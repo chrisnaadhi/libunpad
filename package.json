@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "devDependencies": {
+    "@unocss/nuxt": "^0.45.7",
+    "@unocss/transformer-directives": "^0.45.7",
+    "@unocss/transformer-variant-group": "^0.45.7",
+    "nuxt": "3.0.0-rc.8"
+  }
+}
