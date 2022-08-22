@@ -17,7 +17,7 @@
 }
 
 .navbar {
-  @apply max-w-7xl flex items-unset justify-between py-6 px-0 ma xl:(items-center justify-between);
+  @apply max-w-7xl flex items-unset justify-between py-4 px-0 ma xl:(items-center justify-between);
 }
 
 p {

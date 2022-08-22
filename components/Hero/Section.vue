@@ -7,7 +7,9 @@
         class="flex flex-col items-center text-center xl:(text-left items-unset)"
       >
         <h2 class="text-2xl md:text-4xl text-gray-700">Selamat Datang di</h2>
-        <h1 class="uglam text-4xl md:text-7xl">KANDAGA UNPAD</h1>
+        <h1 class="uglam text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+          KANDAGA UNPAD
+        </h1>
         <p class="text-xl md:text-2xl font-medium text-gray-700">
           Pusat Pengelolaan Pengetahuan UNPAD
         </p>
