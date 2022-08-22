@@ -13,7 +13,7 @@
 .wrapper {
   margin: 0 auto;
   background-color: antiquewhite;
-  @apply ma bg-white border-b sticky top-0;
+  @apply ma bg-white border-b sticky top-0 z-1;
 }
 
 .navbar {
