@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-gray-50 dark:bg-gray-800 max-w-screen mb-15">
+  <section class="bg-gray-50 max-w-screen mb-15">
     <div
       class="mx-12 flex flex-col-reverse xl:(flex flex-row max-w-7xl ma justify-between p-15)"
     >
