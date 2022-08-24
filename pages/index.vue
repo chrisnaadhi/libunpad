@@ -1,12 +1,16 @@
-<script setup></script>
+<script setup>
+useHead({
+  title: "GLAM Unpad | Universitas Padjadjaran",
+});
+</script>
 
 <template>
   <NuxtLayout>
     <HeroSection />
     <div class="dummy w-full flex justify-center relative">
-      <div class="background-block absolute mt--9">
-        <h1>Perpustakaan Pusat UNPAD</h1>
-        <h2>Cari sesuatu disini</h2>
+      <div class="background-block">
+        <h1 class="text-2xl sm:text-4xl">Memanfaatkan Platform Kandaga</h1>
+        <p>Cara memanfaatkan platform untuk memenuhi kebutuhan akademik</p>
       </div>
     </div>
   </NuxtLayout>
@@ -20,6 +24,6 @@
 }
 
 .background-block {
-  @apply w-full text-blue-9 bg-orange md:(w-150);
+  @apply w-full text-blue-9 bg-orange absolute py-3 mt--9 md:(w-150);
 }
 </style>

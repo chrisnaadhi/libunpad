@@ -11,7 +11,7 @@ export default defineNuxtConfig({
     attributify: true,
     transformers: [transformerDirective(), transformerVariantGroup()],
     shortcuts: {
-      btn: "px-4 py-2 mx-2 border-none rounded cursor-pointer",
+      btn: "px-4 py-2 border-none rounded cursor-pointer",
     },
   },
 });

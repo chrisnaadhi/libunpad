@@ -27,6 +27,10 @@
   @apply ml-0 md:(ml-12);
 }
 
+.action-group button {
+  @apply mx-2;
+}
+
 .login {
   @apply bg-blue-500 text-white hidden xl:(inline-block);
 }
