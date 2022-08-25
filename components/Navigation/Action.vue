@@ -1,7 +1,31 @@
 <template>
   <div class="action-group">
-    <button class="btn login">Login</button>
-    <button class="btn search">🔎</button>
+    <div class="lang-wrapper">
+      <button class="btn lang">
+        <img
+          class="w-12px"
+          src="https://img.icons8.com/color/48/000000/indonesia-circular.png"
+        />
+        ID
+      </button>
+      <div class="dropdown-lang">
+        <button class="btn px-1 w-50px bg-gray-2 py-1">
+          <img
+            class="w-12px"
+            src="https://img.icons8.com/color/48/000000/indonesia-circular.png"
+          />
+          SU
+        </button>
+        <button class="btn px-1 w-50px bg-gray-2 py-2">
+          <img
+            class="w-12px"
+            src="https://img.icons8.com/color/48/000000/great-britain-circular.png"
+          />
+          EN
+        </button>
+      </div>
+    </div>
+    <button class="btn login">Akun</button>
     <button class="btn hamburger">
       <svg
         height="32px"
@@ -24,19 +48,36 @@
 
 <style scoped>
 .action-group {
-  @apply ml-0 md:(ml-12);
+  @apply flex ml-0 md:(ml-12);
 }
 
 .action-group button {
   @apply mx-2;
 }
 
+.lang-wrapper {
+  @apply relative inline-block;
+}
+
+.dropdown-lang {
+  @apply hidden absolute bg-gray-2 drop-shadow;
+  z-index: 1;
+}
+
+.dropdown-lang button {
+  @apply block;
+}
+
+.lang-wrapper:hover .dropdown-lang {
+  @apply block;
+}
+
 .login {
   @apply bg-blue-500 text-white hidden xl:(inline-block);
 }
 
-.search {
-  @apply px-3 py-2 bg-gray-200 hidden xl:(inline-block);
+.lang {
+  @apply px-3 py-2 bg-gray-300 hidden xl:(inline-block) hover:(bg-orange-400 text-white);
 }
 
 .hamburger {

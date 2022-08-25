@@ -19,13 +19,13 @@
           fuga praesentium tenetur nemo!
         </p>
         <GenericSearch />
-        <div class="container flex justify-center w-full">
+        <div class="container flex justify-start w-full">
           <a href="#" class="btn tentang">Tentang Kami</a>
           <a href="#" class="btn bantuan">Bantuan</a>
         </div>
       </div>
       <div class="mt-6 xl:mt-0 flex items-center justify-center">
-        <div class="hero-img w-full h-32 xl:h-sm xl:w-md"></div>
+        <div class="hero-img w-full h-32 xl:h-86 xl:w-md"></div>
       </div>
     </div>
   </section>
