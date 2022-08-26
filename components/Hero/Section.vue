@@ -1,25 +1,26 @@
 <template>
   <section class="bg-gray-50 max-w-screen mb-15">
     <div
-      class="mx-12 flex flex-col-reverse xl:(flex flex-row max-w-7xl ma justify-between p-15)"
+      class="flex flex-col-reverse mx-3 max-w-7xl xl:(flex-row items-center justify-center ma p-15)"
     >
       <div
         class="flex flex-col items-center text-center xl:(text-left items-unset)"
       >
-        <h2 class="text-2xl md:text-4xl text-gray-700">Selamat Datang di</h2>
-        <h1 class="uglam text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
-          KANDAGA UNPAD
+        <h2 class="text-xl md:text-4xl text-gray-700">Selamat Datang di</h2>
+        <h1 class="uglam text-5xl sm:text-7xl md:text-8xl lg:text-9xl">
+          KANDAGA
         </h1>
-        <p class="text-xl md:text-2xl font-medium text-gray-700">
-          Pusat Pengelolaan Pengetahuan Universitas Padjadjaran
+        <p class="text-lg md:text-xl font-500 text-gray-700 font-italic">
+          <span class="text-orange-6">Universitas Padjadjaran</span>'s Gallery,
+          <span>Library, Archive, Museum & Repository</span>
         </p>
-        <p class="py-2 mr-6 text-sm">
+        <p class="py-2 text-sm xl:(mr-6)">
           Deskripsi disini seperti Lorem ipsum dolor sit amet consectetur
           adipisicing elit. Molestiae vel sint, animi dolorum error adipisci id
           fuga praesentium tenetur nemo!
         </p>
         <GenericSearch />
-        <div class="container flex justify-start w-full">
+        <div class="container flex justify-center w-full xl:justify-start">
           <a href="#" class="btn tentang">Tentang Kami</a>
           <a href="#" class="btn bantuan">Bantuan</a>
         </div>
@@ -40,17 +41,18 @@
   background-position: center;
   background-size: cover;
   box-shadow: 0 0 18px 18px white inset;
+  @apply hidden xl:block;
 }
 
 .uglam {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-gray-700 to-orange-500;
 }
 
 .tentang {
-  @apply bg-blue-500 px-6 py-2 text-white no-underline mr-2 w-full md:w-auto;
+  @apply bg-orange-500 px-6 py-2 text-white no-underline mr-2 md:w-auto;
 }
 
 .bantuan {
-  @apply bg-green-500 px-6 py-2 text-white no-underline ml-2 w-full md:w-auto;
+  @apply bg-dark-500 px-6 py-2 text-white no-underline ml-2 md:w-auto;
 }
 </style>

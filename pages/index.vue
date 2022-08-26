@@ -11,8 +11,8 @@ useHead({
 </script>
 
 <template>
-  <div class="bg-orange-400">
-    <p>Hello World!</p>
+  <div class="bg-orange-400 text-center py-1">
+    <p>Iklan Disini</p>
   </div>
   <NuxtLayout>
     <HeroSection />

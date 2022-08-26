@@ -1,5 +1,5 @@
 <template>
-  <div class="action-group">
+  <div class="action-group mr-2 xl:mr-0">
     <div class="lang-wrapper">
       <button class="btn lang">
         <img
@@ -56,28 +56,28 @@
 }
 
 .lang-wrapper {
-  @apply relative inline-block;
+  @apply relative transition inline-block;
 }
 
 .dropdown-lang {
-  @apply hidden absolute bg-gray-2 drop-shadow;
+  @apply hidden absolute bg-gray-2 drop-shadow transition;
   z-index: 1;
 }
 
 .dropdown-lang button {
-  @apply block;
+  @apply transition block;
 }
 
 .lang-wrapper:hover .dropdown-lang {
-  @apply block;
+  @apply transition block;
 }
 
 .login {
-  @apply bg-blue-500 text-white hidden xl:(inline-block);
+  @apply bg-orange-500 text-white hidden xl:(inline-block);
 }
 
 .lang {
-  @apply px-3 py-2 bg-gray-300 hidden xl:(inline-block) hover:(bg-orange-400 text-white);
+  @apply px-3 py-2 bg-gray-300 hidden xl:(inline-block) hover:(bg-orange-400 text-white transition transition-all);
 }
 
 .hamburger {

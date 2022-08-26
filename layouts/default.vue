@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-gray-50">
+  <main class="bg-gray-50">
     <NavigationBar />
     <slot />
-  </div>
+  </main>
 </template>
