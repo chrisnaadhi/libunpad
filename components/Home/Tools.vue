@@ -1,6 +1,12 @@
 <template>
   <div class="wrapper">
-    <h1>Manfaatkan secara daring, dan selesaikan penelitianmu.</h1>
+    <div>
+      <h1>Tuntaskan Penelitian secara Daring</h1>
+    </div>
+    <p>
+      Manfaatkan layanan dan alat-alat yang telah kami langgan secara daring,
+      untuk mempercepat proses pekerjaan dan penelitian anda.
+    </p>
     <div class="container content-wrapper">
       <div class="content">1</div>
       <div class="content">2</div>
@@ -12,7 +18,7 @@
 
 <style scoped>
 .wrapper {
-  @apply py-5 max-w-7xl ma text-center bg-white h-screen my-10;
+  @apply py-5 max-w-7xl ma text-center bg-gray-3 rounded-xl my-10;
 }
 
 .content-wrapper {
