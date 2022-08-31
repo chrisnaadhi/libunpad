@@ -1,5 +1,11 @@
 <script setup>
-const date = new Date();
+const { currentTime } = useCurrentTime();
+const options = {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+};
 </script>
 
 <template>
@@ -8,9 +14,9 @@ const date = new Date();
       class="background-block flex flex-col items-center justify-center px-5 cursor-default"
     >
       <div
-        class="tanggal mb-4 px-3 py-1 mt--5 min-w-32 bg-orange-4 text-dark font-700"
+        class="tanggal mb-4 py-2 px-4 mt--5 min-w-32 bg-orange-4 text-dark font-700"
       >
-        <p>Jam | Hari</p>
+        <p>{{ currentTime.toLocaleDateString("id-ID", options) }}</p>
       </div>
       <h1 class="text-2xl sm:text-4xl">Memanfaatkan Platform Kandaga</h1>
       <p>Cara memanfaatkan platform untuk memenuhi kebutuhan akademik</p>
@@ -52,6 +58,6 @@ const date = new Date();
 }
 
 .content {
-  @apply bg-white w-full grow h-72 mx-10 my-5 rounded-md md:(w-1/5 mx-5) xl:(mx-2);
+  @apply bg-white w-full grow h-72 mx-10 my-8 rounded-md md:(w-1/5 mx-5) xl:(mx-2);
 }
 </style>

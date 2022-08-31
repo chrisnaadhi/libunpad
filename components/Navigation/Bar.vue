@@ -12,8 +12,8 @@
 <style scoped>
 .wrapper {
   margin: 0 auto;
-  background-color: antiquewhite;
-  @apply ma bg-white opacity-95 sticky top-0 z-1;
+  background-color: rgba(255, 255, 255, 0.95);
+  @apply ma sticky top-0 z-1;
 }
 
 .navbar {
