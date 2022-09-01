@@ -58,6 +58,6 @@ const options = {
 }
 
 .content {
-  @apply bg-white w-full grow h-72 mx-10 my-8 rounded-md md:(w-1/5 mx-5) xl:(mx-2);
+  @apply bg-white w-full grow h-72 mx-10 my-8 rounded-md sm:(w-xs mx-5) xl:(w-1/5 mx-2);
 }
 </style>

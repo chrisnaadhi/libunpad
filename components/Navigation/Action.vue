@@ -52,7 +52,7 @@
 }
 
 .action-group button {
-  @apply mx-2;
+  @apply mx-1;
 }
 
 .lang-wrapper {
