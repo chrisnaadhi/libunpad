@@ -34,7 +34,7 @@ const options = {
 <style scoped>
 .dummy {
   text-align: center;
-  background-image: url("https://images.unsplash.com/photo-1479142506502-19b3a3b7ff33");
+  background-image: url("/images/9396112_3023.jpg");
   background-position: center;
   background-size: cover;
   /* box-shadow: 0px 25px 15px white inset, 0px -25px 15px white inset; */

@@ -26,7 +26,10 @@
         </div>
       </div>
       <div class="mt-6 xl:mt-0 flex items-center justify-center">
-        <div class="hero-img w-full h-32 xl:h-86 xl:w-md"></div>
+        <div
+          class="hero-img w-full h-32 xl:h-86 xl:w-md"
+          title="GLAM Kandaga"
+        ></div>
       </div>
     </div>
   </section>
@@ -34,7 +37,7 @@
 
 <style scoped>
 .hero-img {
-  background-image: url("https://media3.giphy.com/media/7E8lI6TkLrvvAcPXso/200.gif");
+  background-image: url("/images/lib.gif");
   /* width: 450px;
   height: 300px; */
   background-repeat: no-repeat;
