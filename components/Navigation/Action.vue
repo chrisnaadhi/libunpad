@@ -1,30 +1,8 @@
 <template>
   <div class="action-group mr-2 xl:mr-0">
-    <div class="lang-wrapper">
-      <button class="btn lang">
-        <img
-          class="w-12px"
-          src="https://img.icons8.com/color/48/000000/indonesia-circular.png"
-        />
-        ID
-      </button>
-      <div class="dropdown-lang">
-        <button class="btn px-1 w-50px bg-gray-2 py-1">
-          <img
-            class="w-12px"
-            src="https://img.icons8.com/color/48/000000/indonesia-circular.png"
-          />
-          SU
-        </button>
-        <button class="btn px-1 w-50px bg-gray-2 py-2">
-          <img
-            class="w-12px"
-            src="https://img.icons8.com/color/48/000000/great-britain-circular.png"
-          />
-          EN
-        </button>
-      </div>
-    </div>
+    <button class="btn mode">
+      <div class="i-mdi-calendar-clock bg-dark" />
+    </button>
     <button class="btn login">Akun</button>
     <button class="btn hamburger">
       <svg
@@ -48,39 +26,22 @@
 
 <style scoped>
 .action-group {
-  @apply flex ml-0 md:(ml-12);
+  --at-apply: flex ml-0 md:(ml-12);
 }
 
 .action-group button {
-  @apply mx-1;
-}
-
-.lang-wrapper {
-  @apply relative transition inline-block;
-}
-
-.dropdown-lang {
-  @apply hidden absolute bg-gray-2 drop-shadow transition;
-  z-index: 1;
-}
-
-.dropdown-lang button {
-  @apply transition block;
-}
-
-.lang-wrapper:hover .dropdown-lang {
-  @apply transition block;
+  --at-apply: mx-1;
 }
 
 .login {
-  @apply bg-orange-500 text-white hidden xl:(inline-block);
+  --at-apply: bg-orange-500 text-white hidden xl:(inline-block);
 }
 
-.lang {
-  @apply px-3 py-2 bg-gray-300 hidden xl:(inline-block) hover:(bg-orange-400 text-white transition transition-all);
+.mode {
+  --at-apply: bg-gray-3 text-white font-600;
 }
 
 .hamburger {
-  @apply py-0 block xl:(hidden);
+  --at-apply: py-0 block xl:(hidden);
 }
 </style>

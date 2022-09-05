@@ -10,10 +10,10 @@
 
 <style scoped>
 .nav-group {
-  @apply flex list-none my-0 mx-8;
+  --at-apply: flex list-none my-0 mx-8;
 }
 
 ul li {
-  @apply my-0 mx-8 hidden xl:(block);
+  --at-apply: my-0 mx-8 hidden xl:(block);
 }
 </style>

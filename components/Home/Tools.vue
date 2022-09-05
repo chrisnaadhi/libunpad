@@ -25,14 +25,14 @@ const { data } = await useFetch("/api/test");
 
 <style scoped>
 .wrapper {
-  @apply py-10 max-w-7xl ma text-center bg-gray-2 rounded-xl mt-15;
+  --at-apply: py-10 max-w-7xl ma text-center bg-gray-2 rounded-xl mt-15;
 }
 
 .content-wrapper {
-  @apply max-w-6xl flex flex-1 flex-wrap ma justify-center xl:(flex-nowrap);
+  --at-apply: max-w-6xl flex flex-1 flex-wrap ma justify-center xl:(flex-nowrap);
 }
 
 .content {
-  @apply bg-orange w-full grow h-48 m-5 rounded-md md:(w-1/5);
+  --at-apply: bg-orange w-full grow h-48 m-5 rounded-md md:(w-1/5);
 }
 </style>

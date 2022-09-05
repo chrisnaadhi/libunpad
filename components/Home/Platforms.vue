@@ -38,26 +38,26 @@ const options = {
   background-position: center;
   background-size: cover;
   /* box-shadow: 0px 25px 15px white inset, 0px -25px 15px white inset; */
-  @apply bg-white w-full flex justify-center relative;
+  --at-apply: bg-white w-full flex justify-center relative;
 }
 
 .background-block {
-  @apply w-full text-dark bg-gray-50 absolute py-5 transition-all-500 xl:(w-6xl mt--16 rounded-xl) hover:(bg-orange-5 text-white transition-all-500);
+  --at-apply: w-full text-dark bg-gray-50 absolute py-5 transition-all-500 xl:(w-6xl mt--16 rounded-xl) hover:(bg-orange-5 text-white transition-all-500);
 }
 
 .background-block:hover .tanggal {
-  @apply bg-white text-dark transition-all-500;
+  --at-apply: bg-white text-dark transition-all-500;
 }
 
 .tanggal {
-  @apply transition-all-500;
+  --at-apply: transition-all-500;
 }
 
 .content-wrapper {
-  @apply mt-35 max-w-6xl flex flex-1 flex-wrap justify-center items-center xl:(mt-15 flex-nowrap);
+  --at-apply: mt-35 max-w-6xl flex flex-1 flex-wrap justify-center items-center xl:(mt-15 flex-nowrap);
 }
 
 .content {
-  @apply bg-white w-full grow h-72 mx-10 my-8 rounded-md sm:(w-xs mx-5) xl:(w-1/5 mx-2);
+  --at-apply: bg-white w-full grow h-72 mx-10 my-8 rounded-md sm:(w-xs mx-5) xl:(w-1/5 mx-2);
 }
 </style>

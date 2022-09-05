@@ -44,18 +44,18 @@
   background-position: center;
   background-size: cover;
   box-shadow: 0 0 18px 18px white inset;
-  @apply hidden xl:block;
+  --at-apply: hidden xl:block;
 }
 
 .uglam {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-gray-700 to-orange-500;
+  --at-apply: bg-clip-text text-transparent bg-gradient-to-r from-gray-700 to-orange-500;
 }
 
 .tentang {
-  @apply bg-orange-500 px-6 py-2 text-white no-underline mr-2 md:w-auto;
+  --at-apply: bg-orange-500 px-6 py-2 text-white no-underline mr-2 md:w-auto;
 }
 
 .bantuan {
-  @apply bg-dark-500 px-6 py-2 text-white no-underline ml-2 md:w-auto;
+  --at-apply: bg-dark-500 px-6 py-2 text-white no-underline ml-2 md:w-auto;
 }
 </style>
