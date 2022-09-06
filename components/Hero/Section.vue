@@ -6,8 +6,10 @@
       <div
         class="flex flex-col items-center text-center xl:(text-left items-unset)"
       >
-        <h2 class="text-xl md:text-4xl text-gray-700">Selamat Datang di</h2>
-        <h1 class="uglam text-5xl sm:text-7xl md:text-8xl lg:text-9xl">
+        <h2 class="text-xl font-700 md:text-4xl text-gray-700">
+          Selamat Datang di
+        </h2>
+        <h1 class="uglam text-5xl font-700 sm:text-7xl md:text-8xl lg:text-9xl">
           KANDAGA
         </h1>
         <p class="text-lg md:text-xl font-500 text-gray-700 font-italic">
@@ -21,7 +23,7 @@
         </p>
         <GenericSearch />
         <div class="container flex justify-center w-full xl:justify-start">
-          <a href="#" class="btn tentang">Tentang Kami</a>
+          <NuxtLink to="/visitor" class="btn tentang">Visitor</NuxtLink>
           <a href="#" class="btn bantuan">Bantuan</a>
         </div>
       </div>

@@ -1,8 +1,14 @@
 <template>
   <div class="wrapper">
     <nav class="navbar">
-      <!-- <img src="#" alt="Logo Perpustakaan" /> -->
-      <p>Logo disini</p>
+      <NuxtLink to="/"
+        ><img
+          src="/images/logo-perpus.png"
+          class="logo"
+          alt="Logo Perpustakaan"
+      /></NuxtLink>
+
+      <!-- <p>Logo disini</p> -->
       <NavigationMenu />
       <NavigationAction />
     </nav>
@@ -20,7 +26,7 @@
   --at-apply: max-w-7xl flex items-unset justify-between py-4 px-0 ma xl:(items-center justify-between);
 }
 
-p {
-  --at-apply: mr-0 ml-5 md:(mr-12);
+.logo {
+  --at-apply: max-w-40;
 }
 </style>

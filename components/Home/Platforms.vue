@@ -18,7 +18,9 @@ const options = {
       >
         <p>{{ currentTime.toLocaleDateString("id-ID", options) }}</p>
       </div>
-      <h1 class="text-2xl sm:text-4xl">Memanfaatkan Platform Kandaga</h1>
+      <h1 class="text-2xl font-700 sm:text-4xl">
+        Memanfaatkan Platform Kandaga
+      </h1>
       <p>Cara memanfaatkan platform untuk memenuhi kebutuhan akademik</p>
     </div>
     <div class="content-wrapper">

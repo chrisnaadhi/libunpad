@@ -1,6 +1,6 @@
 <template>
-  <section class="max-w-7xl ma">
-    <h1 class="text-center">Jelajahi Koleksi Kami</h1>
+  <section class="max-w-7xl ma my-8">
+    <h1 class="text-center text-3xl font-600">Jelajahi Koleksi Kami</h1>
     <div class="cards">
       <article class="card-collection">1</article>
       <article class="card-collection">2</article>
