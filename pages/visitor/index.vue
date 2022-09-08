@@ -1,5 +1,5 @@
 <script setup>
-const { data, refresh } = useFetch("/api/post-test");
+const { data, refresh } = useFetch("/api/dor");
 
 onBeforeMount(() => {
   refresh();
@@ -8,12 +8,18 @@ onBeforeMount(() => {
 
 <template>
   <NuxtLayout>
-    <main class="text-center my-5">
-      <h1 class="text-center text-4xl font-600">Visitor Counter</h1>
+    <main class="flex flex-col items-center justify-center my-5">
+      <h1 class="text-4xl font-600">Visitor Counter</h1>
       <h3>{{ data.nama }}</h3>
       <p>{{ data.id }} - {{ data.path }}</p>
       <p class="text-red">{{ data.status }}</p>
-      <button @click="refresh" class="btn bg-blue-500 my-5">Refresh</button>
+      <button @click="refresh" class="btn bg-blue-500 text-white my-5">
+        Refresh
+      </button>
+      <div>
+        <form action="/"></form>
+        {{ data.urlPath }} - {{ data.msg }}
+      </div>
     </main>
   </NuxtLayout>
 </template>
