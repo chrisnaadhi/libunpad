@@ -21,7 +21,7 @@
         </div>
         <input
           type="text"
-          class="w-full md:w-180 xl:w-160 h-13 pl-10 pr-20 border-1 border-blue-5 rounded-lg focus:(shadow-md outline-none)"
+          class="w-full md:w-180 xl:w-160 h-14 pl-10 pr-20 border-1 border-blue-5 rounded-lg focus:(shadow-md outline-none)"
         />
         <div class="absolute top-2 right-2">
           <button class="btn bg-blue-500 text-white">Search</button>

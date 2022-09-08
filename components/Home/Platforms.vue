@@ -46,7 +46,7 @@ const options = {
 }
 
 .background-block:hover .tanggal {
-  --at-apply: bg-gray-8 text-orange-5 transition-all-500;
+  --at-apply: bg-dark text-orange-5 transition-all-500;
 }
 
 .tanggal {

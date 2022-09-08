@@ -5,11 +5,11 @@ const { data } = await useFetch("/api/test");
 <template>
   <div class="wrapper">
     <div class="bg-orange-4 ma mt--17 max-w-150 my-1 py-3 sm:rounded-lg">
-      <h1 class="text-2xl font-600 md:text-3xl">
+      <h1 class="text-2xl font-700 md:text-3xl">
         Tuntaskan Penelitianmu secara Daring
       </h1>
     </div>
-    <p class="text-sm mt-3 md:text-md xl:text-lg">
+    <p class="text-sm mt-3 md:text-base xl:text-lg">
       Manfaatkan layanan dan alat-alat yang telah kami langgan secara daring,
       untuk mempercepat proses pekerjaan dan penelitian anda.
     </p>
