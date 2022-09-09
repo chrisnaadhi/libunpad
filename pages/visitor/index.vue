@@ -1,25 +1,39 @@
 <script setup>
-const { data, refresh } = useFetch("/api/dor");
-
-onBeforeMount(() => {
-  refresh();
-});
+const { data, refresh } = useFetch("/api/visitor/visit");
 </script>
 
 <template>
-  <NuxtLayout>
-    <main class="flex flex-col items-center justify-center my-5">
-      <h1 class="text-4xl font-600">Visitor Counter</h1>
-      <h3>{{ data.nama }}</h3>
-      <p>{{ data.id }} - {{ data.path }}</p>
-      <p class="text-red">{{ data.status }}</p>
-      <button @click="refresh" class="btn bg-blue-500 text-white my-5">
-        Refresh
-      </button>
-      <div>
-        <form action="/"></form>
-        {{ data.urlPath }} - {{ data.msg }}
+  <main class="h-2xl mt-28px flex flex-col items-center justify-center max-w">
+    <h1>Daftar Kunjungan</h1>
+    {{ data }}
+    <h3>Pusat Pengelolaan Pengetahuan Unpad</h3>
+    <form action="/api/visitor/visit" method="POST">
+      <div class="input-block">
+        <label for="nomor">NPM / Nama Lengkap :</label>
+        <input type="text" id="nomor" />
       </div>
-    </main>
-  </NuxtLayout>
+
+      <div class="input-block">
+        <label for="lembaga">Nama Institusi :</label>
+        <input type="text" id="lembaga" />
+      </div>
+
+      <button type="submit" class="btn text-white bg-orange w-full">
+        Masuk
+      </button>
+    </form>
+  </main>
+  <FooterSection />
 </template>
+
+<style scoped>
+h1 {
+  --at-apply: text-4xl;
+}
+input {
+  --at-apply: border w-2xl;
+}
+.input-block {
+  --at-apply: flex flex-col my-5;
+}
+</style>
