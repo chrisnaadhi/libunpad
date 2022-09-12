@@ -3,6 +3,9 @@ const { data, refresh } = useFetch("/api/visitor/visit");
 </script>
 
 <template>
+  <Head>
+    <Title>Daftar Kunjungan Universitas Padjadjaran</Title>
+  </Head>
   <main class="h-2xl mt-28px flex flex-col items-center justify-center max-w">
     <h1>Daftar Kunjungan</h1>
     {{ data }}

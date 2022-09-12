@@ -14,7 +14,7 @@
         </h1>
         <p class="text-lg md:text-xl font-500 text-gray-700 font-italic">
           <span class="text-orange-6">Universitas Padjadjaran</span>'s Gallery,
-          <span>Library, Archive, Museum & Repository</span>
+          Library, Archive, Museum & Repository
         </p>
         <p class="py-2 text-sm xl:(mr-6)">
           Deskripsi disini seperti Lorem ipsum dolor sit amet consectetur
