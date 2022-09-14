@@ -5,6 +5,6 @@
     </Head>
     <NavigationBar />
     <slot />
-    <FooterSection />
+    <FooterSection :show-list="true" />
   </main>
 </template>

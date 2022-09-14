@@ -6,12 +6,16 @@ const options = {
   month: "long",
   day: "numeric",
 };
+
+defineProps({
+  showList: Boolean,
+});
 </script>
 
 <template>
   <ClientOnly>
     <footer class="text-center bg-gray-8 text-white">
-      <div class="max-w-7xl flex flex-col ma sm:flex-row">
+      <div v-show="showList" class="max-w-7xl flex flex-col ma sm:flex-row">
         <section class="w-full">
           <ul class="list-none text-left">
             <li>Menu 1</li>
