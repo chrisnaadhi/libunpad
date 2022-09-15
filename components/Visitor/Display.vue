@@ -10,7 +10,7 @@ const pemilihanRuangan = async (nama) => {
 <template>
   <main class="text-center h-xl">
     <h1>Silahkan Pilih Ruangan</h1>
-    <section class="flex w-full justify-center">
+    <section class="flex flex-col md:flex-row w-full justify-center">
       <div @click="pemilihanRuangan('lobby')">Lobby Utama</div>
       <div @click="pemilihanRuangan('r_sirkulasi')">Ruang Sirkulasi</div>
       <div @click="pemilihanRuangan('r_belajar')">Ruang Belajar</div>
