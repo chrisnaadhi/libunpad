@@ -12,6 +12,6 @@ defineProps({
 
 <style scoped>
 .heading-display {
-  --at-apply: bg-gray-8 p-5 text-center text-orange font-600 text-2xl md:text-6xl;
+  --at-apply: bg-gray-8 p-5 text-center text-orange font-600 text-2xl md:text-4xl;
 }
 </style>
