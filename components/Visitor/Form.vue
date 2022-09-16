@@ -118,7 +118,7 @@ const backToIndex = () => {
     </div>
     <form @submit.prevent="addVisitor" autocomplete="off">
       <div class="input-block">
-        <label for="nomor">NPM / Nama Lengkap :</label>
+        <label for="nomor">NPM / NIP / Nama Lengkap :</label>
         <input
           type="text"
           id="nomor"
