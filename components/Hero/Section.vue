@@ -28,9 +28,10 @@
         </div>
       </div>
       <div class="mt-6 xl:mt-0 flex items-center justify-center">
-        <div class="hero-img" title="GLAM Kandaga">
-          <video src="/images/lib.webm" autoplay loop></video>
-        </div>
+        <div
+          class="hero-img w-full h-32 xl:h-86 xl:w-md"
+          title="GLAM Kandaga"
+        ></div>
       </div>
     </div>
   </section>
@@ -38,18 +39,14 @@
 
 <style scoped>
 .hero-img {
-  /* background-image: url("/images/lib.gif");
-  width: 450px;
-  height: 300px;
+  background-image: url("/images/lib.gif");
+  /* width: 450px;
+  height: 300px; */
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  box-shadow: 0 0 18px 18px white inset; */
-  --at-apply: hidden xl:block w-full h-32 xl:h-86 xl:w-md;
-}
-
-video {
-  border-radius: 8px;
+  box-shadow: 0 0 18px 18px white inset;
+  --at-apply: hidden xl:block;
 }
 
 .uglam {
