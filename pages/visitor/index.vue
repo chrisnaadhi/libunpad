@@ -32,7 +32,7 @@ useHead({
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  --at-apply: h-screen flex pt-5 flex-col items-center min-w-full;
+  --at-apply: flex pt-5 flex-col items-center min-w-full;
 }
 .heading-block {
   --at-apply: flex flex-col items-center;

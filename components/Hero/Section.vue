@@ -12,11 +12,11 @@
         <h1 class="uglam text-5xl font-700 sm:text-7xl md:text-8xl lg:text-9xl">
           KANDAGA
         </h1>
-        <p class="text-lg md:text-xl font-500 text-gray-700 font-italic">
+        <p class="text-sm md:text-xl font-500 text-gray-700 font-italic">
           <span class="text-orange-6">Universitas Padjadjaran</span>'s Gallery,
           Library, Archive, Museum & Repository
         </p>
-        <p class="py-2 text-sm xl:(mr-6)">
+        <p class="py-2 text-xs xl:(mr-6)">
           Deskripsi disini seperti Lorem ipsum dolor sit amet consectetur
           adipisicing elit. Molestiae vel sint, animi dolorum error adipisci id
           fuga praesentium tenetur nemo!
@@ -50,7 +50,7 @@
 }
 
 .uglam {
-  --at-apply: bg-clip-text text-transparent bg-gradient-to-r from-gray-700 to-orange-500;
+  --at-apply: bg-clip-text text-transparent bg-gradient-to-br from-orange-500 to-gray-500;
 }
 
 .tentang {

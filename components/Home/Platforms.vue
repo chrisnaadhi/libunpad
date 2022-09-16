@@ -54,10 +54,10 @@ const options = {
 }
 
 .content-wrapper {
-  --at-apply: mt-35 max-w-6xl flex flex-1 flex-wrap justify-center items-center xl:(mt-15 flex-nowrap);
+  --at-apply: mt-48 max-w-6xl flex flex-1 flex-wrap justify-center items-center md:mt-35 xl:(mt-20 flex-nowrap);
 }
 
 .content {
-  --at-apply: bg-white w-full grow h-72 mx-10 my-8 rounded-md sm:(w-xs mx-5) xl:(w-1/5 mx-2);
+  --at-apply: bg-white w-full grow h-72 mx-10 my-6 rounded-md sm:(w-xs mx-5) xl:(w-1/5 mx-2);
 }
 </style>

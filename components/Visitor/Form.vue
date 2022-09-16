@@ -23,6 +23,14 @@ const displayRuangan = computed(() => {
       return "Ruang Sirkulasi";
     case "r_belajar":
       return "Ruang Belajar";
+    case "r_bni":
+      return "BNI Coworking Space";
+    case "r_multimedia":
+      return "Ruang Multimedia";
+    case "r_populer":
+      return "Ruang Populer";
+    case "r_berkala":
+      return "Ruang Berkala";
   }
 });
 
@@ -63,7 +71,7 @@ const addVisitor = async () => {
         identity.value = {};
         userData.value = "";
         showModal.value = false;
-      }, 10000);
+      }, 1000);
     }
 
     let items: Item = {
@@ -102,7 +110,7 @@ const backToIndex = () => {
 </script>
 
 <template>
-  <main class="min-w-full h-xl">
+  <main class="min-w-full h-screen md:h-xl">
     <VisitorModal @display="displayModal" v-if="showModal" />
     <div class="absolute w-full left-0 mt--25">
       <VisitorBanner :display="displayBanner" v-if="!umum" />
@@ -137,8 +145,8 @@ const backToIndex = () => {
         Masuk
       </button>
     </form>
-    <div class="flex justify-center">
-      <button class="btn bg-orange" @click="backToIndex">Kembali</button>
+    <div class="absolute right-0 bottom-0">
+      <button class="btn bg-orange" @click="backToIndex">Reset Ruangan</button>
     </div>
   </main>
 </template>
