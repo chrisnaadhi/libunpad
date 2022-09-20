@@ -89,6 +89,12 @@ const addVisitor = async () => {
         : 12345,
     };
     await createItems<Item>({ collection: "data_kunjungan", items });
+    // localStorage.setItem("namaUser", userData.value);
+    // localStorage.setItem("namaRuangan", ruangan.value);
+    // localStorage.setItem(
+    //   "verifikasi",
+    //   validated.value ? "Terverifikasi" : "Belum"
+    // );
     validated.value = false;
     setTimeout(() => {
       identity.value = {};
