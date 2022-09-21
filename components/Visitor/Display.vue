@@ -9,17 +9,22 @@ const pemilihanRuangan = async (nama) => {
 
 <template>
   <main class="text-center md:h-xl">
-    <h1>Silahkan Pilih Ruangan</h1>
+    <h1 class="text-2xl font-700">Silahkan Pilih Ruangan</h1>
     <section
       class="flex flex-col flex-wrap max-w-5xl justify-center md:(flex-row)"
     >
       <div @click="pemilihanRuangan('lobby')">Lobby Utama</div>
       <div @click="pemilihanRuangan('r_sirkulasi')">Ruang Sirkulasi</div>
-      <div @click="pemilihanRuangan('r_belajar')">Ruang Belajar</div>
+      <div @click="pemilihanRuangan('r_belajar')">Ruang Belajar Lt.4</div>
       <div @click="pemilihanRuangan('r_bni')">BNI Coworking Space</div>
       <div @click="pemilihanRuangan('r_multimedia')">Ruang Multimedia</div>
       <div @click="pemilihanRuangan('r_populer')">Ruang Populer</div>
       <div @click="pemilihanRuangan('r_berkala')">Ruang Berkala</div>
+    </section>
+    <section class="my-15">
+      <NuxtLink to="/visitor/data">
+        <button class="btn data-kunjungan">Data Kunjungan</button>
+      </NuxtLink>
     </section>
   </main>
 </template>
@@ -28,5 +33,9 @@ const pemilihanRuangan = async (nama) => {
 div {
   --at-apply: bg-orange-500 min-w-xs px-15 py-5 mx-2 my-4 font-600 text-xl
     cursor-pointer;
+}
+
+.data-kunjungan {
+  --at-apply: border border-orange font-600 text-gray-700 hover:(bg-orange-5 text-white border-none)
 }
 </style>

@@ -1,5 +1,7 @@
 import { computed } from "vue";
 
+const date = new Date();
+
 export const displayRuangan = (ruangan) => {
   return computed(() => {
     switch (ruangan) {
@@ -31,5 +33,31 @@ export const displayKeanggotaan = (identitas) => {
       default:
         return "Anggota Terdaftar";
     }
+  });
+};
+
+export const filterPengunjungRuanganDirectus = (
+  ruangan: string,
+  tanggal: string
+) => {
+  return {
+    collection: "data_kunjungan",
+    params: {
+      filter: {
+        nama_ruangan: {
+          _eq: ruangan,
+        },
+        date_created: {
+          _gt: tanggal,
+        },
+      },
+      meta: "filter_count",
+    },
+  };
+};
+
+export const getActualMonth = () => {
+  return computed(() => {
+    return ("0" + (date.getMonth() + 1)).slice(-2);
   });
 };

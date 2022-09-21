@@ -43,7 +43,7 @@ onMounted(() => {
     <section class="max-w-7xl ma">
       <div class="card text-center">
         <p>Pengunjung Terakhir (Refresh setiap 5 menit) :</p>
-        <h1>{{ fetchLastVisitor.biodata_user }}</h1>
+        <h1 class="text-orange-5">{{ fetchLastVisitor.biodata_user }}</h1>
         <p class="text-xl">
           Nama Ruangan:
           <span class="font-500">{{
@@ -56,25 +56,12 @@ onMounted(() => {
             displayKeanggotaan(fetchLastVisitor.identitas_anggota)
           }}</span>
         </p>
-        <button class="btn bg-white my-5" @click="refreshPage">Refresh</button>
+        <div class="pt-5">
+          <button class="btn bg-white" @click="refreshPage">Refresh</button>
+        </div>
       </div>
     </section>
-    <section class="main-content">
-      <div class="card">
-        <h3>Data Pengunjung Hari Ini</h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis,
-          ipsum?
-        </p>
-      </div>
-      <div class="card">
-        <h3>Data Pengunjung Kemarin</h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam,
-          delectus!
-        </p>
-      </div>
-    </section>
+    <VisitorDataRecap />
     <FooterSection />
   </main>
 </template>
@@ -84,20 +71,12 @@ h1 {
   --at-apply: text-5xl font-600 py-4;
 }
 
-h3 {
-  --at-apply: text-2xl font-600 text-center;
-}
-
 .heading {
   --at-apply: text-center;
 }
 
-.main-content {
-  --at-apply: max-w-7xl ma flex flex-col sm:flex-row items-center justify-between;
-}
-
 .card {
-  --at-apply: bg-blue-500 my-5 py-5 px-8;
+  --at-apply: bg-gray-200 my-5 py-5 px-8 rounded-lg;
 }
 
 input {
