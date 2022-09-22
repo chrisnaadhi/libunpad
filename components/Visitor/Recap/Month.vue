@@ -71,7 +71,7 @@ const fetchMonth = [
     nama_fungsi: fetchRBNIMonth,
   },
   {
-    nama_ruangan: "Total Pengunjung Bulan ini",
+    nama_ruangan: "Total Kunjungan Satu Bulan terakhir",
     nama_fungsi: fetchAllMonth,
   },
 ];
@@ -79,11 +79,11 @@ const fetchMonth = [
 
 <template>
   <section>
-    <h3>Data Pengunjung Bulan Ini</h3>
+    <h3>Data Pengunjung Satu Bulan terakhir</h3>
     <div class="baris">
       <div class="kolom" v-for="month in fetchMonth">
         <p class="text-md font-600">{{ month.nama_ruangan }}</p>
-        <p class="text-6xl text-orange-5">
+        <p class="text-6xl text-orange-5 font-600">
           {{ month.nama_fungsi.meta.filter_count }}
         </p>
         <p class="italic">orang</p>
@@ -98,10 +98,10 @@ h3 {
 }
 
 .baris {
-  --at-apply: flex flex-wrap justify-center;
+  --at-apply: flex flex-wrap justify-evenly;
 }
 
 .kolom {
-  --at-apply: min-w-42 my-5;
+  --at-apply: min-w-35 my-5;
 }
 </style>

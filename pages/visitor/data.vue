@@ -32,7 +32,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <main>
+  <main class="background-block">
     <section class="heading">
       <h1>Data Kunjungan</h1>
       <p class="font-500">
@@ -40,7 +40,7 @@ onMounted(() => {
         UNPAD
       </p>
     </section>
-    <section class="max-w-7xl ma">
+    <section class="w-full ma">
       <div class="card text-center">
         <p>Pengunjung Terakhir (Refresh setiap 5 menit) :</p>
         <h1 class="text-orange-5">{{ fetchLastVisitor.biodata_user }}</h1>
@@ -62,17 +62,26 @@ onMounted(() => {
       </div>
     </section>
     <VisitorDataRecap />
-    <FooterSection />
+    <div class="footer">
+      <FooterSection />
+    </div>
   </main>
 </template>
 
 <style scoped>
+.background-block {
+  background-image: url("/images/background-image-visitor.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  --at-apply: flex pt-5 flex-col items-center min-w-full;
+}
 h1 {
   --at-apply: text-5xl font-600 py-4;
 }
 
 .heading {
-  --at-apply: text-center;
+  --at-apply: text-center w-5xl;
 }
 
 .card {
@@ -81,5 +90,9 @@ h1 {
 
 input {
   --at-apply: border border-black rounded;
+}
+
+.footer {
+  --at-apply: w-full mt-5;
 }
 </style>

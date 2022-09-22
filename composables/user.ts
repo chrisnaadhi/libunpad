@@ -61,3 +61,17 @@ export const getActualMonth = () => {
     return ("0" + (date.getMonth() + 1)).slice(-2);
   });
 };
+
+export const getMonthlyVisitor = (tanggal) => {
+  return {
+    collection: "data_kunjungan",
+    params: {
+      filter: {
+        date_created: {
+          _between: tanggal,
+        },
+      },
+      meta: "filter_count",
+    },
+  };
+};

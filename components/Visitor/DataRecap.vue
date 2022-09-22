@@ -1,43 +1,9 @@
 <script setup>
 const { getItems } = useDirectusItems();
 
-const fetchLobby = await getItems(
-  filterPengunjungRuanganDirectus("lobby", "$NOW(-1 day)")
+const getVisitorMonth = await getItems(
+  getMonthlyVisitor(["2022-09-1", "2022-09-22"])
 );
-
-const fetchRBelajar = await getItems(
-  filterPengunjungRuanganDirectus("r_belajar", "$NOW(-1 day)")
-);
-
-const fetchRSirkulasi = await getItems(
-  filterPengunjungRuanganDirectus("r_sirkulasi", "$NOW(-1 day)")
-);
-
-const fetchRPopuler = await getItems(
-  filterPengunjungRuanganDirectus("r_populer", "$NOW(-1 day)")
-);
-
-const fetchRMultimedia = await getItems(
-  filterPengunjungRuanganDirectus("r_multimedia", "$NOW(-1 day)")
-);
-
-const fetchRBNI = await getItems(
-  filterPengunjungRuanganDirectus("r_bni", "$NOW(-1 day)")
-);
-
-const fetchRBerkala = await getItems(
-  filterPengunjungRuanganDirectus("r_berkala", "$NOW(-1 day)")
-);
-
-const fetchToday = [
-  fetchLobby,
-  fetchRBelajar,
-  fetchRSirkulasi,
-  fetchRPopuler,
-  fetchRMultimedia,
-  fetchRBNI,
-  fetchRBerkala,
-];
 </script>
 
 <template>
@@ -61,7 +27,7 @@ h3 {
 }
 
 .card {
-  --at-apply: bg-gray-200 my-5 py-5 px-8 rounded-lg min-w-xl max-w-xl;
+  --at-apply: bg-gray-200 mx-5 my-1 py-5 px-8 rounded-lg min-w-xl max-w-xl;
 }
 
 .baris {

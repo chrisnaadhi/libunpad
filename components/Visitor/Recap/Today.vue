@@ -71,7 +71,7 @@ const fetchToday = [
     nama_fungsi: fetchRBNIToday,
   },
   {
-    nama_ruangan: "Total Pengunjung Hari ini",
+    nama_ruangan: "Total Kunjungan Hari ini",
     nama_fungsi: fetchAllToday,
   },
 ];
@@ -83,7 +83,7 @@ const fetchToday = [
     <div class="baris">
       <div class="kolom" v-for="today in fetchToday">
         <p class="text-md font-600">{{ today.nama_ruangan }}</p>
-        <p class="text-6xl text-orange-5">
+        <p class="text-6xl text-orange-5 font-600">
           {{ today.nama_fungsi.meta.filter_count }}
         </p>
         <p class="italic">orang</p>
@@ -98,7 +98,7 @@ h3 {
 }
 
 .baris {
-  --at-apply: flex flex-wrap justify-center;
+  --at-apply: flex flex-wrap justify-evenly;
 }
 
 .kolom {
