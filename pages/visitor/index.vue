@@ -9,10 +9,10 @@ useHead({
   <main class="background-block">
     <div class="heading-block">
       <img src="/images/lambang-unpad.png" alt="" class="w-16" />
-      <h1 class="text-orange-6 font-700 text-xl md:text-5xl">
+      <h1 class="text-orange-6 font-700 text-xl md:text-4xl">
         Daftar Kunjungan
       </h1>
-      <h3 class="text-dark font-700 py-2 text-sm sm:text-xl">
+      <h3 class="text-dark font-700 py-2 text-xs sm:text-sm">
         Pusat Pengelolaan Pengetahuan Universitas Padjadjaran
       </h3>
     </div>

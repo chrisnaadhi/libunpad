@@ -147,7 +147,7 @@ const backToIndex = () => {
       </button>
     </form>
     <VisitorVirtualKeyboard />
-    <div class="absolute right-0 bottom-0">
+    <div class="fixed right-0 bottom-0">
       <button class="btn bg-orange" @click="backToIndex">Reset Ruangan</button>
     </div>
   </main>
@@ -155,7 +155,7 @@ const backToIndex = () => {
 
 <style scoped>
 label {
-  --at-apply: font-600 pb-2 text-base md:text-xl;
+  --at-apply: font-600 pb-2 text-base md:text-md;
 }
 
 form {
