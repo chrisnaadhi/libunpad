@@ -7,6 +7,7 @@ defineProps({
 <template>
   <div class="w-full">
     <h2 class="heading-display">{{ display }}</h2>
+    <slot />
   </div>
 </template>
 

@@ -80,6 +80,8 @@ const addVisitor = async () => {
         : userData.value,
       institusi: validated.value
         ? identity.value.nama_institusi
+        : isNumeric(userData.value)
+        ? "Belum mendaftar Keanggotaan"
         : institusi.value,
       nama_ruangan: ruangan.value,
       identitas_anggota: validated.value
@@ -110,7 +112,7 @@ const backToIndex = () => {
 </script>
 
 <template>
-  <main class="min-w-full h-screen md:h-xl">
+  <main class="min-w-full">
     <VisitorModal @display="displayModal" v-if="showModal" />
     <div class="absolute w-full left-0 mt--25">
       <VisitorBanner :display="displayBanner" v-if="!umum" />
@@ -135,7 +137,6 @@ const backToIndex = () => {
       </div>
 
       <button
-        type="submit"
         class="btn text-white w-full py-3"
         :disabled="!userData"
         :class="
@@ -145,6 +146,7 @@ const backToIndex = () => {
         Masuk
       </button>
     </form>
+    <VisitorVirtualKeyboard />
     <div class="absolute right-0 bottom-0">
       <button class="btn bg-orange" @click="backToIndex">Reset Ruangan</button>
     </div>
@@ -157,7 +159,7 @@ label {
 }
 
 form {
-  --at-apply: ma mt-25 mb-10 max-w-2xl bg-white px-10 pt-2 pb-10 rounded-xl;
+  --at-apply: ma mt-25 max-w-2xl bg-white px-10 pt-2 pb-10 rounded-xl;
 }
 
 input {

@@ -38,6 +38,6 @@ useHead({
   --at-apply: flex flex-col items-center;
 }
 .footer-section {
-  --at-apply: w-full bottom-0;
+  --at-apply: w-full;
 }
 </style>
