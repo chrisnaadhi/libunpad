@@ -42,7 +42,10 @@ onMounted(() => {
     </section>
     <section class="w-full ma">
       <div class="card text-center">
-        <p>Pengunjung Terakhir (Refresh setiap 5 menit) :</p>
+        <p>
+          Pengunjung Terakhir (Data akan diperbarui secara otomatis setiap 5
+          menit) :
+        </p>
         <h1 class="text-orange-5">{{ fetchLastVisitor.biodata_user }}</h1>
         <p class="text-xl">
           Nama Ruangan:
@@ -77,7 +80,7 @@ onMounted(() => {
   --at-apply: flex pt-5 flex-col items-center min-w-full;
 }
 h1 {
-  --at-apply: text-5xl font-600 py-4;
+  --at-apply: text-5xl font-600;
 }
 
 .heading {

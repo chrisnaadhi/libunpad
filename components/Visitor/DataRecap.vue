@@ -1,11 +1,3 @@
-<script setup>
-const { getItems } = useDirectusItems();
-
-const getVisitorMonth = await getItems(
-  getMonthlyVisitor(["2022-09-1", "2022-09-22"])
-);
-</script>
-
 <template>
   <section class="main-content">
     <div class="card">

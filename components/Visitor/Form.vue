@@ -3,7 +3,7 @@ const { getItemById, createItems } = useDirectusItems();
 const router: any = useRouter();
 
 const ruangan = useCookie("namaRuanganVisitor");
-const userData = ref();
+const userData = useIdentitasForm();
 const identitas = ref();
 const institusi = ref();
 const validated = ref(false);
@@ -109,6 +109,10 @@ const backToIndex = () => {
   ruangan.value = undefined;
   router.go(router.currentRoute);
 };
+
+const focusToIdentitas = () => {
+  identitas.value.focus();
+};
 </script>
 
 <template>
@@ -145,8 +149,17 @@ const backToIndex = () => {
       >
         Masuk
       </button>
+
+      <section class="mt-2 text-gray-700">
+        <h1 class="text-xl font-600 text-center">Hubungi Kami</h1>
+        <div class="flex text-center">
+          <p>Whatsapp: +6282315798979</p>
+          <p>Email: perpustakaan@unpad.ac.id</p>
+          <p>Instagram & Twitter: @libunpad</p>
+        </div>
+      </section>
     </form>
-    <VisitorVirtualKeyboard />
+    <VisitorVirtualKeyboard v-on:choose="focusToIdentitas" />
     <div class="fixed right-0 bottom-0">
       <button class="btn bg-orange" @click="backToIndex">Reset Ruangan</button>
     </div>
@@ -159,7 +172,7 @@ label {
 }
 
 form {
-  --at-apply: ma mt-25 max-w-2xl bg-white px-10 pt-2 pb-10 rounded-xl;
+  --at-apply: ma mt-25 max-w-2xl bg-white px-10 pt-2 pb-2 rounded-xl;
 }
 
 input {

@@ -12,7 +12,7 @@ useHead({
       <h1 class="text-orange-6 font-700 text-xl md:text-4xl">
         Daftar Kunjungan
       </h1>
-      <h3 class="text-dark font-700 py-2 text-xs sm:text-sm">
+      <h3 class="text-dark font-800 py-2 text-xs sm:text-sm">
         Pusat Pengelolaan Pengetahuan Universitas Padjadjaran
       </h3>
     </div>
@@ -32,7 +32,7 @@ useHead({
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  --at-apply: flex pt-5 flex-col items-center min-w-full;
+  --at-apply: flex flex-col items-center min-w-full;
 }
 .heading-block {
   --at-apply: flex flex-col items-center;

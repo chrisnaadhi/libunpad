@@ -1,32 +1,30 @@
 <script setup>
 const { getItems } = useDirectusItems();
+const { currentTime } = useCurrentTime();
+const { thisMonth } = getThisMonth();
 
-const fetchLobbyMonth = await getItems(
-  filterPengunjungRuanganDirectus("lobby", "$NOW(-1 month)")
-);
+const fetchLobbyMonth = await getItems(getMonthlyVisitor("lobby", thisMonth));
 
 const fetchRBelajarMonth = await getItems(
-  filterPengunjungRuanganDirectus("r_belajar", "$NOW(-1 month)")
+  getMonthlyVisitor("r_belajar", thisMonth)
 );
 
 const fetchRSirkulasiMonth = await getItems(
-  filterPengunjungRuanganDirectus("r_sirkulasi", "$NOW(-1 month)")
+  getMonthlyVisitor("r_sirkulasi", thisMonth)
 );
 
 const fetchRPopulerMonth = await getItems(
-  filterPengunjungRuanganDirectus("r_populer", "$NOW(-1 month)")
+  getMonthlyVisitor("r_populer", thisMonth)
 );
 
 const fetchRMultimediaMonth = await getItems(
-  filterPengunjungRuanganDirectus("r_multimedia", "$NOW(-1 month)")
+  getMonthlyVisitor("r_multimedia", thisMonth)
 );
 
-const fetchRBNIMonth = await getItems(
-  filterPengunjungRuanganDirectus("r_bni", "$NOW(-1 month)")
-);
+const fetchRBNIMonth = await getItems(getMonthlyVisitor("r_bni", thisMonth));
 
 const fetchRBerkalaMonth = await getItems(
-  filterPengunjungRuanganDirectus("r_berkala", "$NOW(-1 month)")
+  getMonthlyVisitor("r_berkala", thisMonth)
 );
 
 const fetchAllMonth = await getItems({
@@ -34,7 +32,7 @@ const fetchAllMonth = await getItems({
   params: {
     filter: {
       date_created: {
-        _gt: "$NOW(-1 month)",
+        _between: thisMonth,
       },
     },
     meta: "filter_count",
@@ -71,7 +69,7 @@ const fetchMonth = [
     nama_fungsi: fetchRBNIMonth,
   },
   {
-    nama_ruangan: "Total Kunjungan Satu Bulan terakhir",
+    nama_ruangan: "Total Kunjungan Bulan ini",
     nama_fungsi: fetchAllMonth,
   },
 ];
@@ -79,10 +77,14 @@ const fetchMonth = [
 
 <template>
   <section>
-    <h3>Data Pengunjung Satu Bulan terakhir</h3>
+    <h3>Data Pengunjung Bulan Ini</h3>
+    <p class="font-600">
+      Bulan {{ currentTime.toLocaleDateString("id-ID", { month: "long" }) }}
+      {{ currentTime.getFullYear() }}
+    </p>
     <div class="baris">
       <div class="kolom" v-for="month in fetchMonth">
-        <p class="text-md font-600">{{ month.nama_ruangan }}</p>
+        <p class="text-lg font-600">{{ month.nama_ruangan }}</p>
         <p class="text-6xl text-orange-5 font-600">
           {{ month.nama_fungsi.meta.filter_count }}
         </p>
@@ -102,6 +104,6 @@ h3 {
 }
 
 .kolom {
-  --at-apply: min-w-35 my-5;
+  --at-apply: mx-5 my-1;
 }
 </style>

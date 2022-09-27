@@ -31,11 +31,11 @@ const pemilihanRuangan = async (nama) => {
 
 <style scoped>
 div {
-  --at-apply: bg-orange-500 min-w-xs px-15 py-5 mx-2 my-4 font-600 text-xl
+  --at-apply: bg-orange-400 min-w-xs px-15 py-5 mx-2 my-4 font-600 text-xl
     cursor-pointer;
 }
 
 .data-kunjungan {
-  --at-apply: border border-orange font-600 text-gray-700 hover:(bg-orange-5 text-white border-none)
+  --at-apply: border border-orange font-600 text-gray-700 hover:(bg-orange-400 text-white border-none)
 }
 </style>

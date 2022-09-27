@@ -51,6 +51,7 @@
 
 .uglam {
   --at-apply: bg-clip-text text-transparent bg-gradient-to-br from-orange-500 to-gray-500;
+  font-family: "Kanit", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .tentang {

@@ -46,7 +46,7 @@ defineProps({
       </div>
       <div class="bg-orange-4 py-2">
         <p class="font-500 text-dark">
-          &copy; {{ new Date().getFullYear() }} Pusat Pengelolaan Pengetahuan
+          &copy; {{ currentTime.getFullYear() }} Pusat Pengelolaan Pengetahuan
           Universitas Padjadjaran
         </p>
       </div>
