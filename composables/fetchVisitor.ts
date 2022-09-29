@@ -34,3 +34,17 @@ export const getMonthlyVisitor = (ruangan: string, tanggal: string) => {
     },
   };
 };
+
+export const getMonthlyTotalVisitor = (bulan: string) => {
+  return {
+    collection: "data_kunjungan",
+    params: {
+      filter: {
+        date_created: {
+          _between: bulan,
+        },
+      },
+      meta: "filter_count",
+    },
+  };
+};

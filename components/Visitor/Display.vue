@@ -22,7 +22,7 @@ const pemilihanRuangan = async (nama) => {
       <div @click="pemilihanRuangan('r_berkala')">Ruang Berkala</div>
     </section>
     <section class="my-15">
-      <NuxtLink to="/visitor/data">
+      <NuxtLink to="/visitor/data" target="_blank" rel="noopenner">
         <button class="btn data-kunjungan">Data Kunjungan</button>
       </NuxtLink>
     </section>

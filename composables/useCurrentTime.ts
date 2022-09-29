@@ -39,3 +39,13 @@ export const getThisMonth = () => {
 
   return { thisMonth };
 };
+
+export const getAllMonthly = (bulan, tanggalAwal, tanggalAkhir) => {
+  const tahun = date.getFullYear();
+  const monthly = [
+    `${tahun}-${bulan}-${tanggalAwal}`,
+    `${tahun}-${bulan}-${tanggalAkhir}`,
+  ];
+
+  return { monthly };
+};

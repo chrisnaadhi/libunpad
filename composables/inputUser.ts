@@ -13,3 +13,5 @@ export const processInputVirtualKeyboard = (dataForm) => {
 
   return { addCharacters, delCharacter };
 };
+
+export const uppercaseOpt = () => useState<boolean>("uppercase", () => false);

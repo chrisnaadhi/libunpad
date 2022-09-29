@@ -16,7 +16,7 @@ const keycaps = {
 </script>
 
 <template>
-  <section class="min-w-sm md:min-w-lg">
+  <section class="w-full md:min-w-lg">
     <div class="grid grid-cols-3 gap-1 text-center m-1 sm:(gap-4 m-4)">
       <span
         class="kolom"
@@ -34,6 +34,9 @@ const keycaps = {
 
 <style scoped>
 .kolom {
-  --at-apply: bg-orange-300 rounded-md p-2 cursor-pointer;
+  --at-apply: bg-orange-400 rounded-md p-2 cursor-pointer;
+}
+.kolom:active {
+  --at-apply: bg-dark text-white drop-shadow shadow-xl;
 }
 </style>

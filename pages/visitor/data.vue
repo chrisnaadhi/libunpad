@@ -88,7 +88,7 @@ h1 {
 }
 
 .card {
-  --at-apply: bg-gray-200 my-5 py-5 px-8 rounded-lg;
+  --at-apply: bg-gray-200 my-1 py-5 px-8 rounded-lg;
 }
 
 input {

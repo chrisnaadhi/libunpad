@@ -1,5 +1,6 @@
 <script setup>
 const userData = useIdentitasForm();
+const uppercase = uppercaseOpt();
 const { addCharacters, delCharacter } = processInputVirtualKeyboard(userData);
 
 const keycaps = {
@@ -32,9 +33,8 @@ const keycaps = {
   m: "m",
   koma: ",",
   titik: ".",
-  garing: "/",
+  strip: "-",
 };
-const uppercase = ref(false);
 
 const useShift = () => {
   uppercase.value = !uppercase.value;
@@ -42,9 +42,9 @@ const useShift = () => {
 </script>
 
 <template>
-  <section>
+  <section class="w-full">
     <div
-      class="grid grid-cols-10 gap-1 text-center my-5 text-xs sm:(gap-3 text-base)"
+      class="grid grid-cols-10 gap-1 text-center mx-2 my-5 text-xs sm:(gap-3 text-base)"
     >
       <span
         class="kolom"
@@ -55,7 +55,7 @@ const useShift = () => {
       </span>
       <span class="kolom col-span-2" @click="useShift">Shift</span>
       <span class="kolom col-span-5" @click="addCharacters(false, ' ')">
-        Spasi
+        Space
       </span>
       <span class="kolom col-span-2" @click="delCharacter">Delete</span>
       <span class="kolom" @click="userData = ''">(X)</span>
@@ -65,6 +65,9 @@ const useShift = () => {
 
 <style scoped>
 .kolom {
-  --at-apply: bg-orange-300 rounded-md px-3 py-2 cursor-pointer;
+  --at-apply: bg-orange-400 rounded-md p-2 cursor-pointer;
+}
+.kolom:active {
+  --at-apply: bg-dark text-white drop-shadow shadow-xl;
 }
 </style>

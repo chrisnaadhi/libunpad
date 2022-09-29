@@ -5,7 +5,7 @@ const router: any = useRouter();
 const ruangan = useCookie("namaRuanganVisitor");
 const userData = useIdentitasForm();
 const identitas = ref();
-const institusi = ref();
+const institusi = ref("");
 const validated = ref(false);
 const umum = ref(false);
 const identity: any = ref({});
@@ -133,15 +133,33 @@ const focusToIdentitas = () => {
           min="5"
           ref="identitas"
         />
+        <p class="text-sm italic text-gray-400">
+          Apabila berasal dari luar Unpad, silahkan cantumkan nama dari
+          institusinya juga. <br />
+          Contoh : Chrisna Adhi Pranoto - Institut Pemerintahan Bandung
+        </p>
       </div>
 
       <div class="input-block">
-        <label for="lembaga">Nama Institusi :</label>
-        <input type="text" id="lembaga" v-model="institusi" />
+        <label for="lembaga">Institusi :</label>
+        <select name="institusi" id="lembaga" v-model="institusi">
+          <option value="" selected disabled>
+            Pilih asal dari institusi anda
+          </option>
+          <option value="unpad">Internal Universitas Padjadjaran</option>
+          <option value="pt_lain">Perguruan Tinggi lain</option>
+          <option value="badan">
+            Institusi / Badan Pemerintahan / Kementerian
+          </option>
+          <option value="sekolah">Sekolah Umum (SD/SMP/SMA)</option>
+          <option value="lainnya">
+            Lainnya (Tulis Nama Institusi di sebelah nama lengkap)
+          </option>
+        </select>
       </div>
 
       <button
-        class="btn text-white w-full py-3"
+        class="btn text-white w-xl py-3"
         :disabled="!userData"
         :class="
           !userData ? 'cursor-not-allowed bg-gray' : 'cursor-pointer bg-orange'
@@ -149,17 +167,11 @@ const focusToIdentitas = () => {
       >
         Masuk
       </button>
-
-      <section class="mt-2 text-gray-700">
-        <h1 class="text-xl font-600 text-center">Hubungi Kami</h1>
-        <div class="flex text-center">
-          <p>Whatsapp: +6282315798979</p>
-          <p>Email: perpustakaan@unpad.ac.id</p>
-          <p>Instagram & Twitter: @libunpad</p>
-        </div>
-      </section>
     </form>
-    <VisitorVirtualKeyboard v-on:choose="focusToIdentitas" />
+    <VisitorVirtualKeyboard
+      v-on:choose="focusToIdentitas"
+      v-on:writing="focusToIdentitas"
+    />
     <div class="fixed right-0 bottom-0">
       <button class="btn bg-orange" @click="backToIndex">Reset Ruangan</button>
     </div>
@@ -172,11 +184,15 @@ label {
 }
 
 form {
-  --at-apply: ma mt-25 max-w-2xl bg-white px-10 pt-2 pb-2 rounded-xl;
+  --at-apply: ma mt-25 max-w-2xl bg-white px-10 pt-2 pb-8 rounded-xl;
 }
 
-input {
-  --at-apply: border border-orange rounded px-2 py-3;
+input, select {
+  --at-apply: border border-orange rounded p-3 bg-white;
+}
+
+option {
+  --at-apply: py-5;
 }
 
 .input-block {

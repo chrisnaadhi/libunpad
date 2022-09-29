@@ -1,12 +1,17 @@
 <template>
-  <section class="main-content">
-    <div class="card">
-      <VisitorRecapToday />
-    </div>
-    <div class="card">
-      <VisitorRecapMonth />
-    </div>
-  </section>
+  <article>
+    <section class="main-content">
+      <div class="card">
+        <VisitorRecapToday />
+      </div>
+      <div class="card">
+        <VisitorRecapMonth />
+      </div>
+    </section>
+    <section class="text-center">
+      <VisitorRecapMonthly />
+    </section>
+  </article>
 </template>
 
 <style scoped>
@@ -15,11 +20,11 @@ h3 {
 }
 
 .main-content {
-  --at-apply: max-w-7xl ma flex flex-col sm:flex-row items-center justify-between text-center;
+  --at-apply: max-w-7xl ma flex flex-col sm:flex-row items-center justify-center text-center;
 }
 
 .card {
-  --at-apply: bg-gray-200 mx-5 my-1 py-5 px-8 rounded-lg min-w-xl max-w-xl;
+  --at-apply: bg-gray-200 mx-5 my-5 py-5 px-8 rounded-lg min-w-xl max-w-xl;
 }
 
 .baris {
