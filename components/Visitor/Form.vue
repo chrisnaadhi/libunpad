@@ -67,6 +67,8 @@ const addVisitor = async () => {
     } catch (error) {
       console.log(error);
       displayModal();
+      const audioError = new Audio("/sfx/error.wav");
+      audioError.play();
       setTimeout(() => {
         identity.value = {};
         userData.value = "";
