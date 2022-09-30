@@ -146,7 +146,7 @@ const focusToIdentitas = () => {
           <option value="" selected disabled>
             Pilih asal dari institusi anda
           </option>
-          <option value="unpad">Internal Universitas Padjadjaran</option>
+          <option value="">Internal Universitas Padjadjaran</option>
           <option value="pt_lain">Perguruan Tinggi lain</option>
           <option value="badan">
             Institusi / Badan Pemerintahan / Kementerian
