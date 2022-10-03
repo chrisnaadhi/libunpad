@@ -19,7 +19,11 @@ export const useCurrentTime = () => {
 
 export const getActualMonth = () => {
   return computed(() => {
-    return "0" + (date.getMonth() + 1);
+    if (date.getMonth() + 1 >= 10) {
+      return date.getMonth() + 1;
+    } else {
+      return "0" + (date.getMonth() + 1);
+    }
   });
 };
 

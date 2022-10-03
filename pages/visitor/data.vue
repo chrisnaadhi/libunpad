@@ -14,19 +14,13 @@ let [fetchLastVisitor] = await getItems({
   },
 });
 
-const refreshPage = async () => {
+const refreshPage = () => {
   router.go();
 };
 
 onMounted(() => {
   setInterval(async () => {
-    [fetchLastVisitor] = await getItems({
-      collection: "data_kunjungan",
-      params: {
-        limit: 1,
-        sort: "-date_created",
-      },
-    });
+    refreshPage();
   }, 300000);
 });
 </script>
