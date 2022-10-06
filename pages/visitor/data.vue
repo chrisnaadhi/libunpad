@@ -1,4 +1,6 @@
 <script setup>
+import { displayRuangan, displayKeanggotaan } from "~/composables/user";
+
 useHead({
   title: "Data Pengunjung Kandaga | Pusat Pengelolaan Pengetahuan",
 });

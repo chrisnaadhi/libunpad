@@ -1,10 +1,17 @@
 <script setup>
-const userName = ref();
+const dataUser = ref();
 const ruangan = ref();
 const npm = ref();
-const dataUser = await useFetch(
-  "https://siat.unpad.ac.id/index.php/akademik/datamhs/mahasiswa/getbio/210210160084"
-);
+
+const fetchUserData = async () => {
+  const { data, pending, error, refresh } = await useFetch(
+    `http://siat.unpad.ac.id/index.php/akademik/datamhs/mahasiswa/getbio/${npm.value}`,
+    {
+      mode: "no-cors",
+    }
+  );
+  dataUser.value = data.value;
+};
 const isVerified = ref(false);
 </script>
 
@@ -12,7 +19,9 @@ const isVerified = ref(false);
   <main>
     <section class="my-10 text-center">
       <h1 class="font-600 text-2xl">Administrasi dan Pengajuan</h1>
-      {{ dataUser }}
+      {{
+        fetchUserData === null ? "Tidak ada data untuk ditampilkan" : dataUser
+      }}
       <div class="flex flex-col items-center">
         <input type="text" name="nama" autocomplete="off" v-model="npm" />
         <input

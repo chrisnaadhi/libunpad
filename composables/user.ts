@@ -1,6 +1,6 @@
 import { computed } from "vue";
 
-export const displayRuangan = (ruangan) => {
+export const displayRuangan = (ruangan: string) => {
   return computed(() => {
     switch (ruangan) {
       case "lobby":
@@ -21,7 +21,7 @@ export const displayRuangan = (ruangan) => {
   });
 };
 
-export const displayKeanggotaan = (identitas) => {
+export const displayKeanggotaan = (identitas: string) => {
   return computed(() => {
     switch (identitas) {
       case "12345":
