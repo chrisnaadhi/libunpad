@@ -13,7 +13,7 @@ defineProps({
 <template>
   <section class="md:bg-white p-5 sm:rounded-xl shadow-2xl">
     <div class="content-book">
-      <div class="ma relative lg:(min-w-40 m-0)">
+      <div class="ma relative md:min-w-30 2xl:(min-w-40 m-0)">
         <div class="banner-mobile">
           <h4>{{ banner }}</h4>
         </div>
