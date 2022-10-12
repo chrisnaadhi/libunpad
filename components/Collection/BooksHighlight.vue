@@ -1,24 +1,26 @@
 <script setup>
 const bookItems = booksData();
+const route = useRoute();
 </script>
 
 <template>
   <section class="books-collection">
     <CollectionBookCard
       v-for="buku in bookItems"
-      :key="buku.tipe"
+      :key="buku.id"
       :title="buku.judul"
       :author="buku.author"
       :description="buku.description"
       :banner="buku.tipe"
       :cover="buku.cover"
-      :url-book="buku.url"
+      :url-book="route.path + '/buku/' + buku.path"
+      :banner-color="backgroundBanner(buku.tipe)"
     />
   </section>
 </template>
 
 <style scoped>
 .books-collection {
-    --at-apply: container ma grid grid-cols-none sm:grid-cols-2 md:grid-cols-3 grid-gap-10;
+    --at-apply: container ma grid grid-cols-none sm:grid-cols-2 md:grid-cols-4 grid-gap-7;
 }
 </style>

@@ -6,31 +6,26 @@ defineProps({
   author: String,
   description: String,
   urlBook: String,
+  bannerColor: String,
 });
 </script>
 
 <template>
-  <section class="md:bg-slate-2 p-5 sm:rounded-xl shadow-lg">
+  <section class="md:bg-white p-5 sm:rounded-xl shadow-2xl">
     <div class="content-book">
-      <div class="ma relative md:min-w-45 2xl:(min-w-56 m-0)">
+      <div class="ma relative lg:(min-w-40 m-0)">
         <div class="banner-mobile">
           <h4>{{ banner }}</h4>
         </div>
-        <img :src="cover" alt="" class="h-full w-auto" />
+        <figure>
+          <img :src="cover" alt="" class="" />
+          <figcaption>
+            <p class="text-sm">{{ title }}</p>
+          </figcaption>
+        </figure>
       </div>
       <div class="display-none xl:display-block">
-        <div
-          class="banner-desktop"
-          :class="
-            banner === 'Rekomendasi'
-              ? 'bg-indigo'
-              : 'Terbaru'
-              ? 'bg-red'
-              : 'Populer'
-              ? 'bg-purple'
-              : 'bg-yellow'
-          "
-        >
+        <div class="banner-desktop" :class="bannerColor">
           <h4>{{ banner }}</h4>
         </div>
         <h2 class="title-desktop">{{ title }}</h2>
@@ -46,7 +41,7 @@ defineProps({
       <NuxtLink :to="urlBook" class="action-btn bg-orange-3 xl:(my-0 mr-4)">
         Detail
       </NuxtLink>
-      <NuxtLink :to="urlBook" class="action-btn bg-cyan-3 xl:(my-0 ml-4)">
+      <NuxtLink :to="urlBook" class="action-btn bg-sky-3 xl:(my-0 ml-4)">
         Pinjam
       </NuxtLink>
     </div>
@@ -63,7 +58,7 @@ defineProps({
 }
 
 .banner-desktop {
-  --at-apply: p-1 mb-2 rounded text-xs text-center font-600;
+  --at-apply: p-1 mb-2 rounded text-xs font-600 bg-emerald-3;
 }
 
 .title-mobile {

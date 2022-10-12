@@ -1,47 +1,30 @@
 <script setup>
 const welcome = ref("Jelajahi Koleksi Kami");
-const bookItems = {
-  buku_rekomendasi: {
-    cover:
-      "https://chrisnaadhi.github.io/open-library-frontpage/assets/images/books/html.png",
-    judul: "Introduction to HTML: A Complete Beginner to Expert Course",
-    author: "Laurence Svekis",
-    url: "200",
-    tipe: "Rekomendasi",
-  },
-  buku_populer: {
-    cover:
-      "https://chrisnaadhi.github.io/open-library-frontpage/assets/images/books/html.png",
-    judul: "Introduction to HTML: A Complete Beginner to Expert Course",
-    author: "Laurence Svekis",
-    url: "200",
-    tipe: "Populer",
-  },
-};
 </script>
 
 <template>
   <NuxtLayout>
-    <main>
-      <section class="text-center">
+    <main class="my-10 text-center">
+      <section class="mb-10">
         <p>Pusat Pengelolaan Pengetahuan UNPAD</p>
-        <h1>{{ welcome }}</h1>
+        <h1 class="text-5xl my-8">{{ welcome }}</h1>
         <p>Cari Koleksi Fisik, Elektronik dan lainnya.</p>
       </section>
 
-      <CollectionBooksHighlight />
+      <section class="my-5">
+        <h1 class="text-3xl my-3">Pilihan Kami</h1>
+        <CollectionBooksHighlight />
+      </section>
 
-      <CollectionIndexContent class="my-25" />
+      <section class="mt-25">
+        <h1 class="text-3xl my-3">Koleksi Lainnya</h1>
+      </section>
     </main>
   </NuxtLayout>
 </template>
 
 <style scoped>
 h1 {
-  --at-apply: text-5xl font-600 my-14;
-}
-
-hr {
-  --at-apply: ;
+  --at-apply: font-600;
 }
 </style>
