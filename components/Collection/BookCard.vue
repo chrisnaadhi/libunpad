@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 defineProps({
   banner: String,
   cover: String,
@@ -8,6 +8,11 @@ defineProps({
   urlBook: String,
   bannerColor: String,
 });
+
+const limitChars = (chars: string) => {
+  const limited = chars.slice(0, 85);
+  return limited;
+};
 </script>
 
 <template>
@@ -20,7 +25,7 @@ defineProps({
         <figure>
           <img :src="cover" alt="" class="" />
           <figcaption>
-            <p class="text-sm">{{ title }}</p>
+            <p class="text-xs text-center">{{ title }}</p>
           </figcaption>
         </figure>
       </div>
@@ -30,7 +35,7 @@ defineProps({
         </div>
         <h2 class="title-desktop">{{ title }}</h2>
         <p class="font-600">Penulis: {{ author }}</p>
-        <p>{{ description }}</p>
+        <p>{{ limitChars(description) }}....</p>
       </div>
       <div class="xl:display-none mt-2 text-center">
         <h2 class="title-mobile">{{ title }}</h2>
@@ -58,7 +63,7 @@ defineProps({
 }
 
 .banner-desktop {
-  --at-apply: p-1 mb-2 rounded text-xs font-600 bg-emerald-3;
+  --at-apply: p-1 mb-2 rounded text-xs text-center font-600 bg-emerald-3;
 }
 
 .title-mobile {

@@ -73,7 +73,7 @@ const addVisitor = async () => {
         identity.value = {};
         userData.value = "";
         showModal.value = false;
-      }, 1000);
+      }, 300);
     }
 
     let items: Item = {
@@ -101,7 +101,7 @@ const addVisitor = async () => {
       showModal.value = false;
       umum.value = false;
       identitas.value.focus();
-    }, 1000);
+    }, 300);
   } catch (e) {
     console.log(e);
   }

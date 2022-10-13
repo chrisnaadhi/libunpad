@@ -1,12 +1,16 @@
 <script setup>
-const bookItems = booksData();
+// const bookItems = booksData();
 const route = useRoute();
+
+const { data: bookItems } = useFetch("/api/koleksi/buku", {
+  pick: ["results"],
+});
 </script>
 
 <template>
   <section class="books-collection">
     <CollectionBookCard
-      v-for="buku in bookItems"
+      v-for="buku in bookItems.results"
       :key="buku.id"
       :title="buku.judul"
       :author="buku.author"
