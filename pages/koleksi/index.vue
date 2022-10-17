@@ -3,7 +3,7 @@ const welcome = ref("Jelajahi Koleksi Kami");
 const { getItems } = useDirectusItems();
 
 const fileBooks = await getItems({
-  collection: "journal_collection",
+  collection: "koleksi_jurnal",
 });
 </script>
 
@@ -24,8 +24,11 @@ const fileBooks = await getItems({
       <section class="mt-25">
         <h2>Koleksi Lainnya</h2>
         <p>
-          {{ fileBooks }}
+          {{ fileBooks[0].penulis }}
         </p>
+        <div>
+          <CollectionPDFViewer />
+        </div>
       </section>
     </main>
   </NuxtLayout>

@@ -1,5 +1,6 @@
 <script setup>
 const props = defineProps(["filePath"]);
+const pdfViewer = ref();
 
 useHead({
   script: [
@@ -12,5 +13,16 @@ useHead({
 
 onMounted(() => {
   const pdfjsLib = window["pdfjs-dist/build/pdf"];
+  pdfViewer.value = pdfjsLib.getDocument("");
 });
 </script>
+
+<template>
+  <div>
+    <embed
+      src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+      width="720px"
+      height="240px"
+    />
+  </div>
+</template>
