@@ -1,5 +1,8 @@
 <template>
   <div>
+    <ClientOnly>
+      <div id="modal"></div>
+    </ClientOnly>
     <NuxtPage />
   </div>
 </template>

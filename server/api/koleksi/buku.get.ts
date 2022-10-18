@@ -5,45 +5,52 @@ export default defineEventHandler((event) => {
       {
         id: 100,
         cover:
-          "https://chrisnaadhi.github.io/open-library-frontpage/assets/images/books/html.png",
-        judul: "Introduction to HTML",
-        path: "introduction-to-html",
+          "https://d3mxt5v3yxgcsr.cloudfront.net/courses/5/course_5_image.jpg",
+        judul: "HTML: Hypertext Markup Language",
+        slugs: "html-tutorialspoint",
         author: "Laurence Svekis",
         description:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae voluptatum quod dolores perspiciatis voluptas nostrum non, assumenda nam tempora alias placeat, blanditiis pariatur nesciunt. Perferendis adipisci, ipsum hic in repudiandae dolorem neque repellendus, ipsa accusantium amet soluta ipsam architecto obcaecati nihil asperiores aperiam voluptate iusto. Fugit cupiditate iure voluptatibus praesentium deserunt suscipit eligendi a unde aut earum accusamus doloremque tenetur cum porro, ullam fuga obcaecati atque! Excepturi odit sint exercitationem, repellat eum sequi aliquid cumque eos maiores dolorum quidem libero placeat in repudiandae iure voluptate. Quasi sequi velit ullam consectetur non, praesentium unde numquam voluptatem laborum at quaerat quod modi?",
+          "Html stands for hyper text markup language, which is the most widely used language on web to develop web pages. Html was created by berners-lee in late 1991 but 'html 2.0' was the first standard html specification which was published in 1995. Html 4.01 was a major version of html and it was published in late 1999. Though html 4.01 version is widely used but currently we are having html-5 version which is an extension to html 4.01, and this version was published in 2012",
         tipe: "Rekomendasi",
+        fileAttachment: "https://www.tutorialspoint.com/html/html_tutorial.pdf",
       },
       {
         id: 200,
         cover:
-          "https://chrisnaadhi.github.io/open-library-frontpage/assets/images/books/css.png",
-        judul: "Mastering CSS",
-        path: "mastering-css",
+          "https://d3mxt5v3yxgcsr.cloudfront.net/courses/7/course_7_image.jpg",
+        judul: "CSS: Cascading Style Sheets",
+        slugs: "css-tutorialspoint",
         author: "Rich Finelli",
         description:
-          "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veniam tempora laboriosam nihil ab accusamus cupiditate illo. Voluptas voluptate mollitia magnam officia maxime deserunt. Officia quae nam hic architecto ipsa. Distinctio quaerat animi, expedita quos exercitationem labore incidunt modi. Laudantium quo voluptatem ratione atque officiis reprehenderit doloremque, odio corrupti! Repellendus exercitationem obcaecati quod est reiciendis non culpa natus eaque accusantium eum, eius praesentium at ducimus dolorum doloribus eos maxime error! Quos alias debitis nihil reprehenderit in explicabo eaque ad dignissimos voluptatum modi, quasi itaque doloremque, rerum ea! Incidunt nemo, qui dolores, vero id, delectus quisquam iure possimus et minus hic adipisci.",
+          "CSS is used to control the style of a web document in a simple and easy way. CSS is the acronym for 'Cascading Style Sheet'. This tutorial covers both the versions CSS1,CSS2 and CSS3, and gives a complete understanding of CSS, starting from its basics to advanced concepts. Cascading Style Sheets, fondly referred to as CSS, is a simple design language intended to simplify the process of making web pages presentable. CSS is a MUST for students and working professionals to become a great Software Engineer specially when they are working in Web Development Domain",
         tipe: "Populer",
+        fileAttachment: "https://www.tutorialspoint.com/css/css_tutorial.pdf",
       },
       {
         id: 300,
         cover:
-          "https://chrisnaadhi.github.io/open-library-frontpage/assets/images/books/js.png",
-        judul: "Javascript by Example",
-        path: "javascript-by-example",
+          "https://d3mxt5v3yxgcsr.cloudfront.net/courses/4/course_4_image.jpg",
+        judul: "Javascript Language Tutorial",
+        slugs: "javascript-tutorialspoint",
         author: "Dani Akash S.",
         description:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto magni nihil accusamus dolorum quia sed illo ab tempore nesciunt. Dolores odit voluptatibus, enim sit doloremque aperiam sunt ipsam ut sapiente, corporis veniam tempora officiis ea suscipit quibusdam, quo dicta repellendus tempore nostrum cumque minus? In sapiente cupiditate atque velit nulla delectus, voluptatem inventore modi similique qui hic. Doloribus id, consequuntur quae soluta quia voluptatum possimus quod facilis modi placeat, et tenetur officia facere tempora impedit, excepturi fuga? Dolore aperiam facere officiis consectetur, at, porro magni cum voluptas ipsam tempore, autem optio. Totam, rerum similique perspiciatis dolorem impedit harum. Earum, similique.",
+          "JavaScript is a lightweight, interpreted programming language. It is designed for creating network-centric applications. It is complimentary to and integrated with Java. JavaScript is very easy to implement because it is integrated with HTML. It is open and cross-platform. Javascript is the most popular programming language in the world and that makes it a programmer’s great choice. Once you learnt Javascript, it helps you developing great front-end as well as back-end softwares using different Javascript based frameworks like jQuery, Node.JS etc",
         tipe: "Terbaru",
+        fileAttachment:
+          "https://www.tutorialspoint.com/javascript/javascript_tutorial.pdf",
       },
       {
         id: 400,
-        cover: "https://learning.oreilly.com/library/cover/9781785888960/250w/",
-        judul: "Mastering Node.js",
-        path: "mastering-node-js",
+        cover:
+          "https://d3mxt5v3yxgcsr.cloudfront.net/courses/444/course_444_image.jpg",
+        judul: "Mastering Node.js Runtime",
+        slugs: "mastering-node-js",
         author: "Sandro Pasquali, Kevin Faaborg",
         description:
-          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste consequatur facere maiores sapiente dignissimos quis quisquam sequi et nulla? Aliquam at accusamus pariatur commodi neque, quisquam dolores iusto, nisi provident magnam a corrupti, recusandae doloribus tempora cumque temporibus ullam sint optio reiciendis? Aut quasi porro vitae, beatae assumenda deleniti modi perspiciatis iure eius nulla aliquam veritatis sint incidunt ab animi suscipit adipisci nihil. Delectus animi architecto repellendus, nisi maiores unde magni, explicabo fuga eum perferendis asperiores aut quaerat porro at voluptas et similique voluptatem accusantium repudiandae deserunt. Earum sed, voluptatibus fuga eos quis est vitae atque aliquid aperiam quam laborum!",
+          "Node.js is a very powerful JavaScript-based platform built on Google Chrome's JavaScript V8 Engine. It is used to develop I/O intensive web applications like video streaming sites, single-page applications, and other web applications. Node.js is open source, completely free, and used by thousands of developers around the world. Node.js is a platform built on Chrome's JavaScript runtime for easily building fast and scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.",
         tipe: "Rating Tinggi",
+        fileAttachment:
+          "https://www.tutorialspoint.com/nodejs/nodejs_tutorial.pdf",
       },
     ],
   };

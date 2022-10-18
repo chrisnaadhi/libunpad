@@ -5,7 +5,7 @@
         <div class="absolute top-4 left-3">
           <svg
             aria-hidden="true"
-            class="w-5 h-5 text-orange-500 dark:text-gray-400"
+            class="w-6 h-6 text-orange-500 dark:text-gray-400"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -19,10 +19,7 @@
             ></path>
           </svg>
         </div>
-        <input
-          type="text"
-          class="w-full md:w-180 xl:w-160 h-14 pl-10 pr-20 border-1 border-orange-5 rounded-lg focus:(shadow-md outline-none)"
-        />
+        <input type="text" class="input-form" />
         <div class="absolute top-2 right-2">
           <button class="btn bg-orange-500 text-white">Search</button>
         </div>
@@ -31,4 +28,8 @@
   </form>
 </template>
 
-<style scoped></style>
+<style scoped>
+.input-form {
+--at-apply: w-full md:w-180 xl:w-160 h-14 pl-10 pr-20 border-1 border-orange-5 rounded-lg focus:(shadow-md outline-none);
+}
+</style>

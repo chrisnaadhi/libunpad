@@ -25,7 +25,7 @@ const limitChars = (chars: string) => {
         <figure>
           <img :src="cover" alt="" class="" />
           <figcaption>
-            <p class="text-xs text-center">{{ title }}</p>
+            <p class="text-center" style="font-size: 10px">{{ title }}</p>
           </figcaption>
         </figure>
       </div>
@@ -33,7 +33,7 @@ const limitChars = (chars: string) => {
         <div class="banner-desktop" :class="bannerColor">
           <h4>{{ banner }}</h4>
         </div>
-        <h2 class="title-desktop">{{ title }}</h2>
+        <h2 class="title-desktop py-2">{{ title }}</h2>
         <p class="font-600">Penulis: {{ author }}</p>
         <p>{{ limitChars(description) }}....</p>
       </div>

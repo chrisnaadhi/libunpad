@@ -1,11 +1,7 @@
 <template>
-  <section class="bg-gray-50 max-w-screen mb-15">
-    <div
-      class="flex flex-col-reverse mx-3 max-w-7xl xl:(flex-row items-center justify-center ma p-15)"
-    >
-      <div
-        class="flex flex-col items-center text-center xl:(text-left items-unset)"
-      >
+  <section class="container ma bg-gray-50 mb-15">
+    <div class="hero-space">
+      <div class="hero-left">
         <h2 class="text-xl font-700 md:text-4xl text-gray-700">
           Selamat Datang di
         </h2>
@@ -43,10 +39,18 @@
   /* width: 450px;
   height: 300px; */
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: right;
   background-size: cover;
   box-shadow: 0 0 18px 18px white inset;
   --at-apply: hidden xl:block;
+}
+
+.hero-space {
+  --at-apply: flex flex-col-reverse mx-3 max-w-7xl xl:(flex-row items-center justify-center ma p-15);
+}
+
+.hero-left {
+  --at-apply: flex flex-col items-center text-center xl:(text-left items-unset);
 }
 
 .uglam {

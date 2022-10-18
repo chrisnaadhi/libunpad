@@ -37,7 +37,7 @@ const options = {
   background-image: url("/images/9396112_3023.jpg");
   background-position: center;
   background-size: cover;
-  /* box-shadow: 0px 25px 15px white inset, 0px -25px 15px white inset; */
+  box-shadow: 0px 25px 15px rgb(255, 255, 255) inset, 0px -25px 15px rgb(255, 255, 255) inset;
   --at-apply: bg-white w-full flex justify-center relative;
 }
 
@@ -54,7 +54,7 @@ const options = {
 }
 
 .content-wrapper {
-  --at-apply: mt-48 max-w-6xl flex flex-1 flex-wrap justify-center items-center md:mt-35 xl:(mt-20 flex-nowrap);
+  --at-apply: mt-48 mb-5 max-w-6xl flex flex-1 flex-wrap justify-center items-center md:mt-35 xl:(mt-20 flex-nowrap);
 }
 
 .content {

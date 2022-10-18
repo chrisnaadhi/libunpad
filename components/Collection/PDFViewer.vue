@@ -13,7 +13,6 @@ useHead({
 
 onMounted(() => {
   const pdfjsLib = window["pdfjs-dist/build/pdf"];
-  pdfViewer.value = pdfjsLib.getDocument("");
 });
 </script>
 

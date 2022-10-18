@@ -23,11 +23,12 @@ const fileBooks = await getItems({
 
       <section class="mt-25">
         <h2>Koleksi Lainnya</h2>
-        <p>
+        <p v-if="fileBooks">
           {{ fileBooks[0].penulis }}
         </p>
+        <p v-else>Loading...</p>
         <div>
-          <CollectionPDFViewer />
+          <!-- <CollectionPDFViewer /> -->
         </div>
       </section>
     </main>

@@ -1,10 +1,7 @@
 <script setup>
-// const bookItems = booksData();
 const route = useRoute();
 
-const { data: bookItems } = useFetch("/api/koleksi/buku", {
-  pick: ["results"],
-});
+const { data: bookItems, pending, error } = await useFetch("/api/koleksi/buku");
 </script>
 
 <template>
@@ -17,7 +14,7 @@ const { data: bookItems } = useFetch("/api/koleksi/buku", {
       :description="buku.description"
       :banner="buku.tipe"
       :cover="buku.cover"
-      :url-book="route.path + '/buku/' + buku.path"
+      :url-book="route.path + '/buku/' + buku?.slugs"
       :banner-color="backgroundBanner(buku.tipe)"
     />
   </section>
