@@ -16,9 +16,9 @@ const limitChars = (chars: string) => {
 </script>
 
 <template>
-  <section class="md:bg-white p-5 sm:rounded-xl shadow-2xl">
+  <section class="md:bg-white p-5 sm:rounded-xl shadow-2xl flex flex-col">
     <div class="content-book">
-      <div class="ma relative md:min-w-30 2xl:(min-w-40 m-0)">
+      <div class="ma relative md:(m-0 min-w-30) 2xl:(min-w-40)">
         <div class="banner-mobile">
           <h4>{{ banner }}</h4>
         </div>
@@ -34,7 +34,7 @@ const limitChars = (chars: string) => {
           <h4>{{ banner }}</h4>
         </div>
         <h2 class="title-desktop py-2">{{ title }}</h2>
-        <p class="font-600">Penulis: {{ author }}</p>
+        <p class="font-600">{{ author }}</p>
         <p>{{ limitChars(description) }}....</p>
       </div>
       <div class="xl:display-none mt-2 text-center">
@@ -43,10 +43,13 @@ const limitChars = (chars: string) => {
       </div>
     </div>
     <div class="action">
-      <NuxtLink :to="urlBook" class="action-btn bg-orange-3 xl:(my-0 mr-4)">
+      <NuxtLink :to="urlBook" class="action-btn bg-orange xl:(my-0 mr-4)">
         Detail
       </NuxtLink>
-      <NuxtLink :to="urlBook" class="action-btn bg-sky-3 xl:(my-0 ml-4)">
+      <NuxtLink
+        :to="urlBook"
+        class="action-btn border bg-gray-3 hover:bg-orange xl:(my-0 ml-4)"
+      >
         Pinjam
       </NuxtLink>
     </div>
@@ -55,15 +58,15 @@ const limitChars = (chars: string) => {
 
 <style scoped>
 .content-book {
-  --at-apply: flex flex-col xl:flex-row md:gap-4;
+  --at-apply: flex flex-col m-0 xl:flex-row md:gap-4;
 }
 
 .banner-mobile {
-  --at-apply: display-block xl:display-none absolute p-2 text-xs font-600 bg-emerald-2 rounded-0 right-0;
+  --at-apply: display-block xl:display-none absolute p-2 text-xs font-600 bg-orange rounded-0 right-0;
 }
 
 .banner-desktop {
-  --at-apply: p-1 mb-2 rounded text-xs text-center font-600 bg-emerald-3;
+  --at-apply: p-1 mb-2 rounded text-xs text-center font-600 bg-orange text-white;
 }
 
 .title-mobile {
@@ -79,10 +82,10 @@ p {
 }
 
 .action {
-  --at-apply: flex flex-col justify-between text-sm text-center font-600 mt-4 mx-10 sm:mx-0 xl:(mx-0 flex-row);
+  --at-apply: flex flex-col justify-between text-sm text-center font-600 mt-a mx-10 sm:mx-0 xl:(mx-0 flex-row);
 }
 
 .action-btn {
-  --at-apply: btn w-full mr-0 my-2;
+  --at-apply: btn w-full mr-0 my-2 transition-all-500;
 }
 </style>

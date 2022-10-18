@@ -1,6 +1,6 @@
-# Nuxt 3 Minimal Starter
+# Kandaga Website
 
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+Built with [Nuxt 3](https://v3.nuxtjs.org) and [UnoCSS](https://uno.antfu.me/)
 
 ## Setup
 
@@ -38,5 +38,3 @@ Locally preview production build:
 ```bash
 npm run preview
 ```
-
-Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.
