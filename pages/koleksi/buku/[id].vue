@@ -16,7 +16,7 @@ const viewModal = () => {
       <LazyClientOnly>
         <teleport to="#modal">
           <ModalBase v-show="showModal" @close="viewModal">
-            <iframe class="w-full lg:w-5xl h-lg" :src="buku.fileAttachment" />
+            <iframe class="w-full lg:w-5xl h-85%" :src="buku.fileAttachment" />
           </ModalBase>
         </teleport>
       </LazyClientOnly>
@@ -36,15 +36,12 @@ const viewModal = () => {
             {{ buku.description }}
           </p>
           <section class="grid sm:grid-cols-2 gap-5 my-5">
-            <button
-              class="w-full btn bg-orange-4 text-white"
-              @click="viewModal"
-            >
+            <button class="w-full btn bg-orange text-white" @click="viewModal">
               Baca {{ buku.judul }}
             </button>
             <NuxtLink to="/koleksi">
               <button
-                class="w-full btn text-orange border-orange border hover:(text-white bg-orange-4)"
+                class="w-full btn text-orange border-orange border transition-all-500 hover:(text-white bg-orange)"
               >
                 Kembali ke Koleksi
               </button>
@@ -70,5 +67,19 @@ h1 {
 
 h3 {
   --at-apply: text-2xl font-500;
+}
+
+iframe {
+  --at-apply: bg-gray-3 p-5 rounded-lg;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .4s linear;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
