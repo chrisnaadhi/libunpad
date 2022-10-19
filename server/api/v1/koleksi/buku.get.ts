@@ -1,4 +1,11 @@
-export default defineEventHandler((event) => {
+interface Article {
+  id?: string | number;
+  title: string;
+  content: string;
+  status: string;
+}
+
+export default defineEventHandler(async (event) => {
   return {
     statusCode: event.res.statusCode,
     results: [

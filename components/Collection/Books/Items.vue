@@ -1,6 +1,6 @@
 <script setup>
 const route = useRoute();
-const { data: books } = await useFetch("/api/koleksi/buku", {
+const { data: books } = await useFetch("/api/v1/koleksi/buku", {
   pick: ["results"],
 });
 

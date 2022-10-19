@@ -1,7 +1,6 @@
 <script setup>
 const route = useRoute();
-const router = useRouter();
-const { data: books, pending } = await useFetch("/api/koleksi/buku");
+const { data: books, pending } = await useFetch("/api/v1/koleksi/buku");
 const buku = books.value.results.find((item) => item.slugs == route.params.id);
 
 const showModal = ref(false);
