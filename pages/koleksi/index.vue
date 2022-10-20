@@ -23,13 +23,11 @@ const { getItems } = useDirectusItems();
 
       <section class="mt-25">
         <h2>Koleksi Lainnya</h2>
-        <!-- <p v-if="fileBooks">
-          {{ fileBooks[0].penulis }}
-        </p>
-        <p v-else>Loading...</p> -->
-        <div>
-          <!-- <CollectionPDFViewer /> -->
-        </div>
+        <CollectionBlockLeft :left="true" title="Gallery" />
+        <CollectionBlockLeft :left="false" title="Library" />
+        <CollectionBlockLeft :left="true" title="Archive" />
+        <CollectionBlockLeft :left="false" title="Museum" />
+        <CollectionBlockLeft :left="true" title="Repository" />
       </section>
     </main>
   </NuxtLayout>

@@ -16,14 +16,14 @@ const limitChars = (chars: string) => {
 </script>
 
 <template>
-  <section class="md:bg-white p-5 sm:rounded-xl shadow-2xl flex flex-col">
+  <section class="md:bg-white p-5 sm:rounded-xl shadow-md flex flex-col">
     <div class="content-book">
       <div class="ma relative md:(m-0 min-w-30) 2xl:(min-w-40)">
         <div class="banner-mobile">
           <h4>{{ banner }}</h4>
         </div>
         <figure>
-          <img :src="cover" alt="" class="" />
+          <img :src="cover" alt="" class="ma" />
           <figcaption>
             <p class="text-center" style="font-size: 10px">{{ title }}</p>
           </figcaption>
@@ -66,7 +66,7 @@ const limitChars = (chars: string) => {
 }
 
 .banner-desktop {
-  --at-apply: p-1 mb-2 rounded text-xs text-center font-600 bg-orange text-white;
+  --at-apply: p-1 mb-2 rounded text-xs text-center font-600 bg-orange;
 }
 
 .title-mobile {

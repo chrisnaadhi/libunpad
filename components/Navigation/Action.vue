@@ -34,7 +34,7 @@
 }
 
 .login {
-  --at-apply: bg-orange-500 text-white hidden xl:(inline-block);
+  --at-apply: bg-orange text-white hidden xl:(inline-block);
 }
 
 .mode {

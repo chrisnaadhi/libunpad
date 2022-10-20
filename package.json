@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.2",
+    "@splidejs/vue-splide": "^0.6.12",
     "nuxt-directus": "^3.0.3"
   }
 }

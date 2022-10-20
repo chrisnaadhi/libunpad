@@ -28,7 +28,7 @@ const viewModal = () => {
       </section>
       <section class="book-content" v-else>
         <img :src="buku.cover" alt="" />
-        <div class="max-w-2xl">
+        <div class="max-w-2xl mx-7">
           <h1>{{ buku.judul }}</h1>
           <h3>oleh {{ buku.author }}</h3>
           <p class="text-justify">
@@ -61,7 +61,7 @@ const viewModal = () => {
 }
 
 h1 {
-  --at-apply: text-4xl font-600 my-2;
+  --at-apply: text-2xl font-600 my-2;
 }
 
 h3 {
@@ -69,7 +69,7 @@ h3 {
 }
 
 iframe {
-  --at-apply: bg-gray-3 p-5 rounded-lg;
+  --at-apply: bg-gray-3 p-3 rounded-lg;
 }
 
 .fade-enter-active,
