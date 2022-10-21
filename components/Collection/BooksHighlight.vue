@@ -25,7 +25,7 @@ const options = {
       :banner-color="backgroundBanner(buku.tipe)"
     />
   </section>
-  <Splide :options="options" class="block md:hidden">
+  <Splide :options="options" class="inline md:hidden">
     <SplideSlide v-for="buku in bookItems.results">
       <CollectionBookCard
         :key="buku.id"
@@ -44,5 +44,17 @@ const options = {
 <style scoped>
 .books-collection {
   --at-apply: container ma grid grid-gap-7 hidden sm:(grid-cols-2) md:(flex inline grid-cols-4);
+}
+
+.splide__pagination__page.is-active {
+  --at-apply: bg-orange;
+}
+
+.splide__pagination__page {
+  --at-apply: bg-gray;
+}
+
+.splide__arrow {
+  --at-apply: bg-orange-3;
 }
 </style>

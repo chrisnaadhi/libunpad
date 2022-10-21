@@ -31,8 +31,7 @@ const pemilihanRuangan = async (nama) => {
 
 <style scoped>
 div {
-  --at-apply: bg-orange-400 min-w-xs px-15 py-5 mx-2 my-4 font-600 text-xl
-    cursor-pointer;
+  --at-apply: bg-orange-400 min-w-xs px-15 py-5 mx-2 my-4 font-600 text-xl cursor-pointer rounded-xl;
 }
 
 .data-kunjungan {

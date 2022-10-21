@@ -1,5 +1,5 @@
 <script setup>
-// import "@splidejs/vue-splide/css";
+import "@splidejs/vue-splide/css";
 import "@splidejs/vue-splide/css/core";
 </script>
 
