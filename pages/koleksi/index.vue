@@ -10,7 +10,7 @@ const { getItems } = useDirectusItems();
 <template>
   <NuxtLayout>
     <main class="container ma my-10">
-      <section class="mb-10 text-center">
+      <section class="header-top">
         <p>Pusat Pengelolaan Pengetahuan UNPAD</p>
         <h1>{{ welcome }}</h1>
         <p>Cari Koleksi Fisik, Elektronik dan lainnya.</p>
@@ -34,6 +34,12 @@ const { getItems } = useDirectusItems();
 </template>
 
 <style scoped>
+.header-top {
+  --at-apply: mb-10 text-center;
+  background-image: url("https://www.svgrepo.com/show/428321/notebook.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
 h1 {
   --at-apply: text-5xl my-10 font-600;
 }

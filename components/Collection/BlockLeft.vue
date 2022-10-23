@@ -14,11 +14,11 @@ defineProps({
       <div class="main-topic">
         <img src="/images/9396112_3023.jpg" alt="" class="image-cover" />
         <div class="gradient-background">
-          <h3 class="text-3xl font-600 text-white">Kotak Besar</h3>
+          <h2 class="text-2xl font-600 text-white">Kotak Besar</h2>
           <p class="text-xs text-white text-justify">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur
-            suscipit vel itaque alias ab. Distinctio nemo adipisci ipsa
-            repudiandae voluptas eligendi consequuntur minus minima aut.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores
+            voluptatem aspernatur esse, explicabo molestias cumque sit
+            architecto hic error possimus?
           </p>
         </div>
       </div>
@@ -32,13 +32,28 @@ defineProps({
             'background-image': 'url(' + '/images/9396112_3023.jpg' + ')',
           }"
         >
-          <div class="flex h-full items-center justify-center">
-            <h3 class="text-white">Kotak Panjang</h3>
+          <div class="vertical-backdrop">
+            <h3 class="text-white text-xl font-600">Kotak Panjang</h3>
+            <p class="sub-description">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione
+              cum enim totam voluptates ad accusantium maxime odio consectetur
+              necessitatibus! Quos!
+            </p>
           </div>
         </div>
-        <div class="child-topic">
-          <div>
-            <h3>Kotak Panjang</h3>
+        <div
+          class="child-topic"
+          :style="{
+            'background-image': 'url(' + '/images/museum.jpg' + ')',
+          }"
+        >
+          <div class="vertical-backdrop">
+            <h3 class="text-white text-xl font-600">Kotak Panjang</h3>
+            <p class="sub-description">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Provident soluta quia sint quisquam molestiae autem cupiditate?
+              Nemo quod optio at.
+            </p>
           </div>
         </div>
       </article>
@@ -48,7 +63,7 @@ defineProps({
 
 <style scoped>
 .frame-topic {
-  --at-apply: grid gap-2 mx-5 md:(grid-cols-4 mx-0);
+  --at-apply: grid gap-2 mx-5 md:(grid-cols-4 mx-2) xl:mx-0;
 }
 
 .block-title {
@@ -56,7 +71,7 @@ defineProps({
 }
 
 .main-topic {
-  --at-apply: relative rounded-lg h-xs col-start-1 col-end-4 md:col-span-1;
+  --at-apply: relative rounded-lg h-80 col-start-1 col-end-4 md:col-span-1;
 }
 
 .image-cover {
@@ -64,7 +79,7 @@ defineProps({
 }
 
 .gradient-background {
-  --at-apply: flex flex-col justify-center rounded-lg h-50% absolute bottom-0 w-full bg-gradient-to-t from-black transition-all-500 px-3 hover:(h-full to-black/20);
+  --at-apply: flex flex-col justify-center rounded-lg h-60% absolute bottom-0 w-full bg-gradient-to-t from-black transition-all-500 px-3 hover:(h-full to-black/10);
 }
 
 .sub-topic {
@@ -72,6 +87,21 @@ defineProps({
 }
 
 .child-topic {
-  --at-apply: rounded-lg bg-orange;
+  --at-apply: rounded-lg bg-orange h-39;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.vertical-backdrop {
+  --at-apply: h-full transition-all-500 flex flex-col items-center justify-center rounded-lg bg-black/60 px-5 hover:(bg-black/80);
+}
+
+.sub-description {
+  --at-apply: transition-all-500 overflow-hidden h-0 text-xs text-center text-white;
+}
+
+.vertical-backdrop:hover .sub-description {
+  --at-apply: h-10 block;
 }
 </style>
