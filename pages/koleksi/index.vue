@@ -1,20 +1,12 @@
 <script setup>
-const welcome = ref("Jelajahi Koleksi Kami");
-const { getItems } = useDirectusItems();
-
-// const fileBooks = await getItems({
-//   collection: "koleksi_jurnal",
-// });
+const title = ref("Jelajahi Koleksi Kami");
+const image = ref("https://www.svgrepo.com/show/428321/notebook.svg");
 </script>
 
 <template>
   <NuxtLayout>
     <main class="container ma my-10">
-      <section class="header-top">
-        <p>Pusat Pengelolaan Pengetahuan UNPAD</p>
-        <h1>{{ welcome }}</h1>
-        <p>Cari Koleksi Fisik, Elektronik dan lainnya.</p>
-      </section>
+      <CollectionHeader :title="title" :image="image" />
 
       <section class="my-5">
         <h2>Pilihan Kami</h2>
@@ -23,26 +15,17 @@ const { getItems } = useDirectusItems();
 
       <section class="mt-25">
         <h2>Koleksi Lainnya</h2>
-        <CollectionBlockLeft :left="true" title="Gallery" />
-        <CollectionBlockLeft :left="false" title="Library" />
-        <CollectionBlockLeft :left="true" title="Archive" />
-        <CollectionBlockLeft :left="false" title="Museum" />
-        <CollectionBlockLeft :left="true" title="Repository" />
+        <CollectionBlockData :left="true" title="Gallery" />
+        <CollectionBlockData :left="false" title="Library" />
+        <CollectionBlockData :left="true" title="Archive" />
+        <CollectionBlockData :left="false" title="Museum" />
+        <CollectionBlockData :left="true" title="Repository" />
       </section>
     </main>
   </NuxtLayout>
 </template>
 
 <style scoped>
-.header-top {
-  --at-apply: mb-10 text-center;
-  background-image: url("https://www.svgrepo.com/show/428321/notebook.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-}
-h1 {
-  --at-apply: text-5xl my-10 font-600;
-}
 h2 {
   --at-apply: text-3xl my-3 font-600 text-center;
 }

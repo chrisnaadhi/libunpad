@@ -94,7 +94,7 @@ defineProps({
 }
 
 .vertical-backdrop {
-  --at-apply: h-full transition-all-500 flex flex-col items-center justify-center rounded-lg bg-black/60 px-5 hover:(bg-black/80);
+  --at-apply: h-full transition-all-500 flex flex-col items-center justify-center rounded-lg bg-black/40 px-5 hover:(bg-black/60);
 }
 
 .sub-description {

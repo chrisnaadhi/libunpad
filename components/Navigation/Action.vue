@@ -1,6 +1,14 @@
+<script setup>
+const emit = defineEmits(["toggle"]);
+
+const swapToggle = () => {
+  emit("toggle");
+};
+</script>
+
 <template>
   <div class="action-group mr-2 xl:mr-0">
-    <button class="btn mode">
+    <button class="btn mode" @click="swapToggle">
       <div class="i-mdi-calendar-clock bg-dark" />
     </button>
     <button class="btn login">Akun</button>
