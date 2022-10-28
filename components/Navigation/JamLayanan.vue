@@ -9,13 +9,39 @@ const options = {
 </script>
 
 <template>
-  <main class="bg-blue">
-    <div class="text-center bg-yellow max-w-60 py-2 ma">
-      <p class="text-xl font-600">
+  <main class="bg-gray-1 text-center">
+    <div class="bg-orange-4 max-w-50 py-2 ma">
+      <p class="text-md text-white font-600">
         {{ currentTime.toLocaleDateString("id-ID", options) }}
       </p>
     </div>
-
-    <h1 class="text-center">Jam Layanan</h1>
+    <div class="container ma flex items-center justify-evenly py-5">
+      <section class="px-5">
+        <h1 class="font-600">Perpustakaan Pusat, Jatinangor</h1>
+        <p>Hari ini</p>
+        <p><span class="text-green-6 font-600">Buka</span>: 08.00 - 15.30</p>
+      </section>
+      <section class="px-5">
+        <h1 class="font-600 text-xl">Perpustakaan Fakultas, Jatinangor</h1>
+        <p class="">Hari ini ({{ currentTime.toLocaleDateString("id-ID", { weekday: 'long' }) }})</p>
+        <p><span class="text-2xl text-red-6 font-800">Tutup</span></p>
+      </section>
+      <section class="px-5">
+        <h1 class="font-600">Perpustakaan Fakultas, Dipatiukur</h1>
+        <p>Hari ini</p>
+        <p><span class="text-green-6 font-600">Buka</span>: 08.00 - 15.30</p>
+      </section>
+      <section class="px-5">
+        <h1 class="font-600">Lihat Semua Lokasi</h1>
+        <div class="flex items-center justify-center">
+          <div class="i-mdi-calendar-clock bg-dark w-10 h-10" />
+          <p class="max-w-40 text-sm text-orange-6 underline cursor-pointer">
+            Jam Layanan seluruh Perpustakaan di Unpad
+            <div class="i-mdi-arrow-collapse-right" />
+          </p>
+          
+        </div>
+      </section>
+    </div>
   </main>
 </template>

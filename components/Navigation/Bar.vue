@@ -1,3 +1,7 @@
+<script setup>
+const layanan = layananDisplay();
+</script>
+
 <template>
   <div class="wrapper">
     <nav class="navbar">
@@ -8,11 +12,13 @@
           alt="Logo Perpustakaan"
       /></NuxtLink>
       <NavigationMenu />
-      <NavigationAction />
+      <NavigationAction @toggle="layanan.toggleDisplay()" />
     </nav>
-    <div class="absolute w-full">
-      <NavigationJamLayanan />
-    </div>
+    <Transition name="jamlayanan">
+      <div class="absolute w-full transition-all-500" v-show="layanan.display">
+        <NavigationJamLayanan />
+      </div>
+    </Transition>
   </div>
 </template>
 
@@ -29,5 +35,16 @@
 
 .logo {
   --at-apply: max-w-40;
+}
+
+.jamlayanan-enter-active,
+.jamlayanan-leave-active {
+  transition: opacity 0.5 ease-linear;
+}
+
+.jamlayanan-enter-from,
+.jamlayanan-leave-to {
+  opacity: 0;
+  transform: translate(0, -5px);
 }
 </style>

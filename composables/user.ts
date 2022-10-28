@@ -1,4 +1,5 @@
-import { computed } from "vue";
+import { ref, computed } from "vue";
+import { defineStore } from "pinia";
 
 export const displayRuangan = (ruangan: string) => {
   return computed(() => {
@@ -35,3 +36,16 @@ export const displayKeanggotaan = (identitas: string) => {
 };
 
 export const useIdentitasForm = () => useState("nilai", () => "");
+
+export const layananDisplay = defineStore("jam", () => {
+  const display = ref(false);
+
+  function toggleDisplay() {
+    display.value = !display.value;
+  }
+
+  return {
+    display,
+    toggleDisplay,
+  };
+});
