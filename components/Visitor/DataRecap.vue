@@ -15,6 +15,10 @@
 </template>
 
 <style scoped>
+article {
+  --at-apply: my-5;
+}
+
 h3 {
   --at-apply: text-2xl font-600 text-center;
 }

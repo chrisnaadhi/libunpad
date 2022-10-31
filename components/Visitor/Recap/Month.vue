@@ -100,10 +100,10 @@ h3 {
 }
 
 .baris {
-  --at-apply: flex flex-wrap justify-evenly;
+  --at-apply: flex flex-wrap justify-between;
 }
 
 .kolom {
-  --at-apply: mx-5 my-1;
+  --at-apply: px-3 my-1;
 }
 </style>

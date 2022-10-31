@@ -86,7 +86,7 @@ const fetchToday = [
     <div class="baris">
       <div class="kolom" v-for="today in fetchToday">
         <p class="text-lg font-600">{{ today.nama_ruangan }}</p>
-        <p class="text-6xl text-orange-5 font-600">
+        <p class="text-5xl text-orange-5 font-600">
           {{ today.nama_fungsi.meta.filter_count }}
         </p>
         <p class="italic">orang</p>
@@ -101,10 +101,10 @@ h3 {
 }
 
 .baris {
-  --at-apply: flex flex-wrap justify-evenly;
+  --at-apply: flex flex-wrap justify-between;
 }
 
 .kolom {
-  --at-apply: mx-5 my-1;
+  --at-apply: px-3 my-1;
 }
 </style>

@@ -5,6 +5,10 @@ useHead({
   title: "Data Pengunjung Kandaga | Pusat Pengelolaan Pengetahuan",
 });
 
+definePageMeta({
+  layout: "kunjungan",
+});
+
 const { getItems } = useDirectusItems();
 const router = useRouter();
 
@@ -61,9 +65,6 @@ onMounted(() => {
       </div>
     </section>
     <VisitorDataRecap />
-    <div class="footer">
-      <FooterSection />
-    </div>
   </main>
 </template>
 

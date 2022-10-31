@@ -146,7 +146,7 @@ const monthlyObj = {
     <section class="grid grid-cols-12 grid-gap-7">
       <div v-for="bulan in monthlyObj">
         <p class="text-xl">{{ bulan.name }}</p>
-        <p class="font-800 text-4xl text-orange-5">
+        <p class="font-800 text-2xl text-orange-5">
           {{ bulan.nama_fungsi.meta.filter_count }}
         </p>
       </div>
