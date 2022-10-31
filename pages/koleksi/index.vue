@@ -4,25 +4,23 @@ const image = ref("https://www.svgrepo.com/show/428321/notebook.svg");
 </script>
 
 <template>
-  <NuxtLayout>
-    <main class="container ma my-10">
-      <CollectionHeader :title="title" :image="image" />
+  <main class="container ma my-10">
+    <CollectionHeader :title="title" :image="image" />
 
-      <section class="my-5">
-        <h2>Pilihan Kami</h2>
-        <CollectionBooksHighlight />
-      </section>
+    <section class="my-5">
+      <h2>Pilihan Kami</h2>
+      <CollectionBooksHighlight />
+    </section>
 
-      <section class="mt-25">
-        <h2>Koleksi Lainnya</h2>
-        <CollectionBlockData :left="true" title="Gallery" />
-        <CollectionBlockData :left="false" title="Library" />
-        <CollectionBlockData :left="true" title="Archive" />
-        <CollectionBlockData :left="false" title="Museum" />
-        <CollectionBlockData :left="true" title="Repository" />
-      </section>
-    </main>
-  </NuxtLayout>
+    <section class="mt-25">
+      <h2>Koleksi Lainnya</h2>
+      <CollectionBlockData :left="true" title="Gallery" />
+      <CollectionBlockData :left="false" title="Library" />
+      <CollectionBlockData :left="true" title="Archive" />
+      <CollectionBlockData :left="false" title="Museum" />
+      <CollectionBlockData :left="true" title="Repository" />
+    </section>
+  </main>
 </template>
 
 <style scoped>

@@ -1,16 +1,28 @@
 <script setup>
 const { currentTime } = useCurrentTime();
+const { display, disableDisplay } = layananDisplay(); 
 const options = {
   weekday: "long",
   year: "numeric",
   month: "long",
   day: "numeric",
 };
+
+const preventMainClick = () => {
+  display = true
+}
+
+onMounted(() => {
+  document.addEventListener('click', () => {
+    disableDisplay()
+    console.log(display)
+  })
+})
 </script>
 
 <template>
-  <main class="bg-gray-1 text-center">
-    <div class="bg-orange-4 max-w-50 py-2 ma">
+  <main @click.self="preventMainClick" class="bg-orange-1 text-center">
+    <div class="bg-orange max-w-50 py-2 ma">
       <p class="text-md text-white font-600">
         {{ currentTime.toLocaleDateString("id-ID", options) }}
       </p>

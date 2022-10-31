@@ -44,8 +44,13 @@ export const layananDisplay = defineStore("jam", () => {
     display.value = !display.value;
   }
 
+  function disableDisplay() {
+    display.value = false;
+  }
+
   return {
     display,
     toggleDisplay,
+    disableDisplay,
   };
 });

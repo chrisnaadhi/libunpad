@@ -8,7 +8,7 @@ const swapToggle = () => {
 
 <template>
   <div class="action-group mr-2 xl:mr-0">
-    <button class="btn mode" @click="swapToggle">
+    <button class="btn mode" @click.stop="swapToggle">
       <div class="i-mdi-calendar-clock bg-dark" />
     </button>
     <button class="btn login">Akun</button>

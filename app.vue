@@ -1,6 +1,15 @@
 <script setup>
 import "@splidejs/vue-splide/css";
 import "@splidejs/vue-splide/css/core";
+
+const router = useRouter();
+
+router.afterEach((to, from, next) => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+});
 </script>
 
 <template>
@@ -8,7 +17,9 @@ import "@splidejs/vue-splide/css/core";
     <ClientOnly>
       <div id="modal"></div>
     </ClientOnly>
-    <NuxtPage />
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
   </div>
 </template>
 
@@ -31,7 +42,7 @@ import "@splidejs/vue-splide/css/core";
 .page-enter-from,
 .page-leave-to {
   opacity: 0;
-  transform: translate(0, -25px);
+  transform: translate(0, -15px);
 }
 
 .splide__pagination__page.is-active {
