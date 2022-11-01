@@ -1,6 +1,6 @@
 <script setup>
-const displayTab = [""];
-const displayNow = ref();
+const displayTab = ref(["Data Hari Ini", "Data Per Hari", "Data Per Bulan"]);
+const displayNow = ref("Data Hari Ini");
 
 const toggleTab = (selectedTab) => {
   displayNow.value = selectedTab;
@@ -10,11 +10,16 @@ const toggleTab = (selectedTab) => {
 <template>
   <article>
     <section class="tabs">
-      <div v-for="tab in 3" class="tab">
+      <div
+        v-for="tab in displayTab"
+        class="tab"
+        :class="tab === displayNow ? 'tab-active' : ''"
+        @click="toggleTab(tab)"
+      >
         {{ tab }}
       </div>
     </section>
-    <section class="main-content" v-show="false">
+    <section class="main-content" v-show="displayNow === 'Data Hari Ini'">
       <div class="card">
         <VisitorRecapToday />
       </div>
@@ -22,10 +27,10 @@ const toggleTab = (selectedTab) => {
         <VisitorRecapMonth />
       </div>
     </section>
-    <section class="main-content" v-show="true">
+    <section class="main-content" v-show="displayNow === 'Data Per Hari'">
       <VisitorRecapDisplayDaily />
     </section>
-    <section class="main-content" v-show="false">
+    <section class="main-content" v-show="displayNow === 'Data Per Bulan'">
       <VisitorRecapDisplayMonthly />
     </section>
     <section class="text-center">
@@ -49,6 +54,10 @@ h3 {
 
 .tab {
   --at-apply: bg-orange-2 w-full text-center py-2 my-2 rounded-lg;
+}
+
+.tab-active {
+  --at-apply: bg-orange-4;
 }
 
 .main-content {
