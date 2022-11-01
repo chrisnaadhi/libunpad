@@ -85,7 +85,7 @@ const fetchMonth = [
     <div class="baris">
       <div class="kolom" v-for="month in fetchMonth">
         <p class="text-lg font-600">{{ month.nama_ruangan }}</p>
-        <p class="text-6xl text-orange-5 font-600">
+        <p class="text-5xl text-orange-5 font-600">
           {{ month.nama_fungsi.meta.filter_count }}
         </p>
         <p class="italic">orang</p>
