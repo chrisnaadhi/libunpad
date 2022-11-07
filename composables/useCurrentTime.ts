@@ -31,7 +31,7 @@ export const getDateToday = () => {
   const tanggal = date.getDate();
   const bulan = getActualMonth();
   const tahun = date.getFullYear();
-  const today = `${tahun}-${bulan.value}-${tanggal}`;
+  const today = `${tahun}-${bulan.value}-${tanggal}T00:00:00+07:00`;
 
   return { today };
 };
@@ -39,7 +39,7 @@ export const getDateToday = () => {
 export const getThisMonth = () => {
   const bulan = getActualMonth();
   const tahun = date.getFullYear();
-  const thisMonth = [`${tahun}-${bulan.value}-01`, `$NOW()`];
+  const thisMonth = [`${tahun}-${bulan.value}-01T00:00:00+07:00`, `$NOW()`];
 
   return { thisMonth };
 };
@@ -47,8 +47,8 @@ export const getThisMonth = () => {
 export const getAllMonthly = (bulan, tanggalAwal, tanggalAkhir) => {
   const tahun = date.getFullYear();
   const monthly = [
-    `${tahun}-${bulan}-${tanggalAwal}`,
-    `${tahun}-${bulan}-${tanggalAkhir}`,
+    `${tahun}-${bulan}-${tanggalAwal}T00:00:00+07:00`,
+    `${tahun}-${bulan}-${tanggalAkhir}T23:59:00+07:00`,
   ];
 
   return { monthly };
