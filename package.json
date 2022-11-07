@@ -9,7 +9,7 @@
   "devDependencies": {
     "@iconify-json/mdi": "^1.1.31",
     "@unocss/nuxt": "^0.45.7",
-    "nuxt": "^3.0.0-rc.12"
+    "nuxt": "^3.0.0-rc.13"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.2",

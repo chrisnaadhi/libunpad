@@ -1,5 +1,9 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
+  app: {
+    pageTransition: { name: "page", mode: "out-in" },
+    layoutTransition: { name: "layout", mode: "default" },
+  },
   modules: ["@unocss/nuxt", "nuxt-directus", "@pinia/nuxt"],
   unocss: {
     preflight: true,

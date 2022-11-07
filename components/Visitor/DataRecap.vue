@@ -53,7 +53,7 @@ h3 {
 }
 
 .tab {
-  --at-apply: bg-orange-2 w-full text-center py-2 my-2 rounded-lg;
+  --at-apply: bg-orange-2 w-full text-center py-2 my-2 rounded-lg cursor-pointer;
 }
 
 .tab-active {
