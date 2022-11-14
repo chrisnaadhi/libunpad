@@ -9,6 +9,10 @@ const fetchRBelajarMonth = await getItems(
   getMonthlyVisitor("r_belajar", thisMonth)
 );
 
+const fetchRReferensiMonth = await getItems(
+  getMonthlyVisitor("r_referensi", thisMonth)
+);
+
 const fetchRSirkulasiMonth = await getItems(
   getMonthlyVisitor("r_sirkulasi", thisMonth)
 );
@@ -47,6 +51,10 @@ const fetchMonth = [
   {
     nama_ruangan: "Ruang Belajar",
     nama_fungsi: fetchRBelajarMonth,
+  },
+  {
+    nama_ruangan: "Ruang Referensi",
+    nama_fungsi: fetchRReferensiMonth,
   },
   {
     nama_ruangan: "Ruang Sirkulasi",
@@ -100,7 +108,7 @@ h3 {
 }
 
 .baris {
-  --at-apply: flex flex-wrap justify-between;
+  --at-apply: flex flex-wrap justify-evenly;
 }
 
 .kolom {

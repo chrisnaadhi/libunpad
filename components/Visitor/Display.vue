@@ -16,6 +16,7 @@ const pemilihanRuangan = async (nama) => {
       <div @click="pemilihanRuangan('lobby')">Lobby Utama</div>
       <div @click="pemilihanRuangan('r_sirkulasi')">Ruang Sirkulasi</div>
       <div @click="pemilihanRuangan('r_belajar')">Ruang Belajar Lt.4</div>
+      <div @click="pemilihanRuangan('r_referensi')">Ruang Referensi</div>
       <div @click="pemilihanRuangan('r_bni')">BNI Coworking Space</div>
       <div @click="pemilihanRuangan('r_multimedia')">Ruang Multimedia</div>
       <div @click="pemilihanRuangan('r_populer')">Ruang Populer</div>

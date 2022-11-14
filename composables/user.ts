@@ -10,6 +10,8 @@ export const displayRuangan = (ruangan: string) => {
         return "Ruang Sirkulasi";
       case "r_belajar":
         return "Ruang Belajar";
+      case "r_referensi":
+        return "Ruang Referensi";
       case "r_bni":
         return "BNI Coworking Space";
       case "r_multimedia":

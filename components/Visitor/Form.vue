@@ -23,6 +23,8 @@ const displayRuangan = computed(() => {
       return "Ruang Sirkulasi";
     case "r_belajar":
       return "Ruang Belajar";
+    case "r_referensi":
+      return "Ruang Referensi Tesis Disertasi";
     case "r_bni":
       return "BNI Coworking Space";
     case "r_multimedia":
@@ -108,7 +110,7 @@ const addVisitor = async () => {
 };
 
 const backToIndex = () => {
-  ruangan.value = undefined;
+  ruangan.value = "";
   router.go(router.currentRoute);
 };
 
