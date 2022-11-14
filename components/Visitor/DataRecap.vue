@@ -1,3 +1,5 @@
+<script setup></script>
+
 <template>
   <article>
     <section class="main-content">
@@ -24,11 +26,11 @@ h3 {
 }
 
 .main-content {
-  --at-apply: max-w-7xl ma flex flex-col sm:flex-row items-center justify-center text-center;
+  --at-apply: max-w-6xl ma flex flex-col sm:flex-row items-center justify-between text-center;
 }
 
 .card {
-  --at-apply: bg-gray-200 mx-5 my-5 py-5 px-8 rounded-lg min-w-xl max-w-xl;
+  --at-apply: bg-gray-200 my-5 py-5 px-8 rounded-lg max-w-140;
 }
 
 .baris {

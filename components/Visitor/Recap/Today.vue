@@ -11,6 +11,10 @@ const fetchRBelajarToday = await getItems(
   filterPengunjungRuanganDirectus("r_belajar", today)
 );
 
+const fetchRReferensiToday = await getItems(
+  filterPengunjungRuanganDirectus("r_referensi", today)
+);
+
 const fetchRSirkulasiToday = await getItems(
   filterPengunjungRuanganDirectus("r_sirkulasi", today)
 );
@@ -51,6 +55,10 @@ const fetchToday = [
   {
     nama_ruangan: "Ruang Belajar",
     nama_fungsi: fetchRBelajarToday,
+  },
+  {
+    nama_ruangan: "Ruang Referensi",
+    nama_fungsi: fetchRReferensiToday,
   },
   {
     nama_ruangan: "Ruang Sirkulasi",
@@ -101,7 +109,7 @@ h3 {
 }
 
 .baris {
-  --at-apply: flex flex-wrap justify-between;
+  --at-apply: flex flex-wrap justify-evenly;
 }
 
 .kolom {

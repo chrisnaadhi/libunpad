@@ -18,17 +18,18 @@ let [fetchLastVisitor] = await getItems({
     limit: 1,
     sort: "-date_created",
   },
+  meta: "filter_count",
 });
 
 const refreshPage = () => {
   router.go();
 };
 
-onMounted(() => {
-  setInterval(async () => {
-    refreshPage();
-  }, 300000);
-});
+// onMounted(() => {
+//   setInterval(async () => {
+//     refreshPage();
+//   }, 300000);
+// });
 </script>
 
 <template>
