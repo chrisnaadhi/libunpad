@@ -16,6 +16,7 @@ const pemilihanRuangan = async (nama) => {
       <div @click="pemilihanRuangan('lobby')">Lobby Utama</div>
       <div @click="pemilihanRuangan('r_sirkulasi')">Ruang Sirkulasi</div>
       <div @click="pemilihanRuangan('r_belajar')">Ruang Belajar Lt.4</div>
+      <div @click="pemilihanRuangan('r_referensi')">Ruang Referensi</div>
       <div @click="pemilihanRuangan('r_bni')">BNI Coworking Space</div>
       <div @click="pemilihanRuangan('r_multimedia')">Ruang Multimedia</div>
       <div @click="pemilihanRuangan('r_populer')">Ruang Populer</div>
@@ -31,8 +32,7 @@ const pemilihanRuangan = async (nama) => {
 
 <style scoped>
 div {
-  --at-apply: bg-orange-400 min-w-xs px-15 py-5 mx-2 my-4 font-600 text-xl
-    cursor-pointer;
+  --at-apply: bg-orange-400 min-w-xs px-15 py-5 mx-2 my-4 font-600 text-xl cursor-pointer rounded-xl;
 }
 
 .data-kunjungan {

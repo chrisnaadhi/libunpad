@@ -9,6 +9,10 @@ const fetchRBelajarMonth = await getItems(
   getMonthlyVisitor("r_belajar", thisMonth)
 );
 
+const fetchRReferensiMonth = await getItems(
+  getMonthlyVisitor("r_referensi", thisMonth)
+);
+
 const fetchRSirkulasiMonth = await getItems(
   getMonthlyVisitor("r_sirkulasi", thisMonth)
 );
@@ -49,6 +53,10 @@ const fetchMonth = [
     nama_fungsi: fetchRBelajarMonth,
   },
   {
+    nama_ruangan: "Ruang Referensi",
+    nama_fungsi: fetchRReferensiMonth,
+  },
+  {
     nama_ruangan: "Ruang Sirkulasi",
     nama_fungsi: fetchRSirkulasiMonth,
   },
@@ -85,7 +93,7 @@ const fetchMonth = [
     <div class="baris">
       <div class="kolom" v-for="month in fetchMonth">
         <p class="text-lg font-600">{{ month.nama_ruangan }}</p>
-        <p class="text-6xl text-orange-5 font-600">
+        <p class="text-5xl text-orange-5 font-600">
           {{ month.nama_fungsi.meta.filter_count }}
         </p>
         <p class="italic">orang</p>
@@ -104,6 +112,6 @@ h3 {
 }
 
 .kolom {
-  --at-apply: mx-5 my-1;
+  --at-apply: px-3 my-1;
 }
 </style>

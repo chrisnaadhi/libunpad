@@ -3,9 +3,7 @@
     <Head>
       <Title>GLAM Kandaga Unpad | Universitas Padjadjaran</Title>
     </Head>
-    <GenericMiniBanner />
-    <NavigationBar />
     <slot />
-    <FooterSection :show-list="true" />
+    <FooterSection :show-list="false" />
   </main>
 </template>

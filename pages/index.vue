@@ -12,13 +12,10 @@ useHead({
 
 <template>
   <div>
-    <GenericMiniBanner />
-    <NuxtLayout>
-      <HeroSection />
-      <HomePlatforms />
-      <HomeTools />
-      <HomeCollection />
-    </NuxtLayout>
+    <HeroSection />
+    <HomePlatforms />
+    <HomeTools />
+    <HomeCollection />
   </div>
 </template>
 

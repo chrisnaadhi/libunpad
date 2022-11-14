@@ -1,5 +1,8 @@
 <script setup lang="ts">
 const ruang = useCookie("namaRuanganVisitor");
+definePageMeta({
+  layout: "kunjungan",
+});
 useHead({
   title: "Daftar Kunjungan Pusat Pengelolaan Pengetahuan UNPAD",
 });
@@ -17,12 +20,9 @@ useHead({
       </h3>
     </div>
     <div>
-      <VisitorDisplay v-if="ruang === undefined" />
+      <VisitorDisplay v-if="ruang === ''" />
       <VisitorForm v-else />
     </div>
-    <footer class="footer-section">
-      <FooterSection :show-list="false" />
-    </footer>
   </main>
 </template>
 

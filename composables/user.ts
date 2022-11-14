@@ -1,4 +1,5 @@
-import { computed } from "vue";
+import { ref, computed } from "vue";
+import { defineStore } from "pinia";
 
 export const displayRuangan = (ruangan: string) => {
   return computed(() => {
@@ -9,6 +10,8 @@ export const displayRuangan = (ruangan: string) => {
         return "Ruang Sirkulasi";
       case "r_belajar":
         return "Ruang Belajar";
+      case "r_referensi":
+        return "Ruang Referensi";
       case "r_bni":
         return "BNI Coworking Space";
       case "r_multimedia":
@@ -35,3 +38,21 @@ export const displayKeanggotaan = (identitas: string) => {
 };
 
 export const useIdentitasForm = () => useState("nilai", () => "");
+
+export const layananDisplay = defineStore("jam", () => {
+  const display = ref(false);
+
+  function toggleDisplay() {
+    display.value = !display.value;
+  }
+
+  function disableDisplay() {
+    display.value = false;
+  }
+
+  return {
+    display,
+    toggleDisplay,
+    disableDisplay,
+  };
+});

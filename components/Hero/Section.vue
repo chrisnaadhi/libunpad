@@ -20,7 +20,7 @@
         <GenericSearch />
         <div class="container flex justify-center w-full xl:justify-start">
           <NuxtLink to="/visitor" class="btn tentang">Visitor</NuxtLink>
-          <a href="#" class="btn bantuan">Bantuan</a>
+          <NuxtLink to="/koleksi" class="btn bantuan">Koleksi</NuxtLink>
         </div>
       </div>
       <div class="mt-6 xl:mt-0 flex items-center justify-center">

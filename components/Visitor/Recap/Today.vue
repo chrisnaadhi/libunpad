@@ -11,6 +11,10 @@ const fetchRBelajarToday = await getItems(
   filterPengunjungRuanganDirectus("r_belajar", today)
 );
 
+const fetchRReferensiToday = await getItems(
+  filterPengunjungRuanganDirectus("r_referensi", today)
+);
+
 const fetchRSirkulasiToday = await getItems(
   filterPengunjungRuanganDirectus("r_sirkulasi", today)
 );
@@ -53,6 +57,10 @@ const fetchToday = [
     nama_fungsi: fetchRBelajarToday,
   },
   {
+    nama_ruangan: "Ruang Referensi",
+    nama_fungsi: fetchRReferensiToday,
+  },
+  {
     nama_ruangan: "Ruang Sirkulasi",
     nama_fungsi: fetchRSirkulasiToday,
   },
@@ -86,7 +94,7 @@ const fetchToday = [
     <div class="baris">
       <div class="kolom" v-for="today in fetchToday">
         <p class="text-lg font-600">{{ today.nama_ruangan }}</p>
-        <p class="text-6xl text-orange-5 font-600">
+        <p class="text-5xl text-orange-5 font-600">
           {{ today.nama_fungsi.meta.filter_count }}
         </p>
         <p class="italic">orang</p>
@@ -105,6 +113,6 @@ h3 {
 }
 
 .kolom {
-  --at-apply: mx-5 my-1;
+  --at-apply: px-3 my-1;
 }
 </style>
