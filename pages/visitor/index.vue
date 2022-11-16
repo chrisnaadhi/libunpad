@@ -20,7 +20,7 @@ useHead({
       </h3>
     </div>
     <div>
-      <VisitorDisplay v-if="ruang === ''" />
+      <VisitorDisplay v-if="!ruang" />
       <VisitorForm v-else />
     </div>
   </main>
