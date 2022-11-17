@@ -42,7 +42,7 @@ const swapToggle = () => {
 }
 
 .login {
-  --at-apply: bg-orange text-white hidden xl:(inline-block);
+  --at-apply: bg-orange-4 text-white hidden xl:(inline-block);
 }
 
 .mode {

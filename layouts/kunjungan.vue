@@ -1,9 +1,31 @@
+<script setup>
+useHead({
+  title: "Visitor Kandaga | Universitas Padjadjaran",
+});
+</script>
+
 <template>
-  <main class="bg-gray-50">
-    <Head>
-      <Title>GLAM Kandaga Unpad | Universitas Padjadjaran</Title>
-    </Head>
-    <slot />
-    <FooterSection :show-list="false" />
+  <main class="main-wrapper">
+    <section class="content">
+      <slot />
+    </section>
+
+    <section class="footer">
+      <FooterSection :show-list="false" />
+    </section>
   </main>
 </template>
+
+<style scoped>
+.main-wrapper {
+  --at-apply: bg-gray-50 flex flex-col min-h-screen;
+}
+
+.content {
+  --at-apply: flex-1;
+}
+
+.footer {
+  --at-apply: min-h-10;
+}
+</style>

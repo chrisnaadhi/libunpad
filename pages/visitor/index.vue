@@ -30,9 +30,8 @@ useHead({
 .background-block {
   background-image: url("/images/background-image-visitor.png");
   background-position: center;
-  background-repeat: no-repeat;
   background-size: cover;
-  --at-apply: flex flex-col items-center min-w-full;
+  --at-apply: flex flex-col items-center min-w-full h-full;
 }
 .heading-block {
   --at-apply: flex flex-col items-center;

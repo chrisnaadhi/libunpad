@@ -35,14 +35,14 @@
 
 <style scoped>
 .hero-img {
-  background-image: url("/images/lib.gif");
+  background-image: url("/images/kandaga-bg.png");
   /* width: 450px;
   height: 300px; */
   background-repeat: no-repeat;
   background-position: right;
   background-size: cover;
-  box-shadow: 0 0 18px 18px white inset;
-  --at-apply: hidden xl:block;
+  box-shadow: 0 0 18px 18px rgba(249, 250, 251) inset;
+  --at-apply: hidden xl:block bg-gray-50;
 }
 
 .hero-space {
@@ -59,10 +59,10 @@
 }
 
 .tentang {
-  --at-apply: bg-orange-500 px-6 py-2 text-white no-underline mr-2 md:w-auto;
+  --at-apply: bg-orange-4 px-6 py-2 text-white no-underline mr-2 md:w-auto;
 }
 
 .bantuan {
-  --at-apply: bg-dark-500 px-6 py-2 text-white no-underline ml-2 md:w-auto;
+  --at-apply: bg-dark-4 px-6 py-2 text-white no-underline ml-2 md:w-auto;
 }
 </style>
