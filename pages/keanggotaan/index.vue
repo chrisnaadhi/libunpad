@@ -2,13 +2,12 @@
 useHead({
   title: "Keanggotaan Perpustakaan Pusat Unpad",
 });
-definePageMeta({
-  layout: "default",
-});
 </script>
 
 <template>
-  <h1>Hello User!</h1>
+  <main class="ma container">
+    <h1>Hello User!</h1>
+  </main>
 </template>
 
 <style scoped></style>

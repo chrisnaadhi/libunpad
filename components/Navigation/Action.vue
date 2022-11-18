@@ -11,7 +11,9 @@ const swapToggle = () => {
     <button class="btn mode" @click.stop="swapToggle">
       <div class="i-mdi-calendar-clock bg-dark" />
     </button>
-    <button class="btn login">Akun</button>
+    <NuxtLink to="/keanggotaan">
+      <button class="btn login">Akun</button>
+    </NuxtLink>
     <button class="btn hamburger">
       <svg
         height="32px"

@@ -3,6 +3,12 @@ export default defineNuxtConfig({
   app: {
     pageTransition: { name: "page", mode: "out-in" },
     layoutTransition: { name: "layout", mode: "default" },
+    head: {
+      link: [
+        { rel: "preconnect", href: "https://fonts.googleapis.com" },
+        { rel: "preconnect", href: "https://fonts.gstatic.com" },
+      ],
+    },
   },
   modules: ["@unocss/nuxt", "nuxt-directus", "@pinia/nuxt"],
   unocss: {

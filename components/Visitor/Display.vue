@@ -26,6 +26,9 @@ const pemilihanRuangan = async (nama) => {
       <NuxtLink to="/visitor/data" target="_blank" rel="noopenner">
         <button class="btn data-kunjungan">Data Kunjungan</button>
       </NuxtLink>
+      <NuxtLink to="/">
+        <button class="btn data-kunjungan">Kembali ke Beranda</button>
+      </NuxtLink>
     </section>
   </main>
 </template>
@@ -36,6 +39,6 @@ div {
 }
 
 .data-kunjungan {
-  --at-apply: border border-orange font-600 text-gray-700 hover:(bg-orange-400 text-white border-none)
+  --at-apply: border mx-2 border-orange font-600 text-gray-700 hover:(bg-orange-400 text-white border-none)
 }
 </style>

@@ -2,9 +2,7 @@
   <section class="container ma bg-gray-50 mb-15">
     <div class="hero-space">
       <div class="hero-left">
-        <h2 class="text-xl font-700 md:text-4xl text-gray-700">
-          Selamat Datang di
-        </h2>
+        <h2 class="text-xl md:text-4xl text-gray-700">Selamat Datang di</h2>
         <h1 class="uglam text-5xl font-700 sm:text-7xl md:text-8xl lg:text-9xl">
           KANDAGA
         </h1>
@@ -20,11 +18,11 @@
         </p>
         <GenericSearch />
         <div class="container flex justify-center w-full xl:justify-start">
-          <NuxtLink to="/keanggotaan" class="btn tentang">Panduan</NuxtLink>
+          <NuxtLink to="/visitor" class="btn tentang">Panduan</NuxtLink>
           <NuxtLink to="/koleksi" class="btn bantuan">Koleksi</NuxtLink>
         </div>
       </div>
-      <div class="mt-6 xl:mt-0 flex items-center justify-center">
+      <div class="hero-right">
         <div
           class="hero-img w-full h-32 xl:h-86 xl:w-md"
           title="GLAM Kandaga"
@@ -42,7 +40,7 @@
   background-repeat: no-repeat;
   background-position: right;
   background-size: cover;
-  box-shadow: 0 0 18px 18px rgba(249, 250, 251) inset;
+  box-shadow: 0 0 15px 20px rgba(249, 250, 251) inset;
   --at-apply: hidden xl:block bg-gray-50;
 }
 
@@ -52,6 +50,10 @@
 
 .hero-left {
   --at-apply: flex flex-col items-center text-center xl:(text-left items-unset);
+}
+
+.hero-right {
+  --at-apply: mt-6 xl:mt-0 flex items-center justify-center;
 }
 
 .uglam {

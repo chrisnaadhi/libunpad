@@ -16,7 +16,7 @@ const options = {
       <div class="tanggal">
         <p>{{ currentTime.toLocaleDateString("id-ID", options) }}</p>
       </div>
-      <h1 class="text-2xl font-700 sm:text-4xl">
+      <h1 class="text-2xl font-600 sm:text-4xl">
         Memanfaatkan Platform Kandaga
       </h1>
       <p>Cara memanfaatkan platform untuk memenuhi kebutuhan akademik</p>
