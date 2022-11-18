@@ -9,17 +9,18 @@
           KANDAGA
         </h1>
         <p class="text-sm md:text-xl font-500 text-gray-700 font-italic">
-          <span class="text-orange-6">Universitas Padjadjaran</span>'s Gallery,
-          Library, Archive, Museum & Repository
+          <span class="text-orange-6 font-600">Universitas Padjadjaran</span>'s
+          Gallery, Library, Archive, Museum & Repository
         </p>
-        <p class="py-2 text-xs xl:(mr-6)">
-          Deskripsi disini seperti Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Molestiae vel sint, animi dolorum error adipisci id
-          fuga praesentium tenetur nemo!
+        <p class="py-2 text-xs xl:(mr-6 pr-8)">
+          Kandaga merupakan platform yang menyediakan katalog koleksi dan sistem
+          penelusuran ke sumber-sumber informasi yang dimiliki dan dilanggan
+          oleh Universitas Padjadjaran. Kandaga dikelola oleh Pusat Pengelolaan
+          Pengetahuan Unpad.
         </p>
         <GenericSearch />
         <div class="container flex justify-center w-full xl:justify-start">
-          <NuxtLink to="/visitor" class="btn tentang">Visitor</NuxtLink>
+          <NuxtLink to="/keanggotaan" class="btn tentang">Panduan</NuxtLink>
           <NuxtLink to="/koleksi" class="btn bantuan">Koleksi</NuxtLink>
         </div>
       </div>
@@ -59,10 +60,10 @@
 }
 
 .tentang {
-  --at-apply: bg-orange-4 px-6 py-2 text-white no-underline mr-2 md:w-auto;
+  --at-apply: bg-orange px-6 py-2 text-white font-600 no-underline mr-2 md:w-auto;
 }
 
 .bantuan {
-  --at-apply: bg-dark-4 px-6 py-2 text-white no-underline ml-2 md:w-auto;
+  --at-apply: bg-gray-2 border px-6 py-2 text-gray-7 font-600 no-underline ml-2 transition-all-500 md:w-auto hover:(bg-gray-6 text-white);
 }
 </style>

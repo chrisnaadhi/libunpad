@@ -18,6 +18,7 @@ router.afterEach((to, from, next) => {
       <div id="modal"></div>
     </ClientOnly>
     <NuxtLayout>
+      <NuxtLoadingIndicator color="orange" />
       <NuxtPage />
     </NuxtLayout>
   </div>

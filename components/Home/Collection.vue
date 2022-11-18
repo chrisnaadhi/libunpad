@@ -17,6 +17,6 @@
   --at-apply: flex items-center justify-between flex-col mx-5 sm:flex-row md:mx-0;
 }
 .card-collection {
-  --at-apply: w-full bg-orange-4 m-3 h-24 rounded-lg text-center;
+  --at-apply: w-full bg-orange m-3 h-24 rounded-lg text-center;
 }
 </style>

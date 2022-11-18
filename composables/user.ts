@@ -39,7 +39,7 @@ export const displayKeanggotaan = (identitas: string) => {
 
 export const useIdentitasForm = () => useState("nilai", () => "");
 
-export const layananDisplay = defineStore("jam", () => {
+export const jamLayanan = defineStore("jam", () => {
   const display = ref(false);
 
   function toggleDisplay() {

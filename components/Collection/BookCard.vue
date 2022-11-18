@@ -1,15 +1,17 @@
 <script setup lang="ts">
-defineProps({
-  banner: String,
-  cover: String,
-  title: String,
-  author: String,
-  description: String,
-  urlBook: String,
-  bannerColor: String,
-});
+interface CollectionBanner {
+  banner?: string;
+  cover?: string;
+  title?: string;
+  author?: string;
+  description?: string;
+  urlBook?: string;
+  bannerColor?: string;
+}
 
-const limitChars = (chars: string) => {
+defineProps<CollectionBanner>();
+
+const limitChars = (chars: any) => {
   const limited = chars.slice(0, 85);
   return limited;
 };
@@ -67,6 +69,10 @@ const limitChars = (chars: string) => {
 
 .banner-desktop {
   --at-apply: p-1 mb-2 rounded text-xs text-center font-600 bg-orange;
+}
+
+h4 {
+  --at-apply: text-dark;
 }
 
 .title-mobile {

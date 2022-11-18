@@ -50,14 +50,14 @@ const options = {
 }
 
 .tanggal {
-  --at-apply: mb-4 py-2 px-4 mt--5 min-w-32 bg-orange-4 text-white font-700 transition-all-500 rounded-b-lg;
+  --at-apply: mb-4 py-2 px-4 mt--5 min-w-32 bg-orange text-white font-700 transition-all-500 rounded-b-lg;
 }
 
 .content-wrapper {
-  --at-apply: mt-48 mb-5 max-w-6xl flex flex-1 flex-wrap justify-center items-center md:mt-35 xl:(mt-20 flex-nowrap);
+  --at-apply: mt-48 mb-10 max-w-6xl flex flex-1 flex-wrap justify-evenly items-center md:mt-35 xl:(mt-20 flex-nowrap);
 }
 
 .content {
-  --at-apply: bg-white w-full grow h-72 mx-10 my-6 rounded-md sm:(w-xs mx-5) xl:(w-1/5 mx-2);
+  --at-apply: bg-white w-full grow min-h-65 mx-10 my-6 rounded-md sm:(w-xs mx-5) xl:(w-1/5 mx-2);
 }
 </style>

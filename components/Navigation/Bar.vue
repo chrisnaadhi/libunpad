@@ -1,9 +1,10 @@
 <script setup>
-const layanan = layananDisplay();
+const layanan = jamLayanan();
+const route = useRoute();
 </script>
 
 <template>
-  <GenericMiniBanner />
+  <GenericMiniBanner v-show="route.path === '/'" />
   <div class="wrapper">
     <nav class="navbar">
       <NuxtLink to="/"
