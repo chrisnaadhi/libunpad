@@ -50,7 +50,7 @@ const options = {
 }
 
 .tanggal {
-  --at-apply: mb-4 py-2 px-4 mt--5 min-w-32 bg-orange text-white font-700 transition-all-500 rounded-b-lg;
+  --at-apply: mb-4 py-2 px-4 mt--5 min-w-32 font-600 bg-orange text-white transition-all-500 rounded-b-lg;
 }
 
 .content-wrapper {
