@@ -5,8 +5,8 @@ export default defineEventHandler((event) => {
     status: "responded",
     id: Math.floor(Math.random() * firstNumber * 1000),
     nama: "Chrisna Adhi Pranoto",
-    path: "The Path is: " + event.req.url,
-    statusCode: event.res.statusCode,
-    msg: "OK" || event.res.statusMessage,
+    path: "The Path is: " + event.node.req.url,
+    statusCode: event.node.res.statusCode,
+    msg: "OK" || event.node.res.statusMessage,
   };
 });

@@ -8,12 +8,12 @@
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.1.31",
-    "@unocss/nuxt": "^0.45.7",
-    "nuxt": "^3.0.0-rc.13"
+    "@unocss/nuxt": "^0.46.0",
+    "nuxt": "^3.0.0"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.2",
     "@splidejs/vue-splide": "^0.6.12",
-    "nuxt-directus": "^3.0.3"
+    "nuxt-directus": "^3.2.2"
   }
 }

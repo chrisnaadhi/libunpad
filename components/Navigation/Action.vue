@@ -8,10 +8,14 @@ const swapToggle = () => {
 
 <template>
   <div class="action-group mr-2 xl:mr-0">
-    <button class="btn mode" @click.stop="swapToggle">
+    <button type="button" class="btn mode" @click.stop="swapToggle">
       <div class="i-mdi-calendar-clock bg-dark" />
     </button>
-    <button class="btn login">Akun</button>
+    <NuxtLink to="/keanggotaan">
+      <button type="button" class="btn login">
+        <div class="i-mdi-account-multiple bg-white" />
+      </button>
+    </NuxtLink>
     <button class="btn hamburger">
       <svg
         height="32px"
@@ -42,11 +46,11 @@ const swapToggle = () => {
 }
 
 .login {
-  --at-apply: bg-orange text-white hidden xl:(inline-block);
+  --at-apply: bg-orange-4 text-white py-3;
 }
 
 .mode {
-  --at-apply: bg-gray-3 text-white font-600;
+  --at-apply: bg-gray-2 text-white font-600;
 }
 
 .hamburger {

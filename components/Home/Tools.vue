@@ -4,7 +4,7 @@ const { data } = await useFetch("/api/test");
 
 <template>
   <div class="wrapper">
-    <div class="bg-orange-4 ma mt--17 max-w-150 my-1 py-3 sm:rounded-lg">
+    <div class="bg-orange ma mt--17 max-w-150 my-1 py-3 sm:rounded-lg">
       <h1 class="text-2xl font-700 md:text-3xl">
         Tuntaskan Penelitianmu secara Daring
       </h1>
@@ -35,6 +35,6 @@ const { data } = await useFetch("/api/test");
 }
 
 .content {
-  --at-apply: bg-orange w-full grow h-48 m-5 rounded-md md:(w-1/5);
+  --at-apply: bg-red-5 w-full grow h-48 m-5 rounded-md md:(w-1/5);
 }
 </style>

@@ -1,5 +1,5 @@
-export const processInputVirtualKeyboard = (dataForm) => {
-  const addCharacters = (uppercaseState, key) => {
+export const processInputVirtualKeyboard = (dataForm: any) => {
+  const addCharacters = (uppercaseState: any, key: any) => {
     if (uppercaseState) {
       dataForm.value += key.toUpperCase();
     } else {

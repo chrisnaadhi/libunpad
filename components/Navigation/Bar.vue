@@ -1,8 +1,10 @@
 <script setup>
-const layanan = layananDisplay();
+const layanan = jamLayanan();
+const route = useRoute();
 </script>
 
 <template>
+  <GenericMiniBanner v-show="route.path === '/'" />
   <div class="wrapper">
     <nav class="navbar">
       <NuxtLink to="/"
@@ -26,7 +28,7 @@ const layanan = layananDisplay();
 .wrapper {
   margin: 0 auto;
   background-color: rgba(255, 255, 255, 0.95);
-  --at-apply: ma sticky top-0 z-1;
+  --at-apply: ma sticky top-0 z-1 w-full;
 }
 
 .navbar {

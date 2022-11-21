@@ -1,7 +1,7 @@
 export default defineEventHandler((event) => {
-  if (event.res.statusCode === 200) {
+  if (event.node.res.statusCode === 200) {
     return useDirectus();
   } else {
-    return event.res.statusMessage;
+    return event.node.res.statusMessage;
   }
 });

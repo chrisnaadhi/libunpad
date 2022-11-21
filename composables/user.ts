@@ -38,8 +38,29 @@ export const displayKeanggotaan = (identitas: string) => {
 };
 
 export const useIdentitasForm = () => useState("nilai", () => "");
+export const userLoginState = defineStore("loginState", () => {
+  const state = ref(false);
+  const userID = ref(Math.floor(Math.random() * 10));
 
-export const layananDisplay = defineStore("jam", () => {
+  function login() {
+    state.value = true;
+    return navigateTo("/keanggotaan", { redirectCode: 301 });
+  }
+
+  function logout() {
+    state.value = false;
+    return navigateTo("/login", { redirectCode: 301 });
+  }
+
+  return {
+    state,
+    userID,
+    login,
+    logout,
+  };
+});
+
+export const jamLayanan = defineStore("jam", () => {
   const display = ref(false);
 
   function toggleDisplay() {

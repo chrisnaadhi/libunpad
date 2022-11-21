@@ -16,7 +16,7 @@ const options = {
       <div class="tanggal">
         <p>{{ currentTime.toLocaleDateString("id-ID", options) }}</p>
       </div>
-      <h1 class="text-2xl font-700 sm:text-4xl">
+      <h1 class="text-2xl font-600 sm:text-4xl">
         Memanfaatkan Platform Kandaga
       </h1>
       <p>Cara memanfaatkan platform untuk memenuhi kebutuhan akademik</p>
@@ -34,7 +34,7 @@ const options = {
 <style scoped>
 .dummy {
   text-align: center;
-  background-image: url("/images/9396112_3023.jpg");
+  background-image: url("/images/background-platform.webp");
   background-position: center;
   background-size: cover;
   box-shadow: 0px 25px 15px rgb(255, 255, 255) inset, 0px -25px 15px rgb(255, 255, 255) inset;
@@ -50,14 +50,14 @@ const options = {
 }
 
 .tanggal {
-  --at-apply: mb-4 py-2 px-4 mt--5 min-w-32 bg-orange-4 text-dark font-700 transition-all-500;
+  --at-apply: mb-4 py-2 px-4 mt--5 min-w-32 font-600 bg-orange text-white transition-all-500 rounded-b-lg;
 }
 
 .content-wrapper {
-  --at-apply: mt-48 mb-5 max-w-6xl flex flex-1 flex-wrap justify-center items-center md:mt-35 xl:(mt-20 flex-nowrap);
+  --at-apply: mt-48 mb-10 max-w-6xl flex flex-1 flex-wrap justify-evenly items-center md:mt-35 xl:(mt-20 flex-nowrap);
 }
 
 .content {
-  --at-apply: bg-white w-full grow h-72 mx-10 my-6 rounded-md sm:(w-xs mx-5) xl:(w-1/5 mx-2);
+  --at-apply: bg-white w-full grow min-h-65 mx-10 my-6 rounded-md sm:(w-xs mx-5) xl:(w-1/5 mx-2);
 }
 </style>
