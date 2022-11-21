@@ -3,19 +3,33 @@ const tentang = tentangMenu();
 const viewMenu = ref(false);
 
 const viewDropdown = () => {
-  viewMenu.value = !viewMenu.value;
+  viewMenu.value = true;
+};
+
+const leaveDropdown = () => {
+  viewMenu.value = false;
 };
 </script>
 
 <template>
   <ul class="nav-group">
-    <li class="">
-      <span @mouseover="viewDropdown" @mouseleave="viewDropdown">Tentang</span>
-      <span :class="viewMenu ? '' : 'hidden'"
-        ><NavigationContent :menus="tentang"
-      /></span>
+    <li
+      class="cursor-pointer"
+      @mouseleave="leaveDropdown"
+      @mouseenter="viewDropdown"
+    >
+      <div class="menu flex items-center">
+        <p>Tentang</p>
+        <div class="">
+          <div class="mdi i-mdi-menu-down bg-gray" v-show="!viewMenu"></div>
+          <div class="mdi i-mdi-menu-up bg-gray" v-show="viewMenu"></div>
+        </div>
+      </div>
+      <span :class="viewMenu ? '' : 'hidden'">
+        <NavigationContent :menus="tentang" />
+      </span>
     </li>
-    <li>Layanan</li>
+    <NavigationMenuLink menu-title="Layanan" :dropdown-menu="tentang" />
     <li>Reports</li>
     <li>Berita</li>
     <li>Kontak</li>

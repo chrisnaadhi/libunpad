@@ -2,35 +2,35 @@ export const tentangMenu = () => {
   const tentang = [
     {
       name: "Test Menu",
-      url: "/test-menu",
+      url: "#",
     },
     {
       name: "Test Two",
-      url: "/test-two",
+      url: "#",
     },
     {
       name: "Test Menu",
-      url: "/test-menu",
+      url: "#",
     },
     {
       name: "Test Two",
-      url: "/test-two",
+      url: "#",
     },
     {
       name: "Test Menu",
-      url: "/test-menu",
+      url: "#",
     },
     {
       name: "Test Two",
-      url: "/test-two",
+      url: "#",
     },
     {
       name: "Test Menu",
-      url: "/test-menu",
+      url: "#",
     },
     {
       name: "Test Two",
-      url: "/test-two",
+      url: "#",
     },
   ];
 
