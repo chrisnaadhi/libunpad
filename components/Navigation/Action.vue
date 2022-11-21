@@ -16,9 +16,6 @@ const swapToggle = () => {
         <div class="i-mdi-account-multiple bg-white" />
       </button>
     </NuxtLink>
-    <NuxtLink v-show="false">
-      <button type="button" class="btn bg-orange">Logout</button>
-    </NuxtLink>
     <button class="btn hamburger">
       <svg
         height="32px"
@@ -49,7 +46,7 @@ const swapToggle = () => {
 }
 
 .login {
-  --at-apply: bg-orange-4 text-white py-2 hidden xl:(inline-block);
+  --at-apply: bg-orange-4 text-white py-3;
 }
 
 .mode {
