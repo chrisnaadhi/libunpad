@@ -30,24 +30,24 @@ useHead({
               : ''
           "
           alt=""
-          class="w-45 border-2 border-orange rounded-xl"
+          class="w-35 p-5 border-2 border-orange rounded-xl"
         />
       </div>
       <div>
         <div v-if="user" class="text-left">
-          <h1>Hello, {{ user.first_name }} {{ user.last_name }}!</h1>
+          <h1>Halo, {{ user.first_name }} {{ user.last_name }}!</h1>
           <p>Email: {{ user.email }}</p>
           <p>Role: {{ user.role }}</p>
         </div>
         <div v-else>
           <h1>
             You're not Authorized! <br />
-            Redirecting to Login Page
+            Redirecting to Login Page...
           </h1>
         </div>
       </div>
     </section>
-
+    <p>{{ user }}</p>
     <button
       type="button"
       class="btn bg-red text-white"
@@ -62,5 +62,9 @@ useHead({
 <style scoped>
 h1 {
   --at-apply: text-2xl;
+}
+
+.logout {
+  --at-apply: btn bg-red text-white;
 }
 </style>
