@@ -3,13 +3,13 @@ const route = useRoute();
 </script>
 
 <template>
-  <section>
-    <h1>Look like you're lost in our Website!</h1>
+  <section class="text-center">
+    <h1 class="text-3xl">Look like you're <span>lost</span> in our Website!</h1>
     <p>
       Don't worry just back to homepage it will give you safe and sound
       environment
     </p>
-    <pre> Your are here: {{ route.params.slug }}</pre>
+    <pre> You are here: {{ route.fullPath }}</pre>
     <NuxtLink to="/koleksi">
       <button>Back</button>
     </NuxtLink>

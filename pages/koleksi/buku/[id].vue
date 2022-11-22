@@ -2,6 +2,13 @@
 const route = useRoute();
 const { data: books, pending } = await useFetch("/api/v1/koleksi/buku");
 const buku = books.value.results.find((item) => item.slugs == route.params.id);
+if (!buku) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Books not Found!",
+    fatal: true,
+  });
+}
 
 const showModal = ref(false);
 const viewModal = () => {
