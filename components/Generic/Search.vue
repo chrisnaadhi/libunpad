@@ -1,22 +1,23 @@
 <script setup>
+const search = useSearchFunction();
 const articleObj = ref();
 const isResult = ref(false);
 const searchQuery = ref("");
 
 const removeSearchQuery = () => {
-  searchQuery.value = "";
-  isResult.value = false;
+  search.keywords = "";
+  search.isResult = false;
 };
 
 const submitSearch = async () => {
   try {
     const { data: searchRes } = await useFetch(
-      `https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrnamespace=0&exsentences=1&exintro&explaintext&exlimit=max&prop=extracts&gsrlimit=10&gsrsearch=${searchQuery.value}&format=json&origin=*&gsrsort=just_match`
+      search.baseURLSearch + search.keywords
     );
-    isResult.value = true;
-    articleObj.value = searchRes.value.query.pages;
+    search.isResult = true;
+    search.articleObj = searchRes.value.query.search;
   } catch (error) {
-    isResult.value = false;
+    search.isResult = false;
   }
 };
 const limitChars = (str) => {
@@ -48,12 +49,16 @@ const limitChars = (str) => {
         <input
           type="text"
           class="input-form"
-          v-model="searchQuery"
+          v-model="search.keywords"
           @keyup="submitSearch"
           role="searchbox"
         />
         <div class="absolute top-2 right-2">
-          <button type="button" v-show="isResult" @click="removeSearchQuery">
+          <button
+            type="button"
+            v-show="search.isResult"
+            @click="removeSearchQuery"
+          >
             <div class="i-mdi-window-close bg-orange mr-3 mb--1" />
           </button>
           <button
@@ -64,10 +69,10 @@ const limitChars = (str) => {
             Search
           </button>
         </div>
-        <div class="search-result" v-show="isResult">
+        <div class="search-result" v-show="search.isResult">
           <section class="content-result">
             <div
-              v-for="elem in articleObj"
+              v-for="elem in search.articleObj"
               :key="elem"
               class="result-element"
               target="_blank"
@@ -76,20 +81,24 @@ const limitChars = (str) => {
                 :to="`https://en.wikipedia.org?curid=${elem.pageid}`"
                 target="_blank"
               >
-                <h1 class="text-xl">{{ elem.title }}</h1>
+                <h1 class="text-xl hover:text-orange">{{ elem.title }}</h1>
               </NuxtLink>
               <p class="text-sm text-gray">
-                {{ limitChars(elem.extract) }}...
+                <span v-html="limitChars(elem.snippet)"></span>...
                 <NuxtLink
                   :to="`https://en.wikipedia.org?curid=${elem.pageid}`"
                   target="_blank"
                 >
-                  <span class="text-xs text-blue-3">(read more)</span>
+                  <span class="text-xs text-blue-3 hover:text-blue-6"
+                    >(read more)</span
+                  >
                 </NuxtLink>
               </p>
             </div>
             <div class="bg-orange-1 text-center py-2 cursor-pointer">
-              <p>Lihat hasil lebih banyak</p>
+              <NuxtLink :to="'/search?keyword=' + search.keywords">
+                Lihat hasil lebih banyak
+              </NuxtLink>
             </div>
           </section>
         </div>
@@ -108,7 +117,7 @@ const limitChars = (str) => {
 }
 
 .content-result {
-  --at-apply: bg-white text-gray-6 text-left rounded-lg max-h-sm overflow-auto;
+  --at-apply: bg-white text-gray-6 text-left rounded-lg max-h-sm overflow-auto transition-all-500;
 }
 
 .result-element {

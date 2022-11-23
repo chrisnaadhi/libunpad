@@ -4,12 +4,10 @@ const suggestion = ref("");
 const search = useSearchFunction();
 const route = useRoute();
 
-search.keywords = route.query.keyword;
-
-const submitSearch = async () => {
+const submitSearch = async (keyword) => {
   try {
     const { data: searchResults } = await useFetch(
-      search.baseURLSearch + search.keywords
+      search.baseURLSearch + keyword
     );
     search.isResult = true;
     search.articleObj = searchResults.value.query.search;
@@ -18,10 +16,33 @@ const submitSearch = async () => {
     search.isResult = false;
   }
 };
+
+const prevPage = () => {
+  if (search.initValue > 0) {
+    search.initValue -= 10;
+    submitSearch(search.keywords + "&sroffset=" + search.initValue);
+  } else {
+    search.initValue = 0;
+    submitSearch(search.keywords + "&sroffset=" + search.initValue);
+  }
+};
+
+const nextPage = () => {
+  search.initValue += 10;
+  submitSearch(search.keywords + "&sroffset=" + search.initValue);
+};
+
 const changeKeywords = () => {
   search.keywords = suggestion.value;
-  submitSearch();
+  submitSearch(search.keywords);
 };
+
+onMounted(() => {
+  search.keywords = route.query.keyword;
+  setTimeout(() => {
+    submitSearch(search.keywords);
+  }, 500);
+});
 </script>
 
 <template>
@@ -34,7 +55,7 @@ const changeKeywords = () => {
         id="searchBox"
         placeholder="Hello There!"
         v-model="search.keywords"
-        @keyup="submitSearch"
+        @keyup="submitSearch(search.keywords)"
       />
       <button type="submit" class="btn bg-orange">Search</button>
     </section>
@@ -77,12 +98,27 @@ const changeKeywords = () => {
         kotak pencarian
       </h3>
     </section>
+    <section class="flex justify-center gap-4 my-5">
+      <button
+        @click="prevPage"
+        class="btn"
+        :disabled="search.initValue < 1"
+        :class="
+          search.initValue < 1
+            ? 'bg-gray-1 text-gray-5 cursor-not-allowed'
+            : 'bg-green-2'
+        "
+      >
+        Previous Page
+      </button>
+      <button @click="nextPage" class="btn bg-blue-2">Next Page</button>
+    </section>
   </main>
 </template>
 
 <style scoped>
 h1 {
-  --at-apply: text-4xl;
+  --at-apply: text-2xl xl:text-3xl;
 }
 
 .search-box {
@@ -102,7 +138,8 @@ input {
 }
 
 .result-cards {
-  --at-apply: bg-white my-2 p-5 rounded-xl shadow-lg shadow-orange/30;
+  --at-apply: relative bg-white my-2 p-5 rounded-xl shadow-lg shadow-orange/20 top-0 hover:(top--2 shadow-orange/50);
+  transition: top ease 0.5s;
 }
 
 .lengkap {
