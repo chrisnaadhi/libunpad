@@ -9,14 +9,15 @@ const removeSearchQuery = () => {
 };
 
 const submitSearch = async () => {
-  const { data: searchRes } = await useFetch(
-    `https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrnamespace=0&exsentences=1&exintro&explaintext&exlimit=max&prop=extracts&gsrlimit=10&gsrsearch=${searchQuery.value}&format=json&origin=*&gsrsort=just_match`
-  );
-  if (!searchRes.value) {
+  try {
+    const { data: searchRes } = await useFetch(
+      `https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrnamespace=0&exsentences=1&exintro&explaintext&exlimit=max&prop=extracts&gsrlimit=10&gsrsearch=${searchQuery.value}&format=json&origin=*&gsrsort=just_match`
+    );
+    isResult.value = true;
+    articleObj.value = searchRes.value.query.pages;
+  } catch (error) {
     isResult.value = false;
   }
-  isResult.value = true;
-  articleObj.value = searchRes.value.query.pages;
 };
 const limitChars = (str) => {
   return str.slice(0, 125);
@@ -24,7 +25,7 @@ const limitChars = (str) => {
 </script>
 
 <template>
-  <form @submit.prevent="submitSearch" class="w-full relative">
+  <form @submit.prevent="submitSearch" class="w-full relative" role="search">
     <div class="flex mb-5 mt-2 mx-2 xl:(ml-0 mr-25)">
       <div class="relative w-full">
         <div class="absolute top-4 left-3">
@@ -49,9 +50,14 @@ const limitChars = (str) => {
           class="input-form"
           v-model="searchQuery"
           @keyup="submitSearch"
+          role="searchbox"
         />
         <div class="absolute top-2 right-2">
+          <button type="button" v-show="isResult" @click="removeSearchQuery">
+            <div class="i-mdi-window-close bg-orange mr-3 mb--1" />
+          </button>
           <button
+            type="submit"
             class="btn bg-orange text-white"
             @submit.prevent="submitSearch"
           >
@@ -81,6 +87,9 @@ const limitChars = (str) => {
                   <span class="text-xs text-blue-3">(read more)</span>
                 </NuxtLink>
               </p>
+            </div>
+            <div class="bg-orange-1 text-center py-2 cursor-pointer">
+              <p>Lihat hasil lebih banyak</p>
             </div>
           </section>
         </div>

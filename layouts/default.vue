@@ -8,11 +8,11 @@ useHead({
   <main class="main-wrapper">
     <NavigationBar />
 
-    <section class="content">
+    <section class="content" role="main">
       <slot />
     </section>
 
-    <section class="footer">
+    <section class="footer" role="contentinfo">
       <FooterSection :show-list="true" />
     </section>
   </main>

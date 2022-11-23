@@ -17,8 +17,8 @@ const leaveDropdown = () => {
     @mouseleave="leaveDropdown"
     @mouseenter="viewDropdown"
   >
-    <div class="menu flex items-center">
-      <p>{{ menuTitle }}</p>
+    <div class="menu">
+      <p class="menu-title">{{ menuTitle }}</p>
       <div class="">
         <div class="i-mdi-menu-down bg-gray" v-show="!viewMenu"></div>
         <div class="i-mdi-menu-up bg-gray" v-show="viewMenu"></div>
@@ -30,4 +30,12 @@ const leaveDropdown = () => {
   </li>
 </template>
 
-<style scoped></style>
+<style scoped>
+.menu {
+  --at-apply: flex items-center;
+}
+
+.menu-title {
+  --at-apply: transition-all-200 hover:(text-orange) ;
+}
+</style>
