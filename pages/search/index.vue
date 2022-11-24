@@ -1,5 +1,4 @@
 <script setup>
-const word = ref("Search");
 const suggestion = ref("");
 const search = useSearchFunction();
 const route = useRoute();
@@ -40,6 +39,9 @@ const changeKeywords = () => {
 onMounted(() => {
   search.keywords = route.query.keyword;
   setTimeout(() => {
+    if (search.keywords === undefined) {
+      search.keywords = "Universitas Padjadjaran";
+    }
     submitSearch(search.keywords);
   }, 500);
 });
@@ -47,15 +49,19 @@ onMounted(() => {
 
 <template>
   <main class="text-center container ma my-5 px-4 md:px-0">
-    <h1>Hello {{ word }} here!</h1>
+    <Head>
+      <Title>Pencarian "{{ search.keywords }}" | GLAM Kandaga Unpad</Title>
+    </Head>
+    <h1>Pencarian Terpadu Kandaga</h1>
     <section class="search-box">
       <input
         type="search"
         name="search"
         id="searchBox"
-        placeholder="Hello There!"
+        placeholder="Cari sesuatu disini..."
         v-model="search.keywords"
         @keyup="submitSearch(search.keywords)"
+        autocomplete="off"
       />
       <button type="submit" class="btn bg-orange">Search</button>
     </section>
@@ -69,13 +75,13 @@ onMounted(() => {
         <span class="font-600">{{ search.keywords }}</span>
       </div>
     </section>
-    <section v-if="search.isResult" class="result-display">
+    <section v-if="search.isResult && search.keywords" class="result-display">
       <div v-for="article in search.articleObj" class="result-cards">
         <NuxtLink
           :to="`https://en.wikipedia.org?curid=${article.pageid}`"
           target="_blank"
         >
-          <h1 class="hover:text-orange-5">{{ article.title }}</h1>
+          <h3 class="hover:text-orange-5">{{ article.title }}</h3>
         </NuxtLink>
 
         <p class="text-sm">
@@ -92,13 +98,13 @@ onMounted(() => {
         </div>
       </div>
     </section>
-    <section v-else>
+    <section v-else-if="!search.keywords || search.keywords === ''">
       <h3 class="text-2xl">
         Tidak ada hasil yang bisa ditemukan. Silahkan tuliskan sesuatu pada
         kotak pencarian
       </h3>
     </section>
-    <section class="flex justify-center gap-4 my-5">
+    <section class="flex justify-center gap-4 my-5" v-show="search.keywords">
       <button
         @click="prevPage"
         class="btn"
@@ -118,6 +124,10 @@ onMounted(() => {
 
 <style scoped>
 h1 {
+  --at-apply: text-5xl;
+}
+
+h3 {
   --at-apply: text-2xl xl:text-3xl;
 }
 

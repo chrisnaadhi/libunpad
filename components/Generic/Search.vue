@@ -1,8 +1,5 @@
 <script setup>
 const search = useSearchFunction();
-const articleObj = ref();
-const isResult = ref(false);
-const searchQuery = ref("");
 
 const removeSearchQuery = () => {
   search.keywords = "";
@@ -52,6 +49,7 @@ const limitChars = (str) => {
           v-model="search.keywords"
           @keyup="submitSearch"
           role="searchbox"
+          placeholder="Cari sesuatu disini..."
         />
         <div class="absolute top-2 right-2">
           <button
