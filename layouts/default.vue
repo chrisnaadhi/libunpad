@@ -12,6 +12,10 @@ useHead({
       <slot />
     </section>
 
+    <section class="block transition-all-500 md:hidden">
+      <NavigationBottomBar />
+    </section>
+
     <section class="footer" role="contentinfo">
       <FooterSection :show-list="true" />
     </section>
@@ -23,8 +27,8 @@ useHead({
   --at-apply: bg-gray-50 flex flex-col min-h-screen m-0;
 }
 
-.header .footer {
-  --at-apply: min-h-10;
+.footer {
+  --at-apply: min-h-10 mb-16 md:mb-0;
 }
 
 .content {
