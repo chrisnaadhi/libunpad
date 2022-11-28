@@ -1,40 +1,39 @@
 <script setup>
-const dataUser = ref();
-const ruangan = ref();
-const npm = ref();
+const user = useDirectusUser();
+const dataPengajuan = ref("default");
 
-const fetchUserData = async () => {
-  const { data, pending, error, refresh } = await useFetch(
-    `http://siat.unpad.ac.id/index.php/akademik/datamhs/mahasiswa/getbio/${npm.value}`,
-    {
-      mode: "no-cors",
-    }
-  );
-  dataUser.value = data.value;
-};
+if (!user.value) {
+  await navigateTo("/login");
+}
+
 const isVerified = ref(false);
 </script>
 
 <template>
   <main>
     <section class="my-10 text-center">
-      <h1 class="font-600 text-2xl">Administrasi dan Pengajuan</h1>
-      {{
-        fetchUserData === null ? "Tidak ada data untuk ditampilkan" : dataUser
-      }}
+      <h1 class="font-600 text-4xl">Administrasi dan Pengajuan</h1>
       <div class="flex flex-col items-center">
-        <input type="text" name="nama" autocomplete="off" v-model="npm" />
-        <input
-          type="text"
-          name="ruangan"
-          autocomplete="off"
-          v-model="ruangan"
-        />
-        <input type="checkbox" name="verified" v-model="isVerified" />
-        <button @click="fetchUserData()">Submit</button>
+        <select name="pengajuan" id="" v-model="dataPengajuan">
+          <option value="default" selected disabled>
+            Pilih jenis pengajuan
+          </option>
+          <option value="1">Satu</option>
+          <option value="2">Dua</option>
+          <option value="3">Tiga</option>
+          <option value="4">Empat</option>
+          <option value="5">Lima</option>
+          <option value="6">Enam</option>
+          <option value="7">Tujuh</option>
+          <option value="8">Delapan</option>
+          <option value="9">Sembilan</option>
+          <option value="10">Sepuluh</option>
+        </select>
+        <button>Submit</button>
       </div>
     </section>
-    <FooterSection />
+    <p>{{ user }}</p>
+    <p>{{ dataPengajuan }}</p>
   </main>
 </template>
 

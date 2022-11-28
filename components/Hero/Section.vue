@@ -18,7 +18,7 @@
         </p>
         <GenericSearch />
         <div class="container flex justify-center w-full xl:justify-start">
-          <NuxtLink to="/visitor" class="btn tentang">Panduan</NuxtLink>
+          <NuxtLink to="/search" class="btn tentang">Pencarian</NuxtLink>
           <NuxtLink to="/koleksi" class="btn bantuan">Koleksi</NuxtLink>
         </div>
       </div>
