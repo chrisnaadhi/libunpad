@@ -30,7 +30,7 @@
 
 <style scoped>
 .menu-bar {
-  --at-apply: flex justify-evenly w-full fixed bottom-0 py-2 bg-gray-2;
+  --at-apply: flex justify-evenly w-full fixed bottom-0 py-2 bg-gray-50;
 }
 
 .menu-element {

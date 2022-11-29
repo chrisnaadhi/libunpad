@@ -12,7 +12,7 @@ useHead({
       <slot />
     </section>
 
-    <section class="block transition-all-500 md:hidden">
+    <section class="block transition-all-500 xl:hidden">
       <NavigationBottomBar />
     </section>
 
@@ -28,7 +28,7 @@ useHead({
 }
 
 .footer {
-  --at-apply: min-h-10 mb-16 md:mb-0;
+  --at-apply: min-h-10 mb-16 xl:mb-0;
 }
 
 .content {

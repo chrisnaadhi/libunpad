@@ -25,11 +25,11 @@ const refreshPage = () => {
   router.go();
 };
 
-// onMounted(() => {
-//   setInterval(async () => {
-//     refreshPage();
-//   }, 300000);
-// });
+onMounted(() => {
+  setInterval(async () => {
+    refreshPage();
+  }, 1800000);
+});
 </script>
 
 <template>
@@ -44,7 +44,7 @@ const refreshPage = () => {
     <section class="w-full ma">
       <div class="card text-center">
         <p>
-          Pengunjung Terakhir (Data akan diperbarui secara otomatis setiap 5
+          Pengunjung Terakhir (Data akan diperbarui secara otomatis setiap 30
           menit) :
         </p>
         <h1 class="text-orange-5">{{ fetchLastVisitor.biodata_user }}</h1>
