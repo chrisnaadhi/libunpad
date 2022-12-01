@@ -2,10 +2,6 @@
 const user = useDirectusUser();
 const dataPengajuan = ref("default");
 
-if (!user.value) {
-  await navigateTo("/login");
-}
-
 const isVerified = ref(false);
 </script>
 
@@ -31,9 +27,22 @@ const isVerified = ref(false);
         </select>
         <button>Submit</button>
       </div>
+      <section class="container ma grid gap-2 grid-cols-3 my-5">
+        <GenericBaseCard v-for="num in 9">
+          <h1>Title {{ num }}</h1>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae
+            molestiae nostrum recusandae mollitia dolorum distinctio dolores ea
+            possimus doloremque fugiat quisquam, modi voluptatem dolor, qui
+            explicabo hic magnam sint nobis rem odio facere ullam! Nobis quos
+            dolorem provident blanditiis animi, necessitatibus at itaque enim.
+            Voluptatibus inventore necessitatibus voluptates rerum. Omnis!
+          </p>
+        </GenericBaseCard>
+      </section>
+
+      <p>{{ dataPengajuan }}</p>
     </section>
-    <p>{{ user }}</p>
-    <p>{{ dataPengajuan }}</p>
   </main>
 </template>
 
