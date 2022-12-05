@@ -38,7 +38,7 @@
 }
 
 .unpad-icon {
-  --at-apply: w-20 h-20 bg-orange-3 p-3 mt--10 rounded-full cursor-pointer;
+  --at-apply: w-20 h-20 bg-white p-3 mt--10 rounded-full cursor-pointer;
 }
 
 p {

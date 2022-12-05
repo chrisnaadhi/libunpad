@@ -1,6 +1,7 @@
 <script setup>
 const user = useDirectusUser();
 const dataPengajuan = ref("default");
+const { data: fetchingService } = await useFetch("/api/v1/layanan");
 
 const isVerified = ref(false);
 </script>
@@ -27,17 +28,18 @@ const isVerified = ref(false);
         </select>
         <button>Submit</button>
       </div>
-      <section class="container ma grid gap-2 grid-cols-3 my-5">
-        <GenericBaseCard v-for="num in 9">
-          <h1>Title {{ num }}</h1>
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae
-            molestiae nostrum recusandae mollitia dolorum distinctio dolores ea
-            possimus doloremque fugiat quisquam, modi voluptatem dolor, qui
-            explicabo hic magnam sint nobis rem odio facere ullam! Nobis quos
-            dolorem provident blanditiis animi, necessitatibus at itaque enim.
-            Voluptatibus inventore necessitatibus voluptates rerum. Omnis!
-          </p>
+      {{ fetchingService }}
+      <section class="card-group">
+        <GenericBaseCard
+          v-for="layanan in fetchingService"
+          class="bg-gray-200 shadow-black"
+        >
+          <div class="h-45">
+            <h1 class="text-center text-3xl">
+              {{ layanan.namaLayanan }}
+            </h1>
+            <p>{{ layanan.deskripsiLayanan }}</p>
+          </div>
         </GenericBaseCard>
       </section>
 
@@ -50,7 +52,11 @@ const isVerified = ref(false);
 input {
   --at-apply: border border-black rounded my-1;
 }
+
 button {
   --at-apply: bg-blue rounded py-2 px-4;
+}
+.card-group {
+  --at-apply: container ma flex flex-col gap-4 p-4 md:(grid grid-cols-2) lg:(grid-cols-3);
 }
 </style>
