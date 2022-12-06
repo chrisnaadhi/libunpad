@@ -11,7 +11,7 @@ declare global {
   interface Item {
     biodata_user?: any;
     institusi?: string;
-    nama_ruangan?: string;
+    nama_ruangan?: string | null;
     identitas_anggota?: string | any;
   }
 }
