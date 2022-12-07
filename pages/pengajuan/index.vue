@@ -41,7 +41,7 @@ const fetchService = [
       <h1 class="font-600 text-4xl">Administrasi dan Pengajuan</h1>
       <section class="profile">
         <div>
-          <img src="images/lambang-unpad.png" class="w-xl" />
+          <img src="/images/lambang-unpad.png" class="w-xl" />
         </div>
         <div class="text-justify">
           <h1 class="text-2xl font-600">Halo, Nama Lengkap</h1>
