@@ -1,5 +1,8 @@
 <script setup>
 const { createItems } = useDirectusItems();
+const { getFiles } = useDirectusFiles();
+const directusUrl = useDirectusUrl();
+const config = useRuntimeConfig();
 
 const npm = ref("210210160084");
 const namaLengkap = ref("");
@@ -9,26 +12,34 @@ const keperluan = ref("");
 const ktm = ref();
 let formData = new FormData();
 
-function viewFile() {
-  console.log(ktm.value.files);
-  formData.append("title", "Test My");
+const uploadFile = async () => {
+  formData.append("title", "ktm_" + npm.value);
   formData.append("storage", "local");
   formData.append("type", ktm.value.files[0].type);
-  formData.append("filename_disk", ktm.value.files[0].name);
   formData.append("filename_download", ktm.value.files[0].name);
+  formData.append("folder", "A0C4759B-6A50-45C1-A67E-0B97F3387EFF");
   formData.append("file", ktm.value.files[0]);
-  for (let key of formData.entries()) {
-    console.log(key[0] + ", " + key[1]);
+
+  try {
+    await $fetch(`${directusUrl}files`, {
+      headers: {
+        Authorization: `Bearer ${config.directus.token}`,
+      },
+      method: "POST",
+      body: formData,
+    });
+  } catch (error) {
+    console.log(error);
   }
-}
+};
 
 const kirimPengajuan = async () => {
-  formData.append("title", "Test My");
-  formData.append("storage", "local");
-  formData.append("type", ktm.value.files[0].type);
-  formData.append("filename_disk", ktm.value.files[0].name);
-  formData.append("filename_download", ktm.value.files[0].name);
-  formData.append("file", ktm.value.files[0]);
+  uploadFile();
+  const fileid = await getFiles({
+    params: {
+      filename_download: ktm.value.files[0].name,
+    },
+  });
 
   let items = {
     npm: npm.value,
@@ -36,7 +47,7 @@ const kirimPengajuan = async () => {
     email: email.value,
     kontak: kontak.value,
     keperluan: keperluan.value,
-    file_ktm: formData,
+    file_ktm: fileid[0].id,
   };
   try {
     await createItems({ collection: "pengajuan_surat_bebas_pustaka", items });
@@ -109,16 +120,18 @@ const kirimPengajuan = async () => {
           accept=".jpg, .jpeg, .png, .pdf"
           required
           ref="ktm"
-          @change="viewFile"
         />
         <p class="text-xs">File KTM berupa JPG, PNG atau PDF.</p>
       </div>
 
-      <button type="submit" class="btn bg-orange text-white w-full">
+      <button
+        type="submit"
+        class="btn bg-orange text-white w-full"
+        @click.prevent="kirimPengajuan"
+      >
         Kirim
       </button>
     </form>
-
     <div class="w-full my-10">
       <NuxtLink class="btn bg-orange text-white">Kembali</NuxtLink>
     </div>
@@ -127,19 +140,19 @@ const kirimPengajuan = async () => {
 
 <style scoped>
 h1 {
-  @apply text-4xl my-5;
+  --at-apply: text-4xl my-5;
 }
 
 label {
-  @apply font-600;
+  --at-apply: font-600;
 }
 
 .input-form {
-  @apply my-2;
+  --at-apply: my-2;
 }
 
 input,
 select {
-  @apply w-full bg-white border border-orange rounded p-2;
+  --at-apply: w-full bg-white border border-orange rounded p-2;
 }
 </style>
