@@ -25,7 +25,7 @@ const limitChars = (chars: any) => {
           <h4>{{ banner }}</h4>
         </div>
         <figure>
-          <img :src="cover" alt="" class="ma" />
+          <nuxt-img :src="cover" alt="" class="ma" format="webp" />
           <figcaption>
             <p class="text-center" style="font-size: 10px">{{ title }}</p>
           </figcaption>

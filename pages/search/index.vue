@@ -29,11 +29,19 @@ const prevPage = () => {
 const nextPage = () => {
   search.initValue += 10;
   submitSearch(search.keywords + "&sroffset=" + search.initValue);
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
 };
 
 const changeKeywords = () => {
   search.keywords = suggestion.value;
   submitSearch(search.keywords);
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
 };
 
 onMounted(() => {

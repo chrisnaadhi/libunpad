@@ -34,7 +34,7 @@
 
 <style scoped>
 .hero-img {
-  background-image: url("/images/kandaga-bg.png");
+  background-image: url("/images/kandaga-bg.webp");
   /* width: 450px;
   height: 300px; */
   background-repeat: no-repeat;

@@ -7,12 +7,16 @@ const route = useRoute();
   <GenericMiniBanner v-show="route.path === '/'" />
   <div class="wrapper">
     <nav class="navbar">
-      <NuxtLink to="/"
-        ><img
+      <NuxtLink to="/">
+        <nuxt-img
           src="/images/logo-perpus.png"
           class="logo"
           alt="Logo Perpustakaan"
-      /></NuxtLink>
+          width="256px"
+          height="64px"
+          format="webp"
+        />
+      </NuxtLink>
       <NavigationMenu />
       <NavigationAction @toggle="layanan.toggleDisplay()" />
     </nav>
