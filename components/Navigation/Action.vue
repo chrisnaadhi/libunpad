@@ -8,15 +8,20 @@ const swapToggle = () => {
 
 <template>
   <div class="action-group mr-2 xl:mr-0">
-    <button type="button" class="btn mode" @click.stop="swapToggle">
+    <button
+      type="button"
+      class="btn mode"
+      @click.stop="swapToggle"
+      aria-label="Jam Layanan"
+    >
       <div class="i-mdi-calendar-clock bg-dark" />
     </button>
-    <NuxtLink to="/keanggotaan">
-      <button type="button" class="btn login">
+    <NuxtLink to="/keanggotaan" alt="Halaman Keanggotaan">
+      <button type="button" class="btn login" aria-label="Login">
         <div class="i-mdi-account-multiple bg-white" />
       </button>
     </NuxtLink>
-    <button class="btn hamburger">
+    <button class="btn hamburger" role="menu" aria-label="Menu Toggle">
       <svg
         height="32px"
         id="Layer_1"

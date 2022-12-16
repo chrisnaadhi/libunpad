@@ -10,7 +10,7 @@ export default defineNuxtConfig({
       ],
     },
   },
-  modules: ["@unocss/nuxt", "nuxt-directus", "@pinia/nuxt"],
+  modules: ["@unocss/nuxt", "nuxt-directus", "@pinia/nuxt", "@nuxt/image-edge"],
   unocss: {
     preflight: true,
   },

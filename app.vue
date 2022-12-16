@@ -2,9 +2,15 @@
 import "@splidejs/vue-splide/css";
 import "@splidejs/vue-splide/css/core";
 
+useHead({
+  htmlAttrs: {
+    lang: "id",
+  },
+});
+
 const router = useRouter();
 
-router.afterEach((to, from, next) => {
+router.afterEach(() => {
   window.scrollTo({
     top: 0,
     behavior: "smooth",
@@ -53,7 +59,7 @@ h6 {
 .page-enter-from,
 .page-leave-to {
   opacity: 0;
-  transform: translate(0, -15px);
+  transform: translate(0, 30px);
 }
 
 .splide__pagination__page.is-active {
@@ -65,6 +71,21 @@ h6 {
 }
 
 .splide__arrow {
+  --at-apply: bg-orange-3;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  --at-apply: bg-gray-1;
+}
+
+::-webkit-scrollbar-thumb {
+  --at-apply: bg-orange-2 rounded-xl;
+}
+::-webkit-scrollbar-thumb:hover {
   --at-apply: bg-orange-3;
 }
 </style>
