@@ -16,6 +16,9 @@ definePageMeta({
         <div class="border-3 border-gray rounded-lg h-full">Menu</div>
       </section>
     </section>
+    <section class="py-5">
+      <NuxtLink class="btn bg-purple" to="/"> Home </NuxtLink>
+    </section>
   </main>
 </template>
 

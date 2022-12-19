@@ -22,11 +22,31 @@ const options = {
       <p>Cara memanfaatkan platform untuk memenuhi kebutuhan akademik</p>
     </div>
     <div class="content-wrapper">
-      <div class="content">1</div>
-      <div class="content">2</div>
-      <div class="content">3</div>
-      <div class="content">4</div>
-      <div class="content">5</div>
+      <div class="content">
+        <p class="use-banner">How to use</p>
+        <div class="i-mdi-theater w-24 h-24" />
+        <h1>Gallery</h1>
+      </div>
+      <div class="content">
+        <p class="use-banner">How to use</p>
+        <div class="i-mdi-bookshelf w-24 h-24" />
+        <h1>Library</h1>
+      </div>
+      <div class="content">
+        <p class="use-banner">How to use</p>
+        <div class="i-mdi-archive-sync w-24 h-24" />
+        <h1>Archives</h1>
+      </div>
+      <div class="content">
+        <p class="use-banner">How to use</p>
+        <div class="i-mdi-bank w-24 h-24" />
+        <h1>Museum</h1>
+      </div>
+      <div class="content">
+        <p class="use-banner">How to use</p>
+        <div class="i-mdi-book-education w-24 h-24" />
+        <h1>Repository</h1>
+      </div>
     </div>
   </div>
 </template>
@@ -58,6 +78,22 @@ const options = {
 }
 
 .content {
-  --at-apply: bg-white w-full grow min-h-65 mx-10 my-6 rounded-md sm:(w-xs mx-5) xl:(w-1/5 mx-2);
+  --at-apply: bg-white w-full grow min-h-65 mx-10 my-6 rounded-md flex flex-col items-center justify-center transition-all-500 cursor-pointer sm:(w-xs mx-5) xl:(w-1/5 mx-2);
+}
+
+.content:hover {
+  --at-apply: bg-orange text-white;
+}
+
+.content:hover .btn {
+  --at-apply: text-orange;
+}
+
+.use-banner {
+  --at-apply: text-xs bg-orange text-white px-4 rounded;
+}
+
+h1 {
+  --at-apply: text-2xl;
 }
 </style>

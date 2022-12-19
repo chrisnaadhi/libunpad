@@ -9,15 +9,51 @@ const { data } = await useFetch("/api/test");
         Tuntaskan Penelitianmu secara Daring
       </h1>
     </div>
-    <p class="text-sm mt-3 md:text-base xl:text-lg">
+    <p class="text-sm mt-3 pb-3 md:text-base xl:text-lg">
       Manfaatkan layanan dan alat-alat yang telah kami langgan secara daring,
       untuk mempercepat proses pekerjaan dan penelitian anda.
     </p>
     <div class="container content-wrapper">
-      <div class="content">1</div>
-      <div class="content">2</div>
-      <div class="content">3</div>
-      <div class="content">4</div>
+      <div class="content">
+        <div class="left-content">
+          <div />
+        </div>
+        <div class="right-content">
+          <div>
+            <h1>Tools 1</h1>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="left-content">
+          <div />
+        </div>
+        <div class="right-content">
+          <div>
+            <h1>Tools 2</h1>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="left-content">
+          <div />
+        </div>
+        <div class="right-content">
+          <div>
+            <h1>Tools 3</h1>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="left-content">
+          <div />
+        </div>
+        <div class="right-content">
+          <div>
+            <h1>Tools 4</h1>
+          </div>
+        </div>
+      </div>
     </div>
     <a href="#" class="text-gray-6 text-sm hover:(text-orange-5 underline)"
       >Lihat selengkapnya layanan dan alat yang dapat kami tawarkan →</a
@@ -35,6 +71,15 @@ const { data } = await useFetch("/api/test");
 }
 
 .content {
-  --at-apply: bg-red-5 w-full grow h-48 m-5 rounded-md md:(w-1/5);
+  --at-apply: relative w-full flex grow h-48 m-5 rounded-md top-0 hover:(top--4) md:(w-1/5);
+  transition: top ease 0.5s;
+}
+
+.left-content {
+  --at-apply: bg-orange-2 h-full w-12 rounded-l-lg;
+}
+
+.right-content {
+  --at-apply: bg-orange-3 h-full w-full rounded-r-lg;
 }
 </style>
