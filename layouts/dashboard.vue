@@ -26,7 +26,7 @@ useHead({
           </NuxtLink>
         </li>
         <li class="icon-block">
-          <NuxtLink to="/dashboard" class="flex">
+          <NuxtLink to="/dashboard/pengajuan" class="flex">
             <div class="i-mdi-folder-arrow-up-down icon-item" />
             Pengajuan
           </NuxtLink>

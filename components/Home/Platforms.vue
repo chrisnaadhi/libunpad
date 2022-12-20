@@ -84,14 +84,14 @@ const options = {
 .content:hover {
   --at-apply: bg-orange text-white;
 }
-
-.content:hover .btn {
-  --at-apply: text-orange;
-}
-
 .use-banner {
   --at-apply: text-xs bg-orange text-white px-4 rounded;
 }
+
+.content:hover > .use-banner {
+  --at-apply: transition-all-500 bg-white text-orange;
+}
+
 
 h1 {
   --at-apply: text-2xl;

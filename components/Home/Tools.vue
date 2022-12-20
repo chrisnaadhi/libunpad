@@ -16,41 +16,61 @@ const { data } = await useFetch("/api/test");
     <div class="container content-wrapper">
       <div class="content">
         <div class="left-content">
-          <div />
+          <div class="i-mdi-spanner icon-holder" />
         </div>
         <div class="right-content">
-          <div>
-            <h1>Tools 1</h1>
+          <div class="contents-display">
+            <h1 class="tools-heading">Mendeley</h1>
+            <p class="text-xs">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
+              voluptatum minus blanditiis cupiditate quidem deleniti mollitia
+              cum aperiam nisi veniam?
+            </p>
           </div>
         </div>
       </div>
       <div class="content">
         <div class="left-content">
-          <div />
+          <div class="i-mdi-pencil icon-holder" />
         </div>
         <div class="right-content">
-          <div>
-            <h1>Tools 2</h1>
+          <div class="contents-display">
+            <h1 class="tools-heading">Turnitin</h1>
+            <p class="text-xs">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga
+              beatae et temporibus reiciendis hic fugit laboriosam dolores amet
+              corrupti culpa!
+            </p>
           </div>
         </div>
       </div>
       <div class="content">
         <div class="left-content">
-          <div />
+          <div class="i-mdi-books icon-holder" />
         </div>
         <div class="right-content">
-          <div>
-            <h1>Tools 3</h1>
+          <div class="contents-display">
+            <h1 class="tools-heading">Pintu Unpad</h1>
+            <p class="text-xs">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Voluptate quam minima ad natus nobis itaque quibusdam ipsam labore
+              voluptates impedit.
+            </p>
           </div>
         </div>
       </div>
       <div class="content">
         <div class="left-content">
-          <div />
+          <div class="i-mdi-settings icon-holder" />
         </div>
         <div class="right-content">
-          <div>
-            <h1>Tools 4</h1>
+          <div class="contents-display">
+            <h1 class="tools-heading">Research Assist</h1>
+            <p class="text-xs">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam
+              doloremque debitis quis rerum voluptas expedita molestiae, cum
+              pariatur sed repudiandae.
+            </p>
           </div>
         </div>
       </div>
@@ -76,10 +96,26 @@ const { data } = await useFetch("/api/test");
 }
 
 .left-content {
-  --at-apply: bg-orange-2 h-full w-12 rounded-l-lg;
+  --at-apply: bg-orange-3 h-full w-12 rounded-l-lg flex items-end justify-end;
 }
 
 .right-content {
-  --at-apply: bg-orange-3 h-full w-full rounded-r-lg;
+  --at-apply: bg-orange h-full w-full rounded-r-lg;
+}
+
+.icon-holder {
+  --at-apply: bg-orange-1 w-12 h-12 absolute mr--4 mb-2 transition-all-500;
+}
+
+.content:hover > .left-content {
+  --at-apply: transition-all-500 bg-orange-5;
+}
+
+.contents-display {
+  --at-apply: h-full flex flex-col px-2 items-center justify-center;
+}
+
+.tools-heading {
+  --at-apply: text-dark font-600 text-2xl;
 }
 </style>
