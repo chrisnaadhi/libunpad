@@ -48,7 +48,7 @@ useHead({
         <li v-for="each in 50">{{ each }}</li>
       </ul>
     </section>
-    <section class="relative w-full h-4xl ml-45">
+    <section class="relative w-full h-4xl ml-0 md:ml-45">
       <slot />
     </section>
   </main>
@@ -56,7 +56,7 @@ useHead({
 
 <style scoped>
 .vertical-menu {
-  --at-apply: bg-gray-1 min-w-45 fixed overflow-y-auto top-0 bottom-0;
+  --at-apply: bg-gray-1 min-w-45 fixed overflow-y-auto top-0 bottom-0 hidden md:block;
   scrollbar-width: none;
 }
 

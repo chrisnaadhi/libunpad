@@ -7,7 +7,7 @@ interface Article {
 
 export default defineEventHandler(async (event) => {
   return {
-    statusCode: event.res.statusCode,
+    statusCode: event.node.res.statusCode,
     results: [
       {
         id: 100,

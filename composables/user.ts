@@ -1,5 +1,6 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
+import { useNuxtApp, useRuntimeConfig } from "#app";
 
 export const displayRuangan = (ruangan: string) => {
   return computed(() => {
@@ -45,7 +46,22 @@ export const displayKeperluanSurat = (keperluan: string) => {
       case "wisuda":
         return "Pendaftaran Wisuda";
       case "sidang":
-        return "Pendaftaran Sidang";
+        return "Pengajuan Sidang";
+    }
+  });
+};
+
+export const displayStatusPengajuanSurat = (status: string) => {
+  return computed(() => {
+    switch (status) {
+      case "pengajuan":
+        return "Sedang dalam tahap pengajuan";
+      case "proses":
+        return "Sedang diproses oleh petugas";
+      case "selesai":
+        return "Sudah selesai, silahkan cek email";
+      default:
+        return "Silahkan hubungi Admin";
     }
   });
 };

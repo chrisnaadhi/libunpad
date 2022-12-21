@@ -1,14 +1,5 @@
 <script setup>
 const tentang = tentangMenu();
-const viewMenu = ref(false);
-
-const viewDropdown = () => {
-  viewMenu.value = true;
-};
-
-const leaveDropdown = () => {
-  viewMenu.value = false;
-};
 </script>
 
 <template>

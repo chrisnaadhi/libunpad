@@ -6,31 +6,37 @@ const fetchService = [
     namaLayanan: "Pengajuan Bebas Pustaka",
     deskripsiLayanan:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus pariatur aut ut totam velit dignissimos itaque, sint soluta eligendi ab!",
+    slug: "/pengajuan/bebas-pustaka",
   },
   {
     namaLayanan: "Pengajuan Reservasi Online",
     deskripsiLayanan:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias error dolor sit temporibus minus asperiores at ab, illum voluptatibus laborum?",
+    slug: "/pengajuan/bebas-pustaka",
   },
   {
     namaLayanan: "Pengajuan Peminjaman Ruangan",
     deskripsiLayanan:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus nisi inventore sint. Natus ducimus assumenda, quam quas fuga praesentium sed!",
+    slug: "/pengajuan/bebas-pustaka",
   },
   {
     namaLayanan: "Pengajuan Kelas Literasi",
     deskripsiLayanan:
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi voluptate ad harum veritatis eaque ducimus libero dolore rem nulla quidem.",
+    slug: "/pengajuan/bebas-pustaka",
   },
   {
     namaLayanan: "Pengajuan Lainnya",
     deskripsiLayanan:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet officia quaerat assumenda sequi dicta mollitia incidunt dolorum natus et reprehenderit.",
+    slug: "/pengajuan/bebas-pustaka",
   },
   {
     namaLayanan: "Pengajuan Tambahan",
     deskripsiLayanan:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perferendis expedita tempore obcaecati, aperiam sapiente magnam impedit reprehenderit nesciunt repellat culpa?",
+    slug: "/pengajuan/bebas-pustaka",
   },
 ];
 </script>
@@ -62,7 +68,9 @@ const fetchService = [
             <p class="text-sm">{{ layanan.deskripsiLayanan }}</p>
           </div>
           <div class="flex justify-center">
-            <button class="btn bg-orange">Ajukan</button>
+            <NuxtLink :to="layanan.slug">
+              <button class="btn bg-orange">Ajukan</button>
+            </NuxtLink>
           </div>
         </GenericBaseCard>
       </section>

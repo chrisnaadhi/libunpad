@@ -25,7 +25,7 @@ useHead({
       <div v-show="user">
         <img
           :src="
-            user
+            user.avatar
               ? `https://repository.unpad.ac.id:8050/assets/${user.avatar}.jpg`
               : ''
           "
