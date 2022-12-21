@@ -1,53 +1,20 @@
 <script setup>
 const { createItems } = useDirectusItems();
-const { getFiles } = useDirectusFiles();
-const directusUrl = useDirectusUrl();
-const config = useRuntimeConfig();
 
 const npm = ref("210210160084");
 const namaLengkap = ref("");
 const email = ref("");
 const kontak = ref("");
 const keperluan = ref("");
-const ktm = ref();
-let formData = new FormData();
-
-const uploadFile = async () => {
-  formData.append("title", "ktm_" + npm.value);
-  formData.append("storage", "local");
-  formData.append("type", ktm.value.files[0].type);
-  formData.append("filename_download", ktm.value.files[0].name);
-  formData.append("folder", "A0C4759B-6A50-45C1-A67E-0B97F3387EFF");
-  formData.append("file", ktm.value.files[0]);
-
-  try {
-    await $fetch(`${directusUrl}files`, {
-      headers: {
-        Authorization: `Bearer ${config.directus.token}`,
-      },
-      method: "POST",
-      body: formData,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 const kirimPengajuan = async () => {
-  uploadFile();
-  const fileid = await getFiles({
-    params: {
-      filename_download: ktm.value.files[0].name,
-    },
-  });
-
   let items = {
     npm: npm.value,
     nama_lengkap: namaLengkap.value,
     email: email.value,
     kontak: kontak.value,
     keperluan: keperluan.value,
-    file_ktm: fileid[0].id,
+    status_pengajuan: "pengajuan",
   };
   try {
     await createItems({ collection: "pengajuan_surat_bebas_pustaka", items });
@@ -112,7 +79,7 @@ const kirimPengajuan = async () => {
           <option value="akademik">Keperluan Akademik lainnya</option>
         </select>
       </div>
-      <div class="input-form">
+      <!-- <div class="input-form">
         <label for="ktm">File KTM :</label>
         <input
           type="file"
@@ -122,13 +89,9 @@ const kirimPengajuan = async () => {
           ref="ktm"
         />
         <p class="text-xs">File KTM berupa JPG, PNG atau PDF.</p>
-      </div>
+      </div> -->
 
-      <button
-        type="submit"
-        class="btn bg-orange text-white w-full"
-        @click.prevent="kirimPengajuan"
-      >
+      <button type="submit" class="btn bg-orange text-white w-full">
         Kirim
       </button>
     </form>

@@ -14,24 +14,34 @@ useHead({
 
       <ul class="pl-2">
         <li class="icon-block">
-          <div class="i-mdi-home-outline icon-item" />
-          Dashboard
+          <NuxtLink to="/dashboard" class="flex">
+            <div class="i-mdi-home-outline icon-item" />
+            Dashboard
+          </NuxtLink>
         </li>
         <li class="icon-block">
-          <div class="i-mdi-account-group icon-item" />
-          Anggota
+          <NuxtLink to="/dashboard/anggota" class="flex">
+            <div class="i-mdi-account-group icon-item" />
+            Anggota
+          </NuxtLink>
         </li>
         <li class="icon-block">
-          <div class="i-mdi-folder-arrow-up-down icon-item" />
-          Pengajuan
+          <NuxtLink to="/dashboard/pengajuan" class="flex">
+            <div class="i-mdi-folder-arrow-up-down icon-item" />
+            Pengajuan
+          </NuxtLink>
         </li>
         <li class="icon-block">
-          <div class="i-mdi-archive-star icon-item" />
-          Menu Sana
+          <NuxtLink to="/dashboard" class="flex">
+            <div class="i-mdi-archive-star icon-item" />
+            Menu Sana
+          </NuxtLink>
         </li>
         <li class="icon-block">
-          <div class="i-mdi-sword-cross icon-item" />
-          Menu Sini
+          <NuxtLink to="/dashboard" class="flex">
+            <div class="i-mdi-sword-cross icon-item" />
+            Menu Sini
+          </NuxtLink>
         </li>
       </ul>
       <ul>

@@ -1,7 +1,14 @@
 <script setup>
+const { getItems } = useDirectusItems();
+const { today } = getDateToday();
+
 definePageMeta({
   layout: "dashboard",
 });
+
+const dataHariIni = await getItems(
+  filterPengunjungRuanganDirectus("lobby", today)
+);
 </script>
 
 <template>
@@ -13,8 +20,17 @@ definePageMeta({
         <div class="border-3 border-blue-3 rounded-lg h-1/2">Hello!</div>
       </section>
       <section class="w-full h-100">
-        <div class="border-3 border-gray rounded-lg h-full">Menu</div>
+        <div class="border-3 border-gray rounded-lg h-full">
+          <h1>Pengunjung Hari ini</h1>
+          <div v-if="dataHariIni.meta.filter_count !== 0">
+            {{ dataHariIni }}
+          </div>
+          <div v-else>Tidak ada data!</div>
+        </div>
       </section>
+    </section>
+    <section class="py-5">
+      <NuxtLink class="btn bg-purple" to="/"> Home </NuxtLink>
     </section>
   </main>
 </template>

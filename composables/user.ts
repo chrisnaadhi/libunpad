@@ -37,6 +37,19 @@ export const displayKeanggotaan = (identitas: string) => {
   });
 };
 
+export const displayKeperluanSurat = (keperluan: string) => {
+  return computed(() => {
+    switch (keperluan) {
+      case "ijazah":
+        return "Pengambilan Ijazah";
+      case "wisuda":
+        return "Pendaftaran Wisuda";
+      case "sidang":
+        return "Pendaftaran Sidang";
+    }
+  });
+};
+
 export const useIdentitasForm = () => useState("nilai", () => "");
 export const userLoginState = defineStore("loginState", () => {
   const state = ref(false);
