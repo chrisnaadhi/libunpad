@@ -13,6 +13,6 @@ definePageMeta({
 
 <style scoped>
 h1 {
-  --at-apply: text-xl px-5 py-2;
+  --at-apply: text-xl;
 }
 </style>

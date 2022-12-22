@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data } = await useFetch("/api/test");
+const { data: tools } = await useFetch("/api/v1/tools");
 </script>
 
 <template>
@@ -14,70 +14,29 @@ const { data } = await useFetch("/api/test");
       untuk mempercepat proses pekerjaan dan penelitian anda.
     </p>
     <div class="container content-wrapper">
-      <div class="content">
+      <div class="content" v-for="tool in tools">
         <div class="left-content">
-          <div class="i-mdi-spanner icon-holder" />
+          <div :class="tool.icon + ' icon-holder'" class="icon-holder" />
         </div>
         <div class="right-content">
           <div class="contents-display">
-            <h1 class="tools-heading">Mendeley</h1>
+            <h1 class="tools-heading">{{ tool.nama_tools }}</h1>
             <p class="text-xs">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
-              voluptatum minus blanditiis cupiditate quidem deleniti mollitia
-              cum aperiam nisi veniam?
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="content">
-        <div class="left-content">
-          <div class="i-mdi-pencil icon-holder" />
-        </div>
-        <div class="right-content">
-          <div class="contents-display">
-            <h1 class="tools-heading">Turnitin</h1>
-            <p class="text-xs">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga
-              beatae et temporibus reiciendis hic fugit laboriosam dolores amet
-              corrupti culpa!
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="content">
-        <div class="left-content">
-          <div class="i-mdi-books icon-holder" />
-        </div>
-        <div class="right-content">
-          <div class="contents-display">
-            <h1 class="tools-heading">Pintu Unpad</h1>
-            <p class="text-xs">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Voluptate quam minima ad natus nobis itaque quibusdam ipsam labore
-              voluptates impedit.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="content">
-        <div class="left-content">
-          <div class="i-mdi-settings icon-holder" />
-        </div>
-        <div class="right-content">
-          <div class="contents-display">
-            <h1 class="tools-heading">Research Assist</h1>
-            <p class="text-xs">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam
-              doloremque debitis quis rerum voluptas expedita molestiae, cum
-              pariatur sed repudiandae.
+              {{ tool.deskripsi }}
             </p>
           </div>
         </div>
       </div>
     </div>
-    <a href="#" class="text-gray-6 text-sm hover:(text-orange-5 underline)"
-      >Lihat selengkapnya layanan dan alat yang dapat kami tawarkan →</a
-    >
+    <a href="#" class="text-gray-6 text-sm hover:(text-orange-5 underline)">
+      Lihat selengkapnya layanan dan alat yang dapat kami tawarkan →
+    </a>
+    <div class="hidden">
+      <div class="i-mdi-pencil"></div>
+      <div class="i-mdi-spanner"></div>
+      <div class="i-mdi-books"></div>
+      <div class="i-mdi-settings"></div>
+    </div>
   </div>
 </template>
 
@@ -104,7 +63,7 @@ const { data } = await useFetch("/api/test");
 }
 
 .icon-holder {
-  --at-apply: bg-orange-1 w-12 h-12 absolute mr--4 mb-2 transition-all-500;
+  --at-apply: bg-orange-1 w-12 h-12 absolute mr--4 mb-2;
 }
 
 .content:hover > .left-content {
@@ -116,6 +75,6 @@ const { data } = await useFetch("/api/test");
 }
 
 .tools-heading {
-  --at-apply: text-dark font-600 text-2xl;
+  --at-apply: text-white font-600 text-2xl;
 }
 </style>

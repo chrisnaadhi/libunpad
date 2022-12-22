@@ -1,38 +1,52 @@
-export const tentangMenu = () => {
+export const menuContent = () => {
   const tentang = [
     {
-      name: "Test Menu",
+      name: "Kandaga",
       url: "#",
     },
     {
-      name: "Test Two",
+      name: "Profil",
       url: "#",
     },
     {
-      name: "Test Menu",
+      name: "Fasilitas",
       url: "#",
     },
     {
-      name: "Test Two",
+      name: "Regulasi",
       url: "#",
     },
     {
-      name: "Test Menu",
+      name: "Struktur Organisasi",
       url: "#",
     },
     {
-      name: "Test Two",
-      url: "#",
-    },
-    {
-      name: "Test Menu",
-      url: "#",
-    },
-    {
-      name: "Test Two",
+      name: "Keanggotaan",
       url: "#",
     },
   ];
 
-  return tentang;
+  const layanan = [
+    {
+      name: "Layanan Daring",
+      url: "#",
+    },
+    {
+      name: "Layanan Luring",
+      url: "#",
+    },
+    {
+      name: "Layanan Administratif",
+      url: "/pengajuan",
+    },
+    {
+      name: "Layanan Riset",
+      url: "#",
+    },
+  ];
+
+  return {
+    tentang,
+    layanan,
+  };
 };

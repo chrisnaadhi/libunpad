@@ -31,11 +31,6 @@ const kirimPengajuan = async () => {
   } else {
     textNotif.value = "text-red-7";
     notification.value = "Email tidak valid, silahkan coba lagi";
-    npm.value = "";
-    namaLengkap.value = "";
-    email.value = "";
-    kontak.value = "";
-    keperluan.value = "";
     setTimeout(async () => {
       notification.value = "Silahkan isi seluruh form sesuai dengan data asli";
       textNotif.value = "text-dark";
@@ -109,9 +104,9 @@ const kirimPengajuan = async () => {
       </button>
     </form>
     <div class="w-full my-10">
-      <NuxtLink class="btn bg-orange text-white" to="/pengajuan"
-        >Kembali</NuxtLink
-      >
+      <NuxtLink class="btn bg-orange text-white" to="/pengajuan">
+        Kembali
+      </NuxtLink>
     </div>
   </main>
 </template>

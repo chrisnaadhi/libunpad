@@ -66,6 +66,36 @@ export const displayStatusPengajuanSurat = (status: string) => {
   });
 };
 
+export const displayMessage = (value: string) => {
+  switch (value) {
+    case "pengajuan":
+      return "text-red";
+    case "proses":
+      return "text-amber";
+    case "selesai":
+      return "text-green";
+  }
+};
+
+export const displayPersyaratan = (syarat: object) => {
+  if (syarat === null) {
+    return "Persyaratan belum lengkap";
+  }
+  const changeSyaratType = syarat.toString().split(",");
+  if (
+    changeSyaratType.includes("denda") &&
+    changeSyaratType.includes("peminjaman")
+  ) {
+    return `Syarat sudah lengkap`;
+  } else if (changeSyaratType.includes("denda")) {
+    return `Masih ada peminjaman yang belum dikembalikan`;
+  } else if (changeSyaratType.includes("peminjaman")) {
+    return `Masih ada denda yang belum dibayar`;
+  } else {
+    return `Persyaratan belooommm`;
+  }
+};
+
 export const useIdentitasForm = () => useState("nilai", () => "");
 export const userLoginState = defineStore("loginState", () => {
   const state = ref(false);

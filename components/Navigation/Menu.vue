@@ -1,11 +1,11 @@
 <script setup>
-const tentang = tentangMenu();
+const { tentang, layanan } = menuContent();
 </script>
 
 <template>
   <ul class="nav-group">
     <NavigationMenuLink menu-title="Tentang" :dropdown-menu="tentang" />
-    <NavigationMenuLink menu-title="Layanan" :dropdown-menu="tentang" />
+    <NavigationMenuLink menu-title="Layanan" :dropdown-menu="layanan" />
     <li>Reports</li>
     <li>Berita</li>
     <li>Kontak</li>

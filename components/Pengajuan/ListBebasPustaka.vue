@@ -2,6 +2,8 @@
 import {
   displayKeperluanSurat,
   displayStatusPengajuanSurat,
+  displayMessage,
+  displayPersyaratan,
 } from "~/composables/user";
 
 const config = useRuntimeConfig();
@@ -51,32 +53,22 @@ const convertTimeZone = (time) => {
   return `${formatted} ${timeFormat} WIB`;
 };
 
-const displayMessage = (value) => {
-  switch (value) {
-    case "pengajuan":
-      return "text-red";
-    case "proses":
-      return "text-amber";
-    case "selesai":
-      return "text-green";
-  }
-};
-
 const tableHead = [
   "NPM",
   "Nama Lengkap",
   "Email",
   "Keperluan",
+  "Persyaratan",
   "Tanggal Pengajuan",
+  "Tanggal Diproses",
   "Status Pengajuan",
-  "Tanggal Selesai",
   "Petugas",
 ];
 </script>
 
 <template>
-  <section class="overflow-x-auto relative px-5">
-    <table class="w-full border-collapse border text-xs border-slate-400">
+  <section class="overflow-x-auto relative">
+    <table class="w-full border-collapse border text-sm border-slate-400">
       <thead class="bg-orange-2">
         <tr>
           <th
@@ -101,7 +93,14 @@ const tableHead = [
             {{ displayKeperluanSurat(data.keperluan) }}
           </td>
           <td class="table-border">
+            {{ displayPersyaratan(data.persyaratan) }}
+          </td>
+          <td class="table-border">
             {{ convertTimeZone(data.date_created) }}
+          </td>
+          <td class="table-border">
+            <span v-if="!data.date_updated">Belum diproses</span>
+            <span v-else>{{ convertTimeZone(data.date_updated) }}</span>
           </td>
           <td class="table-border">
             <span
@@ -110,10 +109,6 @@ const tableHead = [
             >
               {{ displayStatusPengajuanSurat(data.status_pengajuan) }}
             </span>
-          </td>
-          <td class="table-border">
-            <span v-if="!data.date_updated">Belum selesai</span>
-            <span v-else>{{ convertTimeZone(data.date_updated) }}</span>
           </td>
           <td class="table-border">
             {{ searchPetugas(data.user_updated) }}

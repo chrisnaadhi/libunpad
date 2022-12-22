@@ -13,7 +13,7 @@ const leaveDropdown = () => {
 
 <template>
   <li
-    class="cursor-pointer"
+    class="cursor-pointer z-2"
     @mouseleave="leaveDropdown"
     @mouseenter="viewDropdown"
   >
@@ -24,7 +24,7 @@ const leaveDropdown = () => {
         <div class="i-mdi-menu-up bg-gray" v-show="viewMenu"></div>
       </div>
     </div>
-    <span :class="viewMenu ? '' : 'hidden'">
+    <span class="transition-all-500" :class="viewMenu ? '' : 'hidden'">
       <NavigationContent :menus="dropdownMenu" />
     </span>
   </li>

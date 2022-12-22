@@ -22,7 +22,7 @@ useHead({
 <template>
   <main class="ma container text-center">
     <section class="flex justify-center my-4 gap-4">
-      <div v-show="user">
+      <div v-if="user.avatar">
         <img
           :src="
             user.avatar
