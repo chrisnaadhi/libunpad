@@ -9,9 +9,9 @@ const { data: fetchService } = await useFetch("/api/v1/layanan");
       <h1 class="font-600 text-4xl">Administrasi dan Pengajuan</h1>
       <section class="profile">
         <div>
-          <img src="/images/lambang-unpad.png" class="w-xl" />
+          <img src="/images/lambang-unpad.png" class="w-32 md:w-64" />
         </div>
-        <div class="text-justify">
+        <div class="text-justify w-full">
           <h1 class="text-2xl font-600">
             Halo, {{ user ? `${user.first_name}!` : "Pengunjung" }}
           </h1>
@@ -53,7 +53,7 @@ input {
 }
 
 .profile {
-  --at-apply: flex items-center justify-center gap-4 max-w-lg ma py-10;
+  --at-apply: flex flex-col items-center justify-center gap-4 max-w-lg ma py-10 px-5 md:flex-row;
 }
 
 .card-group {

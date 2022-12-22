@@ -5,7 +5,7 @@ const name = ref("Chrisna Adhi Pranoto");
 <template>
   <section>
     <h1>Daftar Pengajuan Surat Bebas Pustaka</h1>
-    <div>
+    <div class="flex max-w-lg ma mt-3">
       <input class="searchBox" type="search" name="cari-surat-bebas-pustaka" />
       <button type="submit" class="btn bg-orange-3 mx-1">Search</button>
     </div>
@@ -26,6 +26,6 @@ h1 {
 }
 
 .searchBox {
-  --at-apply: bg-gray-2 mt-3 min-w-lg p-2 rounded mx-1 focus:bg-white;
+  --at-apply: bg-gray-2 w-full p-2 rounded mx-1 focus:bg-white;
 }
 </style>
