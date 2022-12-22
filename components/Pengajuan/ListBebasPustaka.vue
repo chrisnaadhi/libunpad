@@ -2,7 +2,6 @@
 import {
   displayKeperluanSurat,
   displayStatusPengajuanSurat,
-  displayMessage,
   displayPersyaratan,
 } from "~/composables/user";
 
@@ -51,6 +50,17 @@ const convertTimeZone = (time) => {
     minute: "numeric",
   });
   return `${formatted} ${timeFormat} WIB`;
+};
+
+const displayMessage = (value) => {
+  switch (value) {
+    case "pengajuan":
+      return "text-red";
+    case "proses":
+      return "text-amber";
+    case "selesai":
+      return "text-green";
+  }
 };
 
 const tableHead = [

@@ -66,17 +66,6 @@ export const displayStatusPengajuanSurat = (status: string) => {
   });
 };
 
-export const displayMessage = (value: string) => {
-  switch (value) {
-    case "pengajuan":
-      return "text-red";
-    case "proses":
-      return "text-amber";
-    case "selesai":
-      return "text-green";
-  }
-};
-
 export const displayPersyaratan = (syarat: object) => {
   if (syarat === null) {
     return "Persyaratan belum lengkap";
