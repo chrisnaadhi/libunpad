@@ -1,3 +1,5 @@
+import { defineStore } from "pinia";
+
 export const menuContent = () => {
   const tentang = [
     {
@@ -50,3 +52,12 @@ export const menuContent = () => {
     layanan,
   };
 };
+
+export const mobileMenu = defineStore("mobile", () => {
+  const menuState = ref(false);
+  function changeMenuState() {
+    menuState.value = !menuState.value;
+  }
+
+  return { menuState, changeMenuState };
+});
