@@ -107,7 +107,7 @@ const limitChars = (str) => {
 
 <style scoped>
 .input-form {
-  --at-apply: min-w-full h-14 pl-10 pr-20 border-1 border-orange rounded-lg focus:(shadow-md outline-none);
+  --at-apply: min-w-full h-14 pl-10 pr-20 md:pr-30 border-1 border-orange rounded-lg focus:(shadow-md outline-none);
 }
 
 .search-result {

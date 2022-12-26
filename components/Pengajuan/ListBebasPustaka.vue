@@ -29,7 +29,7 @@ const { data: dataPetugas } = await useFetch(
 const searchPetugas = (idPetugas) => {
   const petugas = dataPetugas.value.data.find((nama) => nama.id === idPetugas);
   if (!petugas) {
-    return "Administrator Kandaga";
+    return "Belum diproses";
   }
   const objPetugas = Object.assign({}, petugas);
   return `${objPetugas.first_name} ${objPetugas.last_name}`;
@@ -126,7 +126,6 @@ const tableHead = [
         </tr>
       </tbody>
     </table>
-    {{ searchPetugas("09B23E6C-1F49-4392-B0C4-090E2051FF57") }}
   </section>
 </template>
 

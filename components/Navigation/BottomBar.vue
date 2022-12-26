@@ -3,27 +3,37 @@
 <template>
   <section class="menu-bar">
     <div class="menu-element">
-      <div class="i-mdi-home bg-orange w-8 h-8" />
-      <p>Beranda</p>
+      <div class="i-mdi-home bg-orange w-6 h-6" />
+      <NuxtLink to="/">
+        <p>Beranda</p>
+      </NuxtLink>
     </div>
     <div class="menu-element">
-      <div class="i-mdi-book-sync bg-orange w-8 h-8" />
-      <p>Layanan</p>
+      <div class="i-mdi-book-sync bg-orange w-6 h-6" />
+      <NuxtLink to="/pengajuan">
+        <p>Layanan</p>
+      </NuxtLink>
     </div>
     <div class="middle-menu">
-      <img
-        src="/images/lambang-unpad.png"
-        class="unpad-icon"
-        alt="Logo Unpad"
-      />
+      <NuxtLink to="/search">
+        <img
+          src="/images/lambang-unpad.png"
+          class="unpad-icon"
+          alt="Logo Unpad"
+        />
+      </NuxtLink>
     </div>
     <div class="menu-element">
-      <div class="i-mdi-newspaper-variant-multiple bg-orange w-8 h-8" />
-      <p>Berita</p>
+      <div class="i-mdi-newspaper-variant-multiple bg-orange w-6 h-6" />
+      <NuxtLink to="/">
+        <p>Berita</p>
+      </NuxtLink>
     </div>
     <div class="menu-element">
-      <div class="i-mdi-help-box-multiple bg-orange w-8 h-8" />
-      <p>Bantuan</p>
+      <div class="i-mdi-help-box-multiple bg-orange w-6 h-6" />
+      <NuxtLink to="/">
+        <p>Bantuan</p>
+      </NuxtLink>
     </div>
   </section>
 </template>
@@ -42,6 +52,6 @@
 }
 
 p {
-  --at-apply: text-sm;
+  --at-apply: text-xs;
 }
 </style>
