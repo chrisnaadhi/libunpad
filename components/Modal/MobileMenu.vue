@@ -1,16 +1,18 @@
 <script setup>
-import { mobileMenu } from "~/composables/navMenu";
+import { mobileMenu, menuContent } from "~/composables/navMenu";
 
 const menu = mobileMenu();
-const isTentangOpen = ref(false);
-const isLayananOpen = ref(false);
+const { layanan, tentang } = menuContent();
 
 const viewTentang = () => {
-  isTentangOpen.value = !isTentangOpen.value;
-  isLayananOpen.value = false;
+  menu.isTentangOpen = !menu.isTentangOpen;
+  menu.isLayananOpen = false;
 };
 
-const viewLayanan = () => {};
+const viewLayanan = () => {
+  menu.isLayananOpen = !menu.isLayananOpen;
+  menu.isTentangOpen = false;
+};
 </script>
 
 <template>
@@ -20,31 +22,39 @@ const viewLayanan = () => {};
         <span @click="menu.menuState = false">&#10006;</span>
       </div>
       <div class="menu-wrapper">
-        <div class="pb-2 pl-10">
-          <NuxtLink to="/" class="menu-list">Beranda</NuxtLink>
-          <p class="menu-list">
+        <div class="flex flex-col pb-2 pl-10">
+          <NuxtLink to="/" class="menu-list hover-menu">Beranda</NuxtLink>
+          <p class="menu-list hover-menu" @click="viewTentang">
             Tentang
-            <span v-if="true"> &#707;</span>
-            <span v-else> &#709;</span>
+            <span v-if="menu.isTentangOpen"> &#11167;</span>
+            <span v-else> &#11166;</span>
           </p>
-          <div v-show="true" class="pl-2 text-sm">
-            <p>One</p>
-            <p>Two</p>
-            <p>Three</p>
+          <div
+            v-show="menu.isTentangOpen"
+            class="pl-2 text-sm"
+            v-for="list in tentang"
+          >
+            <NuxtLink :to="list.url" class="hover-menu">{{
+              list.name
+            }}</NuxtLink>
           </div>
-          <p class="menu-list">
+          <p class="menu-list" @click="viewLayanan">
             Layanan
-            <span v-if="true"> &#707;</span>
-            <span v-else> &#709;</span>
+            <span v-if="menu.isLayananOpen"> &#11167;</span>
+            <span v-else> &#11166;</span>
           </p>
-          <div v-show="true" class="pl-2 text-sm">
-            <p>One</p>
-            <p>Two</p>
-            <p>Three</p>
+          <div
+            v-show="menu.isLayananOpen"
+            class="pl-2 text-sm"
+            v-for="list in layanan"
+          >
+            <NuxtLink :to="list.url" class="hover-menu">{{
+              list.name
+            }}</NuxtLink>
           </div>
-          <NuxtLink class="menu-list">Reports</NuxtLink>
-          <NuxtLink class="menu-list">Berita</NuxtLink>
-          <NuxtLink class="menu-list">Kontak</NuxtLink>
+          <NuxtLink class="menu-list hover-menu">Reports</NuxtLink>
+          <NuxtLink class="menu-list hover-menu">Berita</NuxtLink>
+          <NuxtLink class="menu-list hover-menu">Kontak</NuxtLink>
         </div>
         <div class="flex min-w-full flex-row items-center justify-center gap-2">
           <NuxtLink to="keanggotaan">
@@ -68,5 +78,8 @@ const viewLayanan = () => {};
 }
 .menu-list {
   --at-apply: text-lg py-1 cursor-pointer;
+}
+.hover-menu {
+  --at-apply: transition-all-500 hover:(text-orange underline);
 }
 </style>

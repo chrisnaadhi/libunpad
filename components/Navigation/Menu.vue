@@ -1,4 +1,5 @@
 <script setup>
+import { menuContent } from "~/composables/navMenu";
 const { tentang, layanan } = menuContent();
 </script>
 

@@ -1,4 +1,6 @@
 <script setup>
+import { mobileMenu } from "~/composables/navMenu";
+
 const emit = defineEmits(["toggle"]);
 const menuState = mobileMenu();
 

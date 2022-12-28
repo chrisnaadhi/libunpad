@@ -55,9 +55,11 @@ export const menuContent = () => {
 
 export const mobileMenu = defineStore("mobile", () => {
   const menuState = ref(false);
+  const isTentangOpen = ref(false);
+  const isLayananOpen = ref(false);
   function changeMenuState() {
     menuState.value = !menuState.value;
   }
 
-  return { menuState, changeMenuState };
+  return { menuState, isTentangOpen, isLayananOpen, changeMenuState };
 });
