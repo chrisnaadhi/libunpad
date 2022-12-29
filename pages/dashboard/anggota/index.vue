@@ -11,4 +11,4 @@ definePageMeta({
   </section>
 </template>
 
-<style></style>
+<style scoped></style>

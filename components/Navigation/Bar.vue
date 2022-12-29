@@ -32,7 +32,7 @@ const route = useRoute();
 .wrapper {
   margin: 0 auto;
   background-color: rgba(255, 255, 255, 0.95);
-  --at-apply: ma sticky top-0 z-1 w-full;
+  --at-apply: ma sticky top-0 z-3 w-full;
 }
 
 .navbar {

@@ -22,10 +22,10 @@ useHead({
 <template>
   <main class="ma container text-center">
     <section class="flex justify-center my-4 gap-4">
-      <div v-show="user">
+      <div v-if="user.avatar">
         <img
           :src="
-            user
+            user.avatar
               ? `https://repository.unpad.ac.id:8050/assets/${user.avatar}.jpg`
               : ''
           "

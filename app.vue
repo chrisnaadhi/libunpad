@@ -1,6 +1,7 @@
 <script setup>
 import "@splidejs/vue-splide/css";
 import "@splidejs/vue-splide/css/core";
+import { mobileMenu } from "~/composables/navMenu";
 
 useHead({
   htmlAttrs: {
@@ -9,12 +10,18 @@ useHead({
 });
 
 const router = useRouter();
+const menu = mobileMenu();
 
 router.afterEach(() => {
   window.scrollTo({
     top: 0,
     behavior: "smooth",
   });
+  if (menu.menuState) {
+    menu.menuState = false;
+    menu.isLayananOpen = false;
+    menu.isTentangOpen = false;
+  }
 });
 </script>
 

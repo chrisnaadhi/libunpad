@@ -2,12 +2,16 @@
 const { createItems } = useDirectusItems();
 
 const npm = ref("210210160084");
+const notification = ref("Silahkan isi seluruh form sesuai dengan data asli");
+const textNotif = ref("text-dark");
 const namaLengkap = ref("");
 const email = ref("");
 const kontak = ref("");
 const keperluan = ref("");
+const emailPattern = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
 
 const kirimPengajuan = async () => {
+  const emailValidation = emailPattern.test(email.value);
   let items = {
     npm: npm.value,
     nama_lengkap: namaLengkap.value,
@@ -16,11 +20,21 @@ const kirimPengajuan = async () => {
     keperluan: keperluan.value,
     status_pengajuan: "pengajuan",
   };
-  try {
-    await createItems({ collection: "pengajuan_surat_bebas_pustaka", items });
-    await navigateTo({ path: "/pengajuan" });
-  } catch (error) {
-    console.log(error);
+  if (emailValidation) {
+    try {
+      await createItems({ collection: "pengajuan_surat_bebas_pustaka", items });
+      await navigateTo({ path: "/pengajuan" });
+      console.log(emailValidation);
+    } catch (error) {
+      console.log(error);
+    }
+  } else {
+    textNotif.value = "text-red-7";
+    notification.value = "Email tidak valid, silahkan coba lagi";
+    setTimeout(async () => {
+      notification.value = "Silahkan isi seluruh form sesuai dengan data asli";
+      textNotif.value = "text-dark";
+    }, 5000);
   }
 };
 </script>
@@ -79,24 +93,20 @@ const kirimPengajuan = async () => {
           <option value="akademik">Keperluan Akademik lainnya</option>
         </select>
       </div>
-      <!-- <div class="input-form">
-        <label for="ktm">File KTM :</label>
-        <input
-          type="file"
-          name="ktm"
-          accept=".jpg, .jpeg, .png, .pdf"
-          required
-          ref="ktm"
-        />
-        <p class="text-xs">File KTM berupa JPG, PNG atau PDF.</p>
-      </div> -->
+      <div class="pb-4 text-center">
+        <p class="text-sm" :class="textNotif">
+          {{ notification }}
+        </p>
+      </div>
 
       <button type="submit" class="btn bg-orange text-white w-full">
         Kirim
       </button>
     </form>
     <div class="w-full my-10">
-      <NuxtLink class="btn bg-orange text-white">Kembali</NuxtLink>
+      <NuxtLink class="btn bg-orange text-white" to="/pengajuan">
+        Kembali
+      </NuxtLink>
     </div>
   </main>
 </template>

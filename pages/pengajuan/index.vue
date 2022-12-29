@@ -1,38 +1,6 @@
 <script setup>
 const user = useDirectusUser();
-const dataPengajuan = ref("default");
-const fetchService = [
-  {
-    namaLayanan: "Pengajuan Bebas Pustaka",
-    deskripsiLayanan:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus pariatur aut ut totam velit dignissimos itaque, sint soluta eligendi ab!",
-  },
-  {
-    namaLayanan: "Pengajuan Reservasi Online",
-    deskripsiLayanan:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias error dolor sit temporibus minus asperiores at ab, illum voluptatibus laborum?",
-  },
-  {
-    namaLayanan: "Pengajuan Peminjaman Ruangan",
-    deskripsiLayanan:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus nisi inventore sint. Natus ducimus assumenda, quam quas fuga praesentium sed!",
-  },
-  {
-    namaLayanan: "Pengajuan Kelas Literasi",
-    deskripsiLayanan:
-      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi voluptate ad harum veritatis eaque ducimus libero dolore rem nulla quidem.",
-  },
-  {
-    namaLayanan: "Pengajuan Lainnya",
-    deskripsiLayanan:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet officia quaerat assumenda sequi dicta mollitia incidunt dolorum natus et reprehenderit.",
-  },
-  {
-    namaLayanan: "Pengajuan Tambahan",
-    deskripsiLayanan:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perferendis expedita tempore obcaecati, aperiam sapiente magnam impedit reprehenderit nesciunt repellat culpa?",
-  },
-];
+const { data: fetchService } = await useFetch("/api/v1/layanan");
 </script>
 
 <template>
@@ -41,10 +9,12 @@ const fetchService = [
       <h1 class="font-600 text-4xl">Administrasi dan Pengajuan</h1>
       <section class="profile">
         <div>
-          <img src="/images/lambang-unpad.png" class="w-xl" />
+          <img src="/images/lambang-unpad.png" class="w-32 md:w-64" />
         </div>
-        <div class="text-justify">
-          <h1 class="text-2xl font-600">Halo, Nama Lengkap</h1>
+        <div class="text-justify w-full">
+          <h1 class="text-2xl font-600">
+            Halo, {{ user ? `${user.first_name}!` : "Pengunjung" }}
+          </h1>
           <p>
             Jika kamu membutuhkan berkas administrasi dari Perpustakaan Pusat
             Unpad untuk keperluan akademik silahkan ajukan melalui salah satu
@@ -59,15 +29,20 @@ const fetchService = [
             <h1 class="text-center text-2xl">
               {{ layanan.namaLayanan }}
             </h1>
-            <p class="text-sm">{{ layanan.deskripsiLayanan }}</p>
+            <p class="text-sm pb-2">{{ layanan.deskripsiLayanan }}</p>
           </div>
-          <div class="flex justify-center">
-            <button class="btn bg-orange">Ajukan</button>
+          <div class="flex justify-center gap-2">
+            <NuxtLink :to="layanan.slug" class="w-full">
+              <button class="btn bg-orange text-xs w-full">Ajukan</button>
+            </NuxtLink>
+            <NuxtLink :to="layanan.slug + '/data'" class="w-full">
+              <button class="btn bg-orange text-xs w-full">
+                Data Pengajuan
+              </button>
+            </NuxtLink>
           </div>
         </GenericBaseCard>
       </section>
-
-      <p>{{ dataPengajuan }}</p>
     </section>
   </main>
 </template>
@@ -78,7 +53,7 @@ input {
 }
 
 .profile {
-  --at-apply: flex items-center justify-center gap-4 max-w-lg ma py-10;
+  --at-apply: flex flex-col items-center justify-center gap-4 max-w-lg ma py-10 px-5 md:flex-row;
 }
 
 .card-group {

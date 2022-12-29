@@ -2,6 +2,8 @@
 useHead({
   title: "Dashboard Kandaga",
 });
+
+const user = useDirectusUser();
 </script>
 
 <template>
@@ -11,6 +13,15 @@ useHead({
         <img src="/images/lambang-unpad.png" class="w-7" alt="" />
         <h1 class="text-center text-2xl text-orange">Kandaga</h1>
       </div>
+
+      <section>
+        <div v-if="user">
+          <p>Heyo, {{ user.first_name }}</p>
+        </div>
+        <div v-else>
+          <p>Heyo, Guest!</p>
+        </div>
+      </section>
 
       <ul class="pl-2">
         <li class="icon-block">
@@ -48,7 +59,7 @@ useHead({
         <li v-for="each in 50">{{ each }}</li>
       </ul>
     </section>
-    <section class="relative w-full h-4xl ml-45">
+    <section class="relative w-full h-4xl ml-0 md:ml-45 p-5">
       <slot />
     </section>
   </main>
@@ -56,7 +67,7 @@ useHead({
 
 <style scoped>
 .vertical-menu {
-  --at-apply: bg-gray-1 min-w-45 fixed overflow-y-auto top-0 bottom-0;
+  --at-apply: bg-gray-1 min-w-45 fixed overflow-y-auto top-0 bottom-0 hidden md:block;
   scrollbar-width: none;
 }
 

@@ -1,5 +1,8 @@
 <script setup>
+import { mobileMenu } from "~/composables/navMenu";
+
 const emit = defineEmits(["toggle"]);
+const menuState = mobileMenu();
 
 const swapToggle = () => {
   emit("toggle");
@@ -21,7 +24,12 @@ const swapToggle = () => {
         <div class="i-mdi-account-multiple bg-white" />
       </button>
     </NuxtLink>
-    <button class="btn hamburger" role="menu" aria-label="Menu Toggle">
+    <button
+      class="btn hamburger"
+      role="menu"
+      aria-label="Menu Toggle"
+      @click="menuState.changeMenuState"
+    >
       <svg
         height="32px"
         id="Layer_1"
@@ -51,7 +59,7 @@ const swapToggle = () => {
 }
 
 .login {
-  --at-apply: bg-orange-4 text-white py-3;
+  --at-apply: bg-orange-4 text-white py-3 hidden xl:block;
 }
 
 .mode {
