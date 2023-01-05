@@ -23,7 +23,7 @@ const dataHariIni = await getItems(
         <div class="border-3 border-gray rounded-lg h-full">
           <h1>Pengunjung Hari ini</h1>
           <div v-if="dataHariIni.meta.filter_count !== 0">
-            {{ dataHariIni }}
+            {{ dataHariIni.meta.filter_count }} orang.
           </div>
           <div v-else>Tidak ada data!</div>
         </div>
