@@ -131,7 +131,7 @@ const monthlyObj = {
     digit: "12",
     nama_fungsi: await getItems(
       getMonthlyTotalVisitor(
-        bulan.value === "01"
+        bulan.value === "12"
           ? thisMonth
           : getAllMonthly("12", "01", "31").monthly
       )

@@ -64,7 +64,7 @@ const limitChars = (str) => {
             class="btn bg-orange text-white"
             @submit.prevent="submitSearch"
           >
-            Search
+            Cari
           </button>
         </div>
         <div class="search-result" v-show="search.isResult">
