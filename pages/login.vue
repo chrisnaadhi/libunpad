@@ -75,13 +75,15 @@ const submitLogin = async () => {
           >
             Login
           </button>
-          <button
-            class="form-btn"
-            :class="email || password ? 'disable-btn' : 'register-btn'"
-            :disabled="email || password"
-          >
-            Register
-          </button>
+          <NuxtLink to="/" class="w-full">
+            <button
+              class="form-btn"
+              :class="email || password ? 'disable-btn' : 'register-btn'"
+              :disabled="email || password"
+            >
+              Register
+            </button>
+          </NuxtLink>
         </div>
       </div>
     </form>

@@ -16,57 +16,51 @@ const viewLayanan = () => {
 </script>
 
 <template>
-  <Teleport to="#main-content">
-    <section class="layer" v-if="menu.menuState">
-      <div class="mt-15 text-right px-10 font-600 cursor-pointer">
-        <span @click="menu.menuState = false">&#10006;</span>
-      </div>
-      <div class="menu-wrapper">
-        <div class="flex flex-col pb-2 pl-10">
-          <NuxtLink to="/" class="menu-list hover-menu">Beranda</NuxtLink>
-          <p class="menu-list hover-menu" @click="viewTentang">
-            Tentang
-            <span v-if="menu.isTentangOpen"> &#11167;</span>
-            <span v-else> &#11166;</span>
-          </p>
-          <div
-            v-show="menu.isTentangOpen"
-            class="pl-2 text-sm"
-            v-for="list in tentang"
-          >
-            <NuxtLink :to="list.url" class="hover-menu">{{
-              list.name
-            }}</NuxtLink>
-          </div>
-          <p class="menu-list" @click="viewLayanan">
-            Layanan
-            <span v-if="menu.isLayananOpen"> &#11167;</span>
-            <span v-else> &#11166;</span>
-          </p>
-          <div
-            v-show="menu.isLayananOpen"
-            class="pl-2 text-sm"
-            v-for="list in layanan"
-          >
-            <NuxtLink :to="list.url" class="hover-menu">{{
-              list.name
-            }}</NuxtLink>
-          </div>
-          <NuxtLink class="menu-list hover-menu">Reports</NuxtLink>
-          <NuxtLink class="menu-list hover-menu">Berita</NuxtLink>
-          <NuxtLink class="menu-list hover-menu">Kontak</NuxtLink>
+  <section class="layer" v-if="menu.menuState">
+    <div class="mt-15 text-right px-10 font-600 cursor-pointer">
+      <span @click="menu.menuState = false">&#10006;</span>
+    </div>
+    <div class="menu-wrapper">
+      <div class="flex flex-col pb-2 pl-10">
+        <NuxtLink to="/" class="menu-list hover-menu">Beranda</NuxtLink>
+        <p class="menu-list hover-menu" @click="viewTentang">
+          Tentang
+          <span v-if="menu.isTentangOpen"> &#11167;</span>
+          <span v-else> &#11166;</span>
+        </p>
+        <div
+          v-show="menu.isTentangOpen"
+          class="pl-2 text-sm"
+          v-for="list in tentang"
+        >
+          <NuxtLink :to="list.url" class="hover-menu">{{ list.name }}</NuxtLink>
         </div>
-        <div class="flex min-w-full flex-row items-center justify-center gap-2">
-          <NuxtLink to="keanggotaan">
-            <button class="btn bg-orange w-full text-white">Keanggotaan</button>
-          </NuxtLink>
-          <NuxtLink to="keanggotaan">
-            <button class="btn bg-orange w-full text-white">Register</button>
-          </NuxtLink>
+        <p class="menu-list" @click="viewLayanan">
+          Layanan
+          <span v-if="menu.isLayananOpen"> &#11167;</span>
+          <span v-else> &#11166;</span>
+        </p>
+        <div
+          v-show="menu.isLayananOpen"
+          class="pl-2 text-sm"
+          v-for="list in layanan"
+        >
+          <NuxtLink :to="list.url" class="hover-menu">{{ list.name }}</NuxtLink>
         </div>
+        <NuxtLink class="menu-list hover-menu">Reports</NuxtLink>
+        <NuxtLink class="menu-list hover-menu">Berita</NuxtLink>
+        <NuxtLink class="menu-list hover-menu">Kontak</NuxtLink>
       </div>
-    </section>
-  </Teleport>
+      <div class="flex min-w-full flex-row items-center justify-center gap-2">
+        <NuxtLink to="keanggotaan">
+          <button class="btn bg-orange w-full text-white">Keanggotaan</button>
+        </NuxtLink>
+        <NuxtLink to="keanggotaan">
+          <button class="btn bg-orange w-full text-white">Register</button>
+        </NuxtLink>
+      </div>
+    </div>
+  </section>
 </template>
 
 <style scoped>

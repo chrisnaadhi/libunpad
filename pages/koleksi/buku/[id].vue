@@ -21,7 +21,7 @@ const viewModal = () => {
     <LazyClientOnly>
       <teleport to="#modal">
         <ModalBase v-show="showModal" @close="viewModal">
-          <iframe class="w-full lg:w-5xl h-85%" :src="buku.fileAttachment" />
+          <iframe class="w-full lg:w-5xl h-75%" :src="buku.fileAttachment" />
         </ModalBase>
       </teleport>
     </LazyClientOnly>
