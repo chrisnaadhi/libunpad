@@ -8,7 +8,7 @@ useHead({
   <main class="main-wrapper">
     <NavigationBar />
 
-    <section class="content" role="main" id="main-content">
+    <section class="content" id="main-content">
       <ModalMobileMenu />
       <slot />
     </section>

@@ -25,31 +25,31 @@ const user = useDirectusUser();
 
       <ul class="pl-2">
         <li class="icon-block">
-          <NuxtLink to="/dashboard" class="flex">
+          <NuxtLink to="/dashboard" class="flex w-full">
             <div class="i-mdi-home-outline icon-item" />
             Dashboard
           </NuxtLink>
         </li>
         <li class="icon-block">
-          <NuxtLink to="/dashboard/anggota" class="flex">
+          <NuxtLink to="/dashboard/anggota" class="flex w-full">
             <div class="i-mdi-account-group icon-item" />
             Anggota
           </NuxtLink>
         </li>
         <li class="icon-block">
-          <NuxtLink to="/dashboard/pengajuan" class="flex">
+          <NuxtLink to="/dashboard/pengajuan" class="flex w-full">
             <div class="i-mdi-folder-arrow-up-down icon-item" />
             Pengajuan
           </NuxtLink>
         </li>
         <li class="icon-block">
-          <NuxtLink to="/dashboard" class="flex">
+          <NuxtLink to="/dashboard" class="flex w-full">
             <div class="i-mdi-archive-star icon-item" />
             Menu Sana
           </NuxtLink>
         </li>
         <li class="icon-block">
-          <NuxtLink to="/dashboard" class="flex">
+          <NuxtLink to="/dashboard" class="flex w-full">
             <div class="i-mdi-sword-cross icon-item" />
             Menu Sini
           </NuxtLink>

@@ -1,4 +1,7 @@
 <script setup>
+definePageMeta({
+  middleware: ["directus-auth"],
+});
 const { createItems } = useDirectusItems();
 
 const npm = ref("210210160084");

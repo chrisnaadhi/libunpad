@@ -4,7 +4,7 @@ export const menuContent = () => {
   const tentang = [
     {
       name: "Kandaga",
-      url: "#",
+      url: "/visitor",
     },
     {
       name: "Profil",
@@ -24,7 +24,7 @@ export const menuContent = () => {
     },
     {
       name: "Keanggotaan",
-      url: "#",
+      url: "/dashboard",
     },
   ];
 

@@ -4,6 +4,7 @@ const { today } = getDateToday();
 
 definePageMeta({
   layout: "dashboard",
+  middleware: ["directus-auth"],
 });
 
 const dataHariIni = await getItems(

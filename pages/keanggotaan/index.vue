@@ -1,18 +1,21 @@
 <script setup>
 const { logout } = useDirectusAuth();
 const user = useDirectusUser();
+const router = useRouter();
 
 if (!user.value) {
   await navigateTo("/login");
 }
 
 const onLogout = async () => {
-  try {
+  logout();
+  console.log(user.value);
+  setTimeout(async () => {
     logout();
-    await navigateTo("/login");
-  } catch (err) {
-    console.log(err);
-  }
+    await navigateTo("/login", {
+      redirectCode: 401,
+    });
+  }, 100);
 };
 useHead({
   title: "Keanggotaan Perpustakaan Pusat Unpad",
@@ -25,12 +28,12 @@ useHead({
       <div v-if="user.avatar">
         <img
           :src="
-            user.avatar
+            user
               ? `https://repository.unpad.ac.id:8050/assets/${user.avatar}.jpg`
               : ''
           "
           alt=""
-          class="w-35 p-5 border-2 border-orange rounded-xl"
+          class="w-35 border-2 border-orange rounded-xl"
         />
       </div>
       <div>
@@ -47,7 +50,6 @@ useHead({
         </div>
       </div>
     </section>
-    <p>{{ user }}</p>
     <button
       type="button"
       class="btn bg-red text-white"

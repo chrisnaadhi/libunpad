@@ -9,6 +9,7 @@ defineProps(["menus"]);
       :key="index"
       :to="menu.url"
       class="menu-link"
+      rel="noopener noreferrer"
     >
       {{ menu.name }}
     </NuxtLink>
