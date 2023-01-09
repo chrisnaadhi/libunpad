@@ -17,3 +17,15 @@ export const useSearchFunction = defineStore("searchfunction", () => {
     initValue,
   };
 });
+
+export const useSearchDirtakel = defineStore("searchDirtakel", () => {
+  const keywords = ref("");
+  const groupCategory = ref("");
+  const baseURLSearch = ref("/api/v1/koleksi/dirtakel");
+
+  return {
+    keywords,
+    groupCategory,
+    baseURLSearch,
+  };
+});

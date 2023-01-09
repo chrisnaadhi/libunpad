@@ -1,10 +1,3 @@
-interface Article {
-  id?: string | number;
-  title: string;
-  content: string;
-  status: string;
-}
-
 export default defineEventHandler(async (event) => {
   return {
     statusCode: event.node.res.statusCode,

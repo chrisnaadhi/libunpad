@@ -15,6 +15,7 @@
   "dependencies": {
     "@pinia/nuxt": "^0.4.2",
     "@splidejs/vue-splide": "^0.6.12",
+    "easyqrcodejs": "^4.4.13",
     "nuxt-directus": "^3.2.2"
   }
 }
