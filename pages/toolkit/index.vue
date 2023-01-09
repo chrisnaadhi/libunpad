@@ -4,8 +4,8 @@ const tools = ["KandagaQR Generator"];
 
 <template>
   <main>
-    <div v-for="tool in tools">
-      <h1>{{ tool }}</h1>
+    <div>
+      <h1>KandagaQR Tools</h1>
     </div>
   </main>
 </template>
@@ -13,5 +13,9 @@ const tools = ["KandagaQR Generator"];
 <style scoped>
 main {
   --at-apply: flex items-center justify-center;
+}
+
+h1 {
+  --at-apply: text-2xl;
 }
 </style>
