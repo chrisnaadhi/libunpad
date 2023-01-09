@@ -13,7 +13,7 @@ const options = {
   PO: "#F7A22D",
   PI: "#101056",
   title: "KandagaQR",
-  titleFont: "bold 18px Poppins",
+  titleFont: "bold 18px Kanit",
   titleHeight: 35,
   titleTop: 25,
 };
