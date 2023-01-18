@@ -66,6 +66,21 @@ export const displayStatusPengajuanSurat = (status: string) => {
   });
 };
 
+export const displayStatusTugas = (status: string) => {
+  return computed(() => {
+    switch (status) {
+      case "belum":
+        return "Belum dikerjakan";
+      case "proses":
+        return "Sedang dikerjakan";
+      case "selesai":
+        return "Selesai dikerjakan";
+      default:
+        return "Pending";
+    }
+  });
+};
+
 export const displayPersyaratan = (syarat: object) => {
   if (syarat === null) {
     return "Persyaratan belum lengkap";

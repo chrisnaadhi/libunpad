@@ -10,6 +10,14 @@ definePageMeta({
 const dataHariIni = await getItems(
   filterPengunjungRuanganDirectus("lobby", today)
 );
+let [fetchLastVisitor] = await getItems({
+  collection: "data_kunjungan",
+  params: {
+    limit: 1,
+    sort: "-date_created",
+  },
+  meta: "filter_count",
+});
 </script>
 
 <template>
@@ -22,9 +30,22 @@ const dataHariIni = await getItems(
       </section>
       <section class="w-full h-100">
         <div class="border-3 border-gray rounded-lg h-full">
-          <h1>Pengunjung Hari ini</h1>
+          <h1>Total Pengunjung Hari ini</h1>
           <div v-if="dataHariIni.meta.filter_count !== 0">
-            {{ dataHariIni.meta.filter_count }} orang.
+            <span class="text-5xl text-orange font-600">
+              {{ dataHariIni.meta.filter_count }} </span
+            ><br />
+            <span class="italic">orang</span>
+            <div>
+              <h1>Pengunjung Terakhir:</h1>
+              <span class="text-orange font-600">{{
+                fetchLastVisitor.biodata_user
+              }}</span>
+              berkunjung ke
+              <span class="text-dark font-600">{{
+                displayRuangan(fetchLastVisitor.nama_ruangan)
+              }}</span>
+            </div>
           </div>
           <div v-else>Tidak ada data!</div>
         </div>

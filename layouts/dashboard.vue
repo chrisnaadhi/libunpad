@@ -3,7 +3,12 @@ useHead({
   title: "Dashboard Kandaga",
 });
 
+const { currentTime } = useCurrentTime();
 const user = useDirectusUser();
+
+if (!user) {
+  await navigateTo("/login");
+}
 </script>
 
 <template>
@@ -15,8 +20,17 @@ const user = useDirectusUser();
       </div>
 
       <section>
-        <div v-if="user">
-          <p>Heyo, {{ user.first_name }}</p>
+        <div v-if="user" class="flex flex-col items-center">
+          <img
+            :src="
+              user.avatar
+                ? `https://repository.unpad.ac.id:8050/assets/${user.avatar}.jpg`
+                : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'
+            "
+            class="w-15 rounded-lg border border-orange"
+            alt="Foto Anggota"
+          />
+          <p>Halo, {{ user.first_name }}!</p>
         </div>
         <div v-else>
           <p>Heyo, Guest!</p>
@@ -43,9 +57,9 @@ const user = useDirectusUser();
           </NuxtLink>
         </li>
         <li class="icon-block">
-          <NuxtLink to="/dashboard" class="flex w-full">
+          <NuxtLink to="/dashboard/tugas" class="flex w-full">
             <div class="i-mdi-archive-star icon-item" />
-            Menu Sana
+            Draft Tugas
           </NuxtLink>
         </li>
         <li class="icon-block">
@@ -55,8 +69,19 @@ const user = useDirectusUser();
           </NuxtLink>
         </li>
       </ul>
-      <ul>
-        <li v-for="each in 50">{{ each }}</li>
+      <ul class="absolute bottom-0 right-20% pb-2">
+        <div class="text-3xl font-600 text-center">
+          {{ currentTime.toLocaleTimeString("en-GB") }}
+        </div>
+        <div class="text-center">
+          {{
+            new Intl.DateTimeFormat("id-ID", {
+              day: "2-digit",
+              month: "long",
+              year: "numeric",
+            }).format(currentTime)
+          }}
+        </div>
       </ul>
     </section>
     <section class="relative w-full h-4xl ml-0 md:ml-45 p-5">
@@ -67,7 +92,7 @@ const user = useDirectusUser();
 
 <style scoped>
 .vertical-menu {
-  --at-apply: bg-gray-1 min-w-45 fixed overflow-y-auto top-0 bottom-0 hidden md:block;
+  --at-apply: bg-gray-1 min-w-45 max-w-45 fixed overflow-y-auto top-0 bottom-0 hidden md:block;
   scrollbar-width: none;
 }
 
