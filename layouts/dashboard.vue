@@ -3,12 +3,19 @@ useHead({
   title: "Dashboard Kandaga",
 });
 
+const { logout } = useDirectusAuth();
 const { currentTime } = useCurrentTime();
 const user = useDirectusUser();
+const router = useRouter();
+const isLoad = ref(false);
 
-if (!user) {
-  await navigateTo("/login");
-}
+const logoutBtn = () => {
+  isLoad.value = true;
+  logout();
+  setTimeout(() => {
+    router.push("/login");
+  }, 2000);
+};
 </script>
 
 <template>
@@ -20,7 +27,7 @@ if (!user) {
       </div>
 
       <section>
-        <div v-if="user" class="flex flex-col items-center">
+        <div v-if="user.avatar" class="flex flex-col items-center">
           <img
             :src="
               user.avatar
@@ -32,7 +39,7 @@ if (!user) {
           />
           <p>Halo, {{ user.first_name }}!</p>
         </div>
-        <div v-else>
+        <div class="text-center" v-else>
           <p>Heyo, Guest!</p>
         </div>
       </section>
@@ -59,29 +66,37 @@ if (!user) {
         <li class="icon-block">
           <NuxtLink to="/dashboard/tugas" class="flex w-full">
             <div class="i-mdi-archive-star icon-item" />
-            Draft Tugas
+            Data Pekerjaan
           </NuxtLink>
         </li>
         <li class="icon-block">
           <NuxtLink to="/dashboard" class="flex w-full">
             <div class="i-mdi-sword-cross icon-item" />
-            Menu Sini
+            Menu Test
           </NuxtLink>
         </li>
       </ul>
       <ul class="absolute bottom-0 right-20% pb-2">
-        <div class="text-3xl font-600 text-center">
-          {{ currentTime.toLocaleTimeString("en-GB") }}
+        <div class="flex items-center justify-center mb-5">
+          <button class="btn bg-red text-white w-full" @click="logoutBtn">
+            <div class="text-xs" v-show="isLoad">Sedang Logout...</div>
+            <div class="text-xs" v-show="!isLoad">Logout</div>
+          </button>
         </div>
-        <div class="text-center">
-          {{
-            new Intl.DateTimeFormat("id-ID", {
-              day: "2-digit",
-              month: "long",
-              year: "numeric",
-            }).format(currentTime)
-          }}
-        </div>
+        <ClientOnly>
+          <div class="text-3xl font-600 text-center">
+            {{ currentTime.toLocaleTimeString("en-GB") }}
+          </div>
+          <div class="text-center">
+            {{
+              new Intl.DateTimeFormat("id-ID", {
+                day: "2-digit",
+                month: "long",
+                year: "numeric",
+              }).format(currentTime)
+            }}
+          </div>
+        </ClientOnly>
       </ul>
     </section>
     <section class="relative w-full h-4xl ml-0 md:ml-45 p-5">

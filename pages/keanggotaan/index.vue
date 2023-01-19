@@ -3,16 +3,22 @@ const { logout } = useDirectusAuth();
 const user = useDirectusUser();
 const isPegawai = computed(() => {
   let state = null;
-  switch (user.value.role) {
-    case "BE2D46E4-CB00-4585-8E34-5B571A80A820":
-      state = true;
-      break;
-    case "9BB62337-8EAA-44AB-A47C-F8CACEF9B8A7":
-      state = true;
-    default:
-      state = false;
-      break;
+  try {
+    switch (user.value.role) {
+      case "BE2D46E4-CB00-4585-8E34-5B571A80A820":
+        state = true;
+        break;
+      case "9BB62337-8EAA-44AB-A47C-F8CACEF9B8A7":
+        state = true;
+        break;
+      default:
+        state = false;
+        break;
+    }
+  } catch (error) {
+    console.log("Logout..");
   }
+
   return state;
 });
 
@@ -22,13 +28,11 @@ if (!user.value) {
 
 const onLogout = async () => {
   logout();
-  console.log(user.value);
   setTimeout(async () => {
-    logout();
     await navigateTo("/login", {
       redirectCode: 401,
     });
-  }, 100);
+  }, 1000);
 };
 useHead({
   title: "Keanggotaan Perpustakaan Pusat Unpad",
@@ -57,7 +61,7 @@ useHead({
         </div>
         <div v-else>
           <h1>
-            You're not Authorized! <br />
+            You're Logged Out! <br />
             Redirecting to Login Page...
           </h1>
         </div>

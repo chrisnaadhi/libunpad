@@ -10,7 +10,9 @@ useHead({
 });
 
 const router = useRouter();
+const route = useRoute();
 const menu = mobileMenu();
+const user = useDirectusUser();
 
 router.afterEach(() => {
   window.scrollTo({

@@ -1,118 +1,29 @@
 <script setup>
-const { getItems } = useDirectusItems();
-const config = useRuntimeConfig();
-
-const dataPekerjaan = await getItems({
-  collection: "pekerjaan_harian",
-  params: {
-    filter: {
-      pegawai: {
-        _eq: "$CURRENT_USER",
-      },
-    },
-  },
-});
-const { data: dataPetugas } = await useFetch(
-  `${config.public.directus.url}users`,
-  {
-    headers: {
-      Authorization: `Bearer ${config.public.directus.token}`,
-    },
-    pick: ["data", ["id", "first_name", "last_name"]],
-  }
-);
-
-const searchPetugas = (idPetugas) => {
-  const petugas = dataPetugas.value.data.find((nama) => nama.id === idPetugas);
-  if (!petugas) {
-    return "Belum diproses";
-  }
-  const objPetugas = Object.assign({}, petugas);
-  return `${objPetugas.first_name} ${objPetugas.last_name}`;
-};
-
-const convertTimeZone = (time) => {
-  const newDate = new Date(time);
-  const options = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-  const formatted = newDate.toLocaleDateString("id-ID", options);
-  const timeFormat = newDate.toLocaleTimeString("id-ID", {
-    hour12: false,
-    hour: "numeric",
-    minute: "numeric",
-  });
-  if (!time) return "Belum diperbarui";
-  return `${formatted} ${timeFormat}`;
-};
-
-const statusTugasColor = (val) => {
-  switch (val) {
-    case "belum":
-      return "bg-red";
-    case "proses":
-      return "bg-yellow";
-    case "selesai":
-      return "bg-green";
-    default:
-      return "bg-gray";
-  }
-};
+const route = useRoute();
 
 definePageMeta({
   layout: "dashboard",
-  middleware: ["directus-auth"],
 });
 </script>
 
 <template>
   <section>
-    <h1>Data Pekerjaan Anda</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>No.</th>
-          <th>Nama Tugas</th>
-          <th>Deskripsi Tugas</th>
-          <th>Pemberi Tugas</th>
-          <th>Tanggal Dibuat</th>
-          <th>Tanggal Diperbarui</th>
-          <th>Status Tugas</th>
-        </tr>
-      </thead>
-      <tbody v-for="data in dataPekerjaan">
-        <tr>
-          <td>{{ dataPekerjaan.indexOf(data) + 1 }}</td>
-          <td>{{ data.nama_tugas }}</td>
-          <td>{{ data.deskripsi_tugas }}</td>
-          <td>{{ searchPetugas(data.user_created) }}</td>
-          <td>{{ convertTimeZone(data.date_created) }}</td>
-          <td>{{ convertTimeZone(data.date_updated) }}</td>
-          <td :class="statusTugasColor(data.status)" class="font-600">
-            {{ displayStatusTugas(data.status) }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <DashboardPekerjaanProfil />
+    <div class="flex justify-between py-3">
+      <h1>Data Pekerjaan Anda</h1>
+      <NuxtLink
+        :to="route.fullPath + '/tambah'"
+        class="btn bg-orange text-white text-xs"
+      >
+        Tambah Tugas
+      </NuxtLink>
+    </div>
+    <DashboardPekerjaanTabel />
   </section>
 </template>
 
 <style scoped>
-table,
-td,
-th {
-  --at-apply: border border-orange;
-}
-
-th {
-  --at-apply: font-600 bg-orange-2;
-}
-
-th,
-td {
-  --at-apply: px-2 text-center;
+h1 {
+  --at-apply: text-2xl;
 }
 </style>

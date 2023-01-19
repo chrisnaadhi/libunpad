@@ -1,6 +1,6 @@
 <script setup>
 const { login } = useDirectusAuth();
-const router = useRouter();
+const route = useRoute();
 
 const showPassword = ref(false);
 const passwordType = ref("password");
