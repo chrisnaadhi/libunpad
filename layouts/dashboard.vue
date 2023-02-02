@@ -70,9 +70,9 @@ const logoutBtn = () => {
           </NuxtLink>
         </li>
         <li class="icon-block">
-          <NuxtLink to="/dashboard" class="flex w-full">
-            <div class="i-mdi-sword-cross icon-item" />
-            Menu Test
+          <NuxtLink to="/dashboard/map" class="flex w-full">
+            <div class="i-mdi-file-tree icon-item" />
+            Map Pekerjaan
           </NuxtLink>
         </li>
       </ul>
@@ -116,10 +116,14 @@ const logoutBtn = () => {
 }
 
 .icon-block {
-  --at-apply: flex items-center my-5 transition-all-500 cursor-pointer hover:(text-orange);
+  --at-apply: flex items-center my-4 transition-all-500 cursor-pointer hover:(text-orange);
 }
 
 .icon-item {
-  --at-apply: bg-gray-4 mr-2;
+  --at-apply: bg-gray-4 mr-2 mt-1;
+}
+
+.router-link-active, .rouer-link-exact-active {
+  --at-apply: text-orange;
 }
 </style>

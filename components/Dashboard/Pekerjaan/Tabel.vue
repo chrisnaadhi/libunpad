@@ -15,6 +15,7 @@ const dataPekerjaan = await getItems({
     sort: "date_created",
   },
 });
+
 const { data: dataPetugas } = await useFetch(
   `${config.public.directus.url}users`,
   {
@@ -67,40 +68,51 @@ const statusTugasColor = (val) => {
 </script>
 
 <template>
-  <table>
-    <thead>
-      <tr>
-        <th>No.</th>
-        <th>Nama Tugas</th>
-        <th>Deskripsi Tugas</th>
-        <th>Pemberi Tugas</th>
-        <th>Tanggal Dibuat</th>
-        <th>Tanggal Diperbarui</th>
-        <th>Status Tugas</th>
-        <th>Update Tugas</th>
-      </tr>
-    </thead>
-    <tbody v-for="data in dataPekerjaan" :key="data.id">
-      <tr>
-        <td>{{ dataPekerjaan.indexOf(data) + 1 }}</td>
-        <td>{{ data.nama_tugas }}</td>
-        <td class="max-w-4xl">
-          {{ data.deskripsi_tugas }}
-        </td>
-        <td>{{ searchPetugas(data.user_created) }}</td>
-        <td>{{ convertTimeZone(data.date_created) }}</td>
-        <td>{{ convertTimeZone(data.date_updated) }}</td>
-        <td :class="statusTugasColor(data.status)" class="font-600">
-          {{ displayStatusTugas(data.status) }}
-        </td>
-        <td>
-          <NuxtLink :to="route.fullPath + '/' + data.id" class="btn bg-orange-2"
-            >Update</NuxtLink
-          >
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <section>
+    <div class="my-2">
+      Filter :
+      <span class="filter-list">Pending</span>
+      <span class="filter-list">Belum</span>
+      <span class="filter-list">Sedang</span>
+      <span class="filter-list">Selesai</span>
+    </div>
+    <table class="w-full">
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>Nama Tugas</th>
+          <th>Deskripsi Tugas</th>
+          <th>Pemberi Tugas</th>
+          <th>Tanggal Dibuat</th>
+          <th>Tanggal Diperbarui</th>
+          <th>Status Tugas</th>
+          <th>Update Tugas</th>
+        </tr>
+      </thead>
+      <tbody v-for="data in dataPekerjaan" :key="data.id">
+        <tr>
+          <td>{{ dataPekerjaan.indexOf(data) + 1 }}</td>
+          <td>{{ data.nama_tugas }}</td>
+          <td class="max-w-4xl">
+            {{ data.deskripsi_tugas }}
+          </td>
+          <td>{{ searchPetugas(data.user_created) }}</td>
+          <td>{{ convertTimeZone(data.date_created) }}</td>
+          <td>{{ convertTimeZone(data.date_updated) }}</td>
+          <td :class="statusTugasColor(data.status)" class="font-600">
+            {{ displayStatusTugas(data.status) }}
+          </td>
+          <td>
+            <NuxtLink
+              :to="route.fullPath + '/' + data.id"
+              class="btn bg-orange-2 py-1 px-3"
+              >Update</NuxtLink
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
 </template>
 
 <style scoped>
@@ -116,6 +128,10 @@ th {
 
 th,
 td {
-  --at-apply: px-4 py-1 text-center;
+  --at-apply: p-3 text-center;
+}
+
+.filter-list {
+  --at-apply: mx-2 bg-gray-3 px-2 py-1 rounded cursor-pointer;
 }
 </style>

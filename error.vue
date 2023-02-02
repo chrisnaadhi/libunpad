@@ -17,8 +17,8 @@ const handleClearError = () => {
         website Kandaga!
       </h3>
       <p class="py-5">
-        Jangan Khawatir! Kamu bisa kembali ke beranda atau koleksi agar kamu
-        dapat menjelajah kembali di website Kandaga. Jika kamu merasa ini adalah
+        Jangan Khawatir! Kamu bisa kembali ke beranda atau login kembali agar
+        kamu dapat menjelajahi website Kandaga. Jika kamu merasa ini adalah
         sebuah kesalahan dan halaman ini memang benar ada, silahkan hubungi
         administrator kandaga agar dapat kami tanggulangi dengan segera.
       </p>

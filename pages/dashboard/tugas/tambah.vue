@@ -5,6 +5,8 @@ const user = useDirectusUser();
 const namaTugas = ref("");
 const deskripsiTugas = ref("");
 const linkTugas = ref("");
+const kriteriaTugas = ref("");
+const jumlahRencana = ref("");
 
 const createTask = async () => {
   try {
@@ -16,6 +18,8 @@ const createTask = async () => {
         deskripsi_tugas: deskripsiTugas.value,
         link_berkas: linkTugas.value,
         user_created: user.value.id,
+        kriteria_tugas: kriteriaTugas.value,
+        jumlah_rencana: jumlahRencana.value,
       },
     ];
     await createItems({ collection: "pekerjaan_harian", items });
@@ -33,15 +37,62 @@ definePageMeta({
     <DashboardPekerjaanProfil />
     <h1>Tambah Data Pekerjaan</h1>
     <form @submit.prevent="createTask">
-      <div>
-        <label for="nama-tugas">Nama Tugas :</label>
+      <div class="form-edit">
+        <label for="nama-tugas">
+          Nama Tugas <span class="text-red">*</span> :
+        </label>
         <input type="text" v-model="namaTugas" required />
       </div>
-      <div>
-        <label for="deskripsi-tugas">Deskripsi Tugas :</label>
-        <input type="text" v-model="deskripsiTugas" required />
+      <div class="form-edit">
+        <label for="deskripsi-tugas">
+          Deskripsi Tugas <span class="text-red">*</span> :
+        </label>
+        <textarea type="text" v-model="deskripsiTugas" required />
       </div>
-      <div>
+      <div class="form-edit">
+        <label for="kriteria-tugas">
+          Jenis Tugas <span class="text-red">*</span> :
+        </label>
+        <div class="input-radio">
+          <div>
+            <input
+              type="radio"
+              id="wajib"
+              name="kriteria"
+              value="wajib"
+              v-model="kriteriaTugas"
+              required
+              disabled
+            />
+            <label class="radio-text" for="wajib">Wajib</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              id="tambahan"
+              name="kriteria"
+              value="tambahan"
+              v-model="kriteriaTugas"
+            />
+            <label class="radio-text" for="tambahan">Tambahan</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              id="lainnya"
+              name="kriteria"
+              value="lainnya"
+              v-model="kriteriaTugas"
+            />
+            <label class="radio-text" for="lainnya">Lainnya</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-edit">
+        <label for="jumlah-rencana">Jumlah Rencana Tugas</label>
+        <input type="text" v-model="jumlahRencana" required />
+      </div>
+      <div class="form-edit">
         <label for="link-tugas">Link Berkas :</label>
         <input type="text" v-model="linkTugas" />
       </div>
@@ -60,11 +111,29 @@ h1 {
   --at-apply: text-2xl;
 }
 
-div {
+.form-edit {
   --at-apply: flex flex-col;
 }
 
-input {
+input,
+textarea {
   --at-apply: border border-orange p-2 max-w-xl rounded bg-orange-1 my-2;
+}
+
+input:focus,
+textarea:focus {
+  --at-apply: bg-white;
+}
+
+textarea {
+  --at-apply: h-40;
+}
+
+.input-radio {
+  --at-apply: max-w-xl flex flex-row justify-between;
+}
+
+.radio-text {
+  --at-apply: pl-2 text-lg;
 }
 </style>

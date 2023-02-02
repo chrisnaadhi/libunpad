@@ -7,14 +7,31 @@ import {
 
 const config = useRuntimeConfig();
 const { getItems } = useDirectusItems();
+const pageState = ref(0);
+const listData = ref();
+
+async function fetchDataPengajuan() {
+  listData.value = await getItems({
+    collection: "pengajuan_surat_bebas_pustaka",
+    params: {
+      sort: "-date_created",
+      offset: pageState.value,
+    },
+  });
+}
 
 const dataPengajuan = await getItems({
   collection: "pengajuan_surat_bebas_pustaka",
   params: {
     sort: "-date_created",
-    limit: "20",
+    offset: pageState.value,
   },
 });
+
+const nextData = () => {
+  pageState.value += 25;
+  fetchDataPengajuan();
+};
 
 const { data: dataPetugas } = await useFetch(
   `${config.public.directus.url}users`,
@@ -62,6 +79,8 @@ const displayMessage = (value) => {
       return "text-green";
   }
 };
+
+fetchDataPengajuan();
 
 const tableHead = [
   "NPM",

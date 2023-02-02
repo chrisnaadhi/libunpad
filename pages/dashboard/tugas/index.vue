@@ -13,7 +13,7 @@ definePageMeta({
       <h1>Data Pekerjaan Anda</h1>
       <NuxtLink
         :to="route.fullPath + '/tambah'"
-        class="btn bg-orange text-white text-xs"
+        class="btn bg-orange text-white"
       >
         Tambah Tugas
       </NuxtLink>
