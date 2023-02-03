@@ -18,7 +18,7 @@ const name = ref("Chrisna Adhi Pranoto");
 
 <style scoped>
 section {
-  --at-apply: text-center mx-2 my-5;
+  --at-apply: text-center max-w-7xl ma my-4;
 }
 
 h1 {

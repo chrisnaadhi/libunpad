@@ -16,7 +16,6 @@ definePageMeta({
         <p class="text-nip">197009302001122001</p>
         <p class="text-title">Penanggung Jawab Divisi Institusi Informasi</p>
         <p>10 Tugas</p>
-        <p>{{ route.fullPath }}</p>
       </div>
     </div>
     <div class="list-card">

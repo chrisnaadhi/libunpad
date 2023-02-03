@@ -28,7 +28,6 @@ definePageMeta({
           <h1>Nama Lengkap:{{ num }}</h1>
           <p class="text-nip">NIP</p>
           <p class="text-title">Jabatan</p>
-          <p>{{ num }} Tugas</p>
         </div>
       </GenericBaseCard>
     </div>

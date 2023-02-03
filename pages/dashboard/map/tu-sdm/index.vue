@@ -16,7 +16,6 @@ definePageMeta({
         <p class="text-nip">196610021995011001</p>
         <p class="text-title">Penanggung Jawab Divisi Tata Usaha dan SDM</p>
         <p>10 Tugas</p>
-        <p>{{ route.fullPath }}</p>
       </div>
     </div>
     <div class="list-card">

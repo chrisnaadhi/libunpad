@@ -27,26 +27,7 @@ let division = {
 
 <template>
   <section>
-    <div class="upper-division">
-      <GenericBaseCard
-        class="bg-orange-1 my-4 items-center"
-        v-for="divisi in division"
-      >
-        <div class="flex flex-col items-center">
-          <div :class="divisi.icon" class="text-7xl text-orange"></div>
-          <h1 class="">{{ divisi.nama }}</h1>
-          <p class="text-xs">{{ divisi.deskripsi }}</p>
-          <p>Total Tugas : 100</p>
-          <p>Presentase Tugas Selesai : 65%</p>
-        </div>
-        <div class="flex items-center justify-center mt-5">
-          <NuxtLink :to="divisi.path" class="btn bg-white text-center">
-            Detail
-          </NuxtLink>
-        </div>
-      </GenericBaseCard>
-    </div>
-    <div class="lower-division">
+    <div class="my-5 max-w-7xl ma">
       <GenericBaseCard class="bg-orange-1">
         <div class="flex flex-col items-center">
           <div class="i-mdi-stadium text-7xl text-orange"></div>
@@ -63,6 +44,25 @@ let division = {
             :to="route.fullPath + '/total'"
             class="btn bg-white text-center"
           >
+            Detail
+          </NuxtLink>
+        </div>
+      </GenericBaseCard>
+    </div>
+    <div class="lower-division">
+      <GenericBaseCard
+        class="bg-orange-1 items-center"
+        v-for="divisi in division"
+      >
+        <div class="flex flex-col items-center">
+          <div :class="divisi.icon" class="text-7xl text-orange"></div>
+          <h1 class="">{{ divisi.nama }}</h1>
+          <p class="text-xs">{{ divisi.deskripsi }}</p>
+          <p>Total Tugas : 100</p>
+          <p>Presentase Tugas Selesai : 65%</p>
+        </div>
+        <div class="flex items-center justify-center mt-5">
+          <NuxtLink :to="divisi.path" class="btn bg-white text-center">
             Detail
           </NuxtLink>
         </div>

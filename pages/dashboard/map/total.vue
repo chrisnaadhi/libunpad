@@ -2,6 +2,14 @@
 definePageMeta({
   layout: "dashboard",
 });
+
+const { getItems } = useDirectusItems();
+const getTotalAgenda = await getItems({
+  collection: "agenda_kegiatan",
+  params: {
+    meta: "total_count",
+  },
+});
 </script>
 
 <template>
@@ -26,7 +34,7 @@ definePageMeta({
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore,
           architecto.
         </p>
-        <p>Total Agenda : 50</p>
+        <p>Total Agenda : {{ getTotalAgenda.meta.total_count }}</p>
         <p>Presentase Agenda Selesai : 25%</p>
         <div class="mt-5">
           <NuxtLink to="/dashboard/map/agenda" class="btn bg-white">
