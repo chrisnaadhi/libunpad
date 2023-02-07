@@ -51,6 +51,7 @@ const updateTugas = async () => {
       deskripsi_tugas: deskripsiTugas.value,
       link_tugas: linkTugas.value,
       status: statusTugas.value,
+      perkembangan_rencana: perkembanganTugas.value,
     };
     await updateItem({
       collection: "pekerjaan_harian",
@@ -61,7 +62,7 @@ const updateTugas = async () => {
     colorTeks.value = "text-green-6 font-600";
     setTimeout(() => {
       return navigateTo("/dashboard/tugas");
-    }, 500);
+    }, 1000);
   } catch (error) {
     console.log(error);
   }
@@ -80,7 +81,7 @@ const deleteTugas = async () => {
       });
       setTimeout(() => {
         return navigateTo("/dashboard/tugas");
-      }, 500);
+      }, 1000);
     } else {
       alert("Data tidak jadi dihapus");
     }

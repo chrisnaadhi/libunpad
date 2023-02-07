@@ -3,6 +3,8 @@ const { getItems } = useDirectusItems();
 const config = useRuntimeConfig();
 
 const route = useRoute();
+const dataKerja = ref();
+const offsetVal = ref(0);
 
 const dataPekerjaan = await getItems({
   collection: "pekerjaan_harian",
@@ -13,8 +15,46 @@ const dataPekerjaan = await getItems({
       },
     },
     sort: "date_created",
+    meta: "filter_count",
   },
 });
+
+const maxedTask = computed(() => {
+  const maxVal =
+    offsetVal.value / 4 + 1 === Math.ceil(dataPekerjaan.meta.filter_count / 4);
+  if (maxVal) {
+    return true;
+  } else {
+    return false;
+  }
+});
+
+const fetchDataPekerjaan = async (val) => {
+  if (val === "next") {
+    offsetVal.value += 4;
+  } else if (val === "prev") {
+    offsetVal.value -= 4;
+  } else {
+    offsetVal.value = 0;
+  }
+  try {
+    dataKerja.value = await getItems({
+      collection: "pekerjaan_harian",
+      params: {
+        filter: {
+          pegawai: {
+            _eq: "$CURRENT_USER",
+          },
+        },
+        sort: "date_created",
+        offset: offsetVal.value,
+        limit: 4,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const { data: dataPetugas } = await useFetch(
   `${config.public.directus.url}users`,
@@ -65,21 +105,42 @@ const statusTugasColor = (val) => {
       return "bg-gray-3";
   }
 };
+
+onMounted(async () => {
+  if (offsetVal.value === 0) {
+    dataKerja.value = await getItems({
+      collection: "pekerjaan_harian",
+      params: {
+        filter: {
+          pegawai: {
+            _eq: "$CURRENT_USER",
+          },
+        },
+        sort: "date_created",
+        offset: 0,
+        limit: 4,
+      },
+    });
+  } else {
+    console.log("nah");
+  }
+});
 </script>
 
 <template>
   <section>
-    <div class="my-2">
+    <!-- <div class="my-2">
       Filter :
+      <span class="filter-list">Semua</span>
       <span class="filter-list">Pending</span>
       <span class="filter-list">Belum</span>
       <span class="filter-list">Sedang</span>
       <span class="filter-list">Selesai</span>
-    </div>
+    </div> -->
     <table class="w-full">
       <thead>
         <tr>
-          <th>No.</th>
+          <th>Tipe</th>
           <th>Nama Tugas</th>
           <th>Deskripsi Tugas</th>
           <th>Pemberi Tugas</th>
@@ -89,9 +150,9 @@ const statusTugasColor = (val) => {
           <th>Update Tugas</th>
         </tr>
       </thead>
-      <tbody v-for="data in dataPekerjaan" :key="data.id">
+      <tbody v-for="data in dataKerja" :key="data.id">
         <tr>
-          <td>{{ dataPekerjaan.indexOf(data) + 1 }}</td>
+          <td>{{ data.kriteria_tugas }}</td>
           <td>{{ data.nama_tugas }}</td>
           <td class="max-w-4xl">
             {{ data.deskripsi_tugas }}
@@ -112,6 +173,29 @@ const statusTugasColor = (val) => {
         </tr>
       </tbody>
     </table>
+    <div class="flex flex-col">
+      <div class="flex justify-center gap-2 my-5">
+        <button
+          class="btn"
+          :class="
+            offsetVal === 0 ? 'bg-gray-2 cursor-not-allowed' : 'bg-blue-2'
+          "
+          :disabled="offsetVal === 0"
+          @click="fetchDataPekerjaan('prev')"
+        >
+          Sebelumnya
+        </button>
+        <button
+          class="btn"
+          :class="maxedTask ? 'bg-gray-2 cursor-not-allowed' : 'bg-blue-2'"
+          @click="fetchDataPekerjaan('next')"
+          :disabled="maxedTask"
+        >
+          Selanjutnya
+        </button>
+      </div>
+    </div>
+    {{ maxedTask }}
   </section>
 </template>
 
