@@ -39,6 +39,9 @@ const submitLogin = async () => {
     }
   }
 };
+
+// :class="email || password ? 'disable-btn' : 'register-btn'"
+// :disabled="email || password"
 </script>
 
 <template>
@@ -76,12 +79,8 @@ const submitLogin = async () => {
             Login
           </button>
           <NuxtLink to="/" class="w-full">
-            <button
-              class="form-btn"
-              :class="email || password ? 'disable-btn' : 'register-btn'"
-              :disabled="email || password"
-            >
-              PAuS ID
+            <button class="form-btn disable-btn" disabled>
+              <strike>PAuS ID</strike>
             </button>
           </NuxtLink>
         </div>

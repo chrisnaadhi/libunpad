@@ -5,6 +5,7 @@ const config = useRuntimeConfig();
 const route = useRoute();
 const dataKerja = ref();
 const offsetVal = ref(0);
+const baseVal = ref(4);
 
 const dataPekerjaan = await getItems({
   collection: "pekerjaan_harian",
@@ -21,7 +22,8 @@ const dataPekerjaan = await getItems({
 
 const maxedTask = computed(() => {
   const maxVal =
-    offsetVal.value / 4 + 1 === Math.ceil(dataPekerjaan.meta.filter_count / 4);
+    offsetVal.value / baseVal.value + 1 ===
+    Math.ceil(dataPekerjaan.meta.filter_count / baseVal.value);
   if (maxVal) {
     return true;
   } else {
@@ -29,11 +31,21 @@ const maxedTask = computed(() => {
   }
 });
 
+const pageTask = computed(() => {
+  if (offsetVal.value === 0) {
+    return 1;
+  } else if (offsetVal.value >= 1) {
+    return offsetVal.value / baseVal.value + 1;
+  } else {
+    return "Something is breaking in offset value";
+  }
+});
+
 const fetchDataPekerjaan = async (val) => {
   if (val === "next") {
-    offsetVal.value += 4;
+    offsetVal.value += baseVal.value;
   } else if (val === "prev") {
-    offsetVal.value -= 4;
+    offsetVal.value -= baseVal.value;
   } else {
     offsetVal.value = 0;
   }
@@ -48,7 +60,7 @@ const fetchDataPekerjaan = async (val) => {
         },
         sort: "date_created",
         offset: offsetVal.value,
-        limit: 4,
+        limit: baseVal.value,
       },
     });
   } catch (error) {
@@ -118,7 +130,7 @@ onMounted(async () => {
         },
         sort: "date_created",
         offset: 0,
-        limit: 4,
+        limit: baseVal.value,
       },
     });
   } else {
@@ -173,8 +185,13 @@ onMounted(async () => {
         </tr>
       </tbody>
     </table>
-    <div class="flex flex-col">
-      <div class="flex justify-center gap-2 my-5">
+
+    <div class="flex flex-col items-center">
+      <p>
+        {{ pageTask }} /
+        {{ Math.ceil(dataPekerjaan.meta.filter_count / baseVal) }}
+      </p>
+      <div class="flex justify-center gap-2">
         <button
           class="btn"
           :class="
@@ -195,7 +212,7 @@ onMounted(async () => {
         </button>
       </div>
     </div>
-    {{ maxedTask }}
+    {{ Math.ceil(dataPekerjaan.meta.filter_count / baseVal) }}
   </section>
 </template>
 

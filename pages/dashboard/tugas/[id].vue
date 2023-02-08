@@ -164,7 +164,6 @@ definePageMeta({
         &#8592; Kembali ke Daftar Pekerjaan
       </NuxtLink>
     </div>
-    {{ getPekerjaan }}
   </section>
 </template>
 

@@ -25,8 +25,12 @@ let [fetchLastVisitor] = await getItems({
     <h1 class="text-3xl pb-3">Dashboard</h1>
     <section class="flex gap-3 text-center">
       <section class="w-full h-100 flex flex-col gap-3">
-        <div class="border-3 border-orange-3 rounded-lg h-1/2">Hello!</div>
-        <div class="border-3 border-blue-3 rounded-lg h-1/2">Hello!</div>
+        <div class="border-3 border-orange-3 rounded-lg h-1/2">
+          <p>Petugas Piket Hari Ini</p>
+        </div>
+        <div class="border-3 border-blue-3 rounded-lg h-1/2">
+          <p>Petugas Piket Hari Sabtu</p>
+        </div>
       </section>
       <section class="w-full h-100">
         <div class="border-3 border-gray rounded-lg h-full">
