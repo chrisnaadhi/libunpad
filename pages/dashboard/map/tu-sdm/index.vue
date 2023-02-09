@@ -1,6 +1,16 @@
 <script setup>
 const route = useRoute();
 
+const { data: dataKoordinator } = await useFetch(
+  fetchUrlKoordinator("B7A33EAD-0292-4029-94A0-B973E7923601"),
+  useHeaderToken()
+);
+
+const { data: dataPegawai } = await useFetch(
+  fetchUrlPegawai("info"),
+  useHeaderToken()
+);
+
 definePageMeta({
   layout: "dashboard",
 });
@@ -9,13 +19,15 @@ definePageMeta({
 <template>
   <section class="flex flex-col items-center">
     <h1>Divisi Pengelolaan Pengetahuan - Pusat Pengelolaan Pengetahuan</h1>
-    <div class="flex my-5">
+    <div class="flex my-5 items-center">
       <div class="i-mdi-account-circle text-9xl"></div>
       <div>
-        <h1>S.Hamdani, S.IP</h1>
-        <p class="text-nip">196610021995011001</p>
-        <p class="text-title">Penanggung Jawab Divisi Tata Usaha dan SDM</p>
-        <p>10 Tugas</p>
+        <h1>
+          {{ dataKoordinator.data.first_name }}
+          {{ dataKoordinator.data.last_name }}
+        </h1>
+        <p class="text-nip">{{ dataKoordinator.data.nomor_induk }}</p>
+        <p class="text-title">{{ dataKoordinator.data.title }}</p>
       </div>
     </div>
     <div class="list-card">

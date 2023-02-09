@@ -1,6 +1,16 @@
 <script setup>
 const route = useRoute();
 
+const { data: dataKoordinator } = await useFetch(
+  fetchUrlKoordinator("2B1D45CF-F6F6-4A67-822C-7012C13FFE69"),
+  useHeaderToken()
+);
+
+const { data: dataPegawai } = await useFetch(
+  fetchUrlPegawai("km"),
+  useHeaderToken()
+);
+
 definePageMeta({
   layout: "dashboard",
 });
@@ -9,25 +19,26 @@ definePageMeta({
 <template>
   <section class="flex flex-col items-center">
     <h1>Divisi Pengelolaan Pengetahuan - Pusat Pengelolaan Pengetahuan</h1>
-    <div class="flex my-5">
+    <div class="flex my-5 items-center">
       <div class="i-mdi-account-circle text-9xl"></div>
       <div>
-        <h1>Yulianti, S.Sos., M.I.Kom</h1>
-        <p class="text-nip">197607042005012001</p>
+        <h1>
+          {{ dataKoordinator.data.first_name }}
+          {{ dataKoordinator.data.last_name }}
+        </h1>
+        <p class="text-nip">{{ dataKoordinator.data.nomor_induk }}</p>
         <p class="text-title">
-          Penanggung Jawab Divisi Pengelolaan Pengetahuan
+          {{ dataKoordinator.data.title }}
         </p>
-        <p>10 Tugas</p>
-        <p>{{ route.fullPath }}</p>
       </div>
     </div>
     <div class="list-card">
-      <GenericBaseCard v-for="num in 12" class="card-pegawai">
+      <GenericBaseCard v-for="pegawai in dataPegawai.data" class="card-pegawai">
         <div class="i-mdi-account-circle text-7xl"></div>
-        <div>
-          <h1>Nama Lengkap:{{ num }}</h1>
-          <p class="text-nip">NIP</p>
-          <p class="text-title">Jabatan</p>
+        <div class="text-left">
+          <h1>{{ pegawai.first_name }} {{ pegawai.last_name }}</h1>
+          <p class="text-nip">{{ pegawai.nomor_induk }}</p>
+          <p class="text-title">{{ pegawai.title }}</p>
         </div>
       </GenericBaseCard>
     </div>

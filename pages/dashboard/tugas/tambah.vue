@@ -7,6 +7,19 @@ const deskripsiTugas = ref("");
 const linkTugas = ref("");
 const kriteriaTugas = ref("");
 const jumlahRencana = ref("");
+const periodeTugas = computed(() => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const period = () => {
+    if (date.getMonth() < 6) {
+      return "1";
+    } else {
+      return "2";
+    }
+  };
+
+  return `${year}-${period}`;
+});
 
 const createTask = async () => {
   try {
@@ -20,6 +33,7 @@ const createTask = async () => {
         user_created: user.value.id,
         kriteria_tugas: kriteriaTugas.value,
         jumlah_rencana: jumlahRencana.value,
+        periode: periodeTugas.value,
       },
     ];
     await createItems({ collection: "pekerjaan_harian", items });

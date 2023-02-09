@@ -1,3 +1,5 @@
+const config = useRuntimeConfig();
+
 export const displayAgendaKegiatan = (slug: string) => {
   switch (slug) {
     case "pengumpulan_karya_ilmiah":
@@ -75,6 +77,22 @@ export const fetchAgendaKegiatan = (slug: string) => {
         },
       },
       meta: "filter_count",
+    },
+  };
+};
+
+export const fetchUrlKoordinator = (id: string) => {
+  return `${config.public.directus.url}users/${id}`;
+};
+
+export const fetchUrlPegawai = (divisi: string) => {
+  return `${config.public.directus.url}users?filter[divisi][_eq]=${divisi}&filter[koordinator][_eq]=false`;
+};
+
+export const useHeaderToken = () => {
+  return {
+    headers: {
+      Authorization: `Bearer ${config.public.directus.token}`,
     },
   };
 };

@@ -1,5 +1,19 @@
 <script setup>
-const route = useRoute();
+const config = useRuntimeConfig();
+
+const { data: dataKoordinator } = await useFetch(
+  fetchUrlKoordinator("16D809CF-F29D-45E3-99FA-2878C563C51A"),
+  useHeaderToken()
+);
+
+const { data: dataPegawai } = await useFetch(
+  fetchUrlPegawai("info"),
+  useHeaderToken()
+);
+
+const getProfileImage = computed(() => {
+  return `${config.public.directus.url}assets/${dataKoordinator.data.avatar}`;
+});
 
 definePageMeta({
   layout: "dashboard",
@@ -7,25 +21,27 @@ definePageMeta({
 </script>
 
 <template>
-  <section class="flex flex-col items-center">
+  <section class="flex flex-col items-center justify-center">
     <h1>Divisi Pengelolaan Pengetahuan - Pusat Pengelolaan Pengetahuan</h1>
-    <div class="flex my-5">
-      <div class="i-mdi-account-circle text-9xl"></div>
+    <div class="flex my-5 items-center">
+      <img v-if="dataKoordinator.data.avatar" :src="getProfileImage" alt="" />
+      <div v-else class="i-mdi-account-circle text-9xl"></div>
       <div>
-        <h1>Sri Rakhmiyati, S.Sos., M.I.Kom</h1>
-        <p class="text-nip">197009302001122001</p>
-        <p class="text-title">Penanggung Jawab Divisi Institusi Informasi</p>
-        <p>10 Tugas</p>
+        <h1>
+          {{ dataKoordinator.data.first_name }}
+          {{ dataKoordinator.data.last_name }}
+        </h1>
+        <p class="text-nip">{{ dataKoordinator.data.nomor_induk }}</p>
+        <p class="text-title">{{ dataKoordinator.data.title }}</p>
       </div>
     </div>
     <div class="list-card">
-      <GenericBaseCard v-for="num in 12" class="card-pegawai">
+      <GenericBaseCard v-for="pegawai in dataPegawai.data" class="card-pegawai">
         <div class="i-mdi-account-circle text-7xl"></div>
-        <div>
-          <h1>Nama Lengkap:{{ num }}</h1>
-          <p class="text-nip">NIP</p>
-          <p class="text-title">Jabatan</p>
-          <p>{{ num }} Tugas</p>
+        <div class="text-left">
+          <h1>{{ pegawai.first_name }} {{ pegawai.last_name }}</h1>
+          <p class="text-nip">{{ pegawai.nomor_induk }}</p>
+          <p class="text-title">{{ pegawai.title }}</p>
         </div>
       </GenericBaseCard>
     </div>
@@ -51,6 +67,6 @@ definePageMeta({
 }
 
 .card-pegawai {
-  --at-apply: bg-orange-50 flex gap-2 items-center;
+  --at-apply: bg-orange-50 flex gap-2 items-center justify-center;
 }
 </style>
