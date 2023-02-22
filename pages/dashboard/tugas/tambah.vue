@@ -7,19 +7,7 @@ const deskripsiTugas = ref("");
 const linkTugas = ref("");
 const kriteriaTugas = ref("");
 const jumlahRencana = ref("");
-const periodeTugas = computed(() => {
-  const date = new Date();
-  const year = date.getFullYear();
-  const period = () => {
-    if (date.getMonth() < 6) {
-      return "1";
-    } else {
-      return "2";
-    }
-  };
-
-  return `${year}-${period}`;
-});
+const periodeTugas = ref("default");
 
 const createTask = async () => {
   try {
@@ -52,16 +40,35 @@ definePageMeta({
     <h1>Tambah Data Pekerjaan</h1>
     <form @submit.prevent="createTask">
       <div class="form-edit">
+        <label for="periode-tugas">
+          Periode Tugas <span class="text-red">*</span> :
+        </label>
+        <select name="periode-tugas" v-model="periodeTugas" required>
+          <option value="default" selected disabled>
+            Silahkan pilih periode tugas
+          </option>
+          <option value="2023-1">Semester 1 - 2023</option>
+          <option value="2023-2">Semester 2 - 2023</option>
+          <option value="2024-1">Semester 1 - 2024</option>
+          <option value="2024-2">Semester 2 - 2024</option>
+        </select>
+      </div>
+      <div class="form-edit">
         <label for="nama-tugas">
           Nama Tugas <span class="text-red">*</span> :
         </label>
-        <input type="text" v-model="namaTugas" required />
+        <input type="text" name="nama-tugas" v-model="namaTugas" required />
       </div>
       <div class="form-edit">
         <label for="deskripsi-tugas">
           Deskripsi Tugas <span class="text-red">*</span> :
         </label>
-        <textarea type="text" v-model="deskripsiTugas" required />
+        <textarea
+          type="text"
+          name="deskripsi-tugas"
+          v-model="deskripsiTugas"
+          required
+        />
       </div>
       <div class="form-edit">
         <label for="kriteria-tugas">
@@ -130,8 +137,9 @@ h1 {
 }
 
 input,
-textarea {
-  --at-apply: border border-orange p-2 max-w-xl rounded bg-orange-1 my-2;
+textarea,
+select {
+  --at-apply: border border-orange p-2 max-w-xl rounded bg-orange-50 my-2;
 }
 
 input:focus,

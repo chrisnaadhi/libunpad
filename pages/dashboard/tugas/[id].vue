@@ -108,6 +108,7 @@ definePageMeta({
             : "Belum ditentukan"
         }}
       </p>
+      <p>Periode: {{ getPekerjaan.periode }}</p>
     </div>
     <form @submit.prevent="updateTugas">
       <div class="form-edit">
@@ -179,7 +180,7 @@ h1 {
 input,
 select,
 textarea {
-  --at-apply: border border-orange p-2 max-w-xl rounded bg-orange-1 my-2;
+  --at-apply: border border-orange p-2 max-w-xl rounded bg-orange-50 my-2;
 }
 
 input:focus,

@@ -212,7 +212,6 @@ onMounted(async () => {
         </button>
       </div>
     </div>
-    {{ Math.ceil(dataPekerjaan.meta.filter_count / baseVal) }}
   </section>
 </template>
 

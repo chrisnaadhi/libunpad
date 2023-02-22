@@ -7,7 +7,7 @@ const { data: dataKoordinator } = await useFetch(
 );
 
 const { data: dataPegawai } = await useFetch(
-  fetchUrlPegawai("info"),
+  fetchUrlPegawai("tu-sdm"),
   useHeaderToken()
 );
 
@@ -31,13 +31,20 @@ definePageMeta({
       </div>
     </div>
     <div class="list-card">
-      <GenericBaseCard v-for="num in 12" class="card-pegawai">
+      <GenericBaseCard v-for="pegawai in dataPegawai.data" class="card-pegawai">
         <div class="i-mdi-account-circle text-7xl"></div>
         <div>
-          <h1>Nama Lengkap:{{ num }}</h1>
-          <p class="text-nip">NIP</p>
-          <p class="text-title">Jabatan</p>
-          <p>{{ num }} Tugas</p>
+          <h1>{{ pegawai.first_name }} {{ pegawai.last_name }}</h1>
+          <p class="text-nip">{{ pegawai.nomor_induk }}</p>
+          <p class="text-title">{{ pegawai.title }}</p>
+          <div class="mt-5">
+            <NuxtLink
+              class="btn bg-orange text-white"
+              :to="'/dashboard/map/tu-sdm/' + pegawai.id"
+            >
+              Cek
+            </NuxtLink>
+          </div>
         </div>
       </GenericBaseCard>
     </div>

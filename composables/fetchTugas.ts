@@ -81,6 +81,19 @@ export const fetchAgendaKegiatan = (slug: string) => {
   };
 };
 
+export const fetchTugasPegawai = (id: string) => {
+  return {
+    collection: "pekerjaan_harian",
+    params: {
+      filter: {
+        pegawai: {
+          _eq: id,
+        },
+      },
+    },
+  };
+};
+
 export const fetchUrlKoordinator = (id: string) => {
   return `${config.public.directus.url}users/${id}`;
 };

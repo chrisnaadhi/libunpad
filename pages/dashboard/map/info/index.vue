@@ -42,6 +42,14 @@ definePageMeta({
           <h1>{{ pegawai.first_name }} {{ pegawai.last_name }}</h1>
           <p class="text-nip">{{ pegawai.nomor_induk }}</p>
           <p class="text-title">{{ pegawai.title }}</p>
+          <div class="mt-5">
+            <NuxtLink
+              class="btn bg-orange text-white"
+              :to="'/dashboard/map/info/' + pegawai.id"
+            >
+              Cek
+            </NuxtLink>
+          </div>
         </div>
       </GenericBaseCard>
     </div>

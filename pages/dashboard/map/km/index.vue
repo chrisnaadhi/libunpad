@@ -1,6 +1,4 @@
 <script setup>
-const route = useRoute();
-
 const { data: dataKoordinator } = await useFetch(
   fetchUrlKoordinator("2B1D45CF-F6F6-4A67-822C-7012C13FFE69"),
   useHeaderToken()
@@ -39,6 +37,14 @@ definePageMeta({
           <h1>{{ pegawai.first_name }} {{ pegawai.last_name }}</h1>
           <p class="text-nip">{{ pegawai.nomor_induk }}</p>
           <p class="text-title">{{ pegawai.title }}</p>
+          <div class="mt-5">
+            <NuxtLink
+              class="btn bg-orange text-white"
+              :to="'/dashboard/map/km/' + pegawai.id"
+            >
+              Cek
+            </NuxtLink>
+          </div>
         </div>
       </GenericBaseCard>
     </div>
@@ -60,7 +66,7 @@ definePageMeta({
 }
 
 .list-card {
-  --at-apply: flex flex-col w-full md:(grid grid-cols-2 max-w-6xl) lg:(grid-cols-4) gap-4;
+  --at-apply: flex flex-col w-full md:(grid grid-cols-2 max-w-6xl) lg:(grid-cols-3) gap-4;
 }
 
 .card-pegawai {

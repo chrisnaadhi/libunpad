@@ -21,4 +21,8 @@ export default defineNuxtConfig({
     url: process.env.DIRECTUS_BASE_URL,
     token: process.env.DIRECTUS_ACCESS_TOKEN,
   },
+  sourcemap: {
+    server: true,
+    client: false,
+  },
 });

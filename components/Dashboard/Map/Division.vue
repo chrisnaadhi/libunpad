@@ -33,8 +33,7 @@ let division = {
           <div class="i-mdi-stadium text-7xl text-orange"></div>
           <h1>Pusat Pengelolaan Pengetahuan</h1>
           <p class="text-xs">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore,
-            architecto.
+            Pusat pengelolaan Pengetahuan Universitas Padjadjaran.
           </p>
           <p>Total Tugas : 300</p>
           <p>Presentase Tugas Selesai : 65%</p>
