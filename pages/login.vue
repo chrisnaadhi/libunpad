@@ -1,6 +1,6 @@
 <script setup>
 const { login } = useDirectusAuth();
-const route = useRoute();
+const user = useDirectusUser();
 
 const showPassword = ref(false);
 const passwordType = ref("password");
@@ -8,6 +8,29 @@ const email = ref("");
 const password = ref("");
 const loginNotif = ref("Silahkan masukkan Email dan Password untuk Login");
 const textLogin = ref("text-dark");
+const isPegawai = computed(() => {
+  let state = null;
+  try {
+    switch (user.value.role) {
+      case "BE2D46E4-CB00-4585-8E34-5B571A80A820":
+        state = true;
+        break;
+      case "19B573BB-B9DE-4CBC-89BB-596CFCA28448":
+        state = true;
+        break;
+      case "9BB62337-8EAA-44AB-A47C-F8CACEF9B8A7":
+        state = true;
+        break;
+      default:
+        state = false;
+        break;
+    }
+  } catch (error) {
+    console.log("Logout..");
+  }
+
+  return state;
+});
 
 const togglePasswordType = () => {
   showPassword.value = !showPassword.value;
@@ -24,7 +47,11 @@ const submitLogin = async () => {
     loginNotif.value = "Berhasil masuk ke akun Anda! Mengalihkan halaman...";
     textLogin.value = "text-green-7 font-600";
     setTimeout(async () => {
-      await navigateTo("/keanggotaan", { redirectCode: 200 });
+      if (isPegawai.value) {
+        await navigateTo("/dashboard", { redirectCode: 301 });
+      } else {
+        await navigateTo("/keanggotaan", { redirectCode: 200 });
+      }
     }, 2000);
   } catch (err) {
     textLogin.value = "text-red-7 font-600";
@@ -80,7 +107,7 @@ const submitLogin = async () => {
           </button>
           <NuxtLink to="/" class="w-full">
             <button class="form-btn disable-btn" disabled>
-              <strike>PAuS ID</strike>
+              <span class="line-through">PAuS ID</span>
             </button>
           </NuxtLink>
         </div>

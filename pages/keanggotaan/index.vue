@@ -61,8 +61,8 @@ useHead({
         </div>
         <div v-else>
           <h1>
-            You're Logged Out! <br />
-            Redirecting to Login Page...
+            Akun sedang Log Out! <br />
+            Memindahkan ke halaman login...
           </h1>
         </div>
       </div>
@@ -84,10 +84,6 @@ useHead({
         Logout
       </button>
     </section>
-    {{ user }}
-    <pre>
-      {{ isPegawai }}
-    </pre>
   </main>
 </template>
 

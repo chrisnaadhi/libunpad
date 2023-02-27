@@ -5,19 +5,19 @@ const tools = [
     nama: "KandagaQR Generator",
     link: route.fullPath + "/kandagaqr",
     deskripsi:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa, consequuntur?",
+      "Buat QR Code untuk tautan, teks ataupun koleksi anda dengan lebih mudah.",
   },
   {
-    nama: "Paraphrase Kit",
+    nama: "Kandaga Shortlink",
     link: route.fullPath + "/#",
     deskripsi:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, quia!",
+      "Gunakan pemendek tautan untuk memudahkan akses dan promosi tautan anda kepada orang banyak.",
   },
   {
     nama: "DDC Classification",
     link: route.fullPath + "#",
     deskripsi:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, in?",
+      "Referensi Dewey Decimal Classification untuk keperluan katalogisasi dan klasifikasi buku.",
   },
 ];
 </script>
@@ -36,7 +36,7 @@ const tools = [
 
 <style scoped>
 main {
-  --at-apply: flex items-center justify-center container ma gap-4 py-5;
+  --at-apply: flex flex-col md:flex-row ma items-center justify-center container gap-4 py-5;
 }
 
 h1 {
