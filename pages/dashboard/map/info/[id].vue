@@ -3,6 +3,7 @@ const route = useRoute();
 const { getItems } = useDirectusItems();
 
 const tugasPegawai = await getItems(fetchTugasPegawai(route.params.id));
+const profilPegawai = await fetchProfilPegawai(route.params.id);
 
 definePageMeta({
   layout: "dashboard",
@@ -11,8 +12,10 @@ definePageMeta({
 
 <template>
   <section>
-    <h1>{{ route.params.id }}</h1>
-    <div class="grid grid-cols-3 gap-4">
+    <h1>
+      {{ profilPegawai.data.first_name }} {{ profilPegawai.data.last_name }}
+    </h1>
+    <div class="grid grid-cols-3 gap-4" v-if="tugasPegawai">
       <div v-for="task in tugasPegawai" class="bg-orange-50 rounded p-2">
         <h1>{{ task.nama_tugas }}</h1>
         <p>Progress: {{ task.perkembangan_rencana ?? "Tidak ada progress" }}</p>
@@ -22,6 +25,10 @@ definePageMeta({
         </p>
       </div>
     </div>
+    <div v-else>
+      <h3>Tidak ada data pekerjaan</h3>
+    </div>
+    <p>{{ profilPegawai.data }}</p>
     <div class="mt-5">
       <NuxtLink to="/dashboard/map/info" class="btn bg-orange text-white">
         Back to List
@@ -31,6 +38,10 @@ definePageMeta({
 </template>
 
 <style scoped>
+h1 {
+  --at-apply: text-4xl;
+}
+
 section {
   --at-apply: flex flex-col items-center max-w-7xl ma;
 }

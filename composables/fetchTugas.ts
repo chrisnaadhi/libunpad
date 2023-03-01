@@ -102,6 +102,18 @@ export const fetchUrlPegawai = (divisi: string) => {
   return `${config.public.directus.url}users?filter[divisi][_eq]=${divisi}&filter[koordinator][_eq]=false`;
 };
 
+export const fetchProfilPegawai = async (id: string) => {
+  const { data: dataProfil } = await useFetch(
+    `${config.public.directus.url}users/${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${config.public.directus.token}`,
+      },
+    }
+  );
+  return dataProfil;
+};
+
 export const useHeaderToken = () => {
   return {
     headers: {
