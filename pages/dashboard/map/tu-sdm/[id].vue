@@ -3,6 +3,7 @@ const route = useRoute();
 const { getItems } = useDirectusItems();
 
 const tugasPegawai = await getItems(fetchTugasPegawai(route.params.id));
+const profilPegawai = await fetchProfilPegawai(route.params.id);
 
 definePageMeta({
   layout: "dashboard",
@@ -11,7 +12,9 @@ definePageMeta({
 
 <template>
   <section>
-    <h1>{{ route.params.id }}</h1>
+    <h1>
+      {{ profilPegawai.data.first_name }} {{ profilPegawai.data.last_name }}
+    </h1>
     <div class="grid grid-cols-3 gap-4">
       <div v-for="task in tugasPegawai" class="bg-orange-50 rounded p-2">
         <h1>{{ task.nama_tugas }}</h1>

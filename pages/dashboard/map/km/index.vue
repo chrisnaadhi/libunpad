@@ -17,7 +17,7 @@ definePageMeta({
 <template>
   <section class="flex flex-col items-center">
     <h1>Divisi Pengelolaan Pengetahuan - Pusat Pengelolaan Pengetahuan</h1>
-    <div class="flex my-5 items-center">
+    <div class="grid my-5 items-center">
       <div class="i-mdi-account-circle text-9xl"></div>
       <div>
         <h1>
@@ -70,6 +70,6 @@ definePageMeta({
 }
 
 .card-pegawai {
-  --at-apply: bg-orange-50 flex gap-2 items-center;
+  --at-apply: bg-orange-50 grid grid-cols-4 gap-2 items-center justify-center;
 }
 </style>

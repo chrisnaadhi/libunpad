@@ -38,7 +38,7 @@ definePageMeta({
     <div class="list-card">
       <GenericBaseCard v-for="pegawai in dataPegawai.data" class="card-pegawai">
         <div class="i-mdi-account-circle text-7xl"></div>
-        <div class="text-left">
+        <div class="text-left col-span-3">
           <h1>{{ pegawai.first_name }} {{ pegawai.last_name }}</h1>
           <p class="text-nip">{{ pegawai.nomor_induk }}</p>
           <p class="text-title">{{ pegawai.title }}</p>
@@ -54,7 +54,7 @@ definePageMeta({
       </GenericBaseCard>
     </div>
     <div class="my-5">
-      <NuxtLink to="/dashboard/map" class="btn bg-orange-2">
+      <NuxtLink to="/dashboard/map" class="btn bg-orange-2 text-sm">
         Back to List
       </NuxtLink>
     </div>
@@ -71,10 +71,10 @@ definePageMeta({
 }
 
 .list-card {
-  --at-apply: flex flex-col w-full md:(grid grid-cols-2 max-w-6xl) lg:(grid-cols-4) gap-4;
+  --at-apply: flex flex-col w-full md:(grid grid-cols-2 max-w-6xl) lg:(grid-cols-3) gap-4;
 }
 
 .card-pegawai {
-  --at-apply: bg-orange-50 flex gap-2 items-center justify-center;
+  --at-apply: bg-orange-50 grid grid-cols-4 gap-2 items-center justify-center;
 }
 </style>
