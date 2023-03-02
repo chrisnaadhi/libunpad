@@ -19,8 +19,8 @@ const getTotalAgenda = await getItems({
       <GenericBaseCard class="card">
         <h1>Data Pekerjaan</h1>
         <p class="text-xs">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore,
-          architecto.
+          Data Pekerjaan yang dilakukan oleh pegawai Pusat Pengelolaan
+          Pengetahuan.
         </p>
         <p>Total Tugas : 300</p>
         <p>Presentase Tugas Selesai : 35%</p>
@@ -31,8 +31,8 @@ const getTotalAgenda = await getItems({
       <GenericBaseCard class="card">
         <h1>Data Agenda Kegiatan</h1>
         <p class="text-xs">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore,
-          architecto.
+          Daftar Agenda Kegiatan yang telah, sedang dan akan dilaksanakan oleh
+          Pusat Pengelolaan Pengetahuan.
         </p>
         <p>Total Agenda : {{ getTotalAgenda.meta.total_count }}</p>
         <p>Presentase Agenda Selesai : 25%</p>

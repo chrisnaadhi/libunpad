@@ -15,9 +15,11 @@ definePageMeta({
     <h1>
       {{ profilPegawai.data.first_name }} {{ profilPegawai.data.last_name }}
     </h1>
-    <div class="grid grid-cols-3 gap-4">
+    <p class="text-gray italic">{{ profilPegawai.data.nomor_induk }}</p>
+    <h4>{{ profilPegawai.data.title }}</h4>
+    <div class="grid grid-cols-3 gap-4 py-5">
       <div v-for="task in tugasPegawai" class="bg-orange-50 rounded p-2">
-        <h1>{{ task.nama_tugas }}</h1>
+        <h3>{{ task.nama_tugas }}</h3>
         <p>Progress: {{ task.perkembangan_rencana ?? "Tidak ada progress" }}</p>
         <p>
           Rencana:
@@ -34,6 +36,10 @@ definePageMeta({
 </template>
 
 <style scoped>
+h1 {
+  --at-apply: text-4xl;
+}
+
 section {
   --at-apply: flex flex-col items-center max-w-7xl ma;
 }

@@ -7,6 +7,33 @@ definePageMeta({
   middleware: ["directus-auth"],
 });
 
+const date = new Date();
+
+const weekly = [
+  "Senin",
+  "Selasa",
+  "Rabu",
+  "Kamis",
+  "Jum'at",
+  "Sabtu",
+  "Minggu",
+];
+
+const month = [
+  "Januari",
+  "Februari",
+  "Maret",
+  "April",
+  "Mei",
+  "Juni",
+  "Juli",
+  "Agustus",
+  "September",
+  "Oktober",
+  "November",
+  "Desember",
+];
+
 const dataHariIni = await getItems(
   filterPengunjungRuanganDirectus("lobby", today)
 );
@@ -27,6 +54,9 @@ let [fetchLastVisitor] = await getItems({
       <section class="w-full h-100 flex flex-col gap-3">
         <div class="border-3 border-orange-3 rounded-lg h-1/2">
           <p>Petugas Piket Hari Ini</p>
+          <div class="grid grid-cols-7">
+            <div v-for="day in weekly">{{ day }}</div>
+          </div>
         </div>
         <div class="border-3 border-blue-3 rounded-lg h-1/2">
           <p>Petugas Piket Hari Sabtu</p>
