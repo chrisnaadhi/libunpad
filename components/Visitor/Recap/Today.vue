@@ -52,10 +52,10 @@ const fetchToday = [
     nama_ruangan: "Lobby Utama",
     nama_fungsi: fetchLobbyToday,
   },
-  {
-    nama_ruangan: "Ruang Belajar",
-    nama_fungsi: fetchRBelajarToday,
-  },
+  // {
+  //   nama_ruangan: "Ruang Belajar",
+  //   nama_fungsi: fetchRBelajarToday,
+  // },
   {
     nama_ruangan: "Ruang Referensi",
     nama_fungsi: fetchRReferensiToday,
@@ -76,10 +76,10 @@ const fetchToday = [
     nama_ruangan: "Ruang Berkala",
     nama_fungsi: fetchRBerkalaToday,
   },
-  {
-    nama_ruangan: "BNI Coworking Space",
-    nama_fungsi: fetchRBNIToday,
-  },
+  // {
+  //   nama_ruangan: "BNI Coworking Space",
+  //   nama_fungsi: fetchRBNIToday,
+  // },
   {
     nama_ruangan: "Total Kunjungan Hari ini",
     nama_fungsi: fetchAllToday,

@@ -2,13 +2,16 @@
 export default defineNuxtConfig({
   app: {
     pageTransition: { name: "page", mode: "out-in" },
-    layoutTransition: { name: "layout", mode: "default" },
+    layoutTransition: { name: "layout", mode: "in-out" },
     head: {
       link: [
         { rel: "preconnect", href: "https://fonts.googleapis.com" },
         { rel: "preconnect", href: "https://fonts.gstatic.com" },
       ],
     },
+  },
+  routeRules: {
+    "/api/**": { cors: true },
   },
   modules: ["@unocss/nuxt", "nuxt-directus", "@pinia/nuxt", "@nuxt/image-edge"],
   unocss: {
@@ -17,5 +20,9 @@ export default defineNuxtConfig({
   directus: {
     url: process.env.DIRECTUS_BASE_URL,
     token: process.env.DIRECTUS_ACCESS_TOKEN,
+  },
+  sourcemap: {
+    server: true,
+    client: false,
   },
 });

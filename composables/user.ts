@@ -66,6 +66,38 @@ export const displayStatusPengajuanSurat = (status: string) => {
   });
 };
 
+export const displayStatusTugas = (status: string) => {
+  return computed(() => {
+    switch (status) {
+      case "belum":
+        return "Belum dikerjakan";
+      case "proses":
+        return "Sedang dikerjakan";
+      case "selesai":
+        return "Selesai dikerjakan";
+      default:
+        return "Pending";
+    }
+  });
+};
+
+export const displayRoleUser = (id: string) => {
+  return computed(() => {
+    switch (id) {
+      case "BE2D46E4-CB00-4585-8E34-5B571A80A820":
+        return "Administrator";
+      case "19B573BB-B9DE-4CBC-89BB-596CFCA28448":
+        return "Kandaga - Koordinator";
+      case "9BB62337-8EAA-44AB-A47C-F8CACEF9B8A7":
+        return "Kandaga - Pegawai";
+      case "C8B3B5B9-F367-440B-BF8E-D93ADFE930F6":
+        return "Akun Ruangan Layanan";
+      default:
+        return "Guest";
+    }
+  });
+};
+
 export const displayPersyaratan = (syarat: object) => {
   if (syarat === null) {
     return "Persyaratan belum lengkap";

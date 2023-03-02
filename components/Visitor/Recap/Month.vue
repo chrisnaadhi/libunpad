@@ -48,10 +48,10 @@ const fetchMonth = [
     nama_ruangan: "Lobby Utama",
     nama_fungsi: fetchLobbyMonth,
   },
-  {
-    nama_ruangan: "Ruang Belajar",
-    nama_fungsi: fetchRBelajarMonth,
-  },
+  // {
+  //   nama_ruangan: "Ruang Belajar",
+  //   nama_fungsi: fetchRBelajarMonth,
+  // },
   {
     nama_ruangan: "Ruang Referensi",
     nama_fungsi: fetchRReferensiMonth,
@@ -72,10 +72,10 @@ const fetchMonth = [
     nama_ruangan: "Ruang Berkala",
     nama_fungsi: fetchRBerkalaMonth,
   },
-  {
-    nama_ruangan: "BNI Coworking Space",
-    nama_fungsi: fetchRBNIMonth,
-  },
+  // {
+  //   nama_ruangan: "BNI Coworking Space",
+  //   nama_fungsi: fetchRBNIMonth,
+  // },
   {
     nama_ruangan: "Total Kunjungan Bulan ini",
     nama_fungsi: fetchAllMonth,

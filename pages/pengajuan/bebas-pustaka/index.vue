@@ -3,8 +3,9 @@ definePageMeta({
   middleware: ["directus-auth"],
 });
 const { createItems } = useDirectusItems();
+const user = useDirectusUser();
 
-const npm = ref("210210160084");
+const npm = ref(user.value.nomor_induk);
 const notification = ref("Silahkan isi seluruh form sesuai dengan data asli");
 const textNotif = ref("text-dark");
 const namaLengkap = ref("");
@@ -26,7 +27,7 @@ const kirimPengajuan = async () => {
   if (emailValidation) {
     try {
       await createItems({ collection: "pengajuan_surat_bebas_pustaka", items });
-      await navigateTo({ path: "/pengajuan" });
+      await navigateTo({ path: "/pengajuan/bebas-pustaka/data" });
       console.log(emailValidation);
     } catch (error) {
       console.log(error);

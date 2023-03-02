@@ -79,6 +79,11 @@ function downloadQR() {
       Reset
     </button>
   </div>
+  <div class="min-w-72 ma">
+    <NuxtLink to="/toolkit" class="btn w-full bg-orange text-white">
+      Kembali ke daftar Toolkit
+    </NuxtLink>
+  </div>
 </template>
 
 <style scoped>

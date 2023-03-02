@@ -25,8 +25,8 @@ const viewLayanan = () => {
         <NuxtLink to="/" class="menu-list hover-menu">Beranda</NuxtLink>
         <p class="menu-list hover-menu" @click="viewTentang">
           Tentang
-          <span v-if="menu.isTentangOpen"> &#11167;</span>
-          <span v-else> &#11166;</span>
+          <span v-if="menu.isTentangOpen"> &#8628;</span>
+          <span v-else> &#8594;</span>
         </p>
         <div
           v-show="menu.isTentangOpen"
@@ -37,8 +37,8 @@ const viewLayanan = () => {
         </div>
         <p class="menu-list" @click="viewLayanan">
           Layanan
-          <span v-if="menu.isLayananOpen"> &#11167;</span>
-          <span v-else> &#11166;</span>
+          <span v-if="menu.isLayananOpen"> &#8628;</span>
+          <span v-else> &#8594;</span>
         </p>
         <div
           v-show="menu.isLayananOpen"

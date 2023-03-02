@@ -17,22 +17,25 @@ const handleClearError = () => {
         website Kandaga!
       </h3>
       <p class="py-5">
-        Jangan Khawatir! Kamu bisa kembali ke beranda atau koleksi agar kamu
-        dapat menjelajah kembali di website Kandaga. Jika kamu merasa ini adalah
+        Jangan Khawatir! Kamu bisa kembali ke beranda atau login kembali agar
+        kamu dapat menjelajahi website Kandaga. Jika kamu merasa ini adalah
         sebuah kesalahan dan halaman ini memang benar ada, silahkan hubungi
         administrator kandaga agar dapat kami tanggulangi dengan segera.
       </p>
       <pre> Kamu ada di halaman: {{ route.fullPath }}</pre>
       <div class="flex justify-center my-5 gap-5">
-        <NuxtLink to="/koleksi">
-          <button type="button" class="btn border-1 border-orange bg-orange">
-            Kembali ke Koleksi
+        <NuxtLink to="/login">
+          <button
+            type="button"
+            class="btn border-1 border-orange bg-orange text-white"
+          >
+            Kembali ke Login
           </button>
         </NuxtLink>
         <button
           @click="handleClearError"
           type="button"
-          class="btn border-1 border-gray-4 hover:(bg-gray-4 text-white) transition-all-500"
+          class="btn border-1 border-orange-4 hover:(bg-orange-4 text-white) transition-all-500"
         >
           Kembali ke Beranda
         </button>

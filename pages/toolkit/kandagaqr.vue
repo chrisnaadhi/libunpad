@@ -8,6 +8,6 @@
 
 <style scoped>
 section {
-  --at-apply: w-full text-center;
+  --at-apply: w-full text-center mb-10;
 }
 </style>
