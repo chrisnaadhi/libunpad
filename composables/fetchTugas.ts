@@ -94,6 +94,19 @@ export const fetchTugasPegawai = (id: string) => {
   };
 };
 
+export const fetchDataPetugasPiket = async () => {
+  const { data: dataPetugas } = await useFetch(
+    `${config.public.directus.url}items/piket_layanan`,
+    {
+      headers: {
+        Authorization: `Bearer ${config.public.directus.token}`,
+      },
+    }
+  );
+
+  return dataPetugas.value;
+};
+
 export const fetchUrlKoordinator = (id: string) => {
   return `${config.public.directus.url}users/${id}`;
 };
