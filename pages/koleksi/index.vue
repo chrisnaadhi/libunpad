@@ -1,6 +1,7 @@
 <script setup>
 const title = ref("Jelajahi Koleksi Kami");
 const image = ref("https://www.svgrepo.com/show/428321/notebook.svg");
+const route = useRoute();
 </script>
 
 <template>
@@ -14,11 +15,31 @@ const image = ref("https://www.svgrepo.com/show/428321/notebook.svg");
 
     <section class="mt-25">
       <h2>Koleksi Lainnya</h2>
-      <CollectionBlockData :left="true" title="Gallery" />
-      <CollectionBlockData :left="false" title="Library" />
-      <CollectionBlockData :left="true" title="Archive" />
-      <CollectionBlockData :left="false" title="Museum" />
-      <CollectionBlockData :left="true" title="Repository" />
+      <CollectionBlockData
+        :left="true"
+        title="Gallery"
+        :page="route.fullPath"
+      />
+      <CollectionBlockData
+        :left="false"
+        title="Library"
+        :page="route.fullPath"
+      />
+      <CollectionBlockData
+        :left="true"
+        title="Archive"
+        :page="route.fullPath"
+      />
+      <CollectionBlockData
+        :left="false"
+        title="Museum"
+        :page="route.fullPath"
+      />
+      <CollectionBlockData
+        :left="true"
+        title="Repository"
+        :page="route.fullPath + '/repository'"
+      />
     </section>
   </main>
 </template>

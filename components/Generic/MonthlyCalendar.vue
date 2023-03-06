@@ -28,7 +28,7 @@ const searchPetugas = (idPetugas) => {
 <template>
   <section class="border-3 border-orange-3 rounded-lg">
     <p>Petugas Piket Bulan Ini</p>
-    <div class="grid grid-cols-3">
+    <div class="grid grid-cols-3 m-2">
       <div v-for="pegawai in dataPiketPegawai" class="border-1 border-blue-3">
         <h1>{{ pegawai.tanggal }}</h1>
         <p>{{ searchPetugas(pegawai.petugas_pertama) }}</p>

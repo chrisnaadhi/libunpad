@@ -7,7 +7,7 @@ const options = {
   width: 360,
   height: 360,
   correctLevel: QRCode.CorrectLevel.H,
-  logo: "/images/qrverok.png",
+  logo: "/images/versi3.png",
   logoWidth: 80,
   logoHeight: 80,
   PO: "#F7A22D",

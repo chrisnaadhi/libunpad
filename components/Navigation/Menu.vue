@@ -1,13 +1,13 @@
 <script setup>
 import { menuContent } from "~/composables/navMenu";
-const { tentang, layanan } = menuContent();
+const { tentang, layanan, koleksi } = menuContent();
 </script>
 
 <template>
   <ul class="nav-group">
     <NavigationMenuLink menu-title="Tentang" :dropdown-menu="tentang" />
     <NavigationMenuLink menu-title="Layanan" :dropdown-menu="layanan" />
-    <li>Reports</li>
+    <NavigationMenuLink menu-title="Koleksi" :dropdown-menu="koleksi" />
     <li>Berita</li>
     <li>Kontak</li>
   </ul>
@@ -19,6 +19,6 @@ const { tentang, layanan } = menuContent();
 }
 
 ul li {
-  --at-apply: my-0 px-8 hidden xl:(block);
+  --at-apply: my-0 px-5 hidden xl:(block);
 }
 </style>

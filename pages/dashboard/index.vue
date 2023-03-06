@@ -23,6 +23,11 @@ let [fetchLastVisitor] = await getItems({
 <template>
   <main>
     <h1 class="text-3xl pb-3">Dashboard</h1>
+    <div class="mt--3 mb-2">
+      <NuxtLink to="/" class="btn bg-orange py-0 px-3 text-xs text-white">
+        &larr; Home
+      </NuxtLink>
+    </div>
     <section class="flex gap-3 text-center">
       <section class="w-full h-100 flex flex-col gap-3">
         <GenericMonthlyCalendar />
