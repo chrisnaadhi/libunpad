@@ -2,14 +2,15 @@
 defineProps({
   left: Boolean,
   title: String,
+  page: String,
 });
 </script>
 
 <template>
-  <main class="my-10">
-    <h1 class="block-title">
-      {{ title }}
-    </h1>
+  <main class="my-10 flex flex-col items-center">
+    <NuxtLink :to="page">
+      <span class="block-title">{{ title }}</span>
+    </NuxtLink>
     <section class="frame-topic">
       <div class="main-topic">
         <img src="/images/9396112_3023.jpg" alt="" class="image-cover" />
@@ -63,11 +64,11 @@ defineProps({
 
 <style scoped>
 .frame-topic {
-  --at-apply: grid gap-2 mx-5 md:(grid-cols-4 mx-2) xl:mx-0;
+  --at-apply: grid gap-2 my-5 mx-5 md:(grid-cols-4 mx-2) xl:mx-0;
 }
 
 .block-title {
-  --at-apply: my-2 py-1 w-50 ma text-center text-2xl font-600 bg-gray-6 text-white rounded-lg;
+  --at-apply: py-1 px-5 w-50 ma text-center text-2xl font-600 bg-gray-6 text-white rounded-lg;
 }
 
 .main-topic {

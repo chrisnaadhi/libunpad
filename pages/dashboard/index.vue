@@ -7,33 +7,6 @@ definePageMeta({
   middleware: ["directus-auth"],
 });
 
-const date = new Date();
-
-const weekly = [
-  "Senin",
-  "Selasa",
-  "Rabu",
-  "Kamis",
-  "Jum'at",
-  "Sabtu",
-  "Minggu",
-];
-
-const month = [
-  "Januari",
-  "Februari",
-  "Maret",
-  "April",
-  "Mei",
-  "Juni",
-  "Juli",
-  "Agustus",
-  "September",
-  "Oktober",
-  "November",
-  "Desember",
-];
-
 const dataHariIni = await getItems(
   filterPengunjungRuanganDirectus("lobby", today)
 );
@@ -50,17 +23,14 @@ let [fetchLastVisitor] = await getItems({
 <template>
   <main>
     <h1 class="text-3xl pb-3">Dashboard</h1>
+    <div class="mt--3 mb-2">
+      <NuxtLink to="/" class="btn bg-orange py-0 px-3 text-xs text-white">
+        &larr; Home
+      </NuxtLink>
+    </div>
     <section class="flex gap-3 text-center">
       <section class="w-full h-100 flex flex-col gap-3">
-        <div class="border-3 border-orange-3 rounded-lg h-1/2">
-          <p>Petugas Piket Hari Ini</p>
-          <div class="grid grid-cols-7">
-            <div v-for="day in weekly">{{ day }}</div>
-          </div>
-        </div>
-        <div class="border-3 border-blue-3 rounded-lg h-1/2">
-          <p>Petugas Piket Hari Sabtu</p>
-        </div>
+        <GenericMonthlyCalendar />
       </section>
       <section class="w-full h-100">
         <div class="border-3 border-gray rounded-lg h-full">
@@ -84,9 +54,6 @@ let [fetchLastVisitor] = await getItems({
           <div v-else>Tidak ada data!</div>
         </div>
       </section>
-    </section>
-    <section class="py-5">
-      <NuxtLink class="btn bg-purple" to="/"> Home </NuxtLink>
     </section>
   </main>
 </template>

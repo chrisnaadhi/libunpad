@@ -4,6 +4,9 @@ const search = useSearchFunction();
 const route = useRoute();
 
 const submitSearch = async (keyword) => {
+  if (search.keywords === "") {
+    search.initValue = 0;
+  }
   try {
     const { data: searchResults } = await useFetch(
       search.baseURLSearch + keyword
@@ -37,6 +40,7 @@ const nextPage = () => {
 
 const changeKeywords = () => {
   search.keywords = suggestion.value;
+  search.initValue = 0;
   submitSearch(search.keywords);
   window.scrollTo({
     top: 0,

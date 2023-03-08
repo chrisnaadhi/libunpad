@@ -47,9 +47,33 @@ export const menuContent = () => {
     },
   ];
 
+  const koleksi = [
+    {
+      name: "Gallery",
+      url: "#",
+    },
+    {
+      name: "Library",
+      url: "#",
+    },
+    {
+      name: "Archive",
+      url: "#",
+    },
+    {
+      name: "Museum",
+      url: "#",
+    },
+    {
+      name: "Repository",
+      url: "/koleksi/repository",
+    },
+  ];
+
   return {
     tentang,
     layanan,
+    koleksi,
   };
 };
 

@@ -57,3 +57,21 @@ export const getAllMonthly = (
 
   return { monthly };
 };
+
+export const getFirstLastMonth = (tanggal: string) => {
+  const date = new Date();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+
+  return `${year}-${month}-${tanggal}`;
+};
+
+export const readableDate = (tanggal: string) => {
+  const checkDate = new Date(tanggal);
+  const hari = new Intl.DateTimeFormat("id-ID", {
+    weekday: "long",
+  }).format(checkDate);
+  const tgl = checkDate.getDate();
+
+  return `${hari}, ${tgl}`;
+};

@@ -28,7 +28,7 @@ definePageMeta({
       </div>
     </div>
     <div class="mt-5">
-      <NuxtLink to="/dashboard/map/info" class="btn bg-orange text-white">
+      <NuxtLink to="/dashboard/map/tu-sdm" class="btn bg-orange text-white">
         Back to List
       </NuxtLink>
     </div>
