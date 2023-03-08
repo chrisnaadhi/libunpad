@@ -2,6 +2,8 @@
 definePageMeta({
   layout: "default",
 });
+
+const { data: koleksiRepo } = await useFetch("/api/v1/koleksi/repo");
 </script>
 
 <template>
@@ -12,7 +14,15 @@ definePageMeta({
       Padjadjaran
     </p>
     <div class="grid grid-cols-2 gap-2">
-      <CollectionRepositoryCard v-for="collection in 6" />
+      <CollectionRepositoryCard
+        v-for="koleksi in koleksiRepo.results"
+        :author="koleksi.author"
+        :title="koleksi.title"
+        :tipe="koleksi.tipeKoleksi"
+        :prodi="koleksi.prodi"
+        :fakultas="koleksi.fakultas"
+        :description="koleksi.deskripsi"
+      />
     </div>
     <div class="my-10 flex flex-col items-center">
       <NuxtLink to="/koleksi" class="btn bg-orange text-white">
