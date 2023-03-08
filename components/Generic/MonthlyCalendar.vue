@@ -3,6 +3,13 @@ const config = useRuntimeConfig();
 const { getItems } = useDirectusItems();
 const dataPiketPegawai = await getItems({
   collection: "piket_layanan",
+  params: {
+    filter: {
+      tanggal: {
+        _between: ["2023-03-01", "2023-03-15"],
+      },
+    },
+  },
 });
 
 const { data: dataPetugas } = await useFetch(
@@ -30,7 +37,7 @@ const searchPetugas = (idPetugas) => {
     <p>Petugas Piket Bulan Ini</p>
     <div class="grid grid-cols-3 m-2">
       <div v-for="pegawai in dataPiketPegawai" class="border-1 border-blue-3">
-        <h1>{{ pegawai.tanggal }}</h1>
+        <h1>{{ readableDate(pegawai.tanggal) }}</h1>
         <p>{{ searchPetugas(pegawai.petugas_pertama) }}</p>
       </div>
     </div>
