@@ -9,7 +9,7 @@ const route = useRoute();
     <nav class="navbar">
       <NuxtLink to="/">
         <nuxt-img
-          src="/images/logo-perpus.png"
+          src="/images/kandaga-web.png"
           class="logo"
           alt="Logo Perpustakaan"
           width="256px"

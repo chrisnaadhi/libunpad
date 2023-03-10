@@ -66,6 +66,15 @@ export const getFirstLastMonth = (tanggal: string) => {
   return `${year}-${month}-${tanggal}`;
 };
 
+export const getTotalDays = (bulan: any, tahun: any) => {
+  const date = new Date(tahun, bulan, 1);
+
+  date.setMonth(date.getMonth() + 1);
+  date.setDate(0);
+
+  return date.getDate();
+};
+
 export const readableDate = (tanggal: string) => {
   const checkDate = new Date(tanggal);
   const hari = new Intl.DateTimeFormat("id-ID", {

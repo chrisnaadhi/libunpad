@@ -1,12 +1,20 @@
 <script setup>
 const config = useRuntimeConfig();
 const { getItems } = useDirectusItems();
+const date = new Date();
+const lastDay = getTotalDays(date.getMonth() + 1, date.getFullYear());
+const firstDate = `${date.getFullYear()}-${date.getMonth() + 1}-01`;
+const lastDate = `${date.getFullYear()}-${date.getMonth() + 1}-${lastDay}`;
+const monthName = new Intl.DateTimeFormat("id-ID", { month: "long" }).format(
+  date
+);
+
 const dataPiketPegawai = await getItems({
   collection: "piket_layanan",
   params: {
     filter: {
       tanggal: {
-        _between: ["2023-03-01", "2023-03-15"],
+        _between: [firstDate, lastDate],
       },
     },
   },
@@ -35,9 +43,10 @@ const searchPetugas = (idPetugas) => {
 <template>
   <section class="border-3 border-orange-3 rounded-lg">
     <p>Petugas Piket Bulan Ini</p>
+    <h1>{{ monthName }} {{ date.getFullYear() }}</h1>
     <div class="grid grid-cols-3 m-2">
       <div v-for="pegawai in dataPiketPegawai" class="border-1 border-blue-3">
-        <h1>{{ readableDate(pegawai.tanggal) }}</h1>
+        <h4>{{ readableDate(pegawai.tanggal) }}</h4>
         <p>{{ searchPetugas(pegawai.petugas_pertama) }}</p>
       </div>
     </div>
@@ -48,6 +57,10 @@ const searchPetugas = (idPetugas) => {
 </template>
 
 <style>
+h1 {
+  --at-apply: text-3xl;
+}
+
 .calendar {
   --at-apply: p-5 m-5;
 }
