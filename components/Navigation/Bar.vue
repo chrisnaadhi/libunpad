@@ -36,7 +36,7 @@ const route = useRoute();
 }
 
 .navbar {
-  --at-apply: container flex items-unset justify-between py-4 px-0 ma xl:(items-center justify-between);
+  --at-apply: max-w-7xl flex items-unset justify-between py-4 px-3 ma xl:(items-center justify-between px-0);
 }
 
 .logo {

@@ -33,15 +33,16 @@ let [fetchLastVisitor] = await getItems({
         <GenericMonthlyCalendar />
       </section>
       <section class="w-full h-100">
-        <div class="border-3 border-gray rounded-lg h-full">
+        <div class="border-3 border-gray rounded-lg min-h-full">
           <h1>Total Pengunjung Hari ini</h1>
           <div v-if="dataHariIni.meta.filter_count !== 0">
             <span class="text-5xl text-orange font-600">
-              {{ dataHariIni.meta.filter_count }} </span
-            ><br />
+              {{ dataHariIni.meta.filter_count }}
+            </span>
+            <br />
             <span class="italic">orang</span>
             <div>
-              <h1>Pengunjung Terakhir:</h1>
+              <h4>Pengunjung Terakhir:</h4>
               <span class="text-orange font-600">{{
                 fetchLastVisitor.biodata_user
               }}</span>

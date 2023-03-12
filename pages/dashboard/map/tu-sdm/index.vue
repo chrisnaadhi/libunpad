@@ -34,7 +34,7 @@ definePageMeta({
       <GenericBaseCard v-for="pegawai in dataPegawai.data" class="card-pegawai">
         <div class="i-mdi-account-circle text-7xl"></div>
         <div class="col-span-3">
-          <h1>{{ pegawai.first_name }} {{ pegawai.last_name }}</h1>
+          <h3>{{ pegawai.first_name }} {{ pegawai.last_name }}</h3>
           <p class="text-nip">{{ pegawai.nomor_induk }}</p>
           <p class="text-title">{{ pegawai.title }}</p>
           <div class="mt-5">

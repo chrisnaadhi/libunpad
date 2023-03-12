@@ -41,7 +41,7 @@ const searchPetugas = (idPetugas) => {
 </script>
 
 <template>
-  <section class="border-3 border-orange-3 rounded-lg">
+  <section class="border-3 border-orange-3 rounded-lg min-h-full">
     <p>Petugas Piket Bulan Ini</p>
     <h1>{{ monthName }} {{ date.getFullYear() }}</h1>
     <div class="grid grid-cols-3 m-2">
@@ -51,9 +51,6 @@ const searchPetugas = (idPetugas) => {
       </div>
     </div>
   </section>
-  <div class="border-3 border-blue-3 rounded-lg h-1/2">
-    <p>Petugas Piket Hari Sabtu</p>
-  </div>
 </template>
 
 <style>

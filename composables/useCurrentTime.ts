@@ -75,12 +75,27 @@ export const getTotalDays = (bulan: any, tahun: any) => {
   return date.getDate();
 };
 
+export const extendedEveningServiceTime = () => {
+  const date = new Date();
+  const tahun = date.getFullYear();
+  const bulan = date.getMonth() + 1;
+  const tanggal = date.getDate();
+
+  return [
+    `${tahun}-${bulan}-${tanggal} 09:00:00.0000000 -00:00`,
+    `${tahun}-${bulan}-${tanggal} 10:30:00.0000000 -00:00`,
+  ];
+};
+
 export const readableDate = (tanggal: string) => {
   const checkDate = new Date(tanggal);
   const hari = new Intl.DateTimeFormat("id-ID", {
     weekday: "long",
   }).format(checkDate);
   const tgl = checkDate.getDate();
+  const bulan = new Intl.DateTimeFormat("id-ID", {
+    month: "long",
+  }).format(checkDate);
 
-  return `${hari}, ${tgl}`;
+  return `${hari}, ${tgl} ${bulan}`;
 };
