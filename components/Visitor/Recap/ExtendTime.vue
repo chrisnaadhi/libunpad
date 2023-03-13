@@ -1,5 +1,6 @@
 <script setup>
 const { getItems } = useDirectusItems();
+const config = useRuntimeConfig();
 
 const date = new Date();
 const hariIni = new Intl.DateTimeFormat("id-id", {
@@ -24,8 +25,13 @@ const getPetugasExtendedTimeService = await getItems({
   },
 });
 
-const dataPetugasPiket = await fetchProfilPegawai(
-  getPetugasExtendedTimeService[0].petugas_pertama
+const { data: profilPetugasPiket } = await useFetch(
+  `${config.public.directus.url}users/${getPetugasExtendedTimeService[0].petugas_pertama}`,
+  {
+    headers: {
+      Authorization: `Bearer ${config.public.directus.token}`,
+    },
+  }
 );
 </script>
 
@@ -34,16 +40,16 @@ const dataPetugasPiket = await fetchProfilPegawai(
     <h3>Data Pengunjung di Jam Tambahan</h3>
     <p>{{ hariIni }}</p>
     <h3>
-      Petugas:
+      Petugas Piket:
       <span class="font-600 text-orange-6">
         {{
-          !getPetugasExtendedTimeService
-            ? "Tidak ada yang bertugas"
-            : `${dataPetugasPiket.data.first_name} ${dataPetugasPiket.data.last_name}`
+          getPetugasExtendedTimeService !== []
+            ? `${profilPetugasPiket.data.first_name} ${profilPetugasPiket.data.last_name}`
+            : "Tidak data petugas"
         }}
       </span>
     </h3>
-    <p class="font-600">16.00 ~ 17.30</p>
+    <p class="font-600 text-2xl">16.00 ~ 17.30</p>
     <h1>
       {{
         getExtendedTimeVisitor.meta.filter_count === 0
@@ -63,6 +69,6 @@ h1 {
 }
 
 h3 {
-  --at-apply: text-2xl;
+  --at-apply: text-xl;
 }
 </style>

@@ -83,7 +83,7 @@ export const extendedEveningServiceTime = () => {
 
   return [
     `${tahun}-${bulan}-${tanggal} 09:00:00.0000000 -00:00`,
-    `${tahun}-${bulan}-${tanggal} 10:30:00.0000000 -00:00`,
+    `${tahun}-${bulan}-${tanggal} 11:00:00.0000000 -00:00`,
   ];
 };
 

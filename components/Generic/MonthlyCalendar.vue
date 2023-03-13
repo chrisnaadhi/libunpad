@@ -2,7 +2,7 @@
 const config = useRuntimeConfig();
 const { getItems } = useDirectusItems();
 const date = new Date();
-const lastDay = getTotalDays(date.getMonth() + 1, date.getFullYear());
+const lastDay = getTotalDays(date.getMonth(), date.getFullYear());
 const firstDate = `${date.getFullYear()}-${date.getMonth() + 1}-01`;
 const lastDate = `${date.getFullYear()}-${date.getMonth() + 1}-${lastDay}`;
 const monthName = new Intl.DateTimeFormat("id-ID", { month: "long" }).format(
@@ -17,6 +17,7 @@ const dataPiketPegawai = await getItems({
         _between: [firstDate, lastDate],
       },
     },
+    sort: "tanggal",
   },
 });
 
@@ -44,7 +45,7 @@ const searchPetugas = (idPetugas) => {
   <section class="border-3 border-orange-3 rounded-lg min-h-full">
     <p>Petugas Piket Bulan Ini</p>
     <h1>{{ monthName }} {{ date.getFullYear() }}</h1>
-    <div class="grid grid-cols-3 m-2">
+    <div class="grid grid-cols-4 gap-2 m-2">
       <div v-for="pegawai in dataPiketPegawai" class="border-1 border-blue-3">
         <h4>{{ readableDate(pegawai.tanggal) }}</h4>
         <p>{{ searchPetugas(pegawai.petugas_pertama) }}</p>
