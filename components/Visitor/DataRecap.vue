@@ -10,6 +10,9 @@
         <VisitorRecapMonth />
       </div>
     </section>
+    <section class="max-w-6xl ma my-5">
+      <VisitorRecapExtendTime />
+    </section>
     <section class="text-center">
       <VisitorRecapMonthly />
     </section>

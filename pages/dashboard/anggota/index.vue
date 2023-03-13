@@ -7,8 +7,10 @@ definePageMeta({
 
 <template>
   <section>
-    <h1>Heyo this is anggota</h1>
-    <NuxtLink to="/dashboard">Back to Dashboard</NuxtLink>
+    <h1>Daftar Keanggotaan</h1>
+    <NuxtLink to="/dashboard">
+      <button class="btn bg-orange text-white">Back to Dashboard</button>
+    </NuxtLink>
   </section>
 </template>
 

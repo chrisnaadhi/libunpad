@@ -1,3 +1,5 @@
+import { extendedEveningServiceTime } from "./useCurrentTime";
+
 export const filterPengunjungRuanganDirectus = (
   ruangan: string,
   tanggal: string
@@ -42,6 +44,20 @@ export const getMonthlyTotalVisitor = (bulan: string) => {
       filter: {
         date_created: {
           _between: bulan,
+        },
+      },
+      meta: "filter_count",
+    },
+  };
+};
+
+export const getDailyExtendedServiceTimeVisitor = () => {
+  return {
+    collection: "data_kunjungan",
+    params: {
+      filter: {
+        date_created: {
+          _between: extendedEveningServiceTime(),
         },
       },
       meta: "filter_count",

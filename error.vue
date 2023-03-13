@@ -12,7 +12,8 @@ const handleClearError = () => {
     <NavigationBar />
     <section class="content">
       <h1 class="text-9xl">{{ error.statusCode }}</h1>
-      <h3 class="text-3xl">
+      <p class="italic">{{ error.message }}</p>
+      <h3 class="text-3xl font-400">
         Sepertinya kamu <span class="font-600 text-red-6">tersesat</span> di
         website Kandaga!
       </h3>

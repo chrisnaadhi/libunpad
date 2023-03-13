@@ -12,9 +12,9 @@ definePageMeta({
 
 <template>
   <section>
-    <h1>
+    <h3>
       {{ profilPegawai.data.first_name }} {{ profilPegawai.data.last_name }}
-    </h1>
+    </h3>
     <p class="text-gray italic">{{ profilPegawai.data.nomor_induk }}</p>
     <h4>{{ profilPegawai.data.title }}</h4>
     <div class="grid grid-cols-3 gap-4 py-5" v-if="tugasPegawai">

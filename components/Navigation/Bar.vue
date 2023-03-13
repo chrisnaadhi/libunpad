@@ -9,7 +9,7 @@ const route = useRoute();
     <nav class="navbar">
       <NuxtLink to="/">
         <nuxt-img
-          src="/images/logo-perpus.png"
+          src="/images/kandaga-web.png"
           class="logo"
           alt="Logo Perpustakaan"
           width="256px"
@@ -36,7 +36,7 @@ const route = useRoute();
 }
 
 .navbar {
-  --at-apply: container flex items-unset justify-between py-4 px-0 ma xl:(items-center justify-between);
+  --at-apply: max-w-7xl flex items-unset justify-between py-4 px-3 ma xl:(items-center justify-between px-0);
 }
 
 .logo {
