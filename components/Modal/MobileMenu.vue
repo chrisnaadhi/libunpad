@@ -2,7 +2,7 @@
 import { mobileMenu, menuContent } from "~/composables/navMenu";
 
 const menu = mobileMenu();
-const { layanan, tentang } = menuContent();
+const { layanan, tentang, koleksi } = menuContent();
 
 const viewTentang = () => {
   menu.isTentangOpen = !menu.isTentangOpen;
@@ -47,7 +47,13 @@ const viewLayanan = () => {
         >
           <NuxtLink :to="list.url" class="hover-menu">{{ list.name }}</NuxtLink>
         </div>
-        <NuxtLink class="menu-list hover-menu">Reports</NuxtLink>
+        <div
+          v-show="menu.isLayananOpen"
+          class="pl-2 text-sm"
+          v-for="list in layanan"
+        >
+          <NuxtLink :to="list.url" class="hover-menu">{{ list.name }}</NuxtLink>
+        </div>
         <NuxtLink class="menu-list hover-menu">Berita</NuxtLink>
         <NuxtLink class="menu-list hover-menu">Kontak</NuxtLink>
       </div>
