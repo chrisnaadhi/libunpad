@@ -82,8 +82,8 @@ export const extendedEveningServiceTime = () => {
   const tanggal = date.getDate();
 
   return [
-    `${tahun}-${bulan}-${tanggal} 09:00:00.0000000 -00:00`,
-    `${tahun}-${bulan}-${tanggal} 11:00:00.0000000 -00:00`,
+    `${tahun}-${bulan}-${tanggal}T16:00:00+07:00`,
+    `${tahun}-${bulan}-${tanggal}T17:30:00+07:00`,
   ];
 };
 
