@@ -13,11 +13,11 @@
     </div>
     <div class="cards">
       <article class="card-collection">
-        <h1 class="heading-display">Tatanan Dunia Baru</h1>
+        <h1 class="heading-display">Koleksi yang baru ditambahkan</h1>
         <NuxtImg src="/images/museum.jpg" class="image-display" />
       </article>
       <article class="card-collection">
-        <h1 class="heading-display">Pengalaman selama kuliah</h1>
+        <h1 class="heading-display">Koleksi yang paling populer</h1>
         <NuxtImg src="/images/museum.jpg" class="image-display" />
       </article>
     </div>
