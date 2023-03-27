@@ -19,9 +19,9 @@ defineProps({
         v-show="showList"
         class="max-w-7xl flex flex-col ma sm:(grid grid-cols-2) md:(grid-cols-4)"
       >
-        <section class="w-full p-3 text-left md:p-0">
+        <section class="w-full p-3 text-left md:(text-center p-0)">
           <h1>Tautan Cepat</h1>
-          <ul class="list-none">
+          <ul class="md:text-center">
             <li class="text-orange">Menu 1</li>
             <li>Menu 2</li>
             <li>Menu 3</li>
@@ -44,7 +44,7 @@ defineProps({
           </ul>
         </section>
         <section class="w-full p-3 text-left md:(text-right p-0)">
-          <ul class="md:text-right">
+          <ul class="md:text-center">
             <h1>Media Sosial Kami</h1>
             <li>Medsos 1</li>
             <li>Medsos 2</li>

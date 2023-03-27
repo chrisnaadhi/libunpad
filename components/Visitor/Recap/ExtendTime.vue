@@ -49,7 +49,6 @@ const { data: profilPetugasPiket } = await useFetch(
         }}
       </span>
     </h3>
-    <p class="font-600 text-2xl">16.00 ~ 17.30</p>
     <h1>
       {{
         getExtendedTimeVisitor.meta.filter_count === 0

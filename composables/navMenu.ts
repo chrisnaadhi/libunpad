@@ -70,10 +70,34 @@ export const menuContent = () => {
     },
   ];
 
+  const panduan = [
+    {
+      name: "Mahasiswa",
+      url: "#",
+    },
+    {
+      name: "Peneliti",
+      url: "#",
+    },
+    {
+      name: "Dosen",
+      url: "#",
+    },
+    {
+      name: "Tenaga Pendidik",
+      url: "#",
+    },
+    {
+      name: "Layanan Umum",
+      url: "#",
+    },
+  ];
+
   return {
     tentang,
     layanan,
     koleksi,
+    panduan,
   };
 };
 
@@ -81,9 +105,18 @@ export const mobileMenu = defineStore("mobile", () => {
   const menuState = ref(false);
   const isTentangOpen = ref(false);
   const isLayananOpen = ref(false);
+  const isKoleksiOpen = ref(false);
+  const isPanduanOpen = ref(false);
   function changeMenuState() {
     menuState.value = !menuState.value;
   }
 
-  return { menuState, isTentangOpen, isLayananOpen, changeMenuState };
+  return {
+    menuState,
+    isTentangOpen,
+    isLayananOpen,
+    isKoleksiOpen,
+    isPanduanOpen,
+    changeMenuState,
+  };
 });

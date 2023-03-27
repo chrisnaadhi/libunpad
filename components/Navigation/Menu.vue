@@ -1,6 +1,6 @@
 <script setup>
 import { menuContent } from "~/composables/navMenu";
-const { tentang, layanan, koleksi } = menuContent();
+const { tentang, layanan, koleksi, panduan } = menuContent();
 </script>
 
 <template>
@@ -8,7 +8,7 @@ const { tentang, layanan, koleksi } = menuContent();
     <NavigationMenuLink menu-title="Tentang" :dropdown-menu="tentang" />
     <NavigationMenuLink menu-title="Layanan" :dropdown-menu="layanan" />
     <NavigationMenuLink menu-title="Koleksi" :dropdown-menu="koleksi" />
-    <li>Berita</li>
+    <NavigationMenuLink menu-title="Panduan" :dropdown-menu="panduan" />
     <li>Kontak</li>
   </ul>
 </template>

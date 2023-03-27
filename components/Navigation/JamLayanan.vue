@@ -14,11 +14,11 @@ const dataPerpustakaan = [
 ];
 
 const cekHariLibur = ref(() => {
-  const today = "";
+  let today = "";
   if (currentTime.value.getDay() === 0 || currentTime.value.getDay() === 6) {
-    today.value = "Tutup";
+    today = "Tutup";
   } else {
-    today.value = "Buka";
+    today = "Buka";
   }
   return today;
 });
