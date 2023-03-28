@@ -1,11 +1,11 @@
 <script setup>
+import { tugasPagination } from "@/composables/utilsFunction";
 const { getItems } = useDirectusItems();
-const config = useRuntimeConfig();
+const { getUsers } = useDirectusUsers();
 
 const route = useRoute();
 const dataKerja = ref();
-const offsetVal = ref(0);
-const baseVal = ref(4);
+const pageStore = tugasPagination();
 
 const dataPekerjaan = await getItems({
   collection: "pekerjaan_harian",
@@ -22,8 +22,8 @@ const dataPekerjaan = await getItems({
 
 const maxedTask = computed(() => {
   const maxVal =
-    offsetVal.value / baseVal.value + 1 ===
-    Math.ceil(dataPekerjaan.meta.filter_count / baseVal.value);
+    pageStore.offsetVal / pageStore.baseVal + 1 ===
+    Math.ceil(dataPekerjaan.meta.filter_count / pageStore.baseVal);
   if (maxVal) {
     return true;
   } else {
@@ -31,23 +31,13 @@ const maxedTask = computed(() => {
   }
 });
 
-const pageTask = computed(() => {
-  if (offsetVal.value === 0) {
-    return 1;
-  } else if (offsetVal.value >= 1) {
-    return offsetVal.value / baseVal.value + 1;
-  } else {
-    return "Something is breaking in offset value";
-  }
-});
-
 const fetchDataPekerjaan = async (val) => {
   if (val === "next") {
-    offsetVal.value += baseVal.value;
+    pageStore.offsetVal += pageStore.baseVal;
   } else if (val === "prev") {
-    offsetVal.value -= baseVal.value;
+    pageStore.offsetVal -= pageStore.baseVal;
   } else {
-    offsetVal.value = 0;
+    pageStore.offsetVal = 0;
   }
   try {
     dataKerja.value = await getItems({
@@ -59,8 +49,8 @@ const fetchDataPekerjaan = async (val) => {
           },
         },
         sort: "date_created",
-        offset: offsetVal.value,
-        limit: baseVal.value,
+        offset: pageStore.offsetVal,
+        limit: pageStore.baseVal,
       },
     });
   } catch (error) {
@@ -68,41 +58,15 @@ const fetchDataPekerjaan = async (val) => {
   }
 };
 
-const { data: dataPetugas } = await useFetch(
-  `${config.public.directus.url}users`,
-  {
-    headers: {
-      Authorization: `Bearer ${config.public.directus.token}`,
-    },
-    pick: ["data", ["id", "first_name", "last_name"]],
-  }
-);
+const dataUser = await getUsers();
 
 const searchPetugas = (idPetugas) => {
-  const petugas = dataPetugas.value.data.find((nama) => nama.id === idPetugas);
+  const petugas = dataUser.find((nama) => nama.id === idPetugas);
   if (!petugas) {
     return "Belum diproses";
   }
   const objPetugas = Object.assign({}, petugas);
   return `${objPetugas.first_name} ${objPetugas.last_name}`;
-};
-
-const convertTimeZone = (time) => {
-  const newDate = new Date(time);
-  const options = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-  const formatted = newDate.toLocaleDateString("id-ID", options);
-  const timeFormat = newDate.toLocaleTimeString("id-ID", {
-    hour12: false,
-    hour: "numeric",
-    minute: "numeric",
-  });
-  if (!time) return "Belum diperbarui";
-  return `${formatted} ${timeFormat}`;
 };
 
 const statusTugasColor = (val) => {
@@ -119,7 +83,7 @@ const statusTugasColor = (val) => {
 };
 
 onMounted(async () => {
-  if (offsetVal.value === 0) {
+  if (pageStore.offsetVal === 0) {
     dataKerja.value = await getItems({
       collection: "pekerjaan_harian",
       params: {
@@ -130,7 +94,7 @@ onMounted(async () => {
         },
         sort: "date_created",
         offset: 0,
-        limit: baseVal.value,
+        limit: pageStore.baseVal,
       },
     });
   } else {
@@ -167,7 +131,7 @@ onMounted(async () => {
           <td>{{ data.kriteria_tugas }}</td>
           <td>{{ data.nama_tugas }}</td>
           <td class="max-w-4xl">
-            {{ data.deskripsi_tugas }}
+            {{ trimDescription(data.deskripsi_tugas, 50) }}
           </td>
           <td>{{ searchPetugas(data.user_created) }}</td>
           <td>{{ convertTimeZone(data.date_created) }}</td>
@@ -188,16 +152,22 @@ onMounted(async () => {
 
     <div class="flex flex-col items-center">
       <p>
-        {{ pageTask }} /
-        {{ Math.ceil(dataPekerjaan.meta.filter_count / baseVal) }}
+        {{ pageStore.pageTask }} /
+        {{
+          dataPekerjaan.meta.filter_count === 0
+            ? 1
+            : Math.ceil(dataPekerjaan.meta.filter_count / pageStore.baseVal)
+        }}
       </p>
       <div class="flex justify-center gap-2">
         <button
           class="btn"
           :class="
-            offsetVal === 0 ? 'bg-gray-2 cursor-not-allowed' : 'bg-blue-2'
+            pageStore.offsetVal === 0
+              ? 'bg-gray-2 cursor-not-allowed'
+              : 'bg-blue-2'
           "
-          :disabled="offsetVal === 0"
+          :disabled="pageStore.offsetVal === 0"
           @click="fetchDataPekerjaan('prev')"
         >
           Sebelumnya

@@ -99,3 +99,20 @@ export const readableDate = (tanggal: string) => {
 
   return `${hari}, ${tgl} ${bulan}`;
 };
+
+export const convertTimeZone = (time: string) => {
+  const newDate = new Date(time);
+  const formatted = newDate.toLocaleDateString("id-ID", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  const timeFormat = newDate.toLocaleTimeString("id-ID", {
+    hour12: false,
+    hour: "numeric",
+    minute: "numeric",
+  });
+  if (!time) return "Belum diperbarui";
+  return `${formatted} ${timeFormat}`;
+};

@@ -1,6 +1,5 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
-import { useNuxtApp, useRuntimeConfig } from "#app";
 
 export const displayRuangan = (ruangan: string) => {
   return computed(() => {

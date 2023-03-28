@@ -13,10 +13,26 @@ const handleClearError = () => {
     <section class="content">
       <h1 class="text-9xl">{{ error.statusCode }}</h1>
       <p class="italic">{{ error.message }}</p>
-      <h3 class="text-3xl font-400">
-        Sepertinya kamu <span class="font-600 text-red-6">tersesat</span> di
-        website Kandaga!
-      </h3>
+      <div v-if="error.statusCode === 404">
+        <h3 class="text-3xl font-400">
+          Sepertinya kamu <span class="font-600 text-red-6">tersesat</span> di
+          website Kandaga!
+        </h3>
+      </div>
+      <div v-if="error.statusCode === 403">
+        <h3 class="text-3xl font-400">
+          Kamu
+          <span class="font-600 text-red-6">tidak memiliki akses</span> untuk
+          mengunjungi halaman ini!
+        </h3>
+      </div>
+      <div v-else-if="error.statusCode === 500">
+        <h3 class="text-3xl font-400">
+          Sepertinya Sistem Kandaga sedang
+          <span class="font-600 text-red-6">terkendala</span>, silahkan hubungi
+          Administrator!
+        </h3>
+      </div>
       <p class="py-5">
         Jangan Khawatir! Kamu bisa kembali ke beranda atau login kembali agar
         kamu dapat menjelajahi website Kandaga. Jika kamu merasa ini adalah

@@ -9,6 +9,27 @@ const user = useDirectusUser();
 const router = useRouter();
 const isLoad = ref(false);
 
+const isKoordinator = computed(() => {
+  let state = null;
+  try {
+    switch (user.value.role) {
+      case "BE2D46E4-CB00-4585-8E34-5B571A80A820":
+        state = true;
+        break;
+      case "19B573BB-B9DE-4CBC-89BB-596CFCA28448":
+        state = true;
+        break;
+      default:
+        state = false;
+        break;
+    }
+  } catch (error) {
+    console.log("Logout..");
+  }
+
+  return state;
+});
+
 const logoutBtn = () => {
   isLoad.value = true;
   logout();
@@ -27,20 +48,20 @@ const logoutBtn = () => {
       </div>
 
       <section>
-        <div v-if="user.avatar" class="flex flex-col items-center">
+        <div class="flex flex-col items-center">
           <img
             :src="
               user.avatar
                 ? `https://repository.unpad.ac.id:8050/assets/${user.avatar}.jpg`
                 : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'
             "
-            class="w-15 rounded-lg border border-orange"
+            class="w-15 h-15 object-cover rounded-lg border border-orange"
             alt="Foto Anggota"
           />
-          <p>Halo, {{ user.first_name }}!</p>
         </div>
-        <div class="text-center" v-else>
-          <p>Heyo, Guest!</p>
+        <div class="text-center">
+          <p v-if="user.first_name">Halo, {{ user.first_name }}!</p>
+          <p v-else>Halo, Pengunjung!</p>
         </div>
       </section>
 
@@ -69,7 +90,7 @@ const logoutBtn = () => {
             Data Pekerjaan
           </NuxtLink>
         </li>
-        <li class="icon-block">
+        <li class="icon-block" v-show="isKoordinator">
           <NuxtLink to="/dashboard/map" class="flex w-full">
             <div class="i-mdi-file-tree icon-item" />
             Map Pekerjaan
@@ -79,7 +100,9 @@ const logoutBtn = () => {
       <ul class="absolute bottom-0 right-20% pb-2">
         <div class="flex items-center justify-center mb-5">
           <button class="btn bg-red text-white w-full" @click="logoutBtn">
-            <div class="text-xs" v-show="isLoad">Sedang Logout...</div>
+            <div class="text-xs" v-show="isLoad">
+              <span class="loader"></span>
+            </div>
             <div class="text-xs" v-show="!isLoad">Logout</div>
           </button>
         </div>
@@ -126,4 +149,25 @@ const logoutBtn = () => {
 .router-link-active, .rouer-link-exact-active {
   --at-apply: text-orange;
 }
+
+/* Spinner CSS */
+.loader {
+    width: 13px;
+    height: 13px;
+    border: 3px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    }
 </style>
