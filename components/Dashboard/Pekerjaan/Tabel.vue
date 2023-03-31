@@ -37,7 +37,7 @@ const fetchDataPekerjaan = async (val) => {
   } else if (val === "prev") {
     pageStore.offsetVal -= pageStore.baseVal;
   } else {
-    pageStore.offsetVal = 0;
+    pageStore.offsetVal = pageStore.offsetVal;
   }
   try {
     dataKerja.value = await getItems({
@@ -98,7 +98,7 @@ onMounted(async () => {
       },
     });
   } else {
-    console.log("nah");
+    fetchDataPekerjaan();
   }
 });
 </script>

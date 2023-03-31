@@ -8,11 +8,21 @@ const handleClearError = () => {
 </script>
 
 <template>
+  <Head>
+    <Title>{{ error.statusCode }}</Title>
+  </Head>
   <main class="main-wrapper">
     <NavigationBar />
     <section class="content">
       <h1 class="text-9xl">{{ error.statusCode }}</h1>
       <p class="italic">{{ error.message }}</p>
+      <div v-if="error.statusCode === 401">
+        <h3 class="text-3xl font-400">
+          Password yang anda masukkan
+          <span class="font-600 text-red-6">salah</span>, pastikan untuk
+          memasukkan password yang sesuai. Silahkan klik tombol login.
+        </h3>
+      </div>
       <div v-if="error.statusCode === 404">
         <h3 class="text-3xl font-400">
           Sepertinya kamu <span class="font-600 text-red-6">tersesat</span> di
@@ -33,7 +43,8 @@ const handleClearError = () => {
           Administrator!
         </h3>
       </div>
-      <p class="py-5">
+      <p class="py-5" v-show="error.statusCode === 404">
+        {{ error.statusCode }}
         Jangan Khawatir! Kamu bisa kembali ke beranda atau login kembali agar
         kamu dapat menjelajahi website Kandaga. Jika kamu merasa ini adalah
         sebuah kesalahan dan halaman ini memang benar ada, silahkan hubungi

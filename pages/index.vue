@@ -1,6 +1,5 @@
 <script setup>
 useHead({
-  title: "GLAM Unpad | Universitas Padjadjaran",
   meta: [
     {
       name: "description",
