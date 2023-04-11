@@ -33,10 +33,12 @@ const { data: fetchService } = await useFetch("/api/v1/layanan");
           </div>
           <div class="flex justify-center gap-2">
             <NuxtLink :to="layanan.slug" class="w-full">
-              <button class="btn bg-orange text-xs w-full">Ajukan</button>
+              <button class="btn bg-orange text-xs text-white w-full">
+                Ajukan
+              </button>
             </NuxtLink>
             <NuxtLink :to="layanan.slug + '/data'" class="w-full">
-              <button class="btn bg-orange text-xs w-full">
+              <button class="btn bg-orange text-xs text-white w-full">
                 Data Pengajuan
               </button>
             </NuxtLink>

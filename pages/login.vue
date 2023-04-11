@@ -75,7 +75,7 @@ const submitLogin = async () => {
       setTimeout(() => {
         textLogin.value = "text-dark";
         loginNotif.value = "Silahkan masukkan Email dan Password untuk Login";
-      });
+      }, 3000);
     }
   }
 };

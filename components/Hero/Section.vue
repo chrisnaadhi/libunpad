@@ -8,7 +8,7 @@
         </h1>
         <p class="text-sm md:text-xl font-500 text-gray-700 font-italic">
           <span class="text-orange-6 font-600">Universitas Padjadjaran</span>'s
-          Gallery, Library, Archive, Museum & Repository
+          Gallery, Library, Record Management, Museum & Repository
         </p>
         <p class="py-2 text-xs xl:(mr-6 pr-8)">
           <span class="font-600">Kandaga</span> merupakan platform yang

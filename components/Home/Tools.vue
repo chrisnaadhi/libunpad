@@ -5,7 +5,7 @@ const { data: tools } = await useFetch("/api/v1/tools");
 <template>
   <div class="wrapper">
     <div class="bg-orange ma mt--17 max-w-200 my-1 py-3 sm:rounded-lg">
-      <h1 class="text-xl font-700 md:text-3xl mx-3">
+      <h1 class="text-xl text-white font-700 md:text-3xl mx-3">
         Tuntaskan Tugas dan Penelitianmu secara Daring
       </h1>
     </div>

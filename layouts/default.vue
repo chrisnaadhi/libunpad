@@ -25,14 +25,14 @@ useHead({
 
 <style scoped>
 .main-wrapper {
-  --at-apply: bg-gray-50 flex flex-col min-h-screen m-0;
-}
-
-.footer {
-  --at-apply: min-h-10 mb-16 xl:mb-0;
+  --at-apply: bg-white flex flex-col min-h-screen m-0;
 }
 
 .content {
   --at-apply: flex-1;
+}
+
+.footer {
+  --at-apply: min-h-10 mb-16 xl:mb-0;
 }
 </style>

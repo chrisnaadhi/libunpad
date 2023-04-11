@@ -7,7 +7,7 @@
         <NuxtImg src="/images/museum.jpg" class="image-display" />
       </article>
       <article class="card-collection">
-        <h1 class="heading-display">Mengenal Budaya Sunda</h1>
+        <h1 class="heading-display">Koleksi Pengetahuan Lokal</h1>
         <NuxtImg src="/images/museum.jpg" class="image-display" />
       </article>
     </div>

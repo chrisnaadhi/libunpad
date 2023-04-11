@@ -50,19 +50,19 @@ export const menuContent = () => {
   const koleksi = [
     {
       name: "Gallery",
-      url: "#",
+      url: "/gallery",
     },
     {
       name: "Library",
-      url: "#",
+      url: "/library",
     },
     {
       name: "Archive",
-      url: "#",
+      url: "/records",
     },
     {
       name: "Museum",
-      url: "#",
+      url: "/museum",
     },
     {
       name: "Repository",

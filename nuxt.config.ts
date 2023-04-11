@@ -12,6 +12,7 @@ export default defineNuxtConfig({
   },
   routeRules: {
     "/api/**": { cors: true },
+    "/visitor/rekap": { redirect: "/error" },
   },
   modules: ["@unocss/nuxt", "nuxt-directus", "@pinia/nuxt", "@nuxt/image-edge"],
   unocss: {

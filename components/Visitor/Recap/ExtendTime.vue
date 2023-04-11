@@ -3,6 +3,7 @@ const { getItems } = useDirectusItems();
 const config = useRuntimeConfig();
 
 const date = new Date();
+const extendToday = extendedEveningServiceTime();
 const hariIni = new Intl.DateTimeFormat("id-id", {
   weekday: "long",
   day: "2-digit",
@@ -10,9 +11,18 @@ const hariIni = new Intl.DateTimeFormat("id-id", {
   year: "numeric",
 }).format(date);
 
-const getExtendedTimeVisitor = await getItems(
-  getDailyExtendedServiceTimeVisitor()
-);
+const getExtendedTimeVisitor = await getItems({
+  collection: "data_kunjungan",
+  params: {
+    filter: {
+      date_created: {
+        _between: extendToday,
+      },
+      nama_ruangan: "r_bni",
+    },
+    meta: "filter_count",
+  },
+});
 
 const getPetugasExtendedTimeService = await getItems({
   collection: "piket_layanan",
@@ -64,7 +74,7 @@ const { data: profilPetugasPiket } = await useFetch(
 
 <style scoped>
 h1 {
-  --at-apply: font-600 text-5xl text-orange-5;
+  --at-apply: font-600 text-4xl text-orange-5;
 }
 
 h3 {
