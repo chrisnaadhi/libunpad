@@ -82,8 +82,8 @@ export const extendedEveningServiceTime = () => {
   const tanggal = date.getDate();
 
   return [
-    `${tahun}-${bulan}-${tanggal} 09:00:00.0000000 -00:00`,
-    `${tahun}-${bulan}-${tanggal} 11:00:00.0000000 -00:00`,
+    `${tahun}-${bulan}-${tanggal}T14:30:00+07:00`,
+    `${tahun}-${bulan}-${tanggal}T17:30:00+07:00`,
   ];
 };
 
@@ -98,4 +98,21 @@ export const readableDate = (tanggal: string) => {
   }).format(checkDate);
 
   return `${hari}, ${tgl} ${bulan}`;
+};
+
+export const convertTimeZone = (time: string) => {
+  const newDate = new Date(time);
+  const formatted = newDate.toLocaleDateString("id-ID", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  const timeFormat = newDate.toLocaleTimeString("id-ID", {
+    hour12: false,
+    hour: "numeric",
+    minute: "numeric",
+  });
+  if (!time) return "Belum diperbarui";
+  return `${formatted} ${timeFormat}`;
 };

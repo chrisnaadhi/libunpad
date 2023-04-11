@@ -1,5 +1,6 @@
 <script setup>
 import { displayRuangan, displayKeanggotaan } from "~/composables/user";
+import { extendedEveningServiceTime } from "~/composables/useCurrentTime";
 
 useHead({
   title: "Data Pengunjung Kandaga | Pusat Pengelolaan Pengetahuan",

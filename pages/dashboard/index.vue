@@ -7,9 +7,18 @@ definePageMeta({
   middleware: ["directus-auth"],
 });
 
-const dataHariIni = await getItems(
-  filterPengunjungRuanganDirectus("lobby", today)
-);
+const fetchAllToday = await getItems({
+  collection: "data_kunjungan",
+  params: {
+    filter: {
+      date_created: {
+        _gte: today,
+      },
+    },
+    meta: "filter_count",
+  },
+});
+
 let [fetchLastVisitor] = await getItems({
   collection: "data_kunjungan",
   params: {
@@ -35,9 +44,9 @@ let [fetchLastVisitor] = await getItems({
       <section class="w-full h-100">
         <div class="border-3 border-gray rounded-lg min-h-full">
           <h1>Total Pengunjung Hari ini</h1>
-          <div v-if="dataHariIni.meta.filter_count !== 0">
+          <div v-if="fetchAllToday.meta.filter_count !== 0">
             <span class="text-5xl text-orange font-600">
-              {{ dataHariIni.meta.filter_count }}
+              {{ fetchAllToday.meta.filter_count }}
             </span>
             <br />
             <span class="italic">orang</span>

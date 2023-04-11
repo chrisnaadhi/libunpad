@@ -14,13 +14,13 @@ const dataPerpustakaan = [
 ];
 
 const cekHariLibur = ref(() => {
-  const today = ref("");
-  if (currentTime.value.getDay() === 6 || currentTime.value.getDay() === 7) {
-    today.value = "Tutup";
+  let today = "";
+  if (currentTime.value.getDay() === 0 || currentTime.value.getDay() === 6) {
+    today = "Tutup";
   } else {
-    today.value = "Buka";
+    today = "Buka";
   }
-  return today.value;
+  return today;
 });
 
 const preventMainClick = () => {
@@ -48,12 +48,12 @@ onMounted(() => {
         <p class="display-jam">
           <span
             class="text-red-6 text-sm font-600"
-            v-if="cekHariLibur === 'Tutup'"
+            v-if="cekHariLibur() === 'Tutup'"
           >
-            {{ cekHariLibur() }}
+            Tutup
           </span>
           <span class="text-green-6 text-lg font-600" v-else>
-            {{ cekHariLibur() }}:
+            Buka:
             <span class="text-dark">08.00 -15.30</span>
           </span>
         </p>

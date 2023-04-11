@@ -1,4 +1,10 @@
 <script setup>
+defineProps({
+  placeholderText: {
+    type: String,
+    default: "Cari koleksi kami disini...",
+  },
+});
 const search = useSearchFunction();
 
 const removeSearchQuery = () => {
@@ -17,6 +23,7 @@ const submitSearch = async () => {
     search.isResult = false;
   }
 };
+
 const limitChars = (str) => {
   return str.slice(0, 125);
 };
@@ -49,7 +56,7 @@ const limitChars = (str) => {
           v-model="search.keywords"
           @keyup="submitSearch"
           role="searchbox"
-          placeholder="Cari sesuatu disini..."
+          :placeholder="placeholderText"
         />
         <div class="absolute top-2 right-2">
           <button
@@ -87,13 +94,19 @@ const limitChars = (str) => {
                   :to="`https://en.wikipedia.org?curid=${elem.pageid}`"
                   target="_blank"
                 >
-                  <span class="text-xs text-blue-3 hover:text-blue-6"
-                    >(read more)</span
-                  >
+                  <span class="text-xs text-blue-3 hover:text-blue-6">
+                    (read more)
+                  </span>
                 </NuxtLink>
               </p>
             </div>
-            <div class="bg-orange-1 text-center py-2 cursor-pointer">
+            <div
+              class="bg-orange-1 text-center py-2 cursor-not-allowed"
+              v-if="search.articleObj?.length === 0"
+            >
+              <p>Tidak terdapat hasil pencarian dengan kata kunci tersebut</p>
+            </div>
+            <div class="bg-orange-1 text-center py-2 cursor-pointer" v-else>
               <NuxtLink :to="'/search?keyword=' + search.keywords">
                 Lihat hasil lebih banyak
               </NuxtLink>
@@ -115,7 +128,7 @@ const limitChars = (str) => {
 }
 
 .content-result {
-  --at-apply: bg-white text-gray-6 text-left rounded-lg max-h-sm overflow-auto transition-all-500;
+  --at-apply: bg-white text-gray-6 text-left rounded-lg max-h-75 overflow-auto transition-all-500;
 }
 
 .result-element {

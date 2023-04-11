@@ -10,6 +10,13 @@ const { getItems } = useDirectusItems();
 const pageState = ref(0);
 const listData = ref();
 
+defineProps({
+  publicData: {
+    type: Boolean,
+    default: false,
+  },
+});
+
 async function fetchDataPengajuan() {
   listData.value = await getItems({
     collection: "pengajuan_surat_bebas_pustaka",
@@ -93,6 +100,15 @@ const tableHead = [
   "Status Pengajuan",
   "Petugas",
 ];
+
+const tableHeadPublic = [
+  "NPM",
+  "Nama Lengkap",
+  "Keperluan",
+  "Persyaratan",
+  "Status Pengajuan",
+  "Petugas",
+];
 </script>
 
 <template>
@@ -101,7 +117,16 @@ const tableHead = [
       <thead class="bg-orange-2">
         <tr>
           <th
+            v-if="publicData"
             v-for="elem in tableHead"
+            scope="col"
+            class="table-border font-600"
+          >
+            {{ elem }}
+          </th>
+          <th
+            v-else
+            v-for="elem in tableHeadPublic"
             scope="col"
             class="table-border font-600"
           >
@@ -115,7 +140,7 @@ const tableHead = [
           <td class="table-border">
             {{ data.nama_lengkap }}
           </td>
-          <td class="table-border">
+          <td class="table-border" v-show="publicData">
             {{ data.email }}
           </td>
           <td class="table-border">
@@ -124,10 +149,10 @@ const tableHead = [
           <td class="table-border">
             {{ displayPersyaratan(data.persyaratan) }}
           </td>
-          <td class="table-border">
+          <td class="table-border" v-show="publicData">
             {{ convertTimeZone(data.date_created) }}
           </td>
-          <td class="table-border">
+          <td class="table-border" v-show="publicData">
             <span v-if="!data.date_updated">Belum diproses</span>
             <span v-else>{{ convertTimeZone(data.date_updated) }}</span>
           </td>

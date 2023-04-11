@@ -50,7 +50,7 @@ useHead({
               : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'
           "
           alt=""
-          class="w-35 border-2 border-orange rounded-xl"
+          class="w-35 h-35 object-cover border-2 border-orange rounded-xl"
         />
       </div>
       <div>

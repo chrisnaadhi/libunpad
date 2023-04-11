@@ -1,6 +1,6 @@
 <script setup>
 const { getItemById, updateItem, deleteItems } = useDirectusItems();
-const config = useRuntimeConfig();
+const { getUserById } = useDirectusUsers();
 const route = useRoute();
 
 const getPekerjaan = await getItemById({
@@ -8,24 +8,9 @@ const getPekerjaan = await getItemById({
   id: route.params.id,
 });
 
-const { data: dataPetugas } = await useFetch(
-  `${config.public.directus.url}users`,
-  {
-    headers: {
-      Authorization: `Bearer ${config.public.directus.token}`,
-    },
-    pick: ["data", ["id", "first_name", "last_name"]],
-  }
-);
-
-const searchPetugas = (idPetugas) => {
-  const petugas = dataPetugas.value.data.find((nama) => nama.id === idPetugas);
-  if (!petugas) {
-    return "Belum diproses";
-  }
-  const objPetugas = Object.assign({}, petugas);
-  return `${objPetugas.first_name} ${objPetugas.last_name}`;
-};
+const dataPemberiTugas = await getUserById({
+  id: getPekerjaan.user_created,
+});
 
 const isWajib = computed(() => {
   if (getPekerjaan.kriteria_tugas === "wajib") {
@@ -39,7 +24,9 @@ const namaTugas = ref(getPekerjaan.nama_tugas);
 const deskripsiTugas = ref(getPekerjaan.deskripsi_tugas);
 const linkTugas = ref(getPekerjaan.link_berkas);
 const statusTugas = ref(getPekerjaan.status);
-const pemberiTugas = ref(searchPetugas(getPekerjaan.user_created));
+const pemberiTugas = ref(
+  `${dataPemberiTugas.first_name} ${dataPemberiTugas.last_name}`
+);
 const perkembanganTugas = ref(getPekerjaan.perkembangan_rencana);
 const teksUpdate = ref("Silahkan isi data yang ingin diubah");
 const colorTeks = ref("text-dark");

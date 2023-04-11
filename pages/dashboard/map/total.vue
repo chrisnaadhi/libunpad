@@ -61,6 +61,6 @@ h1 {
 }
 
 .card {
-  --at-apply: bg-orange-1 text-center;
+  --at-apply: flex flex-col py-5 px-2 bg-orange-1 text-center;
 }
 </style>

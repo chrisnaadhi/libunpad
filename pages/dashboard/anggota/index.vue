@@ -1,4 +1,6 @@
-<script>
+<script setup>
+const { getUsers, getUserById } = useDirectusUsers();
+
 definePageMeta({
   layout: "dashboard",
   middleware: ["directus-auth"],

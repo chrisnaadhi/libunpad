@@ -2,6 +2,7 @@
 import "@splidejs/vue-splide/css";
 import "@splidejs/vue-splide/css/core";
 import { mobileMenu } from "~/composables/navMenu";
+import { useSearchFunction } from "~/composables/searchFunction";
 
 useHead({
   htmlAttrs: {
@@ -11,6 +12,7 @@ useHead({
 
 const router = useRouter();
 const menu = mobileMenu();
+const searchFunction = useSearchFunction();
 
 router.afterEach(() => {
   window.scrollTo({
@@ -21,6 +23,10 @@ router.afterEach(() => {
     menu.menuState = false;
     menu.isLayananOpen = false;
     menu.isTentangOpen = false;
+  }
+  if (searchFunction.keywords) {
+    searchFunction.keywords = "";
+    searchFunction.isResult = false;
   }
 });
 </script>

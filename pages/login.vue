@@ -42,17 +42,26 @@ const togglePasswordType = () => {
 };
 const submitLogin = async () => {
   loginNotif.value = "Sedang mencoba masuk ke akun anda...";
+  let pattern = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
+  let result = pattern.test(email.value);
   try {
-    await login({ email: email.value, password: password.value });
-    loginNotif.value = "Berhasil masuk ke akun Anda! Mengalihkan halaman...";
-    textLogin.value = "text-green-7 font-600";
-    setTimeout(async () => {
-      if (isPegawai.value) {
-        await navigateTo("/dashboard", { redirectCode: 301 });
-      } else {
-        await navigateTo("/keanggotaan", { redirectCode: 200 });
-      }
-    }, 2000);
+    if (!result) {
+      loginNotif.value = "Format Email Salah! Silahkan periksa kembali";
+      setTimeout(() => {
+        loginNotif.value = "Silahkan masukkan Email dan Password untuk Login";
+      }, 2000);
+    } else {
+      await login({ email: email.value, password: password.value });
+      loginNotif.value = "Berhasil masuk ke akun Anda! Mengalihkan halaman...";
+      textLogin.value = "text-green-7 font-600";
+      setTimeout(async () => {
+        if (isPegawai.value) {
+          await navigateTo("/dashboard", { redirectCode: 301 });
+        } else {
+          await navigateTo("/keanggotaan", { redirectCode: 200 });
+        }
+      }, 2000);
+    }
   } catch (err) {
     textLogin.value = "text-red-7 font-600";
     if (err.message.includes("Unauthorized")) {
@@ -61,8 +70,12 @@ const submitLogin = async () => {
         textLogin.value = "text-dark";
         loginNotif.value = "Silahkan masukkan Email dan Password untuk Login";
       }, 3000);
-    } else {
-      loginNotif.value = err;
+    } else if (err.message.includes("Bad Request")) {
+      loginNotif.value = "Format Email tidak sesuai!";
+      setTimeout(() => {
+        textLogin.value = "text-dark";
+        loginNotif.value = "Silahkan masukkan Email dan Password untuk Login";
+      }, 3000);
     }
   }
 };
@@ -74,7 +87,7 @@ const submitLogin = async () => {
 <template>
   <main class="ma container text-center my-25">
     <h1 class="text-5xl my-4">Login</h1>
-    <form class="ma max-w-sm" @submit.prevent="submitLogin">
+    <form class="ma max-w-sm" @submit.stop.prevent="submitLogin">
       <div class="flex flex-col">
         <label for="email" class="text-left">Email :</label>
         <input class="input-space px-3" type="email" v-model="email" required />
@@ -102,10 +115,11 @@ const submitLogin = async () => {
             :class="email && password ? 'login-btn' : 'disable-btn'"
             :disabled="!email || !password"
             type="submit"
+            @click.prevent="submitLogin"
           >
             Login
           </button>
-          <NuxtLink to="/" class="w-full">
+          <NuxtLink to="#" class="w-full">
             <button class="form-btn disable-btn" disabled>
               <span class="line-through">PAuS ID</span>
             </button>

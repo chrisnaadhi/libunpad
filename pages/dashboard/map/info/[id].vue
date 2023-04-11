@@ -20,6 +20,12 @@ definePageMeta({
     <div class="grid grid-cols-3 gap-4 py-5" v-if="tugasPegawai">
       <div v-for="task in tugasPegawai" class="bg-orange-50 rounded p-2">
         <h1>{{ task.nama_tugas }}</h1>
+        <p>
+          Tanggal Penugasan: {{ task.tanggal_penugasan ?? "Belum ditugaskan" }}
+        </p>
+        <p>
+          Tanggal Deadline: {{ task.tanggal_deadline ?? "Belum ditentukan" }}
+        </p>
         <p>Progress: {{ task.perkembangan_rencana ?? "Tidak ada progress" }}</p>
         <p>
           Rencana:

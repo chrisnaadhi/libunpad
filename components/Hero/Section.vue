@@ -8,13 +8,13 @@
         </h1>
         <p class="text-sm md:text-xl font-500 text-gray-700 font-italic">
           <span class="text-orange-6 font-600">Universitas Padjadjaran</span>'s
-          Gallery, Library, Archive, Museum & Repository
+          Gallery, Library, Record Management, Museum & Repository
         </p>
         <p class="py-2 text-xs xl:(mr-6 pr-8)">
-          Kandaga merupakan platform yang menyediakan katalog koleksi dan sistem
-          penelusuran ke sumber-sumber informasi yang dimiliki dan dilanggan
-          oleh Universitas Padjadjaran. Kandaga dikelola oleh Pusat Pengelolaan
-          Pengetahuan Unpad.
+          <span class="font-600">Kandaga</span> merupakan platform yang
+          menyediakan katalog koleksi dan sistem penelusuran ke sumber-sumber
+          informasi yang dimiliki dan dilanggan oleh Universitas Padjadjaran.
+          Kandaga dikelola oleh Pusat Pengelolaan Pengetahuan Unpad.
         </p>
         <GenericSearch />
         <div class="container flex justify-center w-full xl:justify-start">
@@ -23,27 +23,13 @@
         </div>
       </div>
       <div class="hero-right">
-        <div
-          class="hero-img w-full h-32 xl:h-86 xl:w-md"
-          title="GLAM Kandaga"
-        ></div>
+        <HeroCarousel />
       </div>
     </div>
   </section>
 </template>
 
 <style scoped>
-.hero-img {
-  background-image: url("/images/kandaga-bg.webp");
-  /* width: 450px;
-  height: 300px; */
-  background-repeat: no-repeat;
-  background-position: right;
-  background-size: cover;
-  box-shadow: 0 0 15px 20px rgba(249, 250, 251) inset;
-  --at-apply: hidden xl:block bg-gray-50;
-}
-
 .hero-space {
   --at-apply: flex flex-col-reverse mx-3 max-w-7xl xl:(flex-row items-center justify-center ma p-15);
 }
