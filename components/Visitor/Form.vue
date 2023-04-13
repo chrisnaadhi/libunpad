@@ -68,6 +68,7 @@ const addVisitor = async () => {
       }
     } catch (error) {
       console.log(error);
+      clearError();
       displayModal();
       const audioError = new Audio("/sfx/error.wav");
       audioError.play();

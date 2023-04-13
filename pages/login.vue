@@ -66,12 +66,14 @@ const submitLogin = async () => {
     textLogin.value = "text-red-7 font-600";
     if (err.message.includes("Unauthorized")) {
       loginNotif.value = "Password Salah! Silahkan coba lagi";
+      clearError();
       setTimeout(() => {
         textLogin.value = "text-dark";
         loginNotif.value = "Silahkan masukkan Email dan Password untuk Login";
       }, 3000);
     } else if (err.message.includes("Bad Request")) {
       loginNotif.value = "Format Email tidak sesuai!";
+      clearError();
       setTimeout(() => {
         textLogin.value = "text-dark";
         loginNotif.value = "Silahkan masukkan Email dan Password untuk Login";
@@ -82,6 +84,9 @@ const submitLogin = async () => {
 
 // :class="email || password ? 'disable-btn' : 'register-btn'"
 // :disabled="email || password"
+definePageMeta({
+  middleware: "redirect-login",
+});
 </script>
 
 <template>
