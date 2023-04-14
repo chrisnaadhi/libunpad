@@ -80,7 +80,7 @@ defineProps({
 }
 
 .gradient-background {
-  --at-apply: flex flex-col justify-center rounded-lg h-60% absolute bottom-0 w-full bg-gradient-to-t from-black transition-all-500 px-3 hover:(h-full to-black/10);
+  --at-apply: flex flex-col justify-center rounded-lg h-60% absolute bottom-0 w-full bg-gradient-to-t from-black to-black/10 transition-all-500 px-3 hover:(h-full);
 }
 
 .sub-topic {

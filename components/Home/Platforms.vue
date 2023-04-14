@@ -62,7 +62,7 @@ const options = {
 }
 
 .background-block {
-  --at-apply: w-full text-dark bg-gray-50 absolute py-5 transition-all-500 xl:(w-6xl mt--16 rounded-xl) hover:(bg-orange-5 text-white transition-all-500);
+  --at-apply: w-full text-dark bg-white absolute py-5 transition-all-500 xl:(w-6xl mt--16 rounded-xl) hover:(bg-orange-5 text-white transition-all-500);
 }
 
 .background-block:hover .tanggal {

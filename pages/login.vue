@@ -66,14 +66,16 @@ const submitLogin = async () => {
     textLogin.value = "text-red-7 font-600";
     if (err.message.includes("Unauthorized")) {
       loginNotif.value = "Password Salah! Silahkan coba lagi";
-      clearError();
+      showError("Look like the password is wrong.");
       setTimeout(() => {
         textLogin.value = "text-dark";
         loginNotif.value = "Silahkan masukkan Email dan Password untuk Login";
+        clearError();
       }, 3000);
     } else if (err.message.includes("Bad Request")) {
       loginNotif.value = "Format Email tidak sesuai!";
       clearError();
+      console.log(err.message);
       setTimeout(() => {
         textLogin.value = "text-dark";
         loginNotif.value = "Silahkan masukkan Email dan Password untuk Login";

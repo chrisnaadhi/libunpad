@@ -10,7 +10,7 @@
     "@iconify-json/mdi": "^1.1.31",
     "@nuxt/image-edge": "^1.0.0-27840416.dc1ed65",
     "@unocss/nuxt": "^0.50.0",
-    "nuxt": "^3.4.0"
+    "nuxt": "^3.4.1"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.2",

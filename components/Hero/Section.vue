@@ -1,5 +1,5 @@
 <template>
-  <section class="container ma bg-gray-50 mb-15">
+  <section class="container ma bg-white mb-15">
     <div class="hero-space">
       <div class="hero-left">
         <h2 class="text-xl md:text-4xl text-gray-700">Selamat Datang di</h2>

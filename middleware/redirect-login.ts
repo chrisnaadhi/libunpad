@@ -1,4 +1,9 @@
 export default defineNuxtRouteMiddleware((to, from) => {
-  console.log(to.redirectedFrom, to.path);
-  console.log(from.fullPath, from.meta);
+  const err = useError();
+  const router = useRouter();
+
+  router.beforeEach((to, from) => {
+    console.log(to, from);
+    console.log(err);
+  });
 });

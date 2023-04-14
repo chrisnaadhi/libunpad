@@ -118,6 +118,10 @@ const backToIndex = () => {
 const focusToIdentitas = () => {
   identitas.value.focus();
 };
+
+onMounted(() => {
+  focusToIdentitas();
+});
 </script>
 
 <template>
@@ -169,6 +173,7 @@ const focusToIdentitas = () => {
         :class="
           !userData ? 'cursor-not-allowed bg-gray' : 'cursor-pointer bg-orange'
         "
+        @click.prevent="addVisitor"
       >
         Masuk
       </button>
