@@ -1,6 +1,7 @@
 <script setup>
 const { login } = useDirectusAuth();
 const user = useDirectusUser();
+const error = useError();
 
 const showPassword = ref(false);
 const passwordType = ref("password");
@@ -67,14 +68,13 @@ const submitLogin = async () => {
     if (err.message.includes("Unauthorized")) {
       loginNotif.value = "Password Salah! Silahkan coba lagi";
       showError("Look like the password is wrong.");
+      clearError();
       setTimeout(() => {
         textLogin.value = "text-dark";
         loginNotif.value = "Silahkan masukkan Email dan Password untuk Login";
-        clearError();
       }, 3000);
     } else if (err.message.includes("Bad Request")) {
       loginNotif.value = "Format Email tidak sesuai!";
-      clearError();
       console.log(err.message);
       setTimeout(() => {
         textLogin.value = "text-dark";
@@ -84,17 +84,21 @@ const submitLogin = async () => {
   }
 };
 
+const errorLogger = () => {
+  console.log(error.value);
+};
+
 // :class="email || password ? 'disable-btn' : 'register-btn'"
 // :disabled="email || password"
 definePageMeta({
-  middleware: "redirect-login",
+  middleware: "abort-redirect",
 });
 </script>
 
 <template>
   <main class="ma container text-center my-25">
     <h1 class="text-5xl my-4">Login</h1>
-    <form class="ma max-w-sm" @submit.stop.prevent="submitLogin">
+    <form class="ma max-w-sm" @submit.prevent="submitLogin">
       <div class="flex flex-col">
         <label for="email" class="text-left">Email :</label>
         <input class="input-space px-3" type="email" v-model="email" required />
@@ -113,9 +117,12 @@ definePageMeta({
           <div class="i-mdi-eye" v-if="!showPassword" />
           <div class="i-mdi-eye-off" v-else />
         </div>
-        <div class="my-2 text-xs text-left">
-          <p :class="textLogin">{{ loginNotif }}</p>
-        </div>
+        <NuxtErrorBoundary @error="errorLogger">
+          <div class="my-2 text-xs text-left">
+            <p :class="textLogin">{{ loginNotif }}</p>
+          </div>
+        </NuxtErrorBoundary>
+
         <div class="flex gap-2">
           <button
             class="form-btn"
