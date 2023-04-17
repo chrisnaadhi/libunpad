@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const { getItemById, createItems } = useDirectusItems();
 const router: any = useRouter();
+const route = useRoute();
+console.log(route);
 
 const ruangan = useCookie("namaRuanganVisitor");
 const userData = useIdentitasForm();
@@ -67,7 +69,6 @@ const addVisitor = async () => {
         umum.value = true;
       }
     } catch (error) {
-      console.log(error);
       displayModal();
       const audioError = new Audio("/sfx/error.wav");
       audioError.play();
@@ -94,6 +95,7 @@ const addVisitor = async () => {
         ? 54321
         : 12345,
     };
+
     await createItems<Item>({ collection: "data_kunjungan", items });
     validated.value = false;
     setTimeout(() => {
@@ -117,6 +119,10 @@ const backToIndex = () => {
 const focusToIdentitas = () => {
   identitas.value.focus();
 };
+
+onMounted(() => {
+  focusToIdentitas();
+});
 </script>
 
 <template>
@@ -168,6 +174,7 @@ const focusToIdentitas = () => {
         :class="
           !userData ? 'cursor-not-allowed bg-gray' : 'cursor-pointer bg-orange'
         "
+        @click.prevent="addVisitor"
       >
         Masuk
       </button>

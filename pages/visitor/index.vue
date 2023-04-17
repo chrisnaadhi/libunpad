@@ -2,6 +2,7 @@
 const ruang = useCookie("namaRuanganVisitor");
 definePageMeta({
   layout: "kunjungan",
+  middleware: "abort-redirect",
 });
 useHead({
   title: "Daftar Kunjungan Pusat Pengelolaan Pengetahuan UNPAD",

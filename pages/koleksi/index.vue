@@ -15,26 +15,10 @@ const route = useRoute();
 
     <section class="mt-25">
       <h2>Koleksi Lainnya</h2>
-      <CollectionBlockData
-        :left="true"
-        title="Gallery"
-        :page="route.fullPath"
-      />
-      <CollectionBlockData
-        :left="false"
-        title="Library"
-        :page="route.fullPath"
-      />
-      <CollectionBlockData
-        :left="true"
-        title="Archive"
-        :page="route.fullPath"
-      />
-      <CollectionBlockData
-        :left="false"
-        title="Museum"
-        :page="route.fullPath"
-      />
+      <CollectionBlockData :left="true" title="Gallery" page="/gallery" />
+      <CollectionBlockData :left="false" title="Library" page="/library" />
+      <CollectionBlockData :left="true" title="Archive" page="/records" />
+      <CollectionBlockData :left="false" title="Museum" page="/museum" />
       <CollectionBlockData
         :left="true"
         title="Repository"
