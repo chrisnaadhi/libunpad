@@ -1,5 +1,6 @@
 <script setup>
 const { getItems } = useDirectusItems();
+const { getUserById } = useDirectusUsers();
 const config = useRuntimeConfig();
 
 const date = new Date();
@@ -35,14 +36,11 @@ const getPetugasExtendedTimeService = await getItems({
   },
 });
 
-const { data: profilPetugasPiket } = await useFetch(
-  `${config.public.directus.url}users/${getPetugasExtendedTimeService[0].petugas_pertama}`,
-  {
-    headers: {
-      Authorization: `Bearer ${config.public.directus.token}`,
-    },
-  }
-);
+const profilPetugas = await getUserById({
+  id:
+    getPetugasExtendedTimeService[0]?.petugas_pertama ??
+    "6090A4D5-BD85-423D-9231-E50E705CFD22",
+});
 </script>
 
 <template>
@@ -53,9 +51,9 @@ const { data: profilPetugasPiket } = await useFetch(
       Petugas Piket:
       <span class="font-600 text-orange-6">
         {{
-          getPetugasExtendedTimeService !== []
-            ? `${profilPetugasPiket.data.first_name} ${profilPetugasPiket.data.last_name}`
-            : "Tidak data petugas"
+          getPetugasExtendedTimeService[0] === undefined
+            ? "Tidak ada Petugas"
+            : `${profilPetugas.first_name} ${profilPetugas.last_name}`
         }}
       </span>
     </h3>

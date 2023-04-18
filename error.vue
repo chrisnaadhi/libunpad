@@ -15,7 +15,12 @@ const handleClearError = () => {
     <NavigationBar />
     <section class="content">
       <div class="flex items-center justify-center">
-        <NuxtImg src="/illustration/undraw_Warning.png" height="128px" />
+        <NuxtImg
+          src="/illustration/undraw_Warning.png"
+          height="128px"
+          width="128px"
+          format="webp"
+        />
       </div>
       <h1 class="text-9xl">{{ error.statusCode }}</h1>
       <p class="italic">{{ error.message }}</p>
