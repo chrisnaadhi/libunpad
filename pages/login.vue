@@ -90,9 +90,6 @@ const errorLogger = () => {
 
 // :class="email || password ? 'disable-btn' : 'register-btn'"
 // :disabled="email || password"
-definePageMeta({
-  middleware: "abort-redirect",
-});
 </script>
 
 <template>
