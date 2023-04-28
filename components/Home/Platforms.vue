@@ -22,31 +22,31 @@ const options = {
       <p>Cara memanfaatkan platform untuk memenuhi kebutuhan akademik</p>
     </div>
     <div class="content-wrapper">
-      <div class="content">
+      <NuxtLink to="/gallery" class="content">
         <p class="use-banner">Platform</p>
         <div class="i-mdi-theater w-24 h-24" />
         <h1>Gallery</h1>
-      </div>
-      <div class="content">
+      </NuxtLink>
+      <NuxtLink to="/library" class="content">
         <p class="use-banner">Platform</p>
         <div class="i-mdi-bookshelf w-24 h-24" />
         <h1>Library</h1>
-      </div>
-      <div class="content">
+      </NuxtLink>
+      <NuxtLink to="/records" class="content">
         <p class="use-banner">Platform</p>
         <div class="i-mdi-archive-sync w-24 h-24" />
         <h1>Records</h1>
-      </div>
-      <div class="content">
+      </NuxtLink>
+      <NuxtLink to="/museum" class="content">
         <p class="use-banner">Platform</p>
         <div class="i-mdi-bank w-24 h-24" />
         <h1>Museum</h1>
-      </div>
-      <div class="content">
+      </NuxtLink>
+      <NuxtLink to="/koleksi/repository" class="content">
         <p class="use-banner">Platform</p>
         <div class="i-mdi-book-education w-24 h-24" />
         <h1>Repository</h1>
-      </div>
+      </NuxtLink>
     </div>
   </div>
 </template>

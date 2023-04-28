@@ -39,6 +39,6 @@ div {
 }
 
 .data-kunjungan {
-  --at-apply: border mx-2 border-orange font-600 text-gray-700 bg-gray-300 hover:(bg-orange-400 text-white border-none)
+  --at-apply: mx-2 font-600 text-gray-700 bg-gray-100 hover:(bg-orange-400 text-white border-none)
 }
 </style>

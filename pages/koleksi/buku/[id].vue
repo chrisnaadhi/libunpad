@@ -40,13 +40,13 @@ const viewModal = () => {
         <p class="text-justify">
           {{ buku.description }}
         </p>
-        <section class="grid sm:grid-cols-2 gap-5 my-5">
+        <section class="grid my-5 gap-2 sm:(grid-cols-2)">
           <button class="w-full btn bg-orange text-white" @click="viewModal">
             Baca {{ buku.judul }}
           </button>
           <NuxtLink to="/koleksi">
             <button
-              class="w-full btn text-orange border-orange border transition-all-500 hover:(text-white bg-orange)"
+              class="w-full btn text-orange border border-orange transition-all-500 hover:(text-white bg-orange)"
             >
               Kembali ke Koleksi
             </button>
@@ -70,7 +70,7 @@ h1 {
 }
 
 h3 {
-  --at-apply: text-2xl font-500;
+  --at-apply: text-lg font-500;
 }
 
 iframe {

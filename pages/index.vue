@@ -6,6 +6,7 @@ useHead({
       content: "Situs Resmi Pusat Pengelolaan Pengetahuan UNPAD",
     },
   ],
+  title: "GLAM Kandaga Unpad | Universitas Padjadjaran",
 });
 </script>
 

@@ -2,6 +2,9 @@
 const title = ref("Jelajahi Koleksi Kami");
 const image = ref("https://www.svgrepo.com/show/428321/notebook.svg");
 const route = useRoute();
+useHead({
+  title: "GLAM Kandaga Unpad | Universitas Padjadjaran",
+});
 </script>
 
 <template>
