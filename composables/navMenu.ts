@@ -4,7 +4,7 @@ export const menuContent = () => {
   const tentang = [
     {
       name: "Kandaga",
-      url: "/visitor",
+      url: "#",
     },
     {
       name: "Profil",
@@ -24,7 +24,7 @@ export const menuContent = () => {
     },
     {
       name: "Keanggotaan",
-      url: "/dashboard",
+      url: "#",
     },
   ];
 
@@ -44,6 +44,10 @@ export const menuContent = () => {
     {
       name: "Layanan Riset",
       url: "#",
+    },
+    {
+      name: "Visitor",
+      url: "/visitor",
     },
   ];
 
@@ -72,6 +76,10 @@ export const menuContent = () => {
 
   const panduan = [
     {
+      name: "Layanan & Fasilitas",
+      url: "#",
+    },
+    {
       name: "Mahasiswa",
       url: "#",
     },
@@ -85,10 +93,6 @@ export const menuContent = () => {
     },
     {
       name: "Tenaga Pendidik",
-      url: "#",
-    },
-    {
-      name: "Layanan Umum",
       url: "#",
     },
   ];

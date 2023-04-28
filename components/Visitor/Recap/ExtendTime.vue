@@ -19,7 +19,6 @@ const getExtendedTimeVisitor = await getItems({
       date_created: {
         _between: extendToday,
       },
-      nama_ruangan: "r_bni",
     },
     meta: "filter_count",
   },

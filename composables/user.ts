@@ -46,6 +46,10 @@ export const displayKeperluanSurat = (keperluan: string) => {
         return "Pendaftaran Wisuda";
       case "sidang":
         return "Pengajuan Sidang";
+      case "akademik":
+        return "Keperluan Akademik";
+      default:
+        return "Keperluan Lainnya";
     }
   });
 };
