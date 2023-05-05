@@ -4,7 +4,7 @@ const route = useRoute();
 </script>
 
 <template>
-  <GenericMiniBanner v-show="route.path === '/'" />
+  <GenericMiniBanner v-show="route.path === '/' || '/en'" />
   <div class="wrapper">
     <nav class="navbar">
       <NuxtLink to="/">

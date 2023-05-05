@@ -1,4 +1,6 @@
 <script setup>
+const switchLocalePath = useSwitchLocalePath();
+
 useHead({
   title: "GLAM Kandaga Unpad | Universitas Padjadjaran",
 });
@@ -19,6 +21,13 @@ useHead({
 
     <section class="footer" role="contentinfo">
       <FooterSection :show-list="true" />
+    </section>
+
+    <section class="absolute fixed bottom-0 right-0">
+      <div>
+        <NuxtLink :to="switchLocalePath('id')">🇮🇩 ID</NuxtLink>
+        <NuxtLink :to="switchLocalePath('en')">🇺🇸 EN</NuxtLink>
+      </div>
     </section>
   </main>
 </template>

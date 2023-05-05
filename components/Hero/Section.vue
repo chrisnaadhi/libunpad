@@ -1,8 +1,12 @@
+<script setup></script>
+
 <template>
   <section class="container ma bg-white mb-15">
     <div class="hero-space">
       <div class="hero-left">
-        <h2 class="text-xl md:text-4xl text-gray-700">Selamat Datang di</h2>
+        <h2 class="text-xl md:text-4xl text-gray-700">
+          {{ $t("introWelcome") }}
+        </h2>
         <h1 class="uglam text-5xl font-700 sm:text-7xl md:text-8xl lg:text-9xl">
           KANDAGA
         </h1>

@@ -1,5 +1,5 @@
-export default defineEventHandler((event) => {
-  const body = useBody(event);
+export default defineEventHandler(async (event) => {
+  const body = await readBody(event);
   return {
     body,
   };
