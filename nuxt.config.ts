@@ -29,6 +29,7 @@ export default defineNuxtConfig({
     token: process.env.DIRECTUS_ACCESS_TOKEN,
   },
   i18n: {
+    strategy: "prefix",
     locales: ["id", "en"],
     defaultLocale: "id",
     vueI18n: "./i18n.config.ts",

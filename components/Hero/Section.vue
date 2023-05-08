@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+import { useI18n, useLocalePath } from "#imports";
+</script>
 
 <template>
   <section class="container ma bg-white mb-15">
@@ -15,10 +17,7 @@
           Gallery, Library, Record Management, Museum & Repository
         </p>
         <p class="py-2 text-xs xl:(mr-6 pr-8)">
-          <span class="font-600">Kandaga</span> merupakan platform yang
-          menyediakan katalog koleksi dan sistem penelusuran ke sumber-sumber
-          informasi yang dimiliki dan dilanggan oleh Universitas Padjadjaran.
-          Kandaga dikelola oleh Pusat Pengelolaan Pengetahuan Unpad.
+          {{ $t("homeDescription") }}
         </p>
         <GenericSearch />
         <div class="container flex justify-center w-full xl:justify-start">
