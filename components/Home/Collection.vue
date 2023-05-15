@@ -1,23 +1,25 @@
 <template>
   <section class="max-w-7xl ma my-8">
-    <h1 class="text-center text-3xl font-600">Jelajahi Koleksi Kami</h1>
+    <h1 class="text-center text-3xl font-600">
+      {{ $t("exploreOurCollection") }}
+    </h1>
     <div class="cards">
       <article class="card-collection">
-        <h1 class="heading-display">Unpad dari masa ke masa</h1>
+        <h1 class="heading-display">{{ $t("exploreCollectionItem1") }}</h1>
         <NuxtImg src="/images/museum.jpg" class="image-display" />
       </article>
       <article class="card-collection">
-        <h1 class="heading-display">Koleksi Pengetahuan Lokal</h1>
+        <h1 class="heading-display">{{ $t("exploreCollectionItem2") }}</h1>
         <NuxtImg src="/images/museum.jpg" class="image-display" />
       </article>
     </div>
     <div class="cards">
       <article class="card-collection">
-        <h1 class="heading-display">Koleksi yang baru ditambahkan</h1>
+        <h1 class="heading-display">{{ $t("exploreCollectionItem3") }}</h1>
         <NuxtImg src="/images/museum.jpg" class="image-display" />
       </article>
       <article class="card-collection">
-        <h1 class="heading-display">Koleksi yang paling populer</h1>
+        <h1 class="heading-display">{{ $t("exploreCollectionItem4") }}</h1>
         <NuxtImg src="/images/museum.jpg" class="image-display" />
       </article>
     </div>

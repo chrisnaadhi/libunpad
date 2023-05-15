@@ -1,10 +1,4 @@
 <script setup>
-defineProps({
-  placeholderText: {
-    type: String,
-    default: "Cari koleksi kami disini...",
-  },
-});
 const search = useSearchFunction();
 
 const removeSearchQuery = () => {
@@ -56,7 +50,7 @@ const limitChars = (str) => {
           v-model="search.keywords"
           @keyup="submitSearch"
           role="searchbox"
-          :placeholder="placeholderText"
+          :placeholder="$t('searchOurCollection')"
         />
         <div class="absolute top-2 right-2">
           <button
@@ -71,7 +65,7 @@ const limitChars = (str) => {
             class="btn bg-orange text-white"
             @submit.prevent="submitSearch"
           >
-            Cari
+            {{ $t("search") }}
           </button>
         </div>
         <div class="search-result" v-show="search.isResult">
@@ -104,11 +98,11 @@ const limitChars = (str) => {
               class="bg-orange-1 text-center py-2 cursor-not-allowed"
               v-if="search.articleObj?.length === 0"
             >
-              <p>Tidak terdapat hasil pencarian dengan kata kunci tersebut</p>
+              <p>{{ $t("noSearchResults") }}</p>
             </div>
             <div class="bg-orange-1 text-center py-2 cursor-pointer" v-else>
               <NuxtLink :to="'/search?keyword=' + search.keywords">
-                Lihat hasil lebih banyak
+                {{ $t("moreSearchResults") }}
               </NuxtLink>
             </div>
           </section>

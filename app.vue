@@ -13,12 +13,15 @@ useHead({
 const router = useRouter();
 const menu = mobileMenu();
 const searchFunction = useSearchFunction();
+const { finalizePendingLocaleChange } = useI18n();
 
 router.afterEach(() => {
   window.scrollTo({
     top: 0,
     behavior: "smooth",
   });
+  menu.isLocaleOpen = false;
+
   if (menu.menuState) {
     menu.menuState = false;
     menu.isLayananOpen = false;
@@ -29,6 +32,10 @@ router.afterEach(() => {
     searchFunction.isResult = false;
   }
 });
+
+const onBeforeEnter = async () => {
+  await finalizePendingLocaleChange();
+};
 </script>
 
 <template>
@@ -38,7 +45,7 @@ router.afterEach(() => {
     </ClientOnly>
     <NuxtLayout>
       <NuxtLoadingIndicator color="orange" />
-      <NuxtPage />
+      <NuxtPage :transition="{ onBeforeEnter }" />
     </NuxtLayout>
   </div>
 </template>

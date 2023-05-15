@@ -1,5 +1,7 @@
 <script setup>
 defineProps(["menus"]);
+
+const { locale } = useI18n();
 </script>
 
 <template>
@@ -7,7 +9,7 @@ defineProps(["menus"]);
     <NuxtLink
       v-for="(menu, index) in menus"
       :key="index"
-      :to="menu.url"
+      :to="locale === 'id' ? menu.url : menu.urlEN"
       class="menu-link"
       rel="noopener noreferrer"
     >

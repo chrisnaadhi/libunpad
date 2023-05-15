@@ -6,12 +6,11 @@ const { data: tools } = await useFetch("/api/v1/tools");
   <div class="wrapper">
     <div class="bg-orange ma mt--17 max-w-200 my-1 py-3 sm:rounded-lg">
       <h1 class="text-xl text-white font-700 md:text-3xl mx-3">
-        Tuntaskan Tugas dan Penelitianmu secara Daring
+        {{ $t("toolsHomeTitle") }}
       </h1>
     </div>
     <p class="text-sm mt-3 pb-3 md:text-base xl:text-lg">
-      Manfaatkan layanan dan alat-alat yang telah kami langgan secara daring,
-      untuk mempercepat proses pengerjaan tugas, pekerjaan dan penelitian anda.
+      {{ $t("toolsHomeDescription") }}
     </p>
     <div class="container content-wrapper">
       <div class="content" v-for="tool in tools">

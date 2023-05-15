@@ -30,8 +30,20 @@ export default defineNuxtConfig({
   },
   i18n: {
     strategy: "prefix",
-    locales: ["id", "en"],
+    locales: [
+      {
+        code: "id",
+        file: "id-ID.ts",
+      },
+      {
+        code: "en",
+        file: "en-EN.ts",
+      },
+    ],
+    lazy: true,
+    langDir: "lang",
     defaultLocale: "id",
     vueI18n: "./i18n.config.ts",
+    skipSettingLocaleOnNavigate: true,
   },
 });

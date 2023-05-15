@@ -1,7 +1,3 @@
-<script setup>
-import { useI18n, useLocalePath } from "#imports";
-</script>
-
 <template>
   <section class="container ma bg-white mb-15">
     <div class="hero-space">
@@ -21,8 +17,12 @@ import { useI18n, useLocalePath } from "#imports";
         </p>
         <GenericSearch />
         <div class="container flex justify-center w-full xl:justify-start">
-          <NuxtLink to="/search" class="btn tentang">Pencarian</NuxtLink>
-          <NuxtLink to="/koleksi" class="btn bantuan">Koleksi</NuxtLink>
+          <NuxtLink to="/search" class="btn tentang">{{
+            $t("searchPage")
+          }}</NuxtLink>
+          <NuxtLink to="/koleksi" class="btn bantuan">{{
+            $t("ourCollection")
+          }}</NuxtLink>
         </div>
       </div>
       <div class="hero-right">
