@@ -4,9 +4,9 @@ const { data: fetchService } = await useFetch("/api/v1/layanan");
 </script>
 
 <template>
-  <main>
+  <main class="max-w-7xl ma">
     <section class="my-10 text-center">
-      <h1 class="font-600 text-4xl">Administrasi dan Pengajuan</h1>
+      <h1 class="font-600 text-4xl">{{ $t("pengajuanTitle") }}</h1>
       <section class="profile">
         <div>
           <img src="/images/lambang-unpad.png" class="w-32 md:w-64" />
@@ -16,10 +16,7 @@ const { data: fetchService } = await useFetch("/api/v1/layanan");
             Halo, {{ user ? `${user.first_name}!` : "Pengunjung" }}
           </h1>
           <p>
-            Jika kamu membutuhkan berkas administrasi dari Perpustakaan Pusat
-            Unpad untuk keperluan akademik silahkan ajukan melalui salah satu
-            kolom pengajuan berikut. Petunjuk mengenai pengisian form pengajuan
-            dapat dilihat melalui tautan berikut.
+            {{ $t("pengajuanDescription") }}
           </p>
         </div>
       </section>
@@ -63,7 +60,7 @@ input {
 }
 
 .card-item {
-  --at-apply: bg-white flex flex-col justify-between shadow-lg shadow-orange/20 top-0 hover:(top--2 shadow-orange/50);
+  --at-apply: bg-white p-6 flex flex-col justify-between shadow-lg shadow-orange/20 top-0 hover:(top--2 shadow-orange/50);
   transition: top ease 0.5s;
 }
 </style>

@@ -16,15 +16,11 @@ const isPegawai = computed(() => {
         break;
     }
   } catch (error) {
-    console.log("Logout..");
+    console.log(console.log(error));
   }
 
   return state;
 });
-
-if (!user.value) {
-  await navigateTo("/login");
-}
 
 const onLogout = async () => {
   logout();
@@ -34,8 +30,13 @@ const onLogout = async () => {
     });
   }, 1000);
 };
+
 useHead({
   title: "Keanggotaan Perpustakaan Pusat Unpad",
+});
+
+definePageMeta({
+  middleware: ["directus-auth"],
 });
 </script>
 

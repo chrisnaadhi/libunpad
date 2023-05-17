@@ -1,4 +1,5 @@
 export default {
+  // Homepage - /
   introWelcome: "Welcome to",
   homeDescription:
     "Kandaga is a platform that provides a collection catalog and search system for information sources owned and subscribed to by Universitas Padjadjaran. Kandaga is managed by Pusat Pengelolaan Pengetahuan Unpad",
@@ -19,4 +20,9 @@ export default {
   exploreCollectionItem2: "Local Knowledge Collection",
   exploreCollectionItem3: "Newly added collectionsn",
   exploreCollectionItem4: "The most popular collection",
+
+  // Pengajuan - /pengajuan
+  pengajuanTitle: "Administration and Submissions",
+  pengajuanDescription:
+    "If you need administrative files from the Unpad Central Library for academic purposes, please submit them through one of the submission fields below. Instructions regarding filling out the application form can be seen via the following link.",
 };

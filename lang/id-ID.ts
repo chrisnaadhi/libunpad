@@ -1,4 +1,5 @@
 export default {
+  // Homepage - /
   introWelcome: "Selamat Datang di",
   homeDescription:
     "Kandaga merupakan platform yang menyediakan katalog koleksi dan sistem penelusuran ke sumber-sumber informasi yang dimiliki dan dilanggan oleh Universitas Padjadjaran. Kandaga dikelola oleh Pusat Pengelolaan Pengetahuan Unpad.",
@@ -19,4 +20,9 @@ export default {
   exploreCollectionItem2: "Koleksi Pengetahuan Lokal",
   exploreCollectionItem3: "Koleksi yang baru ditambahkan",
   exploreCollectionItem4: "Koleksi yang paling populer",
+
+  // Pengajuan - /pengajuan
+  pengajuanTitle: "Administrasi dan Pengajuan",
+  pengajuanDescription:
+    "Jika kamu membutuhkan berkas administrasi dari Perpustakaan Pusat Unpad untuk keperluan akademik silahkan ajukan melalui salah satu kolom pengajuan berikut. Petunjuk mengenai pengisian form pengajuan dapat dilihat melalui tautan berikut.",
 };
