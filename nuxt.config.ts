@@ -29,15 +29,15 @@ export default defineNuxtConfig({
     token: process.env.DIRECTUS_ACCESS_TOKEN,
   },
   i18n: {
-    strategy: "prefix",
+    strategy: "prefix_except_default",
     locales: [
-      {
-        code: "id",
-        file: "id-ID.ts",
-      },
       {
         code: "en",
         file: "en-EN.ts",
+      },
+      {
+        code: "id",
+        file: "id-ID.ts",
       },
     ],
     lazy: true,

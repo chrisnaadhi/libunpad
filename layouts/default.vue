@@ -43,7 +43,7 @@ useHead({
             </NuxtLink>
           </div>
         </Transition>
-        <div class="flex">
+        <div class="flex mb-16 xl:mb-0">
           <NuxtImg
             :src="
               locale === 'en' ? '/images/uk-flag.png' : '/images/indonesia.png'
@@ -53,7 +53,9 @@ useHead({
             class="locale-flag"
             @click="toggleLocale"
           />
-          <p class="locale-banner">Pilih Bahasa</p>
+          <p class="locale-banner">
+            {{ locale === "en" ? "Choose Language" : "Pilih Bahasa" }}
+          </p>
         </div>
       </div>
     </section>

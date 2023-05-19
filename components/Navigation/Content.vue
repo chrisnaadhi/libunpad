@@ -13,7 +13,7 @@ const { locale } = useI18n();
       class="menu-link"
       rel="noopener noreferrer"
     >
-      {{ menu.name }}
+      {{ locale === "en" ? menu.nameEN : menu.name }}
     </NuxtLink>
   </section>
 </template>
