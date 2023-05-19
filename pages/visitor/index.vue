@@ -28,9 +28,6 @@ useHead({
 
 <style scoped>
 .background-block {
-  background-image: url("/images/background-image-visitor.png");
-  background-position: center;
-  background-size: cover;
   --at-apply: flex flex-col items-center min-w-full h-full;
 }
 .heading-block {
