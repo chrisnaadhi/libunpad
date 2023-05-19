@@ -42,7 +42,7 @@ let [fetchLastVisitor] = await getItems({
         <GenericMonthlyCalendar />
       </section>
       <section class="w-full h-100">
-        <div class="border-3 border-gray rounded-lg min-h-full">
+        <div class="border-3 border-gray rounded-lg">
           <h1>Total Pengunjung Hari ini</h1>
           <div v-if="fetchAllToday.meta.filter_count !== 0">
             <span class="text-5xl text-orange font-600">

@@ -2,6 +2,7 @@
 const { login } = useDirectusAuth();
 const user = useDirectusUser();
 const error = useError();
+const route = useRoute();
 
 const showPassword = ref(false);
 const passwordType = ref("password");
@@ -59,7 +60,8 @@ const submitLogin = async () => {
         if (isPegawai.value) {
           await navigateTo("/dashboard", { redirectCode: 301 });
         } else {
-          await navigateTo("/keanggotaan", { redirectCode: 200 });
+          const { redir } = route.query;
+          await navigateTo(`${redir}`, { redirectCode: 200 });
         }
       }, 2000);
     }

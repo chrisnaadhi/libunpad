@@ -1,4 +1,14 @@
 <script setup>
+const { locale } = useI18n();
+import { mobileMenu } from "~/composables/navMenu";
+const switchLocalePath = useSwitchLocalePath();
+
+const menu = mobileMenu();
+
+const toggleLocale = () => {
+  menu.isLocaleOpen = !menu.isLocaleOpen;
+};
+
 useHead({
   title: "GLAM Kandaga Unpad | Universitas Padjadjaran",
 });
@@ -20,6 +30,33 @@ useHead({
     <section class="footer" role="contentinfo">
       <FooterSection :show-list="true" />
     </section>
+
+    <section class="absolute fixed bottom-0 left-0">
+      <div class="m-2 transition-all-500">
+        <Transition>
+          <div class="locale-display" v-show="menu.isLocaleOpen">
+            <NuxtLink :to="switchLocalePath('id')">
+              <NuxtImg src="/images/indonesia.png" format="webp" width="35px" />
+            </NuxtLink>
+            <NuxtLink :to="switchLocalePath('en')">
+              <NuxtImg src="/images/uk-flag.png" format="webp" width="35px" />
+            </NuxtLink>
+          </div>
+        </Transition>
+        <div class="flex">
+          <NuxtImg
+            :src="
+              locale === 'en' ? '/images/uk-flag.png' : '/images/indonesia.png'
+            "
+            width="20px"
+            height="20px"
+            class="locale-flag"
+            @click="toggleLocale"
+          />
+          <p class="locale-banner">Pilih Bahasa</p>
+        </div>
+      </div>
+    </section>
   </main>
 </template>
 
@@ -30,6 +67,35 @@ useHead({
 
 .content {
   --at-apply: flex-1;
+}
+
+.locale-display {
+  --at-apply: flex flex-col gap-2 p-2 my-2 rounded bg-orange-3 max-w-12 -translate-y-1;
+}
+
+.v-enter-active {
+  --at-apply: transition-all-500 ease;
+}
+
+.v-leave-active {
+  --at-apply: transition-all-800 ease-out opacity-2;
+}
+
+.v-enter-from,
+v-leave-to {
+  --at-apply: transition-all-500 ease-out opacity-0 translate-y-2;
+}
+
+.locale-banner {
+  --at-apply: bg-orange-3 text-sm text-white rounded px-2 ml-2 hidden;
+}
+
+.locale-flag {
+  --at-apply: cursor-pointer;
+}
+
+.locale-flag:hover + .locale-banner {
+  --at-apply: block -translate-y-1;
 }
 
 .footer {

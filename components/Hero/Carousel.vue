@@ -17,7 +17,7 @@
   background-repeat: no-repeat;
   background-position: right;
   background-size: cover;
-  box-shadow: 0 0 15px 20px rgba(249, 250, 251) inset;
-  --at-apply: hidden xl:block bg-gray-50;
+  box-shadow: 0 0 15px 20px rgb(255, 255, 255) inset;
+  --at-apply: hidden xl:block bg-white;
 }
 </style>

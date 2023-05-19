@@ -14,12 +14,36 @@ export default defineNuxtConfig({
     "/api/**": { cors: true },
     "/visitor/rekap": { redirect: "/error" },
   },
-  modules: ["@unocss/nuxt", "nuxt-directus", "@pinia/nuxt", "@nuxt/image-edge"],
+  modules: [
+    "@unocss/nuxt",
+    "nuxt-directus",
+    "@pinia/nuxt",
+    "@nuxt/image-edge",
+    "@nuxtjs/i18n",
+  ],
   unocss: {
     preflight: true,
   },
   directus: {
     url: process.env.DIRECTUS_BASE_URL,
     token: process.env.DIRECTUS_ACCESS_TOKEN,
+  },
+  i18n: {
+    strategy: "prefix",
+    locales: [
+      {
+        code: "id",
+        file: "id-ID.ts",
+      },
+      {
+        code: "en",
+        file: "en-EN.ts",
+      },
+    ],
+    lazy: true,
+    langDir: "lang",
+    defaultLocale: "id",
+    vueI18n: "./i18n.config.ts",
+    skipSettingLocaleOnNavigate: true,
   },
 });

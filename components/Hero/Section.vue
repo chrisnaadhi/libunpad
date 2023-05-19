@@ -2,7 +2,9 @@
   <section class="container ma bg-white mb-15">
     <div class="hero-space">
       <div class="hero-left">
-        <h2 class="text-xl md:text-4xl text-gray-700">Selamat Datang di</h2>
+        <h2 class="text-xl md:text-4xl text-gray-700">
+          {{ $t("introWelcome") }}
+        </h2>
         <h1 class="uglam text-5xl font-700 sm:text-7xl md:text-8xl lg:text-9xl">
           KANDAGA
         </h1>
@@ -11,15 +13,16 @@
           Gallery, Library, Record Management, Museum & Repository
         </p>
         <p class="py-2 text-xs xl:(mr-6 pr-8)">
-          <span class="font-600">Kandaga</span> merupakan platform yang
-          menyediakan katalog koleksi dan sistem penelusuran ke sumber-sumber
-          informasi yang dimiliki dan dilanggan oleh Universitas Padjadjaran.
-          Kandaga dikelola oleh Pusat Pengelolaan Pengetahuan Unpad.
+          {{ $t("homeDescription") }}
         </p>
         <GenericSearch />
         <div class="container flex justify-center w-full xl:justify-start">
-          <NuxtLink to="/search" class="btn tentang">Pencarian</NuxtLink>
-          <NuxtLink to="/koleksi" class="btn bantuan">Koleksi</NuxtLink>
+          <NuxtLink to="/search" class="btn tentang">{{
+            $t("searchPage")
+          }}</NuxtLink>
+          <NuxtLink to="/koleksi" class="btn bantuan">{{
+            $t("ourCollection")
+          }}</NuxtLink>
         </div>
       </div>
       <div class="hero-right">

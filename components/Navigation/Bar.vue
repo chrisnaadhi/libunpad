@@ -1,13 +1,14 @@
 <script setup>
 const layanan = jamLayanan();
 const route = useRoute();
+const { locale } = useI18n();
 </script>
 
 <template>
-  <GenericMiniBanner v-show="route.path === '/'" />
+  <GenericMiniBanner v-show="route.path === '/' || '/en'" />
   <div class="wrapper">
     <nav class="navbar">
-      <NuxtLink to="/">
+      <NuxtLink :to="locale === 'en' ? '/en' : '/'">
         <nuxt-img
           src="/images/kandaga-web.png"
           class="logo"

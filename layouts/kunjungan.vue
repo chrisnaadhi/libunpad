@@ -18,6 +18,9 @@ useHead({
 
 <style scoped>
 .main-wrapper {
+  background-image: url("/images/background-image-visitor.png");
+  background-position: center;
+  background-size: cover;
   --at-apply: bg-gray-50 flex flex-col min-h-screen;
 }
 

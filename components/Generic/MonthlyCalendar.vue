@@ -42,11 +42,17 @@ const searchPetugas = (idPetugas) => {
 </script>
 
 <template>
-  <section class="border-3 border-orange-3 rounded-lg min-h-full">
-    <p>Petugas Piket Bulan Ini</p>
-    <h1>{{ monthName }} {{ date.getFullYear() }}</h1>
+  <section class="border-3 border-orange-3 rounded-lg">
+    <div class="border-1 border-blue-3 rounded bg-gray-50 mx-2 mt-2">
+      <p>Petugas Piket Bulan Ini</p>
+      <h1>{{ monthName }} {{ date.getFullYear() }}</h1>
+    </div>
+
     <div class="grid grid-cols-4 gap-2 m-2">
-      <div v-for="pegawai in dataPiketPegawai" class="border-1 border-blue-3">
+      <div
+        v-for="pegawai in dataPiketPegawai"
+        class="border-1 border-blue-3 bg-gray-50 rounded"
+      >
         <h4>{{ readableDate(pegawai.tanggal) }}</h4>
         <p>{{ searchPetugas(pegawai.petugas_pertama) }}</p>
       </div>

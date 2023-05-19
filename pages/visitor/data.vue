@@ -72,10 +72,6 @@ onMounted(() => {
 
 <style scoped>
 .background-block {
-  background-image: url("/images/background-image-visitor.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
   --at-apply: flex pt-5 flex-col items-center min-w-full;
 }
 h1 {
