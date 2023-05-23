@@ -29,21 +29,25 @@ export default defineNuxtConfig({
     token: process.env.DIRECTUS_ACCESS_TOKEN,
   },
   i18n: {
-    strategy: "prefix_except_default",
     locales: [
       {
-        code: "en",
-        file: "en-EN.ts",
+        name: "id",
+        code: "id",
+        file: "indonesia.ts",
       },
       {
-        code: "id",
-        file: "id-ID.ts",
+        name: "en",
+        code: "en",
+        file: "english.ts",
       },
     ],
+    strategy: "prefix_and_default",
     lazy: true,
     langDir: "lang",
     defaultLocale: "id",
     vueI18n: "./i18n.config.ts",
     skipSettingLocaleOnNavigate: true,
+    detectBrowserLanguage: false,
+    defaultDirection: "auto",
   },
 });

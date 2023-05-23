@@ -25,4 +25,7 @@ export default {
   pengajuanTitle: "Administration and Submissions",
   pengajuanDescription:
     "If you need administrative files from the Unpad Central Library for academic purposes, please submit them through one of the submission fields below. Instructions regarding filling out the application form can be seen via the following link.",
+
+  // Koleksi - /koleksi
+  collectionTitleHeader: "Explore our Collections",
 };

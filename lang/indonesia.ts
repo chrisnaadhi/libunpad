@@ -25,4 +25,7 @@ export default {
   pengajuanTitle: "Administrasi dan Pengajuan",
   pengajuanDescription:
     "Jika kamu membutuhkan berkas administrasi dari Perpustakaan Pusat Unpad untuk keperluan akademik silahkan ajukan melalui salah satu kolom pengajuan berikut. Petunjuk mengenai pengisian form pengajuan dapat dilihat melalui tautan berikut.",
+
+  // Koleksi - /koleksi
+  collectionTitleHeader: "Jelajahi Koleksi Kami",
 };

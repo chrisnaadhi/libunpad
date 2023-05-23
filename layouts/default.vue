@@ -17,7 +17,6 @@ useHead({
 <template>
   <main class="main-wrapper">
     <NavigationBar />
-
     <section class="content" id="main-content">
       <ModalMobileMenu />
       <slot />
@@ -35,11 +34,11 @@ useHead({
       <div class="m-2 transition-all-500">
         <Transition>
           <div class="locale-display" v-show="menu.isLocaleOpen">
-            <NuxtLink :to="switchLocalePath('id')">
-              <NuxtImg src="/images/indonesia.png" format="webp" width="35px" />
-            </NuxtLink>
             <NuxtLink :to="switchLocalePath('en')">
               <NuxtImg src="/images/uk-flag.png" format="webp" width="35px" />
+            </NuxtLink>
+            <NuxtLink :to="switchLocalePath('id')">
+              <NuxtImg src="/images/indonesia.png" format="webp" width="35px" />
             </NuxtLink>
           </div>
         </Transition>
