@@ -1,3 +1,8 @@
+<script setup>
+const { locale } = useI18n();
+const switchLocalePath = useSwitchLocalePath();
+</script>
+
 <template>
   <section class="container ma bg-white mb-15">
     <div class="hero-space">
@@ -17,12 +22,18 @@
         </p>
         <GenericSearch />
         <div class="container flex justify-center w-full xl:justify-start">
-          <NuxtLink to="/search" class="btn tentang">{{
-            $t("searchPage")
-          }}</NuxtLink>
-          <NuxtLink to="/koleksi" class="btn bantuan">{{
-            $t("ourCollection")
-          }}</NuxtLink>
+          <NuxtLink
+            :to="locale === 'en' ? '/en/search' : '/search'"
+            class="btn tentang"
+          >
+            {{ $t("searchPage") }}
+          </NuxtLink>
+          <NuxtLink
+            :to="locale === 'en' ? '/en/koleksi' : '/koleksi'"
+            class="btn bantuan"
+          >
+            {{ $t("ourCollection") }}
+          </NuxtLink>
         </div>
       </div>
       <div class="hero-right">

@@ -10,9 +10,7 @@ defineProps({
     type: String,
   },
   titleDesc: {
-    type: String,
-    default:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. In error nesciunt, laboriosam excepturi distinctio assumenda quo ipsum quam earum minima impedit, delectus culpa iste quia.",
+    type: Object,
   },
 });
 </script>
@@ -30,7 +28,7 @@ defineProps({
               {{ definition }}
             </span>
             <br />
-            {{ titleDesc }}
+            {{ titleDesc.value }}
           </p>
           <GenericSearch />
         </div>

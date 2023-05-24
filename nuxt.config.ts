@@ -20,6 +20,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@nuxt/image-edge",
     "@nuxtjs/i18n",
+    "dayjs-nuxt",
   ],
   unocss: {
     preflight: true,
@@ -49,5 +50,11 @@ export default defineNuxtConfig({
     skipSettingLocaleOnNavigate: true,
     detectBrowserLanguage: false,
     defaultDirection: "auto",
+  },
+  dayjs: {
+    locales: ["id"],
+    plugins: ["relativeTime", "utc", "timezone"],
+    defaultLocale: "id",
+    defaultTimezone: "Asia/Jakarta",
   },
 });

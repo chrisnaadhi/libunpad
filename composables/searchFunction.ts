@@ -29,3 +29,15 @@ export const useSearchDirtakel = defineStore("searchDirtakel", () => {
     baseURLSearch,
   };
 });
+
+export const useSearchScopus = defineStore("scopusSearch", () => {
+  const keywords = ref("");
+  const scopusObjects = ref();
+  const baseURLSearch = ref("http://api.elsevier.com/content/search/scopus");
+
+  return {
+    keywords,
+    scopusObjects,
+    baseURLSearch,
+  };
+});

@@ -28,4 +28,35 @@ export default {
 
   // Koleksi - /koleksi
   collectionTitleHeader: "Jelajahi Koleksi Kami",
+
+  // Pencarian - /search
+  pencarianTerpaduTitle: "Pencarian Terpadu Kandaga",
+  pencarianHeadTitle: "Hasil Pencarian dari ",
+  pencarianTerpaduPlaceholder: "Cari sesuatu disini...",
+  pencarianTerpaduResultRecommendation: "Mungkin maksud anda: ",
+  pencarianTerpaduSearchResults: "Hasil Pencarian: ",
+
+  // KOLEKSI
+  // Gallery - /gallery
+  galleryDescription:
+    'Galeri diartikan sebagai ruangan atau bangunan tempat benda atau karya seni dipamerkan dan sebagainya. Oxford Advanced Learner\'s Dictionary menyatakan Galeri sebagai "Sebuah ruangan atau bangunan untuk menampilkan karya seni".',
+  // Library - /library
+  libraryDescription:
+    "Perpustakaan adalah kumpulan bahan, buku, atau media yang dapat diakses untuk digunakan dan tidak hanya untuk tujuan pajangan. Perpustakaan menyediakan materi fisik (hard copy) atau akses digital (soft copy), dan dapat berupa lokasi fisik atau ruang virtual, atau keduanya.",
+  // Archive - /records
+  archiveDescription:
+    "Arsip adalah akumulasi catatan atau bahan sejarah – dalam media apa pun – atau fasilitas fisik di mana mereka berada.",
+  // Museum - /museum
+  museumDescription:
+    "Museum adalah bangunan atau lembaga yang merawat dan memamerkan koleksi artefak dan benda lain yang memiliki kepentingan seni, budaya, sejarah, atau ilmiah.",
+
+  // FOOTER
+  // Tautan Cepat
+  footerQuickLink: "Tautan Cepat",
+  // Sumber Informasi
+  footerInformationSource: "Sumber Informasi",
+  // Layanan Kandaga
+  footerKandagaServices: "Layanan Kandaga",
+  // Social Media
+  footerSocialMedia: "Media Sosial Kami",
 };

@@ -62,15 +62,18 @@ onMounted(() => {
 <template>
   <main class="text-center container ma my-5 px-4 md:px-0">
     <Head>
-      <Title>Pencarian "{{ search.keywords }}" | GLAM Kandaga Unpad</Title>
+      <Title>
+        {{ $t("pencarianHeadTitle") }} "{{ search.keywords }}" | GLAM Kandaga
+        Unpad
+      </Title>
     </Head>
-    <h1>Pencarian Terpadu Kandaga</h1>
+    <h1>{{ $t("pencarianTerpaduTitle") }}</h1>
     <section class="search-box">
       <input
         type="search"
         name="search"
         id="searchBox"
-        placeholder="Cari sesuatu disini..."
+        :placeholder="$t('pencarianTerpaduPlaceholder')"
         v-model="search.keywords"
         @keyup="submitSearch(search.keywords)"
         autocomplete="off"
@@ -79,11 +82,11 @@ onMounted(() => {
     </section>
     <section class="py-2">
       <div v-show="suggestion">
-        Mungkin maksud anda:
+        {{ $t("pencarianTerpaduResultRecommendation") }}
         <span class="suggestion" @click="changeKeywords">{{ suggestion }}</span>
       </div>
       <div v-show="!suggestion">
-        Hasil Pencarian:
+        {{ $t("pencarianTerpaduSearchResults") }}
         <span class="font-600">{{ search.keywords }}</span>
       </div>
     </section>
