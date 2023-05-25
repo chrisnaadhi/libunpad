@@ -1,5 +1,6 @@
 <script setup>
 const { login } = useDirectusAuth();
+const { signIn } = useAuth();
 const user = useDirectusUser();
 const error = useError();
 const route = useRoute();
@@ -42,6 +43,7 @@ const togglePasswordType = () => {
     passwordType.value = "text";
   }
 };
+
 const submitLogin = async () => {
   loginNotif.value = "Sedang mencoba masuk ke akun anda...";
   let pattern = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
@@ -86,12 +88,13 @@ const submitLogin = async () => {
   }
 };
 
+const googleLogin = async () => {
+  window.open(await signIn("google", { callbackUrl: "/keanggotaan" }));
+};
+
 const errorLogger = () => {
   console.log(error.value);
 };
-
-// :class="email || password ? 'disable-btn' : 'register-btn'"
-// :disabled="email || password"
 </script>
 
 <template>
@@ -132,11 +135,17 @@ const errorLogger = () => {
           >
             Login
           </button>
-          <NuxtLink to="#" class="w-full">
-            <button class="form-btn disable-btn" disabled>
-              <span class="line-through">PAuS ID</span>
-            </button>
-          </NuxtLink>
+          <button
+            class="form-btn flex items-center justify-center gap-2"
+            :class="email || password ? 'disable-btn' : 'oauth-btn'"
+            @click="googleLogin"
+            :disable="email.length > 0"
+          >
+            <span>
+              <img src="/images/lambang-unpad.png" class="w-6 h-6" alt="" />
+            </span>
+            PAuS Email
+          </button>
         </div>
       </div>
     </form>
@@ -168,7 +177,7 @@ input {
   --at-apply: bg-green-3 cursor-pointer;
 }
 
-.register-btn {
-  --at-apply: bg-blue-3 cursor-pointer;
+.oauth-btn {
+  --at-apply: bg-orange-3 cursor-pointer;
 }
 </style>

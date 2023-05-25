@@ -1,16 +1,26 @@
 <script setup>
 import { mobileMenu } from "~/composables/navMenu";
 
+const { status, data, signOut } = useAuth();
 const emit = defineEmits(["toggle"]);
 const menuState = mobileMenu();
+const viewDropdown = ref(false);
 
 const swapToggle = () => {
   emit("toggle");
 };
+
+const toggleProfile = () => {
+  viewDropdown.value = !viewDropdown.value;
+};
+
+const logout = async () => {
+  await signOut();
+};
 </script>
 
 <template>
-  <div class="action-group mr-2 xl:mr-0">
+  <div class="action-group xl:mr-0">
     <button
       type="button"
       class="btn mode"
@@ -19,7 +29,23 @@ const swapToggle = () => {
     >
       <div class="i-mdi-calendar-clock bg-dark" />
     </button>
-    <NuxtLink to="/keanggotaan" alt="Halaman Keanggotaan">
+    <div v-if="status === 'authenticated'" class="hidden xl:block">
+      <img
+        v-if="data?.user?.image"
+        :src="data?.user?.image"
+        class="w-10 h-10 rounded-full cursor-pointer"
+        alt="Foto User"
+        @click="toggleProfile"
+      />
+      <div class="account-dropdown" v-show="viewDropdown">
+        <p>{{ data?.user?.name }}</p>
+        <p class="text-xs">{{ data?.user?.email }}</p>
+        <button class="btn py-0 bg-red text-xs text-white" @click="logout">
+          Logout
+        </button>
+      </div>
+    </div>
+    <NuxtLink v-else to="/login" alt="Halaman Keanggotaan">
       <button type="button" class="btn login" aria-label="Login">
         <div class="i-mdi-account-multiple bg-white" />
       </button>
@@ -60,6 +86,10 @@ const swapToggle = () => {
 
 .login {
   --at-apply: bg-orange-4 text-white py-3 hidden xl:block;
+}
+
+.account-dropdown {
+  --at-apply: absolute right-0 bg-white/80 border border-orange min-w-25 mr-8 py-2 px-5 my-2 rounded text-right;
 }
 
 .mode {

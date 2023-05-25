@@ -1,8 +1,13 @@
 <script setup>
 import { mobileMenu, menuContent } from "~/composables/navMenu";
 
+const { status, data, signOut } = useAuth();
 const menu = mobileMenu();
 const { layanan, tentang, koleksi, panduan } = menuContent();
+
+const logout = async () => {
+  await signOut();
+};
 
 const viewTentang = () => {
   menu.isTentangOpen = !menu.isTentangOpen;
@@ -35,7 +40,7 @@ const viewPanduan = () => {
 
 <template>
   <section class="layer" v-if="menu.menuState">
-    <div class="mt-15 text-right px-10 font-600 cursor-pointer">
+    <div class="mt-14 text-right px-10 font-600 cursor-pointer">
       <span @click="menu.menuState = false">&#10006;</span>
     </div>
     <div class="menu-wrapper">
@@ -92,12 +97,23 @@ const viewPanduan = () => {
         <NuxtLink class="menu-list hover-menu">Kontak</NuxtLink>
       </div>
       <div class="flex min-w-full flex-row items-center justify-center gap-2">
-        <NuxtLink to="keanggotaan">
-          <button class="btn bg-orange w-full text-white">Keanggotaan</button>
+        <NuxtLink to="/login" v-show="status === 'unauthenticated'">
+          <button class="btn bg-orange w-full text-white">Login</button>
         </NuxtLink>
-        <NuxtLink to="keanggotaan">
-          <button class="btn bg-orange w-full text-white">Register</button>
-        </NuxtLink>
+        <div v-show="status === 'authenticated'" class="flex gap-2">
+          <img
+            :src="data.user.image"
+            class="w-15 h-15 rounded-full"
+            alt="Foto Profil"
+          />
+          <div class="text-sm">
+            <p>{{ data.user.name }}</p>
+            <p class="text-xs">{{ data.user.email }}</p>
+            <button class="btn bg-red text-white py-0" @click="logout">
+              Logout
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -108,7 +124,7 @@ const viewPanduan = () => {
   --at-apply: fixed mt--15 h-full w-full bg-white transition-all-500 z-2;
 }
 .menu-wrapper {
-  --at-apply: min-h-full w-full flex flex-col mt--35 justify-center;
+  --at-apply: w-full flex flex-col justify-center;
 }
 .menu-list {
   --at-apply: text-lg py-1 cursor-pointer;

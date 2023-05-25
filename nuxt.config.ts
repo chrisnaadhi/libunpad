@@ -1,4 +1,4 @@
-// https://v3.nuxtjs.org/api/configuration/nuxt.config
+// / https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   app: {
     pageTransition: { name: "page", mode: "out-in" },
@@ -21,6 +21,7 @@ export default defineNuxtConfig({
     "@nuxt/image-edge",
     "@nuxtjs/i18n",
     "dayjs-nuxt",
+    "@sidebase/nuxt-auth",
   ],
   unocss: {
     preflight: true,
@@ -56,5 +57,18 @@ export default defineNuxtConfig({
     plugins: ["relativeTime", "utc", "timezone"],
     defaultLocale: "id",
     defaultTimezone: "Asia/Jakarta",
+  },
+  auth: {
+    isEnabled: true,
+    baseURL: process.env.AUTH_ORIGIN,
+    provider: {
+      type: "authjs",
+    },
+  },
+  devServer: {
+    https: {
+      key: "localhost-key.pem",
+      cert: "localhost.pem",
+    },
   },
 });

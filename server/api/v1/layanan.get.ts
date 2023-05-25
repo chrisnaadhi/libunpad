@@ -16,7 +16,7 @@ export default defineEventHandler((event) => {
       namaLayanan: "Peminjaman Ruangan",
       deskripsiLayanan:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus nisi inventore sint. Natus ducimus assumenda, quam quas fuga praesentium sed!",
-      slug: "/pengajuan/bebas-pustaka",
+      slug: "/pengajuan/peminjaman-ruangan",
     },
     {
       namaLayanan: "Pengajuan Kelas Literasi",
