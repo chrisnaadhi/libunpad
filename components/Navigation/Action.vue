@@ -32,7 +32,7 @@ const logout = async () => {
     <div v-if="status === 'authenticated'" class="hidden xl:block">
       <img
         v-if="data?.user?.image"
-        :src="data?.user?.image"
+        :src="data?.user?.image ?? '/images/no-image.jpg'"
         class="w-10 h-10 rounded-full cursor-pointer"
         alt="Foto User"
         @click="toggleProfile"

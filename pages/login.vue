@@ -89,7 +89,7 @@ const submitLogin = async () => {
 };
 
 const googleLogin = async () => {
-  window.open(await signIn("google", { callbackUrl: "/keanggotaan" }));
+  window.open(await signIn("google", { callbackUrl: "/" }));
 };
 
 const errorLogger = () => {
