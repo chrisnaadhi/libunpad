@@ -1,6 +1,7 @@
 <script setup>
 import "@splidejs/vue-splide/css";
 import "@splidejs/vue-splide/css/core";
+import "v-calendar/style.css";
 import { mobileMenu } from "~/composables/navMenu";
 import { useSearchFunction } from "~/composables/searchFunction";
 

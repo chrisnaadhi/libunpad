@@ -35,6 +35,7 @@ const logout = async () => {
         :src="data?.user?.image ?? '/images/no-image.jpg'"
         class="w-10 h-10 rounded-full cursor-pointer"
         alt="Foto User"
+        referrerpolicy="no-referrer"
         @click="toggleProfile"
       />
       <div class="account-dropdown" v-show="viewDropdown">

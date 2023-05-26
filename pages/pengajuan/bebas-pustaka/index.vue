@@ -34,7 +34,6 @@ const kirimPengajuan = async () => {
     try {
       await createItems({ collection: "pengajuan_surat_bebas_pustaka", items });
       await navigateTo({ path: "/pengajuan/bebas-pustaka/data" });
-      console.log(emailValidation);
     } catch (error) {
       console.log(error);
     }
