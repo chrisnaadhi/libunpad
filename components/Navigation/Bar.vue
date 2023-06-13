@@ -5,7 +5,7 @@ const { locale } = useI18n();
 </script>
 
 <template>
-  <GenericMiniBanner v-show="route.path === '/' || '/en'" />
+  <GenericMiniBanner />
   <div class="wrapper">
     <nav class="navbar">
       <NuxtLink :to="locale === 'en' ? '/en' : '/'">

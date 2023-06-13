@@ -29,7 +29,7 @@ const logout = async () => {
     >
       <div class="i-mdi-calendar-clock bg-dark" />
     </button>
-    <div v-if="status === 'authenticated'" class="hidden xl:block">
+    <div v-if="status === 'authenticated'" class="relative hidden xl:block">
       <img
         v-if="data?.user?.image"
         :src="data?.user?.image ?? '/images/no-image.jpg'"
@@ -90,7 +90,7 @@ const logout = async () => {
 }
 
 .account-dropdown {
-  --at-apply: absolute right-0 bg-white/80 border border-orange min-w-25 mr-8 py-2 px-5 my-2 rounded text-right;
+  --at-apply: absolute right-100% bg-white/80 border border-orange min-w-25 mr--10 py-2 px-5 my-2 rounded text-right;
 }
 
 .mode {

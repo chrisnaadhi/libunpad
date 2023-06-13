@@ -38,11 +38,12 @@ for (const pegawai of getDataPegawai) {
 </script>
 
 <template>
-  <Calendar :locale="{ id: 'id', masks: { weekdays: 'WWWW' } }" expanded>
+  <Calendar :locale="{ id: 'id', masks: { weekdays: 'WWWW' } }">
     <template v-slot:day-content="{ day, attributes }">
       <div>
         <span>{{ day.day }}</span>
         <p v-for="attr in attributes">{{ attr.key }}</p>
+        <p>{{ attributes }}</p>
       </div>
     </template>
   </Calendar>

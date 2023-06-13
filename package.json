@@ -2,6 +2,7 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
+    "ssl": "set NODE_TLS_REJECT_UNAUTHORIZED=0",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview"

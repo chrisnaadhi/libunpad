@@ -6,6 +6,7 @@ const museumObj = {
   definition: "(noun) /mjuːˈziː.əm/",
   imageUrl: "undraw_search_app.png",
   titleDesc: computed(() => i18n.t("museumDescription")),
+  branding: "GLAM's Memorabilia",
 };
 </script>
 

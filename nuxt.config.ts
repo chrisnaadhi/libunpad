@@ -53,10 +53,10 @@ export default defineNuxtConfig({
     defaultDirection: "auto",
   },
   dayjs: {
-    locales: ["id"],
+    locales: ["id", "en"],
     plugins: ["relativeTime", "utc", "timezone"],
     defaultLocale: "id",
-    defaultTimezone: "Asia/Jakarta",
+    defaultTimezone: "Asia/Bangkok",
   },
   auth: {
     isEnabled: true,

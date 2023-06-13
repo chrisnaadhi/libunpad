@@ -73,6 +73,30 @@ h6 {
     Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+h1 {
+  --at-apply: text-4xl;
+}
+
+h2 {
+  --at-apply: text-3xl;
+}
+
+h3 {
+  --at-apply: text-2xl;
+}
+
+h4 {
+  --at-apply: text-xl;
+}
+
+h5 {
+  --at-apply: text-lg;
+}
+
+h6 {
+  --at-apply: text-base;
+}
+
 .page-enter-active,
 .page-leave-active {
   transition: all 0.4s;

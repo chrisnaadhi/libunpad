@@ -29,35 +29,6 @@ useHead({
     <section class="footer" role="contentinfo">
       <FooterSection :show-list="true" />
     </section>
-
-    <section class="absolute fixed bottom-0 left-0">
-      <div class="m-2 transition-all-500">
-        <Transition>
-          <div class="locale-display" v-show="menu.isLocaleOpen">
-            <NuxtLink :to="switchLocalePath('en')">
-              <NuxtImg src="/images/uk-flag.png" format="webp" width="35px" />
-            </NuxtLink>
-            <NuxtLink :to="switchLocalePath('id')">
-              <NuxtImg src="/images/indonesia.png" format="webp" width="35px" />
-            </NuxtLink>
-          </div>
-        </Transition>
-        <div class="flex mb-16 xl:mb-0">
-          <NuxtImg
-            :src="
-              locale === 'en' ? '/images/uk-flag.png' : '/images/indonesia.png'
-            "
-            width="20px"
-            height="20px"
-            class="locale-flag"
-            @click="toggleLocale"
-          />
-          <p class="locale-banner">
-            {{ locale === "en" ? "Choose Language" : "Pilih Bahasa" }}
-          </p>
-        </div>
-      </div>
-    </section>
   </main>
 </template>
 

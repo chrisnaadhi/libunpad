@@ -116,3 +116,11 @@ export const convertTimeZone = (time: string) => {
   if (!time) return "Belum diperbarui";
   return `${formatted} ${timeFormat}`;
 };
+
+export const jamPiketPegawai = (hari: number) => {
+  if (hari < 6) {
+    return "16.00 - 17.30 WIB";
+  } else {
+    return "09.00 - 12.00 WIB";
+  }
+};

@@ -1,17 +1,17 @@
 <script setup>
 const config = useRuntimeConfig();
-const { getItems } = useDirectusItems();
 const { getUserById } = useDirectusUsers();
+const { getItems } = useDirectusItems();
 const date = new Date();
+const dayjs = useDayjs();
 const lastDay = getTotalDays(date.getMonth(), date.getFullYear());
 const firstDate = `${date.getFullYear()}-${date.getMonth() + 1}-01`;
 const lastDate = `${date.getFullYear()}-${date.getMonth() + 1}-${lastDay}`;
 const monthName = new Intl.DateTimeFormat("id-ID", { month: "long" }).format(
   date
 );
-const days = ["Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu", "Minggu"];
-const daily = [];
 
+// List Pegawai Piket
 const dataPiketPegawai = await getItems({
   collection: "piket_layanan",
   params: {
@@ -24,10 +24,44 @@ const dataPiketPegawai = await getItems({
   },
 });
 
-for (let i = 0; i <= lastDay; i++) {
-  // Add Petugas Object later
-  console.log(i);
-}
+const { data: dataPetugas } = await useFetch(
+  `${config.public.directus.url}users`,
+  {
+    headers: {
+      Authorization: `Bearer ${config.public.directus.token}`,
+    },
+    pick: ["data", ["id", "first_name", "last_name"]],
+  }
+);
+
+const searchPetugas = (idPetugas) => {
+  const petugas = dataPetugas.value.data.find((nama) => nama.id === idPetugas);
+  if (!petugas) {
+    return "Belum diproses";
+  }
+  const objPetugas = Object.assign({}, petugas);
+  return `${objPetugas.first_name} ${objPetugas.last_name}`;
+};
+
+// Data Pegawai Piket Hari ini
+const getPetugasExtendedTimeService = await getItems({
+  collection: "piket_layanan",
+  params: {
+    filter: {
+      tanggal: {
+        _eq: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
+      },
+    },
+  },
+});
+
+const profilPetugas = await getUserById({
+  id:
+    getPetugasExtendedTimeService[0]?.petugas_pertama ??
+    "6090A4D5-BD85-423D-9231-E50E705CFD22",
+});
+
+console.log(jamPiketPegawai(date.getDay()));
 </script>
 
 <template>
@@ -37,25 +71,27 @@ for (let i = 0; i <= lastDay; i++) {
       <h1>{{ monthName }} {{ date.getFullYear() }}</h1>
     </div>
 
-    <div class="grid grid-cols-7 gap-2 m-2">
-      <div v-for="day in days">
-        <div class="border-1 border-blue-5 bg-blue-1 rounded">
-          <p class="font-semibold">{{ day }}</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-7 gap-2 m-2">
+    <div class="grid grid-cols-3 gap-2 m-2">
       <div
-        v-for="tgl in lastDay"
-        class="border-1 border-blue-3 bg-gray-50 rounded min-h-15"
+        v-for="pegawai in dataPiketPegawai"
+        class="border-1 border-blue-3 bg-gray-50 rounded"
       >
-        <h4 class="absolute m-1 h-full">{{ tgl }}</h4>
-        <p class="flex items-center justify-center h-full">nama lengkap</p>
+        <h4>{{ readableDate(pegawai.tanggal) }}</h4>
+        <p>{{ searchPetugas(pegawai.petugas_pertama) }}</p>
       </div>
     </div>
-
-    <pre class="text-left">{{ dataPiketPegawai }}</pre>
+    <h2>Petugas Piket Hari Ini</h2>
+    <h2>
+      {{ readableDate(date) }} <br />
+      {{ jamPiketPegawai(date.getDay()) }}
+    </h2>
+    <h1 class="font-600 text-orange-6">
+      {{
+        getPetugasExtendedTimeService[0] === undefined
+          ? "Tidak ada Petugas"
+          : `${profilPetugas.first_name} ${profilPetugas.last_name}`
+      }}
+    </h1>
   </section>
 </template>
 

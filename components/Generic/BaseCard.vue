@@ -1,5 +1,5 @@
 <template>
-  <section class="w-full h-full rounded-xl text-justify">
+  <section class="w-full h-full rounded text-justify">
     <slot />
   </section>
 </template>

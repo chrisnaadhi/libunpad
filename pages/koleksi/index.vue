@@ -15,7 +15,7 @@ useHead({
       <CollectionBooksHighlight />
     </section>
 
-    <section class="mt-25">
+    <section class="mt-10">
       <h2>Koleksi Lainnya</h2>
       <CollectionBlockData :left="true" title="Gallery" page="/gallery" />
       <CollectionBlockData :left="false" title="Library" page="/library" />

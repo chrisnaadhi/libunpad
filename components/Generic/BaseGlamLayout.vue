@@ -12,6 +12,9 @@ defineProps({
   titleDesc: {
     type: Object,
   },
+  branding: {
+    type: String,
+  },
 });
 </script>
 
@@ -43,7 +46,7 @@ defineProps({
     </div>
     <div class="max-w-6xl ma bg-gray-50 rounded-lt-lg rounded-rt-lg p-4">
       <div class="p-4">
-        <h1 class="text-4xl text-center">{{ title }}</h1>
+        <h1 class="text-4xl text-center">{{ branding ?? title }}</h1>
         <p class="text-justify">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi
           repellat tempora assumenda unde cum. Voluptate architecto labore amet,

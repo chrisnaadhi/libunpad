@@ -46,6 +46,7 @@ const profilPetugas = await getUserById({
   <div class="text-center bg-gray-200 rounded-xl p-5">
     <h3>Data Pengunjung di Jam Tambahan</h3>
     <h5>{{ hariIni }}</h5>
+    <h5>{{ jamPiketPegawai(date.getDay()) }}</h5>
 
     <h3>
       Petugas Piket:

@@ -1,4 +1,5 @@
 <script setup>
+const { data } = useAuth();
 const user = useDirectusUser();
 const { data: fetchService } = await useFetch("/api/v1/layanan");
 </script>
@@ -13,7 +14,14 @@ const { data: fetchService } = await useFetch("/api/v1/layanan");
         </div>
         <div class="text-justify w-full">
           <h1 class="text-2xl font-600">
-            Halo, {{ user ? `${user.first_name}!` : "Pengunjung" }}
+            Halo,
+            {{
+              user
+                ? `${user.first_name}!`
+                : data
+                ? data?.user?.name
+                : "Pengunjung"
+            }}
           </h1>
           <p>
             {{ $t("pengajuanDescription") }}
