@@ -5,7 +5,12 @@ definePageMeta({
 
 const { data } = useAuth();
 
-const { createItems } = useDirectusItems();
+const { createItems, getItems } = useDirectusItems();
+
+const date = new Date();
+const lastDay = getTotalDays(date.getMonth(), date.getFullYear());
+const firstDate = `${date.getFullYear()}-${date.getMonth() + 1}-01`;
+const lastDate = `${date.getFullYear()}-${date.getMonth() + 1}-${lastDay}`;
 
 const npm = ref("");
 const notification = ref("Silahkan isi seluruh form sesuai dengan data asli");
@@ -20,6 +25,10 @@ const jamSelesai = ref("");
 const tujuanPeminjaman = ref("");
 const emailPattern = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
 
+const monthName = new Intl.DateTimeFormat("id-ID", { month: "long" }).format(
+  date
+);
+
 const kirimPengajuan = async () => {
   const emailValidation = emailPattern.test(email.value);
   let items = {
@@ -28,6 +37,10 @@ const kirimPengajuan = async () => {
     email: email.value,
     kontak: kontak.value,
     nama_ruangan: namaRuangan.value,
+    tanggal_peminjaman: tanggalPeminjaman.value,
+    jam_mulai_peminjaman: jamMulai.value,
+    jam_selesai_peminjaman: jamSelesai.value,
+    tujuan_peminjaman: tujuanPeminjaman.value,
     status_pengajuan: "pengajuan",
   };
   if (emailValidation) {
@@ -46,10 +59,21 @@ const kirimPengajuan = async () => {
     }, 5000);
   }
 };
+
+const dataPeminjaman = await getItems({
+  collection: "peminjaman_ruangan",
+  params: {
+    filter: {
+      tanggal_peminjaman: {
+        _between: [firstDate, lastDate],
+      },
+    },
+  },
+});
 </script>
 
 <template>
-  <main class="text-center my-5">
+  <main class="flex justify-center gap-30 text-center my-5">
     <section>
       <h1>Form Peminjaman Ruangan</h1>
       <form
@@ -63,6 +87,7 @@ const kirimPengajuan = async () => {
             name="email"
             id="email"
             v-model="email"
+            class="cursor-not-allowed"
             required
             disabled
           />
@@ -93,9 +118,48 @@ const kirimPengajuan = async () => {
           />
         </div>
         <div class="input-form">
-          <label for="tanggal">Tanggal Peminjaman</label>
-          <input type="date" />
+          <label for="namaruangan">Nama Ruangan</label>
+          <select
+            name="namaruangan"
+            id="namaruangan"
+            v-model="namaRuangan"
+            required
+          >
+            <option value="ruang_the_gade">Ruang Pegadaian</option>
+            <option value="ruang_kelas_2">Ruang Kelas Lt.2</option>
+          </select>
         </div>
+        <div class="input-form">
+          <label for="tanggal">Tanggal Peminjaman</label>
+          <input
+            type="date"
+            name="tanggal"
+            id="tanggal"
+            v-model="tanggalPeminjaman"
+            required
+          />
+        </div>
+
+        <div class="input-form flex gap-2">
+          <div>
+            <label for="jamAwal">Jam Mulai :</label>
+            <input type="time" v-model="jamMulai" required />
+          </div>
+          <div>
+            <label for="jamSelesai">Jam Selesai :</label>
+            <input type="time" v-model="jamSelesai" required />
+          </div>
+        </div>
+        <div class="input-form">
+          <label for="tujuanpeminjaman">Tujuan Peminjaman</label>
+          <textarea
+            name="tujuanpeminjaman"
+            id="tujuanpeminjaman"
+            rows="5"
+            v-model="tujuanPeminjaman"
+          />
+        </div>
+
         <div class="pb-4 text-center">
           <p class="text-sm" :class="textNotif">
             {{ notification }}
@@ -110,6 +174,15 @@ const kirimPengajuan = async () => {
         <NuxtLink class="btn bg-orange text-white" to="/pengajuan">
           Kembali
         </NuxtLink>
+      </div>
+    </section>
+    <section>
+      <h1>Daftar Peminjaman Bulan Ini</h1>
+      <p class="text-2xl font-semibold text-orange">
+        {{ monthName }} {{ date.getFullYear() }}
+      </p>
+      <div>
+        <pre>{{ dataPeminjaman }}</pre>
       </div>
     </section>
   </main>
@@ -129,7 +202,8 @@ label {
 }
 
 input,
-select {
+select,
+textarea {
   --at-apply: w-full bg-white border border-orange rounded p-2;
 }
 

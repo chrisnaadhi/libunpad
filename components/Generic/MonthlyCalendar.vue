@@ -3,7 +3,6 @@ const config = useRuntimeConfig();
 const { getUserById } = useDirectusUsers();
 const { getItems } = useDirectusItems();
 const date = new Date();
-const dayjs = useDayjs();
 const lastDay = getTotalDays(date.getMonth(), date.getFullYear());
 const firstDate = `${date.getFullYear()}-${date.getMonth() + 1}-01`;
 const lastDate = `${date.getFullYear()}-${date.getMonth() + 1}-${lastDay}`;

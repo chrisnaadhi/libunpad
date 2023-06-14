@@ -33,7 +33,7 @@ export default {
   pencarianTerpaduTitle: "Kandaga Unified Search",
   pencarianHeadTitle: "Search Results of ",
   pencarianTerpaduPlaceholder: "Search something here...",
-  pencarianTerpaduResultRecommendation: "Maybe you mean: ",
+  pencarianTerpaduResultRecommendation: "Did you mean: ",
   pencarianTerpaduSearchResults: "Search Results: ",
 
   // KOLEKSI
