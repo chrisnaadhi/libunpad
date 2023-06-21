@@ -121,27 +121,6 @@ export const displayPersyaratan = (syarat: object) => {
 };
 
 export const useIdentitasForm = () => useState("nilai", () => "");
-export const userLoginState = defineStore("loginState", () => {
-  const state = ref(false);
-  const userID = ref(Math.floor(Math.random() * 10));
-
-  function login() {
-    state.value = true;
-    return navigateTo("/keanggotaan", { redirectCode: 301 });
-  }
-
-  function logout() {
-    state.value = false;
-    return navigateTo("/login", { redirectCode: 301 });
-  }
-
-  return {
-    state,
-    userID,
-    login,
-    logout,
-  };
-});
 
 export const jamLayanan = defineStore("jam", () => {
   const display = ref(false);
@@ -158,5 +137,104 @@ export const jamLayanan = defineStore("jam", () => {
     display,
     toggleDisplay,
     disableDisplay,
+  };
+});
+
+export const daftarNamaFakultasUnpad = defineStore("namaFakultas", () => {
+  const objFakultas = [
+    {
+      id: 110,
+      namaFakultas: "Fakultas Hukum",
+      singkatan: "fh",
+    },
+    {
+      id: 120,
+      namaFakultas: "Fakultas Ekonomi & Bisnis",
+      singkatan: "feb",
+    },
+    {
+      id: 130,
+      namaFakultas: "Fakultas Kedokteran",
+      singkatan: "fk",
+    },
+    {
+      id: 140,
+      namaFakultas: "Fakultas Matematika & IPA",
+      singkatan: "fmipa",
+    },
+    {
+      id: 150,
+      namaFakultas: "Fakultas Pertanian",
+      singkatan: "faperta",
+    },
+    {
+      id: 160,
+      namaFakultas: "Fakultas Kedokteran Gigi",
+      singkatan: "fkg",
+    },
+    {
+      id: 170,
+      namaFakultas: "Fakultas Ilmu Sosial & Ilmu Politik",
+      singkatan: "fisip",
+    },
+    {
+      id: 180,
+      namaFakultas: "Fakultas Ilmu Budaya",
+      singkatan: "fib",
+    },
+    {
+      id: 190,
+      namaFakultas: "Fakultas Psikologi",
+      singkatan: "fapsi",
+    },
+    {
+      id: 200,
+      namaFakultas: "Fakultas Peternakan",
+      singkatan: "fapet",
+    },
+    {
+      id: 210,
+      namaFakultas: "Fakultas Ilmu Komunikasi",
+      singkatan: "fikom",
+    },
+    {
+      id: 220,
+      namaFakultas: "Fakultas Keperawatan",
+      singkatan: "fkep",
+    },
+    {
+      id: 230,
+      namaFakultas: "Fakultas Perikanan & Ilmu Kelautan",
+      singkatan: "fpik",
+    },
+    {
+      id: 240,
+      namaFakultas: "Fakultas Teknologi Industri Pertanian",
+      singkatan: "ftip",
+    },
+    {
+      id: 250,
+      namaFakultas: "Sekolah Pascasarjana",
+      singkatan: "sps",
+    },
+    {
+      id: 260,
+      namaFakultas: "Fakultas Farmasi",
+      singkatan: "farmasi",
+    },
+    {
+      id: 270,
+      namaFakultas: "Fakultas Teknik Geologi",
+      singkatan: "ftg",
+    },
+  ];
+
+  const singkatanUpper = (id: number) => {
+    return objFakultas[id].singkatan.toUpperCase();
+  };
+
+  return {
+    objFakultas,
+    singkatanUpper,
   };
 });

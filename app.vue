@@ -97,6 +97,10 @@ h6 {
   --at-apply: text-base;
 }
 
+input[type="search"] {
+  --at-apply: w-full border-1 border-orange;
+}
+
 .page-enter-active,
 .page-leave-active {
   transition: all 0.4s;

@@ -10,7 +10,7 @@ export default defineEventHandler((event) => {
       namaLayanan: "Pengajuan Reservasi Online",
       deskripsiLayanan:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias error dolor sit temporibus minus asperiores at ab, illum voluptatibus laborum?",
-      slug: "/pengajuan/bebas-pustaka",
+      slug: "/pengajuan/#",
     },
     {
       namaLayanan: "Peminjaman Ruangan",
@@ -22,19 +22,19 @@ export default defineEventHandler((event) => {
       namaLayanan: "Pengajuan Kelas Literasi",
       deskripsiLayanan:
         "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi voluptate ad harum veritatis eaque ducimus libero dolore rem nulla quidem.",
-      slug: "/pengajuan/bebas-pustaka",
+      slug: "/pengajuan/#",
     },
     {
       namaLayanan: "Pengajuan Lainnya",
       deskripsiLayanan:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet officia quaerat assumenda sequi dicta mollitia incidunt dolorum natus et reprehenderit.",
-      slug: "/pengajuan/bebas-pustaka",
+      slug: "/pengajuan/#",
     },
     {
       namaLayanan: "Pengajuan Tambahan",
       deskripsiLayanan:
         "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perferendis expedita tempore obcaecati, aperiam sapiente magnam impedit reprehenderit nesciunt repellat culpa?",
-      slug: "/pengajuan/bebas-pustaka",
+      slug: "/pengajuan/#",
     },
   ];
 });

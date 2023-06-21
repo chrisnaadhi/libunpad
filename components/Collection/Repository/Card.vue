@@ -9,7 +9,7 @@ defineProps({
 });
 
 function trimText(txt) {
-  const trimmedText = txt.slice(0, 45);
+  const trimmedText = txt.slice(0, 55);
   return trimmedText + "...";
 }
 </script>
@@ -17,19 +17,19 @@ function trimText(txt) {
 <template>
   <div class="card">
     <div class="cover-section">
-      <NuxtImg src="/images/no-image.jpg" width="85px" />
+      <NuxtImg src="/images/no-image.jpg" class="min-w-100% max-h-55" />
     </div>
     <div class="content-section">
       <h1>{{ title }}</h1>
-      <h4 class="text-sm italic">{{ author }}</h4>
-      <h5 class="text-xs">{{ prodi }} - {{ fakultas }}</h5>
-      <p class="font-600">{{ tipe }}</p>
-      <p>
+      <h6 class="italic">{{ author }}</h6>
+      <p class="text-xs">{{ prodi }} - {{ fakultas }}</p>
+      <p class="text-sm font-600">{{ tipe }}</p>
+      <p class="text-sm mb-2">
         {{ trimText(description) }}
       </p>
       <div class="flex gap-2">
-        <button class="btn bg-orange py-1 px-4 text-white">Lihat</button>
-        <button class="btn bg-blue py-1 px-4 text-white">Pinjam</button>
+        <button class="btn bg-orange py-1 px-4 text-white">Preview</button>
+        <button class="btn bg-blue py-1 px-4 text-white">Detail</button>
       </div>
     </div>
   </div>
@@ -37,7 +37,7 @@ function trimText(txt) {
 
 <style>
 .card {
-  --at-apply: flex rounded shadow-md shadow-gray p-2 m-2;
+  --at-apply: flex rounded shadow-md shadow-gray p-2 max-h-60;
 }
 
 .cover-section {
@@ -45,6 +45,6 @@ function trimText(txt) {
 }
 
 .content-section {
-  --at-apply: m-2;
+  --at-apply: m-2 flex flex-col justify-around;
 }
 </style>

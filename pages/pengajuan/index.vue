@@ -42,7 +42,10 @@ const { data: fetchService } = await useFetch("/api/v1/layanan");
                 Ajukan
               </button>
             </NuxtLink>
-            <NuxtLink :to="layanan.slug + '/data'" class="w-full">
+            <NuxtLink
+              :to="layanan.slug.includes('#') ? '/#' : layanan.slug + '/data'"
+              class="w-full"
+            >
               <button class="btn bg-orange text-xs text-white w-full">
                 Data Pengajuan
               </button>

@@ -41,12 +41,19 @@ const kirimPengajuan = async () => {
     jam_mulai_peminjaman: jamMulai.value,
     jam_selesai_peminjaman: jamSelesai.value,
     tujuan_peminjaman: tujuanPeminjaman.value,
-    status_pengajuan: "pengajuan",
+    status_peminjaman: "pending",
   };
   if (emailValidation) {
     try {
       await createItems({ collection: "peminjaman_ruangan", items });
-      await navigateTo({ path: "/pengajuan" });
+      textNotif.value = "text-green";
+      notification.value = "Berhasil diajukan";
+      setTimeout(async () => {
+        notification.value =
+          "Silahkan isi seluruh form sesuai dengan data asli";
+        textNotif.value = "text-dark";
+        await navigateTo({ path: "/pengajuan/peminjaman-ruangan/data" });
+      }, 2000);
     } catch (error) {
       console.log(error);
     }
@@ -73,8 +80,8 @@ const dataPeminjaman = await getItems({
 </script>
 
 <template>
-  <main class="flex justify-center gap-30 text-center my-5">
-    <section>
+  <main class="main-content">
+    <section class="max-w-lg ma">
       <h1>Form Peminjaman Ruangan</h1>
       <form
         @submit.prevent="kirimPengajuan"
@@ -94,7 +101,7 @@ const dataPeminjaman = await getItems({
         </div>
         <div class="input-form">
           <label for="npm">NPM / NIP :</label>
-          <input type="text" name="npm" id="npm" :value="npm" required />
+          <input type="text" name="npm" id="npm" v-model="npm" required />
         </div>
         <div class="input-form">
           <label for="nama">Nama Lengkap :</label>
@@ -141,12 +148,12 @@ const dataPeminjaman = await getItems({
         </div>
 
         <div class="input-form flex gap-2">
-          <div>
-            <label for="jamAwal">Jam Mulai :</label>
+          <div class="w-full">
+            <label for="jamAwal">Jam Mulai {{ jamMulai }} :</label>
             <input type="time" v-model="jamMulai" required />
           </div>
-          <div>
-            <label for="jamSelesai">Jam Selesai :</label>
+          <div class="w-full">
+            <label for="jamSelesai">Jam Selesai {{ jamSelesai }} :</label>
             <input type="time" v-model="jamSelesai" required />
           </div>
         </div>
@@ -176,19 +183,42 @@ const dataPeminjaman = await getItems({
         </NuxtLink>
       </div>
     </section>
-    <section>
+    <section class="max-w-lg ma">
       <h1>Daftar Peminjaman Bulan Ini</h1>
       <p class="text-2xl font-semibold text-orange">
         {{ monthName }} {{ date.getFullYear() }}
       </p>
-      <div>
-        <pre>{{ dataPeminjaman }}</pre>
+      <div class="max-w-md grid grid-cols-2 gap-4 ma">
+        <div
+          class="rounded bg-orange w-full p-2"
+          v-for="(item, index) in dataPeminjaman"
+          v-bind:key="item.id"
+        >
+          <p class="font-semibold text-white text-lg">
+            {{ item.tanggal_peminjaman }}
+          </p>
+          <div class="text-xs text-white">
+            <p>
+              <span class="font-semibold">Jam: </span
+              >{{ item.jam_mulai_peminjaman }} -
+              {{ item.jam_selesai_peminjaman }}
+            </p>
+            <p>
+              <span class="font-semibold">Peminjam:</span>
+              {{ item.nama_lengkap }}
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 </template>
 
 <style scoped>
+.main-content {
+  --at-apply: max-w-7xl ma flex flex-col-reverse items-center gap-2 text-center my-5 lg:(flex-row);
+}
+
 h1 {
   --at-apply: text-4xl my-5;
 }
