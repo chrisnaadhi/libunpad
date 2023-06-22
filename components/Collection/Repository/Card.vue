@@ -27,9 +27,13 @@ function trimText(txt) {
       <p class="text-sm mb-2">
         {{ trimText(description) }}
       </p>
-      <div class="flex gap-2">
-        <button class="btn bg-orange py-1 px-4 text-white">Preview</button>
-        <button class="btn bg-blue py-1 px-4 text-white">Detail</button>
+      <div class="flex gap-1 text-xs">
+        <button class="btn bg-orange w-full py-1 px-4 text-white">
+          Preview
+        </button>
+        <button class="btn bg-gray-6 w-full py-1 px-4 text-white">
+          Detail
+        </button>
       </div>
     </div>
   </div>
@@ -41,7 +45,7 @@ function trimText(txt) {
 }
 
 .cover-section {
-  --at-apply: m-2 shadow-sm shadow-gray rounded;
+  --at-apply: m-2 flex items-center shadow shadow-gray rounded;
 }
 
 .content-section {

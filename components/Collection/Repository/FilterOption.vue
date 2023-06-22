@@ -26,12 +26,12 @@ const years = [
 </script>
 
 <template>
-  <section class="bg-orange-2 rounded-lg min-w-50 py-5 px-3">
+  <section class="main-block">
     <h5 class="text-center">Filter Options</h5>
     <div class="flex flex-col">
       <div>
         <h6>Pencarian</h6>
-        <input type="search" name="" id="" class="p-1" />
+        <input type="search" name="" id="" class="p-1 rounded" />
       </div>
       <h6>Tahun</h6>
       <div class="flex gap-2">
@@ -74,12 +74,23 @@ const years = [
           </select>
         </div>
       </div>
+      <div class="my-2">
+        <button class="btn text-sm text-white w-full bg-orange">Filter</button>
+      </div>
     </div>
   </section>
 </template>
 
 <style scoped>
+.main-block {
+  --at-apply: bg-orange-1 border-1 border-orange rounded min-w-50 py-5 px-3 mx-2 lg:mx-0;
+}
+
 select {
-  --at-apply: w-20;
+  --at-apply: w-20 rounded border-1 border-orange;
+}
+
+input[type="checkbox"] {
+  --at-apply: mr-2;
 }
 </style>
