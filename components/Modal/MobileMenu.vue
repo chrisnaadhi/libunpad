@@ -97,10 +97,10 @@ const viewPanduan = () => {
         <NuxtLink class="menu-list hover-menu">Kontak</NuxtLink>
       </div>
       <div class="flex min-w-full flex-row items-center justify-center gap-2">
-        <NuxtLink to="/login" v-show="status === 'unauthenticated'">
+        <NuxtLink to="/login" v-if="status === 'unauthenticated'">
           <button class="btn bg-orange w-full text-white">Login</button>
         </NuxtLink>
-        <div v-show="status === 'authenticated'" class="flex gap-2">
+        <div v-else-if="status === 'authenticated'" class="flex gap-2">
           <img
             :src="data.user.image"
             class="w-15 h-15 rounded-full"

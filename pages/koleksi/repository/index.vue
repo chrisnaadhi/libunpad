@@ -11,25 +11,6 @@ const dataTADirectus = await getItems({
   },
 });
 
-const dataMhs = async (npm) => {
-  const mahasiswa = ref();
-  try {
-    const fetchMhs = await getItemById({
-      collection: "data_keanggotaan",
-      id: npm,
-    });
-
-    mahasiswa.value = fetchMhs;
-  } catch (error) {
-    mahasiswa.value = {
-      code: "404",
-      message: "Data Mahasiswa Tidak ditemukan",
-    };
-  }
-
-  return mahasiswa.value;
-};
-
 function trimText(txt) {
   const trimmedText = txt.slice(0, 45);
   return trimmedText + "...";
@@ -48,7 +29,14 @@ definePageMeta({
       Padjadjaran
     </p>
     <div class="max-w-3xl ma py-5 flex gap-1">
-      <input type="search" name="" id="" class="rounded px-2" />
+      <div class="w-full h-full">
+        <input type="search" name="" id="" class="relative rounded p-2" />
+        <div
+          class="bg-white border-1 border-orange absolute w-full max-w-172 rounded"
+        >
+          <p class="py-3" v-for="o in 5">Search Results here</p>
+        </div>
+      </div>
       <button type="submit" class="btn bg-orange text-white">Search</button>
     </div>
     <div class="flex flex-col gap-4 lg:(flex-row)">
@@ -56,11 +44,9 @@ definePageMeta({
       <div class="repository-collection">
         <CollectionRepositoryCard
           v-for="koleksi in dataTADirectus"
-          :author="koleksi.MhsNPM"
+          :npm="koleksi.MhsNPM"
           :title="trimText(koleksi.Judul)"
           :tipe="koleksi.tipeKoleksi"
-          :prodi="koleksi.prodi"
-          :fakultas="koleksi.fakultas"
           :description="koleksi.Abstrak"
           :link-access="'/koleksi/repository/item/' + koleksi.MhsNPM"
         />

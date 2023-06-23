@@ -33,6 +33,7 @@ defineProps({
   fileFullText: String,
   judul: String,
   author: String,
+  namaFakultas: String,
   abstrak: String,
   bahasa: String,
   keywords: String,
@@ -58,6 +59,7 @@ const limitText = (text) => {
             src="/images/lambang-unpad.png"
             format="webp"
             height="75px"
+            width="75px"
           />
           <p class="text-xs">Perpustakaan Universitas Padjadjaran</p>
         </div>
@@ -76,7 +78,7 @@ const limitText = (text) => {
             {{ judul }}
           </h3>
           <h5 class="font-semibold">{{ author }} - {{ npm }}</h5>
-          <p class="italic text-gray-5">Nama Prodi - Nama Fakultas</p>
+          <p class="italic text-gray-5">{{ namaFakultas }}</p>
           <h6>Abstrak:</h6>
           <p class="text-sm text-justify">
             {{ abstrak }}
@@ -100,7 +102,9 @@ const limitText = (text) => {
               <td class="flex">
                 <div class="auth-true"></div>
                 <span v-if="fileCover">
-                  <NuxtLink :to="fileCover" target="_blank">Download</NuxtLink>
+                  <NuxtLink :to="fileCover" target="_blank" no-rel
+                    >Download</NuxtLink
+                  >
                 </span>
                 <span v-else-if="fileCover === null">
                   <p>File tidak tersedia</p>
@@ -116,7 +120,7 @@ const limitText = (text) => {
               <td class="flex">
                 <div class="auth-true"></div>
                 <span v-if="fileAbstrak">
-                  <NuxtLink :to="fileAbstrak" target="_blank"
+                  <NuxtLink :to="fileAbstrak" target="_blank" no-rel
                     >Download</NuxtLink
                   >
                 </span>
@@ -134,7 +138,7 @@ const limitText = (text) => {
               <td class="flex">
                 <div class="auth-true"></div>
                 <span v-if="fileDaftarIsi">
-                  <NuxtLink :to="fileDaftarIsi" target="_blank"
+                  <NuxtLink :to="fileDaftarIsi" target="_blank" no-rel
                     >Download</NuxtLink
                   >
                 </span>
@@ -152,7 +156,9 @@ const limitText = (text) => {
               <td class="flex">
                 <div class="auth-true"></div>
                 <span v-if="fileBab1">
-                  <NuxtLink :to="fileBab1" target="_blank">Download</NuxtLink>
+                  <NuxtLink :to="fileBab1" target="_blank" no-rel
+                    >Download</NuxtLink
+                  >
                 </span>
                 <span v-else-if="fileBab1 === null">
                   <p>File tidak tersedia</p>
@@ -168,7 +174,9 @@ const limitText = (text) => {
               <td class="flex">
                 <div :class="isAccessible(fileBab2)"></div>
                 <span v-if="status === 'authenticated' && fileBab2">
-                  <NuxtLink :to="fileBab2" target="_blank">Download</NuxtLink>
+                  <NuxtLink :to="fileBab2" target="_blank" no-rel
+                    >Download</NuxtLink
+                  >
                 </span>
                 <span v-else-if="fileBab2 === null">
                   <p>File tidak tersedia</p>
@@ -184,7 +192,9 @@ const limitText = (text) => {
               <td class="flex">
                 <div :class="isAccessible(fileBab3)"></div>
                 <span v-if="status === 'authenticated' && fileBab3">
-                  <NuxtLink :to="fileBab3" target="_blank">Download</NuxtLink>
+                  <NuxtLink :to="fileBab3" target="_blank" no-rel
+                    >Download</NuxtLink
+                  >
                 </span>
                 <span v-else-if="fileBab3 === null">
                   <p>File tidak tersedia</p>
@@ -200,7 +210,9 @@ const limitText = (text) => {
               <td class="flex">
                 <div :class="isAccessible(fileBab4)"></div>
                 <span v-if="status === 'authenticated' && fileBab4">
-                  <NuxtLink :to="fileBab4" target="_blank">Download</NuxtLink>
+                  <NuxtLink :to="fileBab4" target="_blank" no-rel
+                    >Download</NuxtLink
+                  >
                 </span>
                 <span v-else-if="fileBab4 === null">
                   <p>File tidak tersedia</p>
@@ -216,7 +228,9 @@ const limitText = (text) => {
               <td class="flex">
                 <div :class="isAccessible(fileBab5)"></div>
                 <span v-if="status === 'authenticated' && fileBab5">
-                  <NuxtLink :to="fileBab5" target="_blank">Download</NuxtLink>
+                  <NuxtLink :to="fileBab5" target="_blank" no-rel
+                    >Download</NuxtLink
+                  >
                 </span>
                 <span v-else-if="fileBab5 === null">
                   <p>File tidak tersedia</p>
@@ -232,7 +246,9 @@ const limitText = (text) => {
               <td class="flex">
                 <div :class="isAccessible(fileBab6)"></div>
                 <span v-if="status === 'authenticated' && fileBab6">
-                  <NuxtLink :to="fileBab6" target="_blank">Download</NuxtLink>
+                  <NuxtLink :to="fileBab6" target="_blank" no-rel
+                    >Download</NuxtLink
+                  >
                 </span>
                 <span v-else-if="fileBab6 === null">
                   <p>File tidak tersedia</p>
@@ -248,7 +264,7 @@ const limitText = (text) => {
               <td class="flex">
                 <div :class="isAccessible(fileLampiran)"></div>
                 <span v-if="status === 'authenticated' && fileLampiran">
-                  <NuxtLink :to="fileLampiran" target="_blank"
+                  <NuxtLink :to="fileLampiran" target="_blank" no-rel
                     >Download</NuxtLink
                   >
                 </span>
@@ -266,7 +282,7 @@ const limitText = (text) => {
               <td class="flex">
                 <div class="auth-true"></div>
                 <span v-if="filePustaka">
-                  <NuxtLink :to="filePustaka" target="_blank"
+                  <NuxtLink :to="filePustaka" target="_blank" no-rel
                     >Download</NuxtLink
                   >
                 </span>
@@ -284,7 +300,7 @@ const limitText = (text) => {
               <td class="flex">
                 <div :class="isAccessible(fileFullText)"></div>
                 <span v-if="status === 'authenticated' && fileFullText">
-                  <NuxtLink :to="fileFullText" target="_blank"
+                  <NuxtLink :to="fileFullText" target="_blank" no-rel
                     >Download</NuxtLink
                   >
                 </span>

@@ -233,8 +233,16 @@ export const daftarNamaFakultasUnpad = defineStore("namaFakultas", () => {
     return objFakultas[id].singkatan.toUpperCase();
   };
 
+  const cariFakultas = (npm: string) => {
+    const hasil = objFakultas.find(
+      (elem) => elem.id.toString() === npm.slice(0, 3)
+    );
+    return hasil?.namaFakultas;
+  };
+
   return {
     objFakultas,
     singkatanUpper,
+    cariFakultas,
   };
 });

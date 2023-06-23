@@ -2,6 +2,7 @@
 const route = useRoute();
 const { status, signIn, signOut, data } = useAuth();
 const { getItemById } = useDirectusItems();
+const fakultas = daftarNamaFakultasUnpad();
 
 const accessText = ref("");
 
@@ -75,6 +76,7 @@ const dataObjectTA = {
   fileFullText: isUserAuthenticated(finalDataTA.FileFullText),
   judul: finalDataTA.Judul,
   author: biodataMhs.nama_anggota,
+  namaFakultas: fakultas.cariFakultas(finalDataTA.MhsNPM),
   abstrak: finalDataTA.Abstrak,
   bahasa: finalDataTA.Bahasa,
   keywords: finalDataTA.Keywords,
@@ -100,11 +102,14 @@ const dataObjectTA = {
       </div>
       <!-- Belum Login -->
       <div class="info-auth" v-else>
-        <div class="flex items-center gap-1">
-          <div class="auth-false" />
-          <p class="text-xs">
-            <span class="text-red-6 font-semibold">Belum Login</span>, untuk
-            dapat mengakses full silahkan login menggunakan email unpad!
+        <div class="flex flex-col items-center">
+          <div class="flex gap-1">
+            <div class="auth-false" />
+            <p class="text-red-6 font-semibold">Belum Login</p>
+          </div>
+          <p class="text-xs italic">
+            untuk dapat mengakses full silahkan login menggunakan Email
+            <span class="text-orange-6 font-semibold">Unpad</span>!
           </p>
         </div>
         <button @click="signIn('google')" class="btn-auth bg-orange">

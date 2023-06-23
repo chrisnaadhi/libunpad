@@ -1,8 +1,8 @@
 <script setup>
 defineProps({
   title: String,
+  npm: String,
   author: String,
-  prodi: String,
   fakultas: String,
   tipe: String,
   description: String,
@@ -22,8 +22,8 @@ function trimText(txt) {
     </div>
     <div class="content-section">
       <h6>{{ title }}</h6>
-      <h6 class="italic">{{ author }}</h6>
-      <p class="text-xs">{{ prodi }} - {{ fakultas }}</p>
+      <h6 class="italic">{{ npm }}</h6>
+      <p class="text-xs">{{ author }}</p>
       <p class="text-sm font-600">{{ tipe }}</p>
       <p class="text-sm mb-2">
         {{ trimText(description) }}
