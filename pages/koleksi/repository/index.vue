@@ -78,10 +78,6 @@ definePageMeta({
         Kembali ke Koleksi
       </NuxtLink>
     </div>
-
-    <div>
-      <pre>{{ dataTADirectus }}</pre>
-    </div>
   </section>
 </template>
 
