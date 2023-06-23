@@ -1,6 +1,6 @@
 <script setup>
 const { login } = useDirectusAuth();
-const { signIn } = useAuth();
+const { signIn, status } = useAuth();
 const user = useDirectusUser();
 const error = useError();
 const route = useRoute();
@@ -89,12 +89,19 @@ const submitLogin = async () => {
 };
 
 const googleLogin = async () => {
-  window.open(await signIn("google", { callbackUrl: "/" }));
+  await signIn("google", { callbackUrl: "/" });
 };
 
 const errorLogger = () => {
   console.log(error.value);
 };
+
+definePageMeta({
+  auth: {
+    unauthenticatedOnly: true,
+    navigateAuthenticatedTo: "/",
+  },
+});
 </script>
 
 <template>

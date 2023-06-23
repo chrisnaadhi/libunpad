@@ -6,6 +6,7 @@ defineProps({
   fakultas: String,
   tipe: String,
   description: String,
+  linkAccess: String,
 });
 
 function trimText(txt) {
@@ -17,23 +18,26 @@ function trimText(txt) {
 <template>
   <div class="card">
     <div class="cover-section">
-      <NuxtImg src="/images/no-image.jpg" class="min-w-100% max-h-55" />
+      <NuxtImg src="/images/no-image.jpg" class="" />
     </div>
     <div class="content-section">
-      <h1>{{ title }}</h1>
+      <h6>{{ title }}</h6>
       <h6 class="italic">{{ author }}</h6>
       <p class="text-xs">{{ prodi }} - {{ fakultas }}</p>
       <p class="text-sm font-600">{{ tipe }}</p>
       <p class="text-sm mb-2">
         {{ trimText(description) }}
       </p>
-      <div class="flex gap-1 text-xs">
+      <div class="flex gap-1 text-center text-xs">
         <button class="btn bg-orange w-full py-1 px-4 text-white">
           Preview
         </button>
-        <button class="btn bg-gray-6 w-full py-1 px-4 text-white">
+        <NuxtLink
+          :to="linkAccess"
+          class="btn bg-gray-6 w-full py-1 px-4 text-white"
+        >
           Detail
-        </button>
+        </NuxtLink>
       </div>
     </div>
   </div>

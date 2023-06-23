@@ -1,6 +1,9 @@
 <script setup>
 const route = useRoute();
+const { status, signIn, signOut, data } = useAuth();
 const { getItemById } = useDirectusItems();
+
+const accessText = ref("");
 
 const dataTugasAkhir = async () => {
   const dataSkripsi = ref();
@@ -42,21 +45,34 @@ const finalDataTA = await dataTugasAkhir();
 const biodataMhs = await dataMhs();
 
 // Create function for access link with auth concerned here
+const isUserAuthenticated = (linkData) => {
+  if (linkData === null) {
+    return null;
+  } else if (status.value === "unauthenticated") {
+    accessText.value = "Anda tidak dapat mengakses";
+    return accessText.value;
+  } else if (status.value === "authenticated") {
+    accessText.value = "Dapat mengakses";
+    return `${finalDataTA.LinkPath}/${linkData}`;
+  } else {
+    console.log("something is missing!");
+  }
+};
 
 const dataObjectTA = {
   npm: finalDataTA.MhsNPM,
-  fileCover: finalDataTA.FileCover,
-  fileAbstrak: finalDataTA.FileAbstrak,
-  fileDaftarIsi: finalDataTA.FileDaftarIsi,
-  fileBab1: finalDataTA.FileBab1,
-  fileBab2: finalDataTA.FileBab2,
-  fileBab3: finalDataTA.FileBab3,
-  fileBab4: finalDataTA.FileBab4,
-  fileBab5: finalDataTA.FileBab5,
-  fileBab6: finalDataTA.FileBab6,
-  fileLampiran: finalDataTA.FileLampiran,
-  filePustaka: finalDataTA.FilePustaka,
-  fileFullText: finalDataTA.FileFullText,
+  fileCover: finalDataTA.LinkPath + finalDataTA.FileCover,
+  fileAbstrak: finalDataTA.LinkPath + finalDataTA.FileAbstrak,
+  fileDaftarIsi: finalDataTA.LinkPath + finalDataTA.FileDaftarIsi,
+  fileBab1: finalDataTA.LinkPath + finalDataTA.FileBab1,
+  fileBab2: isUserAuthenticated(finalDataTA.FileBab2),
+  fileBab3: isUserAuthenticated(finalDataTA.FileBab3),
+  fileBab4: isUserAuthenticated(finalDataTA.FileBab4),
+  fileBab5: isUserAuthenticated(finalDataTA.FileBab5),
+  fileBab6: isUserAuthenticated(finalDataTA.FileBab6),
+  fileLampiran: isUserAuthenticated(finalDataTA.FileLampiran),
+  filePustaka: finalDataTA.LinkPath + finalDataTA.FilePustaka,
+  fileFullText: isUserAuthenticated(finalDataTA.FileFullText),
   judul: finalDataTA.Judul,
   author: biodataMhs.nama_anggota,
   abstrak: finalDataTA.Abstrak,
@@ -71,9 +87,62 @@ const dataObjectTA = {
 
 <template>
   <section>
-    <h1 class="text-center mt-5 mb-15">Repository Universitas Padjadjaran</h1>
+    <h3 class="title">Koleksi Repository Universitas Padjadjaran</h3>
+    <div class="text-center mb-3 flex items-center justify-center">
+      <!-- Sudah Login -->
+      <div class="info-auth" v-if="status === 'authenticated'">
+        <div class="flex items-center gap-1">
+          <div class="auth-true" />
+          <p class="text-xs">Selamat Datang, {{ data.user.email }}</p>
+        </div>
+
+        <button @click="signOut" class="btn-auth bg-red">Logout</button>
+      </div>
+      <!-- Belum Login -->
+      <div class="info-auth" v-else>
+        <div class="flex items-center gap-1">
+          <div class="auth-false" />
+          <p class="text-xs">
+            <span class="text-red-6 font-semibold">Belum Login</span>, untuk
+            dapat mengakses full silahkan login menggunakan email unpad!
+          </p>
+        </div>
+        <button @click="signIn('google')" class="btn-auth bg-orange">
+          Klik untuk Login
+        </button>
+      </div>
+    </div>
     <CollectionRepositoryItem v-bind="dataObjectTA" />
+    <div class="text-center mb-5">
+      <NuxtLink to="/koleksi/repository" class="btn-auth bg-orange text-lg"
+        >Kembali ke Koleksi Repository</NuxtLink
+      >
+    </div>
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.title {
+  --at-apply: my-3 text-center bg-orange max-w-lg py-1 ma text-white rounded;
+}
+
+.btn-auth {
+  --at-apply: btn py-1 px-2 text-white text-xs;
+}
+
+.info-auth {
+  --at-apply: flex flex-col items-center gap-1 text-sm;
+}
+
+.auth-true {
+  --at-apply: i-mdi-lock-open-check bg-green-6 w-5 h-5;
+}
+
+.auth-false {
+  --at-apply: i-mdi-lock-alert bg-red-6 w-5 h-5;
+}
+
+section {
+  --at-apply: max-w-7xl ma;
+}
+</style>

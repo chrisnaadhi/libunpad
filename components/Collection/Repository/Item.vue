@@ -1,4 +1,18 @@
 <script setup>
+const { status } = useAuth();
+
+function isAccessible(linkData) {
+  if (linkData === null) {
+    return "file-not-found";
+  } else if (status.value === "authenticated") {
+    return "auth-true";
+  } else if (status.value === "unauthenticated") {
+    return "auth-false";
+  } else {
+    return "file-not-found";
+  }
+}
+
 defineProps({
   npm: String,
   fileCover: String,
@@ -35,8 +49,8 @@ const limitText = (text) => {
 
 <template>
   <section>
-    <section class="flex gap-5">
-      <div class="w-70 text-center">
+    <section class="flex flex-col lg:flex-row gap-5">
+      <div class="w-70 ma text-center">
         <div class="cover-section">
           <p class="text-xs italic px-2">{{ judul }}...</p>
           <p class="text-xs font-semibold">{{ author }}</p>
@@ -56,13 +70,13 @@ const limitText = (text) => {
           </div>
         </div>
       </div>
-      <div class="w-full">
+      <div class="w-full px-5">
         <div>
-          <h3 class="italic text-gray-6">
+          <h3 class="italic text-gray-5">
             {{ judul }}
           </h3>
-          <h5>{{ author }} - {{ npm }}</h5>
-          <p class="italic">Nama Prodi - Nama Fakultas</p>
+          <h5 class="font-semibold">{{ author }} - {{ npm }}</h5>
+          <p class="italic text-gray-5">Nama Prodi - Nama Fakultas</p>
           <h6>Abstrak:</h6>
           <p class="text-sm text-justify">
             {{ abstrak }}
@@ -71,68 +85,224 @@ const limitText = (text) => {
       </div>
     </section>
     <section class="flex flex-col gap-10 lg:flex-row">
-      <div class="mt-5 mx-2">
+      <div class="mt-5 mx-5">
         <h2 class="my-5">Berkas</h2>
         <table class="w-full lg:w-100">
           <thead>
-            <th>Nama Berkas</th>
-            <th>Akses Berkas</th>
+            <tr>
+              <th>Nama Berkas</th>
+              <th>Akses Berkas</th>
+            </tr>
           </thead>
           <tbody>
             <tr class="text-left">
               <td class="font-semibold w-35">Cover</td>
-              <td>{{ fileCover ?? "Tidak tersedia" }}</td>
+              <td class="flex">
+                <div class="auth-true"></div>
+                <span v-if="fileCover">
+                  <NuxtLink :to="fileCover" target="_blank">Download</NuxtLink>
+                </span>
+                <span v-else-if="fileCover === null">
+                  <p>File tidak tersedia</p>
+                </span>
+                <span v-else-if="status === 'unauthenticated'">
+                  <p>Anda tidak memiliki Akses</p>
+                </span>
+                {{ fileFullText }}
+              </td>
             </tr>
             <tr class="text-left">
               <td class="font-semibold w-35">Abstrak</td>
-              <td>{{ fileAbstrak ?? "Tidak tersedia" }}</td>
+              <td class="flex">
+                <div class="auth-true"></div>
+                <span v-if="fileAbstrak">
+                  <NuxtLink :to="fileAbstrak" target="_blank"
+                    >Download</NuxtLink
+                  >
+                </span>
+                <span v-else-if="fileAbstrak === null">
+                  <p>File tidak tersedia</p>
+                </span>
+                <span v-else-if="status === 'unauthenticated'">
+                  <p>Anda tidak memiliki Akses</p>
+                </span>
+                {{ fileFullText }}
+              </td>
             </tr>
             <tr class="text-left">
               <td class="font-semibold w-35">Daftar Isi</td>
-              <td>{{ fileDaftarIsi ?? "Tidak tersedia" }}</td>
+              <td class="flex">
+                <div class="auth-true"></div>
+                <span v-if="fileDaftarIsi">
+                  <NuxtLink :to="fileDaftarIsi" target="_blank"
+                    >Download</NuxtLink
+                  >
+                </span>
+                <span v-else-if="fileDaftarIsi === null">
+                  <p>File tidak tersedia</p>
+                </span>
+                <span v-else-if="status === 'unauthenticated'">
+                  <p>Anda tidak memiliki Akses</p>
+                </span>
+                {{ fileFullText }}
+              </td>
             </tr>
             <tr class="text-left">
               <td class="font-semibold w-35">Bab 1</td>
-              <td>{{ fileBab1 ?? "Tidak tersedia" }}</td>
+              <td class="flex">
+                <div class="auth-true"></div>
+                <span v-if="fileBab1">
+                  <NuxtLink :to="fileBab1" target="_blank">Download</NuxtLink>
+                </span>
+                <span v-else-if="fileBab1 === null">
+                  <p>File tidak tersedia</p>
+                </span>
+                <span v-else-if="status === 'unauthenticated'">
+                  <p>Anda tidak memiliki Akses</p>
+                </span>
+                {{ fileFullText }}
+              </td>
             </tr>
             <tr class="text-left">
               <td class="font-semibold w-35">Bab 2</td>
-              <td>{{ fileBab2 ?? "Tidak tersedia" }}</td>
+              <td class="flex">
+                <div :class="isAccessible(fileBab2)"></div>
+                <span v-if="status === 'authenticated' && fileBab2">
+                  <NuxtLink :to="fileBab2" target="_blank">Download</NuxtLink>
+                </span>
+                <span v-else-if="fileBab2 === null">
+                  <p>File tidak tersedia</p>
+                </span>
+                <span v-else-if="status === 'unauthenticated'">
+                  <p>Anda tidak memiliki Akses</p>
+                </span>
+                {{ fileFullText }}
+              </td>
             </tr>
             <tr class="text-left">
               <td class="font-semibold w-35">Bab 3</td>
-              <td>{{ fileBab3 ?? "Tidak tersedia" }}</td>
+              <td class="flex">
+                <div :class="isAccessible(fileBab3)"></div>
+                <span v-if="status === 'authenticated' && fileBab3">
+                  <NuxtLink :to="fileBab3" target="_blank">Download</NuxtLink>
+                </span>
+                <span v-else-if="fileBab3 === null">
+                  <p>File tidak tersedia</p>
+                </span>
+                <span v-else-if="status === 'unauthenticated'">
+                  <p>Anda tidak memiliki Akses</p>
+                </span>
+                {{ fileFullText }}
+              </td>
             </tr>
             <tr class="text-left">
               <td class="font-semibold w-35">Bab 4</td>
-              <td>{{ fileBab4 ?? "Tidak tersedia" }}</td>
+              <td class="flex">
+                <div :class="isAccessible(fileBab4)"></div>
+                <span v-if="status === 'authenticated' && fileBab4">
+                  <NuxtLink :to="fileBab4" target="_blank">Download</NuxtLink>
+                </span>
+                <span v-else-if="fileBab4 === null">
+                  <p>File tidak tersedia</p>
+                </span>
+                <span v-else-if="status === 'unauthenticated'">
+                  <p>Anda tidak memiliki Akses</p>
+                </span>
+                {{ fileFullText }}
+              </td>
             </tr>
             <tr class="text-left">
               <td class="font-semibold w-35">Bab 5</td>
-              <td>{{ fileBab5 ?? "Tidak tersedia" }}</td>
+              <td class="flex">
+                <div :class="isAccessible(fileBab5)"></div>
+                <span v-if="status === 'authenticated' && fileBab5">
+                  <NuxtLink :to="fileBab5" target="_blank">Download</NuxtLink>
+                </span>
+                <span v-else-if="fileBab5 === null">
+                  <p>File tidak tersedia</p>
+                </span>
+                <span v-else-if="status === 'unauthenticated'">
+                  <p>Anda tidak memiliki Akses</p>
+                </span>
+                {{ fileFullText }}
+              </td>
             </tr>
             <tr class="text-left">
               <td class="font-semibold w-35">Bab 6</td>
-              <td>{{ fileBab6 ?? "Tidak tersedia" }}</td>
+              <td class="flex">
+                <div :class="isAccessible(fileBab6)"></div>
+                <span v-if="status === 'authenticated' && fileBab6">
+                  <NuxtLink :to="fileBab6" target="_blank">Download</NuxtLink>
+                </span>
+                <span v-else-if="fileBab6 === null">
+                  <p>File tidak tersedia</p>
+                </span>
+                <span v-else-if="status === 'unauthenticated'">
+                  <p>Anda tidak memiliki Akses</p>
+                </span>
+                {{ fileFullText }}
+              </td>
             </tr>
             <tr class="text-left">
               <td class="font-semibold w-35">Lampiran</td>
-              <td>{{ fileLampiran ?? "Tidak tersedia" }}</td>
+              <td class="flex">
+                <div :class="isAccessible(fileLampiran)"></div>
+                <span v-if="status === 'authenticated' && fileLampiran">
+                  <NuxtLink :to="fileLampiran" target="_blank"
+                    >Download</NuxtLink
+                  >
+                </span>
+                <span v-else-if="fileLampiran === null">
+                  <p>File tidak tersedia</p>
+                </span>
+                <span v-else-if="status === 'unauthenticated'">
+                  <p>Anda tidak memiliki Akses</p>
+                </span>
+                {{ fileFullText }}
+              </td>
             </tr>
             <tr class="text-left">
               <td class="font-semibold w-35">Daftar Pustaka</td>
-              <td>{{ filePustaka ?? "Tidak tersedia" }}</td>
+              <td class="flex">
+                <div class="auth-true"></div>
+                <span v-if="filePustaka">
+                  <NuxtLink :to="filePustaka" target="_blank"
+                    >Download</NuxtLink
+                  >
+                </span>
+                <span v-else-if="fileFullText === null">
+                  <p>File tidak tersedia</p>
+                </span>
+                <span v-else-if="status === 'unauthenticated'">
+                  <p>Anda tidak memiliki Akses</p>
+                </span>
+                {{ fileFullText }}
+              </td>
             </tr>
             <tr class="text-left">
               <td class="font-semibold w-35">Full Text</td>
-              <td>{{ fileFullText ?? "Tidak tersedia" }}</td>
+              <td class="flex">
+                <div :class="isAccessible(fileFullText)"></div>
+                <span v-if="status === 'authenticated' && fileFullText">
+                  <NuxtLink :to="fileFullText" target="_blank"
+                    >Download</NuxtLink
+                  >
+                </span>
+                <span v-else-if="fileFullText === null">
+                  <p>File tidak tersedia</p>
+                </span>
+                <span v-else-if="status === 'unauthenticated'">
+                  <p>Anda tidak memiliki Akses</p>
+                </span>
+                {{ fileFullText }}
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="mt-5 mx-5">
         <h2 class="my-5">Metadata</h2>
-        <div class="grid grid-cols-none lg:grid-cols-5 my-5 gap-4">
+        <div class="grid grid-cols-none lg:grid-cols-5 my-5 gap-4 text-xs">
           <div class="w-25">
             <h6>Judul</h6>
           </div>
@@ -174,6 +344,13 @@ const limitText = (text) => {
           <div class="col-span-4">
             <p>{{ stPublikasi ?? "Belum Ada Data" }}</p>
           </div>
+
+          <div class="w-25">
+            <h6>ID Pustaka</h6>
+          </div>
+          <div class="col-span-4">
+            <p>{{ idPustaka ?? "Belum Ada Data" }}</p>
+          </div>
         </div>
       </div>
     </section>
@@ -200,5 +377,17 @@ th {
 
 td {
   --at-apply: px-2 py-1 border-1 border-orange;
+}
+
+.auth-true {
+  --at-apply: i-mdi-lock-open-check bg-green-6 w-5 h-5;
+}
+
+.auth-false {
+  --at-apply: i-mdi-lock-alert bg-red-6 w-5 h-5;
+}
+
+.file-not-found {
+  --at-apply: i-mdi-note-remove bg-gray w-5 h-5;
 }
 </style>

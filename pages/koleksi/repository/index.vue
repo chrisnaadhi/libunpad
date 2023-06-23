@@ -1,9 +1,43 @@
 <script setup>
+const { getItems } = useDirectusItems();
+
+const { data: koleksiRepo } = await useFetch("/api/v1/koleksi/repo");
+
+const dataTADirectus = await getItems({
+  collection: "tbtMhsUploadThesis",
+  params: {
+    limit: 30,
+    sort: "-UploadTgl",
+  },
+});
+
+const dataMhs = async (npm) => {
+  const mahasiswa = ref();
+  try {
+    const fetchMhs = await getItemById({
+      collection: "data_keanggotaan",
+      id: npm,
+    });
+
+    mahasiswa.value = fetchMhs;
+  } catch (error) {
+    mahasiswa.value = {
+      code: "404",
+      message: "Data Mahasiswa Tidak ditemukan",
+    };
+  }
+
+  return mahasiswa.value;
+};
+
+function trimText(txt) {
+  const trimmedText = txt.slice(0, 45);
+  return trimmedText + "...";
+}
+
 definePageMeta({
   layout: "default",
 });
-
-const { data: koleksiRepo } = await useFetch("/api/v1/koleksi/repo");
 </script>
 
 <template>
@@ -21,25 +55,18 @@ const { data: koleksiRepo } = await useFetch("/api/v1/koleksi/repo");
       <CollectionRepositoryFilterOption />
       <div class="repository-collection">
         <CollectionRepositoryCard
-          v-for="koleksi in koleksiRepo.results"
-          :author="koleksi.author"
-          :title="koleksi.title"
+          v-for="koleksi in dataTADirectus"
+          :author="koleksi.MhsNPM"
+          :title="trimText(koleksi.Judul)"
           :tipe="koleksi.tipeKoleksi"
           :prodi="koleksi.prodi"
           :fakultas="koleksi.fakultas"
-          :description="koleksi.deskripsi"
-        />
-        <CollectionRepositoryCard
-          v-for="koleksi in koleksiRepo.results"
-          :author="koleksi.author"
-          :title="koleksi.title"
-          :tipe="koleksi.tipeKoleksi"
-          :prodi="koleksi.prodi"
-          :fakultas="koleksi.fakultas"
-          :description="koleksi.deskripsi"
+          :description="koleksi.Abstrak"
+          :link-access="'/koleksi/repository/item/' + koleksi.MhsNPM"
         />
       </div>
     </div>
+
     <div class="mt-5">
       <div class="bg-orange-2 w-full rounded text-center py-2">
         <p>Pagination here</p>
@@ -50,6 +77,10 @@ const { data: koleksiRepo } = await useFetch("/api/v1/koleksi/repo");
       <NuxtLink to="/koleksi" class="btn bg-orange text-white">
         Kembali ke Koleksi
       </NuxtLink>
+    </div>
+
+    <div>
+      <pre>{{ dataTADirectus }}</pre>
     </div>
   </section>
 </template>
