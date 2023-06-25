@@ -18,7 +18,11 @@ function trimText(txt) {
 <template>
   <div class="card">
     <div class="cover-section">
-      <NuxtImg src="/images/no-image.jpg" class="" />
+      <NuxtImg
+        src="/images/lambang-unpad.png"
+        class="w-full max-w-50 lg:max-w-100 max-h-80 px-3"
+        format="webp"
+      />
     </div>
     <div class="content-section">
       <h6>{{ title }}</h6>
@@ -29,12 +33,12 @@ function trimText(txt) {
         {{ trimText(description) }}
       </p>
       <div class="flex gap-1 text-center text-xs">
-        <button class="btn bg-orange w-full py-1 px-4 text-white">
+        <button class="btn bg-gray-5 w-full py-1 px-4 text-white">
           Preview
         </button>
         <NuxtLink
           :to="linkAccess"
-          class="btn bg-gray-6 w-full py-1 px-4 text-white"
+          class="btn bg-orange-5 w-full py-1 px-4 text-white"
         >
           Detail
         </NuxtLink>

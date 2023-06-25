@@ -1,3 +1,5 @@
+import { defineStore } from "pinia";
+
 export const processInputVirtualKeyboard = (dataForm: any) => {
   const addCharacters = (uppercaseState: any, key: any) => {
     if (uppercaseState) {
@@ -15,3 +17,15 @@ export const processInputVirtualKeyboard = (dataForm: any) => {
 };
 
 export const uppercaseOpt = () => useState<boolean>("uppercase", () => false);
+
+export const previewModalRepository = defineStore("modalRepository", () => {
+  const showModal = ref(false);
+  const viewModal = () => {
+    showModal.value = !showModal.value;
+  };
+
+  return {
+    showModal,
+    viewModal,
+  };
+});

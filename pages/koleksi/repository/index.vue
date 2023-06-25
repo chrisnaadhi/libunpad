@@ -1,7 +1,8 @@
 <script setup>
 const { getItems } = useDirectusItems();
 
-const { data: koleksiRepo } = await useFetch("/api/v1/koleksi/repo");
+const searchTugasAkhir = searchTugasAkhirDirectus();
+const previewItem = previewModalRepository();
 
 const dataTADirectus = await getItems({
   collection: "tbtMhsUploadThesis",
@@ -11,8 +12,17 @@ const dataTADirectus = await getItems({
   },
 });
 
+const selectedNPM = ref("110110170312");
+
+const previewData = (npm) => {
+  const searchData = dataTADirectus.find((elem) => elem.MhsNPM === npm);
+  return searchData;
+};
+
+const selectedPreview = previewData(selectedNPM.value);
+
 function trimText(txt) {
-  const trimmedText = txt.slice(0, 45);
+  const trimmedText = txt.slice(0, 55);
   return trimmedText + "...";
 }
 
@@ -23,27 +33,65 @@ definePageMeta({
 
 <template>
   <section class="max-w-7xl ma">
+    <LazyClientOnly>
+      <Teleport to="#modal">
+        <ModalBase
+          v-show="previewItem.showModal"
+          @close="previewItem.viewModal"
+        >
+          <div
+            class="max-w-3xl flex flex-col items-center bg-white w-full min-h-xs p-5 rounded"
+          >
+            <div class="flex flex-col items-center">
+              <h3>{{ selectedPreview.MhsNPM }}</h3>
+              <p>{{ selectedPreview.Judul }}</p>
+              <p class="text-xs">
+                {{ selectedPreview.AbstrakBersih ?? selectedPreview.Abstrak }}
+              </p>
+            </div>
+            <div class="mt-2">
+              <NuxtLink
+                :to="'/koleksi/repository/item/' + selectedPreview.MhsNPM"
+                class="btn bg-orange text-white px-2 py-1 text-xs"
+              >
+                Detail
+              </NuxtLink>
+            </div>
+          </div>
+        </ModalBase>
+      </Teleport>
+    </LazyClientOnly>
     <h1>Repository Unpad</h1>
     <p class="text-center">
       Koleksi Karya Ilmiah dan Tugas Akhir dari Civitas Akademika Universitas
       Padjadjaran
     </p>
-    <div class="max-w-3xl ma py-5 flex gap-1">
-      <div class="w-full h-full">
-        <input type="search" name="" id="" class="relative rounded p-2" />
-        <div
-          class="bg-white border-1 border-orange absolute w-full max-w-172 rounded"
-        >
-          <p class="py-3" v-for="o in 5">Search Results here</p>
-        </div>
-      </div>
-      <button type="submit" class="btn bg-orange text-white">Search</button>
-    </div>
+    <CollectionRepositoryMainSearch />
     <div class="flex flex-col gap-4 lg:(flex-row)">
-      <CollectionRepositoryFilterOption />
-      <div class="repository-collection">
+      <!-- <CollectionRepositoryFilterOption /> -->
+      <div class="repository-collection" v-if="!searchTugasAkhir.searchResults">
         <CollectionRepositoryCard
           v-for="koleksi in dataTADirectus"
+          :npm="koleksi.MhsNPM"
+          :title="trimText(koleksi.Judul)"
+          :tipe="koleksi.tipeKoleksi"
+          :description="koleksi.Abstrak"
+          :link-access="'/koleksi/repository/item/' + koleksi.MhsNPM"
+        />
+      </div>
+      <div v-else-if="searchTugasAkhir.searchResults === 'loading'">
+        <div class="max-w-3xl ma text-center">
+          <h3>Sedang mencari data...</h3>
+        </div>
+      </div>
+      <div v-else-if="searchTugasAkhir.searchResults === '[]'">
+        <div class="max-w-3xl ma text-center">
+          <h3>Tidak ditemukan</h3>
+        </div>
+      </div>
+      <div class="repository-collection" v-else>
+        <CollectionRepositoryCard
+          v-for="koleksi in searchTugasAkhir.searchResults"
           :npm="koleksi.MhsNPM"
           :title="trimText(koleksi.Judul)"
           :tipe="koleksi.tipeKoleksi"
@@ -54,8 +102,37 @@ definePageMeta({
     </div>
 
     <div class="mt-5">
-      <div class="bg-orange-2 w-full rounded text-center py-2">
-        <p>Pagination here</p>
+      <div class="pagination-block">
+        <button
+          class="pagination-btn"
+          :disabled="
+            !searchTugasAkhir.searchResults || searchTugasAkhir.offset === 0
+          "
+          :class="
+            !searchTugasAkhir.searchResults || searchTugasAkhir.offset === 0
+              ? 'bg-gray-5 cursor-not-allowed'
+              : 'bg-orange-5'
+          "
+          @click="searchTugasAkhir.previousPage()"
+        >
+          <h6>&lt;&lt; Prev. Page</h6>
+        </button>
+        <button
+          class="pagination-btn"
+          :disabled="
+            !searchTugasAkhir.searchResults ||
+            searchTugasAkhir.searchResults === 'loading'
+          "
+          :class="
+            !searchTugasAkhir.searchResults ||
+            searchTugasAkhir.searchResults === 'loading'
+              ? 'bg-gray-5 cursor-not-allowed'
+              : 'bg-orange-5'
+          "
+          @click="searchTugasAkhir.nextPage()"
+        >
+          Next Page &gt;&gt;
+        </button>
       </div>
     </div>
 
@@ -74,5 +151,13 @@ h1 {
 
 .repository-collection {
   --at-apply: flex flex-col gap-3 md:(grid grid-cols-2) lg:(grid grid-cols-3);
+}
+
+.pagination-block {
+  --at-apply: w-full rounded text-center py-2 flex items-center justify-center gap-5;
+}
+
+.pagination-btn {
+  --at-apply: btn py-1 px-2 text-white;
 }
 </style>

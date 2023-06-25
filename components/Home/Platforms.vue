@@ -65,7 +65,7 @@ const options = {
         <h6>Repository</h6>
       </NuxtLink>
       <NuxtLink
-        :to="locale === 'id' ? '/koleksi/repository' : '/en/koleksi/repository'"
+        :to="locale === 'id' ? '/herbarium' : '/en/herbarium'"
         class="extra-content"
       >
         <div class="i-mdi-leaf w-8 h-8" />
@@ -110,7 +110,7 @@ const options = {
 }
 
 .content-wrapper {
-  --at-apply: mt-5 max-w-6xl flex flex-1 flex-wrap justify-evenly items-center md:mt-35 xl:(mt-2 flex-nowrap);
+  --at-apply: mt-5 max-w-6xl flex flex-1 flex-wrap justify-evenly items-center md:mt-8 xl:(mt-2 flex-nowrap);
 }
 
 .content {

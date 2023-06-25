@@ -75,7 +75,7 @@ const years = [
         </div>
       </div>
       <div class="my-2">
-        <button class="btn text-sm text-white w-full bg-orange">Filter</button>
+        <button class="btn text-sm text-white w-full bg-orange">Cari</button>
       </div>
     </div>
   </section>

@@ -77,7 +77,9 @@ const limitText = (text) => {
           <h3 class="italic text-gray-5">
             {{ judul }}
           </h3>
-          <h5 class="font-semibold">{{ author }} - {{ npm }}</h5>
+          <h5 class="font-semibold">
+            {{ author ?? "Belum ada Data" }} - {{ npm }}
+          </h5>
           <p class="italic text-gray-5">{{ namaFakultas }}</p>
           <h6>Abstrak:</h6>
           <p class="text-sm text-justify">
@@ -319,49 +321,49 @@ const limitText = (text) => {
       <div class="mt-5 mx-5">
         <h2 class="my-5">Metadata</h2>
         <div class="grid grid-cols-none lg:grid-cols-5 my-5 gap-4 text-xs">
-          <div class="w-25">
+          <div class="metadata-title">
             <h6>Judul</h6>
           </div>
           <div class="col-span-4">
             <p>{{ judul ?? "Belum Ada Data" }}</p>
           </div>
 
-          <div class="w-25">
+          <div class="metadata-title">
             <h6>Abstrak</h6>
           </div>
           <div class="col-span-4">
             <p>{{ abstrak ?? "Belum Ada Data" }}</p>
           </div>
 
-          <div class="w-25">
+          <div class="metadata-title">
             <h6>Bahasa</h6>
           </div>
           <div class="col-span-4">
             <p>{{ bahasa ?? "Belum Ada Data" }}</p>
           </div>
 
-          <div class="w-25">
+          <div class="metadata-title">
             <h6>Keywords</h6>
           </div>
           <div class="col-span-4">
             <p>{{ keywords ?? "Belum Ada Data" }}</p>
           </div>
 
-          <div class="w-25">
+          <div class="metadata-title">
             <h6>Tanggal Upload</h6>
           </div>
           <div class="col-span-4">
             <p>{{ tglUpload ?? "Belum Ada Data" }}</p>
           </div>
 
-          <div class="w-25">
+          <div class="metadata-title">
             <h6>Publikasi</h6>
           </div>
           <div class="col-span-4">
             <p>{{ stPublikasi ?? "Belum Ada Data" }}</p>
           </div>
 
-          <div class="w-25">
+          <div class="metadata-title">
             <h6>ID Pustaka</h6>
           </div>
           <div class="col-span-4">
@@ -405,5 +407,9 @@ td {
 
 .file-not-found {
   --at-apply: i-mdi-note-remove bg-gray w-5 h-5;
+}
+
+.metadata-title {
+  --at-apply: w-full lg:w-25;
 }
 </style>

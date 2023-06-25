@@ -77,7 +77,7 @@ const dataObjectTA = {
   judul: finalDataTA.Judul,
   author: biodataMhs.nama_anggota,
   namaFakultas: fakultas.cariFakultas(finalDataTA.MhsNPM),
-  abstrak: finalDataTA.Abstrak,
+  abstrak: finalDataTA.AbstrakBersih ?? finalDataTA.Abstrak,
   bahasa: finalDataTA.Bahasa,
   keywords: finalDataTA.Keywords,
   tglUpload: new Date(finalDataTA.UploadTgl),
@@ -85,6 +85,10 @@ const dataObjectTA = {
   stPublikasi: finalDataTA.stPublikasi,
   verifikasi: finalDataTA.Verifikasi,
 };
+
+useHead({
+  title: finalDataTA.Judul + " | Repository Universitas Padjadjaran",
+});
 </script>
 
 <template>
