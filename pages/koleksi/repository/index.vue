@@ -86,7 +86,7 @@ definePageMeta({
             ? dataTADirectus.length
             : searchTugasAkhir.searchResults.length
         }}</span>
-        judul
+        data.
       </p>
     </div>
     <div class="flex flex-col gap-4 lg:(flex-row)">
@@ -146,12 +146,12 @@ definePageMeta({
           :disabled="
             !searchTugasAkhir.searchResults ||
             searchTugasAkhir.searchResults === 'loading' ||
-            searchTugasAkhir.searchResults.length <= 30
+            searchTugasAkhir.searchResults.length < 30
           "
           :class="
             !searchTugasAkhir.searchResults ||
             searchTugasAkhir.searchResults === 'loading' ||
-            searchTugasAkhir.searchResults.length <= 30
+            searchTugasAkhir.searchResults.length < 30
               ? 'bg-gray-5 cursor-not-allowed'
               : 'bg-orange-5'
           "
