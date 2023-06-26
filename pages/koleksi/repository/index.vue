@@ -76,6 +76,19 @@ definePageMeta({
       Padjadjaran
     </p>
     <CollectionRepositoryMainSearch />
+    <div v-show="searchTugasAkhir.searchResults !== 'loading'">
+      <p class="text-center">
+        Hasil pencarian:
+        <span class="font-semibold">"{{ searchTugasAkhir.keywords }}"</span>
+        terdapat
+        <span class="font-semibold">{{
+          !searchTugasAkhir.searchResults
+            ? dataTADirectus.length
+            : searchTugasAkhir.searchResults.length
+        }}</span>
+        judul
+      </p>
+    </div>
     <div class="flex flex-col gap-4 lg:(flex-row)">
       <!-- <CollectionRepositoryFilterOption /> -->
       <div class="repository-collection" v-if="!searchTugasAkhir.searchResults">
@@ -132,11 +145,13 @@ definePageMeta({
           class="pagination-btn"
           :disabled="
             !searchTugasAkhir.searchResults ||
-            searchTugasAkhir.searchResults === 'loading'
+            searchTugasAkhir.searchResults === 'loading' ||
+            searchTugasAkhir.searchResults.length <= 30
           "
           :class="
             !searchTugasAkhir.searchResults ||
-            searchTugasAkhir.searchResults === 'loading'
+            searchTugasAkhir.searchResults === 'loading' ||
+            searchTugasAkhir.searchResults.length <= 30
               ? 'bg-gray-5 cursor-not-allowed'
               : 'bg-orange-5'
           "
