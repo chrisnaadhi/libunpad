@@ -12,16 +12,26 @@ const dataTADirectus = await getItems({
   },
 });
 
-const selectedNPM = ref("110110170312");
-
 const previewData = (npm) => {
-  const searchData = dataTADirectus.find((elem) => elem.MhsNPM === npm);
-  return searchData;
+  if (!searchTugasAkhir.searchResults) {
+    const searchData = dataTADirectus.find((elem) => elem.MhsNPM === npm);
+    return searchData;
+  } else {
+    const searchData = searchTugasAkhir.searchResults.find(
+      (elem) => elem.MhsNPM === npm
+    );
+    return searchData;
+  }
 };
 
-const selectedPreview = previewData(selectedNPM.value);
+let selectedPreview = previewData(previewItem.numberSelected);
 
-function trimText(txt) {
+const openModal = (npm) => {
+  selectedPreview = previewData(npm);
+  previewItem.viewModal();
+};
+
+function trimText(txt, maxVal) {
   const trimmedText = txt.slice(0, 55);
   return trimmedText + "...";
 }
@@ -39,15 +49,14 @@ definePageMeta({
           v-show="previewItem.showModal"
           @close="previewItem.viewModal"
         >
-          <div
-            class="max-w-3xl flex flex-col items-center bg-white w-full min-h-xs p-5 rounded"
-          >
+          <div @click.stop="" class="preview-block">
             <div class="flex flex-col items-center">
               <h3>{{ selectedPreview.MhsNPM }}</h3>
               <p>{{ selectedPreview.Judul }}</p>
               <p class="text-xs">
                 {{ selectedPreview.AbstrakBersih ?? selectedPreview.Abstrak }}
               </p>
+              <p>Keywords: {{ selectedPreview.Keywords }}</p>
             </div>
             <div class="mt-2">
               <NuxtLink
@@ -77,6 +86,7 @@ definePageMeta({
           :tipe="koleksi.tipeKoleksi"
           :description="koleksi.Abstrak"
           :link-access="'/koleksi/repository/item/' + koleksi.MhsNPM"
+          @preview="openModal(koleksi.MhsNPM)"
         />
       </div>
       <div v-else-if="searchTugasAkhir.searchResults === 'loading'">
@@ -97,6 +107,7 @@ definePageMeta({
           :tipe="koleksi.tipeKoleksi"
           :description="koleksi.Abstrak"
           :link-access="'/koleksi/repository/item/' + koleksi.MhsNPM"
+          @preview="openModal(koleksi.MhsNPM)"
         />
       </div>
     </div>
@@ -136,6 +147,11 @@ definePageMeta({
       </div>
     </div>
 
+    <div class="flex flex-col items-center">
+      <h4>Perlu Bantuan ?</h4>
+      <p>Hubungi kami melalui Email, Whatsapp atau Media Sosial.</p>
+    </div>
+
     <div class="my-10 flex flex-col items-center">
       <NuxtLink to="/koleksi" class="btn bg-orange text-white">
         Kembali ke Koleksi
@@ -151,6 +167,10 @@ h1 {
 
 .repository-collection {
   --at-apply: flex flex-col gap-3 md:(grid grid-cols-2) lg:(grid grid-cols-3);
+}
+
+.preview-block {
+  --at-apply: max-w-3xl flex flex-col items-center bg-white w-full max-h-80 overflow-y-scroll p-5 rounded-lg;
 }
 
 .pagination-block {

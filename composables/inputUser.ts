@@ -20,12 +20,14 @@ export const uppercaseOpt = () => useState<boolean>("uppercase", () => false);
 
 export const previewModalRepository = defineStore("modalRepository", () => {
   const showModal = ref(false);
-  const viewModal = () => {
+  const numberSelected = ref("110110190107");
+  const viewModal = (npm: string) => {
     showModal.value = !showModal.value;
   };
 
   return {
     showModal,
     viewModal,
+    numberSelected,
   };
 });

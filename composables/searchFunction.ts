@@ -49,7 +49,6 @@ export const searchTugasAkhirDirectus = defineStore(
     const keywords = ref("");
     const offset = ref(0);
     const searchResults = ref();
-    const searchFields = ref([]);
 
     const searchingTugasAkhir = async () => {
       searchResults.value = "loading";

@@ -122,6 +122,10 @@ useHead({
       </div>
     </div>
     <CollectionRepositoryItem v-bind="dataObjectTA" />
+    <div class="flex flex-col items-center">
+      <h4>Perlu Bantuan ?</h4>
+      <p>Hubungi kami melalui Email, Whatsapp atau Media Sosial.</p>
+    </div>
     <div class="text-center mb-5">
       <NuxtLink to="/koleksi/repository" class="btn-auth bg-orange text-lg"
         >Kembali ke Koleksi Repository</NuxtLink

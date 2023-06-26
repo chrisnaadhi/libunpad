@@ -1,4 +1,5 @@
 <script setup>
+const emit = defineEmits(["preview"]);
 defineProps({
   title: String,
   npm: String,
@@ -7,11 +8,16 @@ defineProps({
   tipe: String,
   description: String,
   linkAccess: String,
+  previewNpm: String,
 });
 
 function trimText(txt) {
   const trimmedText = txt.slice(0, 55);
   return trimmedText + "...";
+}
+
+function openPreview() {
+  emit("preview");
 }
 </script>
 
@@ -20,7 +26,7 @@ function trimText(txt) {
     <div class="cover-section">
       <NuxtImg
         src="/images/lambang-unpad.png"
-        class="w-full max-w-50 lg:max-w-100 max-h-80 px-3"
+        class="w-25 max-w-50 max-h-80 px-3"
         format="webp"
       />
     </div>
@@ -33,7 +39,10 @@ function trimText(txt) {
         {{ trimText(description) }}
       </p>
       <div class="flex gap-1 text-center text-xs">
-        <button class="btn bg-gray-5 w-full py-1 px-4 text-white">
+        <button
+          class="btn bg-gray-5 w-full py-1 px-4 text-white"
+          @click="openPreview"
+        >
           Preview
         </button>
         <NuxtLink
