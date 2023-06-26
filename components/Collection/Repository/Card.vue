@@ -1,35 +1,56 @@
 <script setup>
+const emit = defineEmits(["preview"]);
 defineProps({
   title: String,
+  npm: String,
   author: String,
-  prodi: String,
   fakultas: String,
   tipe: String,
   description: String,
+  linkAccess: String,
+  previewNpm: String,
 });
 
 function trimText(txt) {
-  const trimmedText = txt.slice(0, 45);
+  const trimmedText = txt.slice(0, 55);
   return trimmedText + "...";
+}
+
+function openPreview() {
+  emit("preview");
 }
 </script>
 
 <template>
   <div class="card">
     <div class="cover-section">
-      <NuxtImg src="/images/no-image.jpg" width="85px" />
+      <NuxtImg
+        src="/images/lambang-unpad.png"
+        class="w-25 max-w-50 max-h-80 px-3"
+        format="webp"
+      />
     </div>
     <div class="content-section">
-      <h1>{{ title }}</h1>
-      <h4 class="text-sm italic">{{ author }}</h4>
-      <h5 class="text-xs">{{ prodi }} - {{ fakultas }}</h5>
-      <p class="font-600">{{ tipe }}</p>
-      <p>
+      <h6>{{ title }}</h6>
+      <h6 class="italic">{{ npm }}</h6>
+      <p class="text-xs">{{ author }}</p>
+      <p class="text-sm font-600">{{ tipe }}</p>
+      <p class="text-sm mb-2">
         {{ trimText(description) }}
       </p>
-      <div class="flex gap-2">
-        <button class="btn bg-orange py-1 px-4 text-white">Lihat</button>
-        <button class="btn bg-blue py-1 px-4 text-white">Pinjam</button>
+      <div class="flex gap-1 text-center text-xs">
+        <button
+          class="btn bg-gray-5 w-full py-1 px-4 text-white"
+          @click="openPreview"
+        >
+          Preview
+        </button>
+        <NuxtLink
+          :to="linkAccess"
+          class="btn bg-orange-5 w-full py-1 px-4 text-white"
+        >
+          Detail
+        </NuxtLink>
       </div>
     </div>
   </div>
@@ -37,14 +58,14 @@ function trimText(txt) {
 
 <style>
 .card {
-  --at-apply: flex rounded shadow-md shadow-gray p-2 m-2;
+  --at-apply: flex rounded shadow-md shadow-gray p-2 max-h-60;
 }
 
 .cover-section {
-  --at-apply: m-2 shadow-sm shadow-gray rounded;
+  --at-apply: m-2 flex items-center shadow shadow-gray rounded;
 }
 
 .content-section {
-  --at-apply: m-2;
+  --at-apply: m-2 flex flex-col justify-around;
 }
 </style>

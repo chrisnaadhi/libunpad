@@ -1,5 +1,4 @@
 <script setup>
-const title = ref("Jelajahi Koleksi Kami");
 const image = ref("https://www.svgrepo.com/show/428321/notebook.svg");
 const route = useRoute();
 useHead({
@@ -9,14 +8,14 @@ useHead({
 
 <template>
   <main class="container ma my-10">
-    <CollectionHeader :title="title" :image="image" />
+    <CollectionHeader :title="$t('collectionTitleHeader')" :image="image" />
 
     <section class="my-5">
       <h2>Pilihan Kami</h2>
       <CollectionBooksHighlight />
     </section>
 
-    <section class="mt-25">
+    <section class="mt-10">
       <h2>Koleksi Lainnya</h2>
       <CollectionBlockData :left="true" title="Gallery" page="/gallery" />
       <CollectionBlockData :left="false" title="Library" page="/library" />

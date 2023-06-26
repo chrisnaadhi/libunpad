@@ -9,13 +9,18 @@ const viewDropdown = () => {
 const leaveDropdown = () => {
   viewMenu.value = false;
 };
+
+const openDropdown = () => {
+  viewMenu.value = !viewMenu.value;
+};
 </script>
 
 <template>
   <li
     class="cursor-pointer z-2"
-    @mouseleave="leaveDropdown"
+    @click="openDropdown"
     @mouseenter="viewDropdown"
+    @mouseleave="leaveDropdown"
   >
     <div class="menu">
       <p class="menu-title">{{ menuTitle }}</p>

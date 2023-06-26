@@ -5,31 +5,37 @@ export const menuContent = () => {
     {
       name: "Kandaga",
       url: "#",
+      nameEN: "Kandaga",
       urlEN: "/en#",
     },
     {
       name: "Profil",
       url: "#",
+      nameEN: "Profile",
       urlEN: "/en#",
     },
     {
       name: "Fasilitas",
       url: "#",
+      nameEN: "Facilities",
       urlEN: "/en#",
     },
     {
       name: "Regulasi",
       url: "#",
+      nameEN: "Regulation",
       urlEN: "/en#",
     },
     {
       name: "Struktur Organisasi",
       url: "#",
+      nameEN: "Organization Structure",
       urlEN: "/en#",
     },
     {
       name: "Keanggotaan",
       url: "#",
+      nameEN: "Membership",
       urlEN: "/en#",
     },
   ];
@@ -38,54 +44,64 @@ export const menuContent = () => {
     {
       name: "Layanan Daring",
       url: "#",
+      nameEN: "Online Service",
       urlEN: "/en#",
     },
     {
       name: "Layanan Luring",
       url: "#",
+      nameEN: "Offline Service",
       urlEN: "/en#",
     },
     {
       name: "Layanan Administratif",
       url: "/pengajuan",
+      nameEN: "Administrative Service",
       urlEN: "/en/pengajuan",
     },
     {
       name: "Layanan Riset",
       url: "#",
+      nameEN: "Research Assist",
       urlEN: "/en#",
     },
     {
       name: "Visitor",
       url: "/visitor",
+      nameEN: "Visitor",
       urlEN: "/en/visitor",
     },
   ];
 
   const koleksi = [
     {
-      name: "Gallery",
+      name: "Galeri",
       url: "/gallery",
+      nameEN: "Gallery",
       urlEN: "/en/gallery",
     },
     {
-      name: "Library",
+      name: "Perpustakaan",
       url: "/library",
+      nameEN: "Library",
       urlEN: "/en/library",
     },
     {
-      name: "Archive",
+      name: "Arsip",
       url: "/records",
+      nameEN: "Archive",
       urlEN: "/en/records",
     },
     {
       name: "Museum",
       url: "/museum",
+      nameEN: "Museum",
       urlEN: "/en/museum",
     },
     {
-      name: "Repository",
+      name: "Repositori",
       url: "/koleksi/repository",
+      nameEN: "Repository",
       urlEN: "/en/koleksi/repository",
     },
   ];
@@ -94,26 +110,31 @@ export const menuContent = () => {
     {
       name: "Layanan & Fasilitas",
       url: "#",
+      nameEN: "Services & Facilities",
       urlEN: "/en#",
     },
     {
       name: "Mahasiswa",
       url: "#",
+      nameEN: "Students",
       urlEN: "/en#",
     },
     {
       name: "Peneliti",
       url: "#",
+      nameEN: "Researchers",
       urlEN: "/en#",
     },
     {
       name: "Dosen",
       url: "#",
+      nameEN: "Lecturers",
       urlEN: "/en#",
     },
     {
       name: "Tenaga Pendidik",
       url: "#",
+      nameEN: "Academic Staffs",
       urlEN: "/en#",
     },
   ];

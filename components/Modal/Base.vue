@@ -11,14 +11,14 @@ const closeModal = () => {
     <main @click="closeModal">
       <div class="relative flex justify-center cursor-pointer">
         <p
-          class="absolute mt-13 text-center px-2 bg-orange rounded"
+          class="absolute mt-18 text-center px-2 bg-orange rounded text-white"
           @click.stop="closeModal"
         >
           Close ✖
         </p>
       </div>
 
-      <section class="flex mt--5 flex-col h-full items-center justify-center">
+      <section class="flex mt--10 flex-col h-full items-center justify-center">
         <slot />
       </section>
     </main>
@@ -27,7 +27,7 @@ const closeModal = () => {
 
 <style scoped>
 main {
-  --at-apply: w-full h-full mt-7 fixed z-2 bg-dark/50;
+  --at-apply: w-full h-full mt-15 fixed z-2 bg-dark/50;
   overflow: hidden;
 }
 

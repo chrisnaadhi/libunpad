@@ -19,6 +19,6 @@ definePageMeta({
 
 <style scoped>
 section {
-  --at-apply: max-w-4xl ma my-5 text-center;
+  --at-apply: max-w-6xl ma my-5 text-center;
 }
 </style>

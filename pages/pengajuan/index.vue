@@ -1,4 +1,5 @@
 <script setup>
+const { data } = useAuth();
 const user = useDirectusUser();
 const { data: fetchService } = await useFetch("/api/v1/layanan");
 </script>
@@ -13,7 +14,14 @@ const { data: fetchService } = await useFetch("/api/v1/layanan");
         </div>
         <div class="text-justify w-full">
           <h1 class="text-2xl font-600">
-            Halo, {{ user ? `${user.first_name}!` : "Pengunjung" }}
+            Halo,
+            {{
+              user
+                ? `${user.first_name}!`
+                : data
+                ? data?.user?.name
+                : "Pengunjung"
+            }}
           </h1>
           <p>
             {{ $t("pengajuanDescription") }}
@@ -34,7 +42,10 @@ const { data: fetchService } = await useFetch("/api/v1/layanan");
                 Ajukan
               </button>
             </NuxtLink>
-            <NuxtLink :to="layanan.slug + '/data'" class="w-full">
+            <NuxtLink
+              :to="layanan.slug.includes('#') ? '/#' : layanan.slug + '/data'"
+              class="w-full"
+            >
               <button class="btn bg-orange text-xs text-white w-full">
                 Data Pengajuan
               </button>

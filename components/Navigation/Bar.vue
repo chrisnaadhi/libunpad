@@ -5,7 +5,7 @@ const { locale } = useI18n();
 </script>
 
 <template>
-  <GenericMiniBanner v-show="route.path === '/' || '/en'" />
+  <GenericMiniBanner />
   <div class="wrapper">
     <nav class="navbar">
       <NuxtLink :to="locale === 'en' ? '/en' : '/'">
@@ -37,7 +37,7 @@ const { locale } = useI18n();
 }
 
 .navbar {
-  --at-apply: max-w-7xl flex items-unset justify-between py-4 px-3 ma xl:(items-center justify-between px-0);
+  --at-apply: max-w-7xl flex items-unset justify-between py-4 px-0 sm:px-3 ma xl:(items-center justify-between px-0);
 }
 
 .logo {

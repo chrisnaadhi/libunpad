@@ -1,4 +1,4 @@
-export default defineI18nConfig((nuxt) => ({
+export default defineI18nConfig(() => ({
   legacy: false,
   locale: "id",
   fallbackLocale: "id",

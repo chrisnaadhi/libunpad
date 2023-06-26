@@ -1,6 +1,7 @@
 <script setup>
 import "@splidejs/vue-splide/css";
 import "@splidejs/vue-splide/css/core";
+import "v-calendar/style.css";
 import { mobileMenu } from "~/composables/navMenu";
 import { useSearchFunction } from "~/composables/searchFunction";
 
@@ -70,6 +71,34 @@ h5,
 h6 {
   font-family: "Kanit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+h1 {
+  --at-apply: text-4xl;
+}
+
+h2 {
+  --at-apply: text-3xl;
+}
+
+h3 {
+  --at-apply: text-2xl;
+}
+
+h4 {
+  --at-apply: text-xl;
+}
+
+h5 {
+  --at-apply: text-lg;
+}
+
+h6 {
+  --at-apply: text-base;
+}
+
+input[type="search"] {
+  --at-apply: w-full border-1 border-orange;
 }
 
 .page-enter-active,

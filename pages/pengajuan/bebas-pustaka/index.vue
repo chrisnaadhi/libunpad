@@ -1,17 +1,20 @@
 <script setup>
 definePageMeta({
-  middleware: ["directus-auth"],
+  middleware: ["authentication-check"],
 });
 const { createItems } = useDirectusItems();
-const user = useDirectusUser();
 
-const npm = ref(user.value.nomor_induk);
+const npm = ref("");
 const notification = ref("Silahkan isi seluruh form sesuai dengan data asli");
 const textNotif = ref("text-dark");
 const namaLengkap = ref("");
 const email = ref("");
 const kontak = ref("");
-const keperluan = ref("");
+const namaRuangan = ref("");
+const tanggalPeminjaman = ref("");
+const jamMulai = ref("");
+const jamSelesai = ref("");
+const tujuanPeminjaman = ref("");
 const emailPattern = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
 
 const kirimPengajuan = async () => {
@@ -21,14 +24,16 @@ const kirimPengajuan = async () => {
     nama_lengkap: namaLengkap.value,
     email: email.value,
     kontak: kontak.value,
-    keperluan: keperluan.value,
-    status_pengajuan: "pengajuan",
+    nama_ruangan: namaRuangan.value,
+    tanggal_peminjaman: tanggalPeminjaman.value,
+    jam_mulai_peminjaman: jamMulai.value,
+    jam_selesai_peminjaman: jamSelesai.value,
+    tujuan_peminjaman: tujuanPeminjaman.value,
   };
   if (emailValidation) {
     try {
       await createItems({ collection: "pengajuan_surat_bebas_pustaka", items });
       await navigateTo({ path: "/pengajuan/bebas-pustaka/data" });
-      console.log(emailValidation);
     } catch (error) {
       console.log(error);
     }
@@ -52,14 +57,7 @@ const kirimPengajuan = async () => {
     >
       <div class="input-form">
         <label for="npm">NPM :</label>
-        <input
-          type="text"
-          name="npm"
-          id="npm"
-          disabled
-          :value="npm"
-          class="cursor-not-allowed text-gray"
-        />
+        <input type="text" name="npm" id="npm" :value="npm" />
       </div>
       <div class="input-form">
         <label for="nama">Nama Lengkap :</label>

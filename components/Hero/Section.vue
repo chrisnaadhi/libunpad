@@ -1,3 +1,8 @@
+<script setup>
+const { locale } = useI18n();
+const switchLocalePath = useSwitchLocalePath();
+</script>
+
 <template>
   <section class="container ma bg-white mb-15">
     <div class="hero-space">
@@ -10,19 +15,25 @@
         </h1>
         <p class="text-sm md:text-xl font-500 text-gray-700 font-italic">
           <span class="text-orange-6 font-600">Universitas Padjadjaran</span>'s
-          Gallery, Library, Record Management, Museum & Repository
+          Gallery, Library, Record Management & Museum (GLAMS)
         </p>
         <p class="py-2 text-xs xl:(mr-6 pr-8)">
           {{ $t("homeDescription") }}
         </p>
         <GenericSearch />
         <div class="container flex justify-center w-full xl:justify-start">
-          <NuxtLink to="/search" class="btn tentang">{{
-            $t("searchPage")
-          }}</NuxtLink>
-          <NuxtLink to="/koleksi" class="btn bantuan">{{
-            $t("ourCollection")
-          }}</NuxtLink>
+          <NuxtLink
+            :to="locale === 'en' ? '/en/search' : '/search'"
+            class="btn tentang"
+          >
+            {{ $t("searchPage") }}
+          </NuxtLink>
+          <NuxtLink
+            :to="locale === 'en' ? '/en/koleksi' : '/koleksi'"
+            class="btn bantuan"
+          >
+            {{ $t("ourCollection") }}
+          </NuxtLink>
         </div>
       </div>
       <div class="hero-right">

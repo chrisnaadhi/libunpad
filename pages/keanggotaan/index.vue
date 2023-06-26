@@ -36,7 +36,7 @@ useHead({
 });
 
 definePageMeta({
-  middleware: ["directus-auth"],
+  middleware: ["authentication-check"],
 });
 </script>
 

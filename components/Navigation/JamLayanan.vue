@@ -1,6 +1,6 @@
 <script setup>
 const { currentTime } = useCurrentTime();
-const { display, disableDisplay } = jamLayanan();
+const { disableDisplay } = jamLayanan();
 const options = {
   weekday: "long",
   year: "numeric",
@@ -23,10 +23,6 @@ const cekHariLibur = ref(() => {
   return today;
 });
 
-const preventMainClick = () => {
-  display = true;
-};
-
 onMounted(() => {
   document.addEventListener("click", () => {
     disableDisplay();
@@ -35,7 +31,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <main @click.stop="preventMainClick" class="bg-gray-1 text-center z-1">
+  <main @click.stop="" class="bg-gray-1 text-center z-1">
     <div class="bg-orange max-w-50 py-2 ma">
       <p class="text-md text-white font-600">
         {{ currentTime.toLocaleDateString("id-ID", options) }}

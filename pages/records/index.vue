@@ -1,10 +1,11 @@
 <script setup>
+const i18n = useI18n();
+
 const archiveObj = {
   title: "Archives",
   definition: "(noun) /ˈɑːr.kaɪv/",
   imageUrl: "undraw_Professor.png",
-  titleDesc:
-    "An archive is an accumulation of historical records or materials – in any medium – or the physical facility in which they are located.",
+  titleDesc: computed(() => i18n.t("archiveDescription")),
 };
 </script>
 
