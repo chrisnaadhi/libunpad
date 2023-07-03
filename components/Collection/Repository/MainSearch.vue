@@ -12,7 +12,8 @@ const searchTugasAkhir = searchTugasAkhirDirectus();
           name=""
           id=""
           class="relative rounded p-2"
-          @keyup.enter="searchTugasAkhir.searchingTugasAkhir()"
+          placeholder="Masukkan kata yang ingin dicari"
+          @keyup.enter="searchTugasAkhir.searchingTugasAkhir(true)"
         />
         <!-- <div class="search-wrapper" v-show="mainSearchBar !== ''">
           <div
@@ -32,7 +33,7 @@ const searchTugasAkhir = searchTugasAkhirDirectus();
       </div>
       <button
         type="submit"
-        @click="searchTugasAkhir.searchingTugasAkhir()"
+        @click="searchTugasAkhir.searchingTugasAkhir(true)"
         class="btn bg-orange text-white"
       >
         Search

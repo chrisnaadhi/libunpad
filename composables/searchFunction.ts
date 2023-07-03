@@ -48,9 +48,25 @@ export const searchTugasAkhirDirectus = defineStore(
     const { getItems } = useDirectusItems();
     const keywords = ref("");
     const offset = ref(0);
+    const page = ref(1);
+    const isNewSearch = ref(false);
     const searchResults = ref();
 
-    const searchingTugasAkhir = async () => {
+    const searchingTugasAkhir = async (isNew: boolean) => {
+      switch (isNew) {
+        case false:
+          isNewSearch.value = false;
+          page.value += 1;
+          break;
+        case true:
+          isNewSearch.value = true;
+          offset.value = 0;
+          page.value = 1;
+          break;
+        default:
+          console.log("Something is wrong");
+          break;
+      }
       searchResults.value = "loading";
       if (keywords.value !== "") {
         const fetchSearchResults = await getItems({
@@ -89,20 +105,21 @@ export const searchTugasAkhirDirectus = defineStore(
     const nextPage = () => {
       if (offset.value >= 0) {
         offset.value += 30;
-        searchingTugasAkhir();
+        searchingTugasAkhir(false);
       }
     };
 
     const previousPage = () => {
       if (offset.value >= 0) {
         offset.value -= 30;
-        searchingTugasAkhir();
+        searchingTugasAkhir(false);
       }
     };
 
     return {
       keywords,
       offset,
+      page,
       searchResults,
       searchingTugasAkhir,
       nextPage,

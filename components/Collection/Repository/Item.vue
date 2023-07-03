@@ -44,7 +44,11 @@ defineProps({
 });
 
 const limitText = (text) => {
-  return text.substring(0, 100);
+  if (text.length > 70) {
+    return text.slice(0, 70) + "...";
+  } else {
+    return text;
+  }
 };
 </script>
 
@@ -53,7 +57,7 @@ const limitText = (text) => {
     <section class="flex flex-col lg:flex-row gap-5">
       <div class="w-70 ma text-center">
         <div class="cover-section">
-          <p class="text-xs italic px-2">{{ judul }}...</p>
+          <p class="text-xs italic px-2">{{ limitText(judul) }}</p>
           <p class="text-xs font-semibold">{{ author }}</p>
           <NuxtImg
             src="/images/lambang-unpad.png"

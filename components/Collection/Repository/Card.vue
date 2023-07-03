@@ -9,11 +9,16 @@ defineProps({
   description: String,
   linkAccess: String,
   previewNpm: String,
+  keywords: String,
 });
 
 function trimText(txt) {
-  const trimmedText = txt.slice(0, 55);
-  return trimmedText + "...";
+  if (txt.length > 65) {
+    const trimmedText = txt.slice(0, 65);
+    return trimmedText + "...";
+  } else {
+    return txt;
+  }
 }
 
 function openPreview() {
@@ -38,7 +43,11 @@ function openPreview() {
       <p class="text-sm mb-2">
         {{ trimText(description) }}
       </p>
-      <div class="flex gap-1 text-center text-xs">
+      <p class="text-xs">
+        <span class="font-semibold">Keywords:</span>
+        {{ keywords }}
+      </p>
+      <div class="flex gap-1 text-center text-xs mt-3">
         <button
           class="btn bg-gray-5 w-full py-1 px-4 text-white"
           @click="openPreview"
@@ -58,7 +67,7 @@ function openPreview() {
 
 <style>
 .card {
-  --at-apply: flex rounded shadow-md shadow-gray p-2 max-h-60;
+  --at-apply: flex rounded shadow-md shadow-gray p-2 max-h-full;
 }
 
 .cover-section {

@@ -83,7 +83,7 @@ const years = [
 
 <style scoped>
 .main-block {
-  --at-apply: bg-orange-1 border-1 border-orange rounded min-w-50 py-5 px-3 mx-2 lg:mx-0;
+  --at-apply: bg-orange-50 border-1 border-orange rounded min-w-50 py-5 px-3 mx-2 lg:mx-0;
 }
 
 select {
