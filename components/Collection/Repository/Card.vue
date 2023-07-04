@@ -36,8 +36,12 @@ function openPreview() {
       />
     </div>
     <div class="content-section">
-      <h6>{{ title }}</h6>
-      <h6 class="italic">{{ npm }}</h6>
+      <NuxtLink :to="linkAccess">
+        <h6 class="transition-all-500 hover:(text-orange)">
+          {{ title }}
+        </h6>
+      </NuxtLink>
+      <h6 class="text-sm italic">{{ npm }}</h6>
       <p class="text-xs">{{ author }}</p>
       <p class="text-sm font-600">{{ tipe }}</p>
       <p class="text-sm mb-2">

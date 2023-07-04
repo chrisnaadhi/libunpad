@@ -33,10 +33,7 @@ const dataMhs = async () => {
 
     mahasiswa.value = fetchMhs;
   } catch (error) {
-    mahasiswa.value = {
-      code: "404",
-      message: "Data Mahasiswa Tidak ditemukan",
-    };
+    mahasiswa.value = "Tidak ada data";
   }
 
   return mahasiswa.value;
@@ -86,6 +83,42 @@ const dataObjectTA = {
   verifikasi: finalDataTA.Verifikasi,
 };
 
+// Citation Data
+const formattedAPA = ref("");
+const formattedChicago = ref("");
+const tanggal = new Date(finalDataTA.UploadTgl);
+const tahun = tanggal.getFullYear();
+const nama = biodataMhs
+  ? biodataMhs.nama_anggota.toLowerCase().split(" ")
+  : "Belum ada data";
+const judul = finalDataTA.Judul;
+const penerbit =
+  fakultas.cariFakultas(finalDataTA.MhsNPM) + " Universitas Padjadjaran";
+
+const APAFormat = () => {
+  const firstName = nama[0].split("")[0].toUpperCase();
+  const secondName = nama[1]?.split("")[0].toUpperCase();
+  const thirdName = nama[2]?.split("")[0].toUpperCase();
+  const lastName = nama.at(-1).charAt(0).toUpperCase() + nama.at(-1).slice(1);
+
+  formattedAPA.value = `${lastName}, ${firstName}. ${secondName}. ${thirdName}. (${tahun}). <span class="italic">${judul}</span>. ${penerbit}`;
+};
+const ChicagoFormat = () => {
+  const firstName = nama.at(0).charAt(0).toUpperCase() + nama.at(0).slice(1);
+  const secondName = nama.at(1)?.charAt(0).toUpperCase() + nama.at(1)?.slice(1);
+  const thirdName = nama.at(2)?.charAt(0).toUpperCase() + nama.at(2)?.slice(1);
+  const lastName = nama.at(-1).charAt(0).toUpperCase() + nama.at(-1).slice(1);
+
+  formattedChicago.value = `${lastName}, ${firstName} ${secondName} ${thirdName}. ${tahun}. "${judul}". ${penerbit}`;
+};
+
+// Copy Citation Format
+const copyCitation = (val) => {};
+
+// Call Citation function
+APAFormat();
+ChicagoFormat();
+
 useHead({
   title: finalDataTA.Judul + " | Repository Universitas Padjadjaran",
 });
@@ -122,6 +155,17 @@ useHead({
       </div>
     </div>
     <CollectionRepositoryItem v-bind="dataObjectTA" />
+    <div class="max-w-6xl ma">
+      <h3>Cite this paper</h3>
+      <div>
+        <h4>APA</h4>
+        <p v-html="formattedAPA"></p>
+      </div>
+      <div>
+        <h4>Chicago Style</h4>
+        <p v-html="formattedChicago"></p>
+      </div>
+    </div>
     <div class="flex flex-col items-center">
       <h4>Perlu Bantuan ?</h4>
       <p>Hubungi kami melalui Email, Whatsapp atau Media Sosial.</p>

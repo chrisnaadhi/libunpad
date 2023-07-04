@@ -70,7 +70,7 @@ definePageMeta({
         </ModalBase>
       </Teleport>
     </LazyClientOnly>
-    <h1>Repository Unpad</h1>
+    <h1>Repository Universitas Padjadjaran</h1>
     <p class="text-center">
       Koleksi Karya Ilmiah dan Tugas Akhir dari Civitas Akademika Universitas
       Padjadjaran
