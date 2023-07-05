@@ -109,32 +109,32 @@ export const menuContent = () => {
   const panduan = [
     {
       name: "Layanan & Fasilitas",
-      url: "#",
+      url: "/panduan",
       nameEN: "Services & Facilities",
+      urlEN: "/en/panduan",
+    },
+    {
+      name: "Pustakawan Subjek",
+      url: "#",
+      nameEN: "Subject Librarians",
       urlEN: "/en#",
     },
     {
-      name: "Mahasiswa",
+      name: "Belajar di Kandaga",
       url: "#",
-      nameEN: "Students",
+      nameEN: "Study in Kandaga",
       urlEN: "/en#",
     },
     {
-      name: "Peneliti",
+      name: "E-Resources",
       url: "#",
-      nameEN: "Researchers",
+      nameEN: "E-Resources",
       urlEN: "/en#",
     },
     {
-      name: "Dosen",
+      name: "FAQ",
       url: "#",
-      nameEN: "Lecturers",
-      urlEN: "/en#",
-    },
-    {
-      name: "Tenaga Pendidik",
-      url: "#",
-      nameEN: "Academic Staffs",
+      nameEN: "FAQ",
       urlEN: "/en#",
     },
   ];

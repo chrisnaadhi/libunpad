@@ -53,7 +53,7 @@ const layananPerpustakaan = ref([
       voluptatem quasi vitae laboriosam.
     </p>
     <div class="w-full">
-      <GenericBaseCard class="bg-orange-3 px-4 py-2">
+      <GenericBaseCard class="bg-orange-2 px-4 py-2">
         <h3 class="text-center">Layanan dan Fasilitas</h3>
       </GenericBaseCard>
     </div>

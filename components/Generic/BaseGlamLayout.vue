@@ -44,7 +44,7 @@ defineProps({
         </div>
       </div>
     </div>
-    <div class="max-w-6xl ma bg-gray-50 rounded-lt-lg rounded-rt-lg p-4">
+    <div class="max-w-6xl ma bg-gray-1 rounded-lg rounded-rt-lg p-4">
       <div class="p-4">
         <h1 class="text-4xl text-center">{{ branding ?? title }}</h1>
         <p class="text-justify">
@@ -55,11 +55,7 @@ defineProps({
           doloremque deleniti delectus ab corporis at modi obcaecati? Blanditiis
           nobis ut eveniet quis, dolores dolore aperiam maiores facilis
           voluptatem totam eius tempora nisi veniam mollitia, consequuntur
-          dolorem. Architecto numquam aspernatur ad iusto. Dolorem suscipit
-          corporis dicta excepturi, quod dolores veniam iste iusto consectetur
-          facere. Iste aspernatur omnis laudantium expedita placeat explicabo.
-          Et harum optio consectetur suscipit maxime deserunt voluptates
-          molestiae voluptate provident. Ea, itaque voluptates!
+          dolorem.
         </p>
       </div>
       <div class="p-4 flex flex-col items-center">
@@ -77,20 +73,6 @@ defineProps({
           </NuxtImg>
         </div>
       </div>
-      <div class="p-4">
-        <h3>Cara memanfaatkan koleksi {{ title }} kami</h3>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat,
-          laborum!
-        </p>
-        <ul>
-          <ol v-for="order in 10">
-            {{
-              order
-            }}. Daftar Langkah yang dilaksanakan
-          </ol>
-        </ul>
-      </div>
     </div>
   </section>
 </template>
@@ -101,7 +83,7 @@ h3 {
 }
 
 section {
-  --at-apply: w-full px-8 xl:px-0;
+  --at-apply: w-full px-8 pb-5 xl:px-0;
 }
 
 .header-section {

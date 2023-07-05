@@ -43,7 +43,11 @@ const { data: fetchService } = await useFetch("/api/v1/layanan");
               </button>
             </NuxtLink>
             <NuxtLink
-              :to="layanan.slug.includes('#') ? '/#' : layanan.slug + '/data'"
+              :to="
+                layanan.slug.includes('#')
+                  ? '/pengajuan/#'
+                  : layanan.slug + '/data'
+              "
               class="w-full"
             >
               <button class="btn bg-orange text-xs text-white w-full">

@@ -86,6 +86,7 @@ const dataObjectTA = {
 // Citation Data
 const formattedAPA = ref("");
 const formattedChicago = ref("");
+const chosenCitation = ref("apa");
 const tanggal = new Date(finalDataTA.UploadTgl);
 const tahun = tanggal.getFullYear();
 const nama = biodataMhs
@@ -97,23 +98,40 @@ const penerbit =
 
 const APAFormat = () => {
   const firstName = nama[0].split("")[0].toUpperCase();
-  const secondName = nama[1]?.split("")[0].toUpperCase();
-  const thirdName = nama[2]?.split("")[0].toUpperCase();
+  const secondName =
+    nama.length < 3 ? "" : nama[1]?.split("")[0].toUpperCase() + ".";
+  const thirdName =
+    nama.length < 4 ? "" : nama[2]?.split("")[0].toUpperCase() + ".";
   const lastName = nama.at(-1).charAt(0).toUpperCase() + nama.at(-1).slice(1);
 
-  formattedAPA.value = `${lastName}, ${firstName}. ${secondName}. ${thirdName}. (${tahun}). <span class="italic">${judul}</span>. ${penerbit}`;
+  formattedAPA.value = `${lastName}, ${firstName}. ${secondName} ${thirdName} (${tahun}). <span class="italic">${judul}</span>. ${penerbit}`;
 };
 const ChicagoFormat = () => {
   const firstName = nama.at(0).charAt(0).toUpperCase() + nama.at(0).slice(1);
-  const secondName = nama.at(1)?.charAt(0).toUpperCase() + nama.at(1)?.slice(1);
-  const thirdName = nama.at(2)?.charAt(0).toUpperCase() + nama.at(2)?.slice(1);
+  const secondName =
+    nama.length < 3
+      ? ""
+      : nama.at(1)?.charAt(0).toUpperCase() + nama.at(1)?.slice(1);
+  const thirdName =
+    nama.length < 4
+      ? ""
+      : nama.at(2)?.charAt(0).toUpperCase() + nama.at(2)?.slice(1);
   const lastName = nama.at(-1).charAt(0).toUpperCase() + nama.at(-1).slice(1);
 
   formattedChicago.value = `${lastName}, ${firstName} ${secondName} ${thirdName}. ${tahun}. "${judul}". ${penerbit}`;
 };
 
 // Copy Citation Format
-const copyCitation = (val) => {};
+const copyCitation = (val) => {
+  let strippedTag = val.replace(/(<([^>]+)>)/gi, "");
+  navigator.clipboard.writeText(strippedTag);
+  alert("Sitasi berhasil disalin: " + strippedTag);
+};
+
+// Choose Citation Tab
+const chooseCitation = (val) => {
+  chosenCitation.value = val;
+};
 
 // Call Citation function
 APAFormat();
@@ -157,13 +175,37 @@ useHead({
     <CollectionRepositoryItem v-bind="dataObjectTA" />
     <div class="max-w-6xl ma">
       <h3>Cite this paper</h3>
-      <div>
-        <h4>APA</h4>
-        <p v-html="formattedAPA"></p>
+      <div class="tab-title">
+        <button
+          class="tab-item"
+          :class="chosenCitation === 'apa' ? 'active-tab' : 'inactive-tab'"
+          @click="chooseCitation('apa')"
+        >
+          APA
+        </button>
+        <button
+          class="tab-item"
+          :class="chosenCitation === 'chicago' ? 'active-tab' : 'inactive-tab'"
+          @click="chooseCitation('chicago')"
+        >
+          Chicago
+        </button>
       </div>
-      <div>
+      <div v-show="chosenCitation === 'apa'" class="citation-block">
+        <h4>APA</h4>
+        <p
+          v-html="formattedAPA"
+          @click="copyCitation(formattedAPA)"
+          class="citation"
+        ></p>
+      </div>
+      <div v-show="chosenCitation === 'chicago'" class="citation-block">
         <h4>Chicago Style</h4>
-        <p v-html="formattedChicago"></p>
+        <p
+          v-html="formattedChicago"
+          @click="copyCitation(formattedChicago)"
+          class="citation"
+        ></p>
       </div>
     </div>
     <div class="flex flex-col items-center">
@@ -181,6 +223,30 @@ useHead({
 <style scoped>
 .title {
   --at-apply: my-3 text-center bg-orange max-w-lg py-1 ma text-white rounded;
+}
+
+.tab-title {
+  --at-apply: flex;
+}
+
+.tab-item {
+  --at-apply: py-1 px-3 min-w-30;
+}
+
+.active-tab {
+  --at-apply: bg-orange-1;
+}
+
+.inactive-tab {
+  --at-apply: bg-orange-50;
+}
+
+.citation-block {
+  --at-apply: bg-orange-1 p-2 rounded-b-lg rounded-tr-lg;
+}
+
+.citation {
+  --at-apply: hover:(text-orange-6 cursor-pointer);
 }
 
 .btn-auth {
