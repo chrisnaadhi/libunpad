@@ -15,7 +15,16 @@ defineProps({
   branding: {
     type: String,
   },
+  collectionObj: {
+    type: Object,
+  },
+  linkCollection: {
+    type: String,
+  },
 });
+
+const defaultImage = "/images/no-image.jpg";
+const path = useRoute();
 </script>
 
 <template>
@@ -48,29 +57,25 @@ defineProps({
       <div class="p-4">
         <h1 class="text-4xl text-center">{{ branding ?? title }}</h1>
         <p class="text-justify">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi
-          repellat tempora assumenda unde cum. Voluptate architecto labore amet,
-          quis facere omnis, fugiat in reprehenderit praesentium consectetur et
-          facilis sint officia tempore ut, excepturi repellendus dolorum
-          doloremque deleniti delectus ab corporis at modi obcaecati? Blanditiis
-          nobis ut eveniet quis, dolores dolore aperiam maiores facilis
-          voluptatem totam eius tempora nisi veniam mollitia, consequuntur
-          dolorem.
+          {{ titleDesc.value }}
         </p>
       </div>
       <div class="p-4 flex flex-col items-center">
         <h3>Koleksi {{ title }} Pilihan Kami</h3>
         <div class="grid grid-cols-2 gap-4 lg:flex">
-          <NuxtImg
-            v-for="num in 4"
-            src="/images/no-image.jpg"
-            class="drop-shadow-lg rounded-lg"
-            height="100%"
-            width="180px"
-            format="webp"
+          <NuxtLink
+            v-for="val in collectionObj?.results ?? 4"
+            :to="collectionObj ? '/koleksi/buku/' + val.slugs : path.path"
           >
-            {{ num }}
-          </NuxtImg>
+            <NuxtImg
+              :src="val.cover ?? defaultImage"
+              class="drop-shadow-lg rounded-lg"
+              height="100%"
+              width="180px"
+              format="webp"
+            >
+            </NuxtImg>
+          </NuxtLink>
         </div>
       </div>
     </div>

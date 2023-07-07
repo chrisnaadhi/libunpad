@@ -90,35 +90,43 @@ const chosenCitation = ref("apa");
 const tanggal = new Date(finalDataTA.UploadTgl);
 const tahun = tanggal.getFullYear();
 const nama = biodataMhs
-  ? biodataMhs.nama_anggota.toLowerCase().split(" ")
+  ? biodataMhs?.nama_anggota?.toLowerCase().split(" ")
   : "Belum ada data";
 const judul = finalDataTA.Judul;
 const penerbit =
   fakultas.cariFakultas(finalDataTA.MhsNPM) + " Universitas Padjadjaran";
 
 const APAFormat = () => {
-  const firstName = nama[0].split("")[0].toUpperCase();
-  const secondName =
-    nama.length < 3 ? "" : nama[1]?.split("")[0].toUpperCase() + ".";
-  const thirdName =
-    nama.length < 4 ? "" : nama[2]?.split("")[0].toUpperCase() + ".";
-  const lastName = nama.at(-1).charAt(0).toUpperCase() + nama.at(-1).slice(1);
+  if (nama) {
+    const firstName = nama[0].split("")[0].toUpperCase();
+    const secondName =
+      nama.length < 3 ? "" : nama[1]?.split("")[0].toUpperCase() + ".";
+    const thirdName =
+      nama.length < 4 ? "" : nama[2]?.split("")[0].toUpperCase() + ".";
+    const lastName = nama.at(-1).charAt(0).toUpperCase() + nama.at(-1).slice(1);
 
-  formattedAPA.value = `${lastName}, ${firstName}. ${secondName} ${thirdName} (${tahun}). <span class="italic">${judul}</span>. ${penerbit}`;
+    formattedAPA.value = `${lastName}, ${firstName}. ${secondName} ${thirdName} (${tahun}). <span class="italic">${judul}</span>. ${penerbit}`;
+  } else {
+    formattedAPA.value = "Tidak dapat membuat sitasi";
+  }
 };
 const ChicagoFormat = () => {
-  const firstName = nama.at(0).charAt(0).toUpperCase() + nama.at(0).slice(1);
-  const secondName =
-    nama.length < 3
-      ? ""
-      : nama.at(1)?.charAt(0).toUpperCase() + nama.at(1)?.slice(1);
-  const thirdName =
-    nama.length < 4
-      ? ""
-      : nama.at(2)?.charAt(0).toUpperCase() + nama.at(2)?.slice(1);
-  const lastName = nama.at(-1).charAt(0).toUpperCase() + nama.at(-1).slice(1);
+  if (nama) {
+    const firstName = nama.at(0).charAt(0).toUpperCase() + nama.at(0).slice(1);
+    const secondName =
+      nama.length < 3
+        ? ""
+        : nama.at(1)?.charAt(0).toUpperCase() + nama.at(1)?.slice(1);
+    const thirdName =
+      nama.length < 4
+        ? ""
+        : nama.at(2)?.charAt(0).toUpperCase() + nama.at(2)?.slice(1);
+    const lastName = nama.at(-1).charAt(0).toUpperCase() + nama.at(-1).slice(1);
 
-  formattedChicago.value = `${lastName}, ${firstName} ${secondName} ${thirdName}. ${tahun}. "${judul}". ${penerbit}`;
+    formattedChicago.value = `${lastName}, ${firstName} ${secondName} ${thirdName}. ${tahun}. "${judul}". ${penerbit}`;
+  } else {
+    formattedChicago.value = "Tidak dapat membuat sitasi";
+  }
 };
 
 // Copy Citation Format
@@ -139,6 +147,30 @@ ChicagoFormat();
 
 useHead({
   title: finalDataTA.Judul + " | Repository Universitas Padjadjaran",
+  meta: [
+    { name: "citation_title", content: dataObjectTA.judul },
+    { name: "citation_authors", content: biodataMhs?.nama_anggota ?? "" },
+    { name: "citation_date", content: dataObjectTA.tglUpload.getFullYear() },
+    {
+      name: "citation_publisher",
+      content: dataObjectTA.namaFakultas + " Universitas Padjadjaran",
+    },
+    { name: "citation_abstract", content: dataObjectTA.abstrak },
+    { name: "citation_language", content: dataObjectTA.bahasa },
+    { name: "citation_keywords", content: dataObjectTA.keywords },
+    {
+      name: "citation_public_url",
+      content: "https://kandaga-beta.vercel.app" + route.fullPath,
+    },
+    {
+      name: "citation_pdf_url",
+      content: dataObjectTA.fileAbstrak,
+    },
+    {
+      name: "citation_publication_title",
+      content: "ETD Universitas Padjadjaran",
+    },
+  ],
 });
 </script>
 
@@ -192,7 +224,7 @@ useHead({
         </button>
       </div>
       <div v-show="chosenCitation === 'apa'" class="citation-block">
-        <h4>APA</h4>
+        <h6>APA Style</h6>
         <p
           v-html="formattedAPA"
           @click="copyCitation(formattedAPA)"
@@ -200,7 +232,7 @@ useHead({
         ></p>
       </div>
       <div v-show="chosenCitation === 'chicago'" class="citation-block">
-        <h4>Chicago Style</h4>
+        <h6>Chicago Style</h6>
         <p
           v-html="formattedChicago"
           @click="copyCitation(formattedChicago)"
@@ -213,9 +245,9 @@ useHead({
       <p>Hubungi kami melalui Email, Whatsapp atau Media Sosial.</p>
     </div>
     <div class="text-center mb-5">
-      <NuxtLink to="/koleksi/repository" class="btn-auth bg-orange text-lg"
-        >Kembali ke Koleksi Repository</NuxtLink
-      >
+      <NuxtLink to="/koleksi/repository" class="btn-auth bg-orange text-lg">
+        Kembali ke Koleksi Repository
+      </NuxtLink>
     </div>
   </section>
 </template>
@@ -234,15 +266,15 @@ useHead({
 }
 
 .active-tab {
-  --at-apply: bg-orange-1;
+  --at-apply: bg-orange-2;
 }
 
 .inactive-tab {
-  --at-apply: bg-orange-50;
+  --at-apply: bg-gray-1;
 }
 
 .citation-block {
-  --at-apply: bg-orange-1 p-2 rounded-b-lg rounded-tr-lg;
+  --at-apply: bg-orange-2 p-2 rounded-b-lg rounded-tr-lg;
 }
 
 .citation {

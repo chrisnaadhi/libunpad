@@ -5,7 +5,7 @@ const { locale } = useI18n();
 </script>
 
 <template>
-  <section class="flex flex-col ml--8 pt-5 w-50 absolute bg-white shadow-md">
+  <section class="flex flex-col ml--8 pt-5 w-50 absolute bg-white shadow-lg">
     <NuxtLink
       v-for="(menu, index) in menus"
       :key="index"

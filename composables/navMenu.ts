@@ -104,6 +104,12 @@ export const menuContent = () => {
       nameEN: "Repository",
       urlEN: "/en/koleksi/repository",
     },
+    {
+      name: "Koleksi Hayati",
+      url: "/koleksi-hayati",
+      nameEN: "Biological Collection",
+      urlEN: "/en/koleksi-hayati",
+    },
   ];
 
   const panduan = [
