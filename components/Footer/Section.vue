@@ -77,7 +77,11 @@ defineProps({
                 >pusat.pengetahuan@unpad.ac.id</NuxtLink
               >
             </li>
-            <li>+6282315798979</li>
+            <li>
+              <NuxtLink to="https://wa.me/6282315798979" target="_blank">
+                +6282315798979
+              </NuxtLink>
+            </li>
             <li>
               <NuxtLink to="https://instagram.com/libunpad" target="_blank"
                 >Instagram</NuxtLink

@@ -98,32 +98,43 @@ const penerbit =
 
 const APAFormat = () => {
   if (nama) {
-    const firstName = nama[0].split("")[0].toUpperCase();
+    const firstName =
+      nama.length > 1 ? ", " + nama[0].split("")[0].toUpperCase() + ". " : "";
     const secondName =
-      nama.length < 3 ? "" : nama[1]?.split("")[0].toUpperCase() + ".";
+      nama.length < 3 ? "" : nama[1]?.split("")[0].toUpperCase() + ". ";
     const thirdName =
-      nama.length < 4 ? "" : nama[2]?.split("")[0].toUpperCase() + ".";
-    const lastName = nama.at(-1).charAt(0).toUpperCase() + nama.at(-1).slice(1);
+      nama.length < 4 ? "" : nama[2]?.split("")[0].toUpperCase() + ". ";
+    const fourthName =
+      nama.length < 5 ? "" : nama[3]?.split("")[0].toUppercase() + ". ";
+    const lastName =
+      nama.at(-1).charAt(0).toUpperCase() + nama.at(-1).slice(1) + " ";
 
-    formattedAPA.value = `${lastName}, ${firstName}. ${secondName} ${thirdName} (${tahun}). <span class="italic">${judul}</span>. ${penerbit}`;
+    formattedAPA.value = `${lastName}${firstName}${secondName}${thirdName}${fourthName}(${tahun}). <span class="italic">${judul}</span>. ${penerbit}`;
   } else {
     formattedAPA.value = "Tidak dapat membuat sitasi";
   }
 };
 const ChicagoFormat = () => {
   if (nama) {
-    const firstName = nama.at(0).charAt(0).toUpperCase() + nama.at(0).slice(1);
+    const firstName =
+      nama.length > 1
+        ? ", " + nama.at(0).charAt(0).toUpperCase() + nama.at(0).slice(1)
+        : "";
     const secondName =
       nama.length < 3
         ? ""
-        : nama.at(1)?.charAt(0).toUpperCase() + nama.at(1)?.slice(1);
+        : " " + nama.at(1)?.charAt(0).toUpperCase() + nama.at(1)?.slice(1);
     const thirdName =
       nama.length < 4
         ? ""
-        : nama.at(2)?.charAt(0).toUpperCase() + nama.at(2)?.slice(1);
+        : " " + nama.at(2)?.charAt(0).toUpperCase() + nama.at(2)?.slice(1);
+    const fourthName =
+      nama.length < 5
+        ? ""
+        : " " + nama.at(3)?.charAt(0).toUppercase() + nama.at(3)?.slice(1);
     const lastName = nama.at(-1).charAt(0).toUpperCase() + nama.at(-1).slice(1);
 
-    formattedChicago.value = `${lastName}, ${firstName} ${secondName} ${thirdName}. ${tahun}. "${judul}". ${penerbit}`;
+    formattedChicago.value = `${lastName}${firstName}${secondName}${thirdName}${fourthName}. ${tahun}. "${judul}". ${penerbit}`;
   } else {
     formattedChicago.value = "Tidak dapat membuat sitasi";
   }
@@ -266,7 +277,7 @@ useHead({
 }
 
 .active-tab {
-  --at-apply: bg-orange-2;
+  --at-apply: bg-orange-1;
 }
 
 .inactive-tab {
@@ -274,7 +285,7 @@ useHead({
 }
 
 .citation-block {
-  --at-apply: bg-orange-2 p-2 rounded-b-lg rounded-tr-lg;
+  --at-apply: bg-orange-1 p-2 rounded-b-lg rounded-tr-lg;
 }
 
 .citation {
