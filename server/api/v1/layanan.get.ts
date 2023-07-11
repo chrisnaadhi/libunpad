@@ -3,38 +3,40 @@ export default defineEventHandler((event) => {
     {
       namaLayanan: "Pengajuan Bebas Pustaka",
       deskripsiLayanan:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus pariatur aut ut totam velit dignissimos itaque, sint soluta eligendi ab!",
+        "Layanan Pengajuan Bebas Pustaka dari Perpustakaan Pusat secara daring melalui sistem kami",
       slug: "/pengajuan/bebas-pustaka",
+      isActive: true,
     },
     {
       namaLayanan: "Pengajuan Reservasi Online",
-      deskripsiLayanan:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias error dolor sit temporibus minus asperiores at ab, illum voluptatibus laborum?",
+      deskripsiLayanan: "Belum Tersedia",
       slug: "/pengajuan/#",
+      isActive: false,
     },
     {
       namaLayanan: "Peminjaman Ruangan",
       deskripsiLayanan:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus nisi inventore sint. Natus ducimus assumenda, quam quas fuga praesentium sed!",
+        "Layanan Pengajuan Peminjaman Ruangan di Grha Kandaga secara daring",
       slug: "/pengajuan/peminjaman-ruangan",
+      isActive: true,
     },
     {
       namaLayanan: "Pengajuan Kelas Literasi",
-      deskripsiLayanan:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi voluptate ad harum veritatis eaque ducimus libero dolore rem nulla quidem.",
+      deskripsiLayanan: "Belum Tersedia",
       slug: "/pengajuan/#",
+      isActive: false,
     },
     {
       namaLayanan: "Pengajuan Lainnya",
-      deskripsiLayanan:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet officia quaerat assumenda sequi dicta mollitia incidunt dolorum natus et reprehenderit.",
+      deskripsiLayanan: "Belum Tersedia",
       slug: "/pengajuan/#",
+      isActive: false,
     },
     {
       namaLayanan: "Pengajuan Tambahan",
-      deskripsiLayanan:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perferendis expedita tempore obcaecati, aperiam sapiente magnam impedit reprehenderit nesciunt repellat culpa?",
+      deskripsiLayanan: "Belum Tersedia",
       slug: "/pengajuan/#",
+      isActive: false,
     },
   ];
 });

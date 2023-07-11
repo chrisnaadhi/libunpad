@@ -38,7 +38,10 @@ const { data: fetchService } = await useFetch("/api/v1/layanan");
           </div>
           <div class="flex justify-center gap-2">
             <NuxtLink :to="layanan.slug" class="w-full">
-              <button class="btn bg-orange text-xs text-white w-full">
+              <button
+                class="btn text-xs text-white w-full"
+                :class="layanan.isActive ? 'active' : 'inactive'"
+              >
                 Ajukan
               </button>
             </NuxtLink>
@@ -50,7 +53,10 @@ const { data: fetchService } = await useFetch("/api/v1/layanan");
               "
               class="w-full"
             >
-              <button class="btn bg-orange text-xs text-white w-full">
+              <button
+                class="btn text-xs text-white w-full"
+                :class="layanan.isActive ? 'active' : 'inactive'"
+              >
                 Data Pengajuan
               </button>
             </NuxtLink>
@@ -77,5 +83,13 @@ input {
 .card-item {
   --at-apply: bg-white p-6 flex flex-col justify-between shadow-lg shadow-orange/20 top-0 hover:(top--2 shadow-orange/50);
   transition: top ease 0.5s;
+}
+
+.active {
+  --at-apply: bg-orange cursor-pointer;
+}
+
+.inactive {
+  --at-apply: bg-gray-4 cursor-not-allowed;
 }
 </style>

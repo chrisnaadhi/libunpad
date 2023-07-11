@@ -188,7 +188,10 @@ const dataPeminjaman = await getItems({
       <p class="text-2xl font-semibold text-orange">
         {{ monthName }} {{ date.getFullYear() }}
       </p>
-      <div class="max-w-md grid grid-cols-2 gap-4 ma">
+      <div
+        class="max-w-md grid grid-cols-2 gap-4 ma"
+        v-if="dataPeminjaman.length > 0"
+      >
         <div
           class="rounded bg-orange w-full p-2"
           v-for="(item, index) in dataPeminjaman"
@@ -209,6 +212,9 @@ const dataPeminjaman = await getItems({
             </p>
           </div>
         </div>
+      </div>
+      <div v-else>
+        <p>Belum ada data.</p>
       </div>
     </section>
   </main>
