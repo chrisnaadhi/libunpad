@@ -2,9 +2,9 @@ import { defineStore } from "pinia";
 
 export const trimDescription = (description: string, limit: number) => {
   if (description.length < limit) {
-    return description;
+    return description.replace(/(<([^>]+)>)/gi, "") + "...";
   } else {
-    return description.slice(0, limit) + "...";
+    return description.replace(/(<([^>]+)>)/gi, "").slice(0, limit) + "...";
   }
 };
 

@@ -101,6 +101,10 @@ input[type="search"] {
   --at-apply: w-full border-1 border-orange;
 }
 
+strong {
+  --at-apply: font-semibold;
+}
+
 .page-enter-active,
 .page-leave-active {
   transition: all 0.4s;

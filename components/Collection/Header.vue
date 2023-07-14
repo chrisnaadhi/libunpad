@@ -1,5 +1,5 @@
 <script setup>
-defineProps(["title", "image"]);
+defineProps(["title", "image", "description"]);
 </script>
 
 <template>
@@ -9,7 +9,7 @@ defineProps(["title", "image"]);
     </div>
     <p>Pusat Pengelolaan Pengetahuan UNPAD</p>
     <h1>{{ title }}</h1>
-    <p>Cari Koleksi Fisik, Elektronik dan lainnya.</p>
+    <p>{{ description }}</p>
   </section>
 </template>
 

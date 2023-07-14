@@ -8,7 +8,11 @@ useHead({
 
 <template>
   <main class="container ma my-10">
-    <CollectionHeader :title="$t('collectionTitleHeader')" :image="image" />
+    <CollectionHeader
+      :title="$t('collectionTitleHeader')"
+      :image="image"
+      :description="$t('collectionDescriptionHeader')"
+    />
 
     <section class="my-5">
       <h2>Pilihan Kami</h2>

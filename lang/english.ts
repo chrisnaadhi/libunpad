@@ -28,6 +28,13 @@ export default {
 
   // Koleksi - /koleksi
   collectionTitleHeader: "Explore our Collections",
+  collectionDescriptionHeader:
+    "Search and find what's you need from our collections",
+
+  // Berita - /berita
+  newsTitleHeader: "Kandaga's News and Event",
+  newsDescriptionHeader:
+    "Get the latest information about services, facilities and events held by Kandaga",
 
   // Pencarian - /search
   pencarianTerpaduTitle: "Kandaga Unified Search",

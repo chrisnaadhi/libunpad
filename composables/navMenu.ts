@@ -33,10 +33,10 @@ export const menuContent = () => {
       urlEN: "/en#",
     },
     {
-      name: "Keanggotaan",
-      url: "#",
-      nameEN: "Membership",
-      urlEN: "/en#",
+      name: "Berita & Kegiatan",
+      url: "/berita",
+      nameEN: "News & Event",
+      urlEN: "/en/berita",
     },
   ];
 

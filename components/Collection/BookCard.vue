@@ -22,7 +22,7 @@ const limitChars = (chars: any) => {
     <div class="content-book">
       <div class="ma relative md:(m-0 min-w-30) 2xl:(min-w-40)">
         <div class="banner-mobile">
-          <h6>{{ banner }}</h6>
+          <p>{{ banner }}</p>
         </div>
         <figure>
           <nuxt-img :src="cover" alt="" class="ma" format="webp" />
