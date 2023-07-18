@@ -113,14 +113,14 @@ defineProps({
 
 <style scoped>
 h1 {
-  --at-apply: text-xl;
+  --at-apply: text-xl text-center;
 }
 
 ul {
   --at-apply: list-none;
 }
 
-li {
-  --at-apply: text-white cursor-pointer hover:(text-orange underline);
+li, a {
+  --at-apply: text-white cursor-pointer no-underline ml-0 hover:(text-orange underline);
 }
 </style>

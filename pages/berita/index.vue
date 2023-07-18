@@ -1,6 +1,5 @@
 <script setup>
 const { getItems } = useDirectusItems();
-const { getFiles } = useDirectusFiles();
 const config = useRuntimeConfig();
 
 const image = "https://www.svgrepo.com/show/9244/newspaper-report.svg";
@@ -14,15 +13,11 @@ const platform = [
 
 const article = await getItems({
   collection: "artikel",
+  params: {
+    limit: 3,
+    sort: "-date_updated",
+  },
 });
-
-const getPic = async (item) => {
-  const picture = await getFiles({
-    id: item,
-  });
-
-  return picture;
-};
 </script>
 
 <template>
@@ -52,22 +47,31 @@ const getPic = async (item) => {
       <h2>{{ plat.nama }}</h2>
       <p>{{ plat.deskripsi }}</p>
       <div class="flex flex-col mx-3 lg:(flex-row mx-0) justify-between gap-3">
-        <div
-          class="text-left w-full max-w-md bg-gray-1 p-3 rounded-lg"
-          v-for="item in article"
-        >
+        <div class="article-block" v-for="item in article">
           <NuxtImg
             :src="`${config.public.directus.url}assets/` + item.gambar_unggulan"
             class="w-full max-h-45 object-cover rounded-lg"
           />
-          <h6>{{ item.judul }}</h6>
-
-          <p class="text-xs">{{ new Date(item.date_created) }}</p>
-          <p v-html="trimDescription(item.konten_artikel, 80)"></p>
+          <NuxtLink
+            :to="'/berita/' + item.slug"
+            class="text-dark no-underline transition-all-500 hover:text-orange"
+          >
+            <h5>{{ item.judul }}</h5>
+          </NuxtLink>
+          <p class="text-xs italic">{{ convertTimeZone(item.date_created) }}</p>
+          <div></div>
+          <p>
+            <span v-html="trimDescription(item.konten_artikel, 100)"></span>
+            <NuxtLink
+              :to="'/berita/' + item.slug"
+              class="text-sm text-orange underline"
+            >
+              Baca selengkapnya
+            </NuxtLink>
+          </p>
         </div>
       </div>
     </section>
-    <pre>{{ article }}</pre>
   </main>
 </template>
 
@@ -78,5 +82,10 @@ main {
 
 .platform-section {
   --at-apply: w-full my-8;
+}
+
+.article-block {
+  --at-apply: flex flex-col gap-2 text-left w-full bg-gray-50 p-3 rounded-lg
+    shadow-md shadow-gray-4;
 }
 </style>

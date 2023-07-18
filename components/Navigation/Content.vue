@@ -20,6 +20,6 @@ const { locale } = useI18n();
 
 <style scoped>
 .menu-link {
-  --at-apply: w-full text-left transition-all-500 border-t border-gray-2 p-2 hover:(bg-orange text-white);
+  --at-apply: w-full text-left transition-all-500 border-t border-gray-2 p-2 text-dark no-underline hover:(bg-orange text-white);
 }
 </style>

@@ -4,8 +4,8 @@ defineProps(["title", "image", "description"]);
 
 <template>
   <section class="header-top">
-    <div class="container flex absolute w-full items-center justify-center">
-      <img :src="image" class="mt-10 h-25 w-auto opacity-15" alt="" />
+    <div class="absolute w-full flex justify-center">
+      <img :src="image" class="mt-10 h-25 w-25 opacity-10" alt="" />
     </div>
     <p>Pusat Pengelolaan Pengetahuan UNPAD</p>
     <h1>{{ title }}</h1>
@@ -15,7 +15,7 @@ defineProps(["title", "image", "description"]);
 
 <style scoped>
 .header-top {
-  --at-apply: mb-10 text-center;
+  --at-apply: relative mb-10 text-center;
 }
 
 h1 {

@@ -83,6 +83,10 @@ h4 {
   --at-apply: font-600 text-xs xl:text-base;
 }
 
+a {
+  --at-apply: text-dark no-underline;
+}
+
 p {
   --at-apply: text-sm italic;
 }

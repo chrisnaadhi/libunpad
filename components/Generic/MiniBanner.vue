@@ -52,4 +52,8 @@ const bahasaState = computed(() => {
 .locale {
   --at-apply: px-2;
 }
+
+a {
+  --at-apply: text-white no-underline hover:underline;
+}
 </style>

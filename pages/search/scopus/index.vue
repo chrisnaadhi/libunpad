@@ -4,7 +4,7 @@ const searchScopus = useSearchScopus();
 const submitSearchScopus = async (terms) => {
   try {
     const { data: scopusResults } = await useFetch(
-      "http://api.elsevier.com/content/search/scopus",
+      "https://api.elsevier.com/content/search/scopus",
       {
         query: {
           query: terms,
@@ -19,9 +19,9 @@ const submitSearchScopus = async (terms) => {
   }
 };
 
-const infToSubset = (text) => {
-  return text.replaceAll("inf", "sub");
-};
+// const infToSubset = (text) => {
+//   return text.replaceAll("inf", "sub");
+// };
 </script>
 
 <template>
@@ -37,10 +37,10 @@ const infToSubset = (text) => {
       />
     </div>
     <pre class="text-sm">
-      {{ searchScopus.scopusObjects["search-results"] }}
+      {{ searchScopus.scopusObjects }}
     </pre>
     <!-- <div v-for="myData in searchScopus.scopusObjects">
-      <h1 v-html="infToSubset(myData['dc:title'])"></h1>
+      <h1 v-html="myData['dc:title']"></h1>
       <p>{{ myData["dc:title"] }}</p>
     </div> -->
   </section>

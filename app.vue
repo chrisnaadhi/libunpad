@@ -97,6 +97,22 @@ h6 {
   --at-apply: text-base;
 }
 
+a {
+  --at-apply: text-orange underline;
+}
+
+ul {
+  --at-apply: list-disc;
+}
+
+ol {
+  --at-apply: list-decimal;
+}
+
+li {
+  --at-apply: list-outside ml-10;
+}
+
 input[type="search"] {
   --at-apply: w-full border-1 border-orange;
 }
