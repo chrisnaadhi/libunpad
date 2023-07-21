@@ -7,22 +7,33 @@ const { getItems } = useDirectusItems();
 
 const repoSearch = ref();
 const portPosition = ref(0);
+const loadingWiki = ref(false);
+const loadingRepo = ref(false);
+const loadingScopus = ref(false);
 
 const submitSearch = async (keyword) => {
   if (search.keywords === "") {
     search.initValue = 0;
   }
+
+  loadingWiki.value = true;
+  loadingRepo.value = true;
+  loadingScopus.value = true;
+
   try {
     const { data: searchResults } = await useFetch(
       search.baseURLSearch + keyword
     );
-    const { data: scopusResults } = await useFetch(scopus.baseURLSearch, {
-      query: {
-        query: search.keywords,
-        count: 6,
-        apiKey: "bffdfae1414b050c3f0027d3c6253301",
-      },
-    });
+
+    search.isResult = true;
+    search.articleObj = searchResults.value.query.search;
+    suggestion.value = searchResults.value.query.searchinfo?.suggestion;
+    loadingWiki.value = false;
+  } catch (error) {
+    search.isResult = false;
+  }
+
+  try {
     repoSearch.value = await getItems({
       collection: "tbtMhsUploadThesis",
       params: {
@@ -48,11 +59,24 @@ const submitSearch = async (keyword) => {
         },
       },
     });
+    search.isResult = true;
+    loadingRepo.value = false;
+  } catch (error) {
+    search.isResult = false;
+  }
+
+  try {
+    const { data: scopusResults } = await useFetch(scopus.baseURLSearch, {
+      query: {
+        query: search.keywords,
+        count: 6,
+        apiKey: "bffdfae1414b050c3f0027d3c6253301",
+      },
+    });
 
     search.isResult = true;
-    search.articleObj = searchResults.value.query.search;
-    suggestion.value = searchResults.value.query.searchinfo?.suggestion;
     scopus.scopusObjects = scopusResults.value;
+    loadingScopus.value = false;
   } catch (err) {
     search.isResult = false;
   }
@@ -144,120 +168,164 @@ onMounted(() => {
         <span class="font-600">{{ search.keywords }}</span>
       </div>
     </section>
-    <h2 v-show="search.keywords !== ''">Wikipedia</h2>
-    <section v-if="search.isResult && search.keywords" class="result-display">
-      <div v-for="article in search.articleObj" class="result-cards">
-        <NuxtLink
-          :to="`https://id.wikipedia.org?curid=${article.pageid}`"
-          target="_blank"
-        >
-          <h3 class="hover:text-orange-5">{{ article.title }}</h3>
-        </NuxtLink>
-
-        <p class="text-sm">
-          <span v-html="article.snippet"></span>...
+    <article>
+      <h3 v-show="search.keywords !== ''">Wikipedia</h3>
+      <section
+        v-if="search.isResult && search.keywords && !loadingWiki"
+        class="result-display"
+      >
+        <div v-for="article in search.articleObj" class="result-cards">
           <NuxtLink
             :to="`https://id.wikipedia.org?curid=${article.pageid}`"
             target="_blank"
           >
-            <span class="lengkap">(baca selengkapnya)</span>
+            <h4 class="hover:text-orange-5">{{ article.title }}</h4>
           </NuxtLink>
-        </p>
-        <div v-if="search.articleObj.length < 1">
-          <p>Silahkan coba lagi...</p>
-        </div>
-      </div>
-    </section>
-    <section v-else-if="!search.keywords || search.keywords === ''">
-      <h3 class="text-2xl">
-        Tidak ada hasil yang bisa ditemukan. Silahkan tuliskan sesuatu pada
-        kotak pencarian
-      </h3>
-    </section>
-    <section class="flex justify-center gap-4 my-5" v-show="search.keywords">
-      <button
-        @click="prevPage"
-        class="btn"
-        :disabled="search.initValue < 1"
-        :class="
-          search.initValue < 1
-            ? 'bg-gray-1 text-gray-5 cursor-not-allowed'
-            : 'bg-green-2'
-        "
-      >
-        Previous Page
-      </button>
-      <button @click="nextPage" class="btn bg-blue-2">Next Page</button>
-    </section>
-    <h2 v-show="search.keywords !== ''">Repository Unpad</h2>
-    <section
-      class="grid grid-cols-3 gap-4 text-left my-5"
-      v-if="search.keywords !== ''"
-    >
-      <CollectionRepositoryCard
-        v-for="koleksi in repoSearch"
-        :npm="koleksi.MhsNPM"
-        :title="trimText(koleksi.Judul)"
-        :tipe="koleksi.tipeKoleksi"
-        :description="koleksi.AbstrakBersih ?? koleksi.Abstrak"
-        :keywords="koleksi.Keywords"
-        :link-access="'/koleksi/repository/item/' + koleksi.MhsNPM"
-        @preview="openModal(koleksi.MhsNPM)"
-      />
-    </section>
 
-    <h2 v-show="search.keywords !== ''">Scopus</h2>
-    <section class="grid grid-cols-3 gap-15" v-show="search.keywords !== ''">
-      <div
-        v-if="scopus.scopusObjects"
-        v-for="result in scopus.scopusObjects['search-results']['entry']"
-        class="max-w-sm"
-      >
-        <GenericBaseCard class="bg-white shadow-gray shadow-lg rounded-lg p-5">
-          <h6>{{ result["dc:title"] }}</h6>
-          <p>{{ result["dc:creator"] }}</p>
-          <p>Journal: {{ result["prism:publicationName"] }}</p>
-          <p>ISSN: {{ result["prism:issn"] }}</p>
-          <p>
-            Vol: {{ result["prism:volume"] }}, Issue:
-            {{ result["prism:issueIdentifier"] }}
+          <p class="text-sm">
+            <span v-html="article.snippet"></span>...
+            <NuxtLink
+              :to="`https://id.wikipedia.org?curid=${article.pageid}`"
+              target="_blank"
+            >
+              <span class="lengkap">(baca selengkapnya)</span>
+            </NuxtLink>
           </p>
-          <NuxtLink
-            :to="`https://www.scopus.com/record/display.uri?eid=${result['eid']}&origin=resultslist`"
-            target="_blank"
-          >
-            Akses
-          </NuxtLink>
-        </GenericBaseCard>
-      </div>
-      <div v-else>
-        <p>Belum ada data.</p>
-      </div>
-    </section>
-
-    <div
-      class="sticky bottom-0 h-20 bg-orange-1 px-5 mt-10 rounded-lg"
-      :class="portPosition <= 200 || portPosition >= 1500 ? 'hidden' : 'block'"
-    >
-      <section class="flex items-center gap-4">
-        <input
-          type="search"
-          name="search"
-          id="searchBox"
-          :placeholder="$t('pencarianTerpaduPlaceholder')"
-          v-model="search.keywords"
-          @keyup.enter="submitSearch(search.keywords)"
-          autocomplete="off"
-        />
-        <button
-          type="submit"
-          class="btn bg-orange"
-          @click="submitSearch(search.keywords)"
-        >
-          Search
-        </button>
+          <div v-if="search.articleObj.length < 1">
+            <p>Silahkan coba lagi...</p>
+          </div>
+        </div>
       </section>
-    </div>
+      <section v-else-if="!search.keywords || search.keywords === ''">
+        <h3 class="text-2xl">
+          Tidak ada hasil yang bisa ditemukan. Silahkan tuliskan sesuatu pada
+          kotak pencarian
+        </h3>
+      </section>
+      <section v-show="loadingWiki === true">
+        <p>Mencari data...</p>
+      </section>
+      <section
+        class="flex justify-center gap-4 my-5"
+        v-show="search.keywords && !loadingWiki"
+      >
+        <button
+          @click="prevPage"
+          class="btn"
+          :disabled="search.initValue < 1"
+          :class="
+            search.initValue < 1
+              ? 'bg-gray-1 text-gray-5 cursor-not-allowed'
+              : 'bg-green-2'
+          "
+        >
+          Previous Page
+        </button>
+        <button @click="nextPage" class="btn bg-blue-2">Next Page</button>
+      </section>
+    </article>
+
+    <article>
+      <h3 v-show="search.keywords !== ''">Repository Unpad</h3>
+      <section
+        class="grid grid-cols-3 gap-4 text-left my-5"
+        v-if="repoSearch.length > 0"
+      >
+        <CollectionRepositoryCard
+          v-for="koleksi in repoSearch"
+          :npm="koleksi.MhsNPM"
+          :title="trimText(koleksi.Judul)"
+          :tipe="koleksi.tipeKoleksi"
+          :description="koleksi.AbstrakBersih ?? koleksi.Abstrak"
+          :keywords="koleksi.Keywords"
+          :link-access="'/koleksi/repository/item/' + koleksi.MhsNPM"
+          @preview="openModal(koleksi.MhsNPM)"
+          class="bg-white"
+        />
+      </section>
+      <section v-else-if="repoSearch.length === 0">
+        <p class="text-red-6 font-semibold">Data tidak ditemukan</p>
+      </section>
+      <section v-show="loadingRepo === true">
+        <p>Mencari data...</p>
+      </section>
+    </article>
+
+    <article>
+      <h3 v-show="search.keywords !== ''">Scopus</h3>
+      <section class="grid grid-cols-3 gap-5" v-if="loadingScopus === false">
+        <div
+          v-if="scopus.scopusObjects"
+          v-for="result in scopus.scopusObjects['search-results']['entry']"
+          class="max-w-xl"
+        >
+          <GenericBaseCard
+            class="bg-white shadow-orange-2 shadow-lg rounded-lg p-5"
+          >
+            <h6>{{ result["dc:title"] }}</h6>
+            <p>
+              <span class="font-semibold">Author:</span>
+              {{ result["dc:creator"] }}
+            </p>
+            <p>
+              <span class="font-semibold">Journal:</span>
+              {{ result["prism:publicationName"] }}
+            </p>
+            <p>
+              <span class="font-semibold">ISSN:</span>
+              {{ result["prism:issn"] }}
+            </p>
+            <p>
+              <span class="font-semibold">Vol:</span>
+              {{ result["prism:volume"] }},
+              <span class="font-semibold">Issue:</span>
+              {{ result["prism:issueIdentifier"] ?? "None" }}
+            </p>
+            <div class="mt-5">
+              <NuxtLink
+                :to="`https://www.scopus.com/record/display.uri?eid=${result['eid']}&origin=resultslist`"
+                target="_blank"
+                class="btn bg-orange text-white py-1 px-4 no-underline"
+              >
+                Akses
+              </NuxtLink>
+            </div>
+          </GenericBaseCard>
+        </div>
+        <div v-else>
+          <p>Belum ada data.</p>
+        </div>
+      </section>
+      <section v-show="loadingScopus === true">
+        <p>Mencari data...</p>
+      </section>
+    </article>
+
+    <Transition name="fade">
+      <div
+        class="sticky bottom-0 h-20 bg-orange-1 px-5 mt-10 rounded-lg"
+        v-show="portPosition >= 200 && portPosition <= 1500"
+      >
+        <section class="flex items-center gap-4">
+          <input
+            type="search"
+            name="search"
+            id="searchBox"
+            :placeholder="$t('pencarianTerpaduPlaceholder')"
+            v-model="search.keywords"
+            @keyup.enter="submitSearch(search.keywords)"
+            autocomplete="off"
+          />
+          <button
+            type="submit"
+            class="btn bg-orange"
+            @click="submitSearch(search.keywords)"
+          >
+            Search
+          </button>
+        </section>
+      </div>
+    </Transition>
   </main>
 </template>
 
@@ -267,7 +335,11 @@ h1 {
 }
 
 h3 {
-  --at-apply: text-2xl xl:text-3xl;
+  --at-apply: text-2xl xl:text-4xl;
+}
+
+article {
+  --at-apply: bg-gray-50 pt-5 pb-15 px-10 my-20 rounded-lg shadow-gray-3 shadow-lg;
 }
 
 .search-box {
@@ -293,5 +365,15 @@ input {
 
 .lengkap {
   --at-apply: text-orange-4 hover:underline;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
