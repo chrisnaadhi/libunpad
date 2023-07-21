@@ -304,7 +304,7 @@ onMounted(() => {
     <Transition name="fade">
       <div
         class="sticky bottom-0 h-20 bg-orange-1 px-5 mt-10 rounded-lg"
-        v-show="portPosition >= 200 && portPosition <= 1500"
+        v-show="portPosition >= 200 && portPosition <= 1400"
       >
         <section class="flex items-center gap-4">
           <input
