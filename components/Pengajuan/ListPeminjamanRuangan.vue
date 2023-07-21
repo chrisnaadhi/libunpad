@@ -40,7 +40,6 @@ const displayNamaRuangan = (val) => {
 };
 
 const tableHeadPublic = [
-  "NPM",
   "Nama Lengkap",
   "Ruang Yang Dipinjam",
   "Tanggal Peminjaman",
@@ -61,9 +60,6 @@ const tableHeadPublic = [
       </template>
       <template #tablebody>
         <tr class="bg-white" v-for="elem in dataPeminjam">
-          <td class="table-border">
-            {{ elem.npm }}
-          </td>
           <td class="table-border">{{ elem.nama_lengkap }}</td>
           <td class="table-border">
             {{ displayNamaRuangan(elem.nama_ruangan) }}

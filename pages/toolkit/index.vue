@@ -24,7 +24,7 @@ const tools = [
 
 <template>
   <main>
-    <GenericBaseCard class="bg-orange min-h-45" v-for="tool in tools">
+    <GenericBaseCard class="bg-orange min-h-45 p-5" v-for="tool in tools">
       <h1>{{ tool.nama }}</h1>
       <p>{{ tool.deskripsi }}</p>
       <NuxtLink :to="tool.link" class="btn bg-white text-orange">

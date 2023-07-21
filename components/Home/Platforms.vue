@@ -114,7 +114,7 @@ const options = {
 }
 
 .content {
-  --at-apply: bg-white min-w-65 grow min-h-65 mx-10 my-2 rounded-md flex flex-col items-center justify-center transition-all-500 cursor-pointer sm:(w-xs mx-5) xl:(w-1/5 mx-2);
+  --at-apply: bg-white min-w-65 grow min-h-65 mx-10 my-2 rounded-md flex flex-col items-center justify-center transition-all-500 cursor-pointer text-dark no-underline sm:(w-xs mx-5) xl:(w-1/5 mx-2);
 }
 
 .content:hover {
@@ -129,7 +129,7 @@ const options = {
 }
 
 .extra-content {
-  --at-apply: bg-white p-5 flex items-center justify-center rounded w-full transition-all-500 hover:(bg-orange text-white);
+  --at-apply: bg-white p-5 flex items-center justify-center rounded w-full transition-all-500 text-dark no-underline hover:(bg-orange text-white);
 }
 
 .lib-content {

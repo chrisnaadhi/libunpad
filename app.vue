@@ -110,7 +110,7 @@ ol {
 }
 
 li {
-  --at-apply: list-outside ml-10;
+  --at-apply: list-outside;
 }
 
 input[type="search"] {

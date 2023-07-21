@@ -79,6 +79,6 @@ function openPreview() {
 }
 
 .content-section {
-  --at-apply: m-2 flex flex-col justify-around;
+  --at-apply: m-2 flex flex-col max-w-auto justify-around;
 }
 </style>

@@ -70,6 +70,6 @@ definePageMeta({
 }
 
 .card-pegawai {
-  --at-apply: bg-orange-50 grid grid-cols-4 gap-2 items-center justify-center;
+  --at-apply: bg-orange-50 grid grid-cols-4 gap-2 items-center justify-center p-5;
 }
 </style>

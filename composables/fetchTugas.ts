@@ -90,6 +90,7 @@ export const fetchTugasPegawai = (id: string) => {
           _eq: id,
         },
       },
+      sort: "-date_created",
     },
   };
 };

@@ -28,7 +28,7 @@ let division = {
 <template>
   <section>
     <div class="my-5 max-w-7xl ma">
-      <GenericBaseCard class="bg-orange-1">
+      <GenericBaseCard class="bg-orange-1 p-5">
         <div class="flex flex-col items-center">
           <div class="i-mdi-stadium text-7xl text-orange"></div>
           <h1>Pusat Pengelolaan Pengetahuan</h1>
@@ -50,7 +50,7 @@ let division = {
     </div>
     <div class="lower-division">
       <GenericBaseCard
-        class="bg-orange-1 items-center"
+        class="bg-orange-1 items-center p-5"
         v-for="divisi in division"
       >
         <div class="flex flex-col items-center">
