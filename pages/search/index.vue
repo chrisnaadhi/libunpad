@@ -229,7 +229,7 @@ onMounted(() => {
       <h3 v-show="search.keywords !== ''">Repository Unpad</h3>
       <section
         class="grid grid-cols-3 gap-4 text-left my-5"
-        v-if="repoSearch.length > 0"
+        v-if="loadingRepo === false"
       >
         <CollectionRepositoryCard
           v-for="koleksi in repoSearch"
@@ -243,11 +243,11 @@ onMounted(() => {
           class="bg-white"
         />
       </section>
-      <section v-else-if="repoSearch.length === 0">
-        <p class="text-red-6 font-semibold">Data tidak ditemukan</p>
-      </section>
-      <section v-show="loadingRepo === true">
+      <section v-else-if="loadingRepo === true">
         <p>Mencari data...</p>
+      </section>
+      <section v-show="repoSearch == false">
+        <p class="text-red-6 font-semibold">Tidak ditemukan.</p>
       </section>
     </article>
 
