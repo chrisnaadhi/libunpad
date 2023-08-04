@@ -87,7 +87,7 @@ const limitText = (text) => {
           <p class="italic text-gray-5">{{ namaFakultas }}</p>
           <h6>Abstrak:</h6>
           <p class="text-sm text-justify">
-            {{ abstrak }}
+            <span v-html="abstrak"></span>
           </p>
         </div>
       </div>

@@ -14,11 +14,11 @@ const dataTADirectus = await getItems({
 
 const previewData = (npm) => {
   if (!searchTugasAkhir.searchResults) {
-    const searchData = dataTADirectus.find((elem) => elem.MhsNPM === npm);
+    const searchData = dataTADirectus.find((elem) => elem?.MhsNPM === npm);
     return searchData;
   } else {
     const searchData = searchTugasAkhir.searchResults.find(
-      (elem) => elem.MhsNPM === npm
+      (elem) => elem?.MhsNPM === npm
     );
     return searchData;
   }
@@ -51,16 +51,16 @@ definePageMeta({
         >
           <div @click.stop="" class="preview-block">
             <div class="flex flex-col items-center">
-              <h3>{{ selectedPreview.MhsNPM }}</h3>
-              <p class="font-semibold">{{ selectedPreview.Judul }}</p>
+              <h3>{{ selectedPreview?.MhsNPM }}</h3>
+              <p class="font-semibold">{{ selectedPreview?.Judul }}</p>
               <p class="text-sm text-justify">
-                {{ selectedPreview.AbstrakBersih ?? selectedPreview.Abstrak }}
+                {{ selectedPreview?.AbstrakBersih ?? selectedPreview?.Abstrak }}
               </p>
-              <p>Keywords: {{ selectedPreview.Keywords }}</p>
+              <p>Keywords: {{ selectedPreview?.Keywords }}</p>
             </div>
             <div class="mt-2">
               <NuxtLink
-                :to="'/koleksi/repository/item/' + selectedPreview.MhsNPM"
+                :to="'/koleksi/repository/item/' + selectedPreview?.MhsNPM"
                 class="btn bg-orange text-white px-2 py-1 text-xs"
               >
                 Detail

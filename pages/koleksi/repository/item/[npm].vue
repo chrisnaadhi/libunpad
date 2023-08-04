@@ -181,6 +181,7 @@ useHead({
       name: "citation_publication_title",
       content: "ETD Universitas Padjadjaran",
     },
+    { content: "text/html; charset=UTF-8", "http-equiv": "content-type" },
   ],
 });
 </script>

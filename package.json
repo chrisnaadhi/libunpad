@@ -15,7 +15,7 @@
     "@unocss/nuxt": "^0.50.0",
     "dayjs-nuxt": "^1.1.0",
     "local-ssl-proxy": "^2.0.5",
-    "nuxt": "^3.5.0"
+    "nuxt": "^3.6.5"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.11",
