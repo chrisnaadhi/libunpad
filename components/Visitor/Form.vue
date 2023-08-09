@@ -130,7 +130,7 @@ onMounted(() => {
     <VisitorModal @display="displayModal" v-if="showModal" />
     <div class="absolute w-full left-0 mt--25">
       <VisitorBanner :display="displayBanner" v-if="!umum" />
-      <VisitorBanner :display="`Selamat Datang, ${userData}`" v-else />
+      <VisitorBanner :display="'Selamat Datang, ' + userData" v-else />
     </div>
     <form @submit.prevent="addVisitor" autocomplete="off">
       <div class="input-block">
