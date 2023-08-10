@@ -105,6 +105,12 @@ export const menuContent = () => {
       urlEN: "/en/koleksi/repository",
     },
     {
+      name: "E-Teater",
+      url: "/e-teater",
+      nameEN: "E-Theater",
+      urlEN: "/en/e-teater",
+    },
+    {
       name: "Koleksi Hayati",
       url: "/koleksi-hayati",
       nameEN: "Biological Collection",

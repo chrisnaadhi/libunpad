@@ -18,7 +18,7 @@ export default {
   exploreOurCollection: "Explore Our Collection",
   exploreCollectionItem1: "Unpad from time to time",
   exploreCollectionItem2: "Local Knowledge Collection",
-  exploreCollectionItem3: "Newly added collectionsn",
+  exploreCollectionItem3: "Newly added collections",
   exploreCollectionItem4: "The most popular collection",
 
   // Pengajuan - /pengajuan
