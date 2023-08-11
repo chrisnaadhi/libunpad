@@ -125,6 +125,11 @@ strong {
   --at-apply: font-semibold;
 }
 
+.kandaga-gradient {
+  --at-apply: bg-clip-text text-transparent bg-gradient-to-br from-orange-500
+    to-gray-500;
+}
+
 .page-enter-active,
 .page-leave-active {
   transition: all 0.4s;

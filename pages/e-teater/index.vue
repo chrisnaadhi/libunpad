@@ -1,12 +1,17 @@
 <script setup>
+const { getItems } = useDirectusItems();
 const data = ref("E-Teater");
+
+const listKategori = await getItems({
+  collection: "tipe_koleksi",
+});
 </script>
 
 <template>
   <section>
     <div class="max-w-3xl ma">
       <div class="flex flex-col items-center justify-center gap-3 mx-5">
-        <h1 class="e-teater">{{ data }}</h1>
+        <h1 class="e-teater kandaga-gradient">{{ data }}</h1>
         <p class="italic">
           E-Teater merupakan portal digital dari Teater Pengetahuan yang ada di
           Universitas Padjadjaran. Pengelolaan E-Teater dilakukan oleh Pusat
@@ -22,34 +27,64 @@ const data = ref("E-Teater");
     </div>
     <div class="my-15">
       <div>
-        <h2>Teater Pengetahuan</h2>
-        <div class="flex gap-5 mt-3">
+        <h2 class="kandaga-gradient font-semibold py-2">Teater Pengetahuan</h2>
+        <div class="flex flex-col lg:flex-row gap-5 mt-3">
           <div class="w-full">
-            <NuxtImg src="/images/teater1.png" class="w-100% rounded-xl" />
+            <iframe
+              width="100%"
+              src="https://www.youtube-nocookie.com/embed/jtcBwtuIH-E"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              class="min-h-sm shadow-md shadow-gray rounded-xl"
+            ></iframe>
           </div>
           <div class="w-full">
             <div class="flex justify-center gap-3">
-              <NuxtImg src="/images/teater2.png" class="w-48% rounded-lg" />
-              <NuxtImg src="/images/teater1.png" class="w-48% rounded-lg" />
+              <NuxtImg
+                src="/images/teater2.png"
+                class="w-48% rounded-lg shadow-md shadow-gray"
+              />
+              <NuxtImg
+                src="/images/teater1.png"
+                class="w-48% rounded-lg shadow-md shadow-gray"
+              />
             </div>
-            <p class="text-justify px-2">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas,
-              laboriosam. Et ducimus nam, voluptatum placeat recusandae ipsa sit
-              architecto reiciendis dolorem officia reprehenderit itaque eos
-              accusantium explicabo atque, consequatur tempore fugiat? Nesciunt
-              atque architecto sunt, ad at laudantium. Dolore voluptate,
-              eligendi blanditiis fugiat aliquid corrupti rem doloremque sunt
-              reprehenderit necessitatibus animi, architecto ipsa eum quasi.
+            <p class="text-justify p-2 italic mt-3">
+              Teater Pengetahuan adalah salah satu unit yang berada di bawah
+              Pusat Pengelolaan Pengetahuan yang memiliki fungsi untuk
+              <span class="font-semibold">mempublikasikan</span> karya-karya
+              ilmiah dalam bentuk media
+              <span class="font-semibold">audio-visual</span> (yang bersifat
+              lebih populer) di lingkungan Universitas Padjadjaran.
             </p>
+            <div class="flex justify-evenly">
+              <div class="teater-info">
+                <div class="i-mdi-calendar-clock w-10 h-10 text-orange"></div>
+                <p class="font-semibold text-xl">Senin - Jum'at</p>
+                <p>09.00 - 11.00 WIB</p>
+              </div>
+              <div class="teater-info">
+                <div class="i-mdi-map-marker w-10 h-10 text-orange"></div>
+                <p class="font-semibold text-xl">Ruang Teater Pengetahuan</p>
+                <p class="text-sm">Rektorat Lt.1 Universitas Padjadjaran</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="my-10">
-      <h2>Koleksi E-Teater</h2>
+      <h2 class="kandaga-gradient font-semibold py-2">Koleksi E-Teater</h2>
       <div class="grid grid-cols-4 gap-3 mt-2">
-        <div class="literasi" v-for="num in 10">Literasi {{ num }}</div>
+        <NuxtLink class="literasi" v-for="data in listKategori">
+          {{ data.nama_tipe_koleksi }}
+        </NuxtLink>
       </div>
+    </div>
+    <div class="grid grid-cols-3 gap-5">
+      <CollectionTeaterCategoryCard v-for="num in 10" />
     </div>
   </section>
 </template>
@@ -60,15 +95,19 @@ section {
 }
 
 .e-teater {
-  --at-apply: font-semibold text-5xl bg-clip-text text-transparent
-    bg-gradient-to-br from-orange-500 to-gray-500;
+  --at-apply: font-semibold text-5xl;
 }
 
 .literasi {
-  --at-apply: bg-blue h-15 text-white flex items-center justify-center rounded;
+  --at-apply: bg-orange-1 h-15 text-orange font-semibold flex items-center
+    justify-center rounded transition-all-500 no-underline cursor-pointer hover:(bg-orange text-white);
 }
 
 .mid-content {
   --at-apply: flex items-center justify-center;
+}
+
+.teater-info {
+  --at-apply: flex flex-col items-center justify-center;
 }
 </style>

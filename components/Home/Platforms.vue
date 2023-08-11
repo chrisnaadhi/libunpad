@@ -75,9 +75,9 @@ const options = {
         <div class="i-mdi-map-search w-8 h-8"></div>
         <h6>Indigenous Knowledge</h6>
       </NuxtLink>
-      <NuxtLink class="extra-content">
+      <NuxtLink class="extra-content" to="/e-teater">
         <div class="i-mdi-book-education w-8 h-8"></div>
-        <h6>Learning Center</h6>
+        <h6>E-Teater</h6>
       </NuxtLink>
     </section>
     <section class="lib-content">

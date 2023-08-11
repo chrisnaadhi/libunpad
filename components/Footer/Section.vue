@@ -17,9 +17,9 @@ defineProps({
     <footer class="text-center bg-gray-8 text-white pt-5">
       <div
         v-show="showList"
-        class="max-w-7xl flex flex-col ma sm:(grid grid-cols-2) md:(grid-cols-4)"
+        class="max-w-7xl flex flex-col ma sm:(grid grid-cols-2) lg:(grid-cols-4)"
       >
-        <section class="w-full p-3 text-left md:(text-center p-0)">
+        <section class="footer-section">
           <h1>{{ $t("footerQuickLink") }}</h1>
           <ul class="md:text-center">
             <li>
@@ -39,7 +39,7 @@ defineProps({
             </li>
           </ul>
         </section>
-        <section class="w-full p-3 text-left md:(text-center p-0)">
+        <section class="footer-section">
           <h1>{{ $t("footerInformationSource") }}</h1>
           <ul class="md:text-center">
             <li>
@@ -61,7 +61,7 @@ defineProps({
             </li>
           </ul>
         </section>
-        <section class="w-full p-3 text-left md:(text-center p-0)">
+        <section class="footer-section">
           <h1>{{ $t("footerKandagaServices") }}</h1>
           <ul class="md:text-center">
             <li>Pencarian terintegrasi</li>
@@ -69,7 +69,7 @@ defineProps({
             <li>Layanan Pemustaka</li>
           </ul>
         </section>
-        <section class="w-full p-3 text-left md:(text-right p-0)">
+        <section class="footer-section">
           <ul class="md:text-center">
             <h1>{{ $t("footerSocialMedia") }}</h1>
             <li>
@@ -122,5 +122,9 @@ ul {
 
 li, a {
   --at-apply: text-white cursor-pointer no-underline ml-0 hover:(text-orange underline);
+}
+
+.footer-section {
+  --at-apply: w-full p-3 text-center md:(p-0);
 }
 </style>
