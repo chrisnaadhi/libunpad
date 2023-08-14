@@ -4,8 +4,9 @@ const textForQR = ref("");
 const generatedArea = ref(null);
 const options = {
   text: textForQR.value,
-  width: 360,
-  height: 360,
+  width: 480,
+  height: 480,
+  quietZone: 50,
   correctLevel: QRCode.CorrectLevel.H,
   logo: "/images/versi3.png",
   logoWidth: 100,
@@ -104,7 +105,7 @@ input {
 }
 
 .qr-area {
-  --at-apply: flex items-center justify-center;
+  --at-apply: flex items-center justify-center ma;
 }
 
 .download-btn {
