@@ -79,13 +79,18 @@ const koleksiTerseleksi = daftarKoleksiTerkait.filter(
     </div>
     <div class="mb-10">
       <h3 class="rekomendasi-title">Koleksi terkait</h3>
-      <div class="grid grid-cols-5 gap-3">
-        <div v-for="rekomendasi in koleksiTerseleksi" class="max-w-55">
+      <div
+        class="flex flex-col gap-10 sm:(grid grid-cols-3 gap-5) lg:grid-cols-5"
+      >
+        <div
+          v-for="rekomendasi in koleksiTerseleksi"
+          class="w-full md:max-w-55"
+        >
           <NuxtImg
             :src="`https://img.youtube.com/vi/${extractYoutubeLink(
               rekomendasi.link_youtube
             )}/sddefault.jpg`"
-            class="max-w-55 rounded-lg"
+            class="w-full md:max-w-55 rounded-lg"
           ></NuxtImg>
           <NuxtLink
             class="font-semibold no-underline italic hover:underline"
