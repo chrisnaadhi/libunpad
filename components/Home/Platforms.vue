@@ -55,7 +55,7 @@ const options = {
       </NuxtLink>
     </section>
     <section
-      class="max-w-7xl flex flex-col gap-4 mt-3 md:(grid grid-cols-2) xl:(flex flex-row justify-center)"
+      class="max-w-6xl w-full px-5 flex flex-col gap-4 mt-3 md:(grid grid-cols-2) xl:(flex flex-row justify-center px-8)"
     >
       <NuxtLink
         :to="locale === 'id' ? '/koleksi/repository' : '/en/koleksi/repository'"
@@ -65,19 +65,19 @@ const options = {
         <h6>Repository</h6>
       </NuxtLink>
       <NuxtLink
-        :to="locale === 'id' ? '/herbarium' : '/en/herbarium'"
+        :to="locale === 'id' ? '/koleksi-hayati' : '/en/koleksi-hayati'"
         class="extra-content"
       >
         <div class="i-mdi-leaf w-8 h-8" />
-        <h6>Herbarium</h6>
+        <h6>Koleksi Hayati</h6>
       </NuxtLink>
       <NuxtLink class="extra-content">
         <div class="i-mdi-map-search w-8 h-8"></div>
         <h6>Indigenous Knowledge</h6>
       </NuxtLink>
-      <NuxtLink class="extra-content">
+      <NuxtLink class="extra-content" to="/e-teater">
         <div class="i-mdi-book-education w-8 h-8"></div>
-        <h6>Learning Center</h6>
+        <h6>E-Teater</h6>
       </NuxtLink>
     </section>
     <section class="lib-content">
@@ -114,7 +114,7 @@ const options = {
 }
 
 .content {
-  --at-apply: bg-white min-w-65 grow min-h-65 mx-10 my-2 rounded-md flex flex-col items-center justify-center transition-all-500 cursor-pointer sm:(w-xs mx-5) xl:(w-1/5 mx-2);
+  --at-apply: bg-white min-w-65 grow min-h-65 mx-10 my-2 rounded-md flex flex-col items-center justify-center transition-all-500 cursor-pointer text-dark no-underline sm:(w-xs mx-5) xl:(w-1/5 mx-2);
 }
 
 .content:hover {
@@ -129,7 +129,7 @@ const options = {
 }
 
 .extra-content {
-  --at-apply: bg-white p-5 flex items-center justify-center rounded min-w-65 transition-all-500 hover:(bg-orange text-white);
+  --at-apply: bg-white p-5 flex items-center justify-center rounded w-full transition-all-500 text-dark no-underline hover:(bg-orange text-white);
 }
 
 .lib-content {

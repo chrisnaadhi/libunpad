@@ -4,11 +4,11 @@ const searchScopus = useSearchScopus();
 const submitSearchScopus = async (terms) => {
   try {
     const { data: scopusResults } = await useFetch(
-      "http://api.elsevier.com/content/search/scopus",
+      "https://api.elsevier.com/content/search/scopus",
       {
         query: {
           query: terms,
-          count: 5,
+          count: 6,
           apiKey: "bffdfae1414b050c3f0027d3c6253301",
         },
       }
@@ -19,9 +19,9 @@ const submitSearchScopus = async (terms) => {
   }
 };
 
-const infToSubset = (text) => {
-  return text.replaceAll("inf", "sub");
-};
+// const infToSubset = (text) => {
+//   return text.replaceAll("inf", "sub");
+// };
 </script>
 
 <template>
@@ -36,13 +36,33 @@ const infToSubset = (text) => {
         @keyup.enter="submitSearchScopus(searchScopus.keywords)"
       />
     </div>
-    <pre class="text-sm">
-      {{ searchScopus.scopusObjects["search-results"] }}
-    </pre>
-    <!-- <div v-for="myData in searchScopus.scopusObjects">
-      <h1 v-html="infToSubset(myData['dc:title'])"></h1>
-      <p>{{ myData["dc:title"] }}</p>
-    </div> -->
+    <div class="grid grid-cols-3 gap-2">
+      <div
+        v-if="searchScopus.scopusObjects"
+        v-for="result in searchScopus.scopusObjects['search-results']['entry']"
+        class="text-xs max-w-sm"
+      >
+        <GenericBaseCard class="bg-gray-2 p-5">
+          <h5>{{ result["dc:title"] }}</h5>
+          <p>{{ result["dc:creator"] }}</p>
+          <p>Journal: {{ result["prism:publicationName"] }}</p>
+          <p>ISSN: {{ result["prism:issn"] }}</p>
+          <p>
+            Vol: {{ result["prism:volume"] }}, Issue:
+            {{ result["prism:issueIdentifier"] }}
+          </p>
+          <NuxtLink
+            :to="`https://www.scopus.com/record/display.uri?eid=${result['eid']}&origin=resultslist`"
+            target="_blank"
+          >
+            Akses
+          </NuxtLink>
+        </GenericBaseCard>
+      </div>
+      <div v-else>
+        <p>Belum ada data.</p>
+      </div>
+    </div>
   </section>
 </template>
 

@@ -37,6 +37,10 @@ router.afterEach(() => {
 const onBeforeEnter = async () => {
   await finalizePendingLocaleChange();
 };
+
+useHead({
+  meta: [{ content: "text/html; charset=UTF-8", "http-equiv": "content-type" }],
+});
 </script>
 
 <template>
@@ -97,8 +101,33 @@ h6 {
   --at-apply: text-base;
 }
 
+a {
+  --at-apply: text-orange underline;
+}
+
+ul {
+  --at-apply: list-disc;
+}
+
+ol {
+  --at-apply: list-decimal;
+}
+
+li {
+  --at-apply: list-outside;
+}
+
 input[type="search"] {
   --at-apply: w-full border-1 border-orange;
+}
+
+strong {
+  --at-apply: font-semibold;
+}
+
+.kandaga-gradient {
+  --at-apply: bg-clip-text text-transparent bg-gradient-to-br from-orange-500
+    to-gray-500;
 }
 
 .page-enter-active,

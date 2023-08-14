@@ -33,10 +33,10 @@ export const menuContent = () => {
       urlEN: "/en#",
     },
     {
-      name: "Keanggotaan",
-      url: "#",
-      nameEN: "Membership",
-      urlEN: "/en#",
+      name: "Berita & Kegiatan",
+      url: "/berita",
+      nameEN: "News & Event",
+      urlEN: "/en/berita",
     },
   ];
 
@@ -104,37 +104,49 @@ export const menuContent = () => {
       nameEN: "Repository",
       urlEN: "/en/koleksi/repository",
     },
+    {
+      name: "E-Teater",
+      url: "/e-teater",
+      nameEN: "E-Theater",
+      urlEN: "/en/e-teater",
+    },
+    {
+      name: "Koleksi Hayati",
+      url: "/koleksi-hayati",
+      nameEN: "Biological Collection",
+      urlEN: "/en/koleksi-hayati",
+    },
   ];
 
   const panduan = [
     {
       name: "Layanan & Fasilitas",
-      url: "#",
+      url: "/panduan",
       nameEN: "Services & Facilities",
+      urlEN: "/en/panduan",
+    },
+    {
+      name: "Pustakawan Subjek",
+      url: "#",
+      nameEN: "Subject Librarians",
       urlEN: "/en#",
     },
     {
-      name: "Mahasiswa",
+      name: "Belajar di Kandaga",
       url: "#",
-      nameEN: "Students",
+      nameEN: "Study in Kandaga",
       urlEN: "/en#",
     },
     {
-      name: "Peneliti",
+      name: "E-Resources",
       url: "#",
-      nameEN: "Researchers",
+      nameEN: "E-Resources",
       urlEN: "/en#",
     },
     {
-      name: "Dosen",
+      name: "FAQ",
       url: "#",
-      nameEN: "Lecturers",
-      urlEN: "/en#",
-    },
-    {
-      name: "Tenaga Pendidik",
-      url: "#",
-      nameEN: "Academic Staffs",
+      nameEN: "FAQ",
       urlEN: "/en#",
     },
   ];

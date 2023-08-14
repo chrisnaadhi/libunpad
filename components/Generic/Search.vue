@@ -78,14 +78,18 @@ const limitChars = (str) => {
             >
               <NuxtLink
                 :to="`https://en.wikipedia.org?curid=${elem.pageid}`"
+                class="no-underline"
                 target="_blank"
               >
-                <h1 class="text-xl hover:text-orange">{{ elem.title }}</h1>
+                <h1 class="text-xl text-dark no-underline hover:text-orange">
+                  {{ elem.title }}
+                </h1>
               </NuxtLink>
               <p class="text-sm text-gray">
                 <span v-html="limitChars(elem.snippet)"></span>...
                 <NuxtLink
                   :to="`https://en.wikipedia.org?curid=${elem.pageid}`"
+                  class="no-underline"
                   target="_blank"
                 >
                   <span class="text-xs text-blue-3 hover:text-blue-6">

@@ -33,10 +33,7 @@ const dataMhs = async () => {
 
     mahasiswa.value = fetchMhs;
   } catch (error) {
-    mahasiswa.value = {
-      code: "404",
-      message: "Data Mahasiswa Tidak ditemukan",
-    };
+    mahasiswa.value = "Tidak ada data";
   }
 
   return mahasiswa.value;
@@ -86,8 +83,106 @@ const dataObjectTA = {
   verifikasi: finalDataTA.Verifikasi,
 };
 
+// Citation Data
+const formattedAPA = ref("");
+const formattedChicago = ref("");
+const chosenCitation = ref("apa");
+const tanggal = new Date(finalDataTA.UploadTgl);
+const tahun = tanggal.getFullYear();
+const nama = biodataMhs
+  ? biodataMhs?.nama_anggota?.toLowerCase().split(" ")
+  : "Belum ada data";
+const judul = finalDataTA.Judul;
+const penerbit =
+  fakultas.cariFakultas(finalDataTA.MhsNPM) + " Universitas Padjadjaran";
+
+const APAFormat = () => {
+  if (nama) {
+    const firstName =
+      nama.length > 1 ? ", " + nama[0].split("")[0].toUpperCase() + ". " : "";
+    const secondName =
+      nama.length < 3 ? "" : nama[1]?.split("")[0].toUpperCase() + ". ";
+    const thirdName =
+      nama.length < 4 ? "" : nama[2]?.split("")[0].toUpperCase() + ". ";
+    const fourthName =
+      nama.length < 5 ? "" : nama[3]?.split("")[0].toUppercase() + ". ";
+    const lastName =
+      nama.at(-1).charAt(0).toUpperCase() + nama.at(-1).slice(1) + " ";
+
+    formattedAPA.value = `${lastName}${firstName}${secondName}${thirdName}${fourthName}(${tahun}). <span class="italic">${judul}</span>. ${penerbit}`;
+  } else {
+    formattedAPA.value = "Tidak dapat membuat sitasi";
+  }
+};
+const ChicagoFormat = () => {
+  if (nama) {
+    const firstName =
+      nama.length > 1
+        ? ", " + nama.at(0).charAt(0).toUpperCase() + nama.at(0).slice(1)
+        : "";
+    const secondName =
+      nama.length < 3
+        ? ""
+        : " " + nama.at(1)?.charAt(0).toUpperCase() + nama.at(1)?.slice(1);
+    const thirdName =
+      nama.length < 4
+        ? ""
+        : " " + nama.at(2)?.charAt(0).toUpperCase() + nama.at(2)?.slice(1);
+    const fourthName =
+      nama.length < 5
+        ? ""
+        : " " + nama.at(3)?.charAt(0).toUppercase() + nama.at(3)?.slice(1);
+    const lastName = nama.at(-1).charAt(0).toUpperCase() + nama.at(-1).slice(1);
+
+    formattedChicago.value = `${lastName}${firstName}${secondName}${thirdName}${fourthName}. ${tahun}. "${judul}". ${penerbit}`;
+  } else {
+    formattedChicago.value = "Tidak dapat membuat sitasi";
+  }
+};
+
+// Copy Citation Format
+const copyCitation = (val) => {
+  let strippedTag = val.replace(/(<([^>]+)>)/gi, "");
+  navigator.clipboard.writeText(strippedTag);
+  alert("Sitasi berhasil disalin: " + strippedTag);
+};
+
+// Choose Citation Tab
+const chooseCitation = (val) => {
+  chosenCitation.value = val;
+};
+
+// Call Citation function
+APAFormat();
+ChicagoFormat();
+
 useHead({
   title: finalDataTA.Judul + " | Repository Universitas Padjadjaran",
+  meta: [
+    { name: "citation_title", content: dataObjectTA.judul },
+    { name: "citation_authors", content: biodataMhs?.nama_anggota ?? "" },
+    { name: "citation_date", content: dataObjectTA.tglUpload.getFullYear() },
+    {
+      name: "citation_publisher",
+      content: dataObjectTA.namaFakultas + " Universitas Padjadjaran",
+    },
+    { name: "citation_abstract", content: dataObjectTA.abstrak },
+    { name: "citation_language", content: dataObjectTA.bahasa },
+    { name: "citation_keywords", content: dataObjectTA.keywords },
+    {
+      name: "citation_public_url",
+      content: "https://kandaga-beta.vercel.app" + route.fullPath,
+    },
+    {
+      name: "citation_pdf_url",
+      content: dataObjectTA.fileAbstrak,
+    },
+    {
+      name: "citation_publication_title",
+      content: "ETD Universitas Padjadjaran",
+    },
+    { content: "text/html; charset=UTF-8", "http-equiv": "content-type" },
+  ],
 });
 </script>
 
@@ -122,14 +217,49 @@ useHead({
       </div>
     </div>
     <CollectionRepositoryItem v-bind="dataObjectTA" />
+    <div class="max-w-6xl ma">
+      <h3>Cite this paper</h3>
+      <div class="tab-title">
+        <button
+          class="tab-item"
+          :class="chosenCitation === 'apa' ? 'active-tab' : 'inactive-tab'"
+          @click="chooseCitation('apa')"
+        >
+          APA
+        </button>
+        <button
+          class="tab-item"
+          :class="chosenCitation === 'chicago' ? 'active-tab' : 'inactive-tab'"
+          @click="chooseCitation('chicago')"
+        >
+          Chicago
+        </button>
+      </div>
+      <div v-show="chosenCitation === 'apa'" class="citation-block">
+        <h6>APA Style</h6>
+        <p
+          v-html="formattedAPA"
+          @click="copyCitation(formattedAPA)"
+          class="citation"
+        ></p>
+      </div>
+      <div v-show="chosenCitation === 'chicago'" class="citation-block">
+        <h6>Chicago Style</h6>
+        <p
+          v-html="formattedChicago"
+          @click="copyCitation(formattedChicago)"
+          class="citation"
+        ></p>
+      </div>
+    </div>
     <div class="flex flex-col items-center">
       <h4>Perlu Bantuan ?</h4>
       <p>Hubungi kami melalui Email, Whatsapp atau Media Sosial.</p>
     </div>
     <div class="text-center mb-5">
-      <NuxtLink to="/koleksi/repository" class="btn-auth bg-orange text-lg"
-        >Kembali ke Koleksi Repository</NuxtLink
-      >
+      <NuxtLink to="/koleksi/repository" class="btn-auth bg-orange text-lg">
+        Kembali ke Koleksi Repository
+      </NuxtLink>
     </div>
   </section>
 </template>
@@ -137,6 +267,30 @@ useHead({
 <style scoped>
 .title {
   --at-apply: my-3 text-center bg-orange max-w-lg py-1 ma text-white rounded;
+}
+
+.tab-title {
+  --at-apply: flex;
+}
+
+.tab-item {
+  --at-apply: py-1 px-3 min-w-30;
+}
+
+.active-tab {
+  --at-apply: bg-orange-1;
+}
+
+.inactive-tab {
+  --at-apply: bg-gray-1;
+}
+
+.citation-block {
+  --at-apply: bg-orange-1 p-2 rounded-b-lg rounded-tr-lg;
+}
+
+.citation {
+  --at-apply: hover:(text-orange-6 cursor-pointer);
 }
 
 .btn-auth {

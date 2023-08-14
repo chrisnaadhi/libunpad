@@ -21,14 +21,9 @@ const layananPerpustakaan = ref([
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero saepe reiciendis sed, in veritatis aut, facere incidunt odit dolores quaerat nihil doloribus corrupti suscipit, ipsa vero numquam rerum laudantium adipisci dolorem obcaecati nulla? Qui voluptas et impedit fugiat, maiores sit soluta natus, harum dolorem quas blanditiis dolor possimus aut neque!",
   },
   {
-    namaLayanan: "Layanan Sarana dan Prasarana",
+    namaLayanan: "Fasilitas Sarana dan Prasarana",
     deskripsi:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt omnis, iusto quia, iste vitae aut odit aperiam voluptatibus odio nostrum voluptas maxime facere reprehenderit. Cumque ab sit sunt ullam maiores fuga autem soluta nesciunt vel explicabo rem, iure debitis ipsa at? Sunt delectus enim unde nam repudiandae possimus impedit molestiae.",
-  },
-  {
-    namaLayanan: "Layanan Pengolahan dan Preservasi Koleksi",
-    deskripsi:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, impedit dignissimos. Ipsam quisquam ipsa, rem cum in dignissimos recusandae numquam. Eveniet expedita ullam fugiat veniam labore cumque perspiciatis, atque eius consequuntur exercitationem ab quae esse magnam fuga iusto odio! Esse optio molestias exercitationem ut, error illo necessitatibus tenetur repellat atque?",
   },
   {
     namaLayanan: "Layanan Research Supports",
@@ -36,12 +31,12 @@ const layananPerpustakaan = ref([
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, laborum optio laboriosam, architecto aspernatur earum officiis molestiae vel quo similique tempora quibusdam quod magnam soluta voluptatem veritatis eligendi. Ex, dicta. Placeat quidem ut fugiat eaque fugit eveniet incidunt. Magnam recusandae sunt sit magni eligendi porro non vitae eum molestias quod!",
   },
   {
-    namaLayanan: "Layanan Academic Tools",
+    namaLayanan: "Fasilitas Academic Tools",
     deskripsi:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, iusto ut. Dolorum iusto fugit porro itaque, minus laborum iste, quidem beatae rerum culpa reiciendis ipsam? Quis eaque dolores debitis ad non cum sequi similique nobis dolore veniam, dolorem modi eum inventore perferendis natus, adipisci porro at, officia ipsum molestiae maxime.",
   },
   {
-    namaLayanan: "Layanan Learning Center",
+    namaLayanan: "Fasilitas Learning Center",
     deskripsi:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Explicabo nam maxime sed odio autem repellat. Sunt laudantium laborum doloremque! At ex aspernatur consectetur, dolorum suscipit perferendis deleniti iure, eligendi veniam laboriosam unde mollitia facilis! Officiis quaerat in recusandae reprehenderit perspiciatis? Quisquam repellendus unde delectus placeat quidem inventore maxime provident minima.",
   },
@@ -58,19 +53,28 @@ const layananPerpustakaan = ref([
       voluptatem quasi vitae laboriosam.
     </p>
     <div class="w-full">
-      <GenericBaseCard class="bg-orange-3 px-4 py-2">
+      <GenericBaseCard class="bg-orange-2 px-4 py-2">
         <h3 class="text-center">Layanan dan Fasilitas</h3>
       </GenericBaseCard>
     </div>
-    <div class="w-full grid grid-cols-3 gap-4">
+    <div class="w-full flex flex-col md:(grid grid-cols-2) gap-4">
       <GenericBaseCard
         v-for="item in layananPerpustakaan"
-        class="bg-gray-2 p-6"
+        class="bg-gray-1 p-6 flex items-center gap-2"
       >
-        <h3 class="text-left">{{ item.namaLayanan }}</h3>
-        <p>{{ item.deskripsi }}</p>
-        <div class="w-full my-3">
-          <NuxtLink to="/koleksi" class="btn bg-orange">Cek</NuxtLink>
+        <div>
+          <NuxtImg
+            src="/images/no-image.jpg"
+            format="webp"
+            width="600px"
+          ></NuxtImg>
+        </div>
+        <div class="flex flex-col justify-around">
+          <h3 class="text-left">{{ item.namaLayanan }}</h3>
+          <p class="text-sm">{{ item.deskripsi }}</p>
+          <div class="w-full my-3">
+            <NuxtLink to="#" class="action-btn">Lihat Layanan</NuxtLink>
+          </div>
         </div>
       </GenericBaseCard>
     </div>
@@ -79,6 +83,11 @@ const layananPerpustakaan = ref([
 
 <style scoped>
 .layer {
-  --at-apply: max-w-7xl ma flex flex-col items-center justify-center gap-4 py-5;
+  --at-apply: max-w-7xl ma flex flex-col items-center justify-center gap-4 py-5
+    px-2;
+}
+
+.action-btn {
+  --at-apply: btn bg-orange py-1 px-3 text-white;
 }
 </style>

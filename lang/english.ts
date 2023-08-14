@@ -18,7 +18,7 @@ export default {
   exploreOurCollection: "Explore Our Collection",
   exploreCollectionItem1: "Unpad from time to time",
   exploreCollectionItem2: "Local Knowledge Collection",
-  exploreCollectionItem3: "Newly added collectionsn",
+  exploreCollectionItem3: "Newly added collections",
   exploreCollectionItem4: "The most popular collection",
 
   // Pengajuan - /pengajuan
@@ -28,6 +28,13 @@ export default {
 
   // Koleksi - /koleksi
   collectionTitleHeader: "Explore our Collections",
+  collectionDescriptionHeader:
+    "Search and find what's you need from our collections",
+
+  // Berita - /berita
+  newsTitleHeader: "Kandaga's News and Event",
+  newsDescriptionHeader:
+    "Get the latest information about services, facilities and events held by Kandaga",
 
   // Pencarian - /search
   pencarianTerpaduTitle: "Kandaga Unified Search",

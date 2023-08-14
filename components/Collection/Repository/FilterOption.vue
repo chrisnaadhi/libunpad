@@ -23,6 +23,8 @@ const years = [
   "2010",
   "2009",
 ];
+
+const filterDropdown = () => {};
 </script>
 
 <template>
@@ -34,12 +36,13 @@ const years = [
         <input type="search" name="" id="" class="p-1 rounded" />
       </div>
       <h6>Tahun</h6>
-      <div class="flex gap-2">
-        <select name="first" id="first" v-model="firstSelectedYear">
-          <option :value="year" v-for="year in years">{{ year }}</option>
-        </select>
-        <p>-</p>
-        <select name="second" id="second" v-model="secondSelectedYear">
+      <div>
+        <select
+          class="min-w-full"
+          name="first"
+          id="first"
+          v-model="firstSelectedYear"
+        >
           <option :value="year" v-for="year in years">{{ year }}</option>
         </select>
       </div>
@@ -83,7 +86,7 @@ const years = [
 
 <style scoped>
 .main-block {
-  --at-apply: bg-orange-1 border-1 border-orange rounded min-w-50 py-5 px-3 mx-2 lg:mx-0;
+  --at-apply: bg-orange-50 border-1 border-orange rounded min-w-50 p-3 mx-2 lg:mx-0;
 }
 
 select {

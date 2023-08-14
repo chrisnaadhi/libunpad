@@ -6,7 +6,7 @@ export const useSearchFunction = defineStore("searchfunction", () => {
   const isResult = ref(false);
   const initValue = ref(0);
   const baseURLSearch = ref(
-    "https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=extracts&list=search&utf8=1&formatversion=2&exsentences=1&exlimit=20&exintro=1&explaintext=1&exsectionformat=raw&srnamespace=0&srlimit=12&srprop=snippet&srsearch="
+    "https://id.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=extracts&list=search&utf8=1&formatversion=2&exsentences=1&exlimit=20&exintro=1&explaintext=1&exsectionformat=raw&srnamespace=0&srlimit=8&srprop=snippet&srsearch="
   );
 
   return {
@@ -33,7 +33,7 @@ export const useSearchDirtakel = defineStore("searchDirtakel", () => {
 export const useSearchScopus = defineStore("scopusSearch", () => {
   const keywords = ref("");
   const scopusObjects = ref();
-  const baseURLSearch = ref("http://api.elsevier.com/content/search/scopus");
+  const baseURLSearch = ref("https://api.elsevier.com/content/search/scopus");
 
   return {
     keywords,
@@ -48,9 +48,25 @@ export const searchTugasAkhirDirectus = defineStore(
     const { getItems } = useDirectusItems();
     const keywords = ref("");
     const offset = ref(0);
+    const page = ref(1);
+    const isNewSearch = ref(false);
     const searchResults = ref();
 
-    const searchingTugasAkhir = async () => {
+    const searchingTugasAkhir = async (isNew: boolean) => {
+      switch (isNew) {
+        case false:
+          isNewSearch.value = false;
+          page.value += 1;
+          break;
+        case true:
+          isNewSearch.value = true;
+          offset.value = 0;
+          page.value = 1;
+          break;
+        default:
+          console.log("Something is wrong");
+          break;
+      }
       searchResults.value = "loading";
       if (keywords.value !== "") {
         const fetchSearchResults = await getItems({
@@ -89,20 +105,21 @@ export const searchTugasAkhirDirectus = defineStore(
     const nextPage = () => {
       if (offset.value >= 0) {
         offset.value += 30;
-        searchingTugasAkhir();
+        searchingTugasAkhir(false);
       }
     };
 
     const previousPage = () => {
       if (offset.value >= 0) {
         offset.value -= 30;
-        searchingTugasAkhir();
+        searchingTugasAkhir(false);
       }
     };
 
     return {
       keywords,
       offset,
+      page,
       searchResults,
       searchingTugasAkhir,
       nextPage,

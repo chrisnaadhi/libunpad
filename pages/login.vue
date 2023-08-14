@@ -4,6 +4,7 @@ const { signIn, status } = useAuth();
 const user = useDirectusUser();
 const error = useError();
 const route = useRoute();
+const router = useRouter();
 
 const showPassword = ref(false);
 const passwordType = ref("password");
@@ -89,7 +90,7 @@ const submitLogin = async () => {
 };
 
 const googleLogin = async () => {
-  await signIn("google", { callbackUrl: "/" });
+  await signIn("google", { callbackUrl: route.query.redir });
 };
 
 const errorLogger = () => {

@@ -59,8 +59,6 @@ const profilPetugas = await getUserById({
     getPetugasExtendedTimeService[0]?.petugas_pertama ??
     "6090A4D5-BD85-423D-9231-E50E705CFD22",
 });
-
-console.log(jamPiketPegawai(date.getDay()));
 </script>
 
 <template>

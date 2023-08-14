@@ -14,11 +14,11 @@ const dataTADirectus = await getItems({
 
 const previewData = (npm) => {
   if (!searchTugasAkhir.searchResults) {
-    const searchData = dataTADirectus.find((elem) => elem.MhsNPM === npm);
+    const searchData = dataTADirectus.find((elem) => elem?.MhsNPM === npm);
     return searchData;
   } else {
     const searchData = searchTugasAkhir.searchResults.find(
-      (elem) => elem.MhsNPM === npm
+      (elem) => elem?.MhsNPM === npm
     );
     return searchData;
   }
@@ -31,7 +31,7 @@ const openModal = (npm) => {
   previewItem.viewModal();
 };
 
-function trimText(txt, maxVal) {
+function trimText(txt) {
   const trimmedText = txt.slice(0, 55);
   return trimmedText + "...";
 }
@@ -51,16 +51,16 @@ definePageMeta({
         >
           <div @click.stop="" class="preview-block">
             <div class="flex flex-col items-center">
-              <h3>{{ selectedPreview.MhsNPM }}</h3>
-              <p>{{ selectedPreview.Judul }}</p>
-              <p class="text-xs">
-                {{ selectedPreview.AbstrakBersih ?? selectedPreview.Abstrak }}
+              <h3>{{ selectedPreview?.MhsNPM }}</h3>
+              <p class="font-semibold">{{ selectedPreview?.Judul }}</p>
+              <p class="text-sm text-justify">
+                {{ selectedPreview?.AbstrakBersih ?? selectedPreview?.Abstrak }}
               </p>
-              <p>Keywords: {{ selectedPreview.Keywords }}</p>
+              <p>Keywords: {{ selectedPreview?.Keywords }}</p>
             </div>
             <div class="mt-2">
               <NuxtLink
-                :to="'/koleksi/repository/item/' + selectedPreview.MhsNPM"
+                :to="'/koleksi/repository/item/' + selectedPreview?.MhsNPM"
                 class="btn bg-orange text-white px-2 py-1 text-xs"
               >
                 Detail
@@ -70,7 +70,7 @@ definePageMeta({
         </ModalBase>
       </Teleport>
     </LazyClientOnly>
-    <h1>Repository Unpad</h1>
+    <h1>Repository Universitas Padjadjaran</h1>
     <p class="text-center">
       Koleksi Karya Ilmiah dan Tugas Akhir dari Civitas Akademika Universitas
       Padjadjaran
@@ -90,14 +90,15 @@ definePageMeta({
       </p>
     </div>
     <div class="flex flex-col gap-4 lg:(flex-row)">
-      <!-- <CollectionRepositoryFilterOption /> -->
+      <CollectionRepositoryFilterOption />
       <div class="repository-collection" v-if="!searchTugasAkhir.searchResults">
         <CollectionRepositoryCard
           v-for="koleksi in dataTADirectus"
           :npm="koleksi.MhsNPM"
           :title="trimText(koleksi.Judul)"
           :tipe="koleksi.tipeKoleksi"
-          :description="koleksi.Abstrak"
+          :description="koleksi.AbstrakBersih ?? koleksi.Abstrak"
+          :keywords="koleksi.Keywords"
           :link-access="'/koleksi/repository/item/' + koleksi.MhsNPM"
           @preview="openModal(koleksi.MhsNPM)"
         />
@@ -118,7 +119,8 @@ definePageMeta({
           :npm="koleksi.MhsNPM"
           :title="trimText(koleksi.Judul)"
           :tipe="koleksi.tipeKoleksi"
-          :description="koleksi.Abstrak"
+          :description="koleksi.AbstrakBersih ?? koleksi.Abstrak"
+          :keywords="koleksi.Keywords"
           :link-access="'/koleksi/repository/item/' + koleksi.MhsNPM"
           @preview="openModal(koleksi.MhsNPM)"
         />
@@ -141,6 +143,9 @@ definePageMeta({
         >
           <h6>&lt;&lt; Prev. Page</h6>
         </button>
+        <div>
+          <p>{{ searchTugasAkhir.page }}</p>
+        </div>
         <button
           class="pagination-btn"
           :disabled="
@@ -177,7 +182,7 @@ definePageMeta({
 
 <style scoped>
 h1 {
-  --at-apply: text-center text-4xl;
+  --at-apply: text-center text-5xl;
 }
 
 .repository-collection {
@@ -185,7 +190,7 @@ h1 {
 }
 
 .preview-block {
-  --at-apply: max-w-3xl flex flex-col items-center bg-white w-full max-h-80 overflow-y-scroll p-5 rounded-lg;
+  --at-apply: max-w-3xl flex flex-col items-center bg-white w-full max-h-80 overflow-y-scroll py-5 px-10 rounded-lg;
 }
 
 .pagination-block {

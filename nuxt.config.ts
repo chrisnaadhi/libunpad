@@ -72,3 +72,6 @@ export default defineNuxtConfig({
     },
   },
 });
+
+// Activate Local SSL with this command on CLI
+// SET NODE_TLS_REJECT_UNAUTHORIZED=0

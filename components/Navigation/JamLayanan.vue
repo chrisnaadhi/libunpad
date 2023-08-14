@@ -50,7 +50,7 @@ onMounted(() => {
           </span>
           <span class="text-green-6 text-lg font-600" v-else>
             Buka:
-            <span class="text-dark">08.00 -15.30</span>
+            <span class="text-dark">08.00 -16.00</span>
           </span>
         </p>
       </section>

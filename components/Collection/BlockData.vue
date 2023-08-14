@@ -63,6 +63,9 @@ defineProps({
 </template>
 
 <style scoped>
+a {
+  --at-apply: no-underline;
+}
 .frame-topic {
   --at-apply: grid gap-2 my-5 mx-5 md:(grid-cols-4 mx-2) xl:mx-0;
 }
