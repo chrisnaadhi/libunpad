@@ -77,14 +77,15 @@ const listKategori = await getItems({
     </div>
     <div class="my-10">
       <h2 class="kandaga-gradient font-semibold py-2">Koleksi E-Teater</h2>
-      <div class="grid grid-cols-4 gap-3 mt-2">
-        <NuxtLink class="literasi" v-for="data in listKategori">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-2 px-3">
+        <NuxtLink
+          class="literasi"
+          v-for="data in listKategori"
+          :to="'e-teater/' + data.id"
+        >
           {{ data.nama_tipe_koleksi }}
         </NuxtLink>
       </div>
-    </div>
-    <div class="grid grid-cols-3 gap-5">
-      <CollectionTeaterCategoryCard v-for="num in 10" />
     </div>
   </section>
 </template>
@@ -99,7 +100,7 @@ section {
 }
 
 .literasi {
-  --at-apply: bg-orange-1 h-15 text-orange font-semibold flex items-center
+  --at-apply: bg-orange-1 h-15 text-orange-6 font-semibold flex items-center
     justify-center rounded transition-all-500 no-underline cursor-pointer hover:(bg-orange text-white);
 }
 
