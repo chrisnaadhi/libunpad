@@ -8,6 +8,13 @@ export const trimDescription = (description: string, limit: number) => {
   }
 };
 
+export const extractYoutubeLink = (url: string) => {
+  const splitLink = url.split("=");
+  const youtubeCode = splitLink[1];
+
+  return youtubeCode;
+};
+
 export const tugasPagination = defineStore("tugasPage", () => {
   const offsetVal = ref(0);
   const baseVal = ref(5);

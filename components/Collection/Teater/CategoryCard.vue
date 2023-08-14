@@ -1,29 +1,38 @@
 <script setup>
 const data = ref("Vue Composition API");
+defineProps({
+  tipe: String,
+  gambar: String,
+  judul: String,
+  pembuat: String,
+  deskripsi: String,
+  parent: String,
+  slug: String,
+  ytCode: String,
+});
 </script>
 
 <template>
-  <div class="shadow-lg shadow-gray-3">
+  <div class="card">
     <div class="top-card">
       <div class="bg-orange absolute z-1 m-3 px-3 py-1 rounded-full">
-        <p class="text-white text-sm">Literasi</p>
+        <p class="text-white text-sm">{{ tipe }}</p>
       </div>
       <NuxtImg
-        src="/images/9396112_3023.jpg"
-        class="relative w-full object-cover rounded-tr-lg rounded-tl-lg"
+        :src="`https://img.youtube.com/vi/${ytCode}/sddefault.jpg`"
+        class="relative w-full max-h-45 object-cover rounded-lg"
       />
     </div>
 
-    <div class="bg-orange-50 rounded-br-lg rounded-bl-lg p-4 text-left">
-      <h4 class="italic font-semibold text-orange">Judul</h4>
-      <p>Author</p>
-      <p class="text-justify text-sm">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut quam
-        voluptas accusantium perferendis fugiat molestiae.
+    <div class="bot-card">
+      <h4 class="italic font-semibold text-orange">{{ judul }}</h4>
+      <p class="italic text-sm">{{ pembuat }}</p>
+      <p class="text-sm">
+        <span v-html="trimDescription(deskripsi, 85)"></span>
       </p>
       <div class="mt-3 flex text-center">
         <NuxtLink
-          to="/e-teater/#"
+          :to="`/e-teater/${parent}/${slug}`"
           class="btn w-full py-1 px-5 bg-orange text-white text-sm no-underline"
         >
           Lihat
@@ -34,15 +43,16 @@ const data = ref("Vue Composition API");
 </template>
 
 <style scoped>
-section {
-  --at-apply: w-full;
+.card {
+  --at-apply: w-full max-h-md shadow-lg shadow-gray-3 bg-gray-1 flex flex-col rounded-bl-lg rounded-br-lg;
 }
 
 .top-card {
-  --at-apply: ;
+  --at-apply: relative;
 }
 
-p {
-  --at-apply: italic;
+.bot-card {
+  --at-apply: py-4 text-left flex flex-col rounded-bl-lg rounded-br-lg lg:(justify-between h-55)
+    text-left;
 }
 </style>

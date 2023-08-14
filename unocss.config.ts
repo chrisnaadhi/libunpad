@@ -9,7 +9,7 @@ import {
 } from "unocss";
 
 export default defineConfig({
-  shortcuts: [["btn", "px-4 py-2 rounded"]],
+  shortcuts: [["btn", "px-4 py-2 rounded no-underline"]],
   presets: [
     presetUno(),
     presetAttributify(),
