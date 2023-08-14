@@ -15,18 +15,20 @@ defineProps({
 <template>
   <div class="card">
     <div class="top-card">
-      <div class="bg-orange absolute z-1 m-3 px-3 py-1 rounded-full">
-        <p class="text-white text-sm">{{ tipe }}</p>
+      <div class="bg-orange-6 absolute z-1 m-3 px-3 py-1 rounded-full">
+        <p class="text-white text-sm font-semibold">{{ tipe }}</p>
       </div>
       <NuxtImg
         :src="`https://img.youtube.com/vi/${ytCode}/sddefault.jpg`"
-        class="relative w-full max-h-45 object-cover rounded-lg"
+        class="relative w-full max-h-45 object-cover rounded-tr-lg rounded-tl-lg"
       />
     </div>
 
     <div class="bot-card">
       <h4 class="italic font-semibold text-orange">{{ judul }}</h4>
-      <p class="italic text-sm">{{ pembuat }}</p>
+      <p class="italic text-sm">
+        Pembuat: <span class="font-semibold">{{ pembuat }}</span>
+      </p>
       <p class="text-sm">
         <span v-html="trimDescription(deskripsi, 85)"></span>
       </p>
@@ -44,7 +46,7 @@ defineProps({
 
 <style scoped>
 .card {
-  --at-apply: w-full max-h-md shadow-lg shadow-gray-3 bg-gray-1 flex flex-col rounded-bl-lg rounded-br-lg;
+  --at-apply: w-full max-h-md shadow-lg shadow-gray bg-gray-1 flex flex-col rounded-bl-lg rounded-br-lg;
 }
 
 .top-card {
@@ -52,7 +54,7 @@ defineProps({
 }
 
 .bot-card {
-  --at-apply: py-4 text-left flex flex-col rounded-bl-lg rounded-br-lg lg:(justify-between h-55)
+  --at-apply: py-4 px-2 text-left flex flex-col rounded-bl-lg rounded-br-lg lg:(justify-between h-55)
     text-left;
 }
 </style>
