@@ -71,6 +71,12 @@ export default defineNuxtConfig({
       cert: "localhost.pem",
     },
   },
+  runtimeConfig: {
+    public: {
+      meiliHost: process.env.MEILI_HOST,
+      meiliApiKey: process.env.MEILI_API_KEY,
+    },
+  },
 });
 
 // Activate Local SSL with this command on CLI

@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { MeiliSearch } from "meilisearch";
 
 export const useSearchFunction = defineStore("searchfunction", () => {
   const keywords = ref("");
@@ -127,3 +128,38 @@ export const searchTugasAkhirDirectus = defineStore(
     };
   }
 );
+
+export const searchMeili = defineStore("meilisearch", () => {
+  const client = new MeiliSearch({
+    host: useRuntimeConfig().public.meiliHost,
+    apiKey: useRuntimeConfig().public.meiliApiKey,
+  });
+
+  const meiliKeyword = ref();
+
+  const disertasi = client.index("Disertasi");
+  const tesis = client.index("Tesis");
+  const tugasAkhir = client.index("Tugas-Akhir");
+
+  const universalResults = ref();
+
+  const generalSearch = async (keyword: string) => {
+    const disertasiResult = await disertasi.search(keyword, { limit: 10 });
+    const tesisResult = await tesis.search(keyword, { limit: 10 });
+    const tugasAkhirResult = await tugasAkhir.search(keyword, { limit: 10 });
+
+    await universalResults.value.push(disertasiResult);
+    await universalResults.value.push(tesisResult);
+    await universalResults.value.push(tugasAkhirResult);
+  };
+
+  return {
+    client,
+    disertasi,
+    tesis,
+    tugasAkhir,
+    meiliKeyword,
+    universalResults,
+    generalSearch,
+  };
+});
