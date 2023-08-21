@@ -2,6 +2,7 @@
 const route = useRoute();
 const { status, signIn, signOut, data } = useAuth();
 const { getItemById } = useDirectusItems();
+const meili = searchMeili();
 const fakultas = daftarNamaFakultasUnpad();
 
 const accessText = ref("");

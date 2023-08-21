@@ -18,6 +18,14 @@ const submitSearch = async () => {
   }
 };
 
+const moreSearchResults = async () => {
+  if (search.keywords === "") {
+    console.log("Keywords is blank");
+  } else {
+    await navigateTo("/search?keyword=" + search.keywords);
+  }
+};
+
 const limitChars = (str) => {
   return str.slice(0, 125);
 };
@@ -63,7 +71,7 @@ const limitChars = (str) => {
           <button
             type="submit"
             class="btn bg-orange text-white"
-            @submit.prevent="submitSearch"
+            @click="moreSearchResults"
           >
             {{ $t("search") }}
           </button>

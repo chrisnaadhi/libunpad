@@ -5,17 +5,34 @@ const meili = searchMeili();
 const keyword = ref("Hey World!");
 const dataResults = ref();
 
-const searchIndex = async () => {
-  dataResults.value = await meili.tesis.search(keyword.value);
-};
+const getIndex = await meili.client.multiSearch({
+  queries: [
+    {
+      indexUid: "Tesis",
+      q: "210120150005",
+      limit: 1,
+    },
+    {
+      indexUid: "Disertasi",
+      q: "210120150005",
+      limit: 1,
+    },
+    {
+      indexUid: "Tugas-Akhir",
+      q: "210120150005",
+      limit: 1,
+    },
+  ],
+});
+
+const getDocument = await meili.client.index("Tesis").getDocument(210120150005);
 </script>
 
 <template>
   <section>
-    <p>{{ keyword }}</p>
-    <input type="text" v-model="keyword" @keyup="searchIndex" />
-    <button @click="searchIndex">Search</button>
-    <pre>{{ dataResults }}</pre>
+    <input type="text" v-model="meili.meiliKeyword" />
+    <button @click="meili.generalSearch(meili.meiliKeyword)">Search</button>
+    <p>{{ getIndex }}</p>
   </section>
 </template>
 

@@ -43,9 +43,9 @@ function openPreview() {
       </NuxtLink>
       <h6 class="text-sm italic">{{ npm }}</h6>
       <p class="text-xs">{{ author }}</p>
-      <p class="text-sm font-600">{{ tipe }}</p>
+      <p class="text-sm font-600">{{ tipe }} - {{ fakultas }}</p>
       <p class="text-sm mb-2">
-        {{ trimText(description) }}
+        {{ trimText(description ?? "Hello world!") }}
       </p>
       <p class="text-xs">
         <span class="font-semibold">Keywords:</span>
@@ -79,6 +79,6 @@ function openPreview() {
 }
 
 .content-section {
-  --at-apply: m-2 flex flex-col max-w-auto justify-around;
+  --at-apply: m-2 flex flex-col w-full max-w-auto justify-around;
 }
 </style>

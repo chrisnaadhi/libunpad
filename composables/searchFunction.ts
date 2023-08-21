@@ -135,22 +135,32 @@ export const searchMeili = defineStore("meilisearch", () => {
     apiKey: useRuntimeConfig().public.meiliApiKey,
   });
 
-  const meiliKeyword = ref();
+  const meiliKeyword = ref("");
+  const inputState = ref(true);
 
   const disertasi = client.index("Disertasi");
   const tesis = client.index("Tesis");
+  // const skripsi = client.index("Skripsi");
   const tugasAkhir = client.index("Tugas-Akhir");
 
-  const universalResults = ref();
+  const universalResults = ref<Array<any>>([]);
+  const disertasiResult = ref();
+  const tesisResult = ref();
+  const skripsiResult = ref();
+  const tugasAkhirResult = ref();
 
   const generalSearch = async (keyword: string) => {
-    const disertasiResult = await disertasi.search(keyword, { limit: 10 });
-    const tesisResult = await tesis.search(keyword, { limit: 10 });
-    const tugasAkhirResult = await tugasAkhir.search(keyword, { limit: 10 });
+    disertasiResult.value = await disertasi.search(keyword, { limit: 5 });
+    tesisResult.value = await tesis.search(keyword, { limit: 5 });
+    // skripsiResult.value = await skripsi.search(keyword, { limit: 5 });
+    tugasAkhirResult.value = await tugasAkhir.search(keyword, { limit: 5 });
 
-    await universalResults.value.push(disertasiResult);
-    await universalResults.value.push(tesisResult);
-    await universalResults.value.push(tugasAkhirResult);
+    universalResults.value = [
+      // ...skripsiResult.value.hits,
+      ...disertasiResult.value.hits,
+      ...tesisResult.value.hits,
+      ...tugasAkhirResult.value.hits,
+    ];
   };
 
   return {
@@ -159,7 +169,11 @@ export const searchMeili = defineStore("meilisearch", () => {
     tesis,
     tugasAkhir,
     meiliKeyword,
+    inputState,
     universalResults,
+    disertasiResult,
+    tesisResult,
+    tugasAkhirResult,
     generalSearch,
   };
 });

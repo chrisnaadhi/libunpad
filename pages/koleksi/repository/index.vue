@@ -4,25 +4,14 @@ const { getItems } = useDirectusItems();
 const searchTugasAkhir = searchTugasAkhirDirectus();
 const previewItem = previewModalRepository();
 const meili = searchMeili();
+const initialRes = ref();
 
-const dataTADirectus = await getItems({
-  collection: "tbtMhsUploadThesis",
-  params: {
-    limit: 30,
-    sort: "-UploadTgl",
-  },
-});
+await meili.generalSearch(meili.meiliKeyword);
+initialRes.value = meili.universalResults;
 
 const previewData = (npm) => {
-  if (!searchTugasAkhir.searchResults) {
-    const searchData = dataTADirectus.find((elem) => elem?.MhsNPM === npm);
-    return searchData;
-  } else {
-    const searchData = searchTugasAkhir.searchResults.find(
-      (elem) => elem?.MhsNPM === npm
-    );
-    return searchData;
-  }
+  const searchData = meili.universalResults.find((elem) => elem?.NPM === npm);
+  return searchData;
 };
 
 let selectedPreview = previewData(previewItem.numberSelected);
@@ -52,16 +41,16 @@ definePageMeta({
         >
           <div @click.stop="" class="preview-block">
             <div class="flex flex-col items-center">
-              <h3>{{ selectedPreview?.MhsNPM }}</h3>
-              <p class="font-semibold">{{ selectedPreview?.Judul }}</p>
+              <h3>{{ selectedPreview?.NPM }}</h3>
+              <p class="font-semibold">{{ selectedPreview?.Title }}</p>
               <p class="text-sm text-justify">
-                {{ selectedPreview?.AbstrakBersih ?? selectedPreview?.Abstrak }}
+                {{ selectedPreview?.Abstract }}
               </p>
-              <p>Keywords: {{ selectedPreview?.Keywords }}</p>
+              <p>Tipe: {{ selectedPreview?.Jenis }}</p>
             </div>
             <div class="mt-2">
               <NuxtLink
-                :to="'/koleksi/repository/item/' + selectedPreview?.MhsNPM"
+                :to="'/koleksi/repository/item/' + selectedPreview?.NPM"
                 class="btn bg-orange text-white px-2 py-1 text-xs"
               >
                 Detail
@@ -76,55 +65,41 @@ definePageMeta({
       Koleksi Karya Ilmiah dan Tugas Akhir dari Civitas Akademika Universitas
       Padjadjaran
     </p>
+    <p>{{ meili.inputState }}</p>
     <CollectionRepositoryMainSearch />
-    <div v-show="searchTugasAkhir.searchResults !== 'loading'">
+    <div v-show="meili.meiliKeyword !== '' && meili.inputState">
       <p class="text-center">
         Hasil pencarian:
-        <span class="font-semibold">"{{ searchTugasAkhir.keywords }}"</span>
+        <span class="font-semibold">"{{ meili.meiliKeyword }}"</span>
         terdapat
-        <span class="font-semibold">{{
-          !searchTugasAkhir.searchResults
-            ? dataTADirectus.length
-            : searchTugasAkhir.searchResults.length
-        }}</span>
+        <span class="font-semibold">{{ meili.universalResults.length }}</span>
         data.
       </p>
     </div>
     <div class="flex flex-col gap-4 lg:(flex-row)">
       <CollectionRepositoryFilterOption />
-      <div class="repository-collection" v-if="!searchTugasAkhir.searchResults">
+      <div class="repository-collection" v-if="meili.inputState">
         <CollectionRepositoryCard
-          v-for="koleksi in dataTADirectus"
-          :npm="koleksi.MhsNPM"
-          :title="trimText(koleksi.Judul)"
-          :tipe="koleksi.tipeKoleksi"
-          :description="koleksi.AbstrakBersih ?? koleksi.Abstrak"
-          :keywords="koleksi.Keywords"
-          :link-access="'/koleksi/repository/item/' + koleksi.MhsNPM"
-          @preview="openModal(koleksi.MhsNPM)"
+          v-for="hasil in meili.universalResults"
+          :title="trimText(hasil.Title)"
+          :author="hasil.Author"
+          :description="hasil.Abstract"
+          :fakultas="'Fakultas ' + hasil.Fakultas"
+          :npm="hasil.NPM"
+          :tipe="hasil.Jenis"
+          :link-access="'/koleksi/repository/item/' + hasil.NPM"
+          @preview="openModal(hasil.NPM)"
         />
       </div>
-      <div v-else-if="searchTugasAkhir.searchResults === 'loading'">
+      <div v-else-if="!meili.inputState">
         <div class="max-w-3xl ma text-center">
           <h3>Sedang mencari data...</h3>
         </div>
       </div>
-      <div v-else-if="searchTugasAkhir.searchResults === '[]'">
+      <div v-else-if="meili.universalResults === []">
         <div class="max-w-3xl ma text-center">
           <h3>Tidak ditemukan</h3>
         </div>
-      </div>
-      <div class="repository-collection" v-else>
-        <CollectionRepositoryCard
-          v-for="koleksi in searchTugasAkhir.searchResults"
-          :npm="koleksi.MhsNPM"
-          :title="trimText(koleksi.Judul)"
-          :tipe="koleksi.tipeKoleksi"
-          :description="koleksi.AbstrakBersih ?? koleksi.Abstrak"
-          :keywords="koleksi.Keywords"
-          :link-access="'/koleksi/repository/item/' + koleksi.MhsNPM"
-          @preview="openModal(koleksi.MhsNPM)"
-        />
       </div>
     </div>
 

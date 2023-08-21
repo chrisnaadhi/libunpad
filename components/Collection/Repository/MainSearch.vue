@@ -1,5 +1,6 @@
 <script setup>
 const searchTugasAkhir = searchTugasAkhirDirectus();
+const meili = searchMeili();
 </script>
 
 <template>
@@ -8,12 +9,15 @@ const searchTugasAkhir = searchTugasAkhirDirectus();
       <div class="w-full h-full">
         <input
           type="search"
-          v-model="searchTugasAkhir.keywords"
+          v-model="meili.meiliKeyword"
           name=""
           id=""
           class="relative rounded p-2"
           placeholder="Masukkan kata yang ingin dicari"
-          @keyup.enter="searchTugasAkhir.searchingTugasAkhir(true)"
+          @keydown="meili.inputState = false"
+          @focusout="meili.inputState = true"
+          @keyup.enter="meili.inputState = true"
+          @keydown.enter="meili.generalSearch(meili.meiliKeyword)"
         />
         <!-- <div class="search-wrapper" v-show="mainSearchBar !== ''">
           <div
@@ -33,7 +37,7 @@ const searchTugasAkhir = searchTugasAkhirDirectus();
       </div>
       <button
         type="submit"
-        @click="searchTugasAkhir.searchingTugasAkhir(true)"
+        @click="meili.generalSearch(meili.meiliKeyword)"
         class="btn bg-orange text-white"
       >
         Search
