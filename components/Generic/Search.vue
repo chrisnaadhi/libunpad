@@ -77,7 +77,7 @@ const limitChars = (str) => {
               target="_blank"
             >
               <NuxtLink
-                :to="`https://en.wikipedia.org?curid=${elem.pageid}`"
+                :to="`https://id.wikipedia.org?curid=${elem.pageid}`"
                 class="no-underline"
                 target="_blank"
               >
@@ -88,7 +88,7 @@ const limitChars = (str) => {
               <p class="text-sm text-gray">
                 <span v-html="limitChars(elem.snippet)"></span>...
                 <NuxtLink
-                  :to="`https://en.wikipedia.org?curid=${elem.pageid}`"
+                  :to="`https://id.wikipedia.org?curid=${elem.pageid}`"
                   class="no-underline"
                   target="_blank"
                 >

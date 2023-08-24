@@ -1,7 +1,9 @@
 <script setup>
 const suggestion = ref("");
 const search = useSearchFunction();
+const searchTugasAkhir = searchTugasAkhirDirectus();
 const scopus = useSearchScopus();
+const previewItem = previewModalRepository();
 const route = useRoute();
 const { getItems } = useDirectusItems();
 
@@ -111,6 +113,20 @@ const changeKeywords = () => {
   });
 };
 
+const previewData = (npm) => {
+  if (repoSearch.value) {
+    const searchData = repoSearch.value.find((elem) => elem?.MhsNPM === npm);
+    return searchData;
+  }
+};
+
+let selectedPreview = previewData(previewItem.numberSelected);
+
+const openModal = (npm) => {
+  selectedPreview = previewData(npm);
+  previewItem.viewModal();
+};
+
 function trimText(txt) {
   const trimmedText = txt.slice(0, 55);
   return trimmedText + "...";
@@ -139,6 +155,33 @@ onMounted(() => {
         Unpad
       </Title>
     </Head>
+    <LazyClientOnly>
+      <Teleport to="#modal">
+        <ModalBase
+          v-show="previewItem.showModal"
+          @close="previewItem.viewModal"
+        >
+          <div @click.stop="" class="preview-block">
+            <div class="flex flex-col items-center">
+              <h3>{{ selectedPreview?.MhsNPM }}</h3>
+              <p class="font-semibold">{{ selectedPreview?.Judul }}</p>
+              <p class="text-sm text-justify">
+                {{ selectedPreview?.AbstrakBersih ?? selectedPreview?.Abstrak }}
+              </p>
+              <p>Keywords: {{ selectedPreview?.Keywords }}</p>
+            </div>
+            <div class="mt-2">
+              <NuxtLink
+                :to="'/koleksi/repository/item/' + selectedPreview?.MhsNPM"
+                class="btn bg-orange text-white px-2 py-1 text-xs"
+              >
+                Detail
+              </NuxtLink>
+            </div>
+          </div>
+        </ModalBase>
+      </Teleport>
+    </LazyClientOnly>
     <h1>{{ $t("pencarianTerpaduTitle") }}</h1>
     <section class="search-box">
       <input
@@ -352,6 +395,10 @@ input {
 
 .suggestion {
   --at-apply: text-blue-7 font-600 underline cursor-pointer;
+}
+
+.preview-block {
+  --at-apply: max-w-3xl flex flex-col items-center bg-white w-full max-h-80 overflow-y-scroll py-5 px-10 rounded-lg;
 }
 
 .result-display {

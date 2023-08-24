@@ -1,6 +1,5 @@
 <script setup>
 const { getItems } = useDirectusItems();
-const config = useRuntimeConfig();
 
 const image = "https://www.svgrepo.com/show/9244/newspaper-report.svg";
 const platform = [
@@ -47,29 +46,14 @@ const article = await getItems({
       <h2>{{ plat.nama }}</h2>
       <p>{{ plat.deskripsi }}</p>
       <div class="flex flex-col mx-3 lg:(flex-row mx-0) justify-between gap-3">
-        <div class="article-block" v-for="item in article">
-          <NuxtImg
-            :src="`${config.public.directus.url}assets/` + item.gambar_unggulan"
-            class="w-full max-h-45 object-cover rounded-lg"
-          />
-          <NuxtLink
-            :to="'/berita/' + item.slug"
-            class="text-dark no-underline transition-all-500 hover:text-orange"
-          >
-            <h5>{{ item.judul }}</h5>
-          </NuxtLink>
-          <p class="text-xs italic">{{ convertTimeZone(item.date_created) }}</p>
-          <div></div>
-          <p>
-            <span v-html="trimDescription(item.konten_artikel, 100)"></span>
-            <NuxtLink
-              :to="'/berita/' + item.slug"
-              class="text-sm text-orange underline"
-            >
-              Baca selengkapnya
-            </NuxtLink>
-          </p>
-        </div>
+        <GenericArticleCard
+          v-for="item in article"
+          :featured-img="item.gambar_unggulan"
+          :description="item.konten_artikel"
+          :link-slug="item.slug"
+          :title="item.judul"
+          :date-created="item.date_created"
+        />
       </div>
     </section>
   </main>
