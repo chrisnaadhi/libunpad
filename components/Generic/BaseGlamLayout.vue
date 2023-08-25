@@ -21,6 +21,10 @@ defineProps({
   linkCollection: {
     type: String,
   },
+  displayBody: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const defaultImage = "/images/no-image.jpg";
@@ -53,7 +57,10 @@ const path = useRoute();
         </div>
       </div>
     </div>
-    <div class="max-w-6xl ma bg-gray-1 rounded-lg rounded-rt-lg p-4">
+    <div
+      class="max-w-6xl ma bg-gray-1 rounded-lg rounded-rt-lg p-4"
+      v-show="displayBody"
+    >
       <div class="p-4">
         <h1 class="text-4xl text-center">{{ branding ?? title }}</h1>
         <p class="text-justify">

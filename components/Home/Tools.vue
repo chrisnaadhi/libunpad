@@ -20,16 +20,25 @@ const { data: tools } = await useFetch("/api/v1/tools");
         <div class="right-content">
           <div class="contents-display">
             <h1 class="tools-heading">{{ tool.nama_tools }}</h1>
-            <p class="text-xs">
+            <p class="text-xs text-white">
               {{ tool.deskripsi }}
             </p>
+            <NuxtLink
+              :to="tool.slug"
+              class="btn mt-3 py-0 bg-white text-sm text-orange"
+            >
+              Info
+            </NuxtLink>
           </div>
         </div>
       </div>
     </div>
-    <a href="#" class="text-gray-6 text-sm hover:(text-orange-5 underline)">
+    <NuxtLink
+      to="/panduan"
+      class="text-gray-6 text-sm hover:(text-orange-5 underline)"
+    >
       Lihat selengkapnya layanan dan alat yang dapat kami tawarkan →
-    </a>
+    </NuxtLink>
     <div class="hidden">
       <div class="i-mdi-pencil"></div>
       <div class="i-mdi-spanner"></div>
@@ -41,7 +50,7 @@ const { data: tools } = await useFetch("/api/v1/tools");
 
 <style scoped>
 .wrapper {
-  --at-apply: py-10 max-w-7xl ma text-center bg-gray-2 rounded-xl mt-15;
+  --at-apply: py-10 max-w-7xl ma text-center bg-orange-50 rounded-xl mt-15;
 }
 
 .content-wrapper {

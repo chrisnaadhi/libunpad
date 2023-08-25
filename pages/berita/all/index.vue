@@ -11,7 +11,7 @@ const getAllArticle = await getItems({
 </script>
 
 <template>
-  <main class="max-w-7xl ma px-4">
+  <main class="max-w-7xl ma px-4 py-10">
     <section>
       <CollectionHeader
         :title="$t('newsTitleHeader')"
@@ -29,6 +29,11 @@ const getAllArticle = await getItems({
         :date-created="item.date_created"
       />
     </section>
+    <section class="text-center">
+      <NuxtLink to="/berita" class="btn bg-orange text-white">
+        Kembali ke Berita
+      </NuxtLink>
+    </section>
   </main>
 </template>
 
@@ -38,6 +43,6 @@ p {
 }
 
 .article-list {
-  --at-apply: grid grid-cols-3 gap-5 my-10;
+  --at-apply: grid grid-cols-3 gap-5 my-5;
 }
 </style>

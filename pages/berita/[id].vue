@@ -83,6 +83,6 @@ const namaPenulis = `${getPenulis.first_name} ${getPenulis.last_name}`;
 }
 
 article {
-  --at-apply: bg-gray-50 rounded-2xl p-15 my-5 mx-3;
+  --at-apply: bg-orange-50 rounded-2xl p-15 my-5 mx-3;
 }
 </style>

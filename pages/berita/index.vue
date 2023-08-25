@@ -1,13 +1,33 @@
 <script setup>
 const { getItems } = useDirectusItems();
 
-const image = "https://www.svgrepo.com/show/9244/newspaper-report.svg";
+const imageBg = "https://www.svgrepo.com/show/9244/newspaper-report.svg";
 const platform = [
-  { nama: "Kandaga", deskripsi: "Berita umum seputar layanan Kandaga" },
-  { nama: "Gallery", deskripsi: "Berita mengenai Galeri Kandaga" },
-  { nama: "Library", deskripsi: "Berita mengenai Perpustakaan Kandaga" },
-  { nama: "Records", deskripsi: "Berita mengenai Arsip Kandaga" },
-  { nama: "Museum", deskripsi: "Berita mengenai Museum Kandaga" },
+  {
+    nama: "Kandaga",
+    deskripsi: "Berita umum seputar layanan Kandaga",
+    slug: "all",
+  },
+  {
+    nama: "Gallery",
+    deskripsi: "Berita mengenai Galeri Kandaga",
+    slug: "gallery",
+  },
+  {
+    nama: "Library",
+    deskripsi: "Berita mengenai Perpustakaan Kandaga",
+    slug: "library",
+  },
+  {
+    nama: "Records",
+    deskripsi: "Berita mengenai Arsip Kandaga",
+    slug: "records",
+  },
+  {
+    nama: "Museum",
+    deskripsi: "Berita mengenai Museum Kandaga",
+    slug: "museum",
+  },
 ];
 
 const article = await getItems({
@@ -17,6 +37,10 @@ const article = await getItems({
     sort: "-date_updated",
   },
 });
+
+// TODO : add collection based on news type of GLAM
+platform[0]["collection"] = [1, 2, 3, 4, 5];
+console.log(platform[0]);
 </script>
 
 <template>
@@ -24,7 +48,7 @@ const article = await getItems({
     <section>
       <CollectionHeader
         :title="$t('newsTitleHeader')"
-        :image="image"
+        :image="imageBg"
         :description="$t('newsDescriptionHeader')"
       />
     </section>
@@ -54,6 +78,11 @@ const article = await getItems({
           :title="item.judul"
           :date-created="item.date_created"
         />
+      </div>
+      <div class="text-right mt-5">
+        <NuxtLink :to="'/berita/' + plat.slug" class="italic font-semibold">
+          Lihat selengkapnya >
+        </NuxtLink>
       </div>
     </section>
   </main>
