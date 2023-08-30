@@ -30,7 +30,7 @@ const platform = [
   },
 ];
 
-const article = await getItems({
+const getAllArticle = await getItems({
   collection: "artikel",
   params: {
     limit: 3,
@@ -38,9 +38,16 @@ const article = await getItems({
   },
 });
 
-// TODO : add collection based on news type of GLAM
-platform[0]["collection"] = [1, 2, 3, 4, 5];
-console.log(platform[0]);
+const getGalleryArticle = await getItems(fetchArticleCategory("gallery"));
+const getLibraryArticle = await getItems(fetchArticleCategory("library"));
+const getArchiveArticle = await getItems(fetchArticleCategory("archive"));
+const getMuseumArticle = await getItems(fetchArticleCategory("museum"));
+
+platform[0]["collection"] = getAllArticle;
+platform[1]["collection"] = getGalleryArticle;
+platform[2]["collection"] = getLibraryArticle;
+platform[3]["collection"] = getArchiveArticle;
+platform[4]["collection"] = getMuseumArticle;
 </script>
 
 <template>
@@ -69,9 +76,11 @@ console.log(platform[0]);
     <section v-for="plat in platform" class="platform-section">
       <h2>{{ plat.nama }}</h2>
       <p>{{ plat.deskripsi }}</p>
-      <div class="flex flex-col mx-3 lg:(flex-row mx-0) justify-between gap-3">
+      <div
+        class="flex flex-col mx-3 lg:(grid grid-cols-3 mx-0) justify-between gap-3"
+      >
         <GenericArticleCard
-          v-for="item in article"
+          v-for="item in plat.collection"
           :featured-img="item.gambar_unggulan"
           :description="item.konten_artikel"
           :link-slug="item.slug"

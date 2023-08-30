@@ -1,6 +1,7 @@
 <script setup>
-const data = ref(" Vue Composition API");
 const { getItems } = useDirectusItems();
+
+const imageBg = "https://www.svgrepo.com/show/9244/newspaper-report.svg";
 
 const getAllArticle = await getItems({
   collection: "artikel",
@@ -15,7 +16,7 @@ const getAllArticle = await getItems({
     <section>
       <CollectionHeader
         :title="$t('newsTitleHeader')"
-        :image="image"
+        :image="imageBg"
         :description="$t('newsDescriptionHeader')"
       />
     </section>

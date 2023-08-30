@@ -62,7 +62,8 @@ const namaPenulis = `${getPenulis.first_name} ${getPenulis.last_name}`;
         <h1 class="text-center mb-5">{{ berita[0].judul }}</h1>
         <span class="text-justify" v-html="berita[0].konten_artikel"></span>
         <p class="italic text-sm mt-5">
-          Diperbaharui pada: {{ convertTimeZone(berita[0].date_updated) }} WIB
+          Diperbaharui pada:
+          {{ convertTimeZone(berita[0].date_updated) }}
         </p>
       </article>
       <div class="my-5 text-center">
