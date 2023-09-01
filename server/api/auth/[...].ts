@@ -1,8 +1,10 @@
 import { NuxtAuthHandler } from "#auth";
 import GoogleProvider from "next-auth/providers/google";
 
+const runtimeConfig = useRuntimeConfig();
+
 export default NuxtAuthHandler({
-  secret: process.env.AUTH_SECRET,
+  secret: process.env.AUTH_SECRET ?? runtimeConfig.authSecret,
   providers: [
     // @ts-expect-error
     GoogleProvider.default({

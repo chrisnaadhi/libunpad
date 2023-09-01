@@ -268,8 +268,8 @@ onMounted(() => {
       </section>
     </article>
 
-    <article>
-      <h3 v-show="search.keywords !== ''">Repository Unpad</h3>
+    <article v-show="search.keywords !== ''">
+      <h3>Repository Unpad</h3>
       <section
         class="grid grid-cols-3 gap-4 text-left my-5"
         v-if="loadingRepo === false"
@@ -294,8 +294,8 @@ onMounted(() => {
       </section>
     </article>
 
-    <article>
-      <h3 v-show="search.keywords !== ''">Scopus</h3>
+    <article v-show="search.keywords !== ''">
+      <h3>Scopus</h3>
       <section class="grid grid-cols-3 gap-5" v-if="loadingScopus === false">
         <div
           v-if="scopus.scopusObjects"

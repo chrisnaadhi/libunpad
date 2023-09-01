@@ -90,12 +90,16 @@ const submitLogin = async () => {
 };
 
 const googleLogin = async () => {
-  await signIn("google", { callbackUrl: route.query.redir });
+  await signIn("google", { callbackUrl: route.query.redir ?? "/" });
 };
 
 const errorLogger = () => {
   console.log(error.value);
 };
+
+if (status.value === "authenticated") {
+  await navigateTo("/");
+}
 
 definePageMeta({
   auth: {
