@@ -9,12 +9,16 @@ export const useSearchFunction = defineStore("searchfunction", () => {
   const baseURLSearch = ref(
     "https://id.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=extracts&list=search&utf8=1&formatversion=2&exsentences=1&exlimit=20&exintro=1&explaintext=1&exsectionformat=raw&srnamespace=0&srlimit=8&srprop=snippet&srsearch="
   );
+  const baseURLKandaga = ref(process.env.URL_API_KANDAGA);
+  const kandagaRes = ref();
 
   return {
     keywords,
     isResult,
     articleObj,
     baseURLSearch,
+    baseURLKandaga,
+    kandagaRes,
     initValue,
   };
 });
@@ -161,5 +165,17 @@ export const searchMeili = defineStore("meilisearch", () => {
     meiliKeyword,
     universalResults,
     generalSearch,
+  };
+});
+
+export const federatedSearch = defineStore("federatedSearch", async () => {
+  const baseURL = ref(process.env.URL_API_KANDAGA);
+  const keyword = ref("");
+  const fetchRes = ref();
+
+  return {
+    baseURL,
+    keyword,
+    fetchRes,
   };
 });

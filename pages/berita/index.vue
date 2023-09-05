@@ -19,9 +19,9 @@ const platform = [
     slug: "library",
   },
   {
-    nama: "Records",
-    deskripsi: "Berita mengenai Arsip Kandaga",
-    slug: "records",
+    nama: "Archive",
+    deskripsi: "Berita mengenai Arsip Publik yang dikelola Kandaga",
+    slug: "archive",
   },
   {
     nama: "Museum",

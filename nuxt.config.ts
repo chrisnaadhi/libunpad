@@ -70,6 +70,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     authSecret: process.env.AUTH_SECRET,
+    urlApiKandaga: process.env.URL_API_KANDAGA,
     public: {
       meiliHost: process.env.MEILI_HOST,
       meiliApiKey: process.env.MEILI_API_KEY,

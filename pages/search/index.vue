@@ -2,12 +2,14 @@
 const suggestion = ref("");
 const search = useSearchFunction();
 const searchTugasAkhir = searchTugasAkhirDirectus();
+const federated = federatedSearch();
 const scopus = useSearchScopus();
 const previewItem = previewModalRepository();
 const route = useRoute();
 const { getItems } = useDirectusItems();
 
 const repoSearch = ref();
+const federatedResult = ref();
 const portPosition = ref(0);
 const loadingWiki = ref(false);
 const loadingRepo = ref(false);
@@ -27,12 +29,21 @@ const submitSearch = async (keyword) => {
       search.baseURLSearch + keyword
     );
 
+    const { data: kandagaRes } = await useFetch(search.baseURLKandaga, {
+      query: {
+        allfields: keyword,
+      },
+      mode: "no-cors",
+    });
+
     search.isResult = true;
+    search.kandagaRes = kandagaRes.value;
     search.articleObj = searchResults.value.query.search;
     suggestion.value = searchResults.value.query.searchinfo?.suggestion;
     loadingWiki.value = false;
   } catch (error) {
     search.isResult = false;
+    console.log(error);
   }
 
   try {
@@ -347,7 +358,7 @@ onMounted(() => {
     <Transition name="fade">
       <div
         class="sticky bottom-0 h-20 bg-orange-1 px-5 mt-10 rounded-lg"
-        v-show="portPosition >= 200 && portPosition <= 1400"
+        v-show="portPosition >= 200 && portPosition <= 1600"
       >
         <section class="flex items-center gap-4">
           <input
@@ -369,6 +380,9 @@ onMounted(() => {
         </section>
       </div>
     </Transition>
+    <div>
+      {{ search.kandagaRes }}
+    </div>
   </main>
 </template>
 
