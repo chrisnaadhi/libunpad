@@ -30,7 +30,7 @@ const getAllArticle = await getItems({
         :date-created="item.date_created"
       />
     </section>
-    <section class="text-center">
+    <section class="my-10 text-center">
       <NuxtLink to="/berita" class="btn bg-orange text-white">
         Kembali ke Berita
       </NuxtLink>
