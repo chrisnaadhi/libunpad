@@ -38,7 +38,12 @@ const logout = async () => {
         referrerpolicy="no-referrer"
         @click="toggleProfile"
       />
-      <div class="account-dropdown" v-show="viewDropdown">
+      <div
+        class="account-dropdown"
+        v-show="viewDropdown"
+        :tabindex="-1"
+        @focusout="viewDropdown = false"
+      >
         <p>{{ data?.user?.name }}</p>
         <p class="text-xs">{{ data?.user?.email }}</p>
         <button class="btn py-0 bg-red text-xs text-white" @click="logout">

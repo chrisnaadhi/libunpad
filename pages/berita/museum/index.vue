@@ -17,7 +17,6 @@ const dataArtikelMuseum = await getItems({
   <section>
     <div class="text-center">
       <h1>{{ title }}</h1>
-      <pre>{{ route.fullPath }}</pre>
     </div>
 
     <div class="flex flex-col lg:(grid grid-cols-3) px-4 py-5">

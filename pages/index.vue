@@ -21,10 +21,15 @@ useHead({
   ],
   title: "GLAM Kandaga Unpad | Universitas Padjadjaran",
 });
+
+const state = mobileMenu();
+const windowClick = () => {
+  state.menuState = false;
+};
 </script>
 
 <template>
-  <div>
+  <div @click="windowClick">
     <HeroSection />
     <HomePlatforms />
     <HomeTools />

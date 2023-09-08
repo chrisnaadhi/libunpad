@@ -9,11 +9,12 @@ const route = useRoute();
 const { getItems } = useDirectusItems();
 
 const repoSearch = ref();
-const federatedResult = ref();
 const portPosition = ref(0);
+const bottomPort = ref(false);
 const loadingWiki = ref(false);
 const loadingRepo = ref(false);
 const loadingScopus = ref(false);
+const loadingFederated = ref(false);
 
 const submitSearch = async (keyword) => {
   if (search.keywords === "") {
@@ -23,6 +24,7 @@ const submitSearch = async (keyword) => {
   loadingWiki.value = true;
   loadingRepo.value = true;
   loadingScopus.value = true;
+  loadingFederated.value = true;
 
   try {
     const { data: searchResults } = await useFetch(
@@ -33,14 +35,16 @@ const submitSearch = async (keyword) => {
       query: {
         allfields: keyword,
       },
-      mode: "no-cors",
     });
 
     search.isResult = true;
-    search.kandagaRes = kandagaRes.value;
     search.articleObj = searchResults.value.query.search;
+    if (kandagaRes.value) {
+      search.kandagaRes = JSON.parse(kandagaRes.value.data);
+    }
     suggestion.value = searchResults.value.query.searchinfo?.suggestion;
     loadingWiki.value = false;
+    loadingFederated.value = false;
   } catch (error) {
     search.isResult = false;
     console.log(error);
@@ -153,7 +157,15 @@ onMounted(() => {
   }, 500);
 
   window.addEventListener("scroll", () => {
+    const scrollableHeight =
+      document.documentElement.scrollHeight - window.innerHeight;
+    if (window.scrollY >= scrollableHeight) {
+      bottomPort.value = true;
+    } else {
+      bottomPort.value = false;
+    }
     portPosition.value = window.scrollY;
+    console.log(bottomPort.value);
   });
 });
 </script>
@@ -222,6 +234,7 @@ onMounted(() => {
         <span class="font-600">{{ search.keywords }}</span>
       </div>
     </section>
+
     <article>
       <h3 v-show="search.keywords !== ''">Wikipedia</h3>
       <section
@@ -280,9 +293,33 @@ onMounted(() => {
     </article>
 
     <article v-show="search.keywords !== ''">
+      <h3>Kandaga Federated Search</h3>
+      <div
+        v-if="loadingFederated === false"
+        class="flex flex-col gap-3 md:(grid grid-cols-3)"
+      >
+        <div
+          v-for="item in search.kandagaRes?.response.docs"
+          class="bg-orange-1 text-left"
+        >
+          <p>ID: {{ item.id }}</p>
+          <p>Judul: {{ item?.title[0] }}</p>
+          <p>Pengarang: {{ item.creator.join(", ") }}</p>
+          <p>Tipe Koleksi: {{ typeof item?.type }}</p>
+          <p>Subjek: {{ item.subject.join(", ") }}</p>
+          <p>Lokasi: {{ item.library_name }}</p>
+          <p>Koleksi: {{ item.repository_name }}</p>
+        </div>
+      </div>
+      <div v-else>
+        <p>Mencari data...</p>
+      </div>
+    </article>
+
+    <article v-show="search.keywords !== ''">
       <h3>Repository Unpad</h3>
       <section
-        class="grid grid-cols-3 gap-4 text-left my-5"
+        class="flex flex-col gap-4 text-left my-5 md:(grid grid-cols-3)"
         v-if="loadingRepo === false"
       >
         <CollectionRepositoryCard
@@ -357,10 +394,10 @@ onMounted(() => {
 
     <Transition name="fade">
       <div
-        class="sticky bottom-0 h-20 bg-orange-1 px-5 mt-10 rounded-lg"
-        v-show="portPosition >= 200 && portPosition <= 1600"
+        class="sticky bottom-0 bg-orange-1 px-5 pb-15 rounded-lg h-full xl:h-20"
+        v-show="portPosition >= 200 && bottomPort === false"
       >
-        <section class="flex items-center gap-4">
+        <section class="flex items-center gap-2">
           <input
             type="search"
             name="search"
@@ -380,9 +417,6 @@ onMounted(() => {
         </section>
       </div>
     </Transition>
-    <div>
-      {{ search.kandagaRes }}
-    </div>
   </main>
 </template>
 
