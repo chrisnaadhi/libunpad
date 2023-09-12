@@ -165,7 +165,6 @@ onMounted(() => {
       bottomPort.value = false;
     }
     portPosition.value = window.scrollY;
-    console.log(bottomPort.value);
   });
 });
 </script>
@@ -296,19 +295,44 @@ onMounted(() => {
       <h3>Kandaga Federated Search</h3>
       <div
         v-if="loadingFederated === false"
-        class="flex flex-col gap-3 md:(grid grid-cols-3)"
+        class="flex flex-col gap-3 lg:(grid grid-cols-2)"
       >
         <div
           v-for="item in search.kandagaRes?.response.docs"
-          class="bg-orange-1 text-left"
+          class="bg-orange-1 text-left p-5 rounded-lg"
         >
-          <p>ID: {{ item.id }}</p>
-          <p>Judul: {{ item?.title[0] }}</p>
-          <p>Pengarang: {{ item.creator.join(", ") }}</p>
-          <p>Tipe Koleksi: {{ typeof item?.type }}</p>
-          <p>Subjek: {{ item.subject.join(", ") }}</p>
-          <p>Lokasi: {{ item.library_name }}</p>
-          <p>Koleksi: {{ item.repository_name }}</p>
+          <table class="table-auto">
+            <tbody>
+              <tr>
+                <td>ID</td>
+                <td>: {{ item?.id }}</td>
+              </tr>
+              <tr>
+                <td>Judul</td>
+                <td>: {{ item?.title[0] }}</td>
+              </tr>
+              <tr>
+                <td>Pengarang</td>
+                <td>: {{ item?.creator.join(", ") }}</td>
+              </tr>
+              <tr>
+                <td>Tipe Koleksi</td>
+                <td>: {{ item?.type }}</td>
+              </tr>
+              <tr>
+                <td>Subjek</td>
+                <td>: {{ item?.subject.join(", ") }}</td>
+              </tr>
+              <tr>
+                <td>Lokasi</td>
+                <td>: {{ item?.library_name }}</td>
+              </tr>
+              <tr>
+                <td>Koleksi</td>
+                <td>: {{ item.repository_name }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
       <div v-else>
@@ -427,6 +451,10 @@ h1 {
 
 h3 {
   --at-apply: text-2xl xl:text-4xl;
+}
+
+td {
+  --at-apply: min-w-25 px-1;
 }
 
 article {
