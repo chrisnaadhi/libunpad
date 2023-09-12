@@ -1,15 +1,20 @@
 <script setup>
 const suggestion = ref("");
 const search = useSearchFunction();
+const searchTugasAkhir = searchTugasAkhirDirectus();
+const federated = federatedSearch();
 const scopus = useSearchScopus();
+const previewItem = previewModalRepository();
 const route = useRoute();
 const { getItems } = useDirectusItems();
 
 const repoSearch = ref();
 const portPosition = ref(0);
+const bottomPort = ref(false);
 const loadingWiki = ref(false);
 const loadingRepo = ref(false);
 const loadingScopus = ref(false);
+const loadingFederated = ref(false);
 
 const submitSearch = async (keyword) => {
   if (search.keywords === "") {
@@ -19,18 +24,30 @@ const submitSearch = async (keyword) => {
   loadingWiki.value = true;
   loadingRepo.value = true;
   loadingScopus.value = true;
+  loadingFederated.value = true;
 
   try {
     const { data: searchResults } = await useFetch(
       search.baseURLSearch + keyword
     );
 
+    const { data: kandagaRes } = await useFetch(search.baseURLKandaga, {
+      query: {
+        allfields: keyword,
+      },
+    });
+
     search.isResult = true;
     search.articleObj = searchResults.value.query.search;
+    if (kandagaRes.value) {
+      search.kandagaRes = JSON.parse(kandagaRes.value.data);
+    }
     suggestion.value = searchResults.value.query.searchinfo?.suggestion;
     loadingWiki.value = false;
+    loadingFederated.value = false;
   } catch (error) {
     search.isResult = false;
+    console.log(error);
   }
 
   try {
@@ -111,6 +128,20 @@ const changeKeywords = () => {
   });
 };
 
+const previewData = (npm) => {
+  if (repoSearch.value) {
+    const searchData = repoSearch.value.find((elem) => elem?.MhsNPM === npm);
+    return searchData;
+  }
+};
+
+let selectedPreview = previewData(previewItem.numberSelected);
+
+const openModal = (npm) => {
+  selectedPreview = previewData(npm);
+  previewItem.viewModal();
+};
+
 function trimText(txt) {
   const trimmedText = txt.slice(0, 55);
   return trimmedText + "...";
@@ -126,6 +157,13 @@ onMounted(() => {
   }, 500);
 
   window.addEventListener("scroll", () => {
+    const scrollableHeight =
+      document.documentElement.scrollHeight - window.innerHeight;
+    if (window.scrollY >= scrollableHeight) {
+      bottomPort.value = true;
+    } else {
+      bottomPort.value = false;
+    }
     portPosition.value = window.scrollY;
   });
 });
@@ -139,6 +177,33 @@ onMounted(() => {
         Unpad
       </Title>
     </Head>
+    <LazyClientOnly>
+      <Teleport to="#modal">
+        <ModalBase
+          v-show="previewItem.showModal"
+          @close="previewItem.viewModal"
+        >
+          <div @click.stop="" class="preview-block">
+            <div class="flex flex-col items-center">
+              <h3>{{ selectedPreview?.MhsNPM }}</h3>
+              <p class="font-semibold">{{ selectedPreview?.Judul }}</p>
+              <p class="text-sm text-justify">
+                {{ selectedPreview?.AbstrakBersih ?? selectedPreview?.Abstrak }}
+              </p>
+              <p>Keywords: {{ selectedPreview?.Keywords }}</p>
+            </div>
+            <div class="mt-2">
+              <NuxtLink
+                :to="'/koleksi/repository/item/' + selectedPreview?.MhsNPM"
+                class="btn bg-orange text-white px-2 py-1 text-xs"
+              >
+                Detail
+              </NuxtLink>
+            </div>
+          </div>
+        </ModalBase>
+      </Teleport>
+    </LazyClientOnly>
     <h1>{{ $t("pencarianTerpaduTitle") }}</h1>
     <section class="search-box">
       <input
@@ -168,6 +233,7 @@ onMounted(() => {
         <span class="font-600">{{ search.keywords }}</span>
       </div>
     </section>
+
     <article>
       <h3 v-show="search.keywords !== ''">Wikipedia</h3>
       <section
@@ -225,10 +291,59 @@ onMounted(() => {
       </section>
     </article>
 
-    <article>
-      <h3 v-show="search.keywords !== ''">Repository Unpad</h3>
+    <article v-show="search.keywords !== ''">
+      <h3>Kandaga Federated Search</h3>
+      <div
+        v-if="loadingFederated === false"
+        class="flex flex-col gap-3 lg:(grid grid-cols-2)"
+      >
+        <div
+          v-for="item in search.kandagaRes?.response.docs"
+          class="bg-orange-1 text-left p-5 rounded-lg"
+        >
+          <table class="table-auto">
+            <tbody>
+              <tr>
+                <td>ID</td>
+                <td>: {{ item?.id }}</td>
+              </tr>
+              <tr>
+                <td>Judul</td>
+                <td>: {{ item?.title[0] }}</td>
+              </tr>
+              <tr>
+                <td>Pengarang</td>
+                <td>: {{ item?.creator.join(", ") }}</td>
+              </tr>
+              <tr>
+                <td>Tipe Koleksi</td>
+                <td>: {{ item?.type }}</td>
+              </tr>
+              <tr>
+                <td>Subjek</td>
+                <td>: {{ item?.subject.join(", ") }}</td>
+              </tr>
+              <tr>
+                <td>Lokasi</td>
+                <td>: {{ item?.library_name }}</td>
+              </tr>
+              <tr>
+                <td>Koleksi</td>
+                <td>: {{ item.repository_name }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div v-else>
+        <p>Mencari data...</p>
+      </div>
+    </article>
+
+    <article v-show="search.keywords !== ''">
+      <h3>Repository Unpad</h3>
       <section
-        class="grid grid-cols-3 gap-4 text-left my-5"
+        class="flex flex-col gap-4 text-left my-5 md:(grid grid-cols-3)"
         v-if="loadingRepo === false"
       >
         <CollectionRepositoryCard
@@ -251,8 +366,8 @@ onMounted(() => {
       </section>
     </article>
 
-    <article>
-      <h3 v-show="search.keywords !== ''">Scopus</h3>
+    <article v-show="search.keywords !== ''">
+      <h3>Scopus</h3>
       <section class="grid grid-cols-3 gap-5" v-if="loadingScopus === false">
         <div
           v-if="scopus.scopusObjects"
@@ -303,10 +418,10 @@ onMounted(() => {
 
     <Transition name="fade">
       <div
-        class="sticky bottom-0 h-20 bg-orange-1 px-5 mt-10 rounded-lg"
-        v-show="portPosition >= 200 && portPosition <= 1400"
+        class="sticky bottom-0 bg-orange-1 px-5 pb-15 rounded-lg h-full xl:h-20"
+        v-show="portPosition >= 200 && bottomPort === false"
       >
-        <section class="flex items-center gap-4">
+        <section class="flex items-center gap-2">
           <input
             type="search"
             name="search"
@@ -338,6 +453,10 @@ h3 {
   --at-apply: text-2xl xl:text-4xl;
 }
 
+td {
+  --at-apply: min-w-25 px-1;
+}
+
 article {
   --at-apply: bg-gray-50 pt-5 pb-15 px-10 my-20 rounded-lg shadow-gray-3 shadow-lg;
 }
@@ -352,6 +471,10 @@ input {
 
 .suggestion {
   --at-apply: text-blue-7 font-600 underline cursor-pointer;
+}
+
+.preview-block {
+  --at-apply: max-w-3xl flex flex-col items-center bg-white w-full max-h-80 overflow-y-scroll py-5 px-10 rounded-lg;
 }
 
 .result-display {

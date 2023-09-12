@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { MeiliSearch } from "meilisearch";
 
 export const useSearchFunction = defineStore("searchfunction", () => {
   const keywords = ref("");
@@ -8,12 +9,16 @@ export const useSearchFunction = defineStore("searchfunction", () => {
   const baseURLSearch = ref(
     "https://id.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=extracts&list=search&utf8=1&formatversion=2&exsentences=1&exlimit=20&exintro=1&explaintext=1&exsectionformat=raw&srnamespace=0&srlimit=8&srprop=snippet&srsearch="
   );
+  const baseURLKandaga = ref(process.env.URL_API_KANDAGA);
+  const kandagaRes = ref();
 
   return {
     keywords,
     isResult,
     articleObj,
     baseURLSearch,
+    baseURLKandaga,
+    kandagaRes,
     initValue,
   };
 });
@@ -127,3 +132,50 @@ export const searchTugasAkhirDirectus = defineStore(
     };
   }
 );
+
+export const searchMeili = defineStore("meilisearch", () => {
+  const client = new MeiliSearch({
+    host: useRuntimeConfig().public.meiliHost,
+    apiKey: useRuntimeConfig().public.meiliApiKey,
+  });
+
+  const meiliKeyword = ref();
+
+  const disertasi = client.index("Disertasi");
+  const tesis = client.index("Tesis");
+  const tugasAkhir = client.index("Tugas-Akhir");
+
+  const universalResults = ref();
+
+  const generalSearch = async (keyword: string) => {
+    const disertasiResult = await disertasi.search(keyword, { limit: 10 });
+    const tesisResult = await tesis.search(keyword, { limit: 10 });
+    const tugasAkhirResult = await tugasAkhir.search(keyword, { limit: 10 });
+
+    await universalResults.value.push(disertasiResult);
+    await universalResults.value.push(tesisResult);
+    await universalResults.value.push(tugasAkhirResult);
+  };
+
+  return {
+    client,
+    disertasi,
+    tesis,
+    tugasAkhir,
+    meiliKeyword,
+    universalResults,
+    generalSearch,
+  };
+});
+
+export const federatedSearch = defineStore("federatedSearch", async () => {
+  const baseURL = ref(process.env.URL_API_KANDAGA);
+  const keyword = ref("");
+  const fetchRes = ref();
+
+  return {
+    baseURL,
+    keyword,
+    fetchRes,
+  };
+});

@@ -7,6 +7,11 @@ const options = {
   month: "long",
   day: "numeric",
 };
+
+const viewStateGallery = ref(false);
+const viewStateLibrary = ref(false);
+const viewStateArchive = ref(false);
+const viewStateMuseum = ref(false);
 </script>
 
 <template>
@@ -24,34 +29,70 @@ const options = {
       <NuxtLink
         :to="locale === 'id' ? '/gallery' : '/en/gallery'"
         class="content"
+        @mouseenter="viewStateGallery = true"
+        @mouseleave="viewStateGallery = false"
       >
-        <p class="use-banner">Platform</p>
-        <div class="i-mdi-theater w-24 h-24" />
-        <h1>Gallery</h1>
+        <div v-show="viewStateGallery === false">
+          <p class="use-banner">Platform</p>
+          <div class="i-mdi-theater w-24 h-24" />
+          <h1>Gallery</h1>
+        </div>
+
+        <div v-show="viewStateGallery === true" class="max-w-50">
+          <p class="use-banner-hover">Gallery</p>
+          <p class="text-xs">{{ $t("galleryDescription") }}</p>
+        </div>
       </NuxtLink>
       <NuxtLink
         :to="locale === 'id' ? '/library' : '/en/library'"
         class="content"
+        @mouseenter="viewStateLibrary = true"
+        @mouseleave="viewStateLibrary = false"
       >
-        <p class="use-banner">Platform</p>
-        <div class="i-mdi-bookshelf w-24 h-24" />
-        <h1>Library</h1>
+        <div v-show="viewStateLibrary === false">
+          <p class="use-banner">Platform</p>
+          <div class="i-mdi-bookshelf w-24 h-24" />
+          <h1>Library</h1>
+        </div>
+
+        <div v-show="viewStateLibrary === true" class="max-w-50">
+          <p class="use-banner-hover">Library</p>
+          <p class="text-xs">{{ $t("libraryDescription") }}</p>
+        </div>
       </NuxtLink>
       <NuxtLink
         :to="locale === 'id' ? '/records' : '/en/records'"
         class="content"
+        @mouseenter="viewStateArchive = true"
+        @mouseleave="viewStateArchive = false"
       >
-        <p class="use-banner">Platform</p>
-        <div class="i-mdi-archive-sync w-24 h-24" />
-        <h1>Records</h1>
+        <div v-show="viewStateArchive === false">
+          <p class="use-banner">Platform</p>
+          <div class="i-mdi-archive-sync w-24 h-24" />
+          <h1>Archive</h1>
+        </div>
+
+        <div v-show="viewStateArchive === true" class="max-w-50">
+          <p class="use-banner-hover">Archive</p>
+          <p class="text-xs">{{ $t("archiveDescription") }}</p>
+        </div>
       </NuxtLink>
       <NuxtLink
         :to="locale === 'id' ? '/museum' : '/en/museum'"
         class="content"
+        @mouseenter="viewStateMuseum = true"
+        @mouseleave="viewStateMuseum = false"
       >
-        <p class="use-banner">Platform</p>
-        <div class="i-mdi-bank w-24 h-24" />
-        <h1>Museum</h1>
+        <div v-show="viewStateMuseum === false">
+          <p class="use-banner">Platform</p>
+          <div class="i-mdi-bank w-24 h-24" />
+          <h1>Museum</h1>
+        </div>
+
+        <div v-show="viewStateMuseum === true" class="max-w-50">
+          <p class="use-banner-hover">Museum</p>
+          <p class="text-xs">{{ $t("museumDescription") }}</p>
+        </div>
       </NuxtLink>
     </section>
     <section
@@ -122,6 +163,10 @@ const options = {
 }
 .use-banner {
   --at-apply: text-xs bg-orange text-white px-4 rounded;
+}
+
+.use-banner-hover {
+  --at-apply: max-w-20 ma text-xs bg-white text-orange px-4 rounded;
 }
 
 .content:hover > .use-banner {

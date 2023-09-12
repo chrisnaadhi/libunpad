@@ -62,7 +62,8 @@ const namaPenulis = `${getPenulis.first_name} ${getPenulis.last_name}`;
         <h1 class="text-center mb-5">{{ berita[0].judul }}</h1>
         <span class="text-justify" v-html="berita[0].konten_artikel"></span>
         <p class="italic text-sm mt-5">
-          Diperbaharui pada: {{ convertTimeZone(berita[0].date_updated) }} WIB
+          Diperbaharui pada:
+          {{ convertTimeZone(berita[0].date_updated) }}
         </p>
       </article>
       <div class="my-5 text-center">
@@ -83,6 +84,6 @@ const namaPenulis = `${getPenulis.first_name} ${getPenulis.last_name}`;
 }
 
 article {
-  --at-apply: bg-gray-50 rounded-2xl p-15 my-5 mx-3;
+  --at-apply: bg-orange-50 rounded-2xl p-15 my-5 mx-3;
 }
 </style>

@@ -121,7 +121,7 @@ const viewPanduan = () => {
 
 <style scoped>
 .layer {
-  --at-apply: fixed mt--15 h-full w-full bg-white/95 transition-all-500 z-2;
+  --at-apply: fixed mt--12 h-full w-full bg-white/95 transition-all-500 z-2;
 }
 .menu-wrapper {
   --at-apply: w-full flex flex-col justify-center;
@@ -130,6 +130,6 @@ const viewPanduan = () => {
   --at-apply: text-lg py-1 cursor-pointer;
 }
 .hover-menu {
-  --at-apply: transition-all-500 hover:(text-orange underline);
+  --at-apply: transition-all-500 text-dark no-underline hover:(text-orange underline);
 }
 </style>

@@ -35,9 +35,7 @@ const koleksiTerseleksi = daftarKoleksiTerkait.filter(
 <template>
   <section class="main-frame">
     <div class="mt-4">
-      <NuxtLink :to="'e-teater/' + metaDataKoleksi.kategori">
-        &#8592;Kembali
-      </NuxtLink>
+      <NuxtLink to="/e-teater"> &#8592;Kembali ke Koleksi E-Teater </NuxtLink>
     </div>
     <h1 class="kandaga-gradient font-semibold text-center">E-Teater</h1>
     <h3 class="text-center mb-4">{{ metaDataKoleksi.nama_koleksi }}</h3>

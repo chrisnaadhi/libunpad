@@ -3,6 +3,7 @@ const { getItems } = useDirectusItems();
 
 const searchTugasAkhir = searchTugasAkhirDirectus();
 const previewItem = previewModalRepository();
+const meili = searchMeili();
 
 const dataTADirectus = await getItems({
   collection: "tbtMhsUploadThesis",

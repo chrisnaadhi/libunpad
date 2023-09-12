@@ -114,7 +114,7 @@ export const convertTimeZone = (time: string) => {
     minute: "numeric",
   });
   if (!time) return "Belum diperbarui";
-  return `${formatted} ${timeFormat}`;
+  return `${formatted} ${timeFormat} WIB`;
 };
 
 export const jamPiketPegawai = (hari: number) => {

@@ -43,10 +43,10 @@ export default defineNuxtConfig({
         file: "english.ts",
       },
     ],
+    defaultLocale: "id",
     strategy: "prefix_and_default",
     lazy: true,
     langDir: "lang",
-    defaultLocale: "id",
     vueI18n: "./i18n.config.ts",
     skipSettingLocaleOnNavigate: true,
     detectBrowserLanguage: false,
@@ -60,15 +60,20 @@ export default defineNuxtConfig({
   },
   auth: {
     isEnabled: true,
-    baseURL: process.env.AUTH_ORIGIN,
-    provider: {
-      type: "authjs",
-    },
+    origin: process.env.AUTH_ORIGIN,
   },
   devServer: {
     https: {
       key: "localhost-key.pem",
       cert: "localhost.pem",
+    },
+  },
+  runtimeConfig: {
+    authSecret: process.env.AUTH_SECRET,
+    urlApiKandaga: process.env.URL_API_KANDAGA,
+    public: {
+      meiliHost: process.env.MEILI_HOST,
+      meiliApiKey: process.env.MEILI_API_KEY,
     },
   },
 });

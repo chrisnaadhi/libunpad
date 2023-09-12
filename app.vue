@@ -121,6 +121,10 @@ input[type="search"] {
   --at-apply: w-full border-1 border-orange;
 }
 
+button[type="submit"] {
+  --at-apply: bg-orange;
+}
+
 strong {
   --at-apply: font-semibold;
 }

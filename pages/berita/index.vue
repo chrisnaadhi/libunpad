@@ -1,23 +1,53 @@
 <script setup>
 const { getItems } = useDirectusItems();
-const config = useRuntimeConfig();
 
-const image = "https://www.svgrepo.com/show/9244/newspaper-report.svg";
+const imageBg = "https://www.svgrepo.com/show/9244/newspaper-report.svg";
 const platform = [
-  { nama: "Kandaga", deskripsi: "Berita umum seputar layanan Kandaga" },
-  { nama: "Gallery", deskripsi: "Berita mengenai Galeri Kandaga" },
-  { nama: "Library", deskripsi: "Berita mengenai Perpustakaan Kandaga" },
-  { nama: "Records", deskripsi: "Berita mengenai Arsip Kandaga" },
-  { nama: "Museum", deskripsi: "Berita mengenai Museum Kandaga" },
+  {
+    nama: "Kandaga",
+    deskripsi: "Berita umum seputar layanan Kandaga",
+    slug: "all",
+  },
+  {
+    nama: "Gallery",
+    deskripsi: "Berita mengenai Galeri Kandaga",
+    slug: "gallery",
+  },
+  {
+    nama: "Library",
+    deskripsi: "Berita mengenai Perpustakaan Kandaga",
+    slug: "library",
+  },
+  {
+    nama: "Archive",
+    deskripsi: "Berita mengenai Arsip Publik yang dikelola Kandaga",
+    slug: "archive",
+  },
+  {
+    nama: "Museum",
+    deskripsi: "Berita mengenai Museum Kandaga",
+    slug: "museum",
+  },
 ];
 
-const article = await getItems({
+const getAllArticle = await getItems({
   collection: "artikel",
   params: {
     limit: 3,
     sort: "-date_updated",
   },
 });
+
+const getGalleryArticle = await getItems(fetchArticleCategory("gallery"));
+const getLibraryArticle = await getItems(fetchArticleCategory("library"));
+const getArchiveArticle = await getItems(fetchArticleCategory("archive"));
+const getMuseumArticle = await getItems(fetchArticleCategory("museum"));
+
+platform[0]["collection"] = getAllArticle;
+platform[1]["collection"] = getGalleryArticle;
+platform[2]["collection"] = getLibraryArticle;
+platform[3]["collection"] = getArchiveArticle;
+platform[4]["collection"] = getMuseumArticle;
 </script>
 
 <template>
@@ -25,7 +55,7 @@ const article = await getItems({
     <section>
       <CollectionHeader
         :title="$t('newsTitleHeader')"
-        :image="image"
+        :image="imageBg"
         :description="$t('newsDescriptionHeader')"
       />
     </section>
@@ -46,30 +76,22 @@ const article = await getItems({
     <section v-for="plat in platform" class="platform-section">
       <h2>{{ plat.nama }}</h2>
       <p>{{ plat.deskripsi }}</p>
-      <div class="flex flex-col mx-3 lg:(flex-row mx-0) justify-between gap-3">
-        <div class="article-block" v-for="item in article">
-          <NuxtImg
-            :src="`${config.public.directus.url}assets/` + item.gambar_unggulan"
-            class="w-full max-h-45 object-cover rounded-lg"
-          />
-          <NuxtLink
-            :to="'/berita/' + item.slug"
-            class="text-dark no-underline transition-all-500 hover:text-orange"
-          >
-            <h5>{{ item.judul }}</h5>
-          </NuxtLink>
-          <p class="text-xs italic">{{ convertTimeZone(item.date_created) }}</p>
-          <div></div>
-          <p>
-            <span v-html="trimDescription(item.konten_artikel, 100)"></span>
-            <NuxtLink
-              :to="'/berita/' + item.slug"
-              class="text-sm text-orange underline"
-            >
-              Baca selengkapnya
-            </NuxtLink>
-          </p>
-        </div>
+      <div
+        class="flex flex-col mx-3 lg:(grid grid-cols-3 mx-0) justify-between gap-3"
+      >
+        <GenericArticleCard
+          v-for="item in plat.collection"
+          :featured-img="item.gambar_unggulan"
+          :description="item.konten_artikel"
+          :link-slug="item.slug"
+          :title="item.judul"
+          :date-created="item.date_created"
+        />
+      </div>
+      <div class="text-right mt-5">
+        <NuxtLink :to="'/berita/' + plat.slug" class="italic font-semibold">
+          Lihat selengkapnya >
+        </NuxtLink>
       </div>
     </section>
   </main>
