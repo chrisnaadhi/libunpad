@@ -1,4 +1,6 @@
 <script setup>
+import { useFetch } from "#app";
+
 const suggestion = ref("");
 const search = useSearchFunction();
 const searchTugasAkhir = searchTugasAkhirDirectus();
