@@ -38,7 +38,7 @@ const submitSearch = async (keyword) => {
     });
 
     search.isResult = true;
-    search.articleObj = searchResults.value.query.search;
+    search.articleObj = searchResults?.value?.query?.search;
     if (kandagaRes.value) {
       search.kandagaRes = JSON.parse(kandagaRes.value.data);
     }
@@ -313,7 +313,7 @@ onMounted(() => {
               </tr>
               <tr>
                 <td>Pengarang</td>
-                <td>: {{ item?.creator.join(", ") }}</td>
+                <td>: {{ item?.creator?.join(", ") }}</td>
               </tr>
               <tr>
                 <td>Tipe Koleksi</td>
@@ -321,7 +321,7 @@ onMounted(() => {
               </tr>
               <tr>
                 <td>Subjek</td>
-                <td>: {{ item?.subject.join(", ") }}</td>
+                <td>: {{ item?.subject?.join(", ") }}</td>
               </tr>
               <tr>
                 <td>Lokasi</td>
