@@ -11,7 +11,9 @@ const name = ref("Chrisna Adhi Pranoto");
     </div>
     <PengajuanListBebasPustaka />
     <NuxtLink to="/pengajuan">
-      <button type="button" class="btn bg-orange-3 text-white">Kembali</button>
+      <button type="button" class="btn bg-orange-1 text-orange-6">
+        Kembali
+      </button>
     </NuxtLink>
   </section>
 </template>

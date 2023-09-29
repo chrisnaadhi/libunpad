@@ -74,7 +74,7 @@ const programList = [
 <template>
   <section>
     <div class="card" v-for="list in programList">
-      <h1>{{ list.nama }}</h1>
+      <h4>{{ list.nama }}</h4>
       <p>Total Agenda: {{ list.fungsi?.meta?.filter_count }}</p>
       <div class="my-4">
         <NuxtLink

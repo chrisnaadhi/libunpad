@@ -1,10 +1,6 @@
 <script setup>
-import { useFetch } from "#app";
-
 const suggestion = ref("");
 const search = useSearchFunction();
-const searchTugasAkhir = searchTugasAkhirDirectus();
-const federated = federatedSearch();
 const scopus = useSearchScopus();
 const previewItem = previewModalRepository();
 const route = useRoute();

@@ -171,7 +171,7 @@ useHead({
     { name: "citation_keywords", content: dataObjectTA.keywords },
     {
       name: "citation_public_url",
-      content: "https://kandaga-beta.vercel.app" + route.fullPath,
+      content: "https://kandaga.unpad.ac.id/" + route.fullPath,
     },
     {
       name: "citation_pdf_url",
@@ -187,7 +187,7 @@ useHead({
 </script>
 
 <template>
-  <section>
+  <section class="content-layer">
     <h3 class="title">Koleksi Repository Universitas Padjadjaran</h3>
     <div class="text-center mb-3 flex items-center justify-center">
       <!-- Sudah Login -->
@@ -307,9 +307,5 @@ useHead({
 
 .auth-false {
   --at-apply: i-mdi-lock-alert bg-red-6 w-5 h-5;
-}
-
-section {
-  --at-apply: max-w-7xl ma;
 }
 </style>

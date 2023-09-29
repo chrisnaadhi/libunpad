@@ -19,7 +19,7 @@ const fetchAgenda = await getItems(fetchAgendaKegiatan(route.params.id));
     <div class="grid grid-cols-3 gap-2 my-3">
       <GenericBaseCard
         v-for="agenda in fetchAgenda.data"
-        class="border border-orange"
+        class="border border-orange py-5"
       >
         <h1 class="text-xl">{{ agenda.nama_kegiatan }}</h1>
         <p class="text-sm">

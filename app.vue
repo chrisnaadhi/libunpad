@@ -134,6 +134,10 @@ strong {
     to-gray-500;
 }
 
+.content-layer {
+  --at-apply: max-w-7xl ma;
+}
+
 .page-enter-active,
 .page-leave-active {
   transition: all 0.4s;

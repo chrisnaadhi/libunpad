@@ -15,6 +15,20 @@ export const extractYoutubeLink = (url: string) => {
   return youtubeCode;
 };
 
+export const definePeminjamanRuangan = (ruangan: string) => {
+  switch (ruangan) {
+    case "ruang_the_gade":
+      return "Ruang Pegadaian Lt.1";
+      break;
+    case "ruang_kelas_2":
+      return "Ruang Kelast Lt.2";
+      break;
+    default:
+      return "Belum dibuat";
+      break;
+  }
+};
+
 export const tugasPagination = defineStore("tugasPage", () => {
   const offsetVal = ref(0);
   const baseVal = ref(5);

@@ -32,7 +32,7 @@ const listKategori = await getItems({
           <div class="w-full">
             <iframe
               width="100%"
-              src="https://www.youtube-nocookie.com/embed/jtcBwtuIH-E"
+              src="https://www.youtube-nocookie.com/embed/rrUnAcGTZYk"
               title="YouTube video player"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
