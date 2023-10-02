@@ -122,7 +122,6 @@ const limitText = (text) => {
                 <span v-else-if="status === 'unauthenticated'">
                   <p>Anda tidak memiliki Akses</p>
                 </span>
-                {{ fileFullText }}
               </td>
             </tr>
             <tr class="text-left">
@@ -144,7 +143,6 @@ const limitText = (text) => {
                 <span v-else-if="status === 'unauthenticated'">
                   <p>Anda tidak memiliki Akses</p>
                 </span>
-                {{ fileFullText }}
               </td>
             </tr>
             <tr class="text-left">
@@ -166,7 +164,6 @@ const limitText = (text) => {
                 <span v-else-if="status === 'unauthenticated'">
                   <p>Anda tidak memiliki Akses</p>
                 </span>
-                {{ fileFullText }}
               </td>
             </tr>
             <tr class="text-left">
@@ -188,7 +185,6 @@ const limitText = (text) => {
                 <span v-else-if="status === 'unauthenticated'">
                   <p>Anda tidak memiliki Akses</p>
                 </span>
-                {{ fileFullText }}
               </td>
             </tr>
             <tr class="text-left">
@@ -210,7 +206,6 @@ const limitText = (text) => {
                 <span v-else-if="status === 'unauthenticated'">
                   <p>Anda tidak memiliki Akses</p>
                 </span>
-                {{ fileFullText }}
               </td>
             </tr>
             <tr class="text-left">
@@ -232,7 +227,6 @@ const limitText = (text) => {
                 <span v-else-if="status === 'unauthenticated'">
                   <p>Anda tidak memiliki Akses</p>
                 </span>
-                {{ fileFullText }}
               </td>
             </tr>
             <tr class="text-left">
@@ -254,7 +248,6 @@ const limitText = (text) => {
                 <span v-else-if="status === 'unauthenticated'">
                   <p>Anda tidak memiliki Akses</p>
                 </span>
-                {{ fileFullText }}
               </td>
             </tr>
             <tr class="text-left">
@@ -276,7 +269,6 @@ const limitText = (text) => {
                 <span v-else-if="status === 'unauthenticated'">
                   <p>Anda tidak memiliki Akses</p>
                 </span>
-                {{ fileFullText }}
               </td>
             </tr>
             <tr class="text-left">
@@ -298,14 +290,19 @@ const limitText = (text) => {
                 <span v-else-if="status === 'unauthenticated'">
                   <p>Anda tidak memiliki Akses</p>
                 </span>
-                {{ fileFullText }}
               </td>
             </tr>
             <tr class="text-left">
               <td class="font-semibold w-35">Lampiran</td>
               <td class="flex">
                 <div :class="isAccessible(fileLampiran)"></div>
-                <span v-if="status === 'authenticated' && fileLampiran">
+                <span
+                  v-if="
+                    status === 'authenticated' &&
+                    fileLampiran &&
+                    fileLampiran !== undefined
+                  "
+                >
                   <NuxtLink
                     :to="fileLampiran"
                     target="_blank"
@@ -314,13 +311,16 @@ const limitText = (text) => {
                     >Download</NuxtLink
                   >
                 </span>
-                <span v-else-if="fileLampiran === null">
+                <span
+                  v-else-if="
+                    fileLampiran === null || fileLampiran === undefined
+                  "
+                >
                   <p>File tidak tersedia</p>
                 </span>
                 <span v-else-if="status === 'unauthenticated'">
                   <p>Anda tidak memiliki Akses</p>
                 </span>
-                {{ fileFullText }}
               </td>
             </tr>
             <tr class="text-left">
@@ -342,7 +342,6 @@ const limitText = (text) => {
                 <span v-else-if="status === 'unauthenticated'">
                   <p>Anda tidak memiliki Akses</p>
                 </span>
-                {{ fileFullText }}
               </td>
             </tr>
             <tr class="text-left">
@@ -364,7 +363,6 @@ const limitText = (text) => {
                 <span v-else-if="status === 'unauthenticated'">
                   <p>Anda tidak memiliki Akses</p>
                 </span>
-                {{ fileFullText }}
               </td>
             </tr>
           </tbody>

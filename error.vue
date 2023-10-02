@@ -59,12 +59,12 @@ const handleClearError = () => {
       </p>
       <pre> Kamu ada di halaman: {{ route.fullPath }} </pre>
       <div class="flex justify-center my-5 gap-5">
-        <NuxtLink to="/login">
+        <NuxtLink to="mailto:chrisna.adhi@unpad.ac.id">
           <button
             type="button"
             class="btn border-1 border-orange bg-orange text-white"
           >
-            Kembali ke Login
+            Hubungi Web Admin
           </button>
         </NuxtLink>
         <button

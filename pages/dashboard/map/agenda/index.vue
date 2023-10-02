@@ -9,7 +9,7 @@ definePageMeta({
     <h1>Mapping Agenda Kegiatan Kandaga</h1>
     <DashboardMapAgenda />
     <div class="mt-8">
-      <NuxtLink to="/dashboard/map" class="btn bg-orange-2">
+      <NuxtLink to="/dashboard/map" class="btn bg-orange-2 text-orange-6">
         Back to List
       </NuxtLink>
     </div>

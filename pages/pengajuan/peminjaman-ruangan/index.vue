@@ -210,6 +210,10 @@ const dataPeminjaman = await getItems({
               <span class="font-semibold">Peminjam:</span>
               {{ item.nama_lengkap }}
             </p>
+            <p>
+              <span class="font-semibold">Ruangan: </span>
+              {{ definePeminjamanRuangan(item.nama_ruangan) }}
+            </p>
           </div>
         </div>
       </div>

@@ -13,7 +13,7 @@
     "@nuxtjs/i18n": "^8.0.0-beta.11",
     "@unocss/nuxt": "^0.55.0",
     "dayjs-nuxt": "^1.1.0",
-    "nuxt": "^3.7.0"
+    "nuxt": "^3.7.3"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.11",
@@ -27,6 +27,7 @@
     "v-calendar": "^3.0.3"
   },
   "overrides": {
-    "vue": "latest"
+    "vue": "latest",
+    "next-auth": "4.22.5"
   }
 }
