@@ -72,7 +72,7 @@ definePageMeta({
       </Teleport>
     </LazyClientOnly>
     <h1>Repository Universitas Padjadjaran</h1>
-    <p class="text-center">
+    <p class="text-center my-2">
       Koleksi Karya Ilmiah dan Tugas Akhir dari Civitas Akademika Universitas
       Padjadjaran
     </p>
@@ -91,7 +91,7 @@ definePageMeta({
       </p>
     </div>
     <div class="flex flex-col gap-4 lg:(flex-row)">
-      <CollectionRepositoryFilterOption />
+      <!-- <CollectionRepositoryFilterOption /> -->
       <div class="repository-collection" v-if="!searchTugasAkhir.searchResults">
         <CollectionRepositoryCard
           v-for="koleksi in dataTADirectus"

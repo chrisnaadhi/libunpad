@@ -1,63 +1,40 @@
 <script setup>
-const layananPerpustakaan = ref([
-  {
-    namaLayanan: "Layanan Koleksi",
-    deskripsi:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum nesciunt minima molestias consequuntur iste, dignissimos vel molestiae quo deleniti voluptas. Aliquid quidem libero, sapiente officiis qui nobis eius quisquam laboriosam dolore! Ratione reprehenderit accusamus porro rem aliquam impedit. Quam amet ratione ullam quod exercitationem ex reprehenderit minima porro doloremque optio!",
-  },
-  {
-    namaLayanan: "Layanan Multimedia",
-    deskripsi:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet harum, debitis dolor consectetur unde culpa. Porro, similique. Quisquam officiis rem blanditiis autem magni saepe explicabo vel. Vel iusto consequuntur dignissimos a voluptatum quo possimus rerum dolor ipsam nesciunt nemo ipsum blanditiis, placeat quisquam omnis hic maiores ex pariatur, doloremque labore?",
-  },
-  {
-    namaLayanan: "Layanan Informasi",
-    deskripsi:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur enim harum suscipit libero eos non sequi fuga reprehenderit, similique voluptatem fugiat ut repellat aliquam provident cumque reiciendis quisquam eum ea, excepturi odio aspernatur, ab vitae minus. Provident voluptas ut minus perspiciatis amet? Voluptate reprehenderit vitae tempore nihil tenetur voluptatem id.",
-  },
-  {
-    namaLayanan: "Layanan Tata Usaha dan Administrasi",
-    deskripsi:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero saepe reiciendis sed, in veritatis aut, facere incidunt odit dolores quaerat nihil doloribus corrupti suscipit, ipsa vero numquam rerum laudantium adipisci dolorem obcaecati nulla? Qui voluptas et impedit fugiat, maiores sit soluta natus, harum dolorem quas blanditiis dolor possimus aut neque!",
-  },
-  {
-    namaLayanan: "Fasilitas Sarana dan Prasarana",
-    deskripsi:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt omnis, iusto quia, iste vitae aut odit aperiam voluptatibus odio nostrum voluptas maxime facere reprehenderit. Cumque ab sit sunt ullam maiores fuga autem soluta nesciunt vel explicabo rem, iure debitis ipsa at? Sunt delectus enim unde nam repudiandae possimus impedit molestiae.",
-  },
-  {
-    namaLayanan: "Layanan Research Supports",
-    deskripsi:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, laborum optio laboriosam, architecto aspernatur earum officiis molestiae vel quo similique tempora quibusdam quod magnam soluta voluptatem veritatis eligendi. Ex, dicta. Placeat quidem ut fugiat eaque fugit eveniet incidunt. Magnam recusandae sunt sit magni eligendi porro non vitae eum molestias quod!",
-  },
-  {
-    namaLayanan: "Fasilitas Academic Tools",
-    deskripsi:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, iusto ut. Dolorum iusto fugit porro itaque, minus laborum iste, quidem beatae rerum culpa reiciendis ipsam? Quis eaque dolores debitis ad non cum sequi similique nobis dolore veniam, dolorem modi eum inventore perferendis natus, adipisci porro at, officia ipsum molestiae maxime.",
-  },
-  {
-    namaLayanan: "Fasilitas Learning Center",
-    deskripsi:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Explicabo nam maxime sed odio autem repellat. Sunt laudantium laborum doloremque! At ex aspernatur consectetur, dolorum suscipit perferendis deleniti iure, eligendi veniam laboriosam unde mollitia facilis! Officiis quaerat in recusandae reprehenderit perspiciatis? Quisquam repellendus unde delectus placeat quidem inventore maxime provident minima.",
-  },
-]);
+const { getItems } = useDirectusItems();
+const layananPerpustakaan = await getItems({
+  collection: "layanan_kandaga",
+});
+
+const layananDanFasilitas = ref(true);
+
+const toggleLayanan = () => {
+  layananDanFasilitas.value = !layananDanFasilitas.value;
+};
 </script>
 
 <template>
   <section class="layer">
     <h1>Panduan Untuk Civitas dan Pengguna Platform Kandaga</h1>
-    <p class="max-w-xl text-justify">
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia
-      sapiente laborum saepe vero enim quae voluptas. Nihil eos, aliquam labore
-      at nam suscipit culpa quisquam eveniet animi aut a adipisci ipsum
-      voluptatem quasi vitae laboriosam.
+    <p class="max-w-6xl italic text-center">
+      Panduan Penggunaan Platform Kandaga merupakan panduan bagi mahasiswa dan
+      dosen dalam menjelajahi dan memanfaatkan sumber daya perpustakaan digital
+      yang dikelola oleh Kandaga dengan efisien. Panduan ini dirancang untuk
+      memberikan pemahaman yang mendalam tentang cara menggunakan platform
+      perpustakaan dengan mudah dan efektif, sehingga pengguna dapat
+      memaksimalkan pengalaman mereka dalam mengejar pengetahuan dan melakukan
+      penelitian.
     </p>
     <div class="w-full">
-      <GenericBaseCard class="bg-orange-2 px-4 py-2">
+      <GenericBaseCard
+        class="bg-orange-2 px-4 py-2 cursor-pointer"
+        @click="toggleLayanan"
+      >
         <h3 class="text-center">Layanan dan Fasilitas</h3>
       </GenericBaseCard>
     </div>
-    <div class="w-full flex flex-col md:(grid grid-cols-2) gap-4">
+    <div
+      class="w-full flex flex-col md:(grid grid-cols-2) gap-4"
+      v-show="layananDanFasilitas"
+    >
       <GenericBaseCard
         v-for="item in layananPerpustakaan"
         class="bg-gray-1 p-6 flex items-center gap-2"
@@ -70,10 +47,13 @@ const layananPerpustakaan = ref([
           ></NuxtImg>
         </div>
         <div class="flex flex-col justify-around">
-          <h3 class="text-left">{{ item.namaLayanan }}</h3>
-          <p class="text-sm">{{ item.deskripsi }}</p>
+          <h3 class="text-left">{{ item.nama_layanan }}</h3>
+          <p class="text-sm italic" v-html="item.deskripsi_layanan"></p>
+          <p>{{ item.slug_layanan }}</p>
           <div class="w-full my-3">
-            <NuxtLink to="#" class="action-btn">Lihat Layanan</NuxtLink>
+            <NuxtLink :to="`/panduan/${item.slug_layanan}`" class="action-btn">
+              Lihat Layanan
+            </NuxtLink>
           </div>
         </div>
       </GenericBaseCard>
