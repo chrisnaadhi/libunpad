@@ -132,9 +132,9 @@ export const menuContent = () => {
       urlEN: "/en#",
     },
     {
-      name: "Belajar di Kandaga",
+      name: "Informasi Akademik",
       url: "#",
-      nameEN: "Study in Kandaga",
+      nameEN: "Academic Information",
       urlEN: "/en#",
     },
     {

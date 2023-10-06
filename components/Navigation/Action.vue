@@ -42,7 +42,7 @@ const logout = async () => {
         class="account-dropdown"
         v-show="viewDropdown"
         :tabindex="-1"
-        @focusout="viewDropdown = false"
+        @pointerleave="viewDropdown = false"
       >
         <p>{{ data?.user?.name }}</p>
         <p class="text-xs">{{ data?.user?.email }}</p>
