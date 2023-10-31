@@ -52,7 +52,7 @@ const submitSearch = async (keyword) => {
     repoSearch.value = await getItems({
       collection: "tbtMhsUploadThesis",
       params: {
-        limit: 6,
+        limit: 8,
         filter: {
           _or: [
             {
@@ -297,7 +297,7 @@ onMounted(() => {
       >
         <div
           v-for="item in search.kandagaRes?.response.docs"
-          class="bg-orange-1 text-left p-5 rounded-lg"
+          class="bg-white shadow shadow-orange/60 text-left p-5 rounded-lg"
         >
           <table class="table-auto">
             <tbody>
@@ -341,7 +341,7 @@ onMounted(() => {
     <article v-show="search.keywords !== ''">
       <h3>Repository Unpad</h3>
       <section
-        class="flex flex-col gap-4 text-left my-5 md:(grid grid-cols-3)"
+        class="flex flex-col gap-4 text-left my-5 md:(grid grid-cols-2) lg:(grid-cols-3)"
         v-if="loadingRepo === false"
       >
         <CollectionRepositoryCard

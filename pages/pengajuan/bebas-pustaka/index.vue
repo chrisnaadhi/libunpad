@@ -2,7 +2,8 @@
 definePageMeta({
   middleware: ["authentication-check"],
 });
-const { createItems } = useDirectusItems();
+const { createItems, getItems } = useDirectusItems();
+const { data } = useAuth();
 
 const npm = ref("");
 const notification = ref("Silahkan isi seluruh form sesuai dengan data asli");
@@ -10,12 +11,32 @@ const textNotif = ref("text-dark");
 const namaLengkap = ref("");
 const email = ref("");
 const kontak = ref("");
+const keperluan = ref("");
 const namaRuangan = ref("");
 const tanggalPeminjaman = ref("");
 const jamMulai = ref("");
 const jamSelesai = ref("");
 const tujuanPeminjaman = ref("");
 const emailPattern = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
+
+const checkDuplicateSubmission = async () => {
+  const isDuplicated = ref(false);
+  const getData = await getItems({
+    collection: "pengajuan_surat_bebas_pustaka",
+    params: {
+      filter: {
+        email: data.value.user.email,
+      },
+    },
+  });
+  if (getData.length > 0) {
+    isDuplicated.value = true;
+  } else {
+    isDuplicated.value = false;
+  }
+
+  return isDuplicated;
+};
 
 const kirimPengajuan = async () => {
   const emailValidation = emailPattern.test(email.value);
@@ -46,12 +67,18 @@ const kirimPengajuan = async () => {
     }, 5000);
   }
 };
+
+const isDup = await checkDuplicateSubmission();
 </script>
 
 <template>
   <main class="text-center my-5">
     <h1>Pengajuan Surat Bebas Pustaka</h1>
+    <div v-if="isDup">
+      <p class="text-red-5">Anda sudah mengajukan Surat Bebas Pustaka</p>
+    </div>
     <form
+      v-else
       @submit.prevent="kirimPengajuan"
       class="container ma max-w-md px-5 text-left"
     >

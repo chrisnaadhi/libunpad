@@ -37,6 +37,11 @@ defineProps({
                 >PAuS ID</NuxtLink
               >
             </li>
+            <li>
+              <NuxtLink to="https://sundadigi.com/" target="_blank">
+                SundaDigi
+              </NuxtLink>
+            </li>
           </ul>
         </section>
         <section class="footer-section">

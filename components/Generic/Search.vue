@@ -18,6 +18,10 @@ const submitSearch = async () => {
   }
 };
 
+const doSearch = async () => {
+  await navigateTo("/search?keyword=" + search.keywords);
+};
+
 const limitChars = (str) => {
   return str.slice(0, 125);
 };
@@ -49,6 +53,7 @@ const limitChars = (str) => {
           class="input-form"
           v-model="search.keywords"
           @keyup="submitSearch"
+          @keypress.enter="doSearch"
           role="searchbox"
           :placeholder="$t('searchOurCollection')"
         />

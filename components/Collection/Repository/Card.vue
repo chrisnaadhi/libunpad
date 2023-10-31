@@ -71,7 +71,7 @@ function openPreview() {
 
 <style>
 .card {
-  --at-apply: flex rounded shadow-md shadow-gray p-2 max-h-full;
+  --at-apply: flex rounded shadow-md shadow-gray p-2 h-full;
 }
 
 .cover-section {
@@ -79,6 +79,6 @@ function openPreview() {
 }
 
 .content-section {
-  --at-apply: m-2 flex w-full lg:max-w-50 flex-col justify-around;
+  --at-apply: m-2 flex w-full flex-col justify-around;
 }
 </style>
