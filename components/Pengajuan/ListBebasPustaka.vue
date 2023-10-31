@@ -79,11 +79,11 @@ const convertTimeZone = (time) => {
 const displayMessage = (value) => {
   switch (value) {
     case "pengajuan":
-      return "text-red";
+      return "text-red-5";
     case "proses":
-      return "text-amber";
+      return "text-amber-5";
     case "selesai":
-      return "text-green";
+      return "text-green-5";
   }
 };
 

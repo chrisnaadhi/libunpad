@@ -138,9 +138,9 @@ export const menuContent = () => {
       urlEN: "/en#",
     },
     {
-      name: "E-Resources",
+      name: "Kegiatan Belajar Mengajar",
       url: "#",
-      nameEN: "E-Resources",
+      nameEN: "Teaching & Learning Guide",
       urlEN: "/en#",
     },
     {
