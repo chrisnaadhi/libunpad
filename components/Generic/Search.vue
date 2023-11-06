@@ -29,8 +29,8 @@ const limitChars = (str) => {
 
 <template>
   <form @submit.prevent="submitSearch" class="w-full relative" role="search">
-    <div class="flex mb-5 mt-2 mx-2 xl:(ml-0 mr-25)">
-      <div class="relative w-full">
+    <div class="flex mt-2 mx-2 xl:(ml-0 mr-25)">
+      <div class="relative w-full mb-3">
         <div class="absolute top-4 left-3">
           <svg
             aria-hidden="true"
@@ -123,7 +123,7 @@ const limitChars = (str) => {
 
 <style scoped>
 .input-form {
-  --at-apply: min-w-full h-14 pl-10 pr-20 md:pr-30 border-1 border-orange rounded-lg focus:(shadow-md outline-none);
+  --at-apply: min-w-full h-14 pl-10 pr-20 py-3 md:pr-30 border-3 border-orange rounded-lg focus:(shadow-md outline-none);
 }
 
 .search-result {

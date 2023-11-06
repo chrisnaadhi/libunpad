@@ -338,6 +338,41 @@ onMounted(() => {
       </div>
     </article>
 
+    <GenericBaseCard>
+      <div class="bg-white shadow shadow-orange p-5 rounded-lg">
+        <div class="flex items-center gap-3">
+          <div class="py-2">
+            <p class="bg-orange text-white text-sm rounded mb-2 text-center">
+              Tipe Koleksi
+            </p>
+            <NuxtImg
+              src="/images/lambang-unpad.png"
+              class="w-25 max-w-50 max-h-80 px-8 py-15 border border-orange"
+              format="webp"
+            />
+          </div>
+          <div class="flex gap-2">
+            <div>
+              <p>Judul</p>
+              <p>Pengarang</p>
+              <p>Tipe Koleksi</p>
+              <p>Subjek</p>
+              <p>Lokasi</p>
+              <p>Koleksi</p>
+            </div>
+            <div>
+              <p>: Judul</p>
+              <p>: Pengarang</p>
+              <p>: Tipe Koleksi</p>
+              <p>: Subjek</p>
+              <p>: Lokasi</p>
+              <p>: Koleksi</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </GenericBaseCard>
+
     <article v-show="search.keywords !== ''">
       <h3>Repository Unpad</h3>
       <section

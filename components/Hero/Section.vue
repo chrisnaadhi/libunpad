@@ -17,7 +17,7 @@ const switchLocalePath = useSwitchLocalePath();
           <span class="text-orange-6 font-600">Universitas Padjadjaran</span>'s
           Gallery, Library, Record Management & Museum (GLAMS)
         </p>
-        <p class="py-2 text-xs xl:(mr-6 pr-8)">
+        <p class="py-2 text-sm xl:(mr-6 pr-8)">
           {{ $t("homeDescription") }}
         </p>
         <GenericSearch />
