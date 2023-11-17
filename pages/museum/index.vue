@@ -27,8 +27,8 @@ const path = useRoute();
         <h3>Koleksi {{ museumObj.title }} Pilihan Kami</h3>
         <div class="grid grid-cols-2 gap-4 lg:flex">
           <NuxtLink
-            v-for="val in collectionObj?.results ?? 4"
-            :to="collectionObj ? '/koleksi/buku/' + val.slugs : path.path"
+            v-for="val in museumObj?.results ?? 4"
+            :to="museumObj ? '/koleksi/buku/' + val.slugs : path.path"
           >
             <NuxtImg
               :src="val.cover ?? defaultImage"

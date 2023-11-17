@@ -26,8 +26,8 @@ const path = useRoute();
         <h3>Koleksi {{ galleryObj.title }} Pilihan Kami</h3>
         <div class="grid grid-cols-2 gap-4 lg:flex">
           <NuxtLink
-            v-for="val in collectionObj?.results ?? 4"
-            :to="collectionObj ? '/koleksi/buku/' + val.slugs : path.path"
+            v-for="val in galleryObj?.results ?? 4"
+            :to="galleryObj ? '/koleksi/buku/' + val.slugs : path.path"
           >
             <NuxtImg
               :src="val.cover ?? defaultImage"

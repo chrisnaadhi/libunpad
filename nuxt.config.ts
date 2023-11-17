@@ -18,10 +18,10 @@ export default defineNuxtConfig({
     "@unocss/nuxt",
     "nuxt-directus",
     "@pinia/nuxt",
-    "@nuxt/image-edge",
     "@nuxtjs/i18n",
     "dayjs-nuxt",
     "@sidebase/nuxt-auth",
+    "@nuxt/image",
   ],
   unocss: {
     preflight: true,
