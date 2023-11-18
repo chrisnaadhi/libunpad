@@ -18,7 +18,7 @@ export default defineNuxtConfig({
     "@unocss/nuxt",
     "nuxt-directus",
     "@pinia/nuxt",
-    "@nuxt/image-edge",
+    "@nuxt/image",
     "@nuxtjs/i18n",
     "dayjs-nuxt",
     "@sidebase/nuxt-auth",
@@ -60,7 +60,9 @@ export default defineNuxtConfig({
   },
   auth: {
     isEnabled: true,
-    origin: process.env.AUTH_ORIGIN,
+    provider: {
+      type: "authjs",
+    },
   },
   // devServer: {
   //   https: {

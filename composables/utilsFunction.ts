@@ -19,13 +19,12 @@ export const definePeminjamanRuangan = (ruangan: string) => {
   switch (ruangan) {
     case "ruang_the_gade":
       return "Ruang Pegadaian Lt.1";
-      break;
+
     case "ruang_kelas_2":
       return "Ruang Kelast Lt.2";
-      break;
+
     default:
       return "Belum dibuat";
-      break;
   }
 };
 
@@ -59,3 +58,15 @@ export const tugasPagination = defineStore("tugasPage", () => {
     pageTask,
   };
 });
+
+export const getLinkResult = (link: string) => {
+  const id = "oai:kandaga.unpad.ac.id:8010:slims-154137";
+  if (link.includes("slims")) {
+    const splitLink = link.split("-");
+    const getID = splitLink.at(-1);
+    const fullLink = `https://kandaga.unpad.ac.id:8010/index.php?p=show_detail&id=${getID}`;
+    return fullLink;
+  } else {
+    return "https://kandaga.unpad.ac.id:3000";
+  }
+};
