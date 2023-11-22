@@ -1,4 +1,6 @@
 <script setup>
+import { getLinkResult } from "~/composables/utilsFunction";
+
 const suggestion = ref("");
 const search = useSearchFunction();
 const scopus = useSearchScopus();
@@ -145,6 +147,8 @@ function trimText(txt) {
   return trimmedText + "...";
 }
 
+let getFirstItem;
+
 onMounted(() => {
   search.keywords = route.query.keyword;
   setTimeout(() => {
@@ -152,6 +156,13 @@ onMounted(() => {
       search.keywords = "Universitas Padjadjaran";
     }
     submitSearch(search.keywords);
+    getFirstItem = (list) => {
+      if (list?.length > 0) {
+        return list[0];
+      } else {
+        return "-";
+      }
+    };
   }, 500);
 
   window.addEventListener("scroll", () => {
@@ -293,44 +304,68 @@ onMounted(() => {
       <h3>Kandaga Federated Search</h3>
       <div
         v-if="loadingFederated === false"
-        class="flex flex-col gap-3 lg:(grid grid-cols-2)"
+        class="flex flex-col gap-3 mt-3 lg:(grid grid-cols-2)"
       >
-        <div
-          v-for="item in search.kandagaRes?.response.docs"
-          class="bg-white shadow shadow-orange/60 text-left p-5 rounded-lg"
-        >
-          <table class="table-auto">
-            <tbody>
-              <tr>
-                <td>ID</td>
-                <td>: {{ item?.id }}</td>
-              </tr>
-              <tr>
-                <td>Judul</td>
-                <td>: {{ item?.title[0] }}</td>
-              </tr>
-              <tr>
-                <td>Pengarang</td>
-                <td>: {{ item?.creator?.join(", ") }}</td>
-              </tr>
-              <tr>
-                <td>Tipe Koleksi</td>
-                <td>: {{ item?.type }}</td>
-              </tr>
-              <tr>
-                <td>Subjek</td>
-                <td>: {{ item?.subject?.join(", ") }}</td>
-              </tr>
-              <tr>
-                <td>Lokasi</td>
-                <td>: {{ item?.library_name }}</td>
-              </tr>
-              <tr>
-                <td>Koleksi</td>
-                <td>: {{ item.repository_name }}</td>
-              </tr>
-            </tbody>
-          </table>
+        <div v-for="item in search.kandagaRes?.response.docs">
+          <GenericBaseCard>
+            <div
+              class="flex flex-col justify-between bg-white shadow shadow-orange p-5 rounded-lg w-full h-full"
+            >
+              <div class="grid grid-cols-5 gap-3">
+                <div class="py-2 w-full">
+                  <p
+                    class="bg-orange text-white text-sm rounded mb-2 text-center"
+                  >
+                    {{ getFirstItem(item?.type) }}
+                  </p>
+                  <NuxtImg
+                    src="/images/lambang-unpad.png"
+                    class="w-25 max-w-50 max-h-80 px-8 py-15 border border-orange"
+                    format="webp"
+                  />
+                </div>
+                <div class="flex flex-col gap-2 col-span-4">
+                  <div class="federated-result-column">
+                    <p>Judul</p>
+                    <p class="col-span-3">: {{ item?.title[0] ?? "Judul" }}</p>
+                  </div>
+                  <div class="federated-result-column">
+                    <p>Pengarang</p>
+                    <p class="col-span-3">
+                      : {{ item?.creator?.join(", ") ?? "Pengarang" }}
+                    </p>
+                  </div>
+                  <div class="federated-result-column">
+                    <p>Subjek</p>
+                    <p class="col-span-3">
+                      : {{ item?.subject?.join(", ") ?? "Subjek" }}
+                    </p>
+                  </div>
+                  <div class="federated-result-column">
+                    <p>Lokasi</p>
+                    <p class="col-span-3">
+                      : {{ item?.library_name ?? "Lokasi" }}
+                    </p>
+                  </div>
+                  <div class="federated-result-column">
+                    <p>Koleksi</p>
+                    <p class="col-span-3">
+                      : {{ item?.repository_name ?? "Koleksi" }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex mt-2 text-center">
+                <NuxtLink
+                  :href="getLinkResult(item?.id)"
+                  target="_blank"
+                  class="btn bg-orange py-1 text-white w-full"
+                >
+                  Lihat Koleksi
+                </NuxtLink>
+              </div>
+            </div>
+          </GenericBaseCard>
         </div>
       </div>
       <div v-else>
@@ -482,6 +517,10 @@ input {
 .result-cards {
   --at-apply: relative bg-white my-2 p-5 rounded-xl shadow-lg shadow-orange/20 top-0 hover:(top--2 shadow-orange/50);
   transition: top ease 0.5s;
+}
+
+.federated-result-column {
+  --at-apply: grid grid-cols-4;
 }
 
 .lengkap {
