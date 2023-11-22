@@ -64,12 +64,6 @@ export default defineNuxtConfig({
       type: "authjs",
     },
   },
-  // devServer: {
-  //   https: {
-  //     key: "localhost-key.pem",
-  //     cert: "localhost.pem",
-  //   },
-  // },
   runtimeConfig: {
     authSecret: process.env.AUTH_SECRET,
     urlApiKandaga: process.env.URL_API_KANDAGA,
