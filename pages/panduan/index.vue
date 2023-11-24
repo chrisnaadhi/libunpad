@@ -51,31 +51,11 @@ const toggleLayanan = (value) => {
                 Layanan dan Fasilitas
               </h3>
             </GenericBaseCard>
-            <div class="w-full flex flex-col md:(grid grid-cols-2) gap-4">
-              <GenericBaseCard
-                v-for="item in layananPerpustakaan"
-                class="bg-gray-1 p-6 flex items-center gap-2"
-              >
-                <div>
-                  <NuxtImg
-                    src="/images/no-image.jpg"
-                    format="webp"
-                    width="800px"
-                  ></NuxtImg>
-                </div>
-                <div class="flex flex-col justify-around">
-                  <h3 class="text-left">{{ item.nama_layanan }}</h3>
-                  <p class="text-sm italic" v-html="item.deskripsi_layanan"></p>
-                  <div class="w-full my-3">
-                    <NuxtLink
-                      :to="`/panduan/${item.slug_layanan}`"
-                      class="action-btn"
-                    >
-                      Lihat Layanan
-                    </NuxtLink>
-                  </div>
-                </div>
-              </GenericBaseCard>
+            <div v-if="layananPerpustakaan.length > 0">
+              <PanduanItemLayanan :layanan-perpustakaan="layananPerpustakaan" />
+            </div>
+            <div v-else class="text-center">
+              <p>Belum ada Panduan!</p>
             </div>
           </div>
         </Transition>
@@ -90,7 +70,7 @@ const toggleLayanan = (value) => {
               </h3>
             </GenericBaseCard>
             <div>
-              <p>Hello World!</p>
+              <p>Belum ada Informasi Akademik!</p>
             </div>
           </div>
         </Transition>
@@ -118,7 +98,7 @@ const toggleLayanan = (value) => {
 }
 
 .action-btn {
-  --at-apply: btn bg-orange py-1 px-3 text-white;
+  --at-apply: btn bg-orange py-1 px-3 text-white w-full;
 }
 
 .active-menu {

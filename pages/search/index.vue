@@ -320,11 +320,11 @@ onMounted(() => {
                   </p>
                   <NuxtImg
                     src="/images/lambang-unpad.png"
-                    class="w-25 max-w-50 max-h-80 px-8 py-15 border border-orange"
+                    class="w-25 w-full max-h-80 px-8 py-15 border border-orange"
                     format="webp"
                   />
                 </div>
-                <div class="flex flex-col gap-2 col-span-4">
+                <div class="flex flex-col gap-2 col-span-4 mt-7">
                   <div class="federated-result-column">
                     <p>Judul</p>
                     <p class="col-span-3">: {{ item?.title[0] ?? "Judul" }}</p>
