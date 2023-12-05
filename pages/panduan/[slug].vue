@@ -12,7 +12,7 @@ const getLayanan = await getItems({
     },
   },
 });
-const dataLayanan = getLayanan[0];
+const dataLayanan = await getLayanan[0];
 </script>
 
 <template>

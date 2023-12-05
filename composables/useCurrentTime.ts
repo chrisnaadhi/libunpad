@@ -124,3 +124,15 @@ export const jamPiketPegawai = (hari: number) => {
     return "09.00 - 12.00 WIB";
   }
 };
+
+export const displayTanggalIndonesia = (tanggal: string) => {
+  const getDate = new Date(tanggal);
+  const formattedDate = getDate.toLocaleDateString("id-ID", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  return formattedDate;
+};
