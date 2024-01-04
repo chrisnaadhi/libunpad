@@ -1,4 +1,7 @@
 export default {
+  // Common Verb
+  membership: "Keanggotaan",
+
   // Homepage - /
   introWelcome: "Selamat Datang di",
   homeDescription:

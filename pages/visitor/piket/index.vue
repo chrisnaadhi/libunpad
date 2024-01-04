@@ -10,7 +10,7 @@ definePageMeta({
       <GenericMonthlyCalendar />
     </section>
     <section>
-      <NuxtLink to="/visitor/data" class="btn bg-orange">
+      <NuxtLink to="/visitor/data" class="btn bg-orange text-white">
         Kembali ke Data Visitor
       </NuxtLink>
     </section>

@@ -26,6 +26,14 @@ const { data: fetchService } = await useFetch("/api/v1/layanan");
           <p>
             {{ $t("pengajuanDescription") }}
           </p>
+          <div class="flex text-center" v-show="user || data">
+            <NuxtLink
+              to="/keanggotaan"
+              class="btn bg-orange text-white py-1 w-full"
+            >
+              {{ $t("membership") }}
+            </NuxtLink>
+          </div>
         </div>
       </section>
       <section class="card-group">

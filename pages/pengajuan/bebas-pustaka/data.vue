@@ -5,11 +5,15 @@ const name = ref("Chrisna Adhi Pranoto");
 <template>
   <section>
     <h1>Daftar Pengajuan Surat Bebas Pustaka</h1>
-    <div class="flex max-w-lg ma mt-3">
+    <!-- <div class="flex max-w-lg ma mt-3">
       <input class="searchBox" type="search" name="cari-surat-bebas-pustaka" />
       <button type="submit" class="btn bg-orange-3 mx-1">Search</button>
-    </div>
+    </div> -->
     <PengajuanListBebasPustaka />
+    <div class="mb-3">
+      <p>Cek status kelengkapan pengajuan anda di :</p>
+      <NuxtLink to="/keanggotaan"> Halaman Keanggotaan </NuxtLink>
+    </div>
     <NuxtLink to="/pengajuan">
       <button type="button" class="btn bg-orange-1 text-orange-6">
         Kembali

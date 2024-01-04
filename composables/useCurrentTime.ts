@@ -100,6 +100,16 @@ export const readableDate = (tanggal: string) => {
   return `${hari}, ${tgl} ${bulan}`;
 };
 
+export const bebasPustakaDate = (tanggal: string) => {
+  const checkDate = new Date(tanggal);
+  const tgl = checkDate.getDate();
+  const bulan = new Intl.DateTimeFormat("id-ID", {
+    month: "long",
+  }).format(checkDate);
+  const tahun = checkDate.getFullYear();
+  return `${tgl} ${bulan} ${tahun}`;
+};
+
 export const convertTimeZone = (time: string) => {
   const newDate = new Date(time);
   const formatted = newDate.toLocaleDateString("id-ID", {

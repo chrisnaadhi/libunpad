@@ -4,6 +4,7 @@ import { MeiliSearch } from "meilisearch";
 export const useSearchFunction = defineStore("searchfunction", () => {
   const keywords = ref("");
   const articleObj = ref();
+  const wikipediaDefinition = ref();
   const isResult = ref(false);
   const initValue = ref(0);
   const baseURLSearch = ref(
@@ -16,6 +17,7 @@ export const useSearchFunction = defineStore("searchfunction", () => {
     keywords,
     isResult,
     articleObj,
+    wikipediaDefinition,
     baseURLSearch,
     baseURLKandaga,
     kandagaRes,

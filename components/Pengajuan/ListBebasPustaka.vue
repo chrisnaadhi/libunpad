@@ -8,7 +8,7 @@ import {
 const config = useRuntimeConfig();
 const { getItems } = useDirectusItems();
 const pageState = ref(0);
-const listData = ref();
+const listData = ref(null);
 
 defineProps({
   publicData: {
@@ -23,21 +23,33 @@ async function fetchDataPengajuan() {
     params: {
       sort: "-date_created",
       offset: pageState.value,
+      limit: 10,
     },
   });
 }
 
-const dataPengajuan = await getItems({
+const totalData = await getItems({
   collection: "pengajuan_surat_bebas_pustaka",
-  params: {
-    sort: "-date_created",
-    offset: pageState.value,
-  },
 });
 
+const gapData = Math.floor(totalData.length / 10) * 10;
+
+if (listData.value === null) {
+  listData.value = fetchDataPengajuan();
+}
+
 const nextData = () => {
-  pageState.value += 25;
-  fetchDataPengajuan();
+  if (pageState.value < gapData) {
+    pageState.value += 10;
+    fetchDataPengajuan();
+  }
+};
+
+const prevData = () => {
+  if (pageState !== 0) {
+    pageState.value -= 10;
+    fetchDataPengajuan();
+  }
 };
 
 const { data: dataPetugas } = await useFetch(
@@ -87,8 +99,6 @@ const displayMessage = (value) => {
   }
 };
 
-fetchDataPengajuan();
-
 const tableHead = [
   "NPM",
   "Nama Lengkap",
@@ -99,6 +109,7 @@ const tableHead = [
   "Tanggal Diproses",
   "Status Pengajuan",
   "Petugas",
+  "Proses",
 ];
 
 const tableHeadPublic = [
@@ -113,7 +124,10 @@ const tableHeadPublic = [
 
 <template>
   <section class="overflow-x-auto relative">
-    <table class="w-full border-collapse border text-sm border-slate-400">
+    <table
+      class="w-full border-collapse border text-sm border-slate-400"
+      v-if="totalData.length > 0"
+    >
       <thead class="bg-orange-2">
         <tr>
           <th
@@ -134,7 +148,7 @@ const tableHeadPublic = [
           </th>
         </tr>
       </thead>
-      <tbody v-for="data in dataPengajuan">
+      <tbody v-for="data in listData">
         <tr class="bg-white text-center">
           <td class="table-border">{{ data.npm }}</td>
           <td class="table-border">
@@ -156,6 +170,7 @@ const tableHeadPublic = [
             <span v-if="!data.date_updated">Belum diproses</span>
             <span v-else>{{ convertTimeZone(data.date_updated) }}</span>
           </td>
+
           <td class="table-border">
             <span
               :class="displayMessage(data.status_pengajuan)"
@@ -167,14 +182,58 @@ const tableHeadPublic = [
           <td class="table-border">
             {{ searchPetugas(data.user_updated) }}
           </td>
+          <td class="table-border" v-show="publicData">
+            <NuxtLink
+              :to="
+                'https://repository.unpad.ac.id:8050/admin/content/pengajuan_surat_bebas_pustaka/' +
+                data.id
+              "
+              class="btn bg-orange text-white py-0"
+              target="_blank"
+            >
+              Cek
+            </NuxtLink>
+          </td>
         </tr>
       </tbody>
     </table>
+    <div v-else>
+      <p>Belum ada Data!</p>
+    </div>
+    <div
+      class="flex items-center justify-center gap-1 mt-3"
+      v-show="totalData.length > 10"
+    >
+      <button
+        class="btn py-0 px-5"
+        @click="prevData"
+        :class="pageState === 0 ? 'disable-btn' : 'enable-btn'"
+        :disabled="pageState === 0"
+      >
+        Prev
+      </button>
+      <button
+        class="btn bg-orange py-0 px-5"
+        @click="nextData"
+        :class="pageState < gapData ? 'enable-btn' : 'disable-btn'"
+        :disable="pageState <= gapData"
+      >
+        Next
+      </button>
+    </div>
   </section>
 </template>
 
 <style scoped>
 .table-border {
   --at-apply: border border-orange p-1;
+}
+
+.disable-btn {
+  --at-apply: bg-gray-3 text-dark cursor-not-allowed;
+}
+
+.enable-btn {
+  --at-apply: bg-orange text-white;
 }
 </style>

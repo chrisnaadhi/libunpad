@@ -31,7 +31,7 @@ const toggleLayanan = (value) => {
       memaksimalkan pengalaman mereka dalam mengejar pengetahuan dan melakukan
       penelitian.
     </p>
-    <div class="w-full grid grid-cols-4 gap-3">
+    <div class="w-full h-full grid grid-cols-4 gap-3">
       <div class="flex flex-col items-start gap-3">
         <button
           v-for="list in panduanList"
@@ -90,16 +90,16 @@ const toggleLayanan = (value) => {
             <div class="flex flex-col gap-3 md:(grid grid-cols-2)">
               <GenericBaseCard
                 v-for="item in getAllLiterasiInformasi"
-                class="bg-gray-1 rounded"
+                class="bg-gray-1 h-full"
               >
                 <div>
                   <NuxtImg
                     src="/images/9396112_3023.jpg"
                     format="webp"
-                    class="w-full max-h-40 object-cover rounded-t"
+                    class="w-full object-cover rounded-t"
                   ></NuxtImg>
                 </div>
-                <div class="flex flex-col justify-center px-6 pb-2 pt-4">
+                <div class="flex flex-col px-4 py-5 h-full justify-center">
                   <h3 class="text-left">{{ item.judul }}</h3>
                   <p class="text-sm italic">
                     {{ trimDescription(item.konten, 150) }}
@@ -125,7 +125,7 @@ const toggleLayanan = (value) => {
 <style scoped>
 .layer {
   --at-apply: max-w-7xl ma flex flex-col items-center justify-center gap-4 py-5
-    px-2;
+    px-2 h-full;
 }
 
 .action-btn {

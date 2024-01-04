@@ -20,7 +20,7 @@ const getAllLiterasiInformasi = await getItems({
             class="w-full max-h-40 object-cover rounded-t"
           ></NuxtImg>
         </div>
-        <div class="flex flex-col justify-center px-6 pb-2 pt-4">
+        <div class="flex flex-col px-6 pb-2 pt-4">
           <h3 class="text-left">{{ item.judul }}</h3>
           <p class="text-sm italic">{{ trimDescription(item.konten, 150) }}</p>
           <div class="flex my-3 text-center">
