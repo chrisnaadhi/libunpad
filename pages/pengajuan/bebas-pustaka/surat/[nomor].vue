@@ -3,6 +3,7 @@ import { ref } from "vue";
 import { exportToPDF } from "#imports";
 
 const { getItemById } = useDirectusItems();
+const { getUserById } = useDirectusUsers();
 const fakultas = daftarNamaFakultasUnpad();
 const { cariFakultasAbbrevation } = fakultas;
 const route = useRoute();
@@ -11,6 +12,10 @@ const suratSection = ref(null);
 const getDataSurat = await getItemById({
   collection: "pengajuan_surat_bebas_pustaka",
   id: route.params.nomor,
+});
+
+const getDataPegawai = await getUserById({
+  id: getDataSurat.user_updated,
 });
 
 const date = new Date();
@@ -32,7 +37,7 @@ useHead({
   <section>
     <div
       class="flex flex-col items-center my-2 noPrint"
-      v-show="getDataSurat?.persyaratan?.length > 0"
+      v-show="getDataSurat?.persyaratan?.length > 1"
     >
       <button
         type="button"
@@ -46,7 +51,13 @@ useHead({
         / Laptop
       </p>
     </div>
-    <article ref="suratSection" v-if="getDataSurat?.persyaratan?.length > 0">
+    <article
+      ref="suratSection"
+      v-if="
+        getDataSurat?.persyaratan?.length > 1 &&
+        getDataSurat?.status_pengajuan === 'selesai'
+      "
+    >
       <div class="flex items-center justify-center">
         <NuxtImg src="images/lambang-unpad.png" class="w-24 h-24"></NuxtImg>
         <div class="text-center text-dark">
@@ -61,7 +72,9 @@ useHead({
       </div>
       <hr class="border border-dark my-2" />
       <div class="text-center my-10">
-        <h6 class="font-bold underline">SURAT KETERANGAN BEBAS PUSTAKA</h6>
+        <h6 class="font-bold underline">
+          SURAT KETERANGAN BEBAS PINJAM BUKU / MAJALAH
+        </h6>
         <p>Nomor : {{ getDataSurat.nomor_surat }}</p>
       </div>
       <div>
@@ -103,9 +116,30 @@ useHead({
           <div>
             <p>{{ bebasPustakaDate(date.toDateString()) }}</p>
             <p>a.n. Kepala Pusat Pengelolaan Pengetahuan Unpad</p>
-            <NuxtImg src="images/ttd_kepala.png" class="w-45 mt--15 mb--8" />
-            <p>Tati Asrianti</p>
-            <p>NIP 198911162016024001</p>
+            <div
+              v-if="
+                getDataSurat.user_updated ===
+                '18C2332E-6589-4424-B613-AAB2141F9450'
+              "
+            >
+              <NuxtImg src="images/ttd_kepala.png" class="w-45 mt--15 mb--8" />
+            </div>
+            <div
+              v-else-if="
+                getDataSurat.user_updated ===
+                '95B9A96B-1BC5-44F4-BB6D-994D658CB1AF'
+              "
+            >
+              <NuxtImg src="images/ttd_kepala2p.png" class="w-45 mt--5 mb--5" />
+            </div>
+            <div v-else>
+              <NuxtImg src="images/ttd_kepala2p.png" class="w-45 mt--5 mb--5" />
+            </div>
+
+            <p>
+              {{ getDataPegawai.first_name + " " + getDataPegawai.last_name }}
+            </p>
+            <p>NIP {{ getDataPegawai.nomor_induk }}</p>
           </div>
         </div>
 
@@ -117,8 +151,7 @@ useHead({
     </article>
     <article v-else>
       <h3 class="text-red">Data Belum Sesuai!</h3>
-      <p>Silahkan hubungi Administrator atau Kontak berikut</p>
-      <p></p>
+      <p>Silahkan hubungi Administrator Kandaga</p>
     </article>
   </section>
 </template>
