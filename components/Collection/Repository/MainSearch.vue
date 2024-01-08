@@ -1,4 +1,7 @@
-<script setup>
+<script setup lang="ts">
+defineProps({
+  isFaculty: Boolean,
+});
 const searchTugasAkhir = searchTugasAkhirDirectus();
 </script>
 
@@ -13,7 +16,7 @@ const searchTugasAkhir = searchTugasAkhirDirectus();
           id=""
           class="relative rounded p-2"
           placeholder="Masukkan kata yang ingin dicari"
-          @keyup.enter="searchTugasAkhir.searchingTugasAkhir(true)"
+          @keyup.enter="searchTugasAkhir.searchingTugasAkhir(true, isFaculty)"
         />
         <!-- <div class="search-wrapper" v-show="mainSearchBar !== ''">
           <div
@@ -33,7 +36,7 @@ const searchTugasAkhir = searchTugasAkhirDirectus();
       </div>
       <button
         type="submit"
-        @click="searchTugasAkhir.searchingTugasAkhir(true)"
+        @click="searchTugasAkhir.searchingTugasAkhir(true, isFaculty)"
         class="btn bg-orange text-white"
       >
         Search

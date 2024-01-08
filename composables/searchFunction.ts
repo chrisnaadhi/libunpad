@@ -56,10 +56,14 @@ export const searchTugasAkhirDirectus = defineStore(
     const keywords = ref("");
     const offset = ref(0);
     const page = ref(1);
+    const facultyName = ref<NamaFakultas | null>();
     const isNewSearch = ref(false);
     const searchResults = ref();
 
-    const searchingTugasAkhir = async (isNew: boolean) => {
+    const searchingTugasAkhir = async (
+      isNew: boolean,
+      faculty: boolean = false
+    ) => {
       switch (isNew) {
         case false:
           isNewSearch.value = false;
@@ -75,7 +79,47 @@ export const searchTugasAkhirDirectus = defineStore(
           break;
       }
       searchResults.value = "loading";
-      if (keywords.value !== "") {
+      if (
+        keywords.value !== "" &&
+        faculty === true &&
+        facultyName.value !== null
+      ) {
+        const fetchSearchResults = await getItems({
+          collection: "tbtMhsUploadThesis",
+          params: {
+            limit: 30,
+            offset: offset.value,
+            filter: {
+              _or: [
+                {
+                  Judul: {
+                    _contains: keywords.value,
+                  },
+                },
+                {
+                  Abstrak: {
+                    _contains: keywords.value,
+                  },
+                },
+                {
+                  Keywords: {
+                    _contains: keywords.value,
+                  },
+                },
+              ],
+              MhsNPM: {
+                _starts_with: facultyName.value?.id,
+              },
+            },
+          },
+        });
+
+        searchResults.value = fetchSearchResults;
+      } else if (
+        keywords.value !== "" &&
+        faculty === false &&
+        facultyName.value === null
+      ) {
         const fetchSearchResults = await getItems({
           collection: "tbtMhsUploadThesis",
           params: {
@@ -103,23 +147,29 @@ export const searchTugasAkhirDirectus = defineStore(
           },
         });
 
-        searchResults.value = await fetchSearchResults;
+        searchResults.value = fetchSearchResults;
       } else {
         return "No Results";
       }
     };
 
     const nextPage = () => {
-      if (offset.value >= 0) {
+      if (offset.value >= 0 && facultyName === null) {
         offset.value += 30;
         searchingTugasAkhir(false);
+      } else if (offset.value >= 0 && facultyName !== null) {
+        offset.value += 30;
+        searchingTugasAkhir(false, true);
       }
     };
 
     const previousPage = () => {
-      if (offset.value >= 0) {
+      if (offset.value >= 0 && facultyName === null) {
         offset.value -= 30;
         searchingTugasAkhir(false);
+      } else if (offset.value >= 0 && facultyName !== null) {
+        offset.value -= 30;
+        searchingTugasAkhir(false, true);
       }
     };
 
@@ -127,6 +177,7 @@ export const searchTugasAkhirDirectus = defineStore(
       keywords,
       offset,
       page,
+      facultyName,
       searchResults,
       searchingTugasAkhir,
       nextPage,

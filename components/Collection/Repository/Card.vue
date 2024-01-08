@@ -2,6 +2,7 @@
 const emit = defineEmits(["preview"]);
 defineProps({
   title: String,
+  titleHover: String,
   npm: String,
   author: String,
   fakultas: String,
@@ -37,7 +38,7 @@ function openPreview() {
     </div> -->
     <div class="content-section">
       <NuxtLink :to="linkAccess">
-        <h6 class="transition-all-500 hover:(text-orange)">
+        <h6 class="transition-all-500 hover:(text-orange)" :title="titleHover">
           {{ title }}
         </h6>
       </NuxtLink>

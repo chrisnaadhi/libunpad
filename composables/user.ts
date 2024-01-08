@@ -273,10 +273,18 @@ export const daftarNamaFakultasUnpad = defineStore("namaFakultas", () => {
     return hasil?.namaFakultas;
   };
 
+  const cariFakultasByParameter = (singkatan: string) => {
+    const hasil = objFakultas.find(
+      (fakultas) => fakultas.singkatan === singkatan
+    );
+    return hasil;
+  };
+
   return {
     objFakultas,
     singkatanUpper,
     cariFakultas,
     cariFakultasAbbrevation,
+    cariFakultasByParameter,
   };
 });

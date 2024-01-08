@@ -3,6 +3,8 @@ const { getItems } = useDirectusItems();
 
 const searchTugasAkhir = searchTugasAkhirDirectus();
 const previewItem = previewModalRepository();
+const namaFakultas = daftarNamaFakultasUnpad();
+searchTugasAkhir.facultyName = null;
 
 const dataTADirectus = await getItems({
   collection: "tbtMhsUploadThesis",
@@ -75,7 +77,16 @@ definePageMeta({
       Koleksi Karya Ilmiah dan Tugas Akhir dari Civitas Akademika Universitas
       Padjadjaran
     </p>
-    <CollectionRepositoryMainSearch />
+    <div class="grid grid-cols-3 gap-3 text-center">
+      <NuxtLink
+        v-for="fakultas in namaFakultas.objFakultas"
+        :to="'repository/' + fakultas.singkatan"
+        class="text-white bg-orange no-underline py-3 rounded-xl"
+      >
+        {{ fakultas.namaFakultas }}
+      </NuxtLink>
+    </div>
+    <CollectionRepositoryMainSearch :is-faculty="false" />
     <div v-show="searchTugasAkhir.searchResults !== 'loading'">
       <p class="text-center">
         Hasil pencarian:
