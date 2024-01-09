@@ -100,6 +100,16 @@ export const readableDate = (tanggal: string) => {
   return `${hari}, ${tgl} ${bulan}`;
 };
 
+export const bebasPustakaDate = (tanggal: string) => {
+  const checkDate = new Date(tanggal);
+  const tgl = checkDate.getDate();
+  const bulan = new Intl.DateTimeFormat("id-ID", {
+    month: "long",
+  }).format(checkDate);
+  const tahun = checkDate.getFullYear();
+  return `${tgl} ${bulan} ${tahun}`;
+};
+
 export const convertTimeZone = (time: string) => {
   const newDate = new Date(time);
   const formatted = newDate.toLocaleDateString("id-ID", {
@@ -123,4 +133,16 @@ export const jamPiketPegawai = (hari: number) => {
   } else {
     return "09.00 - 12.00 WIB";
   }
+};
+
+export const displayTanggalIndonesia = (tanggal: string) => {
+  const getDate = new Date(tanggal);
+  const formattedDate = getDate.toLocaleDateString("id-ID", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  return formattedDate;
 };

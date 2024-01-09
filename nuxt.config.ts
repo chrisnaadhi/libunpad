@@ -22,6 +22,7 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "dayjs-nuxt",
     "@sidebase/nuxt-auth",
+    "@sidebase/nuxt-pdf",
   ],
   unocss: {
     preflight: true,
@@ -60,9 +61,10 @@ export default defineNuxtConfig({
   },
   auth: {
     isEnabled: true,
-    provider: {
-      type: "authjs",
-    },
+    // provider: {
+    //   type: "authjs",
+    // },
+    defaultProvider: "google",
   },
   runtimeConfig: {
     authSecret: process.env.AUTH_SECRET,

@@ -8,7 +8,7 @@ definePageMeta({
 <template>
   <section>
     <h1>Daftar Pengajuan Bebas Pustaka</h1>
-    <PengajuanListBebasPustaka />
+    <PengajuanListBebasPustaka :public-data="true" />
   </section>
 </template>
 

@@ -51,7 +51,7 @@ export const displayKeperluanSurat = (keperluan: string) => {
       default:
         return "Keperluan Lainnya";
     }
-  });
+  }).value.replace('"', "");
 };
 
 export const displayStatusPengajuanSurat = (status: string) => {
@@ -62,9 +62,37 @@ export const displayStatusPengajuanSurat = (status: string) => {
       case "proses":
         return "Sedang diproses oleh petugas";
       case "selesai":
-        return "Sudah selesai, silahkan cek email";
+        return "Selesai diproses";
       default:
         return "Silahkan hubungi Admin";
+    }
+  }).value.replace('"', "");
+};
+
+export const displayNamaRuangan = (namaRuangan: string) => {
+  return computed(() => {
+    switch (namaRuangan) {
+      case "ruang_the_gade":
+        return "Ruang The Gade - Pegadaian Lt.1";
+      case "ruang_kelas_2":
+        return "Ruang Kelas Bersama Lt.2";
+      default:
+        return "Ruangan belum terdata";
+    }
+  }).value.replace('"', "");
+};
+
+export const displayStatusPeminjamanRuangan = (namaRuangan: string) => {
+  return computed(() => {
+    switch (namaRuangan) {
+      case "approved":
+        return "bg-green-6 text-white";
+      case "pending":
+        return "bg-gray text-white";
+      case "cancel":
+        return "bg-red text-white";
+      default:
+        return "bg-orange text-white";
     }
   });
 };
@@ -240,9 +268,23 @@ export const daftarNamaFakultasUnpad = defineStore("namaFakultas", () => {
     return hasil?.namaFakultas;
   };
 
+  const cariFakultasAbbrevation = (npm: string) => {
+    const hasil = objFakultas.find((elem) => elem.singkatan === npm);
+    return hasil?.namaFakultas;
+  };
+
+  const cariFakultasByParameter = (singkatan: string) => {
+    const hasil = objFakultas.find(
+      (fakultas) => fakultas.singkatan === singkatan
+    );
+    return hasil;
+  };
+
   return {
     objFakultas,
     singkatanUpper,
     cariFakultas,
+    cariFakultasAbbrevation,
+    cariFakultasByParameter,
   };
 });

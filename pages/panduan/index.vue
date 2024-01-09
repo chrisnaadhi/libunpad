@@ -3,6 +3,9 @@ const { getItems } = useDirectusItems();
 const layananPerpustakaan = await getItems({
   collection: "layanan_kandaga",
 });
+const getAllLiterasiInformasi = await getItems({
+  collection: "konten_literasi_informasi",
+});
 
 const panduanList = [
   "Layanan dan Fasilitas",
@@ -28,7 +31,7 @@ const toggleLayanan = (value) => {
       memaksimalkan pengalaman mereka dalam mengejar pengetahuan dan melakukan
       penelitian.
     </p>
-    <div class="w-full grid grid-cols-4 gap-3">
+    <div class="w-full h-full grid grid-cols-4 gap-3">
       <div class="flex flex-col items-start gap-3">
         <button
           v-for="list in panduanList"
@@ -51,31 +54,11 @@ const toggleLayanan = (value) => {
                 Layanan dan Fasilitas
               </h3>
             </GenericBaseCard>
-            <div class="w-full flex flex-col md:(grid grid-cols-2) gap-4">
-              <GenericBaseCard
-                v-for="item in layananPerpustakaan"
-                class="bg-gray-1 p-6 flex items-center gap-2"
-              >
-                <div>
-                  <NuxtImg
-                    src="/images/no-image.jpg"
-                    format="webp"
-                    width="800px"
-                  ></NuxtImg>
-                </div>
-                <div class="flex flex-col justify-around">
-                  <h3 class="text-left">{{ item.nama_layanan }}</h3>
-                  <p class="text-sm italic" v-html="item.deskripsi_layanan"></p>
-                  <div class="w-full my-3">
-                    <NuxtLink
-                      :to="`/panduan/${item.slug_layanan}`"
-                      class="action-btn"
-                    >
-                      Lihat Layanan
-                    </NuxtLink>
-                  </div>
-                </div>
-              </GenericBaseCard>
+            <div v-if="layananPerpustakaan.length > 0">
+              <PanduanItemLayanan :layanan-perpustakaan="layananPerpustakaan" />
+            </div>
+            <div v-else class="text-center">
+              <p>Belum ada Panduan!</p>
             </div>
           </div>
         </Transition>
@@ -90,7 +73,7 @@ const toggleLayanan = (value) => {
               </h3>
             </GenericBaseCard>
             <div>
-              <p>Hello World!</p>
+              <p>Belum ada Informasi Akademik!</p>
             </div>
           </div>
         </Transition>
@@ -104,6 +87,34 @@ const toggleLayanan = (value) => {
                 Literasi Informasi
               </h3>
             </GenericBaseCard>
+            <div class="flex flex-col gap-3 md:(grid grid-cols-2)">
+              <GenericBaseCard
+                v-for="item in getAllLiterasiInformasi"
+                class="bg-gray-1 h-full"
+              >
+                <div>
+                  <NuxtImg
+                    src="/images/9396112_3023.jpg"
+                    format="webp"
+                    class="w-full object-cover rounded-t"
+                  ></NuxtImg>
+                </div>
+                <div class="flex flex-col px-4 py-5 h-full justify-center">
+                  <h3 class="text-left">{{ item.judul }}</h3>
+                  <p class="text-sm italic">
+                    {{ trimDescription(item.konten, 150) }}
+                  </p>
+                  <div class="flex my-3 text-center">
+                    <NuxtLink
+                      :to="`/panduan/literasi-informasi/${item.slug}`"
+                      class="action-btn"
+                    >
+                      Lihat Layanan
+                    </NuxtLink>
+                  </div>
+                </div>
+              </GenericBaseCard>
+            </div>
           </div>
         </Transition>
       </div>
@@ -114,11 +125,11 @@ const toggleLayanan = (value) => {
 <style scoped>
 .layer {
   --at-apply: max-w-7xl ma flex flex-col items-center justify-center gap-4 py-5
-    px-2;
+    px-2 h-full;
 }
 
 .action-btn {
-  --at-apply: btn bg-orange py-1 px-3 text-white;
+  --at-apply: btn bg-orange py-1 px-3 text-white w-full;
 }
 
 .active-menu {

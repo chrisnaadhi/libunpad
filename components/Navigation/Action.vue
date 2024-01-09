@@ -46,9 +46,19 @@ const logout = async () => {
       >
         <p>{{ data?.user?.name }}</p>
         <p class="text-xs">{{ data?.user?.email }}</p>
-        <button class="btn py-0 bg-red text-xs text-white" @click="logout">
-          Logout
-        </button>
+        <div class="grid grid-cols-2 mt-2">
+          <NuxtLink
+            to="/keanggotaan"
+            class="btn py-0 bg-orange text-xs text-white w-full"
+            >Keanggotaan</NuxtLink
+          >
+          <button
+            class="btn py-0 bg-red text-xs text-white w-full"
+            @click="logout"
+          >
+            Logout
+          </button>
+        </div>
       </div>
     </div>
     <NuxtLink v-else to="/login" alt="Halaman Keanggotaan">
@@ -95,7 +105,7 @@ const logout = async () => {
 }
 
 .account-dropdown {
-  --at-apply: absolute right-100% bg-white/80 border border-orange min-w-25 mr--10 py-2 px-5 my-2 rounded text-right;
+  --at-apply: absolute right-100% bg-white/80 border border-orange min-w-60 mr--10 py-2 px-5 my-2 rounded text-right;
 }
 
 .mode {

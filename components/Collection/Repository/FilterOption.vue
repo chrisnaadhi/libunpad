@@ -1,12 +1,10 @@
 <script setup>
 import { daftarNamaFakultasUnpad } from "~/composables/user";
 
-const firstSelectedYear = ref("-");
-const secondSelectedYear = ref("-");
+const searchTugasAkhir = searchTugasAkhirDirectus();
 const fakultas = daftarNamaFakultasUnpad();
 
 const years = [
-  "-",
   "2023",
   "2022",
   "2021",
@@ -23,8 +21,6 @@ const years = [
   "2010",
   "2009",
 ];
-
-const filterDropdown = () => {};
 </script>
 
 <template>
@@ -33,7 +29,14 @@ const filterDropdown = () => {};
     <div class="flex flex-col">
       <div>
         <h6>Pencarian</h6>
-        <input type="search" name="" id="" class="p-1 rounded" />
+        <input
+          type="search"
+          name="search"
+          id="search"
+          class="p-1 rounded"
+          v-model="searchTugasAkhir.keywords"
+          @keyup.enter="searchTugasAkhir.searchingTugasAkhir(true, false, true)"
+        />
       </div>
       <h6>Tahun</h6>
       <div>
@@ -41,7 +44,7 @@ const filterDropdown = () => {};
           class="min-w-full"
           name="first"
           id="first"
-          v-model="firstSelectedYear"
+          v-model="searchTugasAkhir.tahun"
         >
           <option :value="year" v-for="year in years">{{ year }}</option>
         </select>
@@ -70,15 +73,25 @@ const filterDropdown = () => {};
       <div>
         <h6>Nama Fakultas</h6>
         <div>
-          <select name="fakultas" id="fakultas" class="min-w-full">
-            <option v-for="fak in fakultas.objFakultas" :value="fak.singkatan">
+          <select
+            name="fakultas"
+            id="fakultas"
+            class="min-w-full"
+            v-model="searchTugasAkhir.facultyId"
+          >
+            <option v-for="fak in fakultas.objFakultas" :value="fak.id">
               {{ fak.namaFakultas }}
             </option>
           </select>
         </div>
       </div>
       <div class="my-2">
-        <button class="btn text-sm text-white w-full bg-orange">Cari</button>
+        <button
+          class="btn text-sm text-white w-full bg-orange"
+          @click="searchTugasAkhir.searchingTugasAkhir(true, false, true)"
+        >
+          Cari
+        </button>
       </div>
     </div>
   </section>

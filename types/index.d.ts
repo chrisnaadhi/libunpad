@@ -14,4 +14,10 @@ declare global {
     nama_ruangan?: string | null;
     identitas_anggota?: string | any;
   }
+
+  interface NamaFakultas {
+    id: number;
+    namaFakultas: string;
+    singkatan: string;
+  }
 }

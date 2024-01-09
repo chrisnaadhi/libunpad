@@ -2,6 +2,7 @@
 const emit = defineEmits(["preview"]);
 defineProps({
   title: String,
+  titleHover: String,
   npm: String,
   author: String,
   fakultas: String,
@@ -28,16 +29,16 @@ function openPreview() {
 
 <template>
   <div class="card">
-    <div class="cover-section">
+    <!-- <div class="cover-section">
       <NuxtImg
         src="/images/lambang-unpad.png"
         class="w-25 max-w-50 max-h-80 px-3"
         format="webp"
       />
-    </div>
+    </div> -->
     <div class="content-section">
       <NuxtLink :to="linkAccess">
-        <h6 class="transition-all-500 hover:(text-orange)">
+        <h6 class="transition-all-500 hover:(text-orange)" :title="titleHover">
           {{ title }}
         </h6>
       </NuxtLink>

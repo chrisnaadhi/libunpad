@@ -31,14 +31,21 @@ const submitSearch = async (keyword) => {
       search.baseURLSearch + keyword
     );
 
+    const { data: getKeywordDefinition } = await useFetch(
+      search.baseURLSearch + keyword
+    );
+
     const { data: kandagaRes } = await useFetch(search.baseURLKandaga, {
       query: {
         allfields: keyword,
       },
     });
 
+    console.log(getKeywordDefinition?.value?.query?.search[0]);
+
     search.isResult = true;
-    search.articleObj = searchResults?.value?.query?.search;
+    search.wikipediaDefinition = getKeywordDefinition?.value?.query?.search[0];
+
     if (kandagaRes.value) {
       search.kandagaRes = JSON.parse(kandagaRes.value.data);
     }
@@ -244,31 +251,29 @@ onMounted(() => {
     </section>
 
     <article>
-      <h3 v-show="search.keywords !== ''">Wikipedia</h3>
+      <h4 v-show="search.keywords !== ''">
+        Apa itu <span class="text-orange">{{ search.keywords }}</span> ?
+      </h4>
       <section
         v-if="search.isResult && search.keywords && !loadingWiki"
         class="result-display"
       >
-        <div v-for="article in search.articleObj" class="result-cards">
+        <NuxtLink
+          :to="`https://id.wikipedia.org?curid=${search.wikipediaDefinition?.pageid}`"
+          target="_blank"
+        >
+          <h3 class="hover:text-orange-5">
+            {{ search.wikipediaDefinition?.title }}
+          </h3>
+        </NuxtLink>
+        <div>
+          <span v-html="search.wikipediaDefinition?.snippet"></span> ...
           <NuxtLink
-            :to="`https://id.wikipedia.org?curid=${article.pageid}`"
+            :to="`https://id.wikipedia.org?curid=${search.wikipediaDefinition?.pageid}`"
             target="_blank"
           >
-            <h4 class="hover:text-orange-5">{{ article.title }}</h4>
+            <span class="lengkap">(baca selengkapnya)</span>
           </NuxtLink>
-
-          <p class="text-sm">
-            <span v-html="article.snippet"></span>...
-            <NuxtLink
-              :to="`https://id.wikipedia.org?curid=${article.pageid}`"
-              target="_blank"
-            >
-              <span class="lengkap">(baca selengkapnya)</span>
-            </NuxtLink>
-          </p>
-          <div v-if="search.articleObj.length < 1">
-            <p>Silahkan coba lagi...</p>
-          </div>
         </div>
       </section>
       <section v-else-if="!search.keywords || search.keywords === ''">
@@ -279,24 +284,6 @@ onMounted(() => {
       </section>
       <section v-show="loadingWiki === true">
         <p>Mencari data...</p>
-      </section>
-      <section
-        class="flex justify-center gap-4 my-5"
-        v-show="search.keywords && !loadingWiki"
-      >
-        <button
-          @click="prevPage"
-          class="btn"
-          :disabled="search.initValue < 1"
-          :class="
-            search.initValue < 1
-              ? 'bg-gray-1 text-gray-5 cursor-not-allowed'
-              : 'bg-green-2'
-          "
-        >
-          Previous Page
-        </button>
-        <button @click="nextPage" class="btn bg-blue-2">Next Page</button>
       </section>
     </article>
 
@@ -320,11 +307,11 @@ onMounted(() => {
                   </p>
                   <NuxtImg
                     src="/images/lambang-unpad.png"
-                    class="w-25 max-w-50 max-h-80 px-8 py-15 border border-orange"
+                    class="w-25 w-full max-h-80 px-8 py-15 border border-orange"
                     format="webp"
                   />
                 </div>
-                <div class="flex flex-col gap-2 col-span-4">
+                <div class="flex flex-col gap-2 col-span-4 mt-7">
                   <div class="federated-result-column">
                     <p>Judul</p>
                     <p class="col-span-3">: {{ item?.title[0] ?? "Judul" }}</p>
@@ -511,7 +498,7 @@ input {
 }
 
 .result-display {
-  --at-apply: grid gap-5 md:grid-cols-2 lg:grid-cols-4;
+  --at-apply: flex flex-col;
 }
 
 .result-cards {

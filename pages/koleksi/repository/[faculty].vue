@@ -4,13 +4,20 @@ const { getItems } = useDirectusItems();
 const searchTugasAkhir = searchTugasAkhirDirectus();
 const previewItem = previewModalRepository();
 const namaFakultas = daftarNamaFakultasUnpad();
-searchTugasAkhir.facultyName = null;
+const route = useRoute();
+const dataFakultas = namaFakultas.cariFakultasByParameter(route.params.faculty);
+searchTugasAkhir.facultyName = dataFakultas;
 
 const dataTADirectus = await getItems({
   collection: "tbtMhsUploadThesis",
   params: {
     limit: 30,
     sort: "-UploadTgl",
+    filter: {
+      MhsNPM: {
+        _starts_with: dataFakultas.id,
+      },
+    },
   },
 });
 
@@ -77,16 +84,12 @@ definePageMeta({
       Koleksi Karya Ilmiah dan Tugas Akhir dari Civitas Akademika Universitas
       Padjadjaran
     </p>
-    <div class="grid grid-cols-3 gap-3 text-center">
-      <NuxtLink
-        v-for="fakultas in namaFakultas.objFakultas"
-        :to="'repository/' + fakultas.singkatan"
-        class="text-white bg-orange no-underline py-3 rounded-xl"
-      >
-        {{ fakultas.namaFakultas }}
-      </NuxtLink>
+    <div class="text-center">
+      <h2>Koleksi Tugas Akhir {{ dataFakultas.namaFakultas }}</h2>
+      <NuxtLink to="/koleksi/repository">Kembali ke Repositori Utama</NuxtLink>
     </div>
-    <CollectionRepositoryMainSearch :is-faculty="false" />
+
+    <CollectionRepositoryMainSearch :is-faculty="true" />
     <div v-show="searchTugasAkhir.searchResults !== 'loading'">
       <p class="text-center">
         Hasil pencarian:
@@ -101,12 +104,13 @@ definePageMeta({
       </p>
     </div>
     <div class="flex flex-col gap-4 lg:(flex-row)">
-      <CollectionRepositoryFilterOption />
+      <!-- <CollectionRepositoryFilterOption /> -->
       <div class="repository-collection" v-if="!searchTugasAkhir.searchResults">
         <CollectionRepositoryCard
           v-for="koleksi in dataTADirectus"
           :npm="koleksi.MhsNPM"
           :title="trimText(koleksi.Judul)"
+          :title-hover="koleksi.Judul"
           :tipe="koleksi.tipeKoleksi"
           :description="koleksi.AbstrakBersih ?? koleksi.Abstrak"
           :keywords="koleksi.Keywords"

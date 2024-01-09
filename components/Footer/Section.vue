@@ -88,12 +88,12 @@ defineProps({
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="https://instagram.com/libunpad" target="_blank"
+              <NuxtLink to="https://instagram.com/kandagaunpad" target="_blank"
                 >Instagram</NuxtLink
               >
             </li>
             <li>
-              <NuxtLink to="https://twitter.com/libunpad" target="_blank"
+              <NuxtLink to="https://twitter.com/kandagaunpad" target="_blank"
                 >Twitter</NuxtLink
               >
             </li>

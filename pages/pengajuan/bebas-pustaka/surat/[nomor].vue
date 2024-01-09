@@ -1,0 +1,177 @@
+<script setup>
+import { ref } from "vue";
+import { exportToPDF } from "#imports";
+
+const { getItemById } = useDirectusItems();
+const { getUserById } = useDirectusUsers();
+const fakultas = daftarNamaFakultasUnpad();
+const { cariFakultasAbbrevation } = fakultas;
+const route = useRoute();
+const suratSection = ref(null);
+
+const getDataSurat = await getItemById({
+  collection: "pengajuan_surat_bebas_pustaka",
+  id: route.params.nomor,
+});
+
+const getDataPegawai = await getUserById({
+  id: getDataSurat.user_updated,
+});
+
+const date = new Date();
+
+const downloadSurat = () => {
+  window.print();
+};
+
+definePageMeta({
+  layout: "surat",
+});
+
+useHead({
+  title: `Surat Bebas Pustaka ${getDataSurat.nama_lengkap} - Sistem Administrasi Kandaga Universitas Padjadjaran`,
+});
+</script>
+
+<template>
+  <section>
+    <div
+      class="flex flex-col items-center my-2 noPrint"
+      v-show="getDataSurat?.persyaratan?.length > 1"
+    >
+      <button
+        type="button"
+        class="btn bg-blue text-white"
+        @click="downloadSurat"
+      >
+        Print / Simpan
+      </button>
+      <p class="italic text-center mt-4 text-sm">
+        Surat ini bisa disimpan atau diprint langsung melalui perangkat Komputer
+        / Laptop
+      </p>
+    </div>
+    <article
+      ref="suratSection"
+      v-if="
+        getDataSurat?.persyaratan?.length > 1 &&
+        getDataSurat?.status_pengajuan === 'selesai'
+      "
+    >
+      <div class="flex items-center justify-center">
+        <NuxtImg src="images/lambang-unpad.png" class="w-24 h-24"></NuxtImg>
+        <div class="text-center text-dark">
+          <h4>
+            KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI UNIVERSITAS
+            PADJADJARAN
+          </h4>
+          <h4>PUSAT PENGELOLAAN PENGETAHUAN</h4>
+          <p>Jl. Raya Bandung - Sumedang Km. 21 Jatinangor 45363</p>
+          <p>Telp : 022-8428806 , E-mail : perpustakaan@unpad.ac.id</p>
+        </div>
+      </div>
+      <hr class="border border-dark my-2" />
+      <div class="text-center my-10">
+        <h6 class="font-bold underline">
+          SURAT KETERANGAN BEBAS PINJAM BUKU / MAJALAH
+        </h6>
+        <p>Nomor : {{ getDataSurat.nomor_surat }}</p>
+      </div>
+      <div>
+        <p>
+          Perpustakaan Pusat Universitas Padjadjaran, dengan ini menerangkan
+          bahwa :
+        </p>
+        <div class="flex flex-col pl-6">
+          <div class="grid grid-cols-4">
+            <p>Nama</p>
+            <p class="col-span-3">: {{ getDataSurat.nama_lengkap }}</p>
+          </div>
+          <div class="grid grid-cols-4">
+            <p>NPM</p>
+            <p class="col-span-3">: {{ getDataSurat.npm }}</p>
+          </div>
+          <div class="grid grid-cols-4">
+            <p>Fakultas</p>
+            <p class="col-span-3">
+              : {{ cariFakultasAbbrevation(getDataSurat.nama_fakultas) }}
+            </p>
+          </div>
+          <div class="grid grid-cols-4">
+            <p>Jurusan / Prog. Studi</p>
+            <p class="col-span-3">: {{ getDataSurat.nama_prodi }}</p>
+          </div>
+        </div>
+        <div class="my-5">
+          <p>
+            Mahasiswa tersebut tidak mempunyai tunggakan / pinjaman buku /
+            majalah dari Perpustakaan Pusat Universitas Padjadjaran.
+          </p>
+          <p class="mt-5">
+            Demikian surat keterangan ini dibuat untuk digunakan sebagaimana
+            mestinya.
+          </p>
+        </div>
+        <div class="flex flex-col items-end my-10">
+          <div>
+            <p>{{ bebasPustakaDate(date.toDateString()) }}</p>
+            <p>a.n. Kepala Pusat Pengelolaan Pengetahuan Unpad</p>
+            <div
+              v-if="
+                getDataSurat.user_updated ===
+                '18C2332E-6589-4424-B613-AAB2141F9450'
+              "
+            >
+              <NuxtImg src="images/ttd_kepala.png" class="w-45 mt--15 mb--8" />
+            </div>
+            <div
+              v-else-if="
+                getDataSurat.user_updated ===
+                '95B9A96B-1BC5-44F4-BB6D-994D658CB1AF'
+              "
+            >
+              <NuxtImg src="images/ttd_kepala2p.png" class="w-45 mt--5 mb--5" />
+            </div>
+            <div v-else>
+              <NuxtImg src="images/ttd_kepala2p.png" class="w-45 mt--5 mb--5" />
+            </div>
+
+            <p>
+              {{ getDataPegawai.first_name + " " + getDataPegawai.last_name }}
+            </p>
+            <p>NIP {{ getDataPegawai.nomor_induk }}</p>
+          </div>
+        </div>
+
+        <div class="text-3 text-gray italic">
+          <p>Surat Generated ID : {{ getDataSurat.id }}</p>
+          <p>by Kandaga System</p>
+        </div>
+      </div>
+    </article>
+    <article v-else>
+      <h3 class="text-red">Data Belum Sesuai!</h3>
+      <p>Silahkan hubungi Administrator Kandaga</p>
+    </article>
+  </section>
+</template>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+* {
+  font-family: "Open Sans";
+}
+
+section {
+  --at-apply: max-w-7xl ma;
+}
+
+article {
+  --at-apply: max-w-3xl ma border-1 p-10 my-5;
+}
+
+h4 {
+  --at-apply: font-semibold;
+}
+</style>

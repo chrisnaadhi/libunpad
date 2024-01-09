@@ -12,6 +12,7 @@
     "@nuxt/image": "^1.0.0",
     "@nuxtjs/i18n": "8.0.0-rc.5",
     "@sidebase/nuxt-auth": "^0.5.0",
+    "@sidebase/nuxt-pdf": "^0.1.2",
     "@unocss/nuxt": "^0.55.0",
     "dayjs-nuxt": "^1.1.0",
     "nuxt": "^3.8.1"

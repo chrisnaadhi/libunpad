@@ -1,4 +1,7 @@
 export default {
+  // Common Verb
+  membership: "Membership",
+
   // Homepage - /
   introWelcome: "Welcome to",
   homeDescription:
