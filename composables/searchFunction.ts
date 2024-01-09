@@ -57,12 +57,15 @@ export const searchTugasAkhirDirectus = defineStore(
     const offset = ref(0);
     const page = ref(1);
     const facultyName = ref<NamaFakultas | null>();
+    const facultyId = ref(110);
+    const tahun = ref("2023");
     const isNewSearch = ref(false);
     const searchResults = ref();
 
     const searchingTugasAkhir = async (
       isNew: boolean,
-      faculty: boolean = false
+      faculty: boolean = false,
+      filter: boolean = false
     ) => {
       switch (isNew) {
         case false:
@@ -82,7 +85,8 @@ export const searchTugasAkhirDirectus = defineStore(
       if (
         keywords.value !== "" &&
         faculty === true &&
-        facultyName.value !== null
+        facultyName.value !== null &&
+        filter === false
       ) {
         const fetchSearchResults = await getItems({
           collection: "tbtMhsUploadThesis",
@@ -118,7 +122,51 @@ export const searchTugasAkhirDirectus = defineStore(
       } else if (
         keywords.value !== "" &&
         faculty === false &&
-        facultyName.value === null
+        facultyName.value === null &&
+        filter === true
+      ) {
+        const fetchSearchResults = await getItems({
+          collection: "tbtMhsUploadThesis",
+          params: {
+            limit: 30,
+            offset: offset.value,
+            filter: {
+              _or: [
+                {
+                  Judul: {
+                    _contains: keywords.value,
+                  },
+                },
+                {
+                  Abstrak: {
+                    _contains: keywords.value,
+                  },
+                },
+                {
+                  Keywords: {
+                    _contains: keywords.value,
+                  },
+                },
+              ],
+              MhsNPM: {
+                _starts_with: facultyId.value.toString(),
+              },
+              UploadTgl: {
+                _between: [
+                  `${tahun.value}-01-01T00:00:00`,
+                  `${tahun.value}-12-30T23:59:59`,
+                ],
+              },
+            },
+          },
+        });
+
+        searchResults.value = fetchSearchResults;
+      } else if (
+        keywords.value !== "" &&
+        faculty === false &&
+        facultyName.value === null &&
+        filter === false
       ) {
         const fetchSearchResults = await getItems({
           collection: "tbtMhsUploadThesis",
@@ -177,7 +225,9 @@ export const searchTugasAkhirDirectus = defineStore(
       keywords,
       offset,
       page,
+      tahun,
       facultyName,
+      facultyId,
       searchResults,
       searchingTugasAkhir,
       nextPage,

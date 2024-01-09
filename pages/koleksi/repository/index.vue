@@ -101,7 +101,7 @@ definePageMeta({
       </p>
     </div>
     <div class="flex flex-col gap-4 lg:(flex-row)">
-      <!-- <CollectionRepositoryFilterOption /> -->
+      <CollectionRepositoryFilterOption />
       <div class="repository-collection" v-if="!searchTugasAkhir.searchResults">
         <CollectionRepositoryCard
           v-for="koleksi in dataTADirectus"
