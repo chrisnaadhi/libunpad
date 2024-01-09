@@ -2,8 +2,6 @@
 import "@splidejs/vue-splide/css";
 import "@splidejs/vue-splide/css/core";
 import "v-calendar/style.css";
-import { mobileMenu } from "~/composables/navMenu";
-import { useSearchFunction } from "~/composables/searchFunction";
 
 useHead({
   htmlAttrs: {
@@ -12,27 +10,6 @@ useHead({
 });
 
 const router = useRouter();
-const menu = mobileMenu();
-const searchFunction = useSearchFunction();
-const { finalizePendingLocaleChange } = useI18n();
-
-router.afterEach(() => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
-  menu.isLocaleOpen = false;
-
-  if (menu.menuState) {
-    menu.menuState = false;
-    menu.isLayananOpen = false;
-    menu.isTentangOpen = false;
-  }
-  if (searchFunction.keywords) {
-    searchFunction.keywords = "";
-    searchFunction.isResult = false;
-  }
-});
 
 const onBeforeEnter = async () => {
   await finalizePendingLocaleChange();

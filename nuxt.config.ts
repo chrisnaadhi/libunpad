@@ -21,7 +21,6 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@nuxtjs/i18n",
     "dayjs-nuxt",
-    "@sidebase/nuxt-auth",
     "@sidebase/nuxt-pdf",
   ],
   unocss: {
@@ -58,13 +57,6 @@ export default defineNuxtConfig({
     plugins: ["relativeTime", "utc", "timezone"],
     defaultLocale: "id",
     defaultTimezone: "Asia/Bangkok",
-  },
-  auth: {
-    isEnabled: true,
-    // provider: {
-    //   type: "authjs",
-    // },
-    defaultProvider: "google",
   },
   runtimeConfig: {
     authSecret: process.env.AUTH_SECRET,
