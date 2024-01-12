@@ -15,14 +15,17 @@
     "@sidebase/nuxt-pdf": "^0.1.2",
     "@unocss/nuxt": "^0.55.0",
     "dayjs-nuxt": "^1.1.0",
+    "drizzle-kit": "^0.20.10",
     "nuxt": "^3.8.1"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.11",
     "@popperjs/core": "^2.11.7",
     "@splidejs/vue-splide": "^0.6.12",
+    "drizzle-orm": "^0.29.3",
     "easyqrcodejs": "^4.4.13",
     "meilisearch": "^0.34.1",
+    "mysql2": "^3.7.0",
     "next-auth": "4.22.5",
     "nuxt-directus": "^5.0.0",
     "pinia": "^2.1.3",

@@ -60,7 +60,6 @@ export const tugasPagination = defineStore("tugasPage", () => {
 });
 
 export const getLinkResult = (link: string) => {
-  const id = "oai:kandaga.unpad.ac.id:8010:slims-154137";
   if (link.includes("slims")) {
     const splitLink = link.split("-");
     const getID = splitLink.at(-1);
