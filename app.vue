@@ -123,12 +123,24 @@ li {
   --at-apply: list-outside;
 }
 
+label {
+  --at-apply: font-600 pb-2 text-base md:text-md;
+}
+
 input[type="search"] {
   --at-apply: w-full border-1 border-orange;
 }
 
 input:disabled {
   --at-apply: bg-gray-3 cursor-not-allowed;
+}
+
+.input-block {
+  --at-apply: flex flex-col my-5 sm:w-md md:w-full;
+}
+
+.input-area {
+  --at-apply: border border-orange rounded p-3 bg-white;
 }
 
 button[type="submit"] {

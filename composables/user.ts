@@ -11,7 +11,7 @@ export const displayRuangan = (ruangan: string) => {
       case "r_belajar":
         return "Ruang Belajar";
       case "r_referensi":
-        return "Ruang Referensi";
+        return "Ruang Referensi Tesis Disertasi";
       case "r_bni":
         return "BNI Coworking Space";
       case "r_multimedia":
@@ -19,7 +19,7 @@ export const displayRuangan = (ruangan: string) => {
       case "r_populer":
         return "Ruang Populer";
       case "r_berkala":
-        return "Ruang Berkala";
+        return "Ruang Referensi Koleksi Berkala";
     }
   });
 };

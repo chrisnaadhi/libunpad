@@ -6,7 +6,7 @@
       <div class="i-carbon-logo-github" />
       <p>Whatsapp: +6282315798979</p>
       <p>Email: perpustakaan@unpad.ac.id</p>
-      <p>Instagram & Twitter: @libunpad</p>
+      <p>Instagram & Twitter: @kandagaunpad</p>
     </div>
   </section>
 </template>

@@ -21,14 +21,17 @@ useHead({
     </div>
     <div>
       <VisitorDisplay v-if="!ruang" />
-      <VisitorForm v-else />
+      <div class="flex gap-3 mt-25" v-else>
+        <VisitorForm />
+        <VisitorSurveyKunjungan />
+      </div>
     </div>
   </main>
 </template>
 
 <style scoped>
 .background-block {
-  --at-apply: flex flex-col items-center min-w-full h-full;
+  --at-apply: flex flex-col items-center min-w-full;
 }
 .heading-block {
   --at-apply: flex flex-col items-center;
