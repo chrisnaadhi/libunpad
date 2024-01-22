@@ -110,8 +110,8 @@ const addVisitor = async () => {
 };
 
 const backToIndex = () => {
-  ruangan.value = "";
-  router.go(router.currentRoute);
+  ruangan.value = null;
+  // router.go(router.currentRoute);
 };
 
 const focusToIdentitas = () => {
@@ -192,7 +192,8 @@ form {
   --at-apply: ma max-w-2xl bg-white px-10 pt-2 pb-8 rounded-xl;
 }
 
-input, select {
+input,
+select {
   --at-apply: border border-orange rounded p-3 bg-white;
 }
 

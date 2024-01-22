@@ -64,3 +64,19 @@ export const getDailyExtendedServiceTimeVisitor = () => {
     },
   };
 };
+
+export const getSurveyKandagaVisitor = (ruangan: string, star: string) => {
+  return {
+    collection: "survey_kunjungan",
+    params: {
+      filter: {
+        nama_ruangan: {
+          _eq: ruangan,
+        },
+        selected_star: {
+          _eq: star,
+        },
+      },
+    },
+  };
+};

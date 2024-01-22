@@ -21,7 +21,7 @@ export const displayRuangan = (ruangan: string) => {
       case "r_berkala":
         return "Ruang Referensi Koleksi Berkala";
     }
-  });
+  }).value?.replace('"', '');
 };
 
 export const displayKeanggotaan = (identitas: string) => {
