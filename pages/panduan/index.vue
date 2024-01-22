@@ -99,7 +99,7 @@ const toggleLayanan = (value) => {
                     class="w-full object-cover rounded-t"
                   ></NuxtImg>
                 </div>
-                <div class="flex flex-col px-4 py-5 h-full justify-center">
+                <div class="flex flex-col px-4 py-5 justify-center">
                   <h3 class="text-left">{{ item.judul }}</h3>
                   <p class="text-sm italic">
                     {{ trimDescription(item.konten, 150) }}
@@ -109,7 +109,7 @@ const toggleLayanan = (value) => {
                       :to="`/panduan/literasi-informasi/${item.slug}`"
                       class="action-btn"
                     >
-                      Lihat Layanan
+                      Lihat Panduan
                     </NuxtLink>
                   </div>
                 </div>

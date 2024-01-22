@@ -168,7 +168,7 @@ section {
 }
 
 article {
-  --at-apply: max-w-3xl ma border-1 p-10 my-5;
+  --at-apply: max-w-3xl ma border-none p-10 my-5;
 }
 
 h4 {

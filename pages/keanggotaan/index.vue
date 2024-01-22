@@ -90,6 +90,7 @@ definePageMeta({
       </div>
       <div class="w-full">
         <div v-if="user" class="text-left">
+          <p>{{ status }}</p>
           <h1>Halo, {{ user.first_name }} {{ user.last_name }}!</h1>
           <p>Email: {{ user.email }}</p>
           <p>Status Anggota: {{ user.title }}</p>
@@ -236,7 +237,6 @@ definePageMeta({
         </div>
       </div>
     </section>
-    <pre>{{ status }}</pre>
     <section class="flex justify-center gap-2">
       <NuxtLink
         to="/dashboard"
