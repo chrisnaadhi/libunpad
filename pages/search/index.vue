@@ -41,8 +41,6 @@ const submitSearch = async (keyword) => {
       },
     });
 
-    console.log(getKeywordDefinition?.value?.query?.search[0]);
-
     search.isResult = true;
     search.wikipediaDefinition = getKeywordDefinition?.value?.query?.search[0];
 
@@ -340,6 +338,7 @@ onMounted(() => {
                       : {{ item?.repository_name ?? "Koleksi" }}
                     </p>
                   </div>
+                  <pre>{{ item?.id }}</pre>
                 </div>
               </div>
               <div class="flex mt-2 text-center">

@@ -10,11 +10,11 @@ const { locale } = useI18n();
     <nav class="navbar">
       <NuxtLink :to="locale === 'en' ? '/en' : '/'">
         <nuxt-img
-          src="/images/kandaga-web.png"
+          src="/images/kandaga-transp.png"
           class="logo"
           alt="Logo Perpustakaan"
-          width="256px"
-          height="64px"
+          width="100%"
+          height="128px"
           format="webp"
         />
       </NuxtLink>
@@ -41,7 +41,7 @@ const { locale } = useI18n();
 }
 
 .logo {
-  --at-apply: max-w-40;
+  --at-apply: max-w-50;
 }
 
 .jamlayanan-enter-active,

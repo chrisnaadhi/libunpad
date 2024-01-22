@@ -15,7 +15,9 @@ const focusWriting = () => {
 </script>
 
 <template>
-  <main class="flex justify-between font-600 flex-col my-5 sm:(flex-row my-0)">
+  <main
+    class="max-w-2xl ma flex justify-between font-600 flex-col my-5 sm:(flex-row my-0)"
+  >
     <section class="flex flex-col w-30 justify-center">
       <div
         class="tab"

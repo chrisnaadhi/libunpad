@@ -1,8 +1,6 @@
 <script setup lang="ts">
 const { getItemById, createItems } = useDirectusItems();
 const router: any = useRouter();
-const route = useRoute();
-console.log(route);
 
 const ruangan = useCookie("namaRuanganVisitor");
 const userData = useIdentitasForm();
@@ -34,7 +32,7 @@ const displayRuangan = computed(() => {
     case "r_populer":
       return "Ruang Populer";
     case "r_berkala":
-      return "Ruang Berkala";
+      return "Ruang Referensi Koleksi Berkala";
   }
 });
 
@@ -112,8 +110,8 @@ const addVisitor = async () => {
 };
 
 const backToIndex = () => {
-  ruangan.value = "";
-  router.go(router.currentRoute);
+  ruangan.value = null;
+  // router.go(router.currentRoute);
 };
 
 const focusToIdentitas = () => {
@@ -126,7 +124,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <main class="min-w-full">
+  <main class="max-w-full ma">
     <VisitorModal @display="displayModal" v-if="showModal" />
     <div class="absolute w-full left-0 mt--25">
       <VisitorBanner :display="displayBanner" v-if="!umum" />
@@ -190,23 +188,16 @@ onMounted(() => {
 </template>
 
 <style scoped>
-label {
-  --at-apply: font-600 pb-2 text-base md:text-md;
-}
-
 form {
-  --at-apply: ma mt-25 max-w-2xl bg-white px-10 pt-2 pb-8 rounded-xl;
+  --at-apply: ma max-w-2xl bg-white px-10 pt-2 pb-8 rounded-xl;
 }
 
-input, select {
+input,
+select {
   --at-apply: border border-orange rounded p-3 bg-white;
 }
 
 option {
   --at-apply: py-5;
-}
-
-.input-block {
-  --at-apply: flex flex-col my-5 w-full sm:w-md md:w-xl;
 }
 </style>
