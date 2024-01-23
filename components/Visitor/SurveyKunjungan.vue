@@ -6,6 +6,22 @@ const selectedRating = ref("");
 const masukan = ref("");
 const ruangan = useCookie("namaRuanganVisitor");
 const viewSurvey = ref(true);
+const ratingValue = computed(() => {
+  switch (selectedRating.value) {
+    case "fifthStar":
+      return 5;
+    case "fourthStar":
+      return 4;
+    case "thirdStar":
+      return 3;
+    case "secondStar":
+      return 2;
+    case "firstStar":
+      return 1;
+    default:
+      return null;
+  }
+});
 
 const ratingData = ref({
   firstStar: false,
@@ -56,7 +72,6 @@ const changeStarValue = (starValue) => {
     default:
       break;
   }
-  console.log(starValue);
 };
 
 const sendSuveyData = async () => {
@@ -67,6 +82,7 @@ const sendSuveyData = async () => {
         nama_ruangan: ruangan.value,
         selected_star: selectedRating.value,
         masukan: masukan.value,
+        number_value: ratingValue.value,
       },
     });
   } catch (error) {
