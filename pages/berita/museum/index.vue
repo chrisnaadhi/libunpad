@@ -19,7 +19,7 @@ const dataArtikelMuseum = await getItems({
       <h1>{{ title }}</h1>
     </div>
 
-    <div class="flex flex-col lg:(grid grid-cols-3) px-4 py-5">
+    <div class="article-list">
       <GenericArticleCard
         v-for="item in dataArtikelMuseum"
         :featured-img="item.gambar_unggulan"
@@ -41,5 +41,9 @@ const dataArtikelMuseum = await getItems({
 <style scoped>
 section {
   --at-apply: max-w-7xl ma;
+}
+
+.article-list {
+  --at-apply: flex flex-col gap-5 my-5 px-3 sm:(grid grid-cols-2) lg:(grid grid-cols-3 px-0);
 }
 </style>

@@ -6,7 +6,7 @@ const imageBg = "https://www.svgrepo.com/show/9244/newspaper-report.svg";
 const getAllArticle = await getItems({
   collection: "artikel",
   params: {
-    sort: "-date_updated",
+    sort: "-date_created",
   },
 });
 </script>
@@ -44,6 +44,6 @@ p {
 }
 
 .article-list {
-  --at-apply: grid grid-cols-3 gap-5 my-5;
+  --at-apply: flex flex-col gap-5 my-5 px-3 sm:(grid grid-cols-2) lg:(grid grid-cols-3 px-0);
 }
 </style>

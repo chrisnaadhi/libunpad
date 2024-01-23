@@ -5,7 +5,7 @@ const imageBg = "https://www.svgrepo.com/show/9244/newspaper-report.svg";
 const platform = [
   {
     nama: "Kandaga",
-    deskripsi: "Berita umum seputar layanan Kandaga",
+    deskripsi: "Berita umum seputar Grha Kandaga",
     slug: "all",
   },
   {
@@ -30,11 +30,19 @@ const platform = [
   },
 ];
 
+const getNewestArticle = await getItems({
+  collection: "artikel",
+  params: {
+    limit: 5,
+    sort: "-date_created",
+  },
+});
+
 const getAllArticle = await getItems({
   collection: "artikel",
   params: {
     limit: 3,
-    sort: "-date_updated",
+    sort: "-date_created",
   },
 });
 
@@ -53,6 +61,11 @@ platform[4]["collection"] = getMuseumArticle;
 <template>
   <main>
     <section>
+      <pre>
+        {{ article?.judul }}
+      </pre>
+    </section>
+    <section>
       <CollectionHeader
         :title="$t('newsTitleHeader')"
         :image="imageBg"
@@ -63,13 +76,10 @@ platform[4]["collection"] = getMuseumArticle;
       <h2>Berita Terbaru Kandaga</h2>
       <div class="flex flex-col lg:(flex-row mx-0) gap-3 my-5 mx-3">
         <div class="bg-blue-1 w-full min-h-100 rounded-lg"></div>
-        <div class="flex flex-col gap-3">
-          <div class="bg-green-1 min-w-100 min-h-50 rounded-lg"></div>
-          <div class="bg-orange-1 min-h-50 rounded-lg"></div>
-        </div>
-        <div class="flex flex-col gap-3">
-          <div class="bg-red-1 min-w-100 min-h-50 rounded-lg"></div>
-          <div class="bg-violet-1 min-h-50 rounded-lg"></div>
+        <div v-for="article in getNewestArticle" class="grid grid-cols-2">
+          <div class="bg-red">
+            {{ article?.id }}
+          </div>
         </div>
       </div>
     </section>
