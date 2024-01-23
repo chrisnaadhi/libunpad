@@ -1,5 +1,5 @@
 <script setup>
-const number = ref(10);
+const number = ref(15);
 
 const decreaseValue = () => {
   if (number.value !== 0) {
@@ -63,7 +63,7 @@ useHead({
       </NuxtLink>
     </div>
     <div class="text-center">
-      <p>
+      <p class="text-lg">
         Anda akan dialihkan ke halaman tersebut dalam
         <span class="text-orange font-semibold">{{ number }}</span> detik.
       </p>
