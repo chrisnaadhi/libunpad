@@ -11,8 +11,7 @@ export default defineNuxtConfig({
     },
   },
   routeRules: {
-    "/api/**": { cors: true },
-    "/visitor/rekap": { redirect: "/error" },
+    "/api/**": { redirect: "/" },
   },
   modules: [
     "@unocss/nuxt",

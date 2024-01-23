@@ -1,4 +1,27 @@
 <script setup>
+const number = ref(10);
+
+const decreaseValue = () => {
+  if (number.value !== 0) {
+    number.value -= 1;
+  }
+};
+
+onMounted(async () => {
+  if (number.value !== 0) {
+    setInterval(() => {
+      if (number.value === 0) {
+        clearInterval();
+        window.location.assign("https://kandaga.unpad.ac.id:3000");
+      } else {
+        decreaseValue();
+      }
+    }, 1000);
+  }
+
+  console.log("done");
+});
+
 useHead({
   meta: [
     {
@@ -24,9 +47,32 @@ useHead({
 </script>
 
 <template>
-  <div class="text-center">
-    <h1>Website Resmi Kandaga</h1>
-  </div>
+  <section class="flex flex-col items-center w-full max-w-7xl ma py-25">
+    <div>
+      <NuxtImg src="/images/lambang-unpad.png" width="180px" height="180px" />
+    </div>
+    <h1 class="text-5xl my-3">
+      Website Resmi Kandaga saat ini sudah beralih ke:
+    </h1>
+    <div class="bg-orange text-white rounded my-5 py-4 px-8">
+      <NuxtLink
+        href="https://kandaga.unpad.ac.id:3000"
+        class="text-white text-3xl no-underline"
+      >
+        https://kandaga.unpad.ac.id
+      </NuxtLink>
+    </div>
+    <div class="text-center">
+      <p>
+        Anda akan dialihkan ke halaman tersebut dalam
+        <span class="text-orange font-semibold">{{ number }}</span> detik.
+      </p>
+      <p>atau klik tautan berikut</p>
+      <NuxtLink href="https://kandaga.unpad.ac.id:3000" target="_blank">
+        Klik disini
+      </NuxtLink>
+    </div>
+  </section>
 </template>
 
 <style scoped></style>

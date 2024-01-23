@@ -51,29 +51,18 @@ const handleClearError = () => {
           Administrator!
         </h3>
       </div>
-      <p class="py-5" v-show="error.statusCode === 404">
-        Jangan Khawatir! Kamu bisa kembali ke beranda atau login kembali agar
-        kamu dapat menjelajahi website Kandaga. Jika kamu merasa ini adalah
-        sebuah kesalahan dan halaman ini memang benar ada, silahkan hubungi
-        administrator kandaga agar dapat kami tanggulangi dengan segera.
-      </p>
       <pre> Kamu ada di halaman: {{ route.fullPath }} </pre>
-      <div class="flex justify-center my-5 gap-5">
-        <NuxtLink to="mailto:chrisna.adhi@unpad.ac.id">
-          <button
-            type="button"
-            class="btn border-1 border-orange bg-orange text-white"
-          >
-            Hubungi Web Admin
-          </button>
-        </NuxtLink>
-        <button
-          @click="handleClearError"
-          type="button"
-          class="btn border-1 border-orange-4 hover:(bg-orange-4 text-white) transition-all-500"
+      <p class="py-5" v-show="error.statusCode === 404">
+        Jangan Khawatir! Saat ini Kandaga memiliki website baru, silahkan
+        kunjungi tautan berikut untuk mengakses website baru Kandaga :
+      </p>
+      <div>
+        <NuxtLink
+          href="https://kandaga.unpad.ac.id:3000"
+          class="btn bg-orange text-white rounded-xl"
         >
-          Kembali ke Beranda
-        </button>
+          Website Kandaga
+        </NuxtLink>
       </div>
     </section>
     <FooterSection />
