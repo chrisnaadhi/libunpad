@@ -28,7 +28,7 @@ definePageMeta({
 });
 
 useHead({
-  title: `Surat Bebas Pustaka ${getDataSurat.nama_lengkap} - Sistem Administrasi Kandaga Universitas Padjadjaran`,
+  title: `Surat Bebas Pustaka ${getDataSurat.nama_lengkap}`,
 });
 </script>
 
@@ -57,14 +57,12 @@ useHead({
         getDataSurat?.status_pengajuan === 'selesai'
       "
     >
-      <div class="flex items-center justify-center">
+      <div class="flex items-center justify-evenly">
         <NuxtImg src="images/lambang-unpad.png" class="w-24 h-24"></NuxtImg>
         <div class="text-center text-dark">
-          <h4>
-            KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI UNIVERSITAS
-            PADJADJARAN
-          </h4>
-          <h4>PUSAT PENGELOLAAN PENGETAHUAN</h4>
+          <h6>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI</h6>
+          <h6>UNIVERSITAS PADJADJARAN</h6>
+          <h6>PUSAT PENGELOLAAN PENGETAHUAN</h6>
           <p>Jl. Raya Bandung - Sumedang Km. 21 Jatinangor 45363</p>
           <p>Telp : 022-8428806 , E-mail : perpustakaan@unpad.ac.id</p>
         </div>
@@ -162,9 +160,9 @@ useHead({
         </div>
       </div>
     </article>
-    <article v-else>
+    <article class="text-center" v-else>
       <h3 class="text-red">Data Belum Sesuai!</h3>
-      <p>Silahkan hubungi Administrator Kandaga</p>
+      <p>Silahkan hubungi Administrator Kandaga:</p>
     </article>
   </section>
 </template>
@@ -184,7 +182,7 @@ article {
   --at-apply: max-w-3xl ma border-none p-10 my-5;
 }
 
-h4 {
-  --at-apply: font-semibold;
+h6 {
+  --at-apply: font-bold;
 }
 </style>
