@@ -144,7 +144,7 @@ export const displayPersyaratan = (syarat: object) => {
   } else if (changeSyaratType.includes("peminjaman")) {
     return `Masih ada denda yang belum dibayar`;
   } else {
-    return `Persyaratan belooommm`;
+    return `Persyaratan belum lengkap`;
   }
 };
 
