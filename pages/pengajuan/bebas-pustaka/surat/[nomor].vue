@@ -113,7 +113,7 @@ useHead({
         </div>
         <div class="flex flex-col items-end my-10">
           <div>
-            <p>{{ bebasPustakaDate(date.toDateString()) }}</p>
+            <p>Jatinangor, {{ bebasPustakaDate(date.toDateString()) }}</p>
             <p>a.n. Kepala Pusat Pengelolaan Pengetahuan Unpad</p>
             <div
               v-if="
