@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from "vue";
-import { exportToPDF } from "#imports";
 
 const { getItemById } = useDirectusItems();
 const { getUserById } = useDirectusUsers();
@@ -94,7 +93,7 @@ useHead({
           <div class="grid grid-cols-4">
             <p>Fakultas</p>
             <p class="col-span-3">
-              : {{ cariFakultasAbbrevation(getDataSurat.nama_fakultas) }}
+              : {{ cariFakultasAbbrevation(getDataSurat.nama_fakultas, true) }}
             </p>
           </div>
           <div class="grid grid-cols-4">
@@ -122,7 +121,11 @@ useHead({
                 '18C2332E-6589-4424-B613-AAB2141F9450'
               "
             >
-              <NuxtImg src="images/ttd_kepala.png" class="w-45 mt--15 mb--8" />
+              <NuxtImg
+                src="images/ttd_kepala.png"
+                v-show="getDataSurat.nama_fakultas !== 'fikom'"
+                class="w-45 mt--15 mb--8"
+              />
             </div>
             <div
               v-else-if="
@@ -130,12 +133,22 @@ useHead({
                 '95B9A96B-1BC5-44F4-BB6D-994D658CB1AF'
               "
             >
-              <NuxtImg src="images/ttd_kepala2p.png" class="w-45 mt--5 mb--5" />
+              <NuxtImg
+                src="images/ttd_kepala2p.png"
+                v-show="getDataSurat.nama_fakultas !== 'fikom'"
+                class="w-45 mt--5 mb--5"
+              />
             </div>
             <div v-else>
-              <NuxtImg src="images/ttd_kepala2p.png" class="w-45 mt--5 mb--5" />
+              <NuxtImg
+                src="images/ttd_kepala2p.png"
+                v-show="getDataSurat.nama_fakultas !== 'fikom'"
+                class="w-45 mt--5 mb--5"
+              />
             </div>
-
+            <div v-show="getDataSurat.nama_fakultas === 'fikom'">
+              <div class="py-10" />
+            </div>
             <p>
               {{ getDataPegawai.first_name + " " + getDataPegawai.last_name }}
             </p>

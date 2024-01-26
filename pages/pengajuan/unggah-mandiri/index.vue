@@ -7,7 +7,12 @@ const data = ref("Unggah Mandiri Karya Ilmiah");
     <h1 class="my-10">{{ data }}</h1>
     <div class="grid grid-cols-2 justify-center">
       <div class="flex justify-center">
-        <NuxtImg src="/illustration/undraw_Social.png" format="webp" />
+        <NuxtImg
+          src="/illustration/undraw_Social.png"
+          format="webp"
+          width="256px"
+          height="256px"
+        />
       </div>
       <div>
         <h3>Unggah Mandiri</h3>

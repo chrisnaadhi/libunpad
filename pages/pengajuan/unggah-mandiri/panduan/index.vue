@@ -5,6 +5,9 @@ const data = ref("Panduan Unggah Mandiri");
 <template>
   <section>
     <p>{{ data }}</p>
+    <div>
+      <NuxtLink href="/pengajuan/unggah-mandiri">Kembali ke Pengajuan</NuxtLink>
+    </div>
   </section>
 </template>
 

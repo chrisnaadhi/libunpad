@@ -1,6 +1,5 @@
 <script setup>
 const layanan = jamLayanan();
-const route = useRoute();
 const { locale } = useI18n();
 </script>
 
