@@ -21,7 +21,7 @@ export const displayRuangan = (ruangan: string) => {
       case "r_berkala":
         return "Ruang Referensi Koleksi Berkala";
     }
-  }).value?.replace('"', '');
+  }).value?.replace('"', "");
 };
 
 export const displayKeanggotaan = (identitas: string) => {
@@ -268,9 +268,20 @@ export const daftarNamaFakultasUnpad = defineStore("namaFakultas", () => {
     return hasil?.namaFakultas;
   };
 
-  const cariFakultasAbbrevation = (npm: string) => {
+  const cariFakultasAbbrevation = (
+    npm: string,
+    bebasPustaka: boolean = false
+  ) => {
     const hasil = objFakultas.find((elem) => elem.singkatan === npm);
-    return hasil?.namaFakultas;
+    if (bebasPustaka) {
+      if (hasil?.namaFakultas.includes("Fakultas")) {
+        let bebasPustakaFakultas = hasil?.namaFakultas.split(" ");
+        bebasPustakaFakultas.shift();
+        return bebasPustakaFakultas.join(" ");
+      }
+    } else {
+      return hasil?.namaFakultas;
+    }
   };
 
   const cariFakultasByParameter = (singkatan: string) => {

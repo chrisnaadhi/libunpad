@@ -180,3 +180,36 @@ export const mobileMenu = defineStore("mobile", () => {
     isLocaleOpen,
   };
 });
+
+export const navigationMenuBar = defineStore("navigationMenuBar", () => {
+  const viewedMenuName = ref("");
+  const viewState = ref(false);
+
+  const clickDropdown = (menu: string) => {
+    if (viewedMenuName.value !== "") {
+      viewedMenuName.value = "";
+      viewState.value = !viewState.value;
+    } else {
+      viewedMenuName.value = menu;
+      viewState.value = !viewState.value;
+    }
+  };
+
+  const viewDropdown = (menu: string) => {
+    viewedMenuName.value = menu;
+    viewState.value = true;
+  };
+
+  const leaveDropdown = () => {
+    viewedMenuName.value = "";
+    viewState.value = false;
+  };
+
+  return {
+    viewedMenuName,
+    viewState,
+    clickDropdown,
+    viewDropdown,
+    leaveDropdown,
+  };
+});

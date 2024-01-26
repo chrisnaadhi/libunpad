@@ -31,7 +31,7 @@ const limitChars = (chars: any) => {
           </figcaption>
         </figure>
       </div>
-      <div class="display-none xl:display-block">
+      <div class="hidden xl:block">
         <div class="banner-desktop" :class="bannerColor">
           <h6>{{ banner }}</h6>
         </div>
@@ -39,7 +39,7 @@ const limitChars = (chars: any) => {
         <p class="font-600">{{ author }}</p>
         <p>{{ limitChars(description) }}....</p>
       </div>
-      <div class="xl:display-none mt-2 text-center">
+      <div class="xl:hidden mt-2 text-center">
         <h2 class="title-mobile">{{ title }}</h2>
         <p>Author: {{ author }}</p>
       </div>
