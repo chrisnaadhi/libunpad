@@ -7,7 +7,7 @@ export default {
   dbCredentials: {
     host: process.env.DRIZZLE_HOST!,
     password: process.env.DRIZZLE_PASSWORD,
-    user: process.env.DRIZZLE_USE,
+    user: process.env.DRIZZLE_USERNAME,
     port: Number(process.env.DRIZZLE_PORT),
     database: process.env.DRIZZLE_DATABASE!,
   },

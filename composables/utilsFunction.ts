@@ -2,9 +2,24 @@ import { defineStore } from "pinia";
 
 export const trimDescription = (description: string, limit: number) => {
   if (description.length < limit) {
-    return description.replace(/(<([^>]+)>)/gi, "") + "...";
+    return (
+      description.replace(/(<([^>]+)>)/gi, "").replaceAll("&nbsp;", "") + "..."
+    );
   } else {
-    return description.replace(/(<([^>]+)>)/gi, "").slice(0, limit) + "...";
+    return (
+      description
+        .replace(/(<([^>]+)>)/gi, "")
+        .replaceAll("&nbsp;", "")
+        .slice(0, limit) + "..."
+    );
+  }
+};
+
+export const trimTitle = (title: string, limit: number) => {
+  if (title.length < limit) {
+    return title.replace(/(<([^>]+)>)/gi, "");
+  } else {
+    return title.replace(/(<([^>]+)>)/gi, "").slice(0, limit) + "...";
   }
 };
 
@@ -31,10 +46,10 @@ export const definePeminjamanRuangan = (ruangan: string) => {
 export const tugasPagination = defineStore("tugasPage", () => {
   const offsetVal = ref(0);
   const baseVal = ref(5);
-  const maxedTask = computed((data) => {
+  const maxedTask = computed((data: any) => {
     const maxVal =
       offsetVal.value / baseVal.value + 1 ===
-      Math.ceil(data.meta.filter_count / baseVal.value);
+      Math.ceil(data?.meta.filter_count / baseVal.value);
     if (maxVal) {
       return true;
     } else {

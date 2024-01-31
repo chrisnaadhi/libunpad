@@ -26,13 +26,24 @@ const data = ref("Submit Unggah Mandiri");
         temporibus deleniti accusamus.
       </p>
       <div class="flex items-center justify-center my-3 gap-3">
-        <button class="btn w-full bg-orange text-white">Upload Tesis</button>
-        <button class="btn w-full bg-blue text-white">Upload Skripsi</button>
-        <button class="btn w-full bg-green text-white">Upload Disertasi</button>
+        <NuxtLink href="#" class="w-full">
+          <button class="btn w-full bg-red text-white">Unggah Skripsi</button>
+        </NuxtLink>
+        <NuxtLink href="#" class="w-full">
+          <button class="btn w-full bg-blue text-white">Unggah Tesis</button>
+        </NuxtLink>
+        <NuxtLink href="#" class="w-full">
+          <button class="btn w-full bg-violet text-white">
+            Unggah Disertasi
+          </button>
+        </NuxtLink>
       </div>
       <div>
-        <NuxtLink href="/pengajuan/unggah-mandiri">
-          Kembali ke Pengajuan
+        <NuxtLink
+          href="/pengajuan/unggah-mandiri"
+          class="btn bg-orange text-white py-0"
+        >
+          &leftarrow; Kembali
         </NuxtLink>
       </div>
     </div>

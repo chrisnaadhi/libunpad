@@ -162,7 +162,15 @@ useHead({
     </article>
     <article class="text-center" v-else>
       <h3 class="text-red">Data Belum Sesuai!</h3>
-      <p>Silahkan hubungi Administrator Kandaga:</p>
+      <p>Silahkan hubungi Petugas Bebas Pustaka:</p>
+      <p>
+        Bu Tati Asrianti:
+        <a href="tel:+6282120475023">+6282120475023</a>
+      </p>
+      <p>
+        Pak Ana Sobana:
+        <a href="tel:+6282246842403">+6282246842403</a>
+      </p>
     </article>
   </section>
 </template>

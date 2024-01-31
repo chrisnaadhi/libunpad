@@ -26,3 +26,7 @@ localhost-key.pem
 .env
 .env.*
 !.env.example
+
+# Drizzle Things
+/server/lib/migrations/meta
+/server/lib/migrations/*.sql

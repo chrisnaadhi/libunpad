@@ -183,6 +183,20 @@ definePageMeta({
                           >Unduh Surat</NuxtLink
                         >
                       </div>
+                      <div class="mt-5">
+                        <h5>
+                          Jika ada kendala silahkan hubungi petugas Bebas
+                          Pustaka kami:
+                        </h5>
+                        <p>
+                          Bu Tati Asrianti:
+                          <a href="tel:+6282120475023">+6282120475023</a>
+                        </p>
+                        <p>
+                          Pak Ana Sobana:
+                          <a href="tel:+6282246842403">+6282246842403</a>
+                        </p>
+                      </div>
                     </div>
                   </div>
                   <div v-else>

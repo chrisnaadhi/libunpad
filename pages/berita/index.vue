@@ -30,11 +30,22 @@ const platform = [
   },
 ];
 
+const getHighlightArticle = await getItems({
+  collection: "artikel",
+  params: {
+    limit: 1,
+    sort: "-date_created",
+  },
+});
+
+const highlightArticle = getHighlightArticle[0];
+
 const getNewestArticle = await getItems({
   collection: "artikel",
   params: {
-    limit: 5,
+    limit: 4,
     sort: "-date_created",
+    offset: 1,
   },
 });
 
@@ -61,11 +72,6 @@ platform[4]["collection"] = getMuseumArticle;
 <template>
   <main>
     <section>
-      <pre>
-        {{ article?.judul }}
-      </pre>
-    </section>
-    <section>
       <CollectionHeader
         :title="$t('newsTitleHeader')"
         :image="imageBg"
@@ -73,12 +79,46 @@ platform[4]["collection"] = getMuseumArticle;
       />
     </section>
     <section>
-      <h2>Berita Terbaru Kandaga</h2>
-      <div class="flex flex-col lg:(flex-row mx-0) gap-3 my-5 mx-3">
-        <div class="bg-blue-1 w-full min-h-100 rounded-lg"></div>
-        <div v-for="article in getNewestArticle" class="grid grid-cols-2">
-          <div class="bg-red">
-            {{ article?.id }}
+      <h2>{{ $t("newestKandagaNews") }}</h2>
+      <div class="flex flex-col lg:(flex-row mx-0) gap-4 my-5 mx-3">
+        <div class="highlight-block">
+          <NuxtLink
+            :to="'/berita/' + highlightArticle?.slug"
+            class="no-underline"
+          >
+            <NuxtImg
+              class="highlight-img"
+              :src="handleAssets(highlightArticle?.gambar_unggulan)"
+            />
+            <div class="highlight-content">
+              <h2 class="highlight-heading">
+                {{ trimTitle(highlightArticle?.judul, 80) }}
+              </h2>
+              <p class="text-left italic text-sm">
+                {{ trimDescription(highlightArticle?.konten_artikel, 200) }}
+              </p>
+            </div>
+          </NuxtLink>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div
+            v-for="article in getNewestArticle"
+            class="bg-gray-50 shadow-sm shadow-gray-4 rounded max-h-xl"
+          >
+            <NuxtImg
+              :src="handleAssets(article?.gambar_unggulan)"
+              class="w-full h-40 object-cover rounded"
+            />
+            <div class="h-20 px-3 flex flex-col items-start justify-center">
+              <NuxtLink :to="'/berita/' + article?.slug">
+                <h5 :title="article?.judul">
+                  {{ trimTitle(article?.judul, 27) }}
+                </h5>
+              </NuxtLink>
+              <p class="text-xs text-left italic">
+                {{ trimDescription(article?.konten_artikel, 90) }}
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -119,5 +159,31 @@ main {
 .article-block {
   --at-apply: flex flex-col gap-2 text-left w-full bg-gray-50 p-3 rounded-lg
     shadow-md shadow-gray-4;
+}
+
+.highlight-block {
+  --at-apply: bg-dark max-w-2xl w-full min-h-lg rounded-lg;
+}
+
+.highlight-img {
+  --at-apply: max-w-2xl h-lg object-cover rounded opacity-50 transition-all-500
+    absolute;
+}
+
+.highlight-block:hover .highlight-img {
+  --at-apply: opacity-20;
+}
+
+.highlight-block:hover .highlight-heading {
+  --at-apply: text-orange;
+}
+
+.highlight-heading {
+  --at-apply: text-white text-left transition-all-500;
+}
+
+.highlight-content {
+  --at-apply: relative flex flex-col justify-end items-start p-8 h-full
+    text-white;
 }
 </style>

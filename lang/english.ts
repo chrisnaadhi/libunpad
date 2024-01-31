@@ -38,6 +38,7 @@ export default {
   newsTitleHeader: "Kandaga's News and Event",
   newsDescriptionHeader:
     "Get the latest information about services, facilities and events held by Kandaga",
+  newestKandagaNews: "Newest Kandaga's News",
 
   // Pencarian - /search
   pencarianTerpaduTitle: "Kandaga Unified Search",
