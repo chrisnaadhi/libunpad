@@ -78,6 +78,13 @@ export default defineNuxtConfig({
       meiliApiKey: process.env.MEILI_API_KEY,
     },
   },
+  nitro: {
+    esbuild: {
+      options: {
+        target: "esnext",
+      },
+    },
+  },
 });
 
 // Activate Local SSL with this command on CLI

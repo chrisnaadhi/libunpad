@@ -12,6 +12,7 @@ export const useSearchFunction = defineStore("searchfunction", () => {
   );
   const baseURLKandaga = ref(process.env.URL_API_KANDAGA);
   const kandagaRes = ref();
+  const ulimsRes = ref();
 
   return {
     keywords,
@@ -21,6 +22,7 @@ export const useSearchFunction = defineStore("searchfunction", () => {
     baseURLSearch,
     baseURLKandaga,
     kandagaRes,
+    ulimsRes,
     initValue,
   };
 });

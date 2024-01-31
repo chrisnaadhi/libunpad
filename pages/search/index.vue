@@ -41,11 +41,20 @@ const submitSearch = async (keyword) => {
       },
     });
 
+    const { data: ulimsData } = await useFetch("/api/v1/koleksi/ulims", {
+      query: {
+        search: keyword,
+      },
+    });
+
     search.isResult = true;
     search.wikipediaDefinition = getKeywordDefinition?.value?.query?.search[0];
 
     if (kandagaRes.value) {
       search.kandagaRes = JSON.parse(kandagaRes.value.data);
+    }
+    if (ulimsData.value) {
+      search.ulimsRes = ulimsData.value.results;
     }
     suggestion.value = searchResults.value.query.searchinfo?.suggestion;
     loadingWiki.value = false;
@@ -152,8 +161,6 @@ function trimText(txt) {
   return trimmedText + "...";
 }
 
-let getFirstItem;
-
 onMounted(() => {
   search.keywords = route.query.keyword;
   setTimeout(() => {
@@ -161,13 +168,6 @@ onMounted(() => {
       search.keywords = "Universitas Padjadjaran";
     }
     submitSearch(search.keywords);
-    getFirstItem = (list) => {
-      if (list?.length > 0) {
-        return list[0];
-      } else {
-        return "-";
-      }
-    };
   }, 500);
 
   window.addEventListener("scroll", () => {
@@ -291,7 +291,7 @@ onMounted(() => {
         v-if="loadingFederated === false"
         class="flex flex-col gap-3 mt-3 lg:(grid grid-cols-2)"
       >
-        <div v-for="item in search.kandagaRes?.response.docs">
+        <div v-for="item in search.ulimsRes">
           <GenericBaseCard>
             <div
               class="flex flex-col justify-between bg-white shadow shadow-orange p-5 rounded-lg w-full h-full"
@@ -301,7 +301,7 @@ onMounted(() => {
                   <p
                     class="bg-orange text-white text-sm rounded mb-2 text-center"
                   >
-                    {{ getFirstItem(item?.type) }}
+                    {{ item?.gmd }}
                   </p>
                   <NuxtImg
                     src="/images/lambang-unpad.png"
@@ -312,30 +312,36 @@ onMounted(() => {
                 <div class="flex flex-col gap-2 col-span-4 mt-7">
                   <div class="federated-result-column">
                     <p>Judul</p>
-                    <p class="col-span-3">: {{ item?.title[0] ?? "Judul" }}</p>
+                    <p class="col-span-3">: {{ item?.title ?? "Judul" }}</p>
                   </div>
                   <div class="federated-result-column">
                     <p>Pengarang</p>
                     <p class="col-span-3">
-                      : {{ item?.creator?.join(", ") ?? "Pengarang" }}
+                      : {{ item?.author ?? "Pengarang" }}
                     </p>
                   </div>
                   <div class="federated-result-column">
                     <p>Subjek</p>
                     <p class="col-span-3">
-                      : {{ item?.subject?.join(", ") ?? "Subjek" }}
+                      : {{ item?.topic ?? "Subjek" }}
                     </p>
                   </div>
                   <div class="federated-result-column">
                     <p>Lokasi</p>
                     <p class="col-span-3">
-                      : {{ item?.library_name ?? "Lokasi" }}
+                      : {{ item?.node ?? "Lokasi" }}
                     </p>
                   </div>
                   <div class="federated-result-column">
-                    <p>Koleksi</p>
+                    <p>ISBN / ISSN</p>
                     <p class="col-span-3">
-                      : {{ item?.repository_name ?? "Koleksi" }}
+                      : {{ item?.isbnIssn ?? "Koleksi" }}
+                    </p>
+                  </div>
+                  <div class="federated-result-column">
+                    <p>Nomor Panggil</p>
+                    <p class="col-span-3">
+                      : {{ item?.callNumber ?? "No. Panggil" }}
                     </p>
                   </div>
                   <pre>{{ item?.id }}</pre>
@@ -343,7 +349,7 @@ onMounted(() => {
               </div>
               <div class="flex mt-2 text-center">
                 <NuxtLink
-                  :href="getLinkResult(item?.id)"
+                  :href="`https://kandaga.unpad.ac.id:8010/index.php?p=show_detail&id=${item?.id}`"
                   target="_blank"
                   class="btn bg-orange py-1 text-white w-full"
                 >

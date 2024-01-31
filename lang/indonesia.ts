@@ -38,6 +38,7 @@ export default {
   newsTitleHeader: "Berita dan Kegiatan Kandaga",
   newsDescriptionHeader:
     "Informasi terbaru mengenai layanan, fasisilitas dan kegiatan yang diselenggarakan Kandaga",
+  newestKandagaNews: "Newest Kandaga's News",
 
   // Pencarian - /search
   pencarianTerpaduTitle: "Pencarian Terpadu Kandaga",

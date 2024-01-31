@@ -38,9 +38,7 @@ const namaPenulis = `${getPenulis.first_name} ${getPenulis.last_name}`;
               ? config.public.directus.url + 'assets/' + getPenulis.avatar
               : '/images/no-image.jpg'
           "
-          height="75px"
-          width="75px"
-          class="my-1 bg-orange-50 border-3 border-orange rounded-full"
+          class="my-3 h-24 w-24 object-cover bg-orange-50 border-3 border-orange rounded-full"
         ></NuxtImg>
         <h4>Penulis: {{ namaPenulis }}</h4>
         <p class="font-semibold italic">
