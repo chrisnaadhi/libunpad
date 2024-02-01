@@ -73,6 +73,11 @@ export default defineNuxtConfig({
     authSecret: process.env.AUTH_SECRET,
     urlApiKandaga: process.env.URL_API_KANDAGA,
     directusUrl: process.env.DIRECTUS_BASE_URL,
+    dbHost: process.env.DRIZZLE_HOST,
+    dbUsername: process.env.DRIZZLE_USERNAME,
+    dbName: process.env.DRIZZLE_DATABASE,
+    dbPassword: process.env.DRIZZLE_PASSWORD,
+    dbPort: Number(process.env.DRIZZLE_PORT),
     public: {
       meiliHost: process.env.MEILI_HOST,
       meiliApiKey: process.env.MEILI_API_KEY,

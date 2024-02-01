@@ -9,11 +9,10 @@ const { locale } = useI18n();
     <nav class="navbar">
       <NuxtLink :to="locale === 'en' ? '/en' : '/'">
         <nuxt-img
-          src="/images/kandaga-transp.png"
+          src="/images/kandaga-logo-new.png"
           class="logo"
           alt="Logo Perpustakaan"
-          width="100%"
-          height="128px"
+          height="512px"
           format="webp"
         />
       </NuxtLink>
@@ -32,7 +31,7 @@ const { locale } = useI18n();
 .wrapper {
   margin: 0 auto;
   background-color: rgba(255, 255, 255, 0.95);
-  --at-apply: ma sticky top-0 z-3 w-full;
+  --at-apply: ma sticky top-0 z-5 w-full shadow;
 }
 
 .navbar {
@@ -40,7 +39,7 @@ const { locale } = useI18n();
 }
 
 .logo {
-  --at-apply: max-w-50;
+  --at-apply: pl-3 max-w-50 md:(pl-0 max-w-75);
 }
 
 .jamlayanan-enter-active,

@@ -38,8 +38,8 @@ function openPreview() {
     </div> -->
     <div class="content-section">
       <NuxtLink :to="linkAccess">
-        <h6 class="transition-all-500 hover:(text-orange)" :title="titleHover.toUpperCase()">
-          {{ title.toUpperCase() }}
+        <h6 class="transition-all-500 hover:(text-orange)" :title="titleHover?.toUpperCase()">
+          {{ title?.toUpperCase() }}
         </h6>
       </NuxtLink>
       <h6 class="text-sm italic">{{ npm }}</h6>

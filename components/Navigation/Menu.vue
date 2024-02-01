@@ -26,7 +26,9 @@ const { locale } = useI18n();
       :dropdown-menu="panduan"
       menu-name="panduan"
     />
-    <li>{{ locale === "en" ? "Contact Us" : "Kontak Kami" }}</li>
+    <NuxtLink to="/kontak" class="text-dark no-underline">
+      {{ locale === "en" ? "Contact Us" : "Kontak Kami" }}
+    </NuxtLink>
   </ul>
 </template>
 

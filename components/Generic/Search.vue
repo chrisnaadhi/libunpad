@@ -28,9 +28,13 @@ const limitChars = (str) => {
 </script>
 
 <template>
-  <form @submit.prevent="submitSearch" class="w-full relative" role="search">
-    <div class="flex mt-2 mx-2 xl:(ml-0 mr-25)">
-      <div class="relative w-full mb-3">
+  <form
+    @submit.prevent="submitSearch"
+    class="w-full relative flex"
+    role="search"
+  >
+    <div class="flex items-center justify-center mt-2 mx-2 w-full xl:(ml-0)">
+      <div class="relative w-full flex items-center justify-center mb-3">
         <div class="absolute top-4 left-3">
           <svg
             aria-hidden="true"

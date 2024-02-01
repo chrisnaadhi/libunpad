@@ -1,10 +1,10 @@
 <script setup>
 const { locale } = useI18n();
-const switchLocalePath = useSwitchLocalePath();
 </script>
 
 <template>
-  <section class="container ma bg-white mb-15">
+  <section class="container ma bg-white mb-15 h-full">
+    <div class="img-background" />
     <div class="hero-space">
       <div class="hero-left">
         <h2 class="text-xl md:text-4xl text-gray-700">
@@ -20,24 +20,26 @@ const switchLocalePath = useSwitchLocalePath();
         <p class="py-2 text-sm xl:(mr-6 pr-8)">
           {{ $t("homeDescription") }}
         </p>
-        <GenericSearch />
-        <div class="container flex justify-center w-full xl:justify-start">
-          <NuxtLink
-            :to="locale === 'en' ? '/en/search' : '/search'"
-            class="btn tentang"
-          >
-            {{ $t("searchPage") }}
-          </NuxtLink>
-          <NuxtLink
-            :to="locale === 'en' ? '/en/koleksi' : '/koleksi'"
-            class="btn bantuan"
-          >
-            {{ $t("ourCollection") }}
-          </NuxtLink>
-        </div>
       </div>
-      <div class="hero-right">
+      <!-- <div class="hero-right">
         <HeroCarousel />
+      </div> -->
+    </div>
+    <div class="relative z-2 mt">
+      <GenericSearch />
+      <div class="container flex justify-center w-full xl:justify-start">
+        <NuxtLink
+          :to="locale === 'en' ? '/en/search' : '/search'"
+          class="btn tentang"
+        >
+          {{ $t("searchPage") }}
+        </NuxtLink>
+        <NuxtLink
+          :to="locale === 'en' ? '/en/koleksi' : '/koleksi'"
+          class="btn bantuan"
+        >
+          {{ $t("ourCollection") }}
+        </NuxtLink>
       </div>
     </div>
   </section>
@@ -45,11 +47,19 @@ const switchLocalePath = useSwitchLocalePath();
 
 <style scoped>
 .hero-space {
-  --at-apply: flex flex-col-reverse mx-3 max-w-7xl xl:(flex-row items-center justify-center ma p-15);
+  --at-apply: bg-white opacity-70 flex flex-col-reverse mx-3 max-w-7xl relative z-3 xl:(flex-row items-center justify-center py-5 mx-65);
+}
+
+.img-background {
+  background-image: url('images/kandaga-bg.webp');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  --at-apply: h-full max-h-lg w-full left-0 absolute z-1 opacity-25;
 }
 
 .hero-left {
-  --at-apply: flex flex-col items-center text-center xl:(text-left items-unset);
+  --at-apply: flex flex-col items-center text-center justify-center px-10 pb-20;
 }
 
 .hero-right {
