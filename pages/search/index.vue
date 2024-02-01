@@ -1,6 +1,4 @@
 <script setup>
-import { getLinkResult } from "~/composables/utilsFunction";
-
 const suggestion = ref("");
 const search = useSearchFunction();
 const scopus = useSearchScopus();
@@ -35,12 +33,6 @@ const submitSearch = async (keyword) => {
       search.baseURLSearch + keyword
     );
 
-    const { data: kandagaRes } = await useFetch(search.baseURLKandaga, {
-      query: {
-        allfields: keyword,
-      },
-    });
-
     const { data: ulimsData } = await useFetch("/api/v1/koleksi/ulims", {
       query: {
         search: keyword,
@@ -50,9 +42,6 @@ const submitSearch = async (keyword) => {
     search.isResult = true;
     search.wikipediaDefinition = getKeywordDefinition?.value?.query?.search[0];
 
-    if (kandagaRes.value) {
-      search.kandagaRes = JSON.parse(kandagaRes.value.data);
-    }
     if (ulimsData.value) {
       search.ulimsRes = ulimsData.value.results;
     }
@@ -289,7 +278,7 @@ onMounted(() => {
       <h3>Kandaga Federated Search</h3>
       <div
         v-if="loadingFederated === false"
-        class="flex flex-col gap-3 mt-3 lg:(grid grid-cols-2)"
+        class="flex flex-col gap-3 mt-3 lg:(grid grid-cols-3)"
       >
         <div v-for="item in search.ulimsRes">
           <GenericBaseCard>
@@ -297,7 +286,7 @@ onMounted(() => {
               class="flex flex-col justify-between bg-white shadow shadow-orange p-5 rounded-lg w-full h-full"
             >
               <div class="grid grid-cols-5 gap-3">
-                <div class="py-2 w-full">
+                <div class="py-2 w-full col-span-1">
                   <p
                     class="bg-orange text-white text-sm rounded mb-2 text-center"
                   >
@@ -305,7 +294,7 @@ onMounted(() => {
                   </p>
                   <NuxtImg
                     src="/images/lambang-unpad.png"
-                    class="w-25 w-full max-h-80 px-8 py-15 border border-orange"
+                    class="w-md max-h-80 px-3 py-12 border border-orange"
                     format="webp"
                   />
                 </div>
@@ -335,7 +324,7 @@ onMounted(() => {
                   <div class="federated-result-column">
                     <p>ISBN / ISSN</p>
                     <p class="col-span-3">
-                      : {{ item?.isbnIssn ?? "Koleksi" }}
+                      : {{ item?.isbnIssn ?? "-" }}
                     </p>
                   </div>
                   <div class="federated-result-column">

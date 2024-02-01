@@ -3,36 +3,42 @@ import { defineStore } from "pinia";
 export const menuContent = () => {
   const tentang = [
     {
+      id: 1,
       name: "Kandaga",
       url: "#",
       nameEN: "Kandaga",
       urlEN: "/en#",
     },
     {
+      id: 2,
       name: "Profil",
       url: "#",
       nameEN: "Profile",
       urlEN: "/en#",
     },
     {
+      id: 3,
       name: "Fasilitas",
       url: "#",
       nameEN: "Facilities",
       urlEN: "/en#",
     },
     {
+      id: 4,
       name: "Regulasi",
       url: "#",
       nameEN: "Regulation",
       urlEN: "/en#",
     },
     {
+      id: 5,
       name: "Struktur Organisasi",
       url: "#",
       nameEN: "Organization Structure",
       urlEN: "/en#",
     },
     {
+      id: 6,
       name: "Berita & Kegiatan",
       url: "/berita",
       nameEN: "News & Event",
@@ -42,30 +48,35 @@ export const menuContent = () => {
 
   const layanan = [
     {
+      id: 7,
       name: "Layanan Daring",
       url: "#",
       nameEN: "Online Service",
       urlEN: "/en#",
     },
     {
+      id: 8,
       name: "Layanan Luring",
       url: "#",
       nameEN: "Offline Service",
       urlEN: "/en#",
     },
     {
+      id: 9,
       name: "Layanan Administratif",
       url: "/pengajuan",
       nameEN: "Administrative Service",
       urlEN: "/en/pengajuan",
     },
     {
+      id: 10,
       name: "Layanan Riset",
       url: "#",
       nameEN: "Research Assist",
       urlEN: "/en#",
     },
     {
+      id: 11,
       name: "Visitor",
       url: "/visitor",
       nameEN: "Visitor",
@@ -75,42 +86,49 @@ export const menuContent = () => {
 
   const koleksi = [
     {
+      id: 12,
       name: "Galeri",
       url: "/gallery",
       nameEN: "Gallery",
       urlEN: "/en/gallery",
     },
     {
+      id: 13,
       name: "Perpustakaan",
       url: "/library",
       nameEN: "Library",
       urlEN: "/en/library",
     },
     {
+      id: 14,
       name: "Arsip",
       url: "/records",
       nameEN: "Archive",
       urlEN: "/en/records",
     },
     {
+      id: 15,
       name: "Museum",
       url: "/museum",
       nameEN: "Museum",
       urlEN: "/en/museum",
     },
     {
+      id: 16,
       name: "Repositori",
       url: "/koleksi/repository",
       nameEN: "Repository",
       urlEN: "/en/koleksi/repository",
     },
     {
+      id: 17,
       name: "E-Teater",
       url: "/e-teater",
       nameEN: "E-Theater",
       urlEN: "/en/e-teater",
     },
     {
+      id: 18,
       name: "Koleksi Hayati",
       url: "/koleksi-hayati",
       nameEN: "Biological Collection",
@@ -120,30 +138,35 @@ export const menuContent = () => {
 
   const panduan = [
     {
+      id: 19,
       name: "Layanan & Fasilitas",
       url: "/panduan",
       nameEN: "Services & Facilities",
       urlEN: "/en/panduan",
     },
     {
+      id: 20,
       name: "Pustakawan Subjek",
       url: "#",
       nameEN: "Subject Librarians",
       urlEN: "/en#",
     },
     {
+      id: 21,
       name: "Informasi Akademik",
       url: "#",
       nameEN: "Academic Information",
       urlEN: "/en#",
     },
     {
+      id: 22,
       name: "Kegiatan Belajar Mengajar",
       url: "#",
       nameEN: "Teaching & Learning Guide",
       urlEN: "/en#",
     },
     {
+      id: 23,
       name: "FAQ",
       url: "#",
       nameEN: "FAQ",
