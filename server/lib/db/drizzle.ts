@@ -1,7 +1,7 @@
 import { drizzle } from "drizzle-orm/mysql2";
 import mysql from "mysql2/promise";
 
-const runtimeConfig = useRuntimeConfig()
+const runtimeConfig = useRuntimeConfig();
 
 const connection = await mysql.createConnection({
   host: runtimeConfig.dbHost,
@@ -11,4 +11,4 @@ const connection = await mysql.createConnection({
   port: Number(runtimeConfig.dbPort),
 });
 
-export const db = drizzle(connection);
+// export const db = drizzle(connection);

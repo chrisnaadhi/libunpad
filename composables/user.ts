@@ -278,6 +278,8 @@ export const daftarNamaFakultasUnpad = defineStore("namaFakultas", () => {
         let bebasPustakaFakultas = hasil?.namaFakultas.split(" ");
         bebasPustakaFakultas.shift();
         return bebasPustakaFakultas.join(" ");
+      } else {
+        return hasil?.namaFakultas;
       }
     } else {
       return hasil?.namaFakultas;

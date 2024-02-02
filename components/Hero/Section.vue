@@ -3,7 +3,7 @@ const { locale } = useI18n();
 </script>
 
 <template>
-  <section class="container ma bg-white mb-15 h-full">
+  <section class="max-w-6xl ma bg-white mb-15 h-full">
     <div class="img-background" />
     <div class="hero-space">
       <div class="hero-left">
@@ -25,18 +25,18 @@ const { locale } = useI18n();
         <HeroCarousel />
       </div> -->
     </div>
-    <div class="relative z-2 mt">
+    <div class="relative z-2 mt max-w-5xl ma mt--10 px-10 pb-10 z-4">
       <GenericSearch />
-      <div class="container flex justify-center w-full xl:justify-start">
+      <div class="flex justify-center w-full text-center xl:justify-start">
         <NuxtLink
           :to="locale === 'en' ? '/en/search' : '/search'"
-          class="btn tentang"
+          class="btn tentang w-full"
         >
           {{ $t("searchPage") }}
         </NuxtLink>
         <NuxtLink
           :to="locale === 'en' ? '/en/koleksi' : '/koleksi'"
-          class="btn bantuan"
+          class="btn bantuan w-full"
         >
           {{ $t("ourCollection") }}
         </NuxtLink>
@@ -47,19 +47,20 @@ const { locale } = useI18n();
 
 <style scoped>
 .hero-space {
-  --at-apply: bg-white opacity-70 flex flex-col-reverse mx-3 max-w-7xl relative z-3 xl:(flex-row items-center justify-center py-5 mx-65);
+  --at-apply: bg-white opacity-75 flex flex-col-reverse max-w-7xl relative z-3 rounded-bl-xl rounded-br-xl xl:(flex-row items-center justify-center py-5);
 }
 
 .img-background {
-  background-image: url('images/kandaga-bg.webp');
+  background-image: url('/images/kandaga-bg.webp');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  --at-apply: h-full max-h-lg w-full left-0 absolute z-1 opacity-25;
+  --at-apply: h-full max-h-lg w-full left-0 absolute z-1 opacity-25 bg-white;
+  box-shadow: 0 0 5px 10px bg-white;
 }
 
 .hero-left {
-  --at-apply: flex flex-col items-center text-center justify-center px-10 pb-20;
+  --at-apply: flex flex-col items-center text-center justify-center px-10 pb-10;
 }
 
 .hero-right {
@@ -72,10 +73,10 @@ const { locale } = useI18n();
 }
 
 .tentang {
-  --at-apply: bg-orange px-6 py-2 text-white font-600 no-underline mr-2 md:w-auto;
+  --at-apply: bg-orange px-6 py-2 text-white font-600 no-underline mr-2;
 }
 
 .bantuan {
-  --at-apply: bg-gray-2 border px-6 py-2 text-gray-7 font-600 no-underline ml-2 transition-all-500 md:w-auto hover:(bg-gray-6 text-white);
+  --at-apply: bg-orange-1 border px-6 py-2 text-gray-7 font-600 no-underline ml-2 transition-all-500 hover:(bg-gray-6 text-white);
 }
 </style>
