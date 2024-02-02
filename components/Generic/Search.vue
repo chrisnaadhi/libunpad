@@ -33,7 +33,7 @@ const limitChars = (str) => {
     class="w-full relative flex"
     role="search"
   >
-    <div class="flex items-center justify-center mt-2 mx-2 w-full xl:(ml-0)">
+    <div class="flex items-center justify-center mt-2 w-full xl:(ml-0)">
       <div class="relative w-full flex items-center justify-center mb-3">
         <div class="absolute top-4 left-3">
           <svg
@@ -71,7 +71,7 @@ const limitChars = (str) => {
           </button>
           <button
             type="submit"
-            class="btn bg-orange text-white"
+            class="btn bg-orange text-white w-20"
             @submit.prevent="submitSearch"
           >
             {{ $t("search") }}
