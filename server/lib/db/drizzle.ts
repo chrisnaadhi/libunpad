@@ -11,4 +11,4 @@ const connection = await mysql.createConnection({
   port: Number(runtimeConfig.dbPort),
 });
 
-// export const db = drizzle(connection);
+export const db = drizzle(connection);
