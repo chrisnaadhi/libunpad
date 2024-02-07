@@ -8,7 +8,7 @@ const { locale } = useI18n();
   <div class="wrapper">
     <nav class="navbar">
       <NuxtLink :to="locale === 'en' ? '/en' : '/'">
-        <nuxt-img
+        <NuxtImg
           src="/images/kandaga-logo-new.png"
           class="logo"
           alt="Logo Perpustakaan"
@@ -31,7 +31,7 @@ const { locale } = useI18n();
 .wrapper {
   margin: 0 auto;
   background-color: rgba(255, 255, 255, 0.95);
-  --at-apply: ma sticky top-0 z-5 w-full shadow;
+  --at-apply: ma sticky top-0 z-6 w-full shadow;
 }
 
 .navbar {
