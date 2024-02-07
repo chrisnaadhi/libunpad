@@ -35,7 +35,7 @@ const limitChars = (str) => {
   >
     <div class="flex items-center justify-center mt-2 w-full xl:(ml-0)">
       <div class="relative w-full flex items-center justify-center mb-3">
-        <div class="absolute top-4 left-3">
+        <div class="absolute top-4 left-3 z-3">
           <svg
             aria-hidden="true"
             class="w-6 h-6 text-orange dark:text-gray-400"
@@ -61,7 +61,7 @@ const limitChars = (str) => {
           role="searchbox"
           :placeholder="$t('searchOurCollection')"
         />
-        <div class="absolute top-2 right-2">
+        <div class="absolute top-2 right-2 z-3">
           <button
             type="button"
             v-show="search.isResult"
@@ -127,11 +127,11 @@ const limitChars = (str) => {
 
 <style scoped>
 .input-form {
-  --at-apply: min-w-full h-14 pl-10 pr-20 py-3 md:pr-30 border-3 border-orange rounded-lg focus:(shadow-md outline-none);
+  --at-apply: min-w-full h-14 pl-10 pr-20 py-3 md:pr-30 border-3 border-orange rounded-lg z-2 focus:(shadow-md outline-none);
 }
 
 .search-result {
-  --at-apply: absolute w-full z-1;
+  --at-apply: absolute w-full pt-90 z-1;
 }
 
 .content-result {

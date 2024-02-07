@@ -139,7 +139,7 @@ const viewStateMuseum = ref(false);
 }
 
 .background-block {
-  --at-apply: w-full text-dark bg-white py-5 transition-all-500 flex flex-col items-center justify-center px-5 cursor-default z-5 xl:(w-6xl mt--16 rounded-xl) hover:(bg-orange-5 text-white transition-all-500) ;
+  --at-apply: w-full text-dark bg-white py-5 transition-all-500 flex flex-col items-center justify-center px-5 cursor-default z-2 xl:(w-6xl mt--16 rounded-xl) hover:(bg-orange-5 text-white transition-all-500) ;
 }
 
 .background-block:hover .tanggal {

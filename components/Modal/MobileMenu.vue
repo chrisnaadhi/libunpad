@@ -46,7 +46,7 @@ const viewPanduan = () => {
     <div class="menu-wrapper">
       <div class="flex flex-col pb-2 pl-10">
         <NuxtLink to="/" class="menu-list hover-menu">Beranda</NuxtLink>
-        <p class="menu-list hover-menu" @click="viewTentang">
+        <p class="menu-list" :class="menu.isTentangOpen ? 'text-orange' : ''" @click="viewTentang">
           Tentang
           <span v-if="menu.isTentangOpen"> &#8628;</span>
           <span v-else> &#8594;</span>
@@ -58,7 +58,7 @@ const viewPanduan = () => {
         >
           <NuxtLink :to="list.url" class="hover-menu">{{ list.name }}</NuxtLink>
         </div>
-        <p class="menu-list" @click="viewLayanan">
+        <p class="menu-list" :class="menu.isLayananOpen ? 'text-orange' : ''" @click="viewLayanan">
           Layanan
           <span v-if="menu.isLayananOpen"> &#8628;</span>
           <span v-else> &#8594;</span>
@@ -70,7 +70,7 @@ const viewPanduan = () => {
         >
           <NuxtLink :to="list.url" class="hover-menu">{{ list.name }}</NuxtLink>
         </div>
-        <p class="menu-list" @click="viewKoleksi">
+        <p class="menu-list" :class="menu.isKoleksiOpen ? 'text-orange' : ''" @click="viewKoleksi">
           Koleksi
           <span v-if="menu.isKoleksiOpen"> &#8628;</span>
           <span v-else> &#8594;</span>
@@ -82,7 +82,7 @@ const viewPanduan = () => {
         >
           <NuxtLink :to="list.url" class="hover-menu">{{ list.name }}</NuxtLink>
         </div>
-        <p class="menu-list" @click="viewPanduan">
+        <p class="menu-list" :class="menu.isPanduanOpen ? 'text-orange' : ''" @click="viewPanduan">
           Panduan
           <span v-if="menu.isPanduanOpen"> &#8628;</span>
           <span v-else> &#8594;</span>
@@ -121,7 +121,7 @@ const viewPanduan = () => {
 
 <style scoped>
 .layer {
-  --at-apply: fixed mt--12 h-full w-full bg-white/95 transition-all-500 z-2;
+  --at-apply: fixed mt--12 h-full w-full bg-white/95 transition-all-500 z-5;
 }
 .menu-wrapper {
   --at-apply: w-full flex flex-col justify-center;

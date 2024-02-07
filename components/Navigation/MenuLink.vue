@@ -1,10 +1,6 @@
 <script setup>
 const props = defineProps(["menuTitle", "dropdownMenu", "menuName"]);
 const menuState = navigationMenuBar();
-function clockwork() {
-  console.log(menuState.viewedMenuName);
-  console.log(menuState.viewState);
-}
 </script>
 
 <template>
@@ -27,7 +23,7 @@ function clockwork() {
       @mouseenter="menuState.viewState = true"
       @mouseleave="menuState.leaveDropdown"
     >
-      <NavigationContent :menus="dropdownMenu" />
+      <NavigationContent :menus="dropdownMenu" :chosen="menuTitle" />
     </span>
   </li>
 </template>
