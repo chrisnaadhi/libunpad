@@ -7,12 +7,7 @@ const data = ref("Unggah Mandiri Karya Ilmiah");
     <h1 class="my-10">{{ data }}</h1>
     <div class="grid grid-cols-2 justify-center">
       <div class="flex justify-center">
-        <NuxtImg
-          src="/illustration/undraw_Social.png"
-          format="webp"
-          width="256px"
-          height="256px"
-        />
+        <NuxtImg src="/illustration/undraw_Social.png" format="webp" width="256px" height="256px" />
       </div>
       <div>
         <h3>Unggah Mandiri</h3>
@@ -26,16 +21,10 @@ const data = ref("Unggah Mandiri Karya Ilmiah");
         </p>
         <div class="my-3">
           <div class="flex gap-3 w-full">
-            <NuxtLink
-              href="unggah-mandiri/panduan/"
-              class="btn bg-orange text-white py-1 w-full"
-            >
+            <NuxtLink href="unggah-mandiri/panduan/" class="btn bg-orange text-white py-1 w-full">
               Panduan
             </NuxtLink>
-            <NuxtLink
-              href="unggah-mandiri/submit/"
-              class="btn bg-orange text-white py-1 w-full"
-            >
+            <NuxtLink href="unggah-mandiri/submit/" class="btn bg-orange text-white py-1 w-full">
               Unggah
             </NuxtLink>
           </div>

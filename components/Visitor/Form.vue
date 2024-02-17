@@ -84,14 +84,14 @@ const addVisitor = async () => {
       institusi: validated.value
         ? identity.value.nama_institusi
         : isNumeric(userData.value)
-        ? "Belum mendaftar Keanggotaan"
-        : institusi.value,
+          ? "Belum mendaftar Keanggotaan"
+          : institusi.value,
       nama_ruangan: ruangan.value,
       identitas_anggota: validated.value
         ? identity.value.npm
         : isNumeric(userData.value)
-        ? 54321
-        : 12345,
+          ? 54321
+          : 12345,
     };
 
     await createItems<Item>({ collection: "data_kunjungan", items });
@@ -133,14 +133,7 @@ onMounted(() => {
     <form @submit.prevent="addVisitor" autocomplete="off">
       <div class="input-block">
         <label for="nomor">NPM / NIP / Nama Lengkap :</label>
-        <input
-          type="text"
-          id="nomor"
-          v-model="userData"
-          autofocus
-          min="5"
-          ref="identitas"
-        />
+        <input type="text" id="nomor" v-model="userData" autofocus min="5" ref="identitas" />
         <p class="text-sm italic text-gray-400">
           Apabila berasal dari luar Unpad, silahkan cantumkan nama dari
           institusinya juga. <br />
@@ -166,21 +159,12 @@ onMounted(() => {
         </select>
       </div>
 
-      <button
-        class="btn text-white w-xl py-3"
-        :disabled="!userData"
-        :class="
-          !userData ? 'cursor-not-allowed bg-gray' : 'cursor-pointer bg-orange'
-        "
-        @click.prevent="addVisitor"
-      >
+      <button class="btn text-white w-xl py-3" :disabled="!userData" :class="!userData ? 'cursor-not-allowed bg-gray' : 'cursor-pointer bg-orange'
+        " @click.prevent="addVisitor">
         Masuk
       </button>
     </form>
-    <VisitorVirtualKeyboard
-      v-on:choose="focusToIdentitas"
-      v-on:writing="focusToIdentitas"
-    />
+    <VisitorVirtualKeyboard v-on:choose="focusToIdentitas" v-on:writing="focusToIdentitas" />
     <div class="fixed right-0 bottom-0">
       <button class="btn bg-orange" @click="backToIndex">Reset Ruangan</button>
     </div>

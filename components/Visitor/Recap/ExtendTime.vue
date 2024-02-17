@@ -53,16 +53,16 @@ const profilPetugas = await getUserById({
       <span class="font-600 text-orange-6">
         {{
           getPetugasExtendedTimeService[0] === undefined
-            ? "Tidak ada Petugas"
-            : `${profilPetugas.first_name} ${profilPetugas.last_name}`
+          ? "Tidak ada Petugas"
+          : `${profilPetugas.first_name} ${profilPetugas.last_name}`
         }}
       </span>
     </h3>
     <h1>
       {{
         getExtendedTimeVisitor.meta.filter_count === 0
-          ? "Belum ada Data!"
-          : getExtendedTimeVisitor.meta.filter_count
+        ? "Belum ada Data!"
+        : getExtendedTimeVisitor.meta.filter_count
       }}
     </h1>
     <p class="italic" v-show="getExtendedTimeVisitor.meta.filter_count !== 0">

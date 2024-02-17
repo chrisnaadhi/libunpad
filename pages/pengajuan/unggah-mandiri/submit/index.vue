@@ -39,10 +39,7 @@ const data = ref("Submit Unggah Mandiri");
         </NuxtLink>
       </div>
       <div>
-        <NuxtLink
-          href="/pengajuan/unggah-mandiri"
-          class="btn bg-orange text-white py-0"
-        >
+        <NuxtLink href="/pengajuan/unggah-mandiri" class="btn bg-orange text-white py-0">
           &leftarrow; Kembali
         </NuxtLink>
       </div>

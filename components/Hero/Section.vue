@@ -28,16 +28,10 @@ const { locale } = useI18n();
     <div class="relative z-2 mt max-w-5xl ma mt--10 px-10 pb-30 z-4">
       <GenericSearch />
       <div class="flex justify-center w-full text-center xl:justify-start">
-        <NuxtLink
-          :to="locale === 'en' ? '/en/search' : '/search'"
-          class="btn tentang w-full"
-        >
+        <NuxtLink :to="locale === 'en' ? '/en/search' : '/search'" class="btn tentang w-full">
           {{ $t("searchPage") }}
         </NuxtLink>
-        <NuxtLink
-          :to="locale === 'en' ? '/en/koleksi' : '/koleksi'"
-          class="btn bantuan w-full"
-        >
+        <NuxtLink :to="locale === 'en' ? '/en/koleksi' : '/koleksi'" class="btn bantuan w-full">
           {{ $t("ourCollection") }}
         </NuxtLink>
       </div>

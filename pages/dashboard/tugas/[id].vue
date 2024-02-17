@@ -91,8 +91,8 @@ definePageMeta({
       <p class="text-3xl font-600">
         {{
           getPekerjaan.kriteria_tugas
-            ? getPekerjaan.kriteria_tugas.toUpperCase()
-            : "Belum ditentukan"
+          ? getPekerjaan.kriteria_tugas.toUpperCase()
+          : "Belum ditentukan"
         }}
       </p>
       <p>Periode: {{ getPekerjaan.periode }}</p>
@@ -122,11 +122,7 @@ definePageMeta({
       <div class="form-edit">
         <label for="perkembangan-tugas">Perkembangan Tugas :</label>
         <div class="flex items-center">
-          <input
-            type="text"
-            class="min-w-10 max-w-xl"
-            v-model="perkembanganTugas"
-          />
+          <input type="text" class="min-w-10 max-w-xl" v-model="perkembanganTugas" />
           <p class="pl-1 text-xl">
             / {{ getPekerjaan.jumlah_rencana ?? "Belum ditentukan" }}
           </p>
@@ -137,13 +133,8 @@ definePageMeta({
         <input type="text" v-model="linkTugas" />
       </div>
       <button type="submit" class="btn bg-orange text-white">Update</button>
-      <button
-        type="button"
-        class="btn text-white ml-3"
-        :class="isWajib ? 'bg-gray cursor-not-allowed' : 'bg-red'"
-        @click="deleteTugas"
-        :disabled="isWajib"
-      >
+      <button type="button" class="btn text-white ml-3" :class="isWajib ? 'bg-gray cursor-not-allowed' : 'bg-red'"
+        @click="deleteTugas" :disabled="isWajib">
         Hapus
       </button>
     </form>

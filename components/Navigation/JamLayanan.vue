@@ -42,10 +42,7 @@ onMounted(() => {
         <h1 class="font-600 text-sm md:text-xl">{{ perpus }}</h1>
         <p class="display-hari">Hari ini</p>
         <p class="display-jam">
-          <span
-            class="text-red-6 text-sm font-600"
-            v-if="cekHariLibur() === 'Tutup'"
-          >
+          <span class="text-red-6 text-sm font-600" v-if="cekHariLibur() === 'Tutup'">
             Tutup
           </span>
           <span class="text-green-6 text-lg font-600" v-else>
@@ -67,11 +64,13 @@ onMounted(() => {
 
 <style scoped>
 .layanan-wrapper {
-  --at-apply: container ma flex flex-wrap items-center justify-evenly px-5 py-5 md:(flex-row;)
+  --at-apply: container ma flex flex-wrap items-center justify-evenly px-5 py-5 md:(flex-row; )
 }
+
 .display-hari {
   --at-apply: text-sm md:text-lg;
 }
+
 .link-layanan {
   --at-apply: max-w-40 text-sm text-orange-6 underline cursor-pointer;
 }

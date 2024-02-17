@@ -6,26 +6,14 @@ const { locale } = useI18n();
 
 <template>
   <ul class="nav-group">
-    <NavigationMenuLink
-      :menu-title="locale === 'en' ? 'About' : 'Tentang'"
-      :dropdown-menu="tentang"
-      menu-name="tentang"
-    />
-    <NavigationMenuLink
-      :menu-title="locale === 'en' ? 'Service' : 'Layanan'"
-      :dropdown-menu="layanan"
-      menu-name="layanan"
-    />
-    <NavigationMenuLink
-      :menu-title="locale === 'en' ? 'Collection' : 'Koleksi'"
-      :dropdown-menu="koleksi"
-      menu-name="koleksi"
-    />
-    <NavigationMenuLink
-      :menu-title="locale === 'en' ? 'Guides' : 'Panduan'"
-      :dropdown-menu="panduan"
-      menu-name="panduan"
-    />
+    <NavigationMenuLink :menu-title="locale === 'en' ? 'About' : 'Tentang'" :dropdown-menu="tentang"
+      menu-name="tentang" />
+    <NavigationMenuLink :menu-title="locale === 'en' ? 'Service' : 'Layanan'" :dropdown-menu="layanan"
+      menu-name="layanan" />
+    <NavigationMenuLink :menu-title="locale === 'en' ? 'Collection' : 'Koleksi'" :dropdown-menu="koleksi"
+      menu-name="koleksi" />
+    <NavigationMenuLink :menu-title="locale === 'en' ? 'Guides' : 'Panduan'" :dropdown-menu="panduan"
+      menu-name="panduan" />
     <NuxtLink to="/kontak" class="hidden text-dark no-underline xl:block">
       {{ locale === "en" ? "Contact Us" : "Kontak Kami" }}
     </NuxtLink>

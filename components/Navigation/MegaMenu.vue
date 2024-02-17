@@ -10,11 +10,7 @@ defineProps({
 <template>
   <section>
     <div class="flex items-start justify-between gap-4">
-      <NuxtImg
-        src="/images/teater1.png"
-        format="webp"
-        class="max-w-full max-h-50 object-cover rounded-xl"
-      />
+      <NuxtImg src="/images/teater1.png" format="webp" class="max-w-full max-h-50 object-cover rounded-xl" />
       <div>
         <slot />
         <p>

@@ -48,10 +48,7 @@ const limitChars = (chars: any) => {
       <NuxtLink :to="urlBook" class="action-btn bg-orange xl:(my-0 mr-4)">
         Detail
       </NuxtLink>
-      <NuxtLink
-        :to="urlBook"
-        class="action-btn border bg-gray-3 hover:bg-orange xl:(my-0 ml-4)"
-      >
+      <NuxtLink :to="urlBook" class="action-btn border bg-gray-3 hover:bg-orange xl:(my-0 ml-4)">
         Pinjam
       </NuxtLink>
     </div>

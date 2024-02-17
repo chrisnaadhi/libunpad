@@ -33,9 +33,11 @@ useHead({
 .background-block {
   --at-apply: flex flex-col items-center min-w-full;
 }
+
 .heading-block {
   --at-apply: flex flex-col items-center;
 }
+
 .footer-section {
   --at-apply: w-full;
 }

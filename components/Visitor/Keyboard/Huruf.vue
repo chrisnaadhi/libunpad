@@ -43,14 +43,8 @@ const useShift = () => {
 
 <template>
   <section class="w-full">
-    <div
-      class="grid grid-cols-10 gap-1 text-center mx-2 my-5 text-xs sm:(gap-3 text-base)"
-    >
-      <span
-        class="kolom"
-        v-for="key in keycaps"
-        @click="addCharacters(uppercase, key)"
-      >
+    <div class="grid grid-cols-10 gap-1 text-center mx-2 my-5 text-xs sm:(gap-3 text-base)">
+      <span class="kolom" v-for="key in keycaps" @click="addCharacters(uppercase, key)">
         {{ uppercase ? key.toUpperCase() : key }}
       </span>
       <span class="kolom col-span-2" @click="useShift">Shift</span>
@@ -67,6 +61,7 @@ const useShift = () => {
 .kolom {
   --at-apply: bg-orange-400 rounded-md p-2 cursor-pointer;
 }
+
 .kolom:active {
   --at-apply: bg-dark text-white drop-shadow shadow-xl;
 }

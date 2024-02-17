@@ -22,24 +22,16 @@ const namaPenulis = `${getPenulis.first_name} ${getPenulis.last_name}`;
 
 <template>
   <section>
-    <div
-      class="header"
-      :style="`background-image: url(${
-        config.public.directus.url + 'assets/' + berita[0].gambar_unggulan
-      })`"
-    >
+    <div class="header" :style="`background-image: url(${config.public.directus.url + 'assets/' + berita[0].gambar_unggulan
+      })`">
       <div class="absolute mt--10 w-full h-full bg-dark/75"></div>
       <div class="flex flex-col items-center z-1">
         <h6>Berita</h6>
         <h1 class="text-center">{{ berita[0].judul }}</h1>
-        <NuxtImg
-          :src="
-            getPenulis.avatar
-              ? config.public.directus.url + 'assets/' + getPenulis.avatar
-              : '/images/no-image.jpg'
-          "
-          class="my-3 h-24 w-24 object-cover bg-orange-50 border-3 border-orange rounded-full"
-        ></NuxtImg>
+        <NuxtImg :src="getPenulis.avatar
+            ? config.public.directus.url + 'assets/' + getPenulis.avatar
+            : '/images/no-image.jpg'
+          " class="my-3 h-24 w-24 object-cover bg-orange-50 border-3 border-orange rounded-full"></NuxtImg>
         <h4>Penulis: {{ namaPenulis }}</h4>
         <p class="font-semibold italic">
           Diterbitkan: {{ convertTimeZone(berita[0].date_created) }}

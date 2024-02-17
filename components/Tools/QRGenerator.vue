@@ -53,30 +53,18 @@ function downloadQR() {
   </p>
   <div class="input-area">
     <input type="text" name="textqr" id="" v-model="textForQR" />
-    <button
-      class="generate-btn"
-      :class="!textForQR ? 'bg-gray cursor-not-allowed' : 'bg-orange'"
-      @click="generateQR"
-      :disabled="!textForQR"
-    >
+    <button class="generate-btn" :class="!textForQR ? 'bg-gray cursor-not-allowed' : 'bg-orange'" @click="generateQR"
+      :disabled="!textForQR">
       Generate
     </button>
   </div>
   <div class="qr-area" ref="generatedArea"></div>
   <div class="my-5 flex items-center max-w-72 ma gap-2">
-    <button
-      :class="textForQR ? 'download-btn' : 'btn-disabled'"
-      ref="download"
-      @click="downloadQR"
-      :disabled="!textForQR"
-    >
+    <button :class="textForQR ? 'download-btn' : 'btn-disabled'" ref="download" @click="downloadQR"
+      :disabled="!textForQR">
       Download
     </button>
-    <button
-      :class="textForQR ? 'reset-btn' : 'btn-disabled'"
-      @click="clearQR"
-      :disabled="!textForQR"
-    >
+    <button :class="textForQR ? 'reset-btn' : 'btn-disabled'" @click="clearQR" :disabled="!textForQR">
       Reset
     </button>
   </div>

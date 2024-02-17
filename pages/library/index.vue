@@ -27,17 +27,9 @@ const path = useRoute();
       <div class="p-4 flex flex-col items-center">
         <h3>Koleksi {{ libraryObj.title }} Pilihan Kami</h3>
         <div class="grid grid-cols-2 gap-4 lg:flex">
-          <NuxtLink
-            v-for="val in libraryObj?.results ?? 4"
-            :to="libraryObj ? '/koleksi/buku/' + val.slugs : path.path"
-          >
-            <NuxtImg
-              :src="val.cover ?? defaultImage"
-              class="drop-shadow-lg rounded-lg"
-              height="100%"
-              width="180px"
-              format="webp"
-            >
+          <NuxtLink v-for="val in libraryObj?.results ?? 4" :to="libraryObj ? '/koleksi/buku/' + val.slugs : path.path">
+            <NuxtImg :src="val.cover ?? defaultImage" class="drop-shadow-lg rounded-lg" height="100%" width="180px"
+              format="webp">
             </NuxtImg>
           </NuxtLink>
         </div>

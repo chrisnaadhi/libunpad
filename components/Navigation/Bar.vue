@@ -8,13 +8,7 @@ const { locale } = useI18n();
   <div class="wrapper">
     <nav class="navbar">
       <NuxtLink :to="locale === 'en' ? '/en' : '/'">
-        <NuxtImg
-          src="/images/kandaga-logo-new.png"
-          class="logo"
-          alt="Logo Perpustakaan"
-          height="512px"
-          format="webp"
-        />
+        <NuxtImg src="/images/kandaga-logo-new.png" class="logo" alt="Logo Perpustakaan" height="512px" format="webp" />
       </NuxtLink>
       <NavigationMenu />
       <NavigationAction @toggle="layanan.toggleDisplay()" />

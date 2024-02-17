@@ -170,34 +170,19 @@ const sendSuveyData = async () => {
       </div>
       <div class="my-2 flex items-center justify-center">
         <button @click="changeStarValue('firstStar')">
-          <div
-            class="w-20 h-20 text-amber"
-            :class="ratingData.firstStar ? 'i-mdi-star' : 'i-mdi-star-outline'"
-          />
+          <div class="w-20 h-20 text-amber" :class="ratingData.firstStar ? 'i-mdi-star' : 'i-mdi-star-outline'" />
         </button>
         <button @click="changeStarValue('secondStar')">
-          <div
-            class="w-20 h-20 text-amber"
-            :class="ratingData.secondStar ? 'i-mdi-star' : 'i-mdi-star-outline'"
-          />
+          <div class="w-20 h-20 text-amber" :class="ratingData.secondStar ? 'i-mdi-star' : 'i-mdi-star-outline'" />
         </button>
         <button @click="changeStarValue('thirdStar')">
-          <div
-            class="w-20 h-20 text-amber"
-            :class="ratingData.thirdStar ? 'i-mdi-star' : 'i-mdi-star-outline'"
-          />
+          <div class="w-20 h-20 text-amber" :class="ratingData.thirdStar ? 'i-mdi-star' : 'i-mdi-star-outline'" />
         </button>
         <button @click="changeStarValue('fourthStar')">
-          <div
-            class="w-20 h-20 text-amber"
-            :class="ratingData.fourthStar ? 'i-mdi-star' : 'i-mdi-star-outline'"
-          />
+          <div class="w-20 h-20 text-amber" :class="ratingData.fourthStar ? 'i-mdi-star' : 'i-mdi-star-outline'" />
         </button>
         <button @click="changeStarValue('fifthStar')">
-          <div
-            class="w-20 h-20 text-amber"
-            :class="ratingData.fifthStar ? 'i-mdi-star' : 'i-mdi-star-outline'"
-          />
+          <div class="w-20 h-20 text-amber" :class="ratingData.fifthStar ? 'i-mdi-star' : 'i-mdi-star-outline'" />
         </button>
       </div>
       <div class="my--3 text-center">
@@ -217,33 +202,19 @@ const sendSuveyData = async () => {
           Sangat Baik
         </h3>
       </div>
-      <form
-        v-if="selectedRating !== ''"
-        @submit.prevent="sendSuveyData"
-        autocomplete="off"
-      >
+      <form v-if="selectedRating !== ''" @submit.prevent="sendSuveyData" autocomplete="off">
         <div class="input-block">
-          <label for="masukan" v-show="selectedRating === 'fifthStar'"
-            >Kesan / Pesan :
+          <label for="masukan" v-show="selectedRating === 'fifthStar'">Kesan / Pesan :
           </label>
-          <label for="masukan" v-show="selectedRating === 'fourthStar'"
-            >Masukan :
+          <label for="masukan" v-show="selectedRating === 'fourthStar'">Masukan :
           </label>
-          <label for="masukan" v-show="selectedRating === 'thirdStar'"
-            >Masukan :
+          <label for="masukan" v-show="selectedRating === 'thirdStar'">Masukan :
           </label>
-          <label for="masukan" v-show="selectedRating === 'secondStar'"
-            >Kritik :
+          <label for="masukan" v-show="selectedRating === 'secondStar'">Kritik :
           </label>
-          <label for="masukan" v-show="selectedRating === 'firstStar'"
-            >Kritik :
+          <label for="masukan" v-show="selectedRating === 'firstStar'">Kritik :
           </label>
-          <textarea
-            name="masukan"
-            id="masukan"
-            v-model="masukan"
-            class="input-area"
-          />
+          <textarea name="masukan" id="masukan" v-model="masukan" class="input-area" />
         </div>
         <button class="btn bg-orange w-full mt--4 text-white" type="submit">
           Kirim

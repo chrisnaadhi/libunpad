@@ -78,15 +78,10 @@ definePageMeta({
   <main class="max-w-7xl ma text-center w-full py-10">
     <section class="flex justify-center my-4 gap-4">
       <div v-if="user" class="pb-5">
-        <img
-          :src="
-            user.avatar
-              ? `https://repository.unpad.ac.id:8050/assets/${user.avatar}.jpg`
-              : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'
-          "
-          :alt="user?.first_name"
-          class="w-35 h-35 object-cover border-2 border-orange rounded-xl"
-        />
+        <img :src="user.avatar
+            ? `https://repository.unpad.ac.id:8050/assets/${user.avatar}.jpg`
+            : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'
+          " :alt="user?.first_name" class="w-35 h-35 object-cover border-2 border-orange rounded-xl" />
       </div>
       <div class="w-full">
         <div v-if="user" class="text-left">
@@ -95,10 +90,7 @@ definePageMeta({
           <p>Email: {{ user.email }}</p>
           <p>Status Anggota: {{ user.title }}</p>
         </div>
-        <div
-          v-else-if="status === 'authenticated'"
-          class="flex flex-col items-center"
-        >
+        <div v-else-if="status === 'authenticated'" class="flex flex-col items-center">
           <NuxtImg :src="data.user.image" class="w-20 rounded-full mb-3" />
           <h5>Halo, {{ data.user.name }}!</h5>
           <div class="max-w-6xl ma">
@@ -109,19 +101,14 @@ definePageMeta({
                   <h5>Surat Bebas Pustaka</h5>
                   <div v-if="getBebasPustaka.length > 0">
                     <p>
-                      <span
-                        :class="
-                          bebasPustakaBanner(
-                            getBebasPustaka[0].status_pengajuan
-                          )
-                        "
-                        class="px-2 text-sm rounded"
-                        >{{
-                          displayStatusPengajuanSurat(
-                            getBebasPustaka[0].status_pengajuan
-                          )
-                        }}</span
-                      >
+                      <span :class="bebasPustakaBanner(
+                        getBebasPustaka[0].status_pengajuan
+                      )
+                        " class="px-2 text-sm rounded">{{
+    displayStatusPengajuanSurat(
+      getBebasPustaka[0].status_pengajuan
+    )
+  }}</span>
                     </p>
 
                     <div v-if="getBebasPustaka[0]?.persyaratan?.length === 0">
@@ -130,58 +117,33 @@ definePageMeta({
                     <div v-else>
                       <div>Kelengkapan:</div>
                       <div class="flex">
-                        <span
-                          v-if="
-                            getBebasPustaka[0].persyaratan?.includes('denda')
-                          "
-                          class="flex"
-                        >
+                        <span v-if="getBebasPustaka[0].persyaratan?.includes('denda')
+                          " class="flex">
                           <p>- Tidak ada Denda</p>
-                          <div
-                            class="i-mdi-text-box-check text-green w-6 h-6"
-                          ></div>
+                          <div class="i-mdi-text-box-check text-green w-6 h-6"></div>
                         </span>
                         <span v-else class="flex">
                           <p>- Masih ada Denda</p>
-                          <div
-                            class="i-mdi-text-box-remove text-red w-6 h-6"
-                          ></div>
+                          <div class="i-mdi-text-box-remove text-red w-6 h-6"></div>
                         </span>
                       </div>
                       <div class="flex">
-                        <span
-                          v-if="
-                            getBebasPustaka[0].persyaratan?.includes(
-                              'peminjaman'
-                            )
-                          "
-                          class="flex"
-                        >
+                        <span v-if="getBebasPustaka[0].persyaratan?.includes(
+                          'peminjaman'
+                        )
+                          " class="flex">
                           <p>- Tidak ada Buku yang sedang dipinjam</p>
-                          <div
-                            class="i-mdi-text-box-check text-green w-6 h-6"
-                          ></div>
+                          <div class="i-mdi-text-box-check text-green w-6 h-6"></div>
                         </span>
                         <span v-else class="flex">
                           <p>- Masih ada Buku yang dipinjam</p>
-                          <div
-                            class="i-mdi-text-box-remove text-red w-6 h-6"
-                          ></div>
+                          <div class="i-mdi-text-box-remove text-red w-6 h-6"></div>
                         </span>
                       </div>
-                      <div
-                        class="my-3"
-                        v-if="getBebasPustaka[0].status_pengajuan === 'selesai'"
-                      >
-                        <NuxtLink
-                          :to="
-                            '/pengajuan/bebas-pustaka/surat/' +
-                            getBebasPustaka[0].id
-                          "
-                          class="btn py-1 px-2 bg-orange text-white"
-                          target="_blank"
-                          >Unduh Surat</NuxtLink
-                        >
+                      <div class="my-3" v-if="getBebasPustaka[0].status_pengajuan === 'selesai'">
+                        <NuxtLink :to="'/pengajuan/bebas-pustaka/surat/' +
+                          getBebasPustaka[0].id
+                          " class="btn py-1 px-2 bg-orange text-white" target="_blank">Unduh Surat</NuxtLink>
                       </div>
                       <div class="mt-5">
                         <h5>
@@ -207,22 +169,15 @@ definePageMeta({
                 </div>
                 <div>
                   <h5 class="text-center">Peminjaman Ruangan:</h5>
-                  <div
-                    class="grid grid-cols-2 gap-3"
-                    v-if="getPeminjamanRuangan.length > 0"
-                  >
+                  <div class="grid grid-cols-2 gap-3" v-if="getPeminjamanRuangan.length > 0">
                     <GenericBaseCard v-for="ruang in getPeminjamanRuangan">
                       <div class="p-3 rounded text-sm bg-orange-50">
                         <p>{{ displayNamaRuangan(ruang.nama_ruangan) }}</p>
                         <div class="py-1">
-                          <span
-                            class="px-2 rounded"
-                            :class="
-                              displayStatusPeminjamanRuangan(
-                                ruang.status_peminjaman
-                              )
-                            "
-                          >
+                          <span class="px-2 rounded" :class="displayStatusPeminjamanRuangan(
+                            ruang.status_peminjaman
+                          )
+                            ">
                             {{ ruang.status_peminjaman }}
                           </span>
                         </div>
@@ -252,30 +207,16 @@ definePageMeta({
       </div>
     </section>
     <section class="flex justify-center gap-2">
-      <NuxtLink
-        to="/dashboard"
-        class="btn bg-orange text-white"
-        v-show="isPegawai"
-      >
+      <NuxtLink to="/dashboard" class="btn bg-orange text-white" v-show="isPegawai">
         Dashboard
       </NuxtLink>
       <NuxtLink to="/pengajuan" class="btn bg-orange text-white">
         Pengajuan Lain
       </NuxtLink>
-      <button
-        type="button"
-        class="btn bg-red text-white"
-        v-show="user"
-        @click="onLogout"
-      >
+      <button type="button" class="btn bg-red text-white" v-show="user" @click="onLogout">
         Logout
       </button>
-      <button
-        type="button"
-        class="btn bg-red text-white"
-        v-show="status"
-        @click="signOut()"
-      >
+      <button type="button" class="btn bg-red text-white" v-show="status" @click="signOut()">
         Sign Out
       </button>
     </section>

@@ -39,20 +39,14 @@ let division = {
           <p>Presentase Tugas Selesai : 65%</p>
         </div>
         <div class="flex items-center justify-center mt-5">
-          <NuxtLink
-            :to="route.fullPath + '/total'"
-            class="btn bg-white text-center"
-          >
+          <NuxtLink :to="route.fullPath + '/total'" class="btn bg-white text-center">
             Detail
           </NuxtLink>
         </div>
       </GenericBaseCard>
     </div>
     <div class="lower-division">
-      <GenericBaseCard
-        class="bg-orange-1 items-center p-5"
-        v-for="divisi in division"
-      >
+      <GenericBaseCard class="bg-orange-1 items-center p-5" v-for="divisi in division">
         <div class="flex flex-col items-center">
           <div :class="divisi.icon" class="text-7xl text-orange"></div>
           <h1 class="">{{ divisi.nama }}</h1>
@@ -71,7 +65,8 @@ let division = {
 </template>
 
 <style scoped>
-.upper-division, .lower-division {
+.upper-division,
+.lower-division {
   --at-apply: max-w-7xl ma flex flex-col md:flex-row gap-4 min-h-80;
 }
 

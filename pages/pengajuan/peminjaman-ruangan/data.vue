@@ -5,9 +5,7 @@
     <h1>Data Peminjaman Ruangan</h1>
     <PengajuanListPeminjamanRuangan />
     <div class="my-5">
-      <NuxtLink to="/pengajuan" class="btn bg-orange-1 text-orange-6"
-        >Kembali</NuxtLink
-      >
+      <NuxtLink to="/pengajuan" class="btn bg-orange-1 text-orange-6">Kembali</NuxtLink>
     </div>
   </section>
 </template>

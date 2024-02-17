@@ -53,16 +53,10 @@ function openPreview() {
         {{ keywords }}
       </p>
       <div class="flex gap-1 text-center text-xs mt-3">
-        <button
-          class="btn bg-gray-5 w-full py-1 px-4 text-white"
-          @click="openPreview"
-        >
+        <button class="btn bg-gray-5 w-full py-1 px-4 text-white" @click="openPreview">
           Preview
         </button>
-        <NuxtLink
-          :to="linkAccess"
-          class="btn bg-orange-5 w-full py-1 px-4 text-white"
-        >
+        <NuxtLink :to="linkAccess" class="btn bg-orange-5 w-full py-1 px-4 text-white">
           Detail
         </NuxtLink>
       </div>

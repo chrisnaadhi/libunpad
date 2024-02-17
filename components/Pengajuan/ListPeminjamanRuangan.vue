@@ -68,10 +68,7 @@ const tableHeadPublic = [
           <td class="table-border">
             {{ elem.jam_mulai_peminjaman }} - {{ elem.jam_selesai_peminjaman }}
           </td>
-          <td
-            class="table-border text-white"
-            :class="displayStatusPeminjaman(elem.status_peminjaman)"
-          >
+          <td class="table-border text-white" :class="displayStatusPeminjaman(elem.status_peminjaman)">
             {{ elem.status_peminjaman }}
           </td>
         </tr>
