@@ -119,14 +119,8 @@ definePageMeta({
       </div>
       <div class="flex flex-col relative">
         <label for="password" class="text-left">Password: </label>
-        <input
-          :type="passwordType"
-          name="password"
-          id="password"
-          class="input-space w-full pl-3 pr-10"
-          v-model="password"
-          required
-        />
+        <input :type="passwordType" name="password" id="password" class="input-space w-full pl-3 pr-10" v-model="password"
+          required />
         <div @click="togglePasswordType" class="toggle-password">
           <div class="i-mdi-eye" v-if="!showPassword" />
           <div class="i-mdi-eye-off" v-else />
@@ -138,21 +132,12 @@ definePageMeta({
         </NuxtErrorBoundary>
 
         <div class="flex gap-2">
-          <button
-            class="form-btn"
-            :class="email && password ? 'login-btn' : 'disable-btn'"
-            :disabled="!email || !password"
-            type="submit"
-            @click.prevent="submitLogin"
-          >
+          <button class="form-btn" :class="email && password ? 'login-btn' : 'disable-btn'"
+            :disabled="!email || !password" type="submit" @click.prevent="submitLogin">
             Login
           </button>
-          <button
-            class="form-btn flex items-center justify-center gap-2"
-            :class="email || password ? 'disable-btn' : 'oauth-btn'"
-            @click="googleLogin"
-            :disable="email.length > 0"
-          >
+          <button class="form-btn flex items-center justify-center gap-2"
+            :class="email || password ? 'disable-btn' : 'oauth-btn'" @click="googleLogin" :disable="email.length > 0">
             <span>
               <img src="/images/lambang-unpad.png" class="w-6 h-6" alt="" />
             </span>

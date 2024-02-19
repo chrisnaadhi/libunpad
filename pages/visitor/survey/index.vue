@@ -142,70 +142,30 @@ useHead({
       <h1 class="bg-dark text-orange py-4 rounded-xl">Hasil Survey</h1>
     </div>
     <div class="flex flex-col gap-10 mb-10">
-      <VisitorSurveyRuangan
-        nama-ruangan="Lobby Utama"
-        :jumlah-penilaian1="lobbyB1.length"
-        :jumlah-penilaian2="lobbyB2.length"
-        :jumlah-penilaian3="lobbyB3.length"
-        :jumlah-penilaian4="lobbyB4.length"
-        :jumlah-penilaian5="lobbyB5.length"
-      />
-      <VisitorSurveyRuangan
-        nama-ruangan="Ruang Sirkulasi"
-        :jumlah-penilaian1="ruangSirkulasiB1.length"
-        :jumlah-penilaian2="ruangSirkulasiB2.length"
-        :jumlah-penilaian3="ruangSirkulasiB3.length"
-        :jumlah-penilaian4="ruangSirkulasiB4.length"
-        :jumlah-penilaian5="ruangSirkulasiB5.length"
-      />
-      <VisitorSurveyRuangan
-        nama-ruangan="Ruang Multimedia"
-        :jumlah-penilaian1="ruangMultimediaB1.length"
-        :jumlah-penilaian2="ruangMultimediaB2.length"
-        :jumlah-penilaian3="ruangMultimediaB3.length"
-        :jumlah-penilaian4="ruangMultimediaB4.length"
-        :jumlah-penilaian5="ruangMultimediaB5.length"
-      />
-      <VisitorSurveyRuangan
-        nama-ruangan="Ruang Populer"
-        :jumlah-penilaian1="ruangPopulerB1.length"
-        :jumlah-penilaian2="ruangPopulerB2.length"
-        :jumlah-penilaian3="ruangPopulerB3.length"
-        :jumlah-penilaian4="ruangPopulerB4.length"
-        :jumlah-penilaian5="ruangPopulerB5.length"
-      />
-      <VisitorSurveyRuangan
-        nama-ruangan="Ruang Referensi Koleksi Berkala"
-        :jumlah-penilaian1="ruangBerkalaB1.length"
-        :jumlah-penilaian2="ruangBerkalaB2.length"
-        :jumlah-penilaian3="ruangBerkalaB3.length"
-        :jumlah-penilaian4="ruangBerkalaB4.length"
-        :jumlah-penilaian5="ruangBerkalaB5.length"
-      />
-      <VisitorSurveyRuangan
-        nama-ruangan="Ruang Referensi Tesis Disertasi"
-        :jumlah-penilaian1="ruangTesisB1.length"
-        :jumlah-penilaian2="ruangTesisB2.length"
-        :jumlah-penilaian3="ruangTesisB3.length"
-        :jumlah-penilaian4="ruangTesisB4.length"
-        :jumlah-penilaian5="ruangTesisB5.length"
-      />
-      <VisitorSurveyRuangan
-        nama-ruangan="Ruang BNI Co-Working Space"
-        :jumlah-penilaian1="ruangBNIB1.length"
-        :jumlah-penilaian2="ruangBNIB2.length"
-        :jumlah-penilaian3="ruangBNIB3.length"
-        :jumlah-penilaian4="ruangBNIB4.length"
-        :jumlah-penilaian5="ruangBNIB5.length"
-      />
-      <VisitorSurveyRuangan
-        nama-ruangan="Ruang Belajar Lt. 4"
-        :jumlah-penilaian1="ruangBelajarB1.length"
-        :jumlah-penilaian2="ruangBelajarB2.length"
-        :jumlah-penilaian3="ruangBelajarB3.length"
-        :jumlah-penilaian4="ruangBelajarB4.length"
-        :jumlah-penilaian5="ruangBelajarB5.length"
-      />
+      <VisitorSurveyRuangan nama-ruangan="Lobby Utama" :jumlah-penilaian1="lobbyB1.length"
+        :jumlah-penilaian2="lobbyB2.length" :jumlah-penilaian3="lobbyB3.length" :jumlah-penilaian4="lobbyB4.length"
+        :jumlah-penilaian5="lobbyB5.length" />
+      <VisitorSurveyRuangan nama-ruangan="Ruang Sirkulasi" :jumlah-penilaian1="ruangSirkulasiB1.length"
+        :jumlah-penilaian2="ruangSirkulasiB2.length" :jumlah-penilaian3="ruangSirkulasiB3.length"
+        :jumlah-penilaian4="ruangSirkulasiB4.length" :jumlah-penilaian5="ruangSirkulasiB5.length" />
+      <VisitorSurveyRuangan nama-ruangan="Ruang Multimedia" :jumlah-penilaian1="ruangMultimediaB1.length"
+        :jumlah-penilaian2="ruangMultimediaB2.length" :jumlah-penilaian3="ruangMultimediaB3.length"
+        :jumlah-penilaian4="ruangMultimediaB4.length" :jumlah-penilaian5="ruangMultimediaB5.length" />
+      <VisitorSurveyRuangan nama-ruangan="Ruang Populer" :jumlah-penilaian1="ruangPopulerB1.length"
+        :jumlah-penilaian2="ruangPopulerB2.length" :jumlah-penilaian3="ruangPopulerB3.length"
+        :jumlah-penilaian4="ruangPopulerB4.length" :jumlah-penilaian5="ruangPopulerB5.length" />
+      <VisitorSurveyRuangan nama-ruangan="Ruang Referensi Koleksi Berkala" :jumlah-penilaian1="ruangBerkalaB1.length"
+        :jumlah-penilaian2="ruangBerkalaB2.length" :jumlah-penilaian3="ruangBerkalaB3.length"
+        :jumlah-penilaian4="ruangBerkalaB4.length" :jumlah-penilaian5="ruangBerkalaB5.length" />
+      <VisitorSurveyRuangan nama-ruangan="Ruang Referensi Tesis Disertasi" :jumlah-penilaian1="ruangTesisB1.length"
+        :jumlah-penilaian2="ruangTesisB2.length" :jumlah-penilaian3="ruangTesisB3.length"
+        :jumlah-penilaian4="ruangTesisB4.length" :jumlah-penilaian5="ruangTesisB5.length" />
+      <VisitorSurveyRuangan nama-ruangan="Ruang BNI Co-Working Space" :jumlah-penilaian1="ruangBNIB1.length"
+        :jumlah-penilaian2="ruangBNIB2.length" :jumlah-penilaian3="ruangBNIB3.length"
+        :jumlah-penilaian4="ruangBNIB4.length" :jumlah-penilaian5="ruangBNIB5.length" />
+      <VisitorSurveyRuangan nama-ruangan="Ruang Belajar Lt. 4" :jumlah-penilaian1="ruangBelajarB1.length"
+        :jumlah-penilaian2="ruangBelajarB2.length" :jumlah-penilaian3="ruangBelajarB3.length"
+        :jumlah-penilaian4="ruangBelajarB4.length" :jumlah-penilaian5="ruangBelajarB5.length" />
     </div>
   </section>
 </template>

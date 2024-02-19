@@ -37,6 +37,6 @@ h3 {
 }
 
 .baris {
-    --at-apply: flex justify-between pt-2;
+  --at-apply: flex justify-between pt-2;
 }
 </style>

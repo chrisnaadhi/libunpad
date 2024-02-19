@@ -9,14 +9,9 @@ const closeModal = () => {
 <template>
   <Transition name="fade">
     <main @click="closeModal">
-      <section
-        class="flex mt--10 flex-col h-full w-full items-center justify-center"
-      >
+      <section class="flex mt--10 flex-col h-full w-full items-center justify-center">
         <div class="relative cursor-pointer">
-          <p
-            class="px-10 bg-orange rounded text-white"
-            @click.stop="closeModal"
-          >
+          <p class="px-10 bg-orange rounded text-white" @click.stop="closeModal">
             Close ✖
           </p>
         </div>

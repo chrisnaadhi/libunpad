@@ -29,23 +29,12 @@ const years = [
     <div class="flex flex-col">
       <div>
         <h6>Pencarian</h6>
-        <input
-          type="search"
-          name="search"
-          id="search"
-          class="p-1 rounded"
-          v-model="searchTugasAkhir.keywords"
-          @keyup.enter="searchTugasAkhir.searchingTugasAkhir(true, false, true)"
-        />
+        <input type="search" name="search" id="search" class="p-1 rounded" v-model="searchTugasAkhir.keywords"
+          @keyup.enter="searchTugasAkhir.searchingTugasAkhir(true, false, true)" />
       </div>
       <h6>Tahun</h6>
       <div>
-        <select
-          class="min-w-full"
-          name="first"
-          id="first"
-          v-model="searchTugasAkhir.tahun"
-        >
+        <select class="min-w-full" name="first" id="first" v-model="searchTugasAkhir.tahun">
           <option :value="year" v-for="year in years">{{ year }}</option>
         </select>
       </div>
@@ -73,12 +62,7 @@ const years = [
       <div>
         <h6>Nama Fakultas</h6>
         <div>
-          <select
-            name="fakultas"
-            id="fakultas"
-            class="min-w-full"
-            v-model="searchTugasAkhir.facultyId"
-          >
+          <select name="fakultas" id="fakultas" class="min-w-full" v-model="searchTugasAkhir.facultyId">
             <option v-for="fak in fakultas.objFakultas" :value="fak.id">
               {{ fak.namaFakultas }}
             </option>
@@ -86,10 +70,8 @@ const years = [
         </div>
       </div>
       <div class="my-2">
-        <button
-          class="btn text-sm text-white w-full bg-orange"
-          @click="searchTugasAkhir.searchingTugasAkhir(true, false, true)"
-        >
+        <button class="btn text-sm text-white w-full bg-orange"
+          @click="searchTugasAkhir.searchingTugasAkhir(true, false, true)">
           Cari
         </button>
       </div>

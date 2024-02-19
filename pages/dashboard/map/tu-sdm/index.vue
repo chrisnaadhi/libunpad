@@ -38,10 +38,7 @@ definePageMeta({
           <p class="text-nip">{{ pegawai.nomor_induk }}</p>
           <p class="text-title">{{ pegawai.title }}</p>
           <div class="mt-5">
-            <NuxtLink
-              class="btn bg-orange text-white"
-              :to="'/dashboard/map/tu-sdm/' + pegawai.id"
-            >
+            <NuxtLink class="btn bg-orange text-white" :to="'/dashboard/map/tu-sdm/' + pegawai.id">
               Cek
             </NuxtLink>
           </div>

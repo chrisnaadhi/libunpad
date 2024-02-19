@@ -25,6 +25,7 @@ const viewModal = () => {
         </ModalBase>
       </teleport>
     </LazyClientOnly>
+
     <Head>
       <Title> {{ buku.judul }} | Kandaga Universitas Padjadjaran </Title>
     </Head>
@@ -45,9 +46,7 @@ const viewModal = () => {
             Baca {{ buku.judul }}
           </button>
           <NuxtLink to="/koleksi">
-            <button
-              class="w-full btn text-orange border border-orange transition-all-500 hover:(text-white bg-orange)"
-            >
+            <button class="w-full btn text-orange border border-orange transition-all-500 hover:(text-white bg-orange)">
               Kembali ke Koleksi
             </button>
           </NuxtLink>

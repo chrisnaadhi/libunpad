@@ -34,11 +34,8 @@ const authorName = `${getAuthorData.first_name} ${getAuthorData.last_name}`;
 
       <div class="bg-orange-50 px-15 py-10 rounded">
         <div class="featured">
-          <img
-            :src="url + '/assets/' + literasiContent.featured_image"
-            alt="Literasi Informasi"
-            class="w-full max-h-xs object-cover"
-          />
+          <img :src="url + '/assets/' + literasiContent.featured_image" alt="Literasi Informasi"
+            class="w-full max-h-xs object-cover" />
         </div>
         <span v-html="literasiContent.konten"></span>
       </div>

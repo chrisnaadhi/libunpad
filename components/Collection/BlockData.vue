@@ -23,16 +23,10 @@ defineProps({
           </p>
         </div>
       </div>
-      <article
-        class="sub-topic"
-        :class="left === true ? 'order-last' : 'order-first'"
-      >
-        <div
-          class="child-topic"
-          :style="{
-            'background-image': 'url(' + '/images/9396112_3023.jpg' + ')',
-          }"
-        >
+      <article class="sub-topic" :class="left === true ? 'order-last' : 'order-first'">
+        <div class="child-topic" :style="{
+          'background-image': 'url(' + '/images/9396112_3023.jpg' + ')',
+        }">
           <div class="vertical-backdrop">
             <h3 class="text-white text-xl font-600">Kotak Panjang</h3>
             <p class="sub-description">
@@ -42,12 +36,9 @@ defineProps({
             </p>
           </div>
         </div>
-        <div
-          class="child-topic"
-          :style="{
-            'background-image': 'url(' + '/images/museum.jpg' + ')',
-          }"
-        >
+        <div class="child-topic" :style="{
+          'background-image': 'url(' + '/images/museum.jpg' + ')',
+        }">
           <div class="vertical-backdrop">
             <h3 class="text-white text-xl font-600">Kotak Panjang</h3>
             <p class="sub-description">
@@ -66,6 +57,7 @@ defineProps({
 a {
   --at-apply: no-underline;
 }
+
 .frame-topic {
   --at-apply: grid gap-2 my-5 mx-5 md:(grid-cols-4 mx-2) xl:mx-0;
 }

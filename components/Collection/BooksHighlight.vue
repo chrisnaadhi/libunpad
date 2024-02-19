@@ -13,30 +13,15 @@ const options = {
 
 <template>
   <section class="books-collection">
-    <CollectionBookCard
-      v-for="buku in bookItems.results"
-      :key="buku.id"
-      :title="buku.judul"
-      :author="buku.author"
-      :description="buku.description"
-      :banner="buku.tipe"
-      :cover="buku.cover"
-      :url-book="route.path + '/buku/' + buku?.slugs"
-      :banner-color="backgroundBanner(buku.tipe)"
-    />
+    <CollectionBookCard v-for="buku in bookItems.results" :key="buku.id" :title="buku.judul" :author="buku.author"
+      :description="buku.description" :banner="buku.tipe" :cover="buku.cover"
+      :url-book="route.path + '/buku/' + buku?.slugs" :banner-color="backgroundBanner(buku.tipe)" />
   </section>
   <Splide :options="options" class="inline md:hidden">
     <SplideSlide v-for="buku in bookItems.results">
-      <CollectionBookCard
-        :key="buku.id"
-        :title="buku.judul"
-        :author="buku.author"
-        :description="buku.description"
-        :banner="buku.tipe"
-        :cover="buku.cover"
-        :url-book="route.path + '/buku/' + buku?.slugs"
-        :banner-color="backgroundBanner(buku.tipe)"
-      />
+      <CollectionBookCard :key="buku.id" :title="buku.judul" :author="buku.author" :description="buku.description"
+        :banner="buku.tipe" :cover="buku.cover" :url-book="route.path + '/buku/' + buku?.slugs"
+        :banner-color="backgroundBanner(buku.tipe)" />
     </SplideSlide>
   </Splide>
 </template>

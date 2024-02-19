@@ -8,11 +8,8 @@ useHead({
 
 <template>
   <main class="container ma my-10">
-    <CollectionHeader
-      :title="$t('collectionTitleHeader')"
-      :image="image"
-      :description="$t('collectionDescriptionHeader')"
-    />
+    <CollectionHeader :title="$t('collectionTitleHeader')" :image="image"
+      :description="$t('collectionDescriptionHeader')" />
 
     <section class="my-5">
       <h2>Pilihan Kami</h2>
@@ -25,11 +22,7 @@ useHead({
       <CollectionBlockData :left="false" title="Library" page="/library" />
       <CollectionBlockData :left="true" title="Archive" page="/records" />
       <CollectionBlockData :left="false" title="Museum" page="/museum" />
-      <CollectionBlockData
-        :left="true"
-        title="Repository"
-        :page="route.fullPath + '/repository'"
-      />
+      <CollectionBlockData :left="true" title="Repository" :page="route.fullPath + '/repository'" />
     </section>
   </main>
 </template>

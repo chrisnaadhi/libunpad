@@ -30,6 +30,7 @@
 .cards {
   --at-apply: flex items-center justify-between flex-col mx-5 sm:flex-row md:mx-0;
 }
+
 .card-collection {
   --at-apply: relative w-full bg-dark m-3 h-24 rounded-lg text-center;
 }
@@ -38,7 +39,7 @@
   --at-apply: w-full h-full object-cover rounded opacity-40 transition-all-500;
 }
 
-.card-collection:hover > .image-display {
+.card-collection:hover>.image-display {
   --at-apply: opacity-15;
 }
 

@@ -18,10 +18,8 @@ defineProps({
       <div class="bg-orange-6 absolute z-1 m-3 px-3 py-1 rounded-full">
         <p class="text-white text-sm font-semibold">{{ tipe }}</p>
       </div>
-      <NuxtImg
-        :src="`https://img.youtube.com/vi/${ytCode}/sddefault.jpg`"
-        class="relative w-full max-h-45 object-cover rounded-tr-lg rounded-tl-lg"
-      />
+      <NuxtImg :src="`https://img.youtube.com/vi/${ytCode}/sddefault.jpg`"
+        class="relative w-full max-h-45 object-cover rounded-tr-lg rounded-tl-lg" />
     </div>
 
     <div class="bot-card">
@@ -33,10 +31,8 @@ defineProps({
         <span v-html="trimDescription(deskripsi, 85)"></span>
       </p>
       <div class="mt-3 flex text-center">
-        <NuxtLink
-          :to="`/e-teater/${parent}/${slug}`"
-          class="btn w-full py-1 px-5 bg-orange text-white text-sm no-underline"
-        >
+        <NuxtLink :to="`/e-teater/${parent}/${slug}`"
+          class="btn w-full py-1 px-5 bg-orange text-white text-sm no-underline">
           Lihat
         </NuxtLink>
       </div>
@@ -54,7 +50,6 @@ defineProps({
 }
 
 .bot-card {
-  --at-apply: py-4 px-2 text-left flex flex-col rounded-bl-lg rounded-br-lg lg:(justify-between h-55)
-    text-left;
+  --at-apply: py-4 px-2 text-left flex flex-col rounded-bl-lg rounded-br-lg lg:(justify-between h-55) text-left;
 }
 </style>

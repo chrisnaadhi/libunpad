@@ -9,16 +9,9 @@ defineProps({
 
 <template>
   <div class="w-full flex flex-col md:(grid grid-cols-2) gap-4">
-    <GenericBaseCard
-      v-for="item in layananPerpustakaan"
-      class="bg-gray-1 rounded"
-    >
+    <GenericBaseCard v-for="item in layananPerpustakaan" class="bg-gray-1 rounded">
       <div>
-        <NuxtImg
-          src="/images/9396112_3023.jpg"
-          format="webp"
-          class="w-full max-h-40 object-cover rounded-t"
-        ></NuxtImg>
+        <NuxtImg src="/images/9396112_3023.jpg" format="webp" class="w-full max-h-40 object-cover rounded-t"></NuxtImg>
       </div>
       <div class="flex flex-col justify-center px-6 pb-2 pt-4">
         <h3 class="text-left">{{ item.nama_layanan }}</h3>

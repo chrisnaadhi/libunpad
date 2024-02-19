@@ -26,7 +26,7 @@ const createTask = async () => {
     ];
     await createItems({ collection: "pekerjaan_harian", items });
     await navigateTo("/dashboard/tugas");
-  } catch (error) {}
+  } catch (error) { }
 };
 
 definePageMeta({
@@ -63,12 +63,7 @@ definePageMeta({
         <label for="deskripsi-tugas">
           Deskripsi Tugas <span class="text-red">*</span> :
         </label>
-        <textarea
-          type="text"
-          name="deskripsi-tugas"
-          v-model="deskripsiTugas"
-          required
-        />
+        <textarea type="text" name="deskripsi-tugas" v-model="deskripsiTugas" required />
       </div>
       <div class="form-edit">
         <label for="kriteria-tugas">
@@ -76,35 +71,15 @@ definePageMeta({
         </label>
         <div class="input-radio">
           <div>
-            <input
-              type="radio"
-              id="wajib"
-              name="kriteria"
-              value="wajib"
-              v-model="kriteriaTugas"
-              required
-              disabled
-            />
+            <input type="radio" id="wajib" name="kriteria" value="wajib" v-model="kriteriaTugas" required disabled />
             <label class="radio-text" for="wajib">Wajib</label>
           </div>
           <div>
-            <input
-              type="radio"
-              id="tambahan"
-              name="kriteria"
-              value="tambahan"
-              v-model="kriteriaTugas"
-            />
+            <input type="radio" id="tambahan" name="kriteria" value="tambahan" v-model="kriteriaTugas" />
             <label class="radio-text" for="tambahan">Tambahan</label>
           </div>
           <div>
-            <input
-              type="radio"
-              id="lainnya"
-              name="kriteria"
-              value="lainnya"
-              v-model="kriteriaTugas"
-            />
+            <input type="radio" id="lainnya" name="kriteria" value="lainnya" v-model="kriteriaTugas" />
             <label class="radio-text" for="lainnya">Lainnya</label>
           </div>
         </div>

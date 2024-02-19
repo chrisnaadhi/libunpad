@@ -54,10 +54,7 @@ definePageMeta({
   <section class="max-w-7xl ma">
     <LazyClientOnly>
       <Teleport to="#modal">
-        <ModalBase
-          v-show="previewItem.showModal"
-          @close="previewItem.viewModal"
-        >
+        <ModalBase v-show="previewItem.showModal" @close="previewItem.viewModal">
           <div @click.stop="" class="preview-block">
             <div class="flex flex-col items-center">
               <h3>{{ selectedPreview?.MhsNPM }}</h3>
@@ -68,10 +65,8 @@ definePageMeta({
               <p>Keywords: {{ selectedPreview?.Keywords }}</p>
             </div>
             <div class="mt-2">
-              <NuxtLink
-                :to="'/koleksi/repository/item/' + selectedPreview?.MhsNPM"
-                class="btn bg-orange text-white px-2 py-1 text-xs"
-              >
+              <NuxtLink :to="'/koleksi/repository/item/' + selectedPreview?.MhsNPM"
+                class="btn bg-orange text-white px-2 py-1 text-xs">
                 Detail
               </NuxtLink>
             </div>
@@ -97,8 +92,8 @@ definePageMeta({
         terdapat
         <span class="font-semibold">{{
           !searchTugasAkhir.searchResults
-            ? dataTADirectus.length
-            : searchTugasAkhir.searchResults.length
+          ? dataTADirectus.length
+          : searchTugasAkhir.searchResults.length
         }}</span>
         data.
       </p>
@@ -106,17 +101,10 @@ definePageMeta({
     <div class="flex flex-col gap-4 lg:(flex-row)">
       <!-- <CollectionRepositoryFilterOption /> -->
       <div class="repository-collection" v-if="!searchTugasAkhir.searchResults">
-        <CollectionRepositoryCard
-          v-for="koleksi in dataTADirectus"
-          :npm="koleksi.MhsNPM"
-          :title="trimText(koleksi.Judul)"
-          :title-hover="koleksi.Judul"
-          :tipe="koleksi.tipeKoleksi"
-          :description="koleksi.AbstrakBersih ?? koleksi.Abstrak"
-          :keywords="koleksi.Keywords"
-          :link-access="'/koleksi/repository/item/' + koleksi.MhsNPM"
-          @preview="openModal(koleksi.MhsNPM)"
-        />
+        <CollectionRepositoryCard v-for="koleksi in dataTADirectus" :npm="koleksi.MhsNPM" :title="trimText(koleksi.Judul)"
+          :title-hover="koleksi.Judul" :tipe="koleksi.tipeKoleksi" :description="koleksi.AbstrakBersih ?? koleksi.Abstrak"
+          :keywords="koleksi.Keywords" :link-access="'/koleksi/repository/item/' + koleksi.MhsNPM"
+          @preview="openModal(koleksi.MhsNPM)" />
       </div>
       <div v-else-if="searchTugasAkhir.searchResults === 'loading'">
         <div class="max-w-3xl ma text-center">
@@ -129,54 +117,34 @@ definePageMeta({
         </div>
       </div>
       <div class="repository-collection" v-else>
-        <CollectionRepositoryCard
-          v-for="koleksi in searchTugasAkhir.searchResults"
-          :npm="koleksi.MhsNPM"
-          :title="trimText(koleksi.Judul)"
-          :tipe="koleksi.tipeKoleksi"
-          :description="koleksi.AbstrakBersih ?? koleksi.Abstrak"
-          :keywords="koleksi.Keywords"
-          :link-access="'/koleksi/repository/item/' + koleksi.MhsNPM"
-          @preview="openModal(koleksi.MhsNPM)"
-        />
+        <CollectionRepositoryCard v-for="koleksi in searchTugasAkhir.searchResults" :npm="koleksi.MhsNPM"
+          :title="trimText(koleksi.Judul)" :tipe="koleksi.tipeKoleksi"
+          :description="koleksi.AbstrakBersih ?? koleksi.Abstrak" :keywords="koleksi.Keywords"
+          :link-access="'/koleksi/repository/item/' + koleksi.MhsNPM" @preview="openModal(koleksi.MhsNPM)" />
       </div>
     </div>
 
     <div class="mt-5">
       <div class="pagination-block">
-        <button
-          class="pagination-btn"
-          :disabled="
-            !searchTugasAkhir.searchResults || searchTugasAkhir.offset === 0
-          "
-          :class="
-            !searchTugasAkhir.searchResults || searchTugasAkhir.offset === 0
-              ? 'bg-gray-5 cursor-not-allowed'
-              : 'bg-orange-5'
-          "
-          @click="searchTugasAkhir.previousPage()"
-        >
+        <button class="pagination-btn" :disabled="!searchTugasAkhir.searchResults || searchTugasAkhir.offset === 0
+          " :class="!searchTugasAkhir.searchResults || searchTugasAkhir.offset === 0
+      ? 'bg-gray-5 cursor-not-allowed'
+      : 'bg-orange-5'
+    " @click="searchTugasAkhir.previousPage()">
           <h6>&lt;&lt; Prev. Page</h6>
         </button>
         <div>
           <p>{{ searchTugasAkhir.page }}</p>
         </div>
-        <button
-          class="pagination-btn"
-          :disabled="
-            !searchTugasAkhir.searchResults ||
-            searchTugasAkhir.searchResults === 'loading' ||
-            searchTugasAkhir.searchResults.length < 30
-          "
-          :class="
-            !searchTugasAkhir.searchResults ||
-            searchTugasAkhir.searchResults === 'loading' ||
-            searchTugasAkhir.searchResults.length < 30
-              ? 'bg-gray-5 cursor-not-allowed'
-              : 'bg-orange-5'
-          "
-          @click="searchTugasAkhir.nextPage()"
-        >
+        <button class="pagination-btn" :disabled="!searchTugasAkhir.searchResults ||
+          searchTugasAkhir.searchResults === 'loading' ||
+          searchTugasAkhir.searchResults.length < 30
+          " :class="!searchTugasAkhir.searchResults ||
+      searchTugasAkhir.searchResults === 'loading' ||
+      searchTugasAkhir.searchResults.length < 30
+      ? 'bg-gray-5 cursor-not-allowed'
+      : 'bg-orange-5'
+    " @click="searchTugasAkhir.nextPage()">
           Next Page &gt;&gt;
         </button>
       </div>

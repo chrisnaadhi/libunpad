@@ -31,20 +31,11 @@ const listKoleksi = await getItems({
       <h3 class="font-semibold mb-5">
         Daftar Koleksi {{ deskripsiKoleksi.nama_tipe_koleksi }}
       </h3>
-      <div
-        class="flex flex-col gap-4 lg:(grid grid-cols-3)"
-        v-if="listKoleksi.length > 0"
-      >
-        <CollectionTeaterCategoryCard
-          v-for="koleksi in listKoleksi"
-          :judul="koleksi.nama_koleksi"
-          :tipe="deskripsiKoleksi.nama_tipe_koleksi"
-          :deskripsi="koleksi.deskripsi"
-          :pembuat="koleksi.author_koleksi"
-          :parent="deskripsiKoleksi.id"
-          :slug="koleksi.slug_koleksi"
-          :yt-code="extractYoutubeLink(koleksi.link_youtube)"
-        />
+      <div class="flex flex-col gap-4 lg:(grid grid-cols-3)" v-if="listKoleksi.length > 0">
+        <CollectionTeaterCategoryCard v-for="koleksi in listKoleksi" :judul="koleksi.nama_koleksi"
+          :tipe="deskripsiKoleksi.nama_tipe_koleksi" :deskripsi="koleksi.deskripsi" :pembuat="koleksi.author_koleksi"
+          :parent="deskripsiKoleksi.id" :slug="koleksi.slug_koleksi"
+          :yt-code="extractYoutubeLink(koleksi.link_youtube)" />
       </div>
       <div v-else>
         <h4 class="italic text-red-6">
@@ -53,10 +44,7 @@ const listKoleksi = await getItems({
       </div>
     </div>
     <div class="my-5 flex justify-center">
-      <NuxtLink
-        to="/e-teater"
-        class="btn bg-orange text-white py-1 text-center"
-      >
+      <NuxtLink to="/e-teater" class="btn bg-orange text-white py-1 text-center">
         Kembali ke Koleksi E-Teater
       </NuxtLink>
     </div>

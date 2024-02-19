@@ -23,20 +23,14 @@ const { data: tools } = await useFetch("/api/v1/tools");
             <p class="text-xs text-white">
               {{ tool.deskripsi }}
             </p>
-            <NuxtLink
-              :to="tool.slug"
-              class="btn mt-3 py-0 bg-white text-sm text-orange"
-            >
+            <NuxtLink :to="tool.slug" class="btn mt-3 py-0 bg-white text-sm text-orange">
               Info
             </NuxtLink>
           </div>
         </div>
       </div>
     </div>
-    <NuxtLink
-      to="/panduan"
-      class="text-gray-6 text-sm hover:(text-orange-5 underline)"
-    >
+    <NuxtLink to="/panduan" class="text-gray-6 text-sm hover:(text-orange-5 underline)">
       Lihat selengkapnya layanan dan alat yang dapat kami tawarkan →
     </NuxtLink>
     <div class="hidden">
@@ -74,7 +68,7 @@ const { data: tools } = await useFetch("/api/v1/tools");
   --at-apply: bg-orange-1 w-12 h-12 absolute mr--4 mb-2;
 }
 
-.content:hover > .left-content {
+.content:hover>.left-content {
   --at-apply: transition-all-500 bg-orange-5;
 }
 

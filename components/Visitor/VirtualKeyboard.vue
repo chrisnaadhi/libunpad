@@ -15,27 +15,14 @@ const focusWriting = () => {
 </script>
 
 <template>
-  <main
-    class="max-w-2xl ma flex justify-between font-600 flex-col my-5 sm:(flex-row my-0)"
-  >
+  <main class="max-w-2xl ma flex justify-between font-600 flex-col my-5 sm:(flex-row my-0)">
     <section class="flex flex-col w-30 justify-center">
-      <div
-        class="tab"
-        v-for="tab in tabs"
-        @click="changeActiveTab(tab)"
-        :class="tabActive === tab ? 'tab-active' : ''"
-      >
+      <div class="tab" v-for="tab in tabs" @click="changeActiveTab(tab)" :class="tabActive === tab ? 'tab-active' : ''">
         <h1 class="text-xs sm:text-sm">{{ tab }}</h1>
       </div>
     </section>
-    <VisitorKeyboardAngka
-      v-if="tabActive === 'Mode Angka'"
-      @click="focusWriting"
-    />
-    <VisitorKeyboardHuruf
-      v-else-if="tabActive === 'Mode Huruf'"
-      @click="focusWriting"
-    />
+    <VisitorKeyboardAngka v-if="tabActive === 'Mode Angka'" @click="focusWriting" />
+    <VisitorKeyboardHuruf v-else-if="tabActive === 'Mode Huruf'" @click="focusWriting" />
     <VisitorKeyboardKontak v-else-if="tabActive === 'Kontak Kami'" />
   </main>
 </template>

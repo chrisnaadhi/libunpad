@@ -33,22 +33,15 @@ const toggleLayanan = (value) => {
     </p>
     <div class="w-full h-full grid grid-cols-4 gap-3">
       <div class="flex flex-col items-start gap-3">
-        <button
-          v-for="list in panduanList"
-          class="btn text-left w-full border border-orange"
-          :class="{ 'active-menu': layananDanFasilitas === list }"
-          @click="toggleLayanan(list)"
-        >
+        <button v-for="list in panduanList" class="btn text-left w-full border border-orange"
+          :class="{ 'active-menu': layananDanFasilitas === list }" @click="toggleLayanan(list)">
           &#11166;
           {{ list }}
         </button>
       </div>
       <div class="col-span-3 w-full">
         <Transition>
-          <div
-            class="w-full"
-            v-show="layananDanFasilitas === 'Layanan dan Fasilitas'"
-          >
+          <div class="w-full" v-show="layananDanFasilitas === 'Layanan dan Fasilitas'">
             <GenericBaseCard class="bg-orange-2 px-4 py-2 mb-5 cursor-pointer">
               <h3 class="text-center col-span-17 text-center">
                 Layanan dan Fasilitas
@@ -63,10 +56,7 @@ const toggleLayanan = (value) => {
           </div>
         </Transition>
         <Transition>
-          <div
-            class="w-full"
-            v-show="layananDanFasilitas === 'Informasi Akademik'"
-          >
+          <div class="w-full" v-show="layananDanFasilitas === 'Informasi Akademik'">
             <GenericBaseCard class="bg-orange-2 px-4 py-2 mb-5 cursor-pointer">
               <h3 class="text-center col-span-17 text-center">
                 Informasi Akademik
@@ -78,26 +68,16 @@ const toggleLayanan = (value) => {
           </div>
         </Transition>
         <Transition>
-          <div
-            class="w-full"
-            v-show="layananDanFasilitas === 'Literasi Informasi'"
-          >
+          <div class="w-full" v-show="layananDanFasilitas === 'Literasi Informasi'">
             <GenericBaseCard class="bg-orange-2 px-4 py-2 mb-5 cursor-pointer">
               <h3 class="text-center col-span-17 text-center">
                 Literasi Informasi
               </h3>
             </GenericBaseCard>
             <div class="flex flex-col gap-3 md:(grid grid-cols-2)">
-              <GenericBaseCard
-                v-for="item in getAllLiterasiInformasi"
-                class="bg-gray-1 h-full"
-              >
+              <GenericBaseCard v-for="item in getAllLiterasiInformasi" class="bg-gray-1 h-full">
                 <div>
-                  <NuxtImg
-                    src="/images/9396112_3023.jpg"
-                    format="webp"
-                    class="w-full object-cover rounded-t"
-                  ></NuxtImg>
+                  <NuxtImg src="/images/9396112_3023.jpg" format="webp" class="w-full object-cover rounded-t"></NuxtImg>
                 </div>
                 <div class="flex flex-col px-4 py-5 justify-center">
                   <h3 class="text-left">{{ item.judul }}</h3>
@@ -105,10 +85,7 @@ const toggleLayanan = (value) => {
                     {{ trimDescription(item.konten, 150) }}
                   </p>
                   <div class="flex my-3 text-center">
-                    <NuxtLink
-                      :to="`/panduan/literasi-informasi/${item.slug}`"
-                      class="action-btn"
-                    >
+                    <NuxtLink :to="`/panduan/literasi-informasi/${item.slug}`" class="action-btn">
                       Lihat Panduan
                     </NuxtLink>
                   </div>
@@ -124,8 +101,7 @@ const toggleLayanan = (value) => {
 
 <style scoped>
 .layer {
-  --at-apply: max-w-7xl ma flex flex-col items-center justify-center gap-4 py-5
-    px-2 h-full;
+  --at-apply: max-w-7xl ma flex flex-col items-center justify-center gap-4 py-5 px-2 h-full;
 }
 
 .action-btn {

@@ -21,14 +21,8 @@ const dataArtikelLibrary = await getItems({
     </div>
 
     <div class="article-list">
-      <GenericArticleCard
-        v-for="item in dataArtikelLibrary"
-        :featured-img="item.gambar_unggulan"
-        :description="item.konten_artikel"
-        :link-slug="item.slug"
-        :title="item.judul"
-        :date-created="item.date_created"
-      />
+      <GenericArticleCard v-for="item in dataArtikelLibrary" :featured-img="item.gambar_unggulan"
+        :description="item.konten_artikel" :link-slug="item.slug" :title="item.judul" :date-created="item.date_created" />
     </div>
 
     <div class="my-10 text-center">

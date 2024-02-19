@@ -19,7 +19,6 @@ const emit = defineEmits(["display"]);
 
 <style>
 .modal-display {
-  --at-apply: absolute z-1 inset-0 flex items-center justify-center w-full
-    h-screen bg-gray-500/80;
+  --at-apply: absolute z-1 inset-0 flex items-center justify-center w-full h-screen bg-gray-500/80;
 }
 </style>

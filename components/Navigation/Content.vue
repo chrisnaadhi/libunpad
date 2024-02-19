@@ -20,20 +20,11 @@ const removeIcon = () => {
   <section class="absolute left-0 bg-white shadow-lg w-full mt-5">
     <div class="max-w-6xl ma flex">
       <div class="flex flex-col py-5" @mouseleave="removeIcon">
-        <NuxtLink
-          v-for="(menu, index) in menus"
-          :key="index"
-          :to="locale === 'id' ? menu.url : menu.urlEN"
-          class="menu-link"
-          rel="noopener noreferrer"
-          @mouseenter="viewIconToggle(menu.id)"
-        >
+        <NuxtLink v-for="(menu, index) in menus" :key="index" :to="locale === 'id' ? menu.url : menu.urlEN"
+          class="menu-link" rel="noopener noreferrer" @mouseenter="viewIconToggle(menu.id)">
           <span class="flex items-center justify-between w-50">
             <span>{{ locale === "en" ? menu.nameEN : menu.name }}</span>
-            <div
-              class="i-mdi-arrow-right-drop-circle w-5 h-5 text-orange"
-              v-show="viewedIcon === menu.id"
-            />
+            <div class="i-mdi-arrow-right-drop-circle w-5 h-5 text-orange" v-show="viewedIcon === menu.id" />
           </span>
         </NuxtLink>
       </div>

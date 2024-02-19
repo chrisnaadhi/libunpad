@@ -30,8 +30,7 @@ const dataLayanan = await getLayanan[0];
 
 <style scoped>
 .layer {
-  --at-apply: max-w-7xl ma flex flex-col items-center justify-center gap-4 py-5
-    px-2;
+  --at-apply: max-w-7xl ma flex flex-col items-center justify-center gap-4 py-5 px-2;
 }
 
 p {

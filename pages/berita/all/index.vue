@@ -14,21 +14,11 @@ const getAllArticle = await getItems({
 <template>
   <main class="max-w-7xl ma px-4 py-10">
     <section>
-      <CollectionHeader
-        :title="$t('newsTitleHeader')"
-        :image="imageBg"
-        :description="$t('newsDescriptionHeader')"
-      />
+      <CollectionHeader :title="$t('newsTitleHeader')" :image="imageBg" :description="$t('newsDescriptionHeader')" />
     </section>
     <section class="article-list">
-      <GenericArticleCard
-        v-for="item in getAllArticle"
-        :featured-img="item.gambar_unggulan"
-        :description="item.konten_artikel"
-        :link-slug="item.slug"
-        :title="item.judul"
-        :date-created="item.date_created"
-      />
+      <GenericArticleCard v-for="item in getAllArticle" :featured-img="item.gambar_unggulan"
+        :description="item.konten_artikel" :link-slug="item.slug" :title="item.judul" :date-created="item.date_created" />
     </section>
     <section class="my-10 text-center">
       <NuxtLink to="/berita" class="btn bg-orange text-white">

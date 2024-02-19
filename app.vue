@@ -152,8 +152,7 @@ strong {
 }
 
 .kandaga-gradient {
-  --at-apply: bg-clip-text text-transparent bg-gradient-to-br from-orange-500
-    to-gray-500;
+  --at-apply: bg-clip-text text-transparent bg-gradient-to-br from-orange-500 to-gray-500;
 }
 
 .content-layer {
@@ -164,6 +163,7 @@ strong {
 .page-leave-active {
   transition: all 0.4s;
 }
+
 .page-enter-from,
 .page-leave-to {
   opacity: 0;
@@ -193,6 +193,7 @@ strong {
 ::-webkit-scrollbar-thumb {
   --at-apply: bg-orange-2 rounded-xl;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   --at-apply: bg-orange-3;
 }
