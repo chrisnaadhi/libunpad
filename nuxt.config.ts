@@ -27,9 +27,6 @@ export default defineNuxtConfig({
   unocss: {
     preflight: true,
   },
-  features: {
-    inlineStyles: false,
-  },
   directus: {
     url: process.env.DIRECTUS_BASE_URL,
     token: process.env.DIRECTUS_ACCESS_TOKEN,

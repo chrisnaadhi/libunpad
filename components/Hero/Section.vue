@@ -15,8 +15,6 @@ const getBerita = await getItemById({
 const getThumbnail = (id) => {
   return `${config.public.directus.url}assets/${id}`
 }
-
-console.log(getThumbnail(getBerita.gambar_unggulan))
 </script>
 
 <template>
