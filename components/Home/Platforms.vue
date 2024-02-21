@@ -112,7 +112,7 @@ const viewStateMuseum = ref(false);
   background-position: center;
   background-size: cover;
   box-shadow: 0px 25px 15px rgb(255, 255, 255) inset, 0px -25px 15px rgb(255, 255, 255) inset;
-  --at-apply: bg-white w-full flex flex-col items-center;
+  --at-apply: bg-white w-full flex flex-col items-center mt-25;
 }
 
 .background-block {

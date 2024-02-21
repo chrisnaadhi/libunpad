@@ -1,6 +1,6 @@
 <template>
   <section class="max-w-7xl ma my-8">
-    <h1 class="text-center text-3xl font-600">
+    <h1 class="text-center text-3xl font-600 bg-orange text-white max-w-md w-full ma py-2 rounded">
       {{ $t("exploreOurCollection") }}
     </h1>
     <div class="cards">

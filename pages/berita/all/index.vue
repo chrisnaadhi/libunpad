@@ -7,6 +7,9 @@ const getAllArticle = await getItems({
   collection: "artikel",
   params: {
     sort: "-date_created",
+    filter: {
+      status: "published"
+    }
   },
 });
 </script>

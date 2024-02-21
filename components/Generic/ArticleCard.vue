@@ -20,7 +20,7 @@ defineProps({
     <p class="text-xs italic">{{ convertTimeZone(dateCreated) }}</p>
     <div></div>
     <p>
-      <span v-html="trimDescription(description, 100)"></span>
+      <span v-html="trimDescription(description, 150)"></span>
       <NuxtLink :to="'/berita/' + linkSlug" class="text-sm text-orange underline">
         Baca selengkapnya
       </NuxtLink>
@@ -30,6 +30,6 @@ defineProps({
 
 <style scoped>
 .article-block {
-  --at-apply: flex flex-col gap-2 text-left w-full bg-gray-50 p-3 rounded-lg shadow-md shadow-gray-4;
+  --at-apply: flex flex-col gap-2 text-left w-full min-h-sm bg-gray-50 p-3 rounded-lg shadow-md shadow-gray;
 }
 </style>

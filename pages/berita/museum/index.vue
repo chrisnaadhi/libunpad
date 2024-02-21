@@ -1,13 +1,13 @@
 <script setup>
 const { getItems } = useDirectusItems();
 const title = ref("Berita terkait Museum");
-const route = useRoute();
 
 const dataArtikelMuseum = await getItems({
   collection: "artikel",
   params: {
     filter: {
       kategori: "museum",
+      status: "published"
     },
   },
 });
@@ -17,6 +17,7 @@ const dataArtikelMuseum = await getItems({
   <section>
     <div class="text-center">
       <h1>{{ title }}</h1>
+      <p class="italic">Berita yang berkaitan seputar Museum dan pengelolaannya.</p>
     </div>
 
     <div class="article-list">

@@ -46,41 +46,47 @@ function downloadQR() {
 </script>
 
 <template>
-  <h1>Kandaga QRCode Generator</h1>
-  <p>
-    Masukkan teks atau tautan (link) lalu klik tombol
-    <span class="text-orange font-600">Generate</span>
-  </p>
-  <div class="input-area">
-    <input type="text" name="textqr" id="" v-model="textForQR" />
-    <button class="generate-btn" :class="!textForQR ? 'bg-gray cursor-not-allowed' : 'bg-orange'" @click="generateQR"
-      :disabled="!textForQR">
-      Generate
-    </button>
-  </div>
-  <div class="qr-area" ref="generatedArea"></div>
-  <div class="my-5 flex items-center max-w-72 ma gap-2">
-    <button :class="textForQR ? 'download-btn' : 'btn-disabled'" ref="download" @click="downloadQR"
-      :disabled="!textForQR">
-      Download
-    </button>
-    <button :class="textForQR ? 'reset-btn' : 'btn-disabled'" @click="clearQR" :disabled="!textForQR">
-      Reset
-    </button>
-  </div>
-  <div class="min-w-72 ma">
-    <NuxtLink to="/toolkit" class="btn w-full bg-orange text-white">
-      Kembali ke daftar Toolkit
-    </NuxtLink>
-  </div>
+  <section>
+    <h1>Kandaga QRCode Generator</h1>
+    <p>
+      Masukkan teks atau tautan (link) lalu klik tombol
+      <span class="text-orange font-600">Generate</span>
+    </p>
+    <div class="qr-parents">
+      <input type="text" name="textqr" id="" v-model="textForQR" />
+      <button class="generate-btn" :class="!textForQR ? 'bg-gray cursor-not-allowed' : 'bg-orange'" @click="generateQR"
+        :disabled="!textForQR">
+        Generate
+      </button>
+    </div>
+    <div class="qr-area" ref="generatedArea"></div>
+    <div class="my-5 flex items-center max-w-72 ma gap-2">
+      <button :class="textForQR ? 'download-btn' : 'btn-disabled'" ref="download" @click="downloadQR"
+        :disabled="!textForQR">
+        Download
+      </button>
+      <button :class="textForQR ? 'reset-btn' : 'btn-disabled'" @click="clearQR" :disabled="!textForQR">
+        Reset
+      </button>
+    </div>
+    <div class="min-w-72 ma">
+      <NuxtLink to="/toolkit" class="btn w-full bg-orange text-white">
+        Kembali ke daftar Toolkit
+      </NuxtLink>
+    </div>
+  </section>
 </template>
 
 <style scoped>
+section {
+  --at-apply: pt-5;
+}
+
 h1 {
   --at-apply: text-3xl font-600;
 }
 
-.input-area {
+.qr-parents {
   --at-apply: px-2 my-2 flex flex-col items-center justify-center gap-1 sm:(flex-row w-full);
 }
 
