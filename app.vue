@@ -58,6 +58,8 @@ useHead({
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Kanit&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,900;1,200;1,300;1,400;1,600;1,700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
 @media print {
   .noPrint {
     display: none;
@@ -152,8 +154,7 @@ strong {
 }
 
 .kandaga-gradient {
-  --at-apply: bg-clip-text text-transparent bg-gradient-to-br from-orange-500
-    to-gray-500;
+  --at-apply: bg-clip-text text-transparent bg-gradient-to-br from-orange-500 to-gray-500;
 }
 
 .content-layer {
@@ -164,6 +165,7 @@ strong {
 .page-leave-active {
   transition: all 0.4s;
 }
+
 .page-enter-from,
 .page-leave-to {
   opacity: 0;
@@ -193,6 +195,7 @@ strong {
 ::-webkit-scrollbar-thumb {
   --at-apply: bg-orange-2 rounded-xl;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   --at-apply: bg-orange-3;
 }

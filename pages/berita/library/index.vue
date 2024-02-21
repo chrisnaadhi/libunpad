@@ -1,13 +1,13 @@
 <script setup>
 const { getItems } = useDirectusItems();
 const title = ref("Berita terkait Library");
-const route = useRoute();
 
 const dataArtikelLibrary = await getItems({
   collection: "artikel",
   params: {
     filter: {
       kategori: "library",
+      status: "published"
     },
   },
 });
@@ -17,18 +17,12 @@ const dataArtikelLibrary = await getItems({
   <section>
     <div class="text-center">
       <h1>{{ title }}</h1>
-      <pre>{{ route.fullPath }}</pre>
+      <p class="italic">Berita yang berkaitan seputar Perpustakaan dan pengelolaannya.</p>
     </div>
 
     <div class="article-list">
-      <GenericArticleCard
-        v-for="item in dataArtikelLibrary"
-        :featured-img="item.gambar_unggulan"
-        :description="item.konten_artikel"
-        :link-slug="item.slug"
-        :title="item.judul"
-        :date-created="item.date_created"
-      />
+      <GenericArticleCard v-for="item in dataArtikelLibrary" :featured-img="item.gambar_unggulan"
+        :description="item.konten_artikel" :link-slug="item.slug" :title="item.judul" :date-created="item.date_created" />
     </div>
 
     <div class="my-10 text-center">

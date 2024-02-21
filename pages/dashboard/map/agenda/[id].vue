@@ -17,25 +17,16 @@ const fetchAgenda = await getItems(fetchAgendaKegiatan(route.params.id));
       </span>
     </h1>
     <div class="grid grid-cols-3 gap-2 my-3">
-      <GenericBaseCard
-        v-for="agenda in fetchAgenda.data"
-        class="border border-orange py-5"
-      >
+      <GenericBaseCard v-for="agenda in fetchAgenda.data" class="border border-orange py-5">
         <h1 class="text-xl">{{ agenda.nama_kegiatan }}</h1>
         <p class="text-sm">
           Status Kegiatan:<br />
-          <span
-            :class="colorStatusAgenda(agenda.status_kegiatan)"
-            class="badge"
-          >
+          <span :class="colorStatusAgenda(agenda.status_kegiatan)" class="badge">
             {{ displayStatusAgenda(agenda.status_kegiatan) }}
           </span>
         </p>
         <div class="mt-5">
-          <NuxtLink
-            :to="`/dashboard/map/agenda/detail/${agenda.id}`"
-            class="btn bg-orange-2"
-          >
+          <NuxtLink :to="`/dashboard/map/agenda/detail/${agenda.id}`" class="btn bg-orange-2">
             Detail
           </NuxtLink>
         </div>

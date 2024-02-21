@@ -17,15 +17,10 @@ const totalPekerjaan = await getItems({
 <template>
   <section class="flex gap-2 mb-5" v-show="user">
     <div>
-      <img
-        :src="
-          user.avatar
-            ? `https://repository.unpad.ac.id:8050/assets/${user.avatar}.jpg`
-            : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'
-        "
-        alt="Foto Profil"
-        class="w-30 rounded border border-orange"
-      />
+      <img :src="user.avatar
+          ? `https://repository.unpad.ac.id:8050/assets/${user.avatar}.jpg`
+          : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'
+        " alt="Foto Profil" class="w-30 rounded border border-orange" />
     </div>
     <div class="flex gap-2">
       <div>

@@ -9,10 +9,7 @@ const { data: koleksi } = await useFetch("/api/v1/koleksi/dirtakel");
   <main>
     <h1>{{ heading }}</h1>
     <section class="flex items-center justify-center flex-wrap gap-3">
-      <GenericBaseCard
-        v-for="berkas in koleksi.results"
-        class="max-w-sm bg-orange-2 min-h-xs"
-      >
+      <GenericBaseCard v-for="berkas in koleksi.results" class="max-w-sm bg-orange-2 min-h-xs">
         <h4>{{ berkas.titles }}</h4>
       </GenericBaseCard>
     </section>

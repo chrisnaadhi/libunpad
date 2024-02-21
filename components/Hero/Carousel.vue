@@ -2,10 +2,7 @@
 
 <template>
   <section>
-    <div
-      class="hero-img w-full h-32 xl:h-86 xl:w-md"
-      title="GLAM Kandaga"
-    ></div>
+    <div class="hero-img w-full h-32 xl:h-86 xl:w-md" title="GLAM Kandaga"></div>
   </section>
 </template>
 

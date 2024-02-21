@@ -26,12 +26,8 @@ const viewStateMuseum = ref(false);
       <p>{{ $t("usingPlatformDescription") }}</p>
     </div>
     <section class="content-wrapper">
-      <NuxtLink
-        :to="locale === 'id' ? '/gallery' : '/en/gallery'"
-        class="content"
-        @mouseenter="viewStateGallery = true"
-        @mouseleave="viewStateGallery = false"
-      >
+      <NuxtLink :to="locale === 'id' ? '/gallery' : '/en/gallery'" class="content" @mouseenter="viewStateGallery = true"
+        @mouseleave="viewStateGallery = false">
         <div v-show="viewStateGallery === false">
           <p class="use-banner">Platform</p>
           <div class="i-mdi-theater w-24 h-24" />
@@ -43,12 +39,8 @@ const viewStateMuseum = ref(false);
           <p class="text-xs">{{ $t("galleryDescription") }}</p>
         </div>
       </NuxtLink>
-      <NuxtLink
-        :to="locale === 'id' ? '/library' : '/en/library'"
-        class="content"
-        @mouseenter="viewStateLibrary = true"
-        @mouseleave="viewStateLibrary = false"
-      >
+      <NuxtLink :to="locale === 'id' ? '/library' : '/en/library'" class="content" @mouseenter="viewStateLibrary = true"
+        @mouseleave="viewStateLibrary = false">
         <div v-show="viewStateLibrary === false">
           <p class="use-banner">Platform</p>
           <div class="i-mdi-bookshelf w-24 h-24" />
@@ -60,12 +52,8 @@ const viewStateMuseum = ref(false);
           <p class="text-xs">{{ $t("libraryDescription") }}</p>
         </div>
       </NuxtLink>
-      <NuxtLink
-        :to="locale === 'id' ? '/records' : '/en/records'"
-        class="content"
-        @mouseenter="viewStateArchive = true"
-        @mouseleave="viewStateArchive = false"
-      >
+      <NuxtLink :to="locale === 'id' ? '/records' : '/en/records'" class="content" @mouseenter="viewStateArchive = true"
+        @mouseleave="viewStateArchive = false">
         <div v-show="viewStateArchive === false">
           <p class="use-banner">Platform</p>
           <div class="i-mdi-archive-sync w-24 h-24" />
@@ -77,12 +65,8 @@ const viewStateMuseum = ref(false);
           <p class="text-xs">{{ $t("archiveDescription") }}</p>
         </div>
       </NuxtLink>
-      <NuxtLink
-        :to="locale === 'id' ? '/museum' : '/en/museum'"
-        class="content"
-        @mouseenter="viewStateMuseum = true"
-        @mouseleave="viewStateMuseum = false"
-      >
+      <NuxtLink :to="locale === 'id' ? '/museum' : '/en/museum'" class="content" @mouseenter="viewStateMuseum = true"
+        @mouseleave="viewStateMuseum = false">
         <div v-show="viewStateMuseum === false">
           <p class="use-banner">Platform</p>
           <div class="i-mdi-bank w-24 h-24" />
@@ -96,19 +80,12 @@ const viewStateMuseum = ref(false);
       </NuxtLink>
     </section>
     <section
-      class="max-w-6xl w-full px-5 flex flex-col gap-4 mt-3 md:(grid grid-cols-2) xl:(flex flex-row justify-center px-8)"
-    >
-      <NuxtLink
-        :to="locale === 'id' ? '/koleksi/repository' : '/en/koleksi/repository'"
-        class="extra-content"
-      >
+      class="max-w-6xl w-full px-5 flex flex-col gap-4 mt-3 md:(grid grid-cols-2) xl:(flex flex-row justify-center px-8)">
+      <NuxtLink :to="locale === 'id' ? '/koleksi/repository' : '/en/koleksi/repository'" class="extra-content">
         <div class="i-mdi-book-education w-8 h-8" />
         <h6>Repository</h6>
       </NuxtLink>
-      <NuxtLink
-        :to="locale === 'id' ? '/koleksi-hayati' : '/en/koleksi-hayati'"
-        class="extra-content"
-      >
+      <NuxtLink :to="locale === 'id' ? '/koleksi-hayati' : '/en/koleksi-hayati'" class="extra-content">
         <div class="i-mdi-leaf w-8 h-8" />
         <h6>Koleksi Hayati</h6>
       </NuxtLink>
@@ -135,11 +112,11 @@ const viewStateMuseum = ref(false);
   background-position: center;
   background-size: cover;
   box-shadow: 0px 25px 15px rgb(255, 255, 255) inset, 0px -25px 15px rgb(255, 255, 255) inset;
-  --at-apply: bg-white w-full flex flex-col items-center;
+  --at-apply: bg-white w-full flex flex-col items-center mt-25;
 }
 
 .background-block {
-  --at-apply: w-full text-dark bg-white py-5 transition-all-500 flex flex-col items-center justify-center px-5 cursor-default z-2 xl:(w-6xl mt--16 rounded-xl) hover:(bg-orange-5 text-white transition-all-500) ;
+  --at-apply: w-full text-dark bg-white py-5 transition-all-500 flex flex-col items-center justify-center px-5 cursor-default z-2 xl:(w-6xl mt--16 rounded-xl) hover:(bg-orange-5 text-white transition-all-500);
 }
 
 .background-block:hover .tanggal {
@@ -161,6 +138,7 @@ const viewStateMuseum = ref(false);
 .content:hover {
   --at-apply: bg-orange text-white;
 }
+
 .use-banner {
   --at-apply: text-xs bg-orange text-white px-4 rounded;
 }
@@ -169,7 +147,7 @@ const viewStateMuseum = ref(false);
   --at-apply: max-w-20 ma text-xs bg-white text-orange px-4 rounded;
 }
 
-.content:hover > .use-banner {
+.content:hover>.use-banner {
   --at-apply: transition-all-500 bg-white text-orange;
 }
 

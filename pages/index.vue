@@ -33,6 +33,7 @@ const windowClick = () => {
     <HeroSection />
     <HomePlatforms />
     <HomeTools />
+    <HomeNews />
     <HomeCollection />
   </div>
 </template>

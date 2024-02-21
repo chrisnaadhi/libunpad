@@ -73,6 +73,7 @@ onMounted(() => {
 .background-block {
   --at-apply: flex pt-5 flex-col items-center min-w-full;
 }
+
 h1 {
   --at-apply: text-5xl font-600;
 }

@@ -220,36 +220,22 @@ useHead({
     <div class="max-w-6xl ma">
       <h3>Cite this paper</h3>
       <div class="tab-title">
-        <button
-          class="tab-item"
-          :class="chosenCitation === 'apa' ? 'active-tab' : 'inactive-tab'"
-          @click="chooseCitation('apa')"
-        >
+        <button class="tab-item" :class="chosenCitation === 'apa' ? 'active-tab' : 'inactive-tab'"
+          @click="chooseCitation('apa')">
           APA
         </button>
-        <button
-          class="tab-item"
-          :class="chosenCitation === 'chicago' ? 'active-tab' : 'inactive-tab'"
-          @click="chooseCitation('chicago')"
-        >
+        <button class="tab-item" :class="chosenCitation === 'chicago' ? 'active-tab' : 'inactive-tab'"
+          @click="chooseCitation('chicago')">
           Chicago
         </button>
       </div>
       <div v-show="chosenCitation === 'apa'" class="citation-block">
         <h6>APA Style</h6>
-        <p
-          v-html="formattedAPA"
-          @click="copyCitation(formattedAPA)"
-          class="citation"
-        ></p>
+        <p v-html="formattedAPA" @click="copyCitation(formattedAPA)" class="citation"></p>
       </div>
       <div v-show="chosenCitation === 'chicago'" class="citation-block">
         <h6>Chicago Style</h6>
-        <p
-          v-html="formattedChicago"
-          @click="copyCitation(formattedChicago)"
-          class="citation"
-        ></p>
+        <p v-html="formattedChicago" @click="copyCitation(formattedChicago)" class="citation"></p>
       </div>
     </div>
     <div class="flex flex-col items-center">

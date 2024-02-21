@@ -6,6 +6,7 @@ export const fetchArticleCategory = (category: string) => {
       sort: "-date_updated",
       filter: {
         kategori: category,
+        status: "published",
       },
     },
   };

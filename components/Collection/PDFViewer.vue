@@ -18,10 +18,6 @@ onMounted(() => {
 
 <template>
   <div>
-    <embed
-      src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
-      width="720px"
-      height="240px"
-    />
+    <embed src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" width="720px" height="240px" />
   </div>
 </template>

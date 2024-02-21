@@ -36,7 +36,7 @@ const tools = [
 
 <style scoped>
 main {
-  --at-apply: flex flex-col md:flex-row ma items-center justify-center container gap-4 py-5;
+  --at-apply: max-w-7xl ma flex flex-col md:flex-row items-center justify-center gap-4 py-5;
 }
 
 h1 {

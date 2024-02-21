@@ -16,11 +16,7 @@
     </div>
     <div class="middle-menu">
       <NuxtLink to="/search">
-        <img
-          src="/images/lambang-unpad.png"
-          class="unpad-icon"
-          alt="Logo Unpad"
-        />
+        <img src="/images/lambang-unpad.png" class="unpad-icon" alt="Logo Unpad" />
       </NuxtLink>
     </div>
     <div class="menu-element">

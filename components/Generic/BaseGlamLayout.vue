@@ -46,11 +46,7 @@ defineProps({
           <GenericSearch />
         </div>
         <div>
-          <NuxtImg
-            :src="'/illustration/' + imageUrl"
-            height="250px"
-            format="webp"
-          />
+          <NuxtImg :src="'/illustration/' + imageUrl" height="250px" format="webp" />
         </div>
       </div>
     </div>

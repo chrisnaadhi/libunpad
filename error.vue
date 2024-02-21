@@ -15,12 +15,7 @@ const handleClearError = () => {
     <NavigationBar />
     <section class="content">
       <div class="flex items-center justify-center">
-        <NuxtImg
-          src="/illustration/undraw_Warning.png"
-          height="128px"
-          width="128px"
-          format="webp"
-        />
+        <NuxtImg src="/illustration/undraw_Warning.png" height="128px" width="128px" format="webp" />
       </div>
       <h1 class="text-9xl">{{ error.statusCode }}</h1>
       <p class="italic">{{ error.message }}</p>
@@ -60,18 +55,12 @@ const handleClearError = () => {
       <pre> Kamu ada di halaman: {{ route.fullPath }} </pre>
       <div class="flex justify-center my-5 gap-5">
         <NuxtLink to="mailto:chrisna.adhi@unpad.ac.id">
-          <button
-            type="button"
-            class="btn border-1 border-orange bg-orange text-white"
-          >
+          <button type="button" class="btn border-1 border-orange bg-orange text-white">
             Hubungi Web Admin
           </button>
         </NuxtLink>
-        <button
-          @click="handleClearError"
-          type="button"
-          class="btn border-1 border-orange-4 hover:(bg-orange-4 text-white) transition-all-500"
-        >
+        <button @click="handleClearError" type="button"
+          class="btn border-1 border-orange-4 hover:(bg-orange-4 text-white) transition-all-500">
           Kembali ke Beranda
         </button>
       </div>

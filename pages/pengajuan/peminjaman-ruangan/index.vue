@@ -83,21 +83,10 @@ const dataPeminjaman = await getItems({
   <main class="main-content">
     <section class="max-w-lg ma">
       <h1>Form Peminjaman Ruangan</h1>
-      <form
-        @submit.prevent="kirimPengajuan"
-        class="container ma max-w-md px-5 text-left"
-      >
+      <form @submit.prevent="kirimPengajuan" class="container ma max-w-md px-5 text-left">
         <div class="input-form">
           <label for="email">Email :</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            v-model="email"
-            class="cursor-not-allowed"
-            required
-            disabled
-          />
+          <input type="email" name="email" id="email" v-model="email" class="cursor-not-allowed" required disabled />
         </div>
         <div class="input-form">
           <label for="npm">NPM / NIP :</label>
@@ -105,46 +94,23 @@ const dataPeminjaman = await getItems({
         </div>
         <div class="input-form">
           <label for="nama">Nama Lengkap :</label>
-          <input
-            type="text"
-            name="nama"
-            id="nama"
-            v-model="namaLengkap"
-            required
-          />
+          <input type="text" name="nama" id="nama" v-model="namaLengkap" required />
         </div>
 
         <div class="input-form">
           <label for="kontak">No. HP / Whatsapp / Kontak Lain :</label>
-          <input
-            type="text"
-            name="kontak"
-            id="kontak"
-            v-model="kontak"
-            required
-          />
+          <input type="text" name="kontak" id="kontak" v-model="kontak" required />
         </div>
         <div class="input-form">
           <label for="namaruangan">Nama Ruangan</label>
-          <select
-            name="namaruangan"
-            id="namaruangan"
-            v-model="namaRuangan"
-            required
-          >
+          <select name="namaruangan" id="namaruangan" v-model="namaRuangan" required>
             <option value="ruang_the_gade">Ruang Pegadaian</option>
             <option value="ruang_kelas_2">Ruang Kelas Lt.2</option>
           </select>
         </div>
         <div class="input-form">
           <label for="tanggal">Tanggal Peminjaman</label>
-          <input
-            type="date"
-            name="tanggal"
-            id="tanggal"
-            v-model="tanggalPeminjaman"
-            required
-          />
+          <input type="date" name="tanggal" id="tanggal" v-model="tanggalPeminjaman" required />
         </div>
 
         <div class="input-form flex gap-2">
@@ -159,12 +125,7 @@ const dataPeminjaman = await getItems({
         </div>
         <div class="input-form">
           <label for="tujuanpeminjaman">Tujuan Peminjaman</label>
-          <textarea
-            name="tujuanpeminjaman"
-            id="tujuanpeminjaman"
-            rows="5"
-            v-model="tujuanPeminjaman"
-          />
+          <textarea name="tujuanpeminjaman" id="tujuanpeminjaman" rows="5" v-model="tujuanPeminjaman" />
         </div>
 
         <div class="pb-4 text-center">
@@ -188,22 +149,14 @@ const dataPeminjaman = await getItems({
       <p class="text-2xl font-semibold text-orange">
         {{ monthName }} {{ date.getFullYear() }}
       </p>
-      <div
-        class="max-w-md grid grid-cols-2 gap-4 ma"
-        v-if="dataPeminjaman.length > 0"
-      >
-        <div
-          class="rounded bg-orange w-full p-2"
-          v-for="(item, index) in dataPeminjaman"
-          v-bind:key="item.id"
-        >
+      <div class="max-w-md grid grid-cols-2 gap-4 ma" v-if="dataPeminjaman.length > 0">
+        <div class="rounded bg-orange w-full p-2" v-for="(item, index) in dataPeminjaman" v-bind:key="item.id">
           <p class="font-semibold text-white text-lg">
             {{ item.tanggal_peminjaman }}
           </p>
           <div class="text-xs text-white">
             <p>
-              <span class="font-semibold">Jam: </span
-              >{{ item.jam_mulai_peminjaman }} -
+              <span class="font-semibold">Jam: </span>{{ item.jam_mulai_peminjaman }} -
               {{ item.jam_selesai_peminjaman }}
             </p>
             <p>

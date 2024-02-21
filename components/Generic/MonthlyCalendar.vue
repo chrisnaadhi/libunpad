@@ -69,10 +69,7 @@ const profilPetugas = await getUserById({
     </div>
 
     <div class="grid grid-cols-3 gap-2 m-2">
-      <div
-        v-for="pegawai in dataPiketPegawai"
-        class="border-1 border-blue-3 bg-gray-50 rounded"
-      >
+      <div v-for="pegawai in dataPiketPegawai" class="border-1 border-blue-3 bg-gray-50 rounded">
         <h4>{{ readableDate(pegawai.tanggal) }}</h4>
         <p>{{ searchPetugas(pegawai.petugas_pertama) }}</p>
       </div>
@@ -85,8 +82,8 @@ const profilPetugas = await getUserById({
     <h1 class="font-600 text-orange-6">
       {{
         getPetugasExtendedTimeService[0] === undefined
-          ? "Tidak ada Petugas"
-          : `${profilPetugas.first_name} ${profilPetugas.last_name}`
+        ? "Tidak ada Petugas"
+        : `${profilPetugas.first_name} ${profilPetugas.last_name}`
       }}
     </h1>
   </section>
@@ -111,7 +108,6 @@ h1 {
 
 .day {
   width: calc(100% / 7);
-  --at-apply: flex relative items-center justify-center h-20 border-solid
-    border-1 border-gray;
+  --at-apply: flex relative items-center justify-center h-20 border-solid border-1 border-gray;
 }
 </style>

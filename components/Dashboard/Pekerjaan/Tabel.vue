@@ -140,11 +140,7 @@ onMounted(async () => {
             {{ displayStatusTugas(data.status) }}
           </td>
           <td>
-            <NuxtLink
-              :to="route.fullPath + '/' + data.id"
-              class="btn bg-orange-2 py-1 px-3"
-              >Update</NuxtLink
-            >
+            <NuxtLink :to="route.fullPath + '/' + data.id" class="btn bg-orange-2 py-1 px-3">Update</NuxtLink>
           </td>
         </tr>
       </tbody>
@@ -155,29 +151,19 @@ onMounted(async () => {
         {{ pageStore.pageTask }} /
         {{
           dataPekerjaan.meta.filter_count === 0
-            ? 1
-            : Math.ceil(dataPekerjaan.meta.filter_count / pageStore.baseVal)
+          ? 1
+          : Math.ceil(dataPekerjaan.meta.filter_count / pageStore.baseVal)
         }}
       </p>
       <div class="flex justify-center gap-2">
-        <button
-          class="btn"
-          :class="
-            pageStore.offsetVal === 0
-              ? 'bg-gray-2 cursor-not-allowed'
-              : 'bg-blue-2'
-          "
-          :disabled="pageStore.offsetVal === 0"
-          @click="fetchDataPekerjaan('prev')"
-        >
+        <button class="btn" :class="pageStore.offsetVal === 0
+            ? 'bg-gray-2 cursor-not-allowed'
+            : 'bg-blue-2'
+          " :disabled="pageStore.offsetVal === 0" @click="fetchDataPekerjaan('prev')">
           Sebelumnya
         </button>
-        <button
-          class="btn"
-          :class="maxedTask ? 'bg-gray-2 cursor-not-allowed' : 'bg-blue-2'"
-          @click="fetchDataPekerjaan('next')"
-          :disabled="maxedTask"
-        >
+        <button class="btn" :class="maxedTask ? 'bg-gray-2 cursor-not-allowed' : 'bg-blue-2'"
+          @click="fetchDataPekerjaan('next')" :disabled="maxedTask">
           Selanjutnya
         </button>
       </div>

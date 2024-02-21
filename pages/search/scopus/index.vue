@@ -28,20 +28,12 @@ const submitSearchScopus = async (terms) => {
   <section class="flex flex-col items-center justify-center">
     <h1 class="text-5xl">Pencarian Scopus</h1>
     <div>
-      <input
-        type="search"
-        name="pencarian"
-        id="pencarian"
-        v-model="searchScopus.keywords"
-        @keyup.enter="submitSearchScopus(searchScopus.keywords)"
-      />
+      <input type="search" name="pencarian" id="pencarian" v-model="searchScopus.keywords"
+        @keyup.enter="submitSearchScopus(searchScopus.keywords)" />
     </div>
     <div class="grid grid-cols-3 gap-2">
-      <div
-        v-if="searchScopus.scopusObjects"
-        v-for="result in searchScopus.scopusObjects['search-results']['entry']"
-        class="text-xs max-w-sm"
-      >
+      <div v-if="searchScopus.scopusObjects" v-for="result in searchScopus.scopusObjects['search-results']['entry']"
+        class="text-xs max-w-sm">
         <GenericBaseCard class="bg-gray-2 p-5">
           <h5>{{ result["dc:title"] }}</h5>
           <p>{{ result["dc:creator"] }}</p>
@@ -51,10 +43,8 @@ const submitSearchScopus = async (terms) => {
             Vol: {{ result["prism:volume"] }}, Issue:
             {{ result["prism:issueIdentifier"] }}
           </p>
-          <NuxtLink
-            :to="`https://www.scopus.com/record/display.uri?eid=${result['eid']}&origin=resultslist`"
-            target="_blank"
-          >
+          <NuxtLink :to="`https://www.scopus.com/record/display.uri?eid=${result['eid']}&origin=resultslist`"
+            target="_blank">
             Akses
           </NuxtLink>
         </GenericBaseCard>
