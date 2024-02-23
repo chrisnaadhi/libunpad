@@ -17,6 +17,7 @@
     "@unocss/nuxt": "^0.58.4",
     "dayjs-nuxt": "^1.2.7",
     "drizzle-kit": "^0.20.13",
+    "minio": "^7.1.3",
     "nuxt": "^3.9.3"
   },
   "dependencies": {

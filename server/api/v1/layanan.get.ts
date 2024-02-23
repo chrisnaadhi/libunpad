@@ -8,10 +8,11 @@ export default defineEventHandler((event) => {
       isActive: true,
     },
     {
-      namaLayanan: "Pengajuan Reservasi Online",
-      deskripsiLayanan: "Belum Tersedia",
-      slug: "/pengajuan/#",
-      isActive: false,
+      namaLayanan: "Unggah Mandiri Tugas Akhir",
+      deskripsiLayanan:
+        "Layanan Unggah Mandiri untuk Tugas Akhir dalam bentuk Elektronik untuk keperluan serah simpan karya ilmiah ke Institusi. Tugas Akhir dalam bentuk Karya Ilmiah standar Skripsi, Tesis, Disertasi maupun format karya ilmiah yang telah disetujui oleh program studi dan universitas.",
+      slug: "/pengajuan/unggah-mandiri",
+      isActive: true,
     },
     {
       namaLayanan: "Peminjaman Ruangan",

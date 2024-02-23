@@ -26,16 +26,11 @@ const data = ref("Submit Unggah Mandiri");
         temporibus deleniti accusamus.
       </p>
       <div class="flex items-center justify-center my-3 gap-3">
-        <NuxtLink href="#" class="w-full">
-          <button class="btn w-full bg-red text-white">Unggah Skripsi</button>
+        <NuxtLink href="form" class="w-full">
+          <button class="btn w-full bg-green-6 text-white">Unggah Skripsi / Tesis / Disertasi</button>
         </NuxtLink>
-        <NuxtLink href="#" class="w-full">
-          <button class="btn w-full bg-blue text-white">Unggah Tesis</button>
-        </NuxtLink>
-        <NuxtLink href="#" class="w-full">
-          <button class="btn w-full bg-violet text-white">
-            Unggah Disertasi
-          </button>
+        <NuxtLink class="btn w-full bg-orange-6 text-white">
+          <button>Unggah Karya Ilmiah dalam format lain</button>
         </NuxtLink>
       </div>
       <div>
@@ -49,7 +44,7 @@ const data = ref("Submit Unggah Mandiri");
 
 <style scoped>
 section {
-  --at-apply: max-w-7xl ma;
+  --at-apply: max-w-7xl ma py-15;
 }
 
 p {

@@ -44,15 +44,15 @@ const { data: fetchService } = await useFetch("/api/v1/layanan");
           <div class="flex justify-center gap-2">
             <NuxtLink :to="layanan.slug" class="w-full">
               <button class="btn text-xs text-white w-full" :class="layanan.isActive ? 'active' : 'inactive'">
-                Ajukan
+                {{ layanan.slug.includes('unggah-mandiri') ? 'Unggah' : 'Ajukan' }}
               </button>
             </NuxtLink>
             <NuxtLink :to="layanan.slug.includes('#')
-                ? '/pengajuan/#'
-                : layanan.slug + '/data'
+              ? '/pengajuan/#'
+              : layanan.slug + '/data'
               " class="w-full">
               <button class="btn text-xs text-white w-full" :class="layanan.isActive ? 'active' : 'inactive'">
-                Data Pengajuan
+                {{ layanan.slug.includes('unggah-mandiri') ? 'Status Unggah' : 'Data Pengajuan' }}
               </button>
             </NuxtLink>
           </div>

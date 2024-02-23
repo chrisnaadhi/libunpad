@@ -83,7 +83,7 @@ defineProps({
         <div class="flex flex-col md:flex-row items-center gap-2 max-w-md pl-19 pr-10 md:px-0">
           <NuxtImg src="/images/lambang-unpad.png" class="min-w-30" format="webp" />
           <div class="text-center md:text-left">
-            <h3>Portal Kandaga Unpad</h3>
+            <h3>Website Kandaga Unpad</h3>
             <p class="text-justify text-sm italic">Kandaga merupakan portal yang menyediakan banyak sumber informasi yang
               sudah
               dilanggan
