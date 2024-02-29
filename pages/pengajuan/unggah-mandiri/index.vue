@@ -21,10 +21,10 @@ const data = ref("Unggah Mandiri Karya Ilmiah");
         </p>
         <div class="my-3">
           <div class="flex gap-3 w-full">
-            <NuxtLink href="unggah-mandiri/panduan/" class="btn bg-orange text-white py-1 w-full">
+            <NuxtLink href="/pengajuan/unggah-mandiri/panduan" class="btn bg-orange text-white py-1 w-full">
               Panduan
             </NuxtLink>
-            <NuxtLink href="unggah-mandiri/submit/" class="btn bg-orange text-white py-1 w-full">
+            <NuxtLink href="/pengajuan/unggah-mandiri/submit" class="btn bg-orange text-white py-1 w-full">
               Unggah
             </NuxtLink>
           </div>

@@ -1,11 +1,11 @@
 <script setup>
-const data = ref("Submit Unggah Mandiri");
+const header = ref("Submit Unggah Mandiri");
 </script>
 
 <template>
   <section>
     <div class="text-center px-4 lg:px-0">
-      <h1>{{ data }}</h1>
+      <h1>{{ header }}</h1>
       <p class="text-justify">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores
         deserunt vero rem illum sit earum veniam, neque, quod nihil
@@ -25,8 +25,13 @@ const data = ref("Submit Unggah Mandiri");
         totam. Vitae voluptatem quaerat delectus recusandae ducimus sit
         temporibus deleniti accusamus.
       </p>
+      <div class="text-left">
+        <ul>
+          <!-- <li v-for="community in communityList">{{ community.id }}</li> -->
+        </ul>
+      </div>
       <div class="flex items-center justify-center my-3 gap-3">
-        <NuxtLink href="form" class="w-full">
+        <NuxtLink href="/pengajuan/unggah-mandiri/submit/form" class="w-full">
           <button class="btn w-full bg-green-6 text-white">Unggah Skripsi / Tesis / Disertasi</button>
         </NuxtLink>
         <NuxtLink class="btn w-full bg-orange-6 text-white">

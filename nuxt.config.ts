@@ -75,9 +75,14 @@ export default defineNuxtConfig({
     dbName: process.env.DRIZZLE_DATABASE,
     dbPassword: process.env.DRIZZLE_PASSWORD,
     dbPort: Number(process.env.DRIZZLE_PORT),
+    dSpaceURL: process.env.DSPACE_URL,
+    dSpaceAuth: process.env.DSPACE_AUTH,
+    dSpaceEmail: process.env.DSPACE_EMAIL,
+    dSpacePassword: process.env.DSPACE_PASSWORD,
     public: {
       meiliHost: process.env.MEILI_HOST,
       meiliApiKey: process.env.MEILI_API_KEY,
+      dSpacePublic: process.env.DSPACE_URL,
     },
   },
   nitro: {

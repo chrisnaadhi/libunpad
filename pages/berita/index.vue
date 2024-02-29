@@ -76,6 +76,8 @@ platform[1]["collection"] = getGalleryArticle;
 platform[2]["collection"] = getLibraryArticle;
 platform[3]["collection"] = getArchiveArticle;
 platform[4]["collection"] = getMuseumArticle;
+
+console.log(getHighlightArticle);
 </script>
 
 <template>

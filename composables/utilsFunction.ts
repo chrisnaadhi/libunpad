@@ -1,14 +1,14 @@
 import { defineStore } from "pinia";
 
 export const trimDescription = (description: string, limit: number) => {
-  if (description.length < limit) {
+  if (description?.length < limit) {
     return (
-      description.replace(/(<([^>]+)>)/gi, "").replaceAll("&nbsp;", "") + "..."
+      description?.replace(/(<([^>]+)>)/gi, "").replaceAll("&nbsp;", "") + "..."
     );
   } else {
     return (
       description
-        .replace(/(<([^>]+)>)/gi, "")
+        ?.replace(/(<([^>]+)>)/gi, "")
         .replaceAll("&nbsp;", "")
         .slice(0, limit) + "..."
     );
@@ -16,10 +16,10 @@ export const trimDescription = (description: string, limit: number) => {
 };
 
 export const trimTitle = (title: string, limit: number) => {
-  if (title.length < limit) {
-    return title.replace(/(<([^>]+)>)/gi, "");
+  if (title?.length < limit) {
+    return title?.replace(/(<([^>]+)>)/gi, "");
   } else {
-    return title.replace(/(<([^>]+)>)/gi, "").slice(0, limit) + "...";
+    return title?.replace(/(<([^>]+)>)/gi, "").slice(0, limit) + "...";
   }
 };
 
