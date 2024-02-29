@@ -46,13 +46,13 @@ const isPegawai = computed(() => {
 const bebasPustakaBanner = (value) => {
   switch (value) {
     case "pengajuan":
-      return "bg-red text-white";
+      return "bg-red text-white font-semibold";
     case "proses":
-      return "bg-yellow-3 text-dark";
+      return "bg-yellow-3 text-dark font-semibold";
     case "selesai":
-      return "bg-green-3 text-dark";
+      return "bg-green-3 text-dark font-semibold";
     default:
-      return "bg-orange-3 text-dark";
+      return "bg-orange-3 text-dark font-semibold";
   }
 };
 
@@ -79,8 +79,8 @@ definePageMeta({
     <section class="flex justify-center my-4 gap-4">
       <div v-if="user" class="pb-5">
         <img :src="user.avatar
-            ? `https://repository.unpad.ac.id:8050/assets/${user.avatar}.jpg`
-            : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'
+          ? `https://repository.unpad.ac.id:8050/assets/${user.avatar}.jpg`
+          : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'
           " :alt="user?.first_name" class="w-35 h-35 object-cover border-2 border-orange rounded-xl" />
       </div>
       <div class="w-full">
@@ -96,19 +96,16 @@ definePageMeta({
           <div class="max-w-6xl ma">
             <GenericBaseCard>
               <h4 class="text-center font-semibold">Daftar Pengajuan</h4>
-              <div class="flex flex-col md:(grid grid-cols-2) gap-3 my-3">
+              <div class="flex flex-col md:(grid grid-cols-2) gap-3 my-3 px-5 lg:px-0">
                 <div class="flex flex-col items-center justify-center">
                   <h5>Surat Bebas Pustaka</h5>
                   <div v-if="getBebasPustaka.length > 0">
                     <p>
-                      <span :class="bebasPustakaBanner(
-                        getBebasPustaka[0].status_pengajuan
-                      )
-                        " class="px-2 text-sm rounded">{{
-    displayStatusPengajuanSurat(
-      getBebasPustaka[0].status_pengajuan
-    )
-  }}</span>
+                      <span :class="bebasPustakaBanner(getBebasPustaka[0].status_pengajuan)" class="px-2 text-sm rounded">
+                        {{
+                          displayStatusPengajuanSurat(getBebasPustaka[0].status_pengajuan)
+                        }}
+                      </span>
                     </p>
 
                     <div v-if="getBebasPustaka[0]?.persyaratan?.length === 0">
@@ -140,7 +137,8 @@ definePageMeta({
                           <div class="i-mdi-text-box-remove text-red w-6 h-6"></div>
                         </span>
                       </div>
-                      <div class="my-3" v-if="getBebasPustaka[0].status_pengajuan === 'selesai'">
+                      <div class="my-3"
+                        v-if="getBebasPustaka[0].status_pengajuan === 'selesai' && getBebasPustaka[0]?.persyaratan?.length > 0">
                         <NuxtLink :to="'/pengajuan/bebas-pustaka/surat/' +
                           getBebasPustaka[0].id
                           " class="btn py-1 px-2 bg-orange text-white" target="_blank">Unduh Surat</NuxtLink>

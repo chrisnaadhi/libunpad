@@ -1,17 +1,20 @@
-import { ref, onBeforeUnmount } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 
 const date = new Date();
 
 export const useCurrentTime = () => {
   const currentTime = ref(new Date());
+  const updateTimeInterval = ref();
   const updateCurrentTime = () => {
     currentTime.value = new Date();
   };
 
-  const updateTimeInterval = setInterval(updateCurrentTime, 1000);
+  onMounted(() => {
+    updateTimeInterval.value = setInterval(updateCurrentTime, 1000);
+  });
 
   onBeforeUnmount(() => {
-    clearInterval(updateTimeInterval);
+    clearInterval(updateTimeInterval.value);
   });
 
   return { currentTime };

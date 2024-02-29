@@ -11,7 +11,7 @@ const berita = await getItems({
   },
 });
 
-if (berita.length === 0) await navigateTo("/error", { redirectCode: 404 });
+if (berita?.length === 0) await navigateTo("/error", { redirectCode: 404 });
 
 const getPenulis = await getUserById({
   id: berita[0].user_created,

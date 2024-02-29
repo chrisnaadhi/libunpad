@@ -34,7 +34,7 @@ onMounted(() => {
   <main @click.stop="" class="bg-gray-1 text-center z-1">
     <div class="bg-orange max-w-50 py-2 ma">
       <p class="text-md text-white font-600">
-        {{ currentTime.toLocaleDateString("id-ID", options) }}
+        {{ currentTime?.toLocaleDateString("id-ID", options) }}
       </p>
     </div>
     <div class="layanan-wrapper">

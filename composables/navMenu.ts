@@ -16,9 +16,9 @@ export const menuContent = () => {
     {
       id: 2,
       name: "Profil",
-      url: "#",
+      url: "/profil",
       nameEN: "Profile",
-      urlEN: "/en#",
+      urlEN: "/en/profil",
       deskripsi:
         "Profil Pusat Pengelolaan Pengetahuan Universitas Padjadjaran mencakup gambaran menyeluruh tentang identitas, misi, koleksi, layanan, dan kegiatan yang ditawarkan oleh sebuah perpustakaan. Ini memberikan pemahaman tentang tujuan dan fokus perpustakaan serta bagaimana perpustakaan berfungsi untuk melayani kebutuhan pengguna dan masyarakat secara umum.",
       deskripsiEN: "",

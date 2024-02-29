@@ -100,7 +100,7 @@ useHead({
         </div>
         <div class="flex flex-col items-end my-10">
           <div>
-            <p>Jatinangor, {{ bebasPustakaDate(date.toDateString()) }}</p>
+            <p>Jatinangor, {{ bebasPustakaDate(getDataSurat.date_updated) }}</p>
             <p>a.n. Kepala Pusat Pengelolaan Pengetahuan Unpad</p>
             <div v-if="getDataSurat.user_updated ===
               '18C2332E-6589-4424-B613-AAB2141F9450'

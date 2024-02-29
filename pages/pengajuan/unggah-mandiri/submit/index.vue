@@ -1,11 +1,11 @@
 <script setup>
-const data = ref("Submit Unggah Mandiri");
+const header = ref("Submit Unggah Mandiri");
 </script>
 
 <template>
   <section>
     <div class="text-center px-4 lg:px-0">
-      <h1>{{ data }}</h1>
+      <h1>{{ header }}</h1>
       <p class="text-justify">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores
         deserunt vero rem illum sit earum veniam, neque, quod nihil
@@ -25,17 +25,17 @@ const data = ref("Submit Unggah Mandiri");
         totam. Vitae voluptatem quaerat delectus recusandae ducimus sit
         temporibus deleniti accusamus.
       </p>
+      <div class="text-left">
+        <ul>
+          <!-- <li v-for="community in communityList">{{ community.id }}</li> -->
+        </ul>
+      </div>
       <div class="flex items-center justify-center my-3 gap-3">
-        <NuxtLink href="#" class="w-full">
-          <button class="btn w-full bg-red text-white">Unggah Skripsi</button>
+        <NuxtLink href="/pengajuan/unggah-mandiri/submit/form" class="w-full">
+          <button class="btn w-full bg-green-6 text-white">Unggah Skripsi / Tesis / Disertasi</button>
         </NuxtLink>
-        <NuxtLink href="#" class="w-full">
-          <button class="btn w-full bg-blue text-white">Unggah Tesis</button>
-        </NuxtLink>
-        <NuxtLink href="#" class="w-full">
-          <button class="btn w-full bg-violet text-white">
-            Unggah Disertasi
-          </button>
+        <NuxtLink class="btn w-full bg-orange-6 text-white">
+          <button>Unggah Karya Ilmiah dalam format lain</button>
         </NuxtLink>
       </div>
       <div>
@@ -49,7 +49,7 @@ const data = ref("Submit Unggah Mandiri");
 
 <style scoped>
 section {
-  --at-apply: max-w-7xl ma;
+  --at-apply: max-w-7xl ma py-15;
 }
 
 p {

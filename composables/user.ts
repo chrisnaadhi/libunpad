@@ -301,3 +301,22 @@ export const daftarNamaFakultasUnpad = defineStore("namaFakultas", () => {
     cariFakultasByParameter,
   };
 });
+
+export const unggahMandiriTugasAkhir = defineStore("unggahMandiri", () => {
+  const config = useRuntimeConfig();
+  const programStudi = ref("");
+  const programStudiMetadata = ref();
+
+  const getProgramStudiMetadata = async () => {
+    const getData = await $fetch(
+      config.public.dSpacePublic + "core/communities/" + programStudi.value
+    );
+    return (programStudiMetadata.value = await getData);
+  };
+
+  return {
+    programStudi,
+    programStudiMetadata,
+    getProgramStudiMetadata,
+  };
+});
