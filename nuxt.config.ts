@@ -75,14 +75,12 @@ export default defineNuxtConfig({
     dbName: process.env.DRIZZLE_DATABASE,
     dbPassword: process.env.DRIZZLE_PASSWORD,
     dbPort: Number(process.env.DRIZZLE_PORT),
-    dSpaceURL: process.env.DSPACE_URL,
-    dSpaceAuth: process.env.DSPACE_AUTH,
-    dSpaceEmail: process.env.DSPACE_EMAIL,
-    dSpacePassword: process.env.DSPACE_PASSWORD,
     public: {
       meiliHost: process.env.MEILI_HOST,
       meiliApiKey: process.env.MEILI_API_KEY,
       dSpacePublic: process.env.DSPACE_URL,
+      dSpaceAuthPublic: process.env.DSPACE_AUTH,
+      dSpaceCredentials: `user=${process.env.DSPACE_EMAIL}&password=${process.env.DSPACE_PASSWORD}`,
     },
   },
   nitro: {
@@ -93,6 +91,3 @@ export default defineNuxtConfig({
     },
   },
 });
-
-// Activate Local SSL with this command on CLI
-// SET NODE_TLS_REJECT_UNAUTHORIZED=0
