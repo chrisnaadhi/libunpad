@@ -10,7 +10,8 @@ const showPassword = ref(false);
 const passwordType = ref("password");
 const email = ref("");
 const password = ref("");
-const loginNotif = ref("Silahkan masukkan Email dan Password untuk Login");
+const defaultLoginNotif = ref("Silahkan masukkan Email dan Password untuk Login, atau klik tombol PAuS Email untuk login menggunakan PAuS ID")
+const loginNotif = ref(defaultLoginNotif.value);
 const textLogin = ref("text-dark");
 const isPegawai = computed(() => {
   let state = null;
@@ -53,7 +54,7 @@ const submitLogin = async () => {
     if (!result) {
       loginNotif.value = "Format Email Salah! Silahkan periksa kembali";
       setTimeout(() => {
-        loginNotif.value = "Silahkan masukkan Email dan Password untuk Login";
+        loginNotif.value = defaultLoginNotif.value;
       }, 2000);
     } else {
       await login({ email: email.value, password: password.value });
@@ -76,14 +77,14 @@ const submitLogin = async () => {
       clearError();
       setTimeout(() => {
         textLogin.value = "text-dark";
-        loginNotif.value = "Silahkan masukkan Email dan Password untuk Login";
+        loginNotif.value = defaultLoginNotif.value;
       }, 3000);
     } else if (err.message.includes("Bad Request")) {
       loginNotif.value = "Format Email tidak sesuai!";
       console.log(err.message);
       setTimeout(() => {
         textLogin.value = "text-dark";
-        loginNotif.value = "Silahkan masukkan Email dan Password untuk Login";
+        loginNotif.value = defaultLoginNotif.value;
       }, 3000);
     }
   }
@@ -110,42 +111,52 @@ definePageMeta({
 </script>
 
 <template>
-  <main class="ma container text-center my-25">
+  <main class="ma text-center my-25">
     <h1 class="text-5xl my-4">Login</h1>
-    <form class="ma max-w-sm" @submit.prevent="submitLogin">
-      <div class="flex flex-col">
-        <label for="email" class="text-left">Email :</label>
-        <input class="input-space px-3" type="email" v-model="email" required />
-      </div>
-      <div class="flex flex-col relative">
-        <label for="password" class="text-left">Password: </label>
-        <input :type="passwordType" name="password" id="password" class="input-space w-full pl-3 pr-10" v-model="password"
-          required />
-        <div @click="togglePasswordType" class="toggle-password">
-          <div class="i-mdi-eye" v-if="!showPassword" />
-          <div class="i-mdi-eye-off" v-else />
-        </div>
-        <NuxtErrorBoundary @error="errorLogger">
-          <div class="my-2 text-xs text-left">
-            <p :class="textLogin">{{ loginNotif }}</p>
+    <div class="flex max-w-5xl ma justify-center">
+      <div class="w-full">
+        <form class="ma w-full max-w-sm" @submit.prevent="submitLogin">
+          <h4>Login Pegawai</h4>
+          <div class="flex flex-col">
+            <label for="email" class="text-left">Email :</label>
+            <input class="input-space px-3" type="email" v-model="email" required />
           </div>
-        </NuxtErrorBoundary>
+          <div class="flex flex-col relative">
+            <label for="password" class="text-left">Password: </label>
+            <input :type="passwordType" name="password" id="password" class="input-space w-full pl-3 pr-10"
+              v-model="password" required />
+            <div @click="togglePasswordType" class="toggle-password">
+              <div class="i-mdi-eye text-xl" v-if="!showPassword" />
+              <div class="i-mdi-eye-off text-xl" v-else />
+            </div>
+            <NuxtErrorBoundary @error="errorLogger">
+              <div class="my-2 text-xs text-left">
+                <p :class="textLogin">{{ loginNotif }}</p>
+              </div>
+            </NuxtErrorBoundary>
 
-        <div class="flex gap-2">
-          <button class="form-btn" :class="email && password ? 'login-btn' : 'disable-btn'"
-            :disabled="!email || !password" type="submit" @click.prevent="submitLogin">
-            Login
-          </button>
-          <button class="form-btn flex items-center justify-center gap-2"
-            :class="email || password ? 'disable-btn' : 'oauth-btn'" @click="googleLogin" :disable="email.length > 0">
-            <span>
-              <img src="/images/lambang-unpad.png" class="w-6 h-6" alt="" />
-            </span>
-            PAuS Email
-          </button>
-        </div>
+            <div class="flex gap-2">
+              <button class="form-btn" :class="email && password ? 'login-btn' : 'disable-btn'"
+                :disabled="!email || !password" type="submit" @click.prevent="submitLogin">
+                Login
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
-    </form>
+
+      <div class="w-full">
+        <h4>Login Mahasiswa / Dosen</h4>
+        <button class="form-btn flex items-center justify-center gap-2"
+          :class="email || password ? 'disable-btn' : 'oauth-btn'" @click="googleLogin" :disable="email.length > 0">
+          <span>
+            <img src="/images/lambang-unpad.png" class="w-6 h-6" alt="" />
+          </span>
+          PAuS Email
+        </button>
+      </div>
+    </div>
+
   </main>
 </template>
 
@@ -159,7 +170,7 @@ input {
 }
 
 .toggle-password {
-  --at-apply: absolute right-0 top-9 mr-3;
+  --at-apply: absolute right-0 top-11 mr-3;
 }
 
 .form-btn {

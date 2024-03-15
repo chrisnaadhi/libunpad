@@ -48,7 +48,7 @@ export default defineNuxtRouteMiddleware(async () => {
       }
     }
 
-    if (dSpaceAccess.value) {
+    if (dSpaceAccess.value && status.value === "authenticated") {
       setInterval(async () => {
         const date = new Date();
         const fiveMinutes = date.getTime() + 5 * 60000;
@@ -64,15 +64,28 @@ export default defineNuxtRouteMiddleware(async () => {
               Authorization: "Bearer " + dspace.accessToken,
               "X-XSRF-TOKEN": `${dSpaceToken.value}`,
             }),
+            async onResponse({ response }) {
+              if (response.headers.get("DSPACE-XSRF-TOKEN") !== null) {
+                dSpaceToken.value = response.headers.get("DSPACE-XSRF-TOKEN");
+              }
+              const date = new Date();
+              const accessObject = {
+                accessToken: response.headers
+                  .get("Authorization")
+                  ?.split(" ")
+                  .at(1),
+                expires: date.getTime() + 30 * 60000,
+              };
+              dSpaceAccess.value = JSON.stringify(accessObject);
+              await refreshNuxtData();
+            },
           });
         } else {
-          console.log("Masih lama kayanya, lanjut aja!");
-          console.log("fiveMinutes :" + fiveMinutes);
-          console.log("Date Five Mins: " + new Date(fiveMinutes));
-          console.log("expires: " + dspace.expires);
-          console.log("Date Version: " + new Date(dspace.expires));
+          console.log(
+            "DSpace Token will be expired in : " + new Date(dspace.expires)
+          );
         }
-      }, 10000);
+      }, 60000);
     }
   }
 });

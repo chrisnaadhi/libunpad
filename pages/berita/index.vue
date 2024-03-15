@@ -44,7 +44,7 @@ const getHighlightArticle = await getItems({
 const highlightArticle = getHighlightArticle[0];
 
 const getNewestArticle = await getItems({
-  collection: "artikel",
+  collection: "berita_kunjungan",
   params: {
     limit: 4,
     sort: "-date_created",
@@ -66,18 +66,30 @@ const getAllArticle = await getItems({
   },
 });
 
+const getAllBeritaKunjungan = await getItems({
+  collection: "berita_kunjungan",
+  params: {
+    limit: 3,
+    sort: "-date_created",
+    filter: {
+      status: "published"
+    }
+  }
+})
+
+const beritaKandaga = [...getAllArticle, ...getAllBeritaKunjungan].sort((a, b) => new Date(b.date_created).getTime() - new Date(a.date_created).getTime())
+const servedBerita = beritaKandaga.slice(0, 3)
+
 const getGalleryArticle = await getItems(fetchArticleCategory("gallery"));
 const getLibraryArticle = await getItems(fetchArticleCategory("library"));
 const getArchiveArticle = await getItems(fetchArticleCategory("archive"));
 const getMuseumArticle = await getItems(fetchArticleCategory("museum"));
 
-platform[0]["collection"] = getAllArticle;
+platform[0]["collection"] = servedBerita;
 platform[1]["collection"] = getGalleryArticle;
 platform[2]["collection"] = getLibraryArticle;
 platform[3]["collection"] = getArchiveArticle;
 platform[4]["collection"] = getMuseumArticle;
-
-console.log(getHighlightArticle);
 </script>
 
 <template>
@@ -89,9 +101,12 @@ console.log(getHighlightArticle);
       <h2>{{ $t("newestKandagaNews") }}</h2>
       <div class="flex flex-col lg:(flex-row mx-0) gap-4 my-5 mx-3">
         <div class="highlight-block">
-          <NuxtLink :to="'/berita/' + highlightArticle?.slug" class="no-underline">
+          <NuxtLink :to="beritaType(highlightArticle)" class="no-underline">
             <NuxtImg class="highlight-img" :src="handleAssets(highlightArticle?.gambar_unggulan)" />
             <div class="highlight-content">
+              <div class="bg-orange text-white rounded-xl px-5 py-1 font-semibold mb-5">
+                Berita Highlight
+              </div>
               <h2 class="highlight-heading">
                 {{ trimTitle(highlightArticle?.judul, 80) }}
               </h2>
@@ -105,13 +120,13 @@ console.log(getHighlightArticle);
           <div v-for="article in getNewestArticle" class="bg-gray-50 shadow-sm shadow-gray-4 rounded max-h-xl">
             <NuxtImg :src="handleAssets(article?.gambar_unggulan)" class="w-full h-40 object-cover rounded" />
             <div class="h-20 px-3 flex flex-col items-start justify-center">
-              <NuxtLink :to="'/berita/' + article?.slug">
-                <h5 :title="article?.judul">
+              <NuxtLink :to="beritaType(article)" class="text-left">
+                <h6 :title="article?.judul">
                   {{ trimTitle(article?.judul, 27) }}
-                </h5>
+                </h6>
               </NuxtLink>
               <p class="text-xs text-left italic">
-                {{ trimDescription(article?.konten_artikel, 90) }}
+                {{ trimDescription(article?.konten_berita, 90) }}
               </p>
             </div>
           </div>
@@ -121,15 +136,20 @@ console.log(getHighlightArticle);
     <section v-for="plat in platform" class="platform-section">
       <h2>{{ plat.nama }}</h2>
       <p>{{ plat.deskripsi }}</p>
-      <div class="flex flex-col mx-3 lg:(grid grid-cols-3 mx-0) justify-between gap-3">
-        <GenericArticleCard v-for="item in plat.collection" :featured-img="item.gambar_unggulan"
-          :description="item.konten_artikel" :link-slug="item.slug" :title="item.judul"
-          :date-created="item.date_created" />
+      <div v-if="plat.collection.length > 0">
+        <div class="flex flex-col mx-3 lg:(grid grid-cols-3 mx-0) justify-between gap-3">
+          <GenericArticleCard v-for="item in plat.collection" :featured-img="item.gambar_unggulan"
+            :description="item.konten_artikel ?? item.konten_berita" :link-slug="beritaType(item)" :title="item.judul"
+            :date-created="item.date_created" />
+        </div>
+        <div class="text-right mt-5">
+          <NuxtLink :to="'/berita/' + plat.slug" class="italic font-semibold">
+            Lihat selengkapnya >
+          </NuxtLink>
+        </div>
       </div>
-      <div class="text-right mt-5">
-        <NuxtLink :to="'/berita/' + plat.slug" class="italic font-semibold">
-          Lihat selengkapnya >
-        </NuxtLink>
+      <div v-else>
+        <p class="italic text-red-400">Belum ada berita mengenai {{ plat.nama }}!</p>
       </div>
     </section>
   </main>
@@ -153,7 +173,7 @@ main {
 }
 
 .highlight-img {
-  --at-apply: max-w-2xl h-lg object-cover rounded opacity-50 transition-all-500 absolute;
+  --at-apply: max-w-2xl h-lg object-cover rounded opacity-35 transition-all-500 absolute;
 }
 
 .highlight-block:hover .highlight-img {

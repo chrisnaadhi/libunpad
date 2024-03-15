@@ -5,9 +5,10 @@ const { getItems } = useDirectusItems();
 const { getUserById } = useDirectusUsers();
 
 const berita = await getItems({
-  collection: "artikel",
+  collection: "berita_kunjungan",
   params: {
     search: route.params.id,
+    limit: 1,
   },
 });
 
@@ -36,11 +37,14 @@ const namaPenulis = `${getPenulis.first_name} ${getPenulis.last_name}`;
         <p class="font-semibold italic">
           Diterbitkan: {{ convertTimeZone(berita[0].date_created) }}
         </p>
-        <p class="text-sm">Kategori: {{ berita[0].kategori }}</p>
+        <p class="text-sm" v-show="berita[0].kategori">Kategori: {{ berita[0].kategori }}</p>
         <div class="text-center">
           <p class="text-sm">
             Tag:
-            <span class="italic" v-for="tag in berita[0].tag_artikel">
+            <span class="italic" v-if="berita[0].tag_artikel" v-for="tag in berita[0].tag_artikel">
+              {{ tag }},
+            </span>
+            <span class="italic" v-else-if="berita[0].tag_berita" v-for="tag in berita[0].tag_berita">
               {{ tag }},
             </span>
           </p>
@@ -50,7 +54,7 @@ const namaPenulis = `${getPenulis.first_name} ${getPenulis.last_name}`;
     <div class="max-w-7xl ma">
       <article>
         <h1 class="text-center mb-5">{{ berita[0].judul }}</h1>
-        <span class="text-justify" v-html="berita[0].konten_artikel"></span>
+        <span class="text-justify" v-html="berita[0].konten_artikel ?? berita[0].konten_berita"></span>
         <p class="italic text-sm mt-5">
           Diperbaharui pada:
           {{ convertTimeZone(berita[0].date_updated) }}
