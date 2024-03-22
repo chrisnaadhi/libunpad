@@ -25,11 +25,6 @@ const header = ref("Submit Unggah Mandiri");
         totam. Vitae voluptatem quaerat delectus recusandae ducimus sit
         temporibus deleniti accusamus.
       </p>
-      <div class="text-left">
-        <ul>
-          <!-- <li v-for="community in communityList">{{ community.id }}</li> -->
-        </ul>
-      </div>
       <div class="flex items-center justify-center my-3 gap-3">
         <NuxtLink href="/pengajuan/unggah-mandiri/submit/form" class="w-full">
           <button class="btn w-full bg-green-6 text-white">Unggah Skripsi / Tesis / Disertasi</button>

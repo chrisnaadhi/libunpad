@@ -1,12 +1,30 @@
 <script setup>
 import { getSubmitterData } from '~/composables/dspaceKit';
 
+definePageMeta({
+  middleware: "authentication-check"
+})
+
 const config = useRuntimeConfig();
+const router = useRouter();
+const submitter = getSubmitterData();
 const faculty = useCookie("programFakultas")
 const study = useCookie("programStudi");
 const collection = useCookie("programStudiKoleksi");
-const submitter = getSubmitterData();
+const dSpaceToken = useCookie("X-XSRF-TOKEN");
+const bearer = useCookie("dsAccessToken");
+
 const { data } = useAuth();
+const { createItems } = useDirectusItems();
+
+const submitLoading = ref(false);
+
+const getKelengkapanData = await fetchDspaceItemLogs(data.value.user.email)
+
+if (getKelengkapanData.length > 0) {
+  await navigateTo("/pengajuan/unggah-mandiri/submit/form/kelengkapan")
+} 
+
 submitter.email = data.value.user.email
 
 const communityUrl = config.public.dSpacePublic + '/core/communities/a9d392c7-cabd-44e5-9a06-d86281c307c2/subcommunities'
@@ -52,18 +70,47 @@ const displayModal = () => {
   showModal.value = !showModal.value
 }
 
+const back = () => {
+  router.go(-1);
+}
+
 const nextSubmit = async () => {
+  submitLoading.value = true;
   if (submitter.fakultas && submitter.programStudi && submitter.jenjang && submitter.namaLengkap && submitter.npm) {
+    await $fetch(`${config.public.dSpacePublic}/submission/workspaceitems`, {
+      method: "POST",
+      credentials: "include",
+      headers: new Headers({
+        Accept: "*/*",
+        Authorization: "Bearer " + bearer.value.accessToken,
+        "X-XSRF-TOKEN": `${dSpaceToken.value}`,
+        "Content-Type": "application/json",
+      }),
+      query: {
+        owningCollection: submitter.programStudi
+      },
+      async onResponse({ response }) {
+        await createItems({
+          collection: "log_dspace_items",
+          items: {
+            email: data.value.user.email,
+            npm: submitter.npm,
+            nama_lengkap: submitter.namaLengkap,
+            id_fakultas: submitter.fakultas,
+            id_jenjang: submitter.jenjang,
+            id_prodi: submitter.programStudi,
+            id_workspaceitems: response?._data?.id,
+            id_itemuuid: response?._embedded?.item?.id
+          }
+        })
+      }
+    })
     await navigateTo("/pengajuan/unggah-mandiri/submit/form/kelengkapan");
   } else {
     console.log("Failed")
     displayModal();
   }
 }
-
-definePageMeta({
-  middleware: "authentication-check"
-})
 </script>
 
 <template>
@@ -116,12 +163,18 @@ definePageMeta({
           <input class="input-area" type="text" name="email" id="email" :value="submitter.email" disabled>
         </div>
       </form>
-      <div class="my-5 flex flex-col mx-5">
-        <button class="btn bg-orange text-white" @click="nextSubmit">
-          Selanjutnya
+      <div class="my-5 flex flex-col lg:flex-row gap-3  mx-5">
+        <button class="btn bg-red text-white w-full" @click="back"> &leftarrow;Kembali</button>
+        <button class="btn bg-orange text-white w-full" @click="nextSubmit">
+          <span v-if="submitLoading" class="flex gap-3 items-center justify-center">
+            <div class="loader"></div>
+            Mengirim...
+          </span>
+          <span v-else>
+            Selanjutnya &rightarrow;
+          </span>
         </button>
       </div>
-      
     </section>
   </div>
 </template>

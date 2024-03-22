@@ -111,9 +111,9 @@ definePageMeta({
 </script>
 
 <template>
-  <main class="ma text-center my-25">
-    <h1 class="text-5xl my-4">Login</h1>
-    <div class="flex max-w-5xl ma justify-center">
+  <main class="ma text-center my-5 mb-25">
+    <h1 class="text-5xl mb-8 text-orange">Login</h1>
+    <div class="flex flex-col-reverse max-w-5xl ma lg:flex-row justify-center">
       <div class="w-full">
         <form class="ma w-full max-w-sm" @submit.prevent="submitLogin">
           <h4>Login Pegawai</h4>
@@ -135,7 +135,7 @@ definePageMeta({
               </div>
             </NuxtErrorBoundary>
 
-            <div class="flex gap-2">
+            <div class="flex gap-2 pt-1">
               <button class="form-btn" :class="email && password ? 'login-btn' : 'disable-btn'"
                 :disabled="!email || !password" type="submit" @click.prevent="submitLogin">
                 Login
@@ -145,12 +145,17 @@ definePageMeta({
         </form>
       </div>
 
-      <div class="w-full">
+      <div class="w-full max-w-sm ma lg:hidden">
+        <div class="bg-orange h-2 my-10" />
+      </div>
+
+      <div class="w-full max-w-sm ma flex flex-col items-center">
         <h4>Login Mahasiswa / Dosen</h4>
-        <button class="form-btn flex items-center justify-center gap-2"
+        <NuxtImg format="webp" src="/illustration/undraw_secure_login.png" class="w-70"/>
+        <button class="form-btn"
           :class="email || password ? 'disable-btn' : 'oauth-btn'" @click="googleLogin" :disable="email.length > 0">
           <span>
-            <img src="/images/lambang-unpad.png" class="w-6 h-6" alt="" />
+            <img src="/images/lambang-unpad.png" class="w-8 h-8" alt="" />
           </span>
           PAuS Email
         </button>
@@ -174,7 +179,7 @@ input {
 }
 
 .form-btn {
-  --at-apply: btn w-full;
+  --at-apply: btn flex items-center justify-center gap-2 w-full py-3 text-white font-semibold;
 }
 
 .disable-btn {
@@ -186,6 +191,6 @@ input {
 }
 
 .oauth-btn {
-  --at-apply: bg-orange-3 cursor-pointer;
+  --at-apply: bg-orange-2 text-dark border border-orange border-2 cursor-pointer transition-all-500 hover:(bg-orange text-white);
 }
 </style>

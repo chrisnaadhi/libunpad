@@ -1,7 +1,7 @@
 const config = useRuntimeConfig();
 
 export default defineEventHandler(async (event) => {
-  const login = await fetch(config.dSpaceAuth, {
+  const login = await fetch(config.public.dSpaceAuthPublic, {
     method: "POST",
     headers: {
       Accept: "application/json, text/plain, */*",

@@ -14,9 +14,8 @@ export default defineNuxtRouteMiddleware(async () => {
         }
       },
     });
-
     if (status.value === "authenticated") {
-      if (!dSpaceAccess.value) {
+      if (dSpaceToken.value && !dSpaceAccess.value) {
         await $fetch(config.public.dSpaceAuthPublic, {
           method: "POST",
           credentials: "include",
@@ -30,6 +29,7 @@ export default defineNuxtRouteMiddleware(async () => {
           onResponse({ response }) {
             if (response.headers.get("DSPACE-XSRF-TOKEN") !== null) {
               dSpaceToken.value = response.headers.get("DSPACE-XSRF-TOKEN");
+              dSpaceAccess.value = null;
             }
             const date = new Date();
             const accessObject = {
@@ -56,6 +56,18 @@ export default defineNuxtRouteMiddleware(async () => {
         const dSpaceToken = useCookie("X-XSRF-TOKEN");
 
         if (fiveMinutes > dspace.expires) {
+          await $fetch(config.public.dSpacePublic, {
+            method: "GET",
+            credentials: "include",
+            onResponse({ response }) {
+              if (
+                !dSpaceToken.value &&
+                response.headers.get("dspace-xsrf-token")
+              ) {
+                dSpaceToken.value = response.headers.get("dspace-xsrf-token");
+              }
+            },
+          });
           await $fetch(config.public.dSpaceAuthPublic, {
             method: "POST",
             credentials: "include",
@@ -78,6 +90,7 @@ export default defineNuxtRouteMiddleware(async () => {
               };
               dSpaceAccess.value = JSON.stringify(accessObject);
               await refreshNuxtData();
+              console.log("Successfully Extending DSpace Token!");
             },
           });
         } else {

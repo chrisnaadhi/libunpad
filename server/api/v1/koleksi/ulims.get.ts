@@ -9,25 +9,25 @@ export default defineEventHandler(async (event) => {
 
   if (query.search !== undefined && query.offset !== undefined) {
     let res = await db
-    .select()
-    .from(searchBiblio)
-    .where(
-      or(
-        like(searchBiblio.title, `${query.search}`),
-        like(searchBiblio.topic, `${query.search}`),
-        like(searchBiblio.author, `${query.search}`)
+      .select()
+      .from(searchBiblio)
+      .where(
+        or(
+          like(searchBiblio.title, `${query.search}`),
+          like(searchBiblio.topic, `${query.search}`),
+          like(searchBiblio.author, `${query.search}`)
+        )
       )
-    )
-    .limit(30)
-    .offset(Number(query.offset));
-    
+      .limit(30)
+      .offset(Number(query.offset));
+
     if (res.length > 0) {
-      results = await res
+      results = res;
     } else {
       results = {
         status: 404,
-        message: "Pencarian tidak ditemukan"
-      }
+        message: "Pencarian tidak ditemukan",
+      };
     }
   } else if (query.search) {
     let res = await db
@@ -41,31 +41,35 @@ export default defineEventHandler(async (event) => {
         )
       )
       .limit(30);
-    
-      if (res.length > 0) {
-        results = await res
-      } else {
-        results = {
-          status: 404,
-          message: "Pencarian tidak ditemukan"
-        }
-      }
-  } else if (query.offset) {
-    let res = await db.select().from(searchBiblio).limit(30).offset(Number(query.offset))
 
     if (res.length > 0) {
-      results = await res
+      results = res;
     } else {
       results = {
         status: 404,
-        message: "Pencarian tidak ditemukan"
-      }
+        message: "Pencarian tidak ditemukan",
+      };
+    }
+  } else if (query.offset) {
+    let res = await db
+      .select()
+      .from(searchBiblio)
+      .limit(30)
+      .offset(Number(query.offset));
+
+    if (res.length > 0) {
+      results = res;
+    } else {
+      results = {
+        status: 404,
+        message: "Pencarian tidak ditemukan",
+      };
     }
   } else {
     results = {
       status: 503,
-      message: "Internal Server Error"
-    }
+      message: "Internal Server Error",
+    };
   }
 
   return {
