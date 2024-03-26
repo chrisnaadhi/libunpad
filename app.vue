@@ -133,6 +133,8 @@ input[type="search"] {
   --at-apply: w-full border-1 border-orange;
 }
 
+textarea:disabled,
+select:disabled,
 input:disabled {
   --at-apply: bg-gray-3 cursor-not-allowed;
 }
@@ -147,6 +149,10 @@ input:disabled {
 
 button[type="submit"] {
   --at-apply: bg-orange;
+}
+
+button:disabled {
+  --at-apply: bg-gray text-white cursor-not-allowed;
 }
 
 strong {
