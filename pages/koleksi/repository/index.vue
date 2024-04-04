@@ -57,9 +57,10 @@ definePageMeta({
               </p>
               <p>Keywords: {{ selectedPreview?.Keywords }}</p>
             </div>
-            <div class="mt-2">
+            <div class="flex gap-2 mt-2">
+              <button @click="previewItem.viewModal" class="modal-btn">Kembali</button>
               <NuxtLink :to="'/koleksi/repository/item/' + selectedPreview?.MhsNPM"
-                class="btn bg-orange text-white px-2 py-1 text-xs">
+                class="modal-btn">
                 Detail
               </NuxtLink>
             </div>
@@ -72,7 +73,7 @@ definePageMeta({
       Koleksi Karya Ilmiah dan Tugas Akhir dari Civitas Akademika Universitas
       Padjadjaran
     </p>
-    <div class="grid grid-cols-3 gap-3 text-center">
+    <div class="flex flex-col sm:(grid grid-cols-2) lg:(grid grid-cols-3) gap-3 text-center">
       <NuxtLink v-for="fakultas in namaFakultas.objFakultas" :to="'repository/' + fakultas.singkatan"
         class="text-white bg-orange no-underline py-3 rounded-xl">
         {{ fakultas.namaFakultas }}
@@ -175,5 +176,9 @@ h1 {
 
 .pagination-btn {
   --at-apply: btn py-1 px-2 text-white;
+}
+
+.modal-btn {
+  --at-apply: btn bg-orange text-white px-2 py-1 text-xs;
 }
 </style>

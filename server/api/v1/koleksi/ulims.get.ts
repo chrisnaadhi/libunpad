@@ -67,8 +67,8 @@ export default defineEventHandler(async (event) => {
     }
   } else {
     results = {
-      status: 503,
-      message: "Internal Server Error",
+      status: 400,
+      message: "Bad Request. You should add keyword query",
     };
   }
 

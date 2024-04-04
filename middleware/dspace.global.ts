@@ -37,7 +37,7 @@ export default defineNuxtRouteMiddleware(async () => {
                 .get("Authorization")
                 ?.split(" ")
                 .at(1),
-              expires: date.getTime() + 30 * 60000,
+              expires: date.getTime() + 20 * 60000,
             };
             dSpaceAccess.value = JSON.stringify(accessObject);
           },
@@ -48,12 +48,15 @@ export default defineNuxtRouteMiddleware(async () => {
       }
     }
 
+    if (dSpaceAccess.value && status.value === "unauthenticated") {
+      dSpaceAccess.value = null;
+    }
+
     if (dSpaceAccess.value && status.value === "authenticated") {
       setInterval(async () => {
         const date = new Date();
-        const fiveMinutes = date.getTime() + 5 * 60000;
+        const fiveMinutes = date.getTime() + 1 * 60000;
         const dspace = dSpaceAccess.value as any;
-        const dSpaceToken = useCookie("X-XSRF-TOKEN");
 
         if (fiveMinutes > dspace.expires) {
           await $fetch(config.public.dSpacePublic, {

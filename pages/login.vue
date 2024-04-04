@@ -183,11 +183,11 @@ input {
 }
 
 .disable-btn {
-  --at-apply: bg-gray-2 cursor-not-allowed;
+  --at-apply: bg-gray-2 border border-gray-3 border-2 cursor-not-allowed;
 }
 
 .login-btn {
-  --at-apply: bg-green-3 cursor-pointer;
+  --at-apply: bg-green-3 border border-green-3 border-2 cursor-pointer;
 }
 
 .oauth-btn {

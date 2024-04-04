@@ -137,33 +137,33 @@ const tableHeadPublic = [
       </thead>
       <tbody v-for="data in listData">
         <tr class="bg-white text-center">
-          <td class="table-border">{{ data.npm }}</td>
-          <td class="table-border">
+          <td class="table-border w-10">{{ data.npm }}</td>
+          <td class="table-border w-50">
             {{ data.nama_lengkap }}
           </td>
-          <td class="table-border" v-show="publicData">
+          <td class="table-border w-30" v-show="publicData">
             {{ data.email }}
           </td>
-          <td class="table-border">
+          <td class="table-border w-30">
             {{ displayKeperluanSurat(data.keperluan) }}
           </td>
-          <td class="table-border">
+          <td class="table-border w-30">
             {{ displayPersyaratan(data.persyaratan) }}
           </td>
-          <td class="table-border" v-show="publicData">
+          <td class="table-border w-30" v-show="publicData">
             {{ convertTimeZone(data.date_created) }}
           </td>
-          <td class="table-border" v-show="publicData">
+          <td class="table-border w-40" v-show="publicData">
             <span v-if="!data.date_updated">Belum diproses</span>
             <span v-else>{{ convertTimeZone(data.date_updated) }}</span>
           </td>
 
-          <td class="table-border">
+          <td class="table-border w-40">
             <span :class="displayMessage(data.status_pengajuan)" class="font-600">
               {{ displayStatusPengajuanSurat(data.status_pengajuan) }}
             </span>
           </td>
-          <td class="table-border">
+          <td class="table-border w-30">
             {{ searchPetugas(data.user_updated) }}
           </td>
           <td class="table-border" v-show="publicData">
@@ -184,6 +184,9 @@ const tableHeadPublic = [
         :disabled="pageState === 0">
         Prev
       </button>
+      <div>
+        {{ pageState < 10 ? "1" : (pageState + 10) / 10 }} / {{ (Number(gapData) + 10) / 10 }}
+      </div>
       <button class="btn bg-orange py-0 px-5" @click="nextData"
         :class="pageState < gapData ? 'enable-btn' : 'disable-btn'" :disable="pageState <= gapData">
         Next

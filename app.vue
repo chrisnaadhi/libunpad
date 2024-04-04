@@ -194,8 +194,8 @@ strong {
   border: 4px solid #ffc250; /* Light grey */
   border-top: 4px solid #ffffff; /* Blue */
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
   animation: spin 2s linear infinite;
 }
 

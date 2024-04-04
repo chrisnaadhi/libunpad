@@ -5,9 +5,9 @@ export const menuContent = () => {
     {
       id: 1,
       name: "Kandaga",
-      url: "#",
+      url: "/kandaga",
       nameEN: "Kandaga",
-      urlEN: "/en#",
+      urlEN: "/en/kandaga",
       deskripsi:
         "Kandaga merupakan branding dari Pusat Pengelolaan Pengetahuan untuk Perpustakaan Pusat di Universitas Padjadjaran. Kandaga menjadi portal dan layanan dari Perpustakaan Pusat untuk memenuhi kebutuhan kegiatan belajar dan mengajar mahasiswa serta dosen. Kandaga memberikan layanan dan fasilitas yang bisa dimanfaatkan oleh seluruh mahasiswa serta dosen.",
       deskripsiEN: "",
@@ -27,9 +27,9 @@ export const menuContent = () => {
     {
       id: 3,
       name: "Fasilitas",
-      url: "#",
+      url: "/kandaga/fasilitas",
       nameEN: "Facilities",
-      urlEN: "/en#",
+      urlEN: "/en/kandaga/fasilitas",
       deskripsi:
         "Daftar Fasilitas yang dimiliki oleh Kandaga Universitas Padjadjaran untuk digunakan oleh mahasiswa, dosen dan pengunjung perpustakaan lainnya. Fasilitas yang tersedia terdiri dari fasilitas umum dan fasilitas khusus untuk dimanfaatkan dalam kegiatan belajar mengajar. Fasilitas khusus memerlukan izin untuk menggunakannya.",
       deskripsiEN: "",
@@ -38,9 +38,9 @@ export const menuContent = () => {
     {
       id: 4,
       name: "Regulasi",
-      url: "#",
+      url: "/kandaga/regulasi",
       nameEN: "Regulation",
-      urlEN: "/en#",
+      urlEN: "/en/kandaga/regulasi",
       deskripsi:
         "Peraturan dan Regulasi yang harus ditaati oleh seluruh pengunjung Kandaga. Peraturan ini diatur untuk memudahkan pengunjung untuk melakukan aktivitasnya agar dapat menjaga ketertiban di lingkungan Kandaga sehingga pengunjung lain juga merasa nyaman.",
       deskripsiEN: "",
@@ -48,10 +48,10 @@ export const menuContent = () => {
     },
     {
       id: 5,
-      name: "Struktur Organisasi",
-      url: "#",
-      nameEN: "Organization Structure",
-      urlEN: "/en#",
+      name: "Struktur Fungsi",
+      url: "/kandaga/struktur",
+      nameEN: "Functional Structure",
+      urlEN: "/en/kandaga/struktur",
       deskripsi:
         "Struktur Organisasi dari pengelolaan Kandaga sebagai institusi dan lembaga dibawah naungan Universitas Padjadjaran.",
       deskripsiEN: "",
@@ -74,18 +74,18 @@ export const menuContent = () => {
     {
       id: 7,
       name: "Layanan Daring",
-      url: "#",
+      url: "/layanan/daring",
       nameEN: "Online Service",
-      urlEN: "/en#",
+      urlEN: "/en/layanan/daring",
       deskripsi:
         "Layanan daring Kandaga merupakan inovasi yang menghadirkan akses informasi dan sumber daya pendidikan secara elektronik, memungkinkan pengguna untuk menjelajahi dan memanfaatkan koleksi perpustakaan tanpa perlu berada di lokasi fisik. Dengan adanya layanan daring ini, perpustakaan dapat memberikan pengalaman pembelajaran yang lebih fleksibel dan mudah diakses bagi masyarakat.",
     },
     {
       id: 8,
       name: "Layanan Luring",
-      url: "#",
+      url: "/layanan/luring",
       nameEN: "Offline Service",
-      urlEN: "/en#",
+      urlEN: "/en/layanan/luring",
       deskripsi:
         "Layanan luring di perpustakaan merujuk pada pelayanan yang disediakan di lingkungan fisik perpustakaan, di mana pengguna dapat mengakses koleksi, mengambil dan mengembalikan materi, serta berinteraksi langsung dengan sumber daya perpustakaan dan staf. Layanan ini memberikan dukungan langsung kepada pengunjung perpustakaan dengan menyediakan ruang baca, layanan peminjaman buku, dan bantuan langsung dari petugas perpustakaan",
       deskripsiEN: "",
@@ -105,9 +105,9 @@ export const menuContent = () => {
     {
       id: 10,
       name: "Layanan Riset",
-      url: "#",
+      url: "/layanan/riset",
       nameEN: "Research Assist",
-      urlEN: "/en#",
+      urlEN: "/en/layanan/riset",
       deskripsi:
         "Layanan riset di Kandaga menyediakan bantuan dan sumber daya untuk membantu pengguna dalam menemukan informasi yang relevan dan akurat untuk keperluan penelitian mereka. Ini melibatkan bantuan staf perpustakaan dalam melakukan pencarian, menavigasi basis data, mengakses sumber daya elektronik, dan mengevaluasi keandalan sumber informasi.",
       deskripsiEN: "",
@@ -221,9 +221,9 @@ export const menuContent = () => {
     {
       id: 20,
       name: "Pustakawan Subjek",
-      url: "#",
+      url: "/panduan/pustakawan-subjek",
       nameEN: "Subject Librarians",
-      urlEN: "/en#",
+      urlEN: "/en/panduan/pustakawan-subjek",
       deskripsi:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum dicta voluptatem porro quasi beatae, eos recusandae quaerat deleniti a, sed dignissimos, totam eligendi architecto. Repudiandae ea voluptatibus a sequi quae corporis quos delectus quis voluptates quo eveniet consectetur odio velit, placeat consequuntur repellendus distinctio rerum id. Aliquid, architecto fugiat! Blanditiis, deserunt aspernatur accusamus iste quo quam veniam perferendis optio, omnis odio voluptas fugiat rerum ipsa alias officiis? Corrupti, nam reiciendis. Ipsam, nisi. Minus repellendus quod iste soluta officiis eos ex blanditiis quaerat sapiente, a alias commodi omnis ducimus autem nobis quibusdam eligendi dolorum aut cumque ea obcaecati sed ullam doloribus.",
       deskripsiEN: "",
@@ -232,9 +232,9 @@ export const menuContent = () => {
     {
       id: 21,
       name: "Informasi Akademik",
-      url: "#",
+      url: "/panduan/informasi-akademik",
       nameEN: "Academic Information",
-      urlEN: "/en#",
+      urlEN: "/en/panduan/informasi-akademik",
       deskripsi:
         "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur voluptate corrupti quibusdam ex, illum nihil error odio non architecto ullam illo excepturi vitae, labore, possimus explicabo. Temporibus maiores id enim qui, architecto ipsa perferendis sunt. Esse possimus accusantium mollitia illo modi quis pariatur molestias cumque. Velit adipisci nobis, ipsum quos iste porro est incidunt? Veniam atque dolor aliquam nihil, rem, doloremque dolores quam sequi sunt saepe ipsam, eos sit non tempore. Temporibus nulla dolores natus ipsam tenetur ipsum aperiam tempora veniam reiciendis error quisquam cumque laboriosam esse eos, pariatur tempore illo voluptate non doloribus placeat ea aut repellat saepe cum.",
       deskripsiEN: "",
@@ -243,9 +243,9 @@ export const menuContent = () => {
     {
       id: 22,
       name: "Kegiatan Belajar Mengajar",
-      url: "#",
+      url: "/panduan/kbm",
       nameEN: "Teaching & Learning Guide",
-      urlEN: "/en#",
+      urlEN: "/en/panduan/kbm",
       deskripsi:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati perferendis illum repellendus quibusdam omnis, alias iure dolor, doloribus necessitatibus corrupti possimus, excepturi optio illo rem nulla recusandae quasi. Reiciendis tempore et nemo. Aliquam adipisci dolorem molestiae nostrum unde possimus similique tempora id aspernatur earum odio natus a numquam, tempore et dolores temporibus, ut voluptates voluptatem doloribus eveniet excepturi commodi? Amet quod hic nobis tempore nesciunt nihil, possimus omnis temporibus eveniet quo, odio quisquam quasi autem officia distinctio maxime dolorum nemo placeat porro non dolor! Magnam vitae, temporibus voluptate quaerat illo similique iusto, exercitationem natus cumque dolor ipsum fugit dolorum recusandae.",
       deskripsiEN: "",
@@ -254,9 +254,9 @@ export const menuContent = () => {
     {
       id: 23,
       name: "FAQ",
-      url: "#",
+      url: "/panduan/faq",
       nameEN: "FAQ",
-      urlEN: "/en#",
+      urlEN: "/en/panduan/faq",
       deskripsi:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo alias voluptatum, possimus eveniet placeat vitae temporibus, itaque corrupti molestiae maxime doloribus praesentium qui similique iste odio quos nobis. Nesciunt neque magni veritatis sit beatae asperiores aut eos distinctio quas. Nulla quidem a deleniti facilis dolore voluptatibus similique, illum velit ducimus optio rem nemo in consequatur fugiat tempore! Minima ad quibusdam saepe est delectus, excepturi debitis sequi voluptate provident! Consequatur totam dicta dolor iste! Porro blanditiis quaerat unde quos fugiat. Quos est aperiam voluptatum sapiente totam quibusdam, possimus nostrum hic? Eligendi veritatis distinctio inventore vero possimus quos illum illo nesciunt odio?",
       deskripsiEN: "",

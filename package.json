@@ -24,6 +24,7 @@
     "@pinia/nuxt": "^0.4.11",
     "@popperjs/core": "^2.11.8",
     "@splidejs/vue-splide": "^0.6.12",
+    "@tato30/vue-pdf": "^1.9.6",
     "drizzle-orm": "^0.29.4",
     "easyqrcodejs": "^4.6.1",
     "meilisearch": "^0.34.2",

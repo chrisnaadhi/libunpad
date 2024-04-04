@@ -45,10 +45,10 @@ const limitChars = (chars: any) => {
       </div>
     </div>
     <div class="action">
-      <NuxtLink :to="urlBook" class="action-btn bg-orange xl:(my-0 mr-4)">
+      <NuxtLink :to="urlBook" class="action-btn text-white bg-orange xl:(my-0 mr-4)">
         Detail
       </NuxtLink>
-      <NuxtLink :to="urlBook" class="action-btn border bg-gray-3 hover:bg-orange xl:(my-0 ml-4)">
+      <NuxtLink :to="urlBook" class="action-btn border bg-gray-3 text-dark hover:(bg-orange text-white) xl:(my-0 ml-4)">
         Pinjam
       </NuxtLink>
     </div>
@@ -81,7 +81,7 @@ h4 {
 }
 
 a {
-  --at-apply: text-dark no-underline;
+  --at-apply: no-underline;
 }
 
 p {

@@ -30,6 +30,6 @@ defineProps({
 
 <style scoped>
 .article-block {
-  --at-apply: flex flex-col gap-2 text-left w-full min-h-sm bg-gray-50 p-3 rounded-lg shadow-md shadow-gray;
+  --at-apply: flex flex-col gap-2 text-left w-full h-full min-h-sm bg-gray-50 p-3 rounded-lg shadow-md shadow-gray;
 }
 </style>

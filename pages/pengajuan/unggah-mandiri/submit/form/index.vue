@@ -75,8 +75,8 @@ const back = () => {
 }
 
 const nextSubmit = async () => {
-  submitLoading.value = true;
   if (submitter.fakultas && submitter.programStudi && submitter.jenjang && submitter.namaLengkap && submitter.npm) {
+    submitLoading.value = true;
     await $fetch(`${config.public.dSpacePublic}/submission/workspaceitems`, {
       method: "POST",
       credentials: "include",
@@ -90,6 +90,7 @@ const nextSubmit = async () => {
         owningCollection: submitter.programStudi
       },
       async onResponse({ response }) {
+        console.log(response)
         await createItems({
           collection: "log_dspace_items",
           items: {
@@ -100,7 +101,7 @@ const nextSubmit = async () => {
             id_jenjang: submitter.jenjang,
             id_prodi: submitter.programStudi,
             id_workspaceitems: response?._data?.id,
-            id_itemuuid: response?._embedded?.item?.id
+            id_itemuuid: response?._data?._embedded?.item?.id
           }
         })
       }
