@@ -17,4 +17,7 @@ export default NuxtAuthHandler({
       },
     }),
   ],
+  session: {
+    maxAge: 20 * 60,
+  },
 });

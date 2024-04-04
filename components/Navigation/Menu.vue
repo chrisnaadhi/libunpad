@@ -14,7 +14,7 @@ const { locale } = useI18n();
       menu-name="koleksi" />
     <NavigationMenuLink :menu-title="locale === 'en' ? 'Guides' : 'Panduan'" :dropdown-menu="panduan"
       menu-name="panduan" />
-    <NuxtLink to="/kontak" class="hidden text-dark no-underline xl:block">
+    <NuxtLink to="/kontak" class="hidden text-dark no-underline xl:(block pl-3)">
       {{ locale === "en" ? "Contact Us" : "Kontak Kami" }}
     </NuxtLink>
   </ul>

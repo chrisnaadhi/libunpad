@@ -133,6 +133,8 @@ input[type="search"] {
   --at-apply: w-full border-1 border-orange;
 }
 
+textarea:disabled,
+select:disabled,
 input:disabled {
   --at-apply: bg-gray-3 cursor-not-allowed;
 }
@@ -147,6 +149,10 @@ input:disabled {
 
 button[type="submit"] {
   --at-apply: bg-orange;
+}
+
+button:disabled {
+  --at-apply: bg-gray text-white cursor-not-allowed;
 }
 
 strong {
@@ -182,6 +188,26 @@ strong {
 
 .splide__arrow {
   --at-apply: bg-orange-3;
+}
+
+.loader {
+  border: 4px solid #ffc250; /* Light grey */
+  border-top: 4px solid #ffffff; /* Blue */
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
 }
 
 ::-webkit-scrollbar {

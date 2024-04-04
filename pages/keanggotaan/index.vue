@@ -215,7 +215,7 @@ definePageMeta({
         Logout
       </button>
       <button type="button" class="btn bg-red text-white" v-show="status" @click="signOut()">
-        Sign Out
+        Logout
       </button>
     </section>
   </main>

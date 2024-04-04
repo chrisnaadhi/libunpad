@@ -50,7 +50,7 @@ const getThumbnail = (id) => {
       <div class="mt-30 px-3 bg-orange-50 text-dark rounded-full text-center py-2">
         <p class="font-semibold">Berita Pilihan :
           <NuxtLink class="font-normal px-2 transition-all-500 rounded hover:(bg-orange text-white py-0 )"
-            :href="'/berita/' + getBerita.slug">
+            :href="beritaType(getBerita)">
             {{ getBerita.judul }}
           </NuxtLink>
         </p>

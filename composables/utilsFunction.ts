@@ -84,3 +84,13 @@ export const getLinkResult = (link: string) => {
     return "https://kandaga.unpad.ac.id:3000";
   }
 };
+
+export const beritaType = (berita: any) => {
+  if (berita?.hasOwnProperty('konten_berita')) {
+    return '/berita/kunjungan/' + berita?.slug
+  } else if (berita?.hasOwnProperty('konten_artikel')) {
+    return '/berita/artikel/' + berita?.slug
+  } else {
+    return '/berita'
+  }
+}

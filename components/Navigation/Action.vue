@@ -15,6 +15,9 @@ const toggleProfile = () => {
 };
 
 const logout = async () => {
+  const dSpaceAccess = useCookie("dsAccessToken");
+  dSpaceAccess.value = null;
+  
   await signOut();
 };
 </script>

@@ -217,7 +217,7 @@ useHead({
       </div>
     </div>
     <CollectionRepositoryItem v-bind="dataObjectTA" />
-    <div class="max-w-6xl ma">
+    <div class="max-w-6xl ma pt-5">
       <h3>Cite this paper</h3>
       <div class="tab-title">
         <button class="tab-item" :class="chosenCitation === 'apa' ? 'active-tab' : 'inactive-tab'"

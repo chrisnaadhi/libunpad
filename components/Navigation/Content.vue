@@ -18,7 +18,7 @@ const removeIcon = () => {
 
 <template>
   <section class="absolute left-0 bg-white shadow-lg w-full mt-5">
-    <div class="max-w-6xl ma flex">
+    <div class="max-w-7xl ma flex">
       <div class="flex flex-col py-5" @mouseleave="removeIcon">
         <NuxtLink v-for="(menu, index) in menus" :key="index" :to="locale === 'id' ? menu.url : menu.urlEN"
           class="menu-link" rel="noopener noreferrer" @mouseenter="viewIconToggle(menu.id)">

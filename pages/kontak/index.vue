@@ -33,7 +33,7 @@ const data = ref("Kontak Kami");
 
 <style scoped>
 section {
-  --at-apply: max-w-7xl ma;
+  --at-apply: max-w-7xl ma py-10;
 }
 
 input,
