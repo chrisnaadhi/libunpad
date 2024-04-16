@@ -1,31 +1,37 @@
 <script setup>
-const data = ref("Unggah Mandiri Karya Ilmiah");
+const unggahMandiri = ref("Unggah Mandiri Karya Ilmiah");
+const { data } = useAuth();
+const getKelengkapanData = await fetchDspaceItemLogs(data.value.user.email);
+const userETD = getKelengkapanData[0];
+
+console.log(userETD);
 </script>
 
 <template>
   <section>
-    <h1 class="my-10">{{ data }}</h1>
+    <h1 class="my-10">{{ unggahMandiri }}</h1>
     <div class="grid grid-cols-2 justify-center">
       <div class="flex justify-center">
         <NuxtImg src="/illustration/undraw_Social.png" format="webp" width="256px" height="256px" />
       </div>
       <div>
         <h3>Unggah Mandiri</h3>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla
-          corporis praesentium necessitatibus molestiae at. Dolorem, doloribus
-          provident alias a nihil, laboriosam libero dolor suscipit quia quaerat
-          quam ullam soluta unde dolore fugit, reiciendis animi atque dolorum
-          iusto? Tenetur sunt accusamus aliquid non beatae veniam voluptatum
-          modi. Delectus provident inventore itaque!
+        <p v-show="userETD?.submitted === 'false' || userETD?.submitted === undefined">
+          Silahkan klik tombol Unggah untuk mulai mengunggah karya ilmiah anda. Jika anda memerlukan bantuan atau petunjuk silahkan klik tombol panduan atau hubungi Pustakawan kami melalui media sosial dan kontak yang berada di halaman ini.
         </p>
         <div class="my-3">
+          <div class="bg-green-5 text-white mb-5 rounded text-sm py-2" v-show="userETD?.submitted === 'true'">
+            <p>Anda sudah mengunggah Karya Ilmiah, silahkan cek halaman keanggotaan untuk melihatnya.</p>
+          </div>
           <div class="flex gap-3 w-full">
-            <NuxtLink href="/pengajuan/unggah-mandiri/panduan" class="btn bg-orange text-white py-1 w-full">
+            <NuxtLink href="/pengajuan/unggah-mandiri/panduan" class="btn bg-orange text-white py-1 w-full" v-show="userETD?.submitted === 'false' || userETD?.submitted === undefined">
               Panduan
             </NuxtLink>
-            <NuxtLink href="/pengajuan/unggah-mandiri/submit" class="btn bg-orange text-white py-1 w-full">
+            <NuxtLink href="/pengajuan/unggah-mandiri/submit" class="btn bg-orange text-white py-1 w-full" v-if="userETD?.submitted === 'false'  || userETD?.submitted === undefined">
               Unggah
+            </NuxtLink>
+            <NuxtLink href="/keanggotaan" class="btn bg-orange text-white py-1 w-full" v-else-if="userETD?.submitted === 'true'">
+              Lihat Data Unggah Anda
             </NuxtLink>
           </div>
         </div>

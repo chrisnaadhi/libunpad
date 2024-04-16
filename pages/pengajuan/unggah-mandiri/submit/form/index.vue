@@ -21,9 +21,13 @@ const submitLoading = ref(false);
 
 const getKelengkapanData = await fetchDspaceItemLogs(data.value.user.email)
 
-if (getKelengkapanData.length > 0) {
+if (getKelengkapanData.length > 0 && getKelengkapanData[0]?.submitted === 'false') {
   await navigateTo("/pengajuan/unggah-mandiri/submit/form/kelengkapan")
-} 
+} else if (getKelengkapanData[0]?.submitted === 'true') {
+  await navigateTo("/keanggotaan")
+} else {
+  console.log("Nothing Else")
+}
 
 submitter.email = data.value.user.email
 
