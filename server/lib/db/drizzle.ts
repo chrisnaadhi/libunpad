@@ -3,7 +3,7 @@ import mysql from "mysql2/promise";
 
 const runtimeConfig = useRuntimeConfig();
 
-const connection = await mysql.createConnection({
+const connection = await mysql.createPool({
   host: runtimeConfig.dbHost,
   user: runtimeConfig.dbUsername,
   database: runtimeConfig.dbName,

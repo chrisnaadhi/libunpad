@@ -348,10 +348,6 @@ const inputFormState = reactive({
   FullTeks: false,
 })
 
-const checkReactiveFormState = (form) => {
-  return inputFormState[form] = !inputFormState[form]
-}
-
 const onChangeThenUpload = async ($event, formName) => {
   const target = $event.target;
   const formData = new FormData();
@@ -769,10 +765,6 @@ const showPreview = async (uid) => {
     </ClientOnly>
     <div class="flex flex-col items-center justify-center mt-4 relative" v-if="getKelengkapanData.length > 0">
       <h3 class="text-center pt-5">{{ val }}</h3>
-      <div>
-        {{ inputFormState }}
-      </div>
-      <button @click="checkReactiveFormState('Abstrak')" class="btn bg-orange text-white">Coba Ganti</button>
       <article class="w-full flex flex-col items-center justify-center relative">
         <div class="heading-section">
           <h3>Biodata Pengunggah</h3>
