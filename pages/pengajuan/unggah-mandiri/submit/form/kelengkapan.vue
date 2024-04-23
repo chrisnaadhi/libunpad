@@ -53,15 +53,10 @@ const getProdi = await $fetch(
   `${config.public.dSpacePublic}/core/collections/${getKelengkapanData[0]?.id_prodi ?? submitter.programStudi
   }`
 );
-const getWorkSpaceItem = await $fetch(
-  `${config.public.dSpacePublic}/submission/workspaceitems/${getKelengkapanData[0]?.id_workspaceitems}/item` ?? "",
-  universalHeader
-);
 
-const getWorkSpaceFiles = await $fetch(
-  `${config.public.dSpacePublic}/submission/workspaceitems/${getKelengkapanData[0]?.id_workspaceitems}` ?? "",
-  universalHeader
-);
+const getWorkSpaceItem = await fetchWorkspaceItem(getKelengkapanData[0]?.id_workspaceitems);
+
+const getWorkSpaceFiles = await fetchWorkspaceFiles(getKelengkapanData[0]?.id_workspaceitems);
 
 // Form Metadata
 const judul = ref(getWorkSpaceItem.metadata["dc.title"]?.[0]?.value ?? null);
@@ -91,18 +86,27 @@ const dataWorkspace = ref(
 );
 
 const splitKeyword = ref([]);
-watchEffect(async () => {
-  if (kataKunci.value) {
-    kataKunci.value.split(",").map((kata) => {
-      splitKeyword.value.push({
-        value: kata,
-        language: "id_ID",
-        authority: null,
-        confidence: -1
-      })
+const warn = ref("Tekan 'Enter' untuk memasukkan setiap Kata Kunci. Klik keyword untuk menghapus.")
+const onEnterKeywords = () => {
+  if (kataKunci.value && splitKeyword.value.length < 3) {
+    splitKeyword.value.push({
+      value: kataKunci.value,
+      language: "id_ID",
+      authority: null,
+      confidence: -1
     })
+    kataKunci.value = "";
+  } else if (kataKunci.value && splitKeyword.value.length === 3) {
+    warn.value = "Maksimum 3 Kata Kunci!"
+    setTimeout(() => {
+      warn.value = "Tekan 'Enter' untuk memasukkan setiap Kata Kunci. Klik keyword untuk menghapus."
+    }, 3000)
   }
-})
+}
+
+const deleteKeyword = (index) => {
+  return splitKeyword.value.splice(index, 1)
+}
 
 const saveMetadata = async () => {
   
@@ -179,7 +183,7 @@ const saveMetadata = async () => {
   };
 
   try {
-    if (judul.value && abstrak.value && kataKunci.value && bahasa.value && kelulusan.value && pembimbing1.value && pembimbing2.value) {
+    if (judul.value && abstrak.value && splitKeyword.value.length >= 3 && bahasa.value && kelulusan.value && pembimbing1.value && pembimbing2.value) {
       metadataButtonState.value = true;
       await $fetch(
         config.public.dSpacePublic +
@@ -284,7 +288,7 @@ const saveMetadata = async () => {
       errorMetadata.value = true
       setTimeout(() => {
         errorMetadata.value = false
-      }, 5000)
+      }, 3000)
     }
 
     console.log("DONE!");
@@ -358,13 +362,15 @@ const onChangeThenUpload = async ($event, formName) => {
   };
 
   const bodyRequest = ref();
-  switch (formName) {
-    case value:
-      
-      break;
-  
-    default:
-      break;
+  const fileAccess = () => {
+    switch (formName) {
+      case "Cover":
+        
+        break;
+    
+      default:
+        break;
+    }
   }
   
   if (target && target.files) {
@@ -819,13 +825,13 @@ const showPreview = async (uid) => {
               <div class="input-block">
                 <label for="keyword">Kata Kunci <span class="text-red">*</span> :</label>
                 <input class="input-area" type="text" name="keyword" id="keyword" placeholder="Maksimum 3 Kata Kunci"
-                  v-model="kataKunci" :disabled="getWorkSpaceItem.metadata['dc.subject']?.[0]?.value" />
-                <p class="description-helper">
-                  Gunakan Tanda Koma (,) untuk memisahkan kata kunci. Maksimum 3
-                  Kata Kunci. <br />
-                  <span class="font-semibold text-orange-8">Contoh: Perpustakaan, Diseminasi Informasi, Literasi
-                    Pendidikan</span>
+                  v-model="kataKunci" :disabled="getWorkSpaceItem.metadata['dc.subject']?.[0]?.value" @keyup.enter.stop.prevent="onEnterKeywords" />
+                <p class="description-helper" :class="splitKeyword.length < 3 ? 'text-gray' : 'text-red'">
+                  {{ warn }}
                 </p>
+                <div class="flex flex-wrap gap-1">
+                  <span class="bg-orange text-white text-xs rounded px-2 py-0 transition-all-500 cursor-pointer" v-for="(key, index) in splitKeyword" @click="deleteKeyword(index)">{{ key.value }}</span>
+                </div>
               </div>
               <div class="input-block">
                 <label for="bahasa">Bahasa <span class="text-red">*</span> :</label>
@@ -875,7 +881,7 @@ const showPreview = async (uid) => {
             </div>
             <button class="btn bg-green-5 text-white w-full mt-5 font-semibold" type="submit"
               @click.prevent="saveMetadata"
-              :disabled="judul || abstrak || kataKunci || bahasa || kelulusan || pembimbing1 || pembimbing2">
+              :disabled="!judul && !abstrak && !kataKunci && !bahasa && !kelulusan && !pembimbing1 && !pembimbing2">
               <span v-if="metadataButtonState" class="flex gap-3 items-center justify-center">
                 <div class="loader"></div>
                 Mengirim...
@@ -1443,7 +1449,7 @@ p {
 }
 
 .description-helper {
-  --at-apply: text-sm text-gray italic;
+  --at-apply: text-sm italic;
 }
 
 .heading-section {

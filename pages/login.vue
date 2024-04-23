@@ -116,7 +116,7 @@ definePageMeta({
     <div class="flex flex-col-reverse max-w-5xl ma lg:flex-row justify-center">
       <div class="w-full">
         <form class="ma w-full max-w-sm" @submit.prevent="submitLogin">
-          <h4>Login Pegawai</h4>
+          <h6>Login Staff Kandaga</h6>
           <div class="flex flex-col">
             <label for="email" class="text-left">Email :</label>
             <input class="input-space px-3" type="email" v-model="email" required />
@@ -150,7 +150,7 @@ definePageMeta({
       </div>
 
       <div class="w-full max-w-sm ma flex flex-col items-center">
-        <h4>Login Mahasiswa / Dosen</h4>
+        <h6>Login Mahasiswa / Dosen / Tenaga Kependidikan</h6>
         <NuxtImg format="webp" src="/illustration/undraw_secure_login.png" class="w-70"/>
         <button class="form-btn"
           :class="email || password ? 'disable-btn' : 'oauth-btn'" @click="googleLogin" :disable="email.length > 0">

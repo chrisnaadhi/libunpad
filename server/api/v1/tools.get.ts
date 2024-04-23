@@ -22,7 +22,7 @@ export default defineEventHandler((event) => {
       slug: "/panduan",
     },
     {
-      nama_tools: "Research Assist",
+      nama_tools: "Study Assist",
       deskripsi:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam doloremque debitis quis rerum voluptas expedita molestiae, cum pariatur sed repudiandae.",
       icon: "i-mdi-settings",

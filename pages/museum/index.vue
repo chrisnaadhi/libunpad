@@ -6,6 +6,7 @@ const museumObj = {
   definition: "(noun) /mjuːˈziː.əm/",
   imageUrl: "undraw_search_app.png",
   titleDesc: computed(() => i18n.t("museumDescription")),
+  museumDesc: "Museum GLAM atau yang lebih dikenal dengan Memorabilia Universitas GLAM yang diinisiasi pada Tahun 2019 dan dibuka untuk umum pada tahun 2022 yang terletak Gedung Grha Kandag lt 1 Institusi Informasi Pusat Pengelolaan Pengetahuan. Memorabilia sendiri mengacu pada Kamus Besar Bahasa Memorabilia GLAM ini menyimpan kenangan yang berbentuk ke-UNPAD-an, benda-benda kecil yang mengandung banyak sejarah di dalamnya. Memorabilia GLAM memegang peranan penting dalam regenerasi program yang ada karena dapat memberikan berbagai manfaat sosial dan budaya yang signifikan untuk lokasi dan tujuan dimana museum ini ditetapkan atau didirikan, contohnya ialah sebagai tempat menyimpan ‘memori’ bersama yang terbuka untuk Civitas Akademika maupun alumni karena digunakan sebagai bukti penyimpan kenang-kenangan orang-orang yang pernah berada di Lingkungan Universitas Padjadjaran, baik budaya mereka, mimpi bahkan harapan mereka sekalipun sehingga menimbulkan kesadaran untuk mengakui identitas dan rasa saling memiliki satu sama lain. ",
   branding: "GLAM's Memorabilia",
 };
 
@@ -20,7 +21,7 @@ const path = useRoute();
       <div class="p-4">
         <h1 class="text-4xl text-center">{{ museumObj.title }}</h1>
         <p class="text-justify">
-          {{ museumObj.titleDesc.value }}
+          {{ museumObj.museumDesc }}
         </p>
       </div>
       <div class="p-4 flex flex-col items-center">

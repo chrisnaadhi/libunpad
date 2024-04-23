@@ -19,8 +19,8 @@ const { data: tools } = await useFetch("/api/v1/tools");
         </div>
         <div class="right-content">
           <div class="contents-display">
-            <h1 class="tools-heading">{{ tool.nama_tools }}</h1>
-            <p class="text-xs text-white">
+            <h2 class="tools-heading">{{ tool.nama_tools }}</h2>
+            <p class="text-2 lg:text-xs text-white">
               {{ tool.deskripsi }}
             </p>
             <NuxtLink :to="tool.slug" class="btn mt-3 py-0 bg-white text-sm text-orange">
@@ -48,7 +48,7 @@ const { data: tools } = await useFetch("/api/v1/tools");
 }
 
 .content-wrapper {
-  --at-apply: max-w-6xl flex flex-1 flex-wrap ma justify-center xl:(flex-nowrap);
+  --at-apply: max-w-6xl flex flex-1 flex-wrap ma justify-center 2xl:(flex-nowrap);
 }
 
 .content {
@@ -77,6 +77,6 @@ const { data: tools } = await useFetch("/api/v1/tools");
 }
 
 .tools-heading {
-  --at-apply: text-white font-600 text-2xl;
+  --at-apply: text-white font-600 text-xl;
 }
 </style>

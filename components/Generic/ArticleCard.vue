@@ -13,23 +13,32 @@ defineProps({
 <template>
   <section class="article-block">
     <NuxtImg :src="`${config.public.directus.url}assets/` + featuredImg"
-      class="w-full max-h-45 object-cover rounded-lg" />
-    <NuxtLink :to="linkSlug" class="text-dark no-underline transition-all-500 hover:text-orange">
-      <h5>{{ title }}</h5>
-    </NuxtLink>
-    <p class="text-xs italic">{{ convertTimeZone(dateCreated) }}</p>
-    <div></div>
-    <p>
-      <span v-html="trimDescription(description, 150)"></span>
-      <NuxtLink :to="linkSlug" class="text-sm text-orange underline">
-        Baca selengkapnya
+      class="w-full max-h-55 object-cover object-b rounded-tl-lg rounded-tr-lg" />
+    <div class="p-10 flex flex-col justify-between gap-2 h-full">
+      <NuxtLink :to="linkSlug" class="text-dark no-underline transition-all-500 hover:text-orange">
+        <h4>{{ title }}</h4>
       </NuxtLink>
-    </p>
+      <p class="text-sm text-justify">
+        <span v-html="trimDescription(description, 200)"></span>
+      </p>
+      <div class="flex items-center justify-between">
+        <p class="text-xs text-gray italic">{{ displayTanggalIndonesia(dateCreated) }}</p>
+        <NuxtLink :to="linkSlug" class="text-3 flex items-center py-1 px-2 rounded gap-1 text-orange no-underline transition-all-500 hover:(bg-orange text-white)">
+          <span>
+            Baca selengkapnya
+          </span>
+          <span>
+            <div class="i-mdi-arrow-right" />
+          </span>
+        </NuxtLink>
+      </div>
+    </div>
+
   </section>
 </template>
 
 <style scoped>
 .article-block {
-  --at-apply: flex flex-col gap-2 text-left w-full h-full min-h-sm bg-gray-50 p-3 rounded-lg shadow-md shadow-gray;
+  --at-apply: flex flex-col text-left w-full h-full bg-white rounded-lg shadow-md shadow-gray;
 }
 </style>

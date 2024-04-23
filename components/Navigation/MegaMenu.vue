@@ -1,5 +1,5 @@
 <script setup>
-const defaultDescription = "Konten deskripsi belum tersedia";
+const defaultDescription = "Kandaga merupakan branding dari Pusat Pengelolaan Pengetahuan untuk Perpustakaan Pusat di Universitas Padjadjaran. Kandaga menjadi portal dan layanan dari Perpustakaan Pusat untuk memenuhi kebutuhan kegiatan belajar dan mengajar mahasiswa serta dosen. Kandaga memberikan layanan dan fasilitas yang bisa dimanfaatkan oleh seluruh mahasiswa, dosen serta tenaga kependidikan.";
 
 defineProps({
   imgFile: String,
@@ -10,7 +10,7 @@ defineProps({
 <template>
   <section>
     <div class="flex items-start justify-between gap-4">
-      <NuxtImg src="/images/teater1.png" format="webp" class="max-w-full max-h-50 object-cover rounded-xl" />
+      <NuxtImg src="/images/kandaga-bg.webp" format="webp" class="max-w-full max-h-50 object-cover rounded-xl" />
       <div>
         <slot />
         <p>

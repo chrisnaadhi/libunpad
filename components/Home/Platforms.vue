@@ -98,9 +98,11 @@ const viewStateMuseum = ref(false);
         <h6>E-Teater</h6>
       </NuxtLink>
     </section>
-    <section class="lib-content">
-      <div class="i-mdi-file-document-edit w-8 h-8"></div>
-      <h4>Library, Learning and Administration Services</h4>
+    <section class="w-full">
+      <NuxtLink to="/pengajuan" class="lib-content">
+        <div class="i-mdi-file-document-edit w-8 h-8"></div>
+        <h4>Library, Learning and Administration Services</h4>
+      </NuxtLink>
     </section>
   </div>
 </template>
@@ -112,7 +114,7 @@ const viewStateMuseum = ref(false);
   background-position: center;
   background-size: cover;
   box-shadow: 0px 25px 15px rgb(255, 255, 255) inset, 0px -25px 15px rgb(255, 255, 255) inset;
-  --at-apply: bg-white w-full flex flex-col items-center mt-25;
+  --at-apply: bg-white w-full flex flex-col items-center mt-12 md:mt-25;
 }
 
 .background-block {
@@ -156,7 +158,7 @@ const viewStateMuseum = ref(false);
 }
 
 .lib-content {
-  --at-apply: flex flex-col items-center mt-5 mb-10 bg-white p-4 mx-10 rounded transition-all xl:(w-272) hover:(bg-orange text-white);
+  --at-apply: flex flex-col items-center mt-5 mb-10 bg-white text-dark no-underline p-3 mx-5 rounded transition-all xl:(w-272) hover:(bg-orange text-white);
 }
 
 
