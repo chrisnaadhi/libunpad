@@ -98,7 +98,7 @@ const viewStateMuseum = ref(false);
         <h6>E-Teater</h6>
       </NuxtLink>
     </section>
-    <section class="w-full">
+    <section class="w-full flex items-center justify-center">
       <NuxtLink to="/pengajuan" class="lib-content">
         <div class="i-mdi-file-document-edit w-8 h-8"></div>
         <h4>Library, Learning and Administration Services</h4>

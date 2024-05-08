@@ -23,7 +23,7 @@ const getThumbnail = (id) => {
     <div class="hero-space">
       <div class="hero-left">
         <div class="text-2xl font-600 md:text-4xl text-gray-700 ">
-          {{ $t("introWelcome") }} <span class="uglam">KANDAGA</span>
+          <span class="uglam">KANDAGA</span>
         </div>
         <p class="text-sm md:text-xl font-500 text-gray-700 font-italic">
           <span class="text-orange-6 font-600">Universitas Padjadjaran</span>'s
@@ -81,7 +81,7 @@ const getThumbnail = (id) => {
 }
 
 .uglam {
-  --at-apply: bg-clip-text text-transparent text-5xl sm:text-3xl md:text-4xl lg:text-5xl font-700 bg-gradient-to-br from-orange-500 to-gray-500;
+  --at-apply: bg-clip-text text-transparent text-4xl sm:text-4xl md:text-6xl lg:text-7xl font-700 bg-gradient-to-br from-orange-500 to-gray-500;
   font-family: "Cormorant Garamond", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 

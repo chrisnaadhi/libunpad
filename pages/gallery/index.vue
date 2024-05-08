@@ -1,5 +1,6 @@
 <script setup>
 const i18n = useI18n();
+const { getItems } = useDirectusItems();
 
 const galleryObj = {
   title: "Gallery",
@@ -7,6 +8,13 @@ const galleryObj = {
   imageUrl: "undraw_Picture.png",
   titleDesc: computed(() => i18n.t("galleryDescription")),
 };
+
+const getGalleryData = await getItems({
+  collection: "koleksi_gallery",
+  params: {
+    limit: 4
+  }
+})
 
 const defaultImage = "/images/no-image.jpg";
 const path = useRoute();
@@ -30,6 +38,13 @@ const path = useRoute();
               format="webp">
             </NuxtImg>
           </NuxtLink>
+        </div>
+        <div class="my-5" v-for="galeri in getGalleryData">
+          <div class="bg-white p-5 rounded">
+            <h4>{{ galeri.judul }}</h4>
+            <p><span v-html="galeri.keterangan_koleksi"></span></p>
+            {{ galeri }}
+          </div>
         </div>
       </div>
     </div>

@@ -361,13 +361,15 @@ const onChangeThenUpload = async ($event, formName) => {
     "X-XSRF-TOKEN": dSpaceToken.value ?? "",
   };
 
-  const bodyRequest = ref();
   const fileAccess = () => {
     switch (formName) {
       case "Cover":
-        
-        break;
-    
+      case "Abstrak":
+      case "LembarPernyataan":
+      case "LembarPengesahan":
+        return "anonymous"
+      case "Bab1":
+        return "administrator"
       default:
         break;
     }
@@ -404,12 +406,8 @@ const onChangeThenUpload = async ($event, formName) => {
               files.value = await getFilesData.sections.upload.files;
               switch (formName) {
                 case "Cover":
-                  console.log(files.value)
                   const findCover = await searchFile("Cover");
-                  console.log(findCover)
-                  console.log(fileCover.value)
                   fileCover.value = await findCover
-                  console.log(fileCover.value)
                   break;
                 case "Abstrak":
                   const findAbstrak = await searchFile("Abstrak");
@@ -806,7 +804,7 @@ const showPreview = async (uid) => {
           <div class="heading-section">
             <h3>Informasi Detil Tugas Akhir</h3>
           </div>
-          <form @submit.prevent="saveMetadata">
+          <form>
             <div class="input-block">
               <label for="judul">Judul Tugas Akhir <span class="text-red">*</span> :
               </label>
