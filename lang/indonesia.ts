@@ -49,6 +49,7 @@ export default {
 
   // KOLEKSI
   // Gallery - /gallery
+  galleryTitle: "Galeri",
   galleryDescription:
     'Galeri diartikan sebagai ruangan atau bangunan tempat benda atau karya seni dipamerkan dan sebagainya. Oxford Advanced Learner\'s Dictionary menyatakan Galeri sebagai "Sebuah ruangan atau bangunan untuk menampilkan karya seni". (KBBI)',
   // Library - /library

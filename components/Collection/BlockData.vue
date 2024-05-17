@@ -15,7 +15,7 @@ defineProps({
       <div class="main-topic">
         <img src="/images/9396112_3023.jpg" alt="" class="image-cover" />
         <div class="gradient-background">
-          <h2 class="text-2xl font-600 text-white">Kotak Besar</h2>
+          <h2 class="text-2xl font-600 text-white">Koleksi Utama</h2>
           <p class="text-xs text-white text-justify">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores
             voluptatem aspernatur esse, explicabo molestias cumque sit
@@ -28,7 +28,7 @@ defineProps({
           'background-image': 'url(' + '/images/9396112_3023.jpg' + ')',
         }">
           <div class="vertical-backdrop">
-            <h3 class="text-white text-xl font-600">Kotak Panjang</h3>
+            <h3 class="text-white text-xl font-600">Koleksi Pertama</h3>
             <p class="sub-description">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione
               cum enim totam voluptates ad accusantium maxime odio consectetur
@@ -40,7 +40,7 @@ defineProps({
           'background-image': 'url(' + '/images/museum.jpg' + ')',
         }">
           <div class="vertical-backdrop">
-            <h3 class="text-white text-xl font-600">Kotak Panjang</h3>
+            <h3 class="text-white text-xl font-600">Koleksi Kedua</h3>
             <p class="sub-description">
               Lorem ipsum dolor sit amet consectetur, adipisicing elit.
               Provident soluta quia sint quisquam molestiae autem cupiditate?

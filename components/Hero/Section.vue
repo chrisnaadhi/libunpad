@@ -27,7 +27,7 @@ const getThumbnail = (id) => {
         </div>
         <p class="text-sm md:text-xl font-500 text-gray-700 font-italic">
           <span class="text-orange-6 font-600">Universitas Padjadjaran</span>'s
-          Gallery, Library, Record Management & Museum (GLAMS)
+          Gallery, Library, Archives & Museum (GLAMS)
         </p>
         <p class="py-2 text-sm xl:(mr-6 pr-8 px-20)">
           {{ $t("homeDescription") }}

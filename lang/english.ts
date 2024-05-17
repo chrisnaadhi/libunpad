@@ -49,6 +49,7 @@ export default {
 
   // KOLEKSI
   // Gallery - /gallery
+  galleryTitle: "Gallery",
   galleryDescription:
     'is defined as a room or building where objects or works of art are exhibited and so on. Oxford Advanced Learner\'s Dictionary states Gallery as "A room or building for showing works of art".',
   // Library - /library

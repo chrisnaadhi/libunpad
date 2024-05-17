@@ -25,6 +25,9 @@ const facilities = ref([
     <p>Informasi mengenai Fasilitas yang tersedia Kandaga</p>
     <div>
       <div v-for="facility in facilities">
+        <div>
+          <NuxtImg src="/images/no-image.jpg" />
+        </div>
         <p>{{ facility }}</p>
       </div>
     </div>

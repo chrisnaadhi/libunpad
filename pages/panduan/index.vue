@@ -6,6 +6,7 @@ const layananPerpustakaan = await getItems({
 const getAllLiterasiInformasi = await getItems({
   collection: "konten_literasi_informasi",
 });
+const { getThumbnail: img } = useDirectusFiles();
 
 const panduanList = [
   "Layanan dan Fasilitas",
@@ -77,7 +78,7 @@ const toggleLayanan = (value) => {
             <div class="flex flex-col gap-3 md:(grid grid-cols-2)">
               <GenericBaseCard v-for="item in getAllLiterasiInformasi" class="bg-gray-1 h-full">
                 <div>
-                  <NuxtImg src="/images/9396112_3023.jpg" format="webp" class="w-full object-cover rounded-t"></NuxtImg>
+                  <NuxtImg :src="img(item.featured_image)" format="webp" class="w-full h-50 object-cover rounded-t"></NuxtImg>
                 </div>
                 <div class="flex flex-col px-4 py-5 justify-center">
                   <h3 class="text-left">{{ item.judul }}</h3>

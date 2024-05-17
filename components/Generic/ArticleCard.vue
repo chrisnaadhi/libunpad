@@ -14,7 +14,7 @@ defineProps({
   <section class="article-block">
     <NuxtImg :src="`${config.public.directus.url}assets/` + featuredImg"
       class="w-full max-h-55 object-cover object-b rounded-tl-lg rounded-tr-lg" />
-    <div class="p-10 flex flex-col justify-between gap-2 h-full">
+    <div class="px-10 pt-5 pb-10 flex flex-col justify-between gap-2 h-full">
       <NuxtLink :to="linkSlug" class="text-dark no-underline transition-all-500 hover:text-orange">
         <h4>{{ title }}</h4>
       </NuxtLink>

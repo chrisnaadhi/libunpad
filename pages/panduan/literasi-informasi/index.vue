@@ -15,6 +15,7 @@ const getAllLiterasiInformasi = await getItems({
         </div>
         <div class="flex flex-col px-6 pb-2 pt-4">
           <h3 class="text-left">{{ item.judul }}</h3>
+          
           <p class="text-sm italic">{{ trimDescription(item.konten, 150) }}</p>
           <div class="flex my-3 text-center">
             <NuxtLink :to="`/panduan/literasi-informasi/${item.slug}`" class="action-btn">
@@ -22,6 +23,7 @@ const getAllLiterasiInformasi = await getItems({
             </NuxtLink>
           </div>
         </div>
+        {{ item }}
       </GenericBaseCard>
     </div>
   </section>
