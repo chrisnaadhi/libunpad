@@ -18,7 +18,7 @@ const getGalleryCollection = await getItemById({
     </div>
     <div class="flex justify-center gap-5 max-w-4xl ma">
       <div>
-        <NuxtImg :src="getThumbnail(getGalleryCollection.thumbnail)" class="w-50 h-full rounded-md" />
+        <NuxtImg :src="getThumbnail(getGalleryCollection.thumbnail)" format="webp" class="w-50 h-full rounded-md" />
       </div>
       <div class="flex gap-4">
         <div class="text-left font-semibold flex flex-col gap-3">

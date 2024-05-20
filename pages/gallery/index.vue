@@ -1,6 +1,16 @@
 <script setup>
 const i18n = useI18n();
 const { getItems } = useDirectusItems();
+const { getThumbnail: img } = useDirectusFiles();
+
+const getTotalDataGallery = ref(await getItems({
+  collection: "koleksi_gallery",
+}))
+
+const pageTotal = getTotalDataGallery.value.length
+const currentPage = ref(0);
+const collectionList = ref();
+const collectionTag = ref(null);
 
 const galleryObj = {
   title: i18n.t("galleryTitle"),
@@ -16,17 +26,45 @@ const getGalleryDataHighlight = await getItems({
   }
 })
 
-const getAllGalleryCollection = await getItems({
-  collection: "koleksi_gallery",
-  params: {
-    sort: "-date_created"
+const getGalleryPaginationData = async (opts) => {
+  collectionTag.value.scrollIntoView()
+  if (opts === 'next' && currentPage.value >= 0 && currentPage.value < pageTotal) {
+    collectionList.value = [];
+    currentPage.value = currentPage.value + 12;
+    collectionList.value = await getItems({
+      collection: "koleksi_gallery",
+      params: {
+        sort: "-date_created",
+        limit: 12,
+        offset: currentPage.value
+      }
+    })
+  } else if (opts === 'previous' && currentPage.value !== 0) {
+    collectionList.value = [];
+    currentPage.value = currentPage.value - 12;
+    collectionList.value = await getItems({
+      collection: "koleksi_gallery",
+      params: {
+        sort: "-date_created",
+        limit: 12,
+        offset: currentPage.value
+      }
+    })
+  } else {
+    alert("Nothing Happened!")
   }
+}
+
+onMounted(async () => {
+  collectionList.value = await getItems({
+    collection: "koleksi_gallery",
+    params: {
+      sort: "-date_created",
+      limit: 12,
+      offset: 0
+    }
+  })
 })
-
-const { getThumbnail: img } = useDirectusFiles();
-
-const defaultImage = "/images/no-image.jpg";
-const path = useRoute();
 </script>
 
 <template>
@@ -38,17 +76,19 @@ const path = useRoute();
       </div>
       <div class="p-4 flex flex-col items-center">
         <h3>Koleksi {{ galleryObj.title }} Pilihan Kami</h3>
-        <div class="my-5 grid grid-cols-2 gap-3">
+        <div class="my-5 flex flex-col gap-5 lg:(grid grid-cols-2 gap-3) w-full">
           <div class="bg-white p-5 rounded flex w-full h-full gap-5" v-for="galeri in getGalleryDataHighlight">
-            <NuxtImg :src="img(galeri.thumbnail)" class="w-50 h-60 object-cover rounded-lg" />
+            <NuxtLink :to="'/gallery/' + galeri.id">
+              <NuxtImg :src="img(galeri.thumbnail)" format="webp"
+                class="w-full h-40 object-cover rounded-lg lg:(w-50 h-60) transition duration-300 ease-in-out hover:scale-110" />
+            </NuxtLink>
             <div class="flex flex-col justify-around gap-3 w-full">
               <div class="flex">
-                <NuxtLink :to="'/gallery/' + galeri.id" class="no-underline">
-                  <h4 class="bg-orange-1 px-3 rounded text-orange">{{ galeri.judul }}</h4>
+                <NuxtLink :to="'/gallery/' + galeri.id" class="no-underline w-full">
+                  <h4 class="bg-orange-1 px-3 rounded text-orange">{{ trimTitle(galeri.judul, 22) }}</h4>
                 </NuxtLink>
               </div>
               <div class="flex flex-col w-full pl-2">
-                <span v-html="galeri.keterangan_koleksi"></span>
                 <p class="text-sm text-gray-5">Pembuat: {{ galeri.pembuat_koleksi ?? "Belum ada data" }}</p>
                 <p class="text-sm text-gray-5">Dibuat pada: {{ galeri.tanggal_dibuat }}</p>
                 <p class="text-sm text-gray-5">Pengelola : {{ galeri.lembaga_penanggungjawab }}</p>
@@ -59,27 +99,36 @@ const path = useRoute();
         </div>
       </div>
     </div>
-    <div class="my-10 flex flex-col items-center justify-evenly">
-      <h3 class="text-center mb-5">Daftar Koleksi Galeri</h3>
-      <div class="grid grid-cols-4 gap-10">
-        <div v-for="galeri in getAllGalleryCollection" class="max-w-50 text-center flex flex-col gap-2">
-          <NuxtImg :src="img(galeri.thumbnail)" class="w-50 h-80 object-cover rounded-xl" />
-          <NuxtLink :to="'/gallery/' + galeri.id" class="no-underline bg-orange-50 font-semibold transition-all-500 rounded-md hover:(bg-orange text-white)" :title="galeri.judul">
-            {{ trimTitle(galeri.judul, 20) }}
-          </NuxtLink>
-          <p class="text-sm text-gray mt--2">{{ galeri.tanggal_dibuat ?? "-" }}</p>
-          <div>
-            <NuxtLink class="bg-orange text-white px-4 py-0 text-sm rounded no-underline" :to="'/gallery/' + galeri.id">
-              Lihat
-            </NuxtLink>
-          </div>
+    <div class="my-10 flex flex-col items-center justify-evenly w-full">
+      <h3 class="text-center mb-5" ref="collectionTag">Daftar Koleksi Galeri</h3>
+      <div v-if="collectionList?.length === 0">
+        <p>Sedang memuat koleksi</p>
+      </div>
+      <div class="gallery-collection" v-else>
+        <div v-for="galeri in collectionList" class="max-w-50 text-center flex flex-col gap-2">
+          <CollectionGLAMItems v-bind="galeri" />
         </div>
+      </div>
+      <div class="flex items-center justify-center gap-3 w-full mt-8">
+        <button class="btn bg-orange text-white py-0" @click="getGalleryPaginationData('previous')"
+          :disabled="currentPage === 0">Sebelumnya</button>
+        <p>{{ currentPage == 0 ? "1" : Math.ceil((currentPage / 12) + 1) }} / {{ Math.ceil(pageTotal / 12) }}</p>
+        <button class="btn bg-orange text-white py-0" @click="getGalleryPaginationData('next')"
+          :disabled="Math.ceil((currentPage / 12) + 1) === Math.ceil(pageTotal / 12)">Selanjutnya</button>
       </div>
     </div>
   </section>
 </template>
 
 <style scoped>
+.gallery-collection {
+  --at-apply: flex flex-col gap-3 sm:(grid grid-cols-3) lg:(grid grid-cols-4 gap-10);
+}
+
+.navigation-area {
+  --at-apply: flex items-center justify-center gap-3 w-full mt-8;
+}
+
 section {
   --at-apply: max-w-7xl ma;
 }
