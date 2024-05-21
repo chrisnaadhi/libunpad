@@ -85,12 +85,12 @@ onMounted(async () => {
             <div class="flex flex-col justify-around gap-3 w-full">
               <div class="flex">
                 <NuxtLink :to="'/gallery/' + galeri.id" class="no-underline w-full">
-                  <h4 class="bg-orange-1 px-3 rounded text-orange">{{ trimTitle(galeri.judul, 22) }}</h4>
+                  <h4 class="bg-orange-1 px-3 rounded text-orange">{{ galeri.judul }}</h4>
                 </NuxtLink>
               </div>
               <div class="flex flex-col w-full pl-2">
                 <p class="text-sm text-gray-5">Pembuat: {{ galeri.pembuat_koleksi ?? "Belum ada data" }}</p>
-                <p class="text-sm text-gray-5">Dibuat pada: {{ galeri.tanggal_dibuat }}</p>
+                <p class="text-sm text-gray-5">Dibuat pada: {{ galeri.tanggal_dibuat ?? "Tidak diketahui" }}</p>
                 <p class="text-sm text-gray-5">Pengelola : {{ galeri.lembaga_penanggungjawab }}</p>
               </div>
               <NuxtLink class="btn bg-orange text-white text-center py-1" :to="'/gallery/' + galeri.id">Lihat</NuxtLink>
@@ -101,8 +101,9 @@ onMounted(async () => {
     </div>
     <div class="my-10 flex flex-col items-center justify-evenly w-full">
       <h3 class="text-center mb-5" ref="collectionTag">Daftar Koleksi Galeri</h3>
+      <h5 class="text-center mb-5">Total Koleksi Galeri: {{ pageTotal }}</h5>
       <div v-if="collectionList?.length === 0">
-        <p>Sedang memuat koleksi</p>
+        <p>Sedang memuat koleksi...</p>
       </div>
       <div class="gallery-collection" v-else>
         <div v-for="galeri in collectionList" class="max-w-50 text-center flex flex-col gap-2">

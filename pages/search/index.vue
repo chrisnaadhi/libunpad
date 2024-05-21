@@ -5,6 +5,8 @@ const scopus = useSearchScopus();
 const previewItem = previewModalRepository();
 const route = useRoute();
 const { getItems } = useDirectusItems();
+const galleryResult = ref();
+const museumResult = ref();
 
 const repoSearch = ref();
 const portPosition = ref(0);
@@ -54,6 +56,27 @@ const submitSearch = async (keyword) => {
   }
 
   try {
+    galleryResult.value = await getItems({
+      collection: "koleksi_gallery",
+      params: {
+        search: keyword,
+        limit: 3
+      }
+    })
+
+    museumResult.value = await getItems({
+      collection: "koleksi_museum",
+      params: {
+        search: keyword,
+        limit: 3
+      }
+    })
+  } catch (error) {
+    search.isResult = false;
+    console.log(error)
+  }
+
+  try {
     repoSearch.value = await getItems({
       collection: "tbtMhsUploadThesis",
       params: {
@@ -100,25 +123,6 @@ const submitSearch = async (keyword) => {
   } catch (err) {
     search.isResult = false;
   }
-};
-
-const prevPage = () => {
-  if (search.initValue > 0) {
-    search.initValue -= 10;
-    submitSearch(search.keywords + "&sroffset=" + search.initValue);
-  } else {
-    search.initValue = 0;
-    submitSearch(search.keywords + "&sroffset=" + search.initValue);
-  }
-};
-
-const nextPage = () => {
-  search.initValue += 10;
-  submitSearch(search.keywords + "&sroffset=" + search.initValue);
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
 };
 
 const changeKeywords = () => {
@@ -252,21 +256,23 @@ onMounted(() => {
 
     <article v-show="search.keywords !== ''">
       <h3>Kandaga Federated Search</h3>
-      <div v-if="loadingFederated === false && search.ulimsRes?.length > 0" class="flex flex-col gap-3 mt-3 lg:(grid grid-cols-3)">
-        
+      <div v-if="loadingFederated === false && search.ulimsRes?.length > 0"
+        class="flex flex-col gap-3 mt-3 lg:(grid grid-cols-3)">
+
         <div v-for="item in search.ulimsRes">
-          <GenericBaseCard >
+          <GenericBaseCard>
             <div class="flex flex-col justify-between bg-white shadow shadow-orange p-5 rounded-lg w-full h-full">
               <div class="grid grid-cols-2 gap-3">
                 <div class="py-2 w-full col-span-1">
                   <p class="bg-orange text-white text-sm rounded mb-2 text-center">
                     {{ item?.gmd }}
                   </p>
-                  <NuxtImg :src="item?.image ? `https://kandaga.unpad.ac.id:8010/lib/minigalnano/createthumb.php?filename=images/docs/${item?.image}&width=240` : '/images/lambang-unpad.png'" class="w-full h-60 border border-orange object-scale-down"
-                    format="webp">
+                  <NuxtImg
+                    :src="item?.image ? `https://kandaga.unpad.ac.id:8010/lib/minigalnano/createthumb.php?filename=images/docs/${item?.image}&width=240` : '/images/lambang-unpad.png'"
+                    class="w-full h-60 border border-orange object-scale-down" format="webp">
                     <p v-show="!item?.image" class="text-center">No Image</p>
                   </NuxtImg>
-                  
+
                 </div>
                 <div class="flex flex-col gap-2 col-span-1 mt-2">
                   <div class="box-content">
@@ -301,14 +307,38 @@ onMounted(() => {
               </div>
             </div>
           </GenericBaseCard>
-          
+
         </div>
       </div>
-      <div v-else>
-          <h4 class="text-red text-center">Tidak ditemukan</h4>
-        </div>
+      <div v-else-if="search.ulimsRes?.length === 0">
+        <h4 class="text-red text-center">Tidak ditemukan</h4>
+      </div>
       <div v-else>
         <p>Mencari data...</p>
+      </div>
+    </article>
+
+    <article v-show="search.keywords !== ''">
+      <h3>Hasil pencarian Galeri</h3>
+      <div v-if="galleryResult.length > 0" v-for="galeri in galleryResult">
+        {{ galeri.judul }}
+      </div>
+      <div v-else>
+        <p class="text-center">
+          Tidak ditemukan
+        </p>
+      </div>
+    </article>
+
+    <article v-show="search.keywords !== ''">
+      <h3>Hasil pencarian Museum</h3>
+      <div v-if="museumResult.length > 0" v-for="museum in museumResult">
+        {{ museum.judul }}
+      </div>
+      <div v-else>
+        <p class="text-center">
+          Tidak ditemukan
+        </p>
       </div>
     </article>
 
@@ -317,9 +347,9 @@ onMounted(() => {
       <section class="flex flex-col gap-4 text-left my-5 md:(grid grid-cols-2) lg:(grid-cols-3)"
         v-if="loadingRepo === false">
         <CollectionRepositoryCard v-for="koleksi in repoSearch" :npm="koleksi.MhsNPM" :title="trimText(koleksi.Judul)"
-          :tipe="koleksi.tipeKoleksi" :description="koleksi.AbstrakBersih ?? koleksi.Abstrak" :keywords="koleksi.Keywords"
-          :link-access="'/koleksi/repository/item/' + koleksi.MhsNPM" @preview="openModal(koleksi.MhsNPM)"
-          class="bg-white" />
+          :tipe="koleksi.tipeKoleksi" :description="koleksi.AbstrakBersih ?? koleksi.Abstrak"
+          :keywords="koleksi.Keywords" :link-access="'/koleksi/repository/item/' + koleksi.MhsNPM"
+          @preview="openModal(koleksi.MhsNPM)" class="bg-white" />
       </section>
       <section v-else-if="loadingRepo === true">
         <p>Mencari data...</p>
