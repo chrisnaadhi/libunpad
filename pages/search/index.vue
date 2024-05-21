@@ -320,7 +320,7 @@ onMounted(() => {
 
     <article v-show="search.keywords !== ''">
       <h3>Hasil pencarian Galeri</h3>
-      <div v-if="galleryResult.length > 0" v-for="galeri in galleryResult">
+      <div v-if="galleryResult?.length > 0" v-for="galeri in galleryResult">
         {{ galeri.judul }}
       </div>
       <div v-else>
@@ -332,7 +332,7 @@ onMounted(() => {
 
     <article v-show="search.keywords !== ''">
       <h3>Hasil pencarian Museum</h3>
-      <div v-if="museumResult.length > 0" v-for="museum in museumResult">
+      <div v-if="museumResult?.length > 0" v-for="museum in museumResult">
         {{ museum.judul }}
       </div>
       <div v-else>
