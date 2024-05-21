@@ -8,9 +8,9 @@ export default defineEventHandler((event) => {
       isActive: true,
     },
     {
-      namaLayanan: "Unggah Mandiri Tugas Akhir",
+      namaLayanan: "Unggah Mandiri ETD",
       deskripsiLayanan:
-        "Layanan Unggah Mandiri untuk Tugas Akhir dalam bentuk Elektronik untuk keperluan serah simpan karya ilmiah ke Institusi. Tugas Akhir dalam bentuk Karya Ilmiah standar Skripsi, Tesis, Disertasi maupun format karya ilmiah yang telah disetujui oleh program studi dan universitas.",
+        "Layanan Unggah Mandiri untuk Karya ETD (Electronic Theses / Dissertation) Tugas Akhir dalam bentuk Elektronik untuk keperluan serah simpan karya ilmiah ke Institusi. Tugas Akhir dalam bentuk Karya Ilmiah standar Skripsi, Tesis, Disertasi maupun format karya ilmiah yang telah disetujui oleh program studi dan universitas.",
       slug: "/pengajuan/unggah-mandiri",
       isActive: true,
     },
@@ -22,7 +22,7 @@ export default defineEventHandler((event) => {
       isActive: true,
     },
     {
-      namaLayanan: "Pengajuan Kelas Literasi",
+      namaLayanan: "Pengajuan Kelas Literasi Informasi",
       deskripsiLayanan: "Belum Tersedia",
       slug: "/pengajuan/#",
       isActive: false,

@@ -13,6 +13,9 @@ export default defineNuxtConfig({
   routeRules: {
     "/api/**": { cors: true },
     "/visitor/rekap": { redirect: "/error" },
+    "/pengajuan/unggah-mandiri/submit/**": {
+      redirect: "/pengajuan/unggah-mandiri",
+    },
   },
   modules: [
     "@unocss/nuxt",
@@ -61,9 +64,6 @@ export default defineNuxtConfig({
   },
   auth: {
     isEnabled: true,
-    // provider: {
-    //   type: "authjs",
-    // },
     defaultProvider: "google",
   },
   runtimeConfig: {

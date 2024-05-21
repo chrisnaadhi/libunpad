@@ -49,17 +49,18 @@ export default {
 
   // KOLEKSI
   // Gallery - /gallery
+  galleryTitle: "Galeri",
   galleryDescription:
-    'Galeri diartikan sebagai ruangan atau bangunan tempat benda atau karya seni dipamerkan dan sebagainya. Oxford Advanced Learner\'s Dictionary menyatakan Galeri sebagai "Sebuah ruangan atau bangunan untuk menampilkan karya seni".',
+    'Galeri diartikan sebagai ruangan atau bangunan tempat benda atau karya seni dipamerkan dan sebagainya. Oxford Advanced Learner\'s Dictionary menyatakan Galeri sebagai "Sebuah ruangan atau bangunan untuk menampilkan karya seni". (KBBI)',
   // Library - /library
   libraryDescription:
-    "Perpustakaan adalah kumpulan bahan, buku, atau media yang dapat diakses untuk digunakan dan tidak hanya untuk tujuan pajangan. Perpustakaan menyediakan materi fisik (hard copy) atau akses digital (soft copy), dan dapat berupa lokasi fisik atau ruang virtual, atau keduanya.",
+    "Merupakan kumpulan bahan, buku, atau media yang dapat diakses untuk digunakan dan tidak hanya untuk tujuan pajangan. Perpustakaan menyediakan materi fisik (hard copy) atau akses digital (soft copy), dan dapat berupa lokasi fisik atau ruang virtual, atau keduanya. (KBBI)",
   // Archive - /records
   archiveDescription:
-    "Arsip adalah akumulasi catatan atau bahan sejarah – dalam media apa pun – atau fasilitas fisik di mana mereka berada.",
+    "Merupakan akumulasi catatan atau bahan sejarah – dalam media apa pun – atau fasilitas fisik di mana mereka berada. (KBBI)",
   // Museum - /museum
   museumDescription:
-    "Museum adalah bangunan atau lembaga yang merawat dan memamerkan koleksi artefak dan benda lain yang memiliki kepentingan seni, budaya, sejarah, atau ilmiah.",
+    "Merupakan bangunan atau lembaga yang merawat dan memamerkan koleksi artefak dan benda lain yang memiliki kepentingan seni, budaya, sejarah, atau ilmiah. (KBBI)",
 
   // FOOTER
   // Tautan Cepat

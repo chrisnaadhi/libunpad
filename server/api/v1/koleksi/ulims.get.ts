@@ -13,12 +13,12 @@ export default defineEventHandler(async (event) => {
       .from(searchBiblio)
       .where(
         or(
-          like(searchBiblio.title, `${query.search}`),
-          like(searchBiblio.topic, `${query.search}`),
-          like(searchBiblio.author, `${query.search}`)
+          like(searchBiblio.title, `%${query.search}%`),
+          like(searchBiblio.topic, `%${query.search}%`),
+          like(searchBiblio.author, `%${query.search}%`)
         )
       )
-      .limit(30)
+      .limit(6)
       .offset(Number(query.offset));
 
     if (res.length > 0) {
@@ -35,12 +35,12 @@ export default defineEventHandler(async (event) => {
       .from(searchBiblio)
       .where(
         or(
-          like(searchBiblio.title, `${query.search}`),
-          like(searchBiblio.topic, `${query.search}`),
-          like(searchBiblio.author, `${query.search}`)
+          like(searchBiblio.title, `%${query.search}%`),
+          like(searchBiblio.topic, `%${query.search}%`),
+          like(searchBiblio.author, `%${query.search}%`)
         )
       )
-      .limit(30);
+      .limit(6);
 
     if (res.length > 0) {
       results = res;
@@ -48,13 +48,14 @@ export default defineEventHandler(async (event) => {
       results = {
         status: 404,
         message: "Pencarian tidak ditemukan",
+        query: query.search,
       };
     }
   } else if (query.offset) {
     let res = await db
       .select()
       .from(searchBiblio)
-      .limit(30)
+      .limit(6)
       .offset(Number(query.offset));
 
     if (res.length > 0) {

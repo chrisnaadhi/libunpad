@@ -17,12 +17,6 @@ export const getCSRFToken = async () => {
   }
 };
 
-export const getSubmissionWorkspace = async () => {
-  const dSpaceToken = useCookie("X-XSRF-TOKEN");
-  const dSpaceAccess = useCookie("dsAccessToken");
-  const config = useRuntimeConfig();
-};
-
 export const getSubmitterData = defineStore("submitterData", () => {
   const namaLengkap = ref("");
   const npm = ref("");
@@ -40,3 +34,40 @@ export const getSubmitterData = defineStore("submitterData", () => {
     jenjang,
   };
 });
+
+export const fetchWorkspaceItem = async (workspaceid: string) => {
+  const config = useRuntimeConfig();
+  const bearer = useCookie("dsAccessToken");
+  const dSpaceToken = useCookie("X-XSRF-TOKEN");
+  const results = await $fetch(
+    `${config.public.dSpacePublic}/submission/workspaceitems/${workspaceid}/item`,
+    {
+      credentials: "include",
+      headers: new Headers({
+        //@ts-expect-error
+        Authorization: "Bearer " + bearer.value.accessToken,
+        "X-XSRF-TOKEN": `${dSpaceToken.value}`,
+      }),
+    }
+  );
+  return results;
+};
+
+export const fetchWorkspaceFiles = async (workspaceid: string) => {
+  const config = useRuntimeConfig();
+  const bearer = useCookie("dsAccessToken");
+  const dSpaceToken = useCookie("X-XSRF-TOKEN");
+  const results = await $fetch(
+    `${config.public.dSpacePublic}/submission/workspaceitems/${workspaceid}`,
+    {
+      credentials: "include",
+      headers: new Headers({
+        //@ts-expect-error
+        Authorization: "Bearer " + bearer.value.accessToken,
+        "X-XSRF-TOKEN": `${dSpaceToken.value}`,
+      }),
+    }
+  );
+
+  return results;
+};

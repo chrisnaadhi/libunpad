@@ -1,10 +1,8 @@
 <script setup>
 const unggahMandiri = ref("Unggah Mandiri Karya Ilmiah");
 const { data } = useAuth();
-const getKelengkapanData = await fetchDspaceItemLogs(data.value.user.email);
+const getKelengkapanData = await fetchDspaceItemLogs(data?.value?.user?.email);
 const userETD = getKelengkapanData[0];
-
-console.log(userETD);
 </script>
 
 <template>
@@ -27,7 +25,7 @@ console.log(userETD);
             <NuxtLink href="/pengajuan/unggah-mandiri/panduan" class="btn bg-orange text-white py-1 w-full" v-show="userETD?.submitted === 'false' || userETD?.submitted === undefined">
               Panduan
             </NuxtLink>
-            <NuxtLink href="/pengajuan/unggah-mandiri/submit" class="btn bg-orange text-white py-1 w-full" v-if="userETD?.submitted === 'false'  || userETD?.submitted === undefined">
+            <NuxtLink href="https://students.unpad.ac.id" target="blank" :external="true" class="btn bg-orange text-white py-1 w-full" v-if="userETD?.submitted === 'false'  || userETD?.submitted === undefined">
               Unggah
             </NuxtLink>
             <NuxtLink href="/keanggotaan" class="btn bg-orange text-white py-1 w-full" v-else-if="userETD?.submitted === 'true'">

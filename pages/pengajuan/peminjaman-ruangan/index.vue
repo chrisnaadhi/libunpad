@@ -106,6 +106,10 @@ const dataPeminjaman = await getItems({
           <select name="namaruangan" id="namaruangan" v-model="namaRuangan" required>
             <option value="ruang_the_gade">Ruang Pegadaian</option>
             <option value="ruang_kelas_2">Ruang Kelas Lt.2</option>
+            <option value="ruang_teater">Ruang Teater</option>
+            <option value="ruang_telkomsel">Ruang Telkomsel</option>
+            <option value="ruang_bni_berbagi">Ruang Coaching BNI Berbagi</option>
+            <option value="r_kppu">Ruang KPPU</option>
           </select>
         </div>
         <div class="input-form">

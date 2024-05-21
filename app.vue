@@ -73,6 +73,7 @@ useHead({
   font-family: "Titillium Web", system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
     sans-serif;
+  scroll-behavior: smooth;
 }
 
 h1,

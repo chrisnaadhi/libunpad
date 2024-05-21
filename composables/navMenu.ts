@@ -9,7 +9,7 @@ export const menuContent = () => {
       nameEN: "Kandaga",
       urlEN: "/en/kandaga",
       deskripsi:
-        "Kandaga merupakan branding dari Pusat Pengelolaan Pengetahuan untuk Perpustakaan Pusat di Universitas Padjadjaran. Kandaga menjadi portal dan layanan dari Perpustakaan Pusat untuk memenuhi kebutuhan kegiatan belajar dan mengajar mahasiswa serta dosen. Kandaga memberikan layanan dan fasilitas yang bisa dimanfaatkan oleh seluruh mahasiswa serta dosen.",
+        "Kandaga merupakan branding dari Pusat Pengelolaan Pengetahuan untuk Perpustakaan Pusat di Universitas Padjadjaran. Kandaga menjadi portal dan layanan dari Perpustakaan Pusat untuk memenuhi kebutuhan kegiatan belajar dan mengajar mahasiswa serta dosen. Kandaga memberikan layanan dan fasilitas yang bisa dimanfaatkan oleh seluruh mahasiswa, dosen serta tenaga kependidikan.",
       deskripsiEN: "",
       imgUrl: "",
     },

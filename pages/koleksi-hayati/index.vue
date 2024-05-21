@@ -8,7 +8,7 @@ const herbariumObj = {
   imageUrl: "undraw_Online_art.png",
   titleDesc: {
     value:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime repellat minima quasi, fuga delectus ullam omnis dolorum vero aperiam dolore sequi, adipisci maiores beatae consequuntur praesentium ipsum accusantium, iure quaerat minus? Voluptas quisquam quidem minus cupiditate dolor, rem voluptatibus ad quo quam cumque provident, at mollitia in pariatur rerum architecto?",
+      "Koleksi Hayati adalah kumpulan koleksi dari berbagai organisme, termasuk tumbuhan, hewan, dan mikroba, beserta data terkaitnya. Koleksi ini dapat mencakup spesimen, jaringan, sel, gen, dan data ekologi, yang diawetkan dan diorganisir dengan cermat untuk tujuan penelitian, pendidikan, dan konservasi.",
   },
 };
 </script>
