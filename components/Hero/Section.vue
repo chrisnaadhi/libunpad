@@ -48,7 +48,7 @@ const getThumbnail = (id) => {
         </NuxtLink>
       </div>
       <div class="mt-5 px-3 bg-orange-50 text-dark text-center py-2 lg:(mt-30 rounded-full)">
-        <p class="font-semibold">Berita Pilihan :</p>
+        <p class="font-semibold">{{ $t("chosenNews") }} : </p>
         <NuxtLink class="px-2 transition-all-500 rounded hover:(bg-orange text-white py-0)"
           :href="beritaType(getBerita)">
           {{ getBerita.judul }}

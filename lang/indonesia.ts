@@ -4,6 +4,7 @@ export default {
 
   // Homepage - /
   introWelcome: "Selamat Datang di",
+  chosenNews: "Berita Pilihan",
   homeDescription:
     "Kandaga merupakan platform yang menyediakan katalog koleksi dan sistem penelusuran ke sumber-sumber informasi yang dimiliki dan dilanggan oleh Universitas Padjadjaran. Kandaga dikelola oleh Pusat Pengelolaan Pengetahuan Unpad.",
   searchOurCollection: "Cari koleksi kami disini...",

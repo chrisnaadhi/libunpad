@@ -4,13 +4,14 @@ export default {
 
   // Homepage - /
   introWelcome: "Welcome to",
+  chosenNews: "Selected News",
   homeDescription:
     "Kandaga is a platform that provides a collection catalog and search system for information sources owned and subscribed to by Universitas Padjadjaran. Kandaga is managed by Pusat Pengelolaan Pengetahuan Unpad",
   searchOurCollection: "Search our collections here...",
   searchPage: "Search Page",
   ourCollection: "Kandaga's Collection",
   search: "Search",
-  noSearchResults: "No Results with that keywords",
+  noSearchResults: "No Results for the keywords",
   moreSearchResults: "View more results",
   usingPlatform: "Using Kandaga Platform",
   usingPlatformDescription:

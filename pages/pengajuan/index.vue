@@ -7,7 +7,7 @@ const { data: fetchService } = await useFetch("/api/v1/layanan");
 <template>
   <main class="max-w-7xl ma">
     <section class="my-10 text-center">
-      <h1 class="font-600 text-4xl">{{ $t("pengajuanTitle") }}</h1>
+      <h2 class="">{{ $t("pengajuanTitle") }}</h2>
       <section class="profile">
         <div>
           <img src="/images/lambang-unpad.png" class="w-32 md:w-64" />

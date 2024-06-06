@@ -4,6 +4,11 @@ defineProps({
   judul: String,
   thumbnail: String,
   tanggal_dibuat: String,
+  type_collection: String,
+  abbr: {
+    type: Boolean,
+    default: true
+  }
 })
 
 const { getThumbnail: img } = useDirectusFiles();
@@ -11,19 +16,24 @@ const { getThumbnail: img } = useDirectusFiles();
 
 <template>
   <section>
-    <NuxtLink :to="'/gallery/' + id" :title="judul">
-      <NuxtImg :src="img(thumbnail)" format="webp" class="w-50 h-80 object-cover rounded-xl transition duration-300 ease-in-out hover:scale-105" />
+    <NuxtLink :to="`/${type_collection}/` + id" :title="judul">
+      <NuxtImg :src="img(thumbnail).includes('null') ? '/images/no-image.jpg' : img(thumbnail)" format="webp" class="w-50 h-80 object-cover rounded-xl transition duration-300 ease-in-out hover:scale-105" />
     </NuxtLink>
     <div class="flex flex-col w-full">
-      <NuxtLink :to="'/gallery/' + id"
+      <NuxtLink :to="`/${type_collection}/` + id"
         class="no-underline w-full bg-orange-50 font-semibold transition-all-500 rounded-md hover:(bg-orange text-white)"
         :title="judul">
-        {{ trimTitle(judul, 20) }}
+        <span v-if="abbr">
+          {{ trimTitle(judul, 20) }}
+        </span>
+        <span v-else>
+          {{ judul }}
+        </span>
       </NuxtLink>
     </div>
     <p class="text-sm text-gray mt--2">{{ tanggal_dibuat ?? "Tanggal tidak diketahui" }}</p>
     <div>
-      <NuxtLink class="bg-orange text-white px-4 py-0 text-sm rounded no-underline" :to="'/gallery/' + id">
+      <NuxtLink class="bg-orange text-white px-4 py-0 text-sm rounded no-underline" :to="`/${type_collection}/` + id">
         Lihat
       </NuxtLink>
     </div>
