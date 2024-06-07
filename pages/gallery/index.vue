@@ -107,7 +107,7 @@ onMounted(async () => {
       </div>
       <div class="gallery-collection" v-else>
         <div v-for="galeri in collectionList" class="max-w-50 text-center flex flex-col gap-2">
-          <CollectionGLAMItems v-bind="galeri" />
+          <CollectionGLAMItems v-bind="galeri" type_collection="gallery" />
         </div>
       </div>
       <div class="flex items-center justify-center gap-3 w-full mt-8">
