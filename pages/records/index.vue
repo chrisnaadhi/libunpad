@@ -87,7 +87,7 @@ onMounted(async () => {
             <div class="flex flex-col justify-around gap-3 w-full">
               <div class="flex">
                 <NuxtLink :to="'/records/' + archive.id" class="no-underline w-full">
-                  <h4 class="bg-orange-1 px-3 rounded text-orange">{{ archive.judul, 22 }}</h4>
+                  <h4 class="bg-orange-1 px-3 rounded text-orange" :title="archive.judul">{{ trimTitle(archive.judul, 22) }}</h4>
                 </NuxtLink>
               </div>
               <div class="flex flex-col w-full pl-2">
