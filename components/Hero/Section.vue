@@ -37,9 +37,9 @@ const getThumbnail = (id) => {
         <HeroCarousel />
       </div> -->
     </div>
-    <div class="relative z-2 mt max-w-5xl ma mt--10 mb--6 px-10 z-4">
-      <GenericSearch />
-      <div class="flex justify-center w-full text-center xl:justify-start">
+    <div class="relative z-2 mt max-w-5xl ma mt--8 mb--6 px-10 z-4 md:mt--10 xl:mt--20">
+      <GenericMainSearch />
+      <div class="flex justify-center w-full text-center xl:justify-start mt-2">
         <NuxtLink :to="locale === 'en' ? '/en/search' : '/search'" class="btn tentang w-full">
           {{ $t("searchPage") }}
         </NuxtLink>
@@ -60,7 +60,7 @@ const getThumbnail = (id) => {
 
 <style scoped>
 .hero-space {
-  --at-apply: bg-white opacity-85 flex flex-col-reverse max-w-7xl relative z-3 rounded-bl-xl rounded-br-xl pt-5 py-0 xl:(flex-row items-center justify-center py-5);
+  --at-apply: bg-white opacity-85 flex flex-col-reverse max-w-7xl relative z-3 rounded-bl-xl rounded-br-xl pt-5 py-0 xl:(flex-row items-center justify-center pt-5 pb-15);
 }
 
 .img-background {
