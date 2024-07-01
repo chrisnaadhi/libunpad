@@ -45,7 +45,7 @@ const getMuseumCollection = await getItemById({
       <span v-html="getMuseumCollection.keterangan_koleksi"></span>
     </div>
     <div class="mb-10">
-      <NuxtLink to="/gallery" class="btn bg-orange text-white py-1">&leftarrow; Kembali</NuxtLink>
+      <NuxtLink to="/museum" class="btn bg-orange text-white py-1">&leftarrow; Kembali</NuxtLink>
     </div>
   </section>
 </template>

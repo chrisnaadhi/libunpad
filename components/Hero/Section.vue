@@ -47,7 +47,7 @@ const getThumbnail = (id) => {
           {{ $t("ourCollection") }}
         </NuxtLink>
       </div>
-      <div class="mt-5 px-3 bg-orange-50 text-dark text-center py-2 lg:(mt-30 rounded-full)">
+      <div class="mt-5 px-3 bg-orange-50 border-2 border-orange-2 text-dark text-center py-2 lg:(mt-20 rounded)">
         <p class="font-semibold">{{ $t("chosenNews") }} : </p>
         <NuxtLink class="px-2 transition-all-500 rounded hover:(bg-orange text-white py-0)"
           :href="beritaType(getBerita)">
@@ -86,10 +86,10 @@ const getThumbnail = (id) => {
 }
 
 .tentang {
-  --at-apply: bg-orange text-xs px-2 py-2 text-white font-600 no-underline mr-2 md:(px-6);
+  --at-apply: bg-orange text-xs px-2 py-2 text-white font-600 no-underline mr-2 md:(px-6 text-base);
 }
 
 .bantuan {
-  --at-apply: bg-white text-xs px-2 border px-6 py-2 text-gray-7 font-600 no-underline ml-2 transition-all-500 md:(px-6) hover:(bg-gray-6 text-white border-gray);
+  --at-apply: bg-white text-xs px-2 border px-6 py-2 text-gray-7 font-600 no-underline ml-2 transition-all-500 md:(px-6 text-base) hover:(bg-gray-6 text-white border-gray);
 }
 </style>

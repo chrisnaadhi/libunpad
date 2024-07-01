@@ -26,6 +26,8 @@ const submitSearch = async (keyword) => {
   loadingScopus.value = true;
   loadingFederated.value = true;
 
+  window.scrollTo(0, 0)
+
   try {
     const { data: searchResults } = await useFetch(
       search.baseURLSearch + keyword
@@ -227,10 +229,13 @@ onMounted(() => {
     </section>
 
     <article>
-      <h4 v-show="search.keywords !== ''">
+      <h4 v-show="search.keywords !== '' && search.wikipediaDefinition">
         Apa itu <span class="text-orange">{{ search.keywords }}</span> ?
       </h4>
-      <section v-if="search.isResult && search.keywords && !loadingWiki" class="result-display">
+      <h4 v-show="search.wikipediaDefinition === false">
+        Kata Kunci <span class="underline text-red-5">{{ search.keywords }}</span> tidak dapat ditemukan!
+      </h4>
+      <section v-if="search.isResult && search.keywords && !loadingWiki && search.wikipediaDefinition" class="result-display">
         <NuxtLink :to="`https://id.wikipedia.org?curid=${search.wikipediaDefinition?.pageid}`" target="_blank">
           <h3 class="hover:text-orange-5">
             {{ search.wikipediaDefinition?.title }}
@@ -312,32 +317,31 @@ onMounted(() => {
       <div v-else-if="search.ulimsRes?.length === 0">
         <h4 class="text-red text-center">Tidak ditemukan</h4>
       </div>
-      <div v-else>
+      <div v-else-if="loadingFederated === true">
         <p>Mencari data...</p>
+      </div>
+      <div v-else>
+        <p class="text-red-6 font-semibold">Hasil pencarian tidak ditemukan</p>
       </div>
     </article>
 
     <article v-show="search.keywords !== ''">
       <h3>Hasil pencarian Galeri</h3>
       <div v-if="galleryResult?.length > 0" class="flex flex-col mt-10 md:(grid grid-cols-3 gap-10)">
-        <CollectionGLAMItems v-bind="galeri" v-for="galeri in galleryResult" :abbr="true"/>
+        <CollectionGLAMItems v-bind="galeri" v-for="galeri in galleryResult" :abbr="true" type_collection="gallery" />
       </div>
       <div v-else>
-        <p class="text-center">
-          Hasil pencarian tidak ditemukan
-        </p>
+        <p class="text-red-6 font-semibold">Hasil pencarian tidak ditemukan</p>
       </div>
     </article>
 
     <article v-show="search.keywords !== ''">
       <h3>Hasil pencarian Museum</h3>
       <div v-if="museumResult?.length > 0" class="flex flex-col mt-10 md:(grid grid-cols-3 gap-10)">
-        <CollectionGLAMItems v-bind="museum" v-for="museum in museumResult" :abbr="true"/>
+        <CollectionGLAMItems v-bind="museum" v-for="museum in museumResult" :abbr="true" type_collection="museum" />
       </div>
       <div v-else>
-        <p class="text-center">
-          Hasil pencarian tidak ditemukan
-        </p>
+        <p class="text-red-6 font-semibold">Hasil pencarian tidak ditemukan</p>
       </div>
     </article>
 
@@ -354,7 +358,7 @@ onMounted(() => {
         <p>Mencari data...</p>
       </section>
       <section v-show="repoSearch == false">
-        <p class="text-red-6 font-semibold">Tidak ditemukan.</p>
+        <p class="text-red-6 font-semibold">Hasil pencarian tidak ditemukan</p>
       </section>
     </article>
 

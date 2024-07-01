@@ -26,6 +26,7 @@ export default defineNuxtConfig({
     "dayjs-nuxt",
     "@sidebase/nuxt-auth",
     "@sidebase/nuxt-pdf",
+    "@nuxtjs/plausible",
   ],
   unocss: {
     preflight: true,
@@ -60,7 +61,7 @@ export default defineNuxtConfig({
     locales: ["id", "en"],
     plugins: ["relativeTime", "utc", "timezone"],
     defaultLocale: "id",
-    defaultTimezone: "Asia/Bangkok",
+    defaultTimezone: "Asia/Jakarta",
   },
   auth: {
     isEnabled: true,
@@ -90,5 +91,13 @@ export default defineNuxtConfig({
         target: "esnext",
       },
     },
+  },
+  plausible: {
+    enabled: true,
+    // ignoredHostnames: ['localhost'],
+    hashMode: false,
+    domain: process.env.NUXT_PUBLIC_PLAUSIBLE_DOMAIN,
+    apiHost: process.env.NUXT_PUBLIC_PLAUSIBLE_API_HOST,
+    autoPageviews: true,
   },
 });
