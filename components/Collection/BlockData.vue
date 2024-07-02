@@ -2,8 +2,13 @@
 defineProps({
   left: Boolean,
   title: String,
+  description: String,
   page: String,
+  firstCollection: Object,
+  secondCollection: Object
 });
+
+const { getThumbnail: img } = useDirectusFiles()
 </script>
 
 <template>
@@ -15,37 +20,35 @@ defineProps({
       <div class="main-topic">
         <img src="/images/9396112_3023.jpg" alt="" class="image-cover" />
         <div class="gradient-background">
-          <h2 class="text-2xl font-600 text-white">Koleksi Utama</h2>
+          <h2 class="text-2xl font-600 text-white">{{ title }}</h2>
           <p class="text-xs text-white text-justify">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores
-            voluptatem aspernatur esse, explicabo molestias cumque sit
-            architecto hic error possimus?
+            {{ description }}
           </p>
+          <div>
+            <NuxtLink :to="page" class="btn my-3 bg-orange py-0 text-white text-xs">Akses &rightarrow;</NuxtLink>
+          </div>
+          
         </div>
       </div>
       <article class="sub-topic" :class="left === true ? 'order-last' : 'order-first'">
-        <div class="child-topic" :style="{
-          'background-image': 'url(' + '/images/9396112_3023.jpg' + ')',
-        }">
+        <div class="child-topic">
+          <NuxtImg :src="firstCollection?.thumbnail ? img(firstCollection?.thumbnail) : '/images/no-image.jpg'" class="image-cover w-full" />
           <div class="vertical-backdrop">
-            <h3 class="text-white text-xl font-600">Koleksi Pertama</h3>
+            <h3 class="text-white text-xl font-600">{{ firstCollection?.judul ?? "Belum ada Koleksi" }}</h3>
             <p class="sub-description">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione
-              cum enim totam voluptates ad accusantium maxime odio consectetur
-              necessitatibus! Quos!
+             <span v-html="firstCollection?.keterangan_koleksi ? trimTitle(firstCollection?.keterangan_koleksi, 50) : 'Belum ada Koleksi'"></span>
             </p>
+            <NuxtLink v-show="firstCollection?.id" :to="page + '/' + firstCollection?.id">Lihat ></NuxtLink>
           </div>
         </div>
-        <div class="child-topic" :style="{
-          'background-image': 'url(' + '/images/museum.jpg' + ')',
-        }">
+        <div class="child-topic">
+          <NuxtImg :src="secondCollection?.thumbnail ? img(secondCollection?.thumbnail) : '/images/no-image.jpg'" class="image-cover w-full" />
           <div class="vertical-backdrop">
-            <h3 class="text-white text-xl font-600">Koleksi Kedua</h3>
+            <h3 class="text-white text-xl font-600">{{ secondCollection?.judul ?? "Belum ada Koleksi" }}</h3>
             <p class="sub-description">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Provident soluta quia sint quisquam molestiae autem cupiditate?
-              Nemo quod optio at.
+              <span v-html="secondCollection?.keterangan_koleksi ? trimTitle(secondCollection?.keterangan_koleksi, 50) : 'Belum ada Koleksi'"></span>
             </p>
+            <NuxtLink v-show="secondCollection?.id" :to="page + '/' + secondCollection?.id ?? ''">Lihat ></NuxtLink>
           </div>
         </div>
       </article>
@@ -79,18 +82,15 @@ a {
 }
 
 .sub-topic {
-  --at-apply: hidden grid gap-2 col-span-3 md:inline-grid;
+  --at-apply: hidden grid max-h-80 h-full gap-2 col-span-3 md:inline-grid;
 }
 
 .child-topic {
-  --at-apply: rounded-lg bg-orange h-39;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  --at-apply: relative h-40;
 }
 
 .vertical-backdrop {
-  --at-apply: h-full transition-all-500 flex flex-col items-center justify-center rounded-lg bg-black/40 px-5 hover:(bg-black/60);
+  --at-apply: flex flex-col items-center justify-center rounded-lg h-full absolute bottom-0 w-full bg-dark/80;
 }
 
 .sub-description {

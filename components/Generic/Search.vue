@@ -90,7 +90,7 @@ const limitChars = (str) => {
 }
 
 .content-result {
-  --at-apply: bg-white text-gray-6 text-left rounded-lg max-h-75 overflow-auto transition-all-500;
+  --at-apply: bg-white text-gray-6 border-1 border-orange-3 text-left rounded-lg max-h-75 overflow-auto transition-all-500;
 }
 
 .result-element {

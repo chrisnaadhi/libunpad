@@ -85,7 +85,7 @@ onMounted(async () => {
             <div class="flex flex-col justify-around gap-3 w-full">
               <div class="flex">
                 <NuxtLink :to="'/gallery/' + galeri.id" class="no-underline w-full">
-                  <h4 class="bg-orange-1 px-3 rounded text-orange">{{ galeri.judul }}</h4>
+                  <h4 class="bg-orange-1 px-3 rounded text-orange" :title="galeri.judul">{{ trimTitle(galeri.judul, 25) }}</h4>
                 </NuxtLink>
               </div>
               <div class="flex flex-col w-full pl-2">
@@ -107,7 +107,7 @@ onMounted(async () => {
       </div>
       <div class="gallery-collection" v-else>
         <div v-for="galeri in collectionList" class="max-w-50 text-center flex flex-col gap-2">
-          <CollectionGLAMItems v-bind="galeri" />
+          <CollectionGLAMItems v-bind="galeri" type_collection="gallery" />
         </div>
       </div>
       <div class="flex items-center justify-center gap-3 w-full mt-8">
