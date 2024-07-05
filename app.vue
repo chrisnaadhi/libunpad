@@ -5,12 +5,6 @@ import "v-calendar/style.css";
 import { mobileMenu } from "~/composables/navMenu";
 import { useSearchFunction } from "~/composables/searchFunction";
 
-useHead({
-  htmlAttrs: {
-    lang: "id",
-  },
-});
-
 const router = useRouter();
 const menu = mobileMenu();
 const searchFunction = useSearchFunction();
@@ -40,6 +34,16 @@ const onBeforeEnter = async () => {
 
 useHead({
   meta: [{ content: "text/html; charset=UTF-8", "http-equiv": "content-type" }],
+  htmlAttrs: {
+    lang: "id",
+  },
+  script: [
+    {
+      src: "https://kandaga.unpad.ac.id:8000/js/script.js",
+      "data-domain": "kandaga.unpad.ac.id",
+      defer: true
+    }
+  ]
 });
 </script>
 

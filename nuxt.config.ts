@@ -94,7 +94,7 @@ export default defineNuxtConfig({
   },
   plausible: {
     enabled: true,
-    // ignoredHostnames: ['localhost'],
+    ignoredHostnames: ["localhost"],
     hashMode: false,
     domain: process.env.NUXT_PUBLIC_PLAUSIBLE_DOMAIN,
     apiHost: process.env.NUXT_PUBLIC_PLAUSIBLE_API_HOST,
