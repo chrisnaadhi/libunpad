@@ -30,3 +30,6 @@ localhost-key.pem
 # Drizzle Things
 /server/lib/migrations/meta
 /server/lib/migrations/*.sql
+
+# shell update build
+*.sh
