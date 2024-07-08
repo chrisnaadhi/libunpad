@@ -43,10 +43,11 @@ export default defineNuxtRouteMiddleware(async () => {
             dSpaceAccess.value = JSON.stringify(accessObject);
             refreshCookie("dsAccessToken");
           },
-          // onResponseError({ error }) {
-          //   reloadNuxtApp();
-          //   console.error(error);
-          // },
+          onResponseError({ error }) {
+            refreshCookie("dsAccessToken");
+            reloadNuxtApp();
+            console.error(error);
+          },
         });
       }
     }
