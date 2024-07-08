@@ -4,17 +4,18 @@ export default defineNuxtRouteMiddleware(async () => {
   const config = useRuntimeConfig();
   const { data, status } = useAuth();
 
+  await $fetch(config.public.dSpacePublic, {
+    method: "GET",
+    credentials: "include",
+    onResponse({ response }) {
+      if (!dSpaceToken.value && response.headers.get("dspace-xsrf-token")) {
+        dSpaceToken.value = response.headers.get("dspace-xsrf-token");
+      }
+    },
+  });
+
   if (process.client) {
-    await $fetch(config.public.dSpacePublic, {
-      method: "GET",
-      credentials: "include",
-      onResponse({ response }) {
-        if (!dSpaceToken.value && response.headers.get("dspace-xsrf-token")) {
-          dSpaceToken.value = response.headers.get("dspace-xsrf-token");
-        }
-      },
-    });
-    if (status.value === "authenticated") {
+    if (!dSpaceAccess.value && status.value === "authenticated") {
       if (dSpaceToken.value && !dSpaceAccess.value) {
         await $fetch(config.public.dSpaceAuthPublic, {
           method: "POST",
@@ -40,10 +41,12 @@ export default defineNuxtRouteMiddleware(async () => {
               expires: date.getTime() + 20 * 60000,
             };
             dSpaceAccess.value = JSON.stringify(accessObject);
+            refreshCookie("dsAccessToken");
           },
-          onResponseError({ error }) {
-            console.error(error);
-          },
+          // onResponseError({ error }) {
+          //   reloadNuxtApp();
+          //   console.error(error);
+          // },
         });
       }
     }

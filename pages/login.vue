@@ -119,11 +119,11 @@ definePageMeta({
           <h6>Login Staff Kandaga</h6>
           <div class="flex flex-col">
             <label for="email" class="text-left">Email :</label>
-            <input class="input-space px-3" type="email" v-model="email" required />
+            <input class="input-space px-3" type="email" v-model="email" required autocomplete="email" />
           </div>
           <div class="flex flex-col relative">
             <label for="password" class="text-left">Password: </label>
-            <input :type="passwordType" name="password" id="password" class="input-space w-full pl-3 pr-10"
+            <input :type="passwordType" name="password" id="password" autocomplete="current-password" class="input-space w-full pl-3 pr-10"
               v-model="password" required />
             <div @click="togglePasswordType" class="toggle-password">
               <div class="i-mdi-eye text-xl" v-if="!showPassword" />
