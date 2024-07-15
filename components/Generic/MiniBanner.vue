@@ -18,7 +18,7 @@ const bahasaState = computed(() => {
   <div class="bg-gray-7 w-full py-2 transition-all-500">
     <div class="max-w-7xl ma flex items-center justify-between text-white text-xs font-600">
       <p class="px-5 lg:px-0">
-        Pemberitahuan, pengumuman ataupun sekilas informasi akan tampil disini
+        Pengajuan Administrasi dan Bebas Pustaka dapat dilakukan dengan mengklik tautan berikut : <NuxtLink class="text-orange underline-orange" to="/pengajuan">Pengajuan Administrasi</NuxtLink>
       </p>
       <div class="flex flex-col w-60% md:w-unset items-end">
         <p>{{ bahasaState }}: &nbsp;</p>
@@ -36,10 +36,10 @@ const bahasaState = computed(() => {
 
 <style scoped>
 .locale {
-  --at-apply: px-2;
+  --at-apply: px-2 text-white;
 }
 
 a {
-  --at-apply: text-white no-underline hover:underline;
+  --at-apply: no-underline hover:underline;
 }
 </style>

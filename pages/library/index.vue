@@ -1,7 +1,7 @@
 <script setup>
 const i18n = useI18n();
 
-const { data: bookCollection } = await useFetch("/api/v1/koleksi/ulims?search=unpad");
+const { data: bookCollection } = await useFetch("/api/v1/koleksi/ulims");
 
 const libraryObj = {
   title: "Library",
@@ -27,7 +27,7 @@ const path = useRoute();
       <div class="p-4 flex flex-col items-center">
         <h3>Koleksi {{ libraryObj.title }} Pilihan Kami</h3>
         <div class="my-5 flex flex-col gap-5 w-full lg:(grid grid-cols-2 gap-3)">
-          <div class="bg-white p-5 rounded flex w-full h-full gap-5" v-for="koleksi in bookCollection.results">
+          <div class="bg-white p-5 rounded flex w-full h-full gap-5" v-for="koleksi in bookCollection?.results">
             <NuxtLink :to="'/library/biblio/' + koleksi?.biblioId">
               <NuxtImg
                 :src="koleksi?.image === undefined || koleksi?.image === null || koleksi?.image === '' ? '/images/default_cover.png' : `https://kandaga.unpad.ac.id:8010/lib/minigalnano/createthumb.php?filename=images/docs/${koleksi.image}&width=240`"
@@ -47,7 +47,7 @@ const path = useRoute();
                     <p class="font-semibold text-gray-5">Lokasi</p>
                   </div>
                   <div>
-                    <p>: {{ koleksi?.author ?? "Belum ada data" }}</p>
+                    <p :title="koleksi?.author">: {{ trimTitle(koleksi?.author, 20) ?? "Belum ada data" }}</p>
                     <p>: {{ koleksi?.isbnIssn ?? "Tidak diketahui" }}</p>
                     <p>: {{ koleksi?.classification ?? "Belum ada data" }}</p>
                     <p>: {{ koleksi?.node ?? "Belum ada data" }}</p>
