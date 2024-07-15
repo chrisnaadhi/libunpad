@@ -27,7 +27,7 @@ export default defineNuxtRouteMiddleware(async () => {
             Cookie: "DSPACE-XSRF-COOKIE=" + dSpaceToken.value,
           }),
           body: config.public.dSpaceCredentials,
-          onResponse({ response }) {
+          async onResponse({ response }) {
             if (response.headers.get("DSPACE-XSRF-TOKEN") !== null) {
               dSpaceToken.value = response.headers.get("DSPACE-XSRF-TOKEN");
               dSpaceAccess.value = null;
@@ -41,6 +41,7 @@ export default defineNuxtRouteMiddleware(async () => {
               expires: date.getTime() + 20 * 60000,
             };
             dSpaceAccess.value = JSON.stringify(accessObject);
+            await refreshNuxtData();
             refreshCookie("dsAccessToken");
           },
           onResponseError({ error }) {

@@ -1,4 +1,4 @@
-import { eq, like, or } from "drizzle-orm";
+import { and, isNotNull, like, ne, or, sql } from "drizzle-orm";
 import { db } from "~/server/lib/db/drizzle";
 import { searchBiblio } from "~/server/lib/migrations/schema";
 
@@ -67,10 +67,30 @@ export default defineEventHandler(async (event) => {
       };
     }
   } else {
-    results = {
-      status: 400,
-      message: "Bad Request. You should add keyword query",
-    };
+    let res = await db
+      .select()
+      .from(searchBiblio)
+      .where(
+        or(
+          like(searchBiblio.title, `%unpad%`),
+          like(searchBiblio.topic, `%unpad%`),
+          like(searchBiblio.author, `%unpad%`)
+        )
+      )
+      // @ts-expect-error
+      .where(and(isNotNull(searchBiblio.image), ne(searchBiblio.image, "")))
+      .orderBy(sql`RAND()`)
+      .limit(6);
+
+    if (res.length > 0) {
+      results = res;
+    } else {
+      results = {
+        status: 404,
+        message: "Pencarian tidak ditemukan",
+        query: query.search,
+      };
+    }
   }
 
   return {
