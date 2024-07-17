@@ -2,8 +2,7 @@ export default defineEventHandler((event) => {
   return [
     {
       namaLayanan: "Pengajuan Bebas Pustaka",
-      deskripsiLayanan:
-        "Layanan Pengajuan Bebas Pustaka dari Perpustakaan Pusat secara daring melalui sistem kami",
+      deskripsiLayanan: `Layanan Pengajuan Bebas Pustaka dari Perpustakaan Pusat secara daring melalui sistem kami. Pastikan anda sudah membaca <a href="/pengajuan/bebas-pustaka/petunjuk" target="_blank">petunjuk</a> dari kami <a href="https://www.instagram.com/p/C2dve3qPobF" target="_blank">disini</a> atau <a href="/pengajuan/bebas-pustaka/petunjuk" target="_blank">disini</a> sebelum anda mengajukan permohonan Bebas Pustaka.`,
       slug: "/pengajuan/bebas-pustaka",
       isActive: true,
     },
