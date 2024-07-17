@@ -39,7 +39,7 @@ const { data: fetchService } = await useFetch("/api/v1/layanan");
             <h1 class="text-center text-2xl">
               {{ layanan.namaLayanan }}
             </h1>
-            <p class="text-sm pb-2">{{ layanan.deskripsiLayanan }}</p>
+            <div class="text-sm pb-2" v-html="layanan.deskripsiLayanan" />
           </div>
           <div class="flex justify-center gap-2">
             <NuxtLink :to="layanan.slug" class="w-full">
