@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { VuePDF, usePDF } from "@tato30/vue-pdf";
 import '@tato30/vue-pdf/style.css';
 
@@ -1472,5 +1472,20 @@ p {
 
 button:disabled {
   --at-apply: bg-gray text-white;
+}
+</style> -->
+<script setup>
+  const val = ref('Vue Composition API')
+</script>
+
+<template>
+  <section>
+    <p>{{ val }}</p>
+  </section>
+</template>
+
+<style scoped>
+p {
+  --at-apply: italic;
 }
 </style>

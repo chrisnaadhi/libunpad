@@ -118,6 +118,7 @@ const tableHeadPublic = [
   "Keperluan",
   "Persyaratan",
   "Status Pengajuan",
+  "Tanggal Diproses",
   "Petugas",
 ];
 </script>
@@ -153,15 +154,14 @@ const tableHeadPublic = [
           <td class="table-border w-30" v-show="publicData">
             {{ convertTimeZone(data.date_created) }}
           </td>
-          <td class="table-border w-40" v-show="publicData">
-            <span v-if="!data.date_updated">Belum diproses</span>
-            <span v-else>{{ convertTimeZone(data.date_updated) }}</span>
-          </td>
-
           <td class="table-border w-40">
             <span :class="displayMessage(data.status_pengajuan)" class="font-600">
               {{ displayStatusPengajuanSurat(data.status_pengajuan) }}
             </span>
+          </td>
+          <td class="table-border w-40">
+            <span v-if="!data.date_updated">Belum diproses</span>
+            <span v-else>{{ convertTimeZone(data.date_updated) }}</span>
           </td>
           <td class="table-border w-30">
             {{ searchPetugas(data.user_updated) }}
