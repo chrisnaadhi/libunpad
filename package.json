@@ -9,34 +9,34 @@
     "introspectDb": "drizzle-kit introspect:mysql"
   },
   "devDependencies": {
-    "@iconify-json/mdi": "^1.1.64",
-    "@nuxt/image": "^1.3.0",
+    "@iconify-json/mdi": "^1.1.67",
+    "@nuxt/image": "^1.7.0",
     "@nuxtjs/i18n": "8.0.0",
     "@nuxtjs/plausible": "^1.0.0",
-    "@sidebase/nuxt-auth": "^0.5.0",
+    "@sidebase/nuxt-auth": "^0.8.1",
     "@sidebase/nuxt-pdf": "^0.1.2",
-    "@unocss/nuxt": "^0.58.5",
+    "@unocss/nuxt": "^0.58.9",
     "dayjs-nuxt": "^1.2.7",
-    "drizzle-kit": "^0.20.14",
-    "nuxt": "^3.10.3"
+    "drizzle-kit": "^0.20.18",
+    "nuxt": "^3.12.4"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.11",
     "@popperjs/core": "^2.11.8",
     "@splidejs/vue-splide": "^0.6.12",
-    "@tato30/vue-pdf": "^1.9.6",
-    "drizzle-orm": "^0.29.4",
+    "@tato30/vue-pdf": "^1.10.0",
+    "drizzle-orm": "^0.29.5",
     "easyqrcodejs": "^4.6.1",
     "meilisearch": "^0.34.2",
-    "mysql2": "^3.9.2",
+    "mysql2": "^3.10.3",
     "next-auth": "4.22.5",
-    "nuxt-directus": "^5.6.0",
+    "nuxt-directus": "^5.6.1",
     "pinia": "^2.1.7",
     "v-calendar": "^3.1.2"
   },
   "overrides": {
     "vue": "latest",
-    "next-auth": "4.22.5"
+    "next-auth": "4.21.1"
   },
   "packageManager": "pnpm@9.4.0+sha512.f549b8a52c9d2b8536762f99c0722205efc5af913e77835dbccc3b0b0b2ca9e7dc8022b78062c17291c48e88749c70ce88eb5a74f1fa8c4bf5e18bb46c8bd83a"
 }

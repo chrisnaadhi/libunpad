@@ -10,6 +10,7 @@ export default defineNuxtConfig({
       ],
     },
   },
+
   routeRules: {
     "/api/**": { cors: true },
     "/visitor/rekap": { redirect: "/error" },
@@ -17,6 +18,7 @@ export default defineNuxtConfig({
       redirect: "/pengajuan/unggah-mandiri",
     },
   },
+
   modules: [
     "@unocss/nuxt",
     "nuxt-directus",
@@ -28,13 +30,16 @@ export default defineNuxtConfig({
     "@sidebase/nuxt-pdf",
     "@nuxtjs/plausible",
   ],
+
   unocss: {
     preflight: true,
   },
+
   directus: {
     url: process.env.DIRECTUS_BASE_URL,
     token: process.env.DIRECTUS_ACCESS_TOKEN,
   },
+
   i18n: {
     locales: [
       {
@@ -57,18 +62,30 @@ export default defineNuxtConfig({
     detectBrowserLanguage: false,
     defaultDirection: "auto",
   },
+
   dayjs: {
     locales: ["id", "en"],
     plugins: ["relativeTime", "utc", "timezone"],
     defaultLocale: "id",
     defaultTimezone: "Asia/Jakarta",
   },
+
   auth: {
     isEnabled: true,
-    defaultProvider: "google",
+    disableServerSideAuth: false,
+    baseURL: process.env.AUTH_BASEURL,
+    provider: {
+      type: "authjs",
+      trustHost: false,
+      defaultProvider: "google",
+      addDefaultCallbackUrl: true,
+    },
   },
+
   runtimeConfig: {
     authSecret: process.env.AUTH_SECRET,
+    authGoogleClientId: process.env.GOOGLE_CLIENT_ID,
+    authGoogleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
     urlApiKandaga: process.env.URL_API_KANDAGA,
     directusUrl: process.env.DIRECTUS_BASE_URL,
     dbHost: process.env.DRIZZLE_HOST,
@@ -85,6 +102,7 @@ export default defineNuxtConfig({
       dSpaceCredentials: `user=${process.env.DSPACE_EMAIL}&password=${process.env.DSPACE_PASSWORD}`,
     },
   },
+
   nitro: {
     esbuild: {
       options: {
@@ -92,6 +110,7 @@ export default defineNuxtConfig({
       },
     },
   },
+
   plausible: {
     enabled: true,
     ignoredHostnames: ["localhost"],
@@ -100,4 +119,6 @@ export default defineNuxtConfig({
     apiHost: process.env.NUXT_PUBLIC_PLAUSIBLE_API_HOST,
     autoPageviews: true,
   },
+
+  compatibilityDate: "2024-07-22",
 });
