@@ -72,4 +72,9 @@ export default {
   footerKandagaServices: "Layanan Kandaga",
   // Social Media
   footerSocialMedia: "Media Sosial Kami",
+
+  // Maintenance
+  maintenanceTitle: "Mode Pemeliharaan",
+  maintenanceDescription:
+    "Saat ini kami dalam mode pemeliharaan (maintenance). Silahkan akses kembali nanti. Jika kamu ingin menanyakan sesuatu silahkan hubungi kami :",
 };
