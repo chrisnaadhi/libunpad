@@ -27,7 +27,6 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "dayjs-nuxt",
     "@sidebase/nuxt-auth",
-    "@sidebase/nuxt-pdf",
     "@nuxtjs/plausible",
   ],
 
@@ -103,14 +102,6 @@ export default defineNuxtConfig({
     },
   },
 
-  nitro: {
-    esbuild: {
-      options: {
-        target: "esnext",
-      },
-    },
-  },
-
   plausible: {
     enabled: true,
     ignoredHostnames: ["localhost"],
@@ -121,4 +112,21 @@ export default defineNuxtConfig({
   },
 
   compatibilityDate: "2024-07-22",
+
+  nitro: {
+    esbuild: {
+      options: {
+        target: "esnext",
+      },
+    },
+  },
+  vite: {
+    esbuild: {
+      tsconfigRaw: {
+        compilerOptions: {
+          target: "esnext",
+        },
+      },
+    },
+  },
 });
