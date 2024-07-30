@@ -11,6 +11,7 @@ const umum = ref(false);
 const identity: any = ref({});
 const welcome = ref();
 const showModal = ref(false);
+const showPeminjamanLoker = ref(false);
 const isNumeric = (value: any) => {
   return /^-?\d+$/.test(value);
 };
@@ -52,7 +53,6 @@ const displayBanner = computed(() => {
 const displayModal = () => {
   showModal.value = !showModal.value;
 };
-
 const addVisitor = async () => {
   try {
     try {
