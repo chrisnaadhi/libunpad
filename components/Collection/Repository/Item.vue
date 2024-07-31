@@ -1,17 +1,6 @@
 <script setup>
 const { status } = useAuth();
-
-function isAccessible(linkData) {
-  if (linkData === null) {
-    return "file-not-found";
-  } else if (status.value === "authenticated") {
-    return "auth-true";
-  } else if (status.value === "unauthenticated") {
-    return "auth-false";
-  } else {
-    return "file-not-found";
-  }
-}
+const notAllowedNpm = ref(["170310080038"])
 
 defineProps({
   npm: String,
@@ -42,6 +31,18 @@ defineProps({
   stPublikasi: Boolean,
   verifikasi: Boolean,
 });
+
+function isAccessible(linkData) {
+  if (linkData === null) {
+    return "e-not-found";
+  } else if (status.value === "authenticated") {
+    return "auth-true";
+  } else if (status.value === "unauthenticated") {
+    return "auth-false";
+  } else {
+    return "file-not-found";
+  }
+}
 
 const limitText = (text) => {
   if (text.length > 70) {
@@ -237,14 +238,18 @@ const limitText = (text) => {
               <td class="font-semibold w-35">Lampiran</td>
               <td class="flex">
                 <div :class="isAccessible(fileLampiran)"></div>
-                <span v-if="status === 'authenticated' &&
+                <span
+                  v-if="status === 'authenticated' && fileLampiran && fileLampiran !== undefined && notAllowedNpm?.includes(npm)">
+                  <p>Anda tidak memiliki Akses</p>
+                </span>
+                <span v-else-if="status === 'authenticated' &&
                   fileLampiran &&
                   fileLampiran !== undefined
-                  ">
+                ">
                   <NuxtLink :to="fileLampiran" target="_blank" no-rel :external="true">Download</NuxtLink>
                 </span>
                 <span v-else-if="fileLampiran === null || fileLampiran === undefined
-                  ">
+                ">
                   <p>File tidak tersedia</p>
                 </span>
                 <span v-else-if="status === 'unauthenticated'">
