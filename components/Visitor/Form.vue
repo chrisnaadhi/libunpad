@@ -1,9 +1,10 @@
 <script setup lang="ts">
-const { getItemById, createItems } = useDirectusItems();
+const { getItems, getItemById, createItems } = useDirectusItems();
 const router: any = useRouter();
 
 const ruangan = useCookie("namaRuanganVisitor");
 const userData = useIdentitasForm();
+const peminjamanLokerStore = prosesPeminjamanLoker()
 const identitas = ref();
 const institusi = ref("");
 const validated = ref(false);
@@ -11,7 +12,8 @@ const umum = ref(false);
 const identity: any = ref({});
 const welcome = ref();
 const showModal = ref(false);
-const showPeminjamanLoker = ref(false);
+const showPeminjamanLoker = ref(true);
+const nomorLoker = ref("10");
 const isNumeric = (value: any) => {
   return /^-?\d+$/.test(value);
 };
@@ -52,7 +54,29 @@ const displayBanner = computed(() => {
 
 const displayModal = () => {
   showModal.value = !showModal.value;
+  focusToIdentitas();
 };
+
+const displayPeminjamanLoker = () => {
+  showPeminjamanLoker.value = !showPeminjamanLoker.value;
+  focusToIdentitas();
+};
+
+const getRequestLoker = async () => {
+  const listLoker = await getItems({ collection: "data_kesediaan_loker" });
+  const getRandomLoker = () => {
+    return listLoker[Math.floor((Math.random() * listLoker.length))];
+  }
+  const data = getRandomLoker()
+  return data;
+};
+
+const lokerData = async () => {
+  const data: any = await getRequestLoker()
+  nomorLoker.value = data.nomor_loker
+  console.log(data)
+}
+
 const addVisitor = async () => {
   try {
     try {
@@ -94,16 +118,17 @@ const addVisitor = async () => {
           : 12345,
     };
 
-    await createItems<Item>({ collection: "data_kunjungan", items });
+    // await createItems<Item>({ collection: "data_kunjungan", items });
+    displayPeminjamanLoker();
     validated.value = false;
-    setTimeout(() => {
-      identity.value = {};
-      userData.value = "";
-      institusi.value = "";
-      showModal.value = false;
-      umum.value = false;
-      identitas.value.focus();
-    }, 300);
+    // setTimeout(() => {
+    //   identity.value = {};
+    //   userData.value = "";
+    //   institusi.value = "";
+    //   showModal.value = false;
+    //   umum.value = false;
+    //   identitas.value.focus();
+    // }, 300);
   } catch (e) {
     console.log(e);
   }
@@ -126,6 +151,7 @@ onMounted(() => {
 <template>
   <main class="max-w-full ma">
     <VisitorModal @display="displayModal" v-if="showModal" />
+    <VisitorPeminjamanLoker :name="nomorLoker" @peminjaman="displayPeminjamanLoker" @requestPeminjaman="lokerData" v-if="showPeminjamanLoker" />
     <div class="absolute w-full left-0 mt--25">
       <VisitorBanner :display="displayBanner" v-if="!umum" />
       <VisitorBanner :display="'Selamat Datang, ' + userData" v-else />
@@ -140,7 +166,6 @@ onMounted(() => {
           Contoh : Chrisna Adhi Pranoto - Institut Pemerintahan Bandung
         </p>
       </div>
-
       <div class="input-block">
         <label for="lembaga">Institusi :</label>
         <select name="institusi" id="lembaga" v-model="institusi">
@@ -164,6 +189,7 @@ onMounted(() => {
         Masuk
       </button>
     </form>
+    <button @click="displayPeminjamanLoker">Klik Loker</button>
     <VisitorVirtualKeyboard v-on:choose="focusToIdentitas" v-on:writing="focusToIdentitas" />
     <div class="fixed right-0 bottom-0">
       <button class="btn bg-orange" @click="backToIndex">Reset Ruangan</button>

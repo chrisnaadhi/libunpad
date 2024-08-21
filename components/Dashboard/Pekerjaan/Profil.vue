@@ -20,7 +20,7 @@ const totalPekerjaan = await getItems({
       <img :src="user.avatar
           ? `https://repository.unpad.ac.id:8050/assets/${user.avatar}.jpg`
           : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'
-        " alt="Foto Profil" class="w-30 rounded border border-orange" />
+        " alt="Foto Profil" class="w-30 h-30 object-cover rounded border border-orange" />
     </div>
     <div class="flex gap-2">
       <div>
