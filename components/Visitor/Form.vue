@@ -1,10 +1,10 @@
 <script setup lang="ts">
-const { getItems, getItemById, createItems } = useDirectusItems();
+const { getItems, getItemById, createItems, updateItem } = useDirectusItems();
 const router: any = useRouter();
 
 const ruangan = useCookie("namaRuanganVisitor");
 const userData = useIdentitasForm();
-const peminjamanLokerStore = prosesPeminjamanLoker()
+const peminjamanLokerStore = prosesPeminjamanLoker();
 const identitas = ref();
 const institusi = ref("");
 const validated = ref(false);
@@ -12,8 +12,8 @@ const umum = ref(false);
 const identity: any = ref({});
 const welcome = ref();
 const showModal = ref(false);
-const showPeminjamanLoker = ref(true);
-const nomorLoker = ref("10");
+const showPeminjamanLoker = ref(false);
+const sudahMeminjamLoker = ref(false);
 const isNumeric = (value: any) => {
   return /^-?\d+$/.test(value);
 };
@@ -62,30 +62,172 @@ const displayPeminjamanLoker = () => {
   focusToIdentitas();
 };
 
+const tutupLokerModal = () => {
+  showPeminjamanLoker.value = false;
+  identity.value = {};
+  userData.value = "";
+  institusi.value = "";
+  showModal.value = false;
+  umum.value = false;
+  identitas.value.focus();
+};
+
 const getRequestLoker = async () => {
-  const listLoker = await getItems({ collection: "data_kesediaan_loker" });
-  const getRandomLoker = () => {
-    return listLoker[Math.floor((Math.random() * listLoker.length))];
+  const listLoker = await getItems({
+    collection: "data_kesediaan_loker",
+    params: {
+      filter: {
+        status_loker: {
+          _eq: "dapat_dipinjam",
+        },
+      },
+    },
+  });
+
+  if (listLoker.length > 0) {
+    const getRandomLoker = () => {
+      return listLoker[Math.floor(Math.random() * listLoker.length)];
+    };
+    const data = getRandomLoker();
+    return data;
+  } else {
+    return false;
   }
-  const data = getRandomLoker()
-  return data;
+
 };
 
 const lokerData = async () => {
-  const data: any = await getRequestLoker()
-  nomorLoker.value = data.nomor_loker
-  console.log(data)
-}
+  const cekJikaSudahMeminjam = await getItems({
+    collection: "data_kesediaan_loker",
+    params: {
+      filter: {
+        _or: [
+          {
+            nama_peminjam: {
+              _eq: userData.value,
+            },
+          },
+          {
+            npm_peminjam: {
+              _eq: userData.value,
+            },
+          },
+        ],
+      }
+    }
+  })
+
+  if (cekJikaSudahMeminjam.length === 0) {
+    peminjamanLokerStore.konfirmasiPeminjam = true;
+    const data: any = await getRequestLoker();
+    if (data) {
+      peminjamanLokerStore.nomorLoker = data.nomor_loker;
+      peminjamanLokerStore.namaPeminjam = identity.value.nama_anggota;
+      peminjamanLokerStore.showLokerData = true;
+      peminjamanLokerStore.npmPeminjam = identity.value.npm ?? userData.value;
+
+      const directusLoker: Array<any> = await getItems({
+        collection: "data_kesediaan_loker",
+        params: {
+          filter: {
+            nomor_loker: {
+              _eq: data.nomor_loker,
+            },
+          },
+        },
+      });
+
+      console.log(directusLoker[0].id)
+      console.log(peminjamanLokerStore)
+
+      await updateItem({
+        collection: "data_kesediaan_loker",
+        id: directusLoker[0].id,
+        item: {
+          status_loker: "sedang_dipinjam",
+          npm_peminjam: peminjamanLokerStore.npmPeminjam,
+          nama_peminjam: peminjamanLokerStore.namaPeminjam,
+        },
+      }).then(async () => {
+        console.log("Berhasil update data loker");
+        await createItems({
+          collection: "data_peminjaman_loker",
+          items: {
+            nomor_loker: peminjamanLokerStore.nomorLoker,
+            nama_peminjam: peminjamanLokerStore.namaPeminjam,
+            nomor_induk: peminjamanLokerStore.npmPeminjam,
+            waktu_peminjaman: new Date().toISOString(),
+          },
+        }).then(() => {
+          console.log("Berhasil menambahkan data peminjaman loker");
+          peminjamanLokerStore.konfirmasiPeminjam = false;
+          peminjamanLokerStore.nomorLoker = null;
+          peminjamanLokerStore.namaPeminjam = "";
+
+          peminjamanLokerStore.npmPeminjam = "";
+
+          identity.value = {};
+          userData.value = "";
+          institusi.value = "";
+          showModal.value = false;
+          umum.value = false;
+
+          identitas.value.focus();
+        });
+      });
+
+      setTimeout(() => {
+        showPeminjamanLoker.value = false;
+        peminjamanLokerStore.showLokerData = false;
+        identitas.value.focus();
+      }, 5000);
+    } else {
+      identity.value = {};
+      userData.value = "";
+      institusi.value = "";
+      showModal.value = false;
+      umum.value = false;
+
+      identitas.value.focus();
+      peminjamanLokerStore.isFull = true;
+      setTimeout(() => {
+
+        peminjamanLokerStore.isFull = false;
+        showPeminjamanLoker.value = false;
+      }, 2000);
+    }
+  } else {
+    const audioError = new Audio("/sfx/error.wav");
+    audioError.play();
+    identity.value = {};
+    userData.value = "";
+    institusi.value = "";
+    showModal.value = false;
+    umum.value = false;
+    sudahMeminjamLoker.value = true;
+    showPeminjamanLoker.value = false;
+    setTimeout(() => {
+      sudahMeminjamLoker.value = false;
+    }, 1000);
+  }
+};
 
 const addVisitor = async () => {
   try {
+    peminjamanLokerStore.konfirmasiPeminjam = false;
+    peminjamanLokerStore.nomorLoker = null;
+    peminjamanLokerStore.namaPeminjam = userData.value;
+    peminjamanLokerStore.showLokerData = false;
+    peminjamanLokerStore.npmPeminjam = "";
+    showPeminjamanLoker.value = false;
     try {
       if (isNumeric(userData.value)) {
         const id_anggota = await getItemById({
           collection: "data_keanggotaan",
           id: userData.value,
         });
-        identity.value = id_anggota;
+        identity.value = await id_anggota;
+        peminjamanLokerStore.namaPeminjam = identity.value.nama_anggota;
         validated.value = true;
       } else {
         umum.value = true;
@@ -94,12 +236,14 @@ const addVisitor = async () => {
       displayModal();
       const audioError = new Audio("/sfx/error.wav");
       audioError.play();
-      setTimeout(() => {
-        identity.value = {};
-        userData.value = "";
-        showModal.value = false;
-      }, 300);
+      // setTimeout(() => {
+      //   identity.value = {};
+      //   userData.value = "";
+      //   showModal.value = false;
+      // }, 300);
     }
+
+    console.log(identity.value);
 
     let items: Item = {
       biodata_user: validated.value
@@ -127,6 +271,7 @@ const addVisitor = async () => {
     //   institusi.value = "";
     //   showModal.value = false;
     //   umum.value = false;
+    //   sudahMeminjamLoker.value = false;
     //   identitas.value.focus();
     // }, 300);
   } catch (e) {
@@ -143,7 +288,7 @@ const focusToIdentitas = () => {
   identitas.value.focus();
 };
 
-onMounted(() => {
+onMounted(async () => {
   focusToIdentitas();
 });
 </script>
@@ -151,7 +296,9 @@ onMounted(() => {
 <template>
   <main class="max-w-full ma">
     <VisitorModal @display="displayModal" v-if="showModal" />
-    <VisitorPeminjamanLoker :name="nomorLoker" @peminjaman="displayPeminjamanLoker" @requestPeminjaman="lokerData" v-if="showPeminjamanLoker" />
+    <VisitorLokerPeminjamanLoker :name="peminjamanLokerStore.namaPeminjam" @peminjaman="displayPeminjamanLoker"
+      @tutupPeminjamanLoker="tutupLokerModal" @requestPeminjaman="lokerData" v-if="showPeminjamanLoker" />
+    <VisitorLokerAlertSudahMeminjam v-if="sudahMeminjamLoker" />
     <div class="absolute w-full left-0 mt--25">
       <VisitorBanner :display="displayBanner" v-if="!umum" />
       <VisitorBanner :display="'Selamat Datang, ' + userData" v-else />
