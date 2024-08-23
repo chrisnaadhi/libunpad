@@ -95,6 +95,7 @@ export default defineNuxtConfig({
     public: {
       meiliHost: process.env.MEILI_HOST,
       meiliApiKey: process.env.MEILI_API_KEY,
+      directusPublicUrl: process.env.DIRECTUS_BASE_URL,
       dSpacePublic: process.env.DSPACE_URL,
       dSpaceFront: process.env.DSPACE_FRONTEND,
       dSpaceAuthPublic: process.env.DSPACE_AUTH,

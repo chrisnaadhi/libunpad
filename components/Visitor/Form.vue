@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const { getItems, getItemById, createItems, updateItem } = useDirectusItems();
-const router: any = useRouter();
 
 const ruangan = useCookie("namaRuanganVisitor");
 const userData = useIdentitasForm();
@@ -63,6 +62,10 @@ const displayPeminjamanLoker = () => {
 };
 
 const tutupLokerModal = () => {
+  peminjamanLokerStore.konfirmasiPeminjam = false;
+  peminjamanLokerStore.nomorLoker = null;
+  peminjamanLokerStore.namaPeminjam = "";
+  peminjamanLokerStore.npmPeminjam = "";
   showPeminjamanLoker.value = false;
   identity.value = {};
   userData.value = "";
@@ -74,7 +77,7 @@ const tutupLokerModal = () => {
 
 const getRequestLoker = async () => {
   const listLoker = await getItems({
-    collection: "data_kesediaan_loker",
+    collection: "list_kesediaan_loker",
     params: {
       filter: {
         status_loker: {
@@ -98,7 +101,7 @@ const getRequestLoker = async () => {
 
 const lokerData = async () => {
   const cekJikaSudahMeminjam = await getItems({
-    collection: "data_kesediaan_loker",
+    collection: "list_kesediaan_loker",
     params: {
       filter: {
         _or: [
@@ -122,12 +125,12 @@ const lokerData = async () => {
     const data: any = await getRequestLoker();
     if (data) {
       peminjamanLokerStore.nomorLoker = data.nomor_loker;
-      peminjamanLokerStore.namaPeminjam = identity.value.nama_anggota;
+      peminjamanLokerStore.namaPeminjam = identity.value.nama_anggota ?? userData.value;
       peminjamanLokerStore.showLokerData = true;
       peminjamanLokerStore.npmPeminjam = identity.value.npm ?? userData.value;
 
       const directusLoker: Array<any> = await getItems({
-        collection: "data_kesediaan_loker",
+        collection: "list_kesediaan_loker",
         params: {
           filter: {
             nomor_loker: {
@@ -137,11 +140,8 @@ const lokerData = async () => {
         },
       });
 
-      console.log(directusLoker[0].id)
-      console.log(peminjamanLokerStore)
-
       await updateItem({
-        collection: "data_kesediaan_loker",
+        collection: "list_kesediaan_loker",
         id: directusLoker[0].id,
         item: {
           status_loker: "sedang_dipinjam",
@@ -151,20 +151,14 @@ const lokerData = async () => {
       }).then(async () => {
         console.log("Berhasil update data loker");
         await createItems({
-          collection: "data_peminjaman_loker",
+          collection: "list_peminjaman_loker",
           items: {
             nomor_loker: peminjamanLokerStore.nomorLoker,
             nama_peminjam: peminjamanLokerStore.namaPeminjam,
             nomor_induk: peminjamanLokerStore.npmPeminjam,
-            waktu_peminjaman: new Date().toISOString(),
           },
         }).then(() => {
           console.log("Berhasil menambahkan data peminjaman loker");
-          peminjamanLokerStore.konfirmasiPeminjam = false;
-          peminjamanLokerStore.nomorLoker = null;
-          peminjamanLokerStore.namaPeminjam = "";
-
-          peminjamanLokerStore.npmPeminjam = "";
 
           identity.value = {};
           userData.value = "";
@@ -177,10 +171,14 @@ const lokerData = async () => {
       });
 
       setTimeout(() => {
+        peminjamanLokerStore.konfirmasiPeminjam = false;
+        peminjamanLokerStore.nomorLoker = null;
+        peminjamanLokerStore.namaPeminjam = "";
+        peminjamanLokerStore.npmPeminjam = "";
         showPeminjamanLoker.value = false;
         peminjamanLokerStore.showLokerData = false;
         identitas.value.focus();
-      }, 5000);
+      }, 10000);
     } else {
       identity.value = {};
       userData.value = "";
@@ -243,8 +241,6 @@ const addVisitor = async () => {
       // }, 300);
     }
 
-    console.log(identity.value);
-
     let items: Item = {
       biodata_user: validated.value
         ? identity.value.nama_anggota
@@ -262,26 +258,33 @@ const addVisitor = async () => {
           : 12345,
     };
 
-    // await createItems<Item>({ collection: "data_kunjungan", items });
-    displayPeminjamanLoker();
-    validated.value = false;
-    // setTimeout(() => {
-    //   identity.value = {};
-    //   userData.value = "";
-    //   institusi.value = "";
-    //   showModal.value = false;
-    //   umum.value = false;
-    //   sudahMeminjamLoker.value = false;
-    //   identitas.value.focus();
-    // }, 300);
+    await createItems<Item>({ collection: "data_kunjungan", items }).then(
+      () => {
+        if (ruangan.value === "lobby") {
+          displayPeminjamanLoker();
+        } else {
+          setTimeout(() => {
+            identity.value = {};
+            userData.value = "";
+            institusi.value = "";
+            showModal.value = false;
+            umum.value = false;
+            sudahMeminjamLoker.value = false;
+            identitas.value.focus();
+          }, 300);
+        }
+        validated.value = false;
+      }
+    );
+
   } catch (e) {
     console.log(e);
   }
 };
 
-const backToIndex = () => {
+const backToIndex = async () => {
   ruangan.value = null;
-  // router.go(router.currentRoute);
+  reloadNuxtApp();
 };
 
 const focusToIdentitas = () => {
@@ -332,11 +335,10 @@ onMounted(async () => {
       </div>
 
       <button class="btn text-white w-xl py-3" :disabled="!userData" :class="!userData ? 'cursor-not-allowed bg-gray' : 'cursor-pointer bg-orange'
-        " @click.prevent="addVisitor">
+      " @click.prevent="addVisitor">
         Masuk
       </button>
     </form>
-    <button @click="displayPeminjamanLoker">Klik Loker</button>
     <VisitorVirtualKeyboard v-on:choose="focusToIdentitas" v-on:writing="focusToIdentitas" />
     <div class="fixed right-0 bottom-0">
       <button class="btn bg-orange" @click="backToIndex">Reset Ruangan</button>

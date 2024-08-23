@@ -41,7 +41,7 @@ let [fetchLastVisitor] = await getItems({
       <section class="w-full h-100 flex flex-col gap-3">
         <GenericMonthlyCalendar />
       </section>
-      <section class="w-full h-100">
+      <section class="w-full flex flex-col gap-5 h-100">
         <div class="border-3 border-gray rounded-lg">
           <h1>Total Pengunjung Hari ini</h1>
           <div v-if="fetchAllToday.meta.filter_count !== 0">
@@ -62,6 +62,12 @@ let [fetchLastVisitor] = await getItems({
             </div>
           </div>
           <div v-else>Tidak ada data!</div>
+        </div>
+        <div class="border-3 border-gray rounded-lg">
+          <h1>Akses Manajemen Loker</h1>
+          <NuxtLink to="/visitor/manajemen-loker">
+            <button class="btn bg-orange text-white my-5">Manajemen Loker</button>
+          </NuxtLink>
         </div>
       </section>
     </section>

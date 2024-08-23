@@ -33,9 +33,7 @@ const isKoordinator = computed(() => {
 const logoutBtn = () => {
   isLoad.value = true;
   logout();
-  setTimeout(() => {
-    router.push("/login");
-  }, 2000);
+  router.push("/");
 };
 </script>
 
@@ -51,8 +49,8 @@ const logoutBtn = () => {
         <div class="flex flex-col items-center">
           <img
             :src="
-              user.avatar
-                ? `https://repository.unpad.ac.id:8050/assets/${user.avatar}.jpg`
+              user?.avatar
+                ? `https://repository.unpad.ac.id:8050/assets/${user?.avatar}.jpg`
                 : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'
             "
             class="w-15 h-15 object-cover rounded-lg border border-orange"
@@ -60,7 +58,7 @@ const logoutBtn = () => {
           />
         </div>
         <div class="text-center">
-          <p v-if="user.first_name">Halo, {{ user.first_name }}!</p>
+          <p v-if="user?.first_name">Halo, {{ user?.first_name ?? "guest" }}!</p>
           <p v-else>Halo, Pengunjung!</p>
         </div>
       </section>
