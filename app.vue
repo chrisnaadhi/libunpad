@@ -172,6 +172,10 @@ strong {
   --at-apply: bg-clip-text text-transparent bg-gradient-to-br from-orange-500 to-gray-500;
 }
 
+.konten-berita img {
+  --at-apply: py-5;
+}
+
 .content-layer {
   --at-apply: max-w-7xl ma;
 }

@@ -158,7 +158,8 @@ const lokerData = async () => {
             nomor_induk: peminjamanLokerStore.npmPeminjam,
           },
         }).then(() => {
-          console.log("Berhasil menambahkan data peminjaman loker");
+          const audioAjuanLoker = new Audio("/sfx/ajuan_loker_berhasil.mp3");
+          audioAjuanLoker.play();
 
           identity.value = {};
           userData.value = "";
@@ -178,7 +179,7 @@ const lokerData = async () => {
         showPeminjamanLoker.value = false;
         peminjamanLokerStore.showLokerData = false;
         identitas.value.focus();
-      }, 10000);
+      }, 20000);
     } else {
       identity.value = {};
       userData.value = "";
@@ -262,6 +263,17 @@ const addVisitor = async () => {
       () => {
         if (ruangan.value === "lobby") {
           displayPeminjamanLoker();
+
+          setTimeout(() => {
+            identity.value = {};
+            userData.value = "";
+            institusi.value = "";
+            showModal.value = false;
+            umum.value = false;
+            showPeminjamanLoker.value = false;
+            sudahMeminjamLoker.value = false;
+            identitas.value.focus();
+          }, 20000);
         } else {
           setTimeout(() => {
             identity.value = {};
