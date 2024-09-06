@@ -3,10 +3,10 @@ import { defineStore } from "pinia";
 
 export const prosesPeminjamanLoker = defineStore("prosesPeminjamanLoker", () => {
   const nomorLoker = ref(null);
-  const namaPeminjam = ref("Anda");
-  const npmPeminjam = ref("");
+  const namaPeminjam = ref("Chrisna Adhi Pranoto");
+  const npmPeminjam = ref("210210160084");
   const konfirmasiPeminjam = ref(false);
-  const showLokerData = ref(false);
+  const showLokerData = ref(true);
   const isFull = ref(false);
 
   return {

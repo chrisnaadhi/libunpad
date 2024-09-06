@@ -6,7 +6,12 @@ const layananPerpustakaan = await getItems({
 const getAllLiterasiInformasi = await getItems({
   collection: "konten_literasi_informasi",
 });
-const { getThumbnail: img } = useDirectusFiles();
+
+const config = useRuntimeConfig();
+
+const getImg = (id) => {
+  return `${config.public.directusPublicUrl}assets/${id}`;
+}
 
 const panduanList = [
   "Layanan dan Fasilitas",
@@ -78,12 +83,12 @@ const toggleLayanan = (value) => {
             <div class="flex flex-col gap-3 md:(grid grid-cols-2)">
               <GenericBaseCard v-for="item in getAllLiterasiInformasi" class="bg-gray-1 h-full">
                 <div>
-                  <NuxtImg :src="img(item.featured_image)" format="webp" class="w-full h-50 object-cover rounded-t"></NuxtImg>
+                  <NuxtImg :src="getImg(item.featured_image)" format="webp" class="w-full h-50 object-cover rounded-t"></NuxtImg>
                 </div>
                 <div class="flex flex-col px-4 py-5 justify-center">
                   <h3 class="text-left">{{ item.judul }}</h3>
                   <p class="text-sm italic">
-                    {{ trimDescription(item.konten, 150) }}
+                    {{ trimDescription(item.konten, 160) }}
                   </p>
                   <div class="flex my-3 text-center">
                     <NuxtLink :to="`/panduan/literasi-informasi/${item.slug}`" class="action-btn">

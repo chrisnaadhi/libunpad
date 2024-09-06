@@ -54,7 +54,7 @@ const namaPenulis = `${getPenulis.first_name} ${getPenulis.last_name}`;
     <div class="max-w-7xl ma">
       <article>
         <h1 class="text-center mb-5">{{ berita[0].judul }}</h1>
-        <span class="text-justify" v-html="berita[0].konten_artikel ?? berita[0].konten_berita"></span>
+        <span class="text-justify konten-berita" v-html="berita[0].konten_artikel ?? berita[0].konten_berita"></span>
         <p class="italic text-sm mt-5">
           Diperbaharui pada:
           {{ convertTimeZone(berita[0].date_updated) }}

@@ -60,11 +60,11 @@ const submitLogin = async () => {
       await login({ email: email.value, password: password.value });
       loginNotif.value = "Berhasil masuk ke akun Anda! Mengalihkan halaman...";
       textLogin.value = "text-green-7 font-600";
+      const { redir } = route.query;
       setTimeout(async () => {
-        if (isPegawai.value) {
+        if (!redir) {
           await navigateTo("/dashboard", { redirectCode: 301 });
         } else {
-          const { redir } = route.query;
           await navigateTo(`${redir}`, { redirectCode: 200 });
         }
       }, 2000);

@@ -8,5 +8,9 @@ export default defineNuxtRouteMiddleware((to, from) => {
         redir: to.path,
       },
     });
+  } else if (to.path === "/login" && user.value) {
+    return navigateTo({
+      path: "/dashboard"
+    })
   }
 });
