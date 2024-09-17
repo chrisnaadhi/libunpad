@@ -347,7 +347,7 @@ onMounted(async () => {
       </div>
 
       <button class="btn text-white w-xl py-3" :disabled="!userData" :class="!userData ? 'cursor-not-allowed bg-gray' : 'cursor-pointer bg-orange'
-      " @click.prevent="addVisitor">
+        " @click.prevent="addVisitor">
         Masuk
       </button>
     </form>

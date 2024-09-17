@@ -1,12 +1,12 @@
 <script setup>
-  const val = ref('Nomor Loker')
+const val = ref('Anda sudah meminjam Loker!')
 </script>
 
 <template>
   <div class="modal-display">
     <Transition>
       <section class="max-w-2xl bg-white p-10 rounded-lg">
-        <h1 class="text-red font-bold text-3xl">Anda sudah meminjam Loker!</h1>
+        <h1 class="text-red font-bold text-3xl">{{ val }}</h1>
       </section>
     </Transition>
   </div>
