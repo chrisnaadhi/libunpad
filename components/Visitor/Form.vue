@@ -11,7 +11,7 @@ const umum = ref(false);
 const identity: any = ref({});
 const welcome = ref();
 const showModal = ref(false);
-const showPeminjamanLoker = ref(true);
+const showPeminjamanLoker = ref(false);
 const sudahMeminjamLoker = ref(false);
 const isNumeric = (value: any) => {
   return /^-?\d+$/.test(value);
