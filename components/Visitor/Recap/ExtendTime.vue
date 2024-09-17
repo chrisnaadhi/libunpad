@@ -61,7 +61,9 @@ const getDataJamLayananTambahan = async () => {
 }
 
 const updateJumlahPengunjung = async () => {
-  if (jumlahPengunjung.value) {
+  if (jumlahPengunjung.value < 0) {
+    alert("Jumlah Pengunjung tidak boleh kurang dari 0 atau angka negatif!");
+  } else if (jumlahPengunjung.value || jumlahPengunjung.value === 0) {
     loadInputJumlahPengunjung.value = true;
     await updateItem({
       collection: "piket_layanan",
@@ -100,10 +102,10 @@ onMounted(async () => {
           Petugas Piket:
           <span class="font-600 text-orange-6">
             {{
-          getPetugasExtendedTimeService[0] === undefined
-            ? "Tidak ada Petugas"
-            : `${profilPetugas.first_name} ${profilPetugas.last_name}`
-        }}
+              getPetugasExtendedTimeService[0] === undefined
+                ? "Tidak ada Petugas"
+                : `${profilPetugas.first_name} ${profilPetugas.last_name}`
+            }}
           </span>
         </h3>
         <h1>
@@ -118,8 +120,10 @@ onMounted(async () => {
         </p>
       </div>
       <div class="max-w-2xl ma">
-        <h5>Silahkan tuliskan jumlah data kunjungan yang sudah anda hitung secara manual pada form dibawah ini lalu klik <span class="text-orange-6 font-semibold">Simpan</span> untuk menyimpan data laporan kunjungan.</h5>
-        
+        <h5>Silahkan tuliskan jumlah data kunjungan yang sudah anda hitung secara manual pada form dibawah ini lalu klik
+          <span class="text-orange-6 font-semibold">Simpan</span> untuk menyimpan data laporan kunjungan.
+        </h5>
+
         <form @submit.prevent="updateJumlahPengunjung" class="max-w-xl ma flex flex-col items-center gap-3 mb-5">
           <input type="number" v-model="jumlahPengunjung" class="w-full p-2 border border-gray-400 rounded-lg"
             placeholder="Jumlah Pengunjung" />
@@ -128,7 +132,21 @@ onMounted(async () => {
             {{ updateText }}
           </button>
         </form>
-        <p v-if="dataJamTambahan?.jumlah_kunjungan">Data kunjungan yang sudah tersimpan di database: <span class="font-semibold text-green-6"> {{ dataJamTambahan?.jumlah_kunjungan ?? "Data Kunjungan Manual belum diinput." }} orang</span></p>
+        <p v-if="dataJamTambahan?.jumlah_kunjungan > 0">Data kunjungan yang sudah tersimpan di database:
+          <span class="font-semibold text-green-6">
+            {{ dataJamTambahan?.jumlah_kunjungan ?? "Data Kunjungan Manual belum diinput." }} orang
+          </span>
+        </p>
+        <p v-else-if="dataJamTambahan?.jumlah_kunjungan == 0">Data kunjungan yang sudah tersimpan di database:
+          <span class="font-semibold text-green-6">
+            Tidak ada yang berkunjung
+          </span>
+        </p>
+        <p v-else>
+          <span class="font-semibold text-red-6">
+            Data Kunjungan Manual belum diinput.
+          </span>
+        </p>
       </div>
     </div>
   </div>

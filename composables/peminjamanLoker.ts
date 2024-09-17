@@ -6,7 +6,7 @@ export const prosesPeminjamanLoker = defineStore("prosesPeminjamanLoker", () => 
   const namaPeminjam = ref("Chrisna Adhi Pranoto");
   const npmPeminjam = ref("210210160084");
   const konfirmasiPeminjam = ref(false);
-  const showLokerData = ref(true);
+  const showLokerData = ref(false);
   const isFull = ref(false);
 
   return {
