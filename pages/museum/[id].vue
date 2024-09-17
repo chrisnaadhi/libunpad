@@ -21,9 +21,9 @@ const getMuseumCollection = await getItemById({
       </div>
       <div class="flex gap-4">
         <div class="text-left font-semibold flex flex-col gap-3">
-          <p>Judul </p>
+          <p>Judul</p>
           <p>Tipe Koleksi</p>
-          <p>Pembuat Koleksi</p>
+          <p>Kolektor</p>
           <p>Keywords</p>
           <p>Lembaga Penanggungjawab</p>
         </div>

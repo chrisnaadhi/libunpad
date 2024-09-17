@@ -3,28 +3,28 @@ export default defineEventHandler((event) => {
     {
       nama_tools: "Academic Tools",
       deskripsi:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis voluptatum minus blanditiis cupiditate quidem deleniti mollitia cum aperiam nisi veniam?",
+        "Software and resources aiding researchers in literature review, data collection, analysis, writing, and collaboration.",
       icon: "i-mdi-spanner",
       slug: "/panduan",
     },
     {
       nama_tools: "Digital Collection",
       deskripsi:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga beatae et temporibus reiciendis hic fugit laboriosam dolores amet corrupti culpa!",
+        "Organized digital resources like articles, images, and videos, accessible online for research and education.",
       icon: "i-mdi-pencil",
-      slug: "/panduan",
+      slug: "/koleksi",
     },
     {
       nama_tools: "Pintu Unpad",
       deskripsi:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate quam minima ad natus nobis itaque quibusdam ipsam labore voluptates impedit.",
+        "Online access to e-books, articles, and research papers through libraries or platforms for research and education.",
       icon: "i-mdi-books",
       slug: "/panduan",
     },
     {
       nama_tools: "Study Assist",
       deskripsi:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam doloremque debitis quis rerum voluptas expedita molestiae, cum pariatur sed repudiandae.",
+        "Services and resources like tutorials, research guides, and citation tools to support students' academic skills.",
       icon: "i-mdi-settings",
       slug: "/panduan",
     },

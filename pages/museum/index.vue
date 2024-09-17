@@ -89,9 +89,9 @@ onMounted(async () => {
                 </NuxtLink>
               </div>
               <div class="flex flex-col w-full pl-2">
-                <p class="text-sm text-gray-5">Pembuat: {{ museum.pembuat_koleksi ?? "Belum ada data" }}</p>
-                <p class="text-sm text-gray-5">Dibuat pada: {{ museum.tanggal_dibuat ?? "Tidak diketahui" }}</p>
-                <p class="text-sm text-gray-5">Pengelola : {{ museum.lembaga_penanggungjawab }}</p>
+                <p class="text-sm text-gray-5">{{ t("GLAMCollector") }}: {{ museum.pembuat_koleksi ?? "Belum ada data" }}</p>
+                <p class="text-sm text-gray-5">{{ t("GLAMCreatedAt") }}: {{ museum.tanggal_dibuat ?? "Tidak diketahui" }}</p>
+                <p class="text-sm text-gray-5">{{ t("GLAMManagedBy") }}: {{ museum.lembaga_penanggungjawab }}</p>
               </div>
               <NuxtLink class="btn bg-orange text-white text-center py-1" :to="'/museum/' + museum.id">Lihat</NuxtLink>
             </div>

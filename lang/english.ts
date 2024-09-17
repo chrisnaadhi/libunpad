@@ -76,4 +76,9 @@ export default {
   // Maintenance
   maintenanceTitle: "Maintenance Mode",
   maintenanceDescription: `We are currently in maintenance mode. Please come back later. If you need to ask something please kindly direct message us on :`,
+
+  // GLAM Metadata
+  GLAMCollector: "Collector",
+  GLAMCreatedAt: "Collected At",
+  GLAMManagedBy: "Managed By",
 };

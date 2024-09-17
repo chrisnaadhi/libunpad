@@ -15,7 +15,7 @@ export default {
   moreSearchResults: "Lihat hasil lebih banyak",
   usingPlatform: "Memanfaatkan Platform Kandaga",
   usingPlatformDescription:
-    "Cara memanfaatkan platform untuk memenuhi kebutuhan akademik dan risetmu",
+    "Cara memanfaatkan platform untuk memenuhi kebutuhan akademik dan riset anda",
   toolsHomeTitle: "Tuntaskan Tugas dan Penelitianmu secara Daring",
   toolsHomeDescription:
     "Manfaatkan layanan dan alat-alat yang telah kami langgan secara daring, untuk mempercepat proses pengerjaan tugas, pekerjaan dan penelitian anda.",
@@ -77,4 +77,9 @@ export default {
   maintenanceTitle: "Mode Pemeliharaan",
   maintenanceDescription:
     "Saat ini kami dalam mode pemeliharaan (maintenance). Silahkan akses kembali nanti. Jika kamu ingin menanyakan sesuatu silahkan hubungi kami :",
+
+  // GLAM Metadata
+  GLAMCollector: "Kolektor",
+  GLAMCreatedAt: "Dibuat pada",
+  GLAMManagedBy: "Pengelola",
 };
