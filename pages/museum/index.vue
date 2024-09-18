@@ -1,5 +1,5 @@
 <script setup>
-const i18n = useI18n();
+const { t } = useI18n();
 const { getItems } = useDirectusItems();
 const { getThumbnail: img } = useDirectusFiles();
 
@@ -16,7 +16,7 @@ const museumObj = {
   title: "Museum",
   definition: "(noun) /mjuːˈziː.əm/",
   imageUrl: "undraw_search_app.png",
-  titleDesc: computed(() => i18n.t("museumDescription"))
+  titleDesc: computed(() => t("museumDescription"))
 };
 
 const getMuseumDataHighlight = await getItems({
@@ -85,12 +85,15 @@ onMounted(async () => {
             <div class="flex flex-col justify-around gap-3 w-full">
               <div class="flex">
                 <NuxtLink :to="'/museum/' + museum.id" class="no-underline w-full">
-                  <h4 class="bg-orange-1 px-3 rounded text-orange" :title="museum.judul">{{ trimTitle(museum.judul, 25) }}</h4>
+                  <h4 class="bg-orange-1 px-3 rounded text-orange" :title="museum.judul">{{ trimTitle(museum.judul, 25)
+                    }}</h4>
                 </NuxtLink>
               </div>
               <div class="flex flex-col w-full pl-2">
-                <p class="text-sm text-gray-5">{{ t("GLAMCollector") }}: {{ museum.pembuat_koleksi ?? "Belum ada data" }}</p>
-                <p class="text-sm text-gray-5">{{ t("GLAMCreatedAt") }}: {{ museum.tanggal_dibuat ?? "Tidak diketahui" }}</p>
+                <p class="text-sm text-gray-5">{{ t("GLAMCollector") }}: {{ museum.pembuat_koleksi ?? "Belum ada data"
+                  }}</p>
+                <p class="text-sm text-gray-5">{{ t("GLAMCreatedAt") }}: {{ museum.tanggal_dibuat ?? "Tidak diketahui"
+                  }}</p>
                 <p class="text-sm text-gray-5">{{ t("GLAMManagedBy") }}: {{ museum.lembaga_penanggungjawab }}</p>
               </div>
               <NuxtLink class="btn bg-orange text-white text-center py-1" :to="'/museum/' + museum.id">Lihat</NuxtLink>

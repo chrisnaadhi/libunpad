@@ -1,5 +1,5 @@
 <script setup>
-const i18n = useI18n();
+const { t } = useI18n();
 const { getItems } = useDirectusItems();
 const { getThumbnail: img } = useDirectusFiles();
 
@@ -13,10 +13,10 @@ const collectionList = ref();
 const collectionTag = ref(null);
 
 const galleryObj = {
-  title: i18n.t("galleryTitle"),
+  title: t("galleryTitle"),
   definition: "(noun) /'gæl.ər.i/",
   imageUrl: "undraw_Picture.png",
-  titleDesc: computed(() => i18n.t("galleryDescription")),
+  titleDesc: computed(() => t("galleryDescription")),
 };
 
 const getGalleryDataHighlight = await getItems({
@@ -85,7 +85,8 @@ onMounted(async () => {
             <div class="flex flex-col justify-around gap-3 w-full">
               <div class="flex">
                 <NuxtLink :to="'/gallery/' + galeri.id" class="no-underline w-full">
-                  <h4 class="bg-orange-1 px-3 rounded text-orange" :title="galeri.judul">{{ trimTitle(galeri.judul, 25) }}</h4>
+                  <h4 class="bg-orange-1 px-3 rounded text-orange" :title="galeri.judul">{{ trimTitle(galeri.judul, 25)
+                    }}</h4>
                 </NuxtLink>
               </div>
               <div class="flex flex-col w-full pl-2">

@@ -1,5 +1,5 @@
 <script setup>
-const i18n = useI18n();
+const { t } = useI18n();
 
 const { data: bookCollection } = await useFetch("/api/v1/koleksi/ulims");
 
@@ -7,7 +7,7 @@ const libraryObj = {
   title: "Library",
   definition: "(noun) /'laɪ.brer.i/",
   imageUrl: "undraw_Books.png",
-  titleDesc: computed(() => i18n.t("libraryDescription")),
+  titleDesc: computed(() => t("libraryDescription")),
 };
 
 const defaultImage = "/images/no-image.jpg";
@@ -37,7 +37,7 @@ const path = useRoute();
               <div class="flex flex-col gap-3">
                 <NuxtLink :to="'/library/biblio/' + koleksi?.biblioId" class="no-underline w-full">
                   <h4 class="bg-orange-1 px-3 rounded text-orange" :title="koleksi?.title">{{
-      trimTitle(koleksi?.title, 25) }}</h4>
+                    trimTitle(koleksi?.title, 25) }}</h4>
                 </NuxtLink>
                 <div class="flex w-full gap-4 pl-2">
                   <div>
@@ -55,7 +55,9 @@ const path = useRoute();
                 </div>
               </div>
 
-              <NuxtLink class="btn bg-orange text-white text-center py-1" :to="`https://kandaga.unpad.ac.id:8010/index.php?p=show_detail&id=${koleksi?.biblioId}`" target="_blank">
+              <NuxtLink class="btn bg-orange text-white text-center py-1"
+                :to="`https://kandaga.unpad.ac.id:8010/index.php?p=show_detail&id=${koleksi?.biblioId}`"
+                target="_blank">
                 Lihat</NuxtLink>
             </div>
           </div>
