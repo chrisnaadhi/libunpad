@@ -1,9 +1,9 @@
 <script setup>
-const i18n = useI18n();
+const { t } = useI18n();
 const { getItems } = useDirectusItems();
 const { getThumbnail: img } = useDirectusFiles();
 
-const getTotalDataArchive= ref(await getItems({
+const getTotalDataArchive = ref(await getItems({
   collection: "koleksi_archive"
 }))
 
@@ -16,7 +16,7 @@ const archiveObj = {
   title: "Archives",
   definition: "(noun) /ˈɑːr.kaɪv/",
   imageUrl: "undraw_Professor.png",
-  titleDesc: computed(() => i18n.t("archiveDescription")),
+  titleDesc: computed(() => t("archiveDescription")),
 };
 
 const getArchiveDataHighlight = await getItems({
@@ -87,7 +87,8 @@ onMounted(async () => {
             <div class="flex flex-col justify-around gap-3 w-full">
               <div class="flex">
                 <NuxtLink :to="'/records/' + archive.id" class="no-underline w-full">
-                  <h4 class="bg-orange-1 px-3 rounded text-orange" :title="archive.judul">{{ trimTitle(archive.judul, 22) }}</h4>
+                  <h4 class="bg-orange-1 px-3 rounded text-orange" :title="archive.judul">{{ trimTitle(archive.judul,
+                    22) }}</h4>
                 </NuxtLink>
               </div>
               <div class="flex flex-col w-full pl-2">
@@ -95,7 +96,8 @@ onMounted(async () => {
                 <p class="text-sm text-gray-5">Dibuat pada: {{ archive.tanggal_dibuat ?? "Tidak diketahui" }}</p>
                 <p class="text-sm text-gray-5">Pengelola : {{ archive.lembaga_penanggungjawab }}</p>
               </div>
-              <NuxtLink class="btn bg-orange text-white text-center py-1" :to="'/records/' + archive.id">Lihat</NuxtLink>
+              <NuxtLink class="btn bg-orange text-white text-center py-1" :to="'/records/' + archive.id">Lihat
+              </NuxtLink>
             </div>
           </div>
         </div>
