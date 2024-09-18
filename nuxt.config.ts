@@ -17,6 +17,9 @@ export default defineNuxtConfig({
     "/pengajuan/unggah-mandiri/submit/**": {
       redirect: "/pengajuan/unggah-mandiri",
     },
+    "/pengajuan/peminjaman-ruangan": {
+      redirect: "/pengajuan"
+    }
   },
 
   modules: [

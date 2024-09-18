@@ -16,9 +16,9 @@ export default defineEventHandler((event) => {
     {
       namaLayanan: "Peminjaman Ruangan",
       deskripsiLayanan:
-        "Layanan Pengajuan Peminjaman Ruangan di Grha Kandaga secara daring",
-      slug: "/pengajuan/peminjaman-ruangan",
-      isActive: true,
+        "Dinonaktifkan sementara",
+      slug: "/pengajuan/#",
+      isActive: false,
     },
     {
       namaLayanan: "Pengajuan Kelas Literasi Informasi",
