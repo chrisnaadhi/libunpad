@@ -1,7 +1,7 @@
 <script setup>
 defineProps({
   title: {
-    type: String,
+    type: Object,
   },
   definition: {
     type: String,
@@ -26,6 +26,8 @@ defineProps({
     default: true,
   },
 });
+
+const { locale } = useI18n()
 </script>
 
 <template>
@@ -33,17 +35,16 @@ defineProps({
     <div class="py-5">
       <div class="header-section">
         <div class="max-w-2xl w-full">
-          <h1 class="text-4xl">
-            {{ title }}<span class="text-base"> (EN)</span>
+          <h1 class="kandaga-gradient">
+            {{ title.value }}<span class="text-base pl-2">({{ locale }})</span>
           </h1>
-          <p>
+          <p class="text-lg">
             <span class="italic">
               {{ definition }}
             </span>
             <br />
             {{ titleDesc.value }}
           </p>
-          <GenericSearch />
         </div>
         <div>
           <NuxtImg :src="'/illustration/' + imageUrl" height="250px" format="webp" />

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { locale } = useI18n();
 const { data: tools } = await useFetch("/api/v1/tools");
 </script>
 
@@ -18,14 +19,26 @@ const { data: tools } = await useFetch("/api/v1/tools");
           <div :class="tool.icon + ' icon-holder'" class="icon-holder" />
         </div>
         <div class="right-content">
-          <div class="contents-display">
-            <h2 class="tools-heading">{{ tool.nama_tools }}</h2>
+          <div v-if="locale === 'id'" class="contents-display">
+            <h2 class="tools-heading">{{ tool.namaTools }}</h2>
             <p class="text-2 lg:text-xs text-white">
               {{ tool.deskripsi }}
             </p>
             <NuxtLink :to="tool.slug" class="btn mt-3 py-0 bg-white text-sm text-orange">
-              Info
+              Lihat
             </NuxtLink>
+          </div>
+          <div v-else-if="locale === 'en'" class="contents-display">
+            <h2 class="tools-heading">{{ tool.namaToolsEN }}</h2>
+            <p class="text-2 lg:text-xs text-white">
+              {{ tool.deskripsiEN }}
+            </p>
+            <NuxtLink :to="tool.slug" class="btn mt-3 py-0 bg-white text-sm text-orange">
+              Lihat
+            </NuxtLink>
+          </div>
+          <div v-else class="contents-display">
+            <p>Format bahasa belum tersedia.</p>
           </div>
         </div>
       </div>

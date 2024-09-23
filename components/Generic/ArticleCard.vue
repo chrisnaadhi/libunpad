@@ -23,7 +23,8 @@ defineProps({
       </p>
       <div class="flex items-center justify-between">
         <p class="text-xs text-gray italic">{{ displayTanggalIndonesia(dateCreated) }}</p>
-        <NuxtLink :to="linkSlug" class="text-3 flex items-center py-1 px-2 rounded gap-1 text-orange no-underline transition-all-500 hover:(bg-orange text-white)">
+        <NuxtLink :to="linkSlug"
+          class="text-3 flex items-center py-1 px-2 rounded gap-1 text-orange no-underline transition-all-500 hover:(bg-orange text-white)">
           <span>
             Baca selengkapnya
           </span>

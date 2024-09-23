@@ -90,6 +90,7 @@ export default defineNuxtConfig({
     authGoogleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
     urlApiKandaga: process.env.URL_API_KANDAGA,
     directusUrl: process.env.DIRECTUS_BASE_URL,
+    directusAuthToken: process.env.DIRECTUS_ACCESS_TOKEN,
     dbHost: process.env.DRIZZLE_HOST,
     dbUsername: process.env.DRIZZLE_USERNAME,
     dbName: process.env.DRIZZLE_DATABASE,

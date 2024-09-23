@@ -20,6 +20,7 @@
     "nuxt": "^3.12.4"
   },
   "dependencies": {
+    "@directus/sdk": "^17.0.1",
     "@pinia/nuxt": "^0.4.11",
     "@popperjs/core": "^2.11.8",
     "@splidejs/vue-splide": "^0.6.12",

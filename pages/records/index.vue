@@ -3,17 +3,17 @@ const { t } = useI18n();
 const { getItems } = useDirectusItems();
 const { getThumbnail: img } = useDirectusFiles();
 
-const getTotalDataArchive = ref(await getItems({
-  collection: "koleksi_archive"
-}))
+const getTotalDataArchive = ref(await getItems(getGLAMCollectionsCount("koleksi_archive")))
 
 const pageTotal = getTotalDataArchive.value.length
 const currentPage = ref(0);
 const collectionList = ref();
 const collectionTag = ref(null);
+const filterKeyword = ref("");
+const filterJenisKoleksi = ref("");
 
 const archiveObj = {
-  title: "Archives",
+  title: computed(() => t("archiveTitle")),
   definition: "(noun) /ˈɑːr.kaɪv/",
   imageUrl: "undraw_Professor.png",
   titleDesc: computed(() => t("archiveDescription")),
@@ -54,8 +54,39 @@ const getArchivePaginationData = async (opts) => {
   }
 }
 
-const defaultImage = "/images/no-image.jpg";
-const path = useRoute();
+const filterArchiveData = async () => {
+  currentPage.value = 0;
+  if (filterKeyword.value !== "") {
+    collectionList.value = [];
+    collectionList.value = await getItems({
+      collection: "koleksi_archive",
+      params: {
+        search: filterKeyword.value,
+        limit: 12
+      }
+    })
+  } else if (filterJenisKoleksi.value !== "") {
+    collectionList.value = [];
+    collectionList.value = await getItems({
+      collection: "koleksi_archive",
+      params: {
+        filter: {
+          tipe_koleksi: filterJenisKoleksi.value
+        },
+        limit: 12
+      }
+    })
+  } else {
+    alert("Kata Kunci wajib diisi!");
+  }
+}
+
+const listTipeKoleksi = await getItems({
+  collection: "koleksi_archive",
+  params: {
+    groupBy: "tipe_koleksi"
+  }
+})
 
 onMounted(async () => {
   collectionList.value = await getItems({
@@ -102,23 +133,55 @@ onMounted(async () => {
           </div>
         </div>
       </div>
+    </div>
+    <div>
       <div class="my-10 flex flex-col items-center justify-evenly w-full">
         <h3 class="text-center mb-5" ref="collectionTag">Daftar Koleksi Museum</h3>
         <h5 class="text-center mb-5">Total Koleksi Museum: {{ pageTotal }}</h5>
-        <div v-if="collectionList?.length === 0">
-          <p>Sedang memuat koleksi...</p>
-        </div>
-        <div class="archive-collection" v-else>
-          <div v-for="archive in collectionList" class="max-w-50 text-center flex flex-col gap-2">
-            <CollectionGLAMItems v-bind="archive" type_collection="records" />
+        <div class="flex justify-center gap-5 w-full">
+          <div class="w-full max-w-65">
+            <div class="bg-orange-50 h-full rounded-xl p-5">
+              <h5 class="text-center">Filter Koleksi</h5>
+              <div class="input-block">
+                <label for="search">Kata Kunci :</label>
+                <input type="search" name="search" id="search" class="input-area" v-model="filterKeyword"
+                  @keyup.enter="filterArchiveData" />
+              </div>
+              <div class="input-block">
+                <label for="jenis-koleksi">Tipe Koleksi: </label>
+                <select name="jenis-koleksi" id="jenis-koleksi" class="input-area" v-model="filterJenisKoleksi">
+                  <option value="" selected disabled>Pilih Tipe Koleksi</option>
+                  <option v-for="tipe in listTipeKoleksi" :value="tipe.tipe_koleksi">{{ tipe.tipe_koleksi }}</option>
+                </select>
+              </div>
+              <div class="input-block flex flex-col gap-2">
+                <button class="btn bg-orange w-full text-white" @click="filterArchiveData">Filter Gallery</button>
+                <button class="btn w-full text-white"
+                  :class="filterKeyword || filterJenisKoleksi ? 'bg-red' : 'bg-gray cursor-not-allowed'"
+                  @click="resetFilter" :disabled="!filterKeyword && !filterJenisKoleksi">
+                  Reset Filter
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="flex items-center justify-center gap-3 w-full mt-8">
-          <button class="btn bg-orange text-white py-0" @click="getArchivePaginationData('previous')"
-            :disabled="currentPage === 0">Sebelumnya</button>
-          <p>{{ currentPage == 0 ? "1" : Math.ceil((currentPage / 12) + 1) }} / {{ Math.ceil(pageTotal / 12) }}</p>
-          <button class="btn bg-orange text-white py-0" @click="getArchivePaginationData('next')"
-            :disabled="Math.ceil((currentPage / 12) + 1) === Math.ceil(pageTotal / 12)">Selanjutnya</button>
+          <div class="w-full">
+            <div v-if="collectionList?.length === 0">
+              <p>Sedang memuat koleksi...</p>
+            </div>
+            <div class="archive-collection" v-else>
+              <div v-for="archive in collectionList" class="max-w-50 text-center flex flex-col gap-2">
+                <CollectionGLAMItems v-bind="archive" type_collection="records" />
+              </div>
+            </div>
+            <div class="flex items-center justify-center gap-3 w-full mt-8">
+              <button class="btn bg-orange text-white py-0" @click="getArchivePaginationData('previous')"
+                :disabled="currentPage === 0">Sebelumnya</button>
+              <p>{{ currentPage == 0 ? "1" : Math.ceil((currentPage / 12) + 1) }} / {{ Math.ceil(pageTotal / 12) }}
+              </p>
+              <button class="btn bg-orange text-white py-0" @click="getArchivePaginationData('next')"
+                :disabled="Math.ceil((currentPage / 12) + 1) === Math.ceil(pageTotal / 12)">Selanjutnya</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

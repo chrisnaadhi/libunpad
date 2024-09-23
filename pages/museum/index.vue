@@ -3,17 +3,17 @@ const { t } = useI18n();
 const { getItems } = useDirectusItems();
 const { getThumbnail: img } = useDirectusFiles();
 
-const getTotalDataMuseum = ref(await getItems({
-  collection: "koleksi_museum",
-}))
+const getTotalDataMuseum = ref(await getItems(getGLAMCollectionsCount("koleksi_museum")))
 
-const pageTotal = getTotalDataMuseum.value.length
+const pageTotal = getTotalDataMuseum.value.meta.total_count
 const currentPage = ref(0);
 const collectionList = ref();
 const collectionTag = ref(null);
+const filterKeyword = ref("");
+const filterJenisKoleksi = ref("");
 
 const museumObj = {
-  title: "Museum",
+  title: computed(() => t("museumTitle")),
   definition: "(noun) /mjuːˈziː.əm/",
   imageUrl: "undraw_search_app.png",
   titleDesc: computed(() => t("museumDescription"))
@@ -25,6 +25,52 @@ const getMuseumDataHighlight = await getItems({
     limit: 4
   }
 })
+
+const filterMuseumData = async () => {
+  currentPage.value = 0;
+  if (filterKeyword.value !== "") {
+    collectionList.value = [];
+    collectionList.value = await getItems({
+      collection: "koleksi_museum",
+      params: {
+        search: filterKeyword.value,
+        limit: 12
+      }
+    })
+  } else if (filterJenisKoleksi.value !== "") {
+    collectionList.value = [];
+    collectionList.value = await getItems({
+      collection: "koleksi_gallery",
+      params: {
+        filter: {
+          tipe_koleksi: filterJenisKoleksi.value
+        },
+        limit: 12
+      }
+    })
+  } else {
+    alert("Kata Kunci wajib diisi!");
+  }
+}
+
+const listTipeKoleksi = await getItems({
+  collection: "koleksi_museum",
+  params: {
+    groupBy: "tipe_koleksi"
+  }
+})
+
+const resetFilter = async () => {
+  currentPage.value = 0;
+  filterKeyword.value = "";
+  filterJenisKoleksi.value = ""
+  collectionList.value = await getItems({
+    collection: "koleksi_museum",
+    params: {
+      limit: 12
+    }
+  })
+}
 
 const getMuseumPaginationData = async (opts) => {
   collectionTag.value.scrollIntoView()
@@ -101,23 +147,54 @@ onMounted(async () => {
           </div>
         </div>
       </div>
+    </div>
+    <div>
       <div class="my-10 flex flex-col items-center justify-evenly w-full">
         <h3 class="text-center mb-5" ref="collectionTag">Daftar Koleksi Museum</h3>
         <h5 class="text-center mb-5">Total Koleksi Museum: {{ pageTotal }}</h5>
-        <div v-if="collectionList?.length === 0">
-          <p>Sedang memuat koleksi...</p>
-        </div>
-        <div class="museum-collection" v-else>
-          <div v-for="museum in collectionList" class="max-w-50 text-center flex flex-col gap-2">
-            <CollectionGLAMItems v-bind="museum" type_collection="museum" />
+        <div class="flex justify-center gap-5 w-full">
+          <div class="w-full max-w-65">
+            <div class="bg-orange-50 h-full rounded-xl p-5">
+              <h5 class="text-center">Filter Koleksi</h5>
+              <div class="input-block">
+                <label for="search">Kata Kunci :</label>
+                <input type="search" name="search" id="search" class="input-area" v-model="filterKeyword"
+                  @keyup.enter="filterMuseumData" />
+              </div>
+              <div class="input-block">
+                <label for="jenis-koleksi">Tipe Koleksi: </label>
+                <select name="jenis-koleksi" id="jenis-koleksi" class="input-area" v-model="filterJenisKoleksi">
+                  <option value="" selected disabled>Pilih Tipe Koleksi</option>
+                  <option v-for="tipe in listTipeKoleksi" :value="tipe.tipe_koleksi">{{ tipe.tipe_koleksi }}</option>
+                </select>
+              </div>
+              <div class="input-block flex flex-col gap-2">
+                <button class="btn bg-orange w-full text-white" @click="filterMuseumData">Filter Gallery</button>
+                <button class="btn w-full text-white"
+                  :class="filterKeyword || filterJenisKoleksi ? 'bg-red' : 'bg-gray cursor-not-allowed'"
+                  @click="resetFilter" :disabled="!filterKeyword && !filterJenisKoleksi">
+                  Reset Filter
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="flex items-center justify-center gap-3 w-full mt-8">
-          <button class="btn bg-orange text-white py-0" @click="getMuseumPaginationData('previous')"
-            :disabled="currentPage === 0">Sebelumnya</button>
-          <p>{{ currentPage == 0 ? "1" : Math.ceil((currentPage / 12) + 1) }} / {{ Math.ceil(pageTotal / 12) }}</p>
-          <button class="btn bg-orange text-white py-0" @click="getMuseumPaginationData('next')"
-            :disabled="Math.ceil((currentPage / 12) + 1) === Math.ceil(pageTotal / 12)">Selanjutnya</button>
+          <div class="w-full">
+            <div v-if="collectionList?.length === 0">
+              <p>Sedang memuat koleksi...</p>
+            </div>
+            <div class="museum-collection" v-else>
+              <div v-for="museum in collectionList" class="max-w-50 text-center flex flex-col gap-2">
+                <CollectionGLAMItems v-bind="museum" type_collection="museum" />
+              </div>
+            </div>
+            <div class="flex items-center justify-center gap-3 w-full mt-8">
+              <button class="btn bg-orange text-white py-0" @click="getMuseumPaginationData('previous')"
+                :disabled="currentPage === 0">Sebelumnya</button>
+              <p>{{ currentPage == 0 ? "1" : Math.ceil((currentPage / 12) + 1) }} / {{ Math.ceil(pageTotal / 12) }}</p>
+              <button class="btn bg-orange text-white py-0" @click="getMuseumPaginationData('next')"
+                :disabled="Math.ceil((currentPage / 12) + 1) === Math.ceil(pageTotal / 12)">Selanjutnya</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

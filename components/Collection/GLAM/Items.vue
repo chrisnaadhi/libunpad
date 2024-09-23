@@ -17,7 +17,8 @@ const { getThumbnail: img } = useDirectusFiles();
 <template>
   <section>
     <NuxtLink :to="`/${type_collection}/` + id" :title="judul">
-      <NuxtImg :src="img(thumbnail).includes('null') ? '/images/no-image.jpg' : img(thumbnail)" format="webp" class="w-50 h-80 object-cover rounded-xl transition duration-300 ease-in-out hover:scale-105" />
+      <NuxtImg :src="img(thumbnail).includes('null') ? '/images/no-image.jpg' : img(thumbnail)" format="webp"
+        class="w-50 h-80 object-cover rounded-xl transition duration-300 ease-in-out border-1 hover:scale-105" />
     </NuxtLink>
     <div class="flex flex-col w-full">
       <NuxtLink :to="`/${type_collection}/` + id"

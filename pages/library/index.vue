@@ -4,7 +4,7 @@ const { t } = useI18n();
 const { data: bookCollection } = await useFetch("/api/v1/koleksi/ulims");
 
 const libraryObj = {
-  title: "Library",
+  title: computed(() => t("libraryTitle")),
   definition: "(noun) /'laɪ.brer.i/",
   imageUrl: "undraw_Books.png",
   titleDesc: computed(() => t("libraryDescription")),
@@ -30,7 +30,7 @@ const path = useRoute();
           <div class="bg-white p-5 rounded flex w-full h-full gap-5" v-for="koleksi in bookCollection?.results">
             <NuxtLink :to="'/library/biblio/' + koleksi?.biblioId">
               <NuxtImg
-                :src="koleksi?.image === undefined || koleksi?.image === null || koleksi?.image === '' ? '/images/default_cover.png' : `https://kandaga.unpad.ac.id:8010/lib/minigalnano/createthumb.php?filename=images/docs/${koleksi.image}&width=240`"
+                :src="koleksi?.image === undefined || koleksi?.image === null || koleksi?.image === '' ? '/images/default_cover.png' : `https://kandaga.unpad.ac.id:8011/lib/minigalnano/createthumb.php?filename=images/docs/${koleksi.image}&width=240`"
                 class="w-full h-40 object-cover rounded-lg lg:(w-50 h-60) transition duration-300 ease-in-out hover:scale-110" />
             </NuxtLink>
             <div class="flex flex-col justify-between gap-3 w-full h-full">
