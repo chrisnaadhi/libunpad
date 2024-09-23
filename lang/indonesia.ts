@@ -34,6 +34,7 @@ export default {
   collectionTitleHeader: "Jelajahi Koleksi Kami",
   collectionDescriptionHeader:
     "Cari dan temukan apa yang kamu butuhkan berdasarkan rekomendasi koleksi kami",
+  exploreAllCollections: "Jelajahi Semua Koleksi",
 
   // Berita - /berita
   newsTitleHeader: "Berita dan Kegiatan Kandaga",
@@ -52,14 +53,17 @@ export default {
   // Gallery - /gallery
   galleryTitle: "Galeri",
   galleryDescription:
-    'Galeri diartikan sebagai ruangan atau bangunan tempat benda atau karya seni dipamerkan dan sebagainya. Oxford Advanced Learner\'s Dictionary menyatakan Galeri sebagai "Sebuah ruangan atau bangunan untuk menampilkan karya seni". (KBBI)',
+    "mengacu pada ruang yang didedikasikan untuk pameran dan tampilan karya seni. Galeri berfungsi sebagai platform bagi para seniman dan peneliti untuk memamerkan karya-karya mereka, dan juga memberikan kesempatan bagi publik untuk menghargai dan belajar tentang seni serta pengetahuan. (KBBI)",
   // Library - /library
+  libraryTitle: "Perpustakaan",
   libraryDescription:
     "Merupakan kumpulan bahan, buku, atau media yang dapat diakses untuk digunakan dan tidak hanya untuk tujuan pajangan. Perpustakaan menyediakan materi fisik (hard copy) atau akses digital (soft copy), dan dapat berupa lokasi fisik atau ruang virtual, atau keduanya. (KBBI)",
   // Archive - /records
+  archiveTitle: "Arsip",
   archiveDescription:
     "Merupakan akumulasi catatan atau bahan sejarah – dalam media apa pun – atau fasilitas fisik di mana mereka berada. (KBBI)",
   // Museum - /museum
+  museumTitle: "Museum",
   museumDescription:
     "Merupakan bangunan atau lembaga yang merawat dan memamerkan koleksi artefak dan benda lain yang memiliki kepentingan seni, budaya, sejarah, atau ilmiah. (KBBI)",
 

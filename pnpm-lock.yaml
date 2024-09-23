@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@directus/sdk':
+        specifier: ^17.0.1
+        version: 17.0.1
       '@pinia/nuxt':
         specifier: ^0.4.11
         version: 0.4.11(magicast@0.3.4)(rollup@4.19.0)(vue@3.4.33)
@@ -269,6 +272,10 @@ packages:
   '@cloudflare/kv-asset-handler@0.3.4':
     resolution: {integrity: sha512-YLPHc8yASwjNkmcDMQMY35yiWjoKAKnhUbPRszBRS0YgH+IXtsMp61j+yTcnCE3oO2DgP0U3iejLC8FTtKDC8Q==}
     engines: {node: '>=16.13'}
+
+  '@directus/sdk@17.0.1':
+    resolution: {integrity: sha512-6TorT8am/8q2YmhLhGY1yZks2rFr31my5WqbXUPZs+4hPWYkTNThns2lfhZQ8w2KBh9DZ7v5SaghZNSIswUOwA==}
+    engines: {node: '>=18.0.0'}
 
   '@esbuild-kit/core-utils@3.3.2':
     resolution: {integrity: sha512-sPRAnw9CdSsRmEtnsl2WXWdyquogVpB3yZ3dgwJfe8zrOzTsV7cJvmwrKVa+0ma5BoiGJ+BoqkMvawbayKUsqQ==}
@@ -4982,6 +4989,8 @@ snapshots:
   '@cloudflare/kv-asset-handler@0.3.4':
     dependencies:
       mime: 3.0.0
+
+  '@directus/sdk@17.0.1': {}
 
   '@esbuild-kit/core-utils@3.3.2':
     dependencies:

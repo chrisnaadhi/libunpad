@@ -23,6 +23,11 @@
         <NuxtImg src="/images/museum.jpg" class="image-display" />
       </article>
     </div>
+    <div>
+      <NuxtLink to="/search" class="action-btn">
+        {{ $t("exploreAllCollection") }}
+      </NuxtLink>
+    </div>
   </section>
 </template>
 

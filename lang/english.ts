@@ -34,6 +34,7 @@ export default {
   collectionTitleHeader: "Explore our Collections",
   collectionDescriptionHeader:
     "Search and find what's you need from our collections",
+  exploreAllCollections: "Explore All Collections",
 
   // Berita - /berita
   newsTitleHeader: "Kandaga's News and Event",
@@ -52,14 +53,17 @@ export default {
   // Gallery - /gallery
   galleryTitle: "Gallery",
   galleryDescription:
-    'is defined as a room or building where objects or works of art are exhibited and so on. Oxford Advanced Learner\'s Dictionary states Gallery as "A room or building for showing works of art".',
+    "refers to a space dedicated to the exhibition and display of art, often featuring paintings, sculptures, or other visual works. Galleries serve as platforms for researcher to showcase their creations, and they also provide opportunities for the public to appreciate and learn about art and science.",
   // Library - /library
+  libraryTitle: "Library",
   libraryDescription:
     "is a collection of materials, books or media that are accessible for use and not just for display purposes. A library provides physical (hard copies) or digital access (soft copies) materials, and may be a physical location or a virtual space, or both.",
   // Archive - /records
+  archiveTitle: "Archive",
   archiveDescription:
     "is an accumulation of historical records or materials – in any medium – or the physical facility in which they are located.",
   // Museum - /museum
+  museumTitle: "Museum",
   museumDescription:
     "is a building or institution that cares for and displays a collection of artifacts and other objects of artistic, cultural, historical, or scientific importance.",
 

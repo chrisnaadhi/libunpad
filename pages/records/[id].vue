@@ -11,7 +11,9 @@ const getArchiveCollection = await getItemById({
 
 <template>
   <section>
-    <h3 class="mt-10 mb-3">Koleksi <span class="text-orange font-semibold">{{ getArchiveCollection.judul }}</span></h3>
+    <h3 class="mt-10 mb-3 text-center">Koleksi <br> <span class="text-orange font-semibold">{{
+      getArchiveCollection.judul
+        }}</span></h3>
     <div class="flex items-center justify-center mb-5">
       <h5 class="bg-orange text-white px-5 py-1 rounded-md">Metadata Koleksi</h5>
     </div>
@@ -19,32 +21,46 @@ const getArchiveCollection = await getItemById({
       <div>
         <NuxtImg :src="getThumbnail(getArchiveCollection.thumbnail)" format="webp" class="w-50 h-full rounded-md" />
       </div>
-      <div class="flex gap-4">
-        <div class="text-left font-semibold flex flex-col gap-3">
-          <p>Judul </p>
-          <p>Tipe Koleksi</p>
-          <p>Pembuat Koleksi</p>
-          <p>Keywords</p>
-          <p>Lembaga Penanggungjawab</p>
-        </div>
-        <div class="text-left flex flex-col gap-3">
-          <p>: {{ getArchiveCollection.judul }}</p>
-          <p>: {{ getArchiveCollection.tipe_koleksi ?? '-' }}</p>
-          <p>: {{ getArchiveCollection.pembuat_koleksi }}</p>
-          <p>: {{ getArchiveCollection.keywords.join(", ") }}</p>
-          <p>: {{ getArchiveCollection.lembaga_penanggungjawab }}</p>
-        </div>
-      </div>
+      <table>
+        <tr>
+          <td class="font-semibold pr-5">Judul</td>
+          <td>: {{ getArchiveCollection.judul ?? "-" }}</td>
+        </tr>
+        <tr>
+          <td class="font-semibold pr-5">Tipe Koleksi</td>
+          <td>: {{ getArchiveCollection.tipe_koleksi ?? '-' }}</td>
+        </tr>
+        <tr>
+          <td class="font-semibold pr-5">Pembuat Koleksi</td>
+          <td>: {{ getArchiveCollection.pembuat_koleksi ?? "-" }}</td>
+        </tr>
+        <tr>
+          <td class="font-semibold pr-5">Keywords</td>
+          <td>: {{ getArchiveCollection.keywords.join(", ") ?? "-" }}</td>
+        </tr>
+        <tr>
+          <td class="font-semibold pr-5">Lembaga Penanggungjawab</td>
+          <td>: {{ getArchiveCollection.lembaga_penanggungjawab ?? "-" }}</td>
+        </tr>
+      </table>
     </div>
-    <div class="flex items-center justify-center mb-5">
+    <div class="flex items-center justify-center my-5">
       <h5 class="bg-orange text-white px-5 py-1 rounded-md">Keterangan Koleksi</h5>
     </div>
-    <div class="mb-10">
-      <p class="text-sm text-gray">Tanggal dibuat: {{ getArchiveCollection.tanggal_dibuat }}</p>
-      <p class="text-sm text-gray mb-5">Tanggal publikasi: {{ getArchiveCollection.tanggal_publikasi }}</p>
-      <span v-html="getArchiveCollection.keterangan_koleksi"></span>
+    <div class="max-w-3xl ma">
+      <table class="my-5 italic">
+        <tr class="text-sm text-gray">
+          <td class="pr-5">Tanggal Dibuat</td>
+          <td>: {{ getArchiveCollection.tanggal_dibuat ?? "-" }}</td>
+        </tr>
+        <tr class="text-sm text-gray">
+          <td class="pr-5">Tanggal publikasi</td>
+          <td>: {{ getArchiveCollection.tanggal_publikasi ?? "-" }}</td>
+        </tr>
+      </table>
+      <div class="content-data" v-html="getArchiveCollection.keterangan_koleksi"></div>
     </div>
-    <div class="mb-10">
+    <div class="my-10 text-center">
       <NuxtLink to="/records" class="btn bg-orange text-white py-1">&leftarrow; Kembali</NuxtLink>
     </div>
   </section>
@@ -52,6 +68,6 @@ const getArchiveCollection = await getItemById({
 
 <style scoped>
 section {
-  --at-apply: max-w-7xl ma text-center;
+  --at-apply: max-w-7xl ma;
 }
 </style>
