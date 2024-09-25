@@ -46,17 +46,17 @@ export const menuContent = () => {
       deskripsiEN: "",
       imgUrl: "",
     },
-    {
-      id: 5,
-      name: "Struktur Fungsi",
-      url: "/kandaga/struktur",
-      nameEN: "Functional Structure",
-      urlEN: "/en/kandaga/struktur",
-      deskripsi:
-        "Struktur Organisasi dari pengelolaan Kandaga sebagai institusi dan lembaga dibawah naungan Universitas Padjadjaran.",
-      deskripsiEN: "",
-      imgUrl: "",
-    },
+    // {
+    //   id: 5,
+    //   name: "Struktur Fungsi",
+    //   url: "/kandaga/struktur",
+    //   nameEN: "Functional Structure",
+    //   urlEN: "/en/kandaga/struktur",
+    //   deskripsi:
+    //     "Struktur Organisasi dari pengelolaan Kandaga sebagai institusi dan lembaga dibawah naungan Universitas Padjadjaran.",
+    //   deskripsiEN: "",
+    //   imgUrl: "",
+    // },
     {
       id: 6,
       name: "Berita & Kegiatan",

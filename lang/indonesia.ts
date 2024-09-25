@@ -66,6 +66,10 @@ export default {
   museumTitle: "Museum",
   museumDescription:
     "Merupakan bangunan atau lembaga yang merawat dan memamerkan koleksi artefak dan benda lain yang memiliki kepentingan seni, budaya, sejarah, atau ilmiah. (KBBI)",
+  // Koleksi Hayati - /koleksi-hayati
+  koleksiHayatiTitle: "Koleksi Hayati",
+  koleksiHayatiDescription:
+    "Koleksi hayati adalah kumpulan spesimen hayati yang dikumpulkan, disimpan, dan diawetkan untuk kepentingan penelitian, pendidikan, dan konservasi. Koleksi hayati dapat berupa spesimen tumbuhan, hewan, dan mikroorganisme, serta bahan-bahan yang terkait dengan spesimen tersebut. (KBBI)",
 
   // FOOTER
   // Tautan Cepat

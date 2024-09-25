@@ -29,40 +29,84 @@ const years = [
     <div class="flex flex-col">
       <div>
         <h6>Pencarian</h6>
-        <input type="search" name="search" id="search" class="p-1 rounded" v-model="searchTugasAkhir.keywords"
-          @keyup.enter="searchTugasAkhir.searchingTugasAkhir(true, false, true)" />
+        <input
+          type="search"
+          name="search"
+          id="search"
+          class="p-1 rounded"
+          v-model="searchTugasAkhir.keywords"
+          @keyup.enter="searchTugasAkhir.searchingTugasAkhir(true, false, true)"
+        />
       </div>
       <h6>Tahun</h6>
       <div>
-        <select class="min-w-full" name="first" id="first" v-model="searchTugasAkhir.tahun">
+        <select
+          class="min-w-full"
+          name="first"
+          id="first"
+          v-model="searchTugasAkhir.tahun"
+        >
           <option :value="year" v-for="year in years">{{ year }}</option>
         </select>
       </div>
 
       <div>
         <h6>Jenis Karya</h6>
-        <div>
-          <input type="checkbox" name="ta" id="ta" />
-          <label for="ta">Tugas Akhir (Diploma)</label>
+        <div class="flex items-center">
+          <input
+            type="checkbox"
+            name="ta"
+            id="ta"
+            class="w-4 h-4 text-orange-600 bg-gray-100 border-gray-300 rounded focus:ring-orange-500 dark:focus:ring-orange-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          />
+          <label for="ta" class="ms-2 text-gray-900 dark:text-gray-300">
+            Tugas Akhir (Diploma)
+          </label>
         </div>
-        <div>
-          <input type="checkbox" name="skripsi" id="skripsi" />
-          <label for="skripsi">Skripsi (S1)</label>
+        <div class="flex items-center">
+          <input
+            type="checkbox"
+            name="ta"
+            id="ta"
+            class="w-4 h-4 text-orange-600 bg-gray-100 border-gray-300 rounded focus:ring-orange-500 dark:focus:ring-orange-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          />
+          <label for="skripsi" class="ms-2 text-gray-900 dark:text-gray-300">
+            Skripsi (S1)
+          </label>
         </div>
-        <div>
-          <input type="checkbox" name="tesis" id="tesis" />
-          <label for="tesis">Tesis (S2)</label>
+        <div class="flex items-center">
+          <input
+            type="checkbox"
+            name="tesis"
+            id="tesis"
+            class="w-4 h-4 text-orange-600 bg-gray-100 border-gray-300 rounded focus:ring-orange-500 dark:focus:ring-orange-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          />
+          <label for="tesis" class="ms-2 text-gray-900 dark:text-gray-300">
+            Tesis (S2)
+          </label>
         </div>
-        <div>
-          <input type="checkbox" name="disertasi" id="disertasi" />
-          <label for="disertasi">Disertasi (S3)</label>
+        <div class="flex items-center">
+          <input
+            type="checkbox"
+            name="disertasi"
+            id="disertasi"
+            class="w-4 h-4 text-orange-600 bg-gray-100 border-gray-300 rounded focus:ring-orange-500 dark:focus:ring-orange-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          />
+          <label for="disertasi" class="ms-2 text-gray-900 dark:text-gray-300">
+            Disertasi (S3)
+          </label>
         </div>
       </div>
 
       <div>
         <h6>Nama Fakultas</h6>
         <div>
-          <select name="fakultas" id="fakultas" class="min-w-full" v-model="searchTugasAkhir.facultyId">
+          <select
+            name="fakultas"
+            id="fakultas"
+            class="min-w-full"
+            v-model="searchTugasAkhir.facultyId"
+          >
             <option v-for="fak in fakultas.objFakultas" :value="fak.id">
               {{ fak.namaFakultas }}
             </option>
@@ -70,8 +114,10 @@ const years = [
         </div>
       </div>
       <div class="my-2">
-        <button class="btn text-sm text-white w-full bg-orange"
-          @click="searchTugasAkhir.searchingTugasAkhir(true, false, true)">
+        <button
+          class="btn text-sm text-white w-full bg-orange"
+          @click="searchTugasAkhir.searchingTugasAkhir(true, false, true)"
+        >
           Cari
         </button>
       </div>
@@ -89,6 +135,6 @@ select {
 }
 
 input[type="checkbox"] {
-  --at-apply: mr-2;
+  --at-apply: mr-0;
 }
 </style>

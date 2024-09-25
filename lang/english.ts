@@ -66,6 +66,10 @@ export default {
   museumTitle: "Museum",
   museumDescription:
     "is a building or institution that cares for and displays a collection of artifacts and other objects of artistic, cultural, historical, or scientific importance.",
+  // Koleksi Hayati - /koleksi-hayati
+  koleksiHayatiTitle: "Biological Collection",
+  koleksiHayatiDescription:
+    "A biological collection is a collection of biological specimens that are collected, stored, and preserved for research, education, and conservation purposes. The biological collection can include specimens of plants, animals, and microorganisms, as well as materials related to these specimens.",
 
   // FOOTER
   // Tautan Cepat

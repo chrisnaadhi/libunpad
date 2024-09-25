@@ -25,7 +25,7 @@
     </div>
     <div>
       <NuxtLink to="/search" class="action-btn">
-        {{ $t("exploreAllCollection") }}
+        {{ $t("exploreAllCollections") }}
       </NuxtLink>
     </div>
   </section>
