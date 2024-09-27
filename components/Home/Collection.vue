@@ -1,6 +1,12 @@
+<script setup>
+const { t } = useI18n();
+</script>
+
 <template>
   <section class="max-w-7xl ma my-8">
-    <h1 class="text-center text-3xl font-600 bg-orange text-white max-w-md w-full ma py-2 rounded">
+    <h1
+      class="text-center text-3xl font-600 bg-orange text-white max-w-md w-full ma py-2 rounded"
+    >
       {{ $t("exploreOurCollection") }}
     </h1>
     <div class="cards">
@@ -23,9 +29,9 @@
         <NuxtImg src="/images/museum.jpg" class="image-display" />
       </article>
     </div>
-    <div>
+    <div class="text-center">
       <NuxtLink to="/search" class="action-btn">
-        {{ $t("exploreAllCollections") }}
+        {{ $t("exploreAllCollections") }} &rightarrow;
       </NuxtLink>
     </div>
   </section>

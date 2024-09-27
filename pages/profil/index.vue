@@ -30,7 +30,7 @@ const data = ref("Profil Kandaga");
           koleksi khusus, ruang diskusi dosen, ruang preservasi, ruang
           pengolahan dan pengembangan koleksi, museum, musholah dan toilet.
         </p>
-        <NuxtImg src="/images/struktur-organisasi.jpg" />
+        <!-- <NuxtImg src="/images/struktur-organisasi.jpg" /> -->
       </div>
       <div class="text-justify py-4">
         <h2>Sejarah Kandaga</h2>

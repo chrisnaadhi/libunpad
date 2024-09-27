@@ -1,6 +1,5 @@
 <script setup>
 const { getSingletonItem } = useDirectusItems();
-const { getThumbnail: img } = useDirectusFiles();
 
 const val = ref("Regulasi Kandaga");
 const regulasiKandaga = await getSingletonItem({

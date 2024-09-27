@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { locale } = useI18n();
+const { locale, t } = useI18n();
 const { data: tools } = await useFetch("/api/v1/tools");
 </script>
 
@@ -24,7 +24,10 @@ const { data: tools } = await useFetch("/api/v1/tools");
             <p class="text-2 lg:text-xs text-white">
               {{ tool.deskripsi }}
             </p>
-            <NuxtLink :to="tool.slug" class="btn mt-3 py-0 bg-white text-sm text-orange">
+            <NuxtLink
+              :to="tool.slug"
+              class="btn mt-3 py-0 bg-white text-sm text-orange"
+            >
               Lihat
             </NuxtLink>
           </div>
@@ -33,8 +36,11 @@ const { data: tools } = await useFetch("/api/v1/tools");
             <p class="text-2 lg:text-xs text-white">
               {{ tool.deskripsiEN }}
             </p>
-            <NuxtLink :to="tool.slug" class="btn mt-3 py-0 bg-white text-sm text-orange">
-              Lihat
+            <NuxtLink
+              :to="tool.slug"
+              class="btn mt-3 py-0 bg-white text-sm text-orange"
+            >
+              View
             </NuxtLink>
           </div>
           <div v-else class="contents-display">
@@ -43,7 +49,10 @@ const { data: tools } = await useFetch("/api/v1/tools");
         </div>
       </div>
     </div>
-    <NuxtLink to="/panduan" class="text-gray-6 text-sm hover:(text-orange-5 underline)">
+    <NuxtLink
+      to="/panduan"
+      class="text-gray-6 text-sm hover:(text-orange-5 underline)"
+    >
       Lihat selengkapnya layanan dan alat yang dapat kami tawarkan →
     </NuxtLink>
     <div class="hidden">

@@ -1,6 +1,5 @@
 <script setup>
 const { getItems } = useDirectusItems();
-const { getThumbnail: img } = useDirectusFiles();
 
 const val = ref("Layanan Daring Kandaga");
 const dataLayananDaring = await getItems({
@@ -12,7 +11,7 @@ const dataLayananDaring = await getItems({
   <section>
     <div class="w-full relative">
       <img
-        :src="img(dataLayananDaring.featured_image)"
+        :src="directusImageUrl(dataLayananDaring.featured_image)"
         class="w-full max-h-80 object-cover relative"
         alt="daring"
       />

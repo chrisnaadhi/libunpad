@@ -1,7 +1,6 @@
 <script setup>
 const { t } = useI18n();
 const { getItems } = useDirectusItems();
-const { getThumbnail: img } = useDirectusFiles();
 
 const getTotalDataArchive = ref(
   await getItems(getGLAMCollectionsCount("koleksi_archive"))
@@ -13,6 +12,7 @@ const collectionList = ref();
 const collectionTag = ref(null);
 const filterKeyword = ref("");
 const filterJenisKoleksi = ref("");
+const isSearching = ref(false);
 
 const archiveObj = {
   title: computed(() => t("archiveTitle")),
@@ -62,18 +62,27 @@ const getArchivePaginationData = async (opts) => {
 
 const filterArchiveData = async () => {
   currentPage.value = 0;
+  isSearching.value = true;
   if (filterKeyword.value !== "") {
     collectionList.value = [];
-    collectionList.value = await getItems({
+    const searchData = await getItems({
       collection: "koleksi_archive",
       params: {
         search: filterKeyword.value,
         limit: 12,
       },
+    }).finally(() => {
+      isSearching.value = false;
     });
+
+    if (searchData.length > 0) {
+      collectionList.value = searchData;
+    } else {
+      collectionList.value = null;
+    }
   } else if (filterJenisKoleksi.value !== "") {
     collectionList.value = [];
-    collectionList.value = await getItems({
+    const searchData = await getItems({
       collection: "koleksi_archive",
       params: {
         filter: {
@@ -81,10 +90,31 @@ const filterArchiveData = async () => {
         },
         limit: 12,
       },
+    }).finally(() => {
+      isSearching.value = false;
     });
+
+    if (searchData.length > 0) {
+      collectionList.value = searchData;
+    } else {
+      collectionList.value = null;
+    }
   } else {
     alert("Kata Kunci wajib diisi!");
   }
+};
+
+const resetFilter = async () => {
+  currentPage.value = 0;
+  filterKeyword.value = "";
+  filterJenisKoleksi.value = "";
+  collectionList.value = await getItems({
+    collection: "koleksi_archive",
+    params: {
+      sort: "-date_created",
+      limit: 12,
+    },
+  });
 };
 
 const listTipeKoleksi = await getItems({
@@ -124,7 +154,7 @@ onMounted(async () => {
           >
             <NuxtLink :to="'/records/' + archive.id">
               <NuxtImg
-                :src="img(archive.thumbnail)"
+                :src="directusImageUrl(archive.thumbnail)"
                 format="webp"
                 class="w-full h-40 object-cover rounded-lg lg:(w-50 h-60) transition duration-300 ease-in-out hover:scale-110"
               />
@@ -167,9 +197,9 @@ onMounted(async () => {
     <div>
       <div class="my-10 flex flex-col items-center justify-evenly w-full">
         <h3 class="text-center mb-5" ref="collectionTag">
-          Daftar Koleksi Museum
+          Daftar Koleksi Arsip
         </h3>
-        <h5 class="text-center mb-5">Total Koleksi Museum: {{ pageTotal }}</h5>
+        <h5 class="text-center mb-5">Total Koleksi Arsip: {{ pageTotal }}</h5>
         <div class="flex justify-center gap-5 w-full">
           <div class="w-full max-w-65">
             <div class="bg-orange-50 h-full rounded-xl p-5">
@@ -225,8 +255,14 @@ onMounted(async () => {
             </div>
           </div>
           <div class="w-full">
-            <div v-if="collectionList?.length === 0">
+            <div v-if="collectionList?.length === 0 && isSearching">
               <p>Sedang memuat koleksi...</p>
+            </div>
+            <div v-else-if="collectionList === null && !isSearching">
+              <p class="text-red">
+                Hasil pencarian dari kata kunci "{{ filterKeyword }}" tidak
+                ditemukan!
+              </p>
             </div>
             <div class="archive-collection" v-else>
               <div

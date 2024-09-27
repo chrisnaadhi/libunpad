@@ -20,7 +20,6 @@ const facilities = ref([
 ]);
 
 const { getItems } = useDirectusItems();
-const { getThumbnail } = useDirectusFiles();
 
 const getFasilitasKandaga = await getItems({
   collection: "fasilitas_kandaga",
@@ -64,7 +63,7 @@ const getFasilitasKandaga = await getItems({
             </div>
           </div>
           <NuxtImg
-            :src="getThumbnail(facility.foto_fasilitas)"
+            :src="directusImageUrl(facility.foto_fasilitas)"
             class="w-100 max-w-md h-60 object-cover z-0 rounded-lg"
           />
         </div>
