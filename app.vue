@@ -41,13 +41,13 @@ useHead({
     {
       src: "https://kandaga.unpad.ac.id:8000/js/script.js",
       "data-domain": "kandaga.unpad.ac.id",
-      defer: true
+      defer: true,
     },
     {
       src: "https://www.instagram.com/embed.js",
-      async: true
-    }
-  ]
+      async: true,
+    },
+  ],
 });
 </script>
 
@@ -123,11 +123,11 @@ a {
 }
 
 ul {
-  --at-apply: list-disc;
+  --at-apply: list-disc ml-10;
 }
 
 ol {
-  --at-apply: list-decimal;
+  --at-apply: list-decimal ml-10;
 }
 
 li {
@@ -218,6 +218,10 @@ strong {
 
 .all-initial {
   all: initial;
+}
+
+#contents > p {
+  --at-apply: py-2;
 }
 
 @keyframes spin {

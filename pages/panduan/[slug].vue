@@ -18,6 +18,12 @@ const dataLayanan = await getLayanan[0];
 <template>
   <section class="layer">
     <h1>{{ dataLayanan.nama_layanan }}</h1>
+    <div>
+      <img
+        :src="directusImageUrl(dataLayanan.featured_image)"
+        alt="Gambar Layanan"
+      />
+    </div>
     <p>{{ dataLayanan.deskripsi_layanan }}</p>
     <div v-html="dataLayanan.konten_layanan"></div>
     <div>
@@ -30,7 +36,8 @@ const dataLayanan = await getLayanan[0];
 
 <style scoped>
 .layer {
-  --at-apply: max-w-7xl ma flex flex-col items-center justify-center gap-4 py-5 px-2;
+  --at-apply: max-w-7xl ma flex flex-col items-center justify-center gap-4 py-5
+    px-2;
 }
 
 p {

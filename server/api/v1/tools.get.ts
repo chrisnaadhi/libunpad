@@ -28,7 +28,7 @@ export default defineEventHandler((event) => {
       slug: "/panduan",
     },
     {
-      namaTools: "Pendukung Pembelajaran",
+      namaTools: "Asistensi Studi",
       namaToolsEN: "Study Assist",
       deskripsi: "Layanan dan sumber informasi seperti pelatihan, panduan penelitian, dan alat sitasi untuk mendukung keterampilan akademik mahasiswa.",
       deskripsiEN:

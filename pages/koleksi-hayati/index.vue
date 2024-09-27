@@ -1,18 +1,16 @@
 <script setup>
 const i18n = useI18n();
-const galleryDesc = computed(() => i18n.t("galleryDescription"));
 
 const herbariumObj = {
-  title: "Koleksi Hayati",
-  definition: "(noun) /'herbarium/",
+  title: computed(() => i18n.t("koleksiHayatiTitle")),
+  definition: "(noun) /'baɪəˈlɒʤɪkl kəˈlekʃn/",
   imageUrl: "undraw_Online_art.png",
-  titleDesc: {
-    value:
-      "Koleksi Hayati adalah kumpulan koleksi dari berbagai organisme, termasuk tumbuhan, hewan, dan mikroba, beserta data terkaitnya. Koleksi ini dapat mencakup spesimen, jaringan, sel, gen, dan data ekologi, yang diawetkan dan diorganisir dengan cermat untuk tujuan penelitian, pendidikan, dan konservasi.",
-  },
+  titleDesc: computed(() => i18n.t("koleksiHayatiDescription")),
 };
 </script>
 
 <template>
-  <GenericBaseGlamLayout v-bind="herbariumObj" />
+  <section>
+    <GenericBaseGlamLayout v-bind="herbariumObj" />
+  </section>
 </template>

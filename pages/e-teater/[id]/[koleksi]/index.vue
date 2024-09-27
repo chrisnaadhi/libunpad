@@ -22,6 +22,7 @@ const daftarKoleksiTerkait = await getItems({
   params: {
     filter: {
       kategori: metaDataKoleksi.kategori,
+      status: "published",
     },
     limit: 10,
   },
@@ -39,44 +40,65 @@ const koleksiTerseleksi = daftarKoleksiTerkait.filter(
     </div>
     <h1 class="kandaga-gradient font-semibold text-center">E-Teater</h1>
     <h3 class="text-center mb-4">{{ metaDataKoleksi.nama_koleksi }}</h3>
-    <div class="flex flex-col gap-4 lg:flex-row">
-      <div class="min-w-65%">
-        <iframe :src="`https://www.youtube-nocookie.com/embed/${ytCode}`" title="YouTube video player" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen class="w-full h-lg"></iframe>
+    <LazyClientOnly>
+      <div class="flex flex-col gap-4 lg:flex-row">
+        <div class="min-w-65%">
+          <iframe
+            :src="`https://www.youtube-nocookie.com/embed/${ytCode}`"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            class="w-full h-lg"
+          ></iframe>
+        </div>
+        <div class="flex flex-col items-start lg:items-center text-center">
+          <h6 class="bg-orange text-white rounded-full text-center px-20">
+            {{ metaDataKoleksi.kategori }}
+          </h6>
+          <h2 class="font-semibold">{{ metaDataKoleksi.nama_koleksi }}</h2>
+          <h5 class="italic">
+            Pembuat: <br />
+            <span class="text-orange-6 font-bold">{{
+              metaDataKoleksi.author_koleksi
+            }}</span>
+          </h5>
+          <p>
+            <span class="text-justify" v-html="metaDataKoleksi.deskripsi" />
+          </p>
+        </div>
       </div>
-      <div class="flex flex-col items-start lg:items-center">
-        <h6 class="bg-orange text-white rounded-full text-center px-20">
-          {{ metaDataKoleksi.kategori }}
-        </h6>
-        <h2 class="font-semibold">{{ metaDataKoleksi.nama_koleksi }}</h2>
-        <h5 class="italic">
-          Pembuat:
-          <span class="text-orange-6 font-bold">{{
-            metaDataKoleksi.author_koleksi
-          }}</span>
-        </h5>
-        <p class="text-justify">
-          <span v-html="metaDataKoleksi.deskripsi" />
-        </p>
-      </div>
-    </div>
+    </LazyClientOnly>
 
     <div class="my-5">
-      <NuxtLink :to="'/e-teater/' + metaDataKoleksi.kategori" class="btn bg-orange text-white py-1 w-full">
+      <NuxtLink
+        :to="'/e-teater/' + metaDataKoleksi.kategori"
+        class="btn bg-orange text-white py-1 w-full"
+      >
         Kembali ke Koleksi
       </NuxtLink>
     </div>
     <div class="mb-10">
       <h3 class="rekomendasi-title">Koleksi terkait</h3>
-      <div class="flex flex-col gap-10 sm:(grid grid-cols-3 gap-5) lg:grid-cols-5">
-        <div v-for="rekomendasi in koleksiTerseleksi" class="w-full md:max-w-55">
-          <NuxtImg :src="`https://img.youtube.com/vi/${extractYoutubeLink(
-            rekomendasi.link_youtube
-          )}/sddefault.jpg`" class="w-full md:max-w-55 rounded-lg"></NuxtImg>
-          <NuxtLink class="font-semibold no-underline italic hover:underline"
-            :to="`/e-teater/${rekomendasi.kategori}/${rekomendasi.slug_koleksi}`">
-            {{ rekomendasi.nama_koleksi }}
+      <div
+        class="flex flex-col gap-10 sm:(grid grid-cols-3 gap-5) lg:grid-cols-5"
+      >
+        <div
+          v-for="rekomendasi in koleksiTerseleksi"
+          class="w-full md:max-w-55"
+        >
+          <NuxtImg
+            :src="`https://img.youtube.com/vi/${extractYoutubeLink(
+              rekomendasi.link_youtube
+            )}/sddefault.jpg`"
+            class="w-full md:max-w-55 rounded-lg"
+          ></NuxtImg>
+          <NuxtLink
+            class="font-semibold no-underline italic hover:underline"
+            :to="`/e-teater/${rekomendasi.kategori}/${rekomendasi.slug_koleksi}`"
+            :title="rekomendasi.nama_koleksi"
+          >
+            {{ trimTitle(rekomendasi.nama_koleksi, 50) }}
           </NuxtLink>
         </div>
       </div>
@@ -91,9 +113,5 @@ const koleksiTerseleksi = daftarKoleksiTerkait.filter(
 
 .rekomendasi-title {
   --at-apply: font-semibold mt-25 mb-4 underline transition-all-500 hover:(text-orange);
-}
-
-p {
-  --at-apply: italic;
 }
 </style>

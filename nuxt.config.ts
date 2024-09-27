@@ -31,6 +31,7 @@ export default defineNuxtConfig({
     "dayjs-nuxt",
     "@sidebase/nuxt-auth",
     "@nuxtjs/plausible",
+    "@nuxtjs/turnstile",
   ],
 
   unocss: {
@@ -96,6 +97,9 @@ export default defineNuxtConfig({
     dbName: process.env.DRIZZLE_DATABASE,
     dbPassword: process.env.DRIZZLE_PASSWORD,
     dbPort: Number(process.env.DRIZZLE_PORT),
+    turnstile: {
+      secretKey: process.env.TURNSTILE_SECRETKEY
+    },
     public: {
       meiliHost: process.env.MEILI_HOST,
       meiliApiKey: process.env.MEILI_API_KEY,
@@ -134,4 +138,7 @@ export default defineNuxtConfig({
       },
     },
   },
+  turnstile: {
+    siteKey: process.env.TURNSTILE_SITEKEY,
+  }
 });
