@@ -10,7 +10,9 @@ const showPassword = ref(false);
 const passwordType = ref("password");
 const email = ref("");
 const password = ref("");
-const defaultLoginNotif = ref("Silahkan masukkan Email dan Password untuk Login, atau klik tombol PAuS Email untuk login menggunakan PAuS ID")
+const defaultLoginNotif = ref(
+  "Login khusus Staff Kandaga, jika anda Mahasiswa atau Dosen silahkan login dengan menggunakan PAuS E-Mail."
+);
 const loginNotif = ref(defaultLoginNotif.value);
 const textLogin = ref("text-dark");
 const isPegawai = computed(() => {
@@ -92,6 +94,7 @@ const submitLogin = async () => {
 
 const googleLogin = async () => {
   await signIn("google", { callbackUrl: route.query.redir ?? "/" });
+  console.log(route.query.redir);
 };
 
 const errorLogger = () => {
@@ -119,12 +122,25 @@ definePageMeta({
           <h6>Login Staff Kandaga</h6>
           <div class="flex flex-col">
             <label for="email" class="text-left">Email :</label>
-            <input class="input-space px-3" type="email" v-model="email" required autocomplete="email" />
+            <input
+              class="input-space px-3"
+              type="email"
+              v-model="email"
+              required
+              autocomplete="email"
+            />
           </div>
           <div class="flex flex-col relative">
             <label for="password" class="text-left">Password: </label>
-            <input :type="passwordType" name="password" id="password" autocomplete="current-password" class="input-space w-full pl-3 pr-10"
-              v-model="password" required />
+            <input
+              :type="passwordType"
+              name="password"
+              id="password"
+              autocomplete="current-password"
+              class="input-space w-full pl-3 pr-10"
+              v-model="password"
+              required
+            />
             <div @click="togglePasswordType" class="toggle-password">
               <div class="i-mdi-eye text-xl" v-if="!showPassword" />
               <div class="i-mdi-eye-off text-xl" v-else />
@@ -136,8 +152,13 @@ definePageMeta({
             </NuxtErrorBoundary>
 
             <div class="flex gap-2 pt-1">
-              <button class="form-btn" :class="email && password ? 'login-btn' : 'disable-btn'"
-                :disabled="!email || !password" type="submit" @click.prevent="submitLogin">
+              <button
+                class="form-btn"
+                :class="email && password ? 'login-btn' : 'disable-btn'"
+                :disabled="!email || !password"
+                type="submit"
+                @click.prevent="submitLogin"
+              >
                 Login
               </button>
             </div>
@@ -151,9 +172,17 @@ definePageMeta({
 
       <div class="w-full max-w-sm ma flex flex-col items-center">
         <h6>Login Mahasiswa / Dosen / Tenaga Kependidikan</h6>
-        <NuxtImg format="webp" src="/illustration/undraw_secure_login.png" class="w-70"/>
-        <button class="form-btn"
-          :class="email || password ? 'disable-btn' : 'oauth-btn'" @click="googleLogin" :disable="email.length > 0">
+        <NuxtImg
+          format="webp"
+          src="/illustration/undraw_secure_login.png"
+          class="w-70"
+        />
+        <button
+          class="form-btn"
+          :class="email || password ? 'disable-btn' : 'oauth-btn'"
+          @click="googleLogin"
+          :disable="email.length > 0"
+        >
           <span>
             <img src="/images/lambang-unpad.png" class="w-8 h-8" alt="" />
           </span>
@@ -161,7 +190,6 @@ definePageMeta({
         </button>
       </div>
     </div>
-
   </main>
 </template>
 
