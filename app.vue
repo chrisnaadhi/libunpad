@@ -82,6 +82,7 @@ useHead({
     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
     sans-serif;
   scroll-behavior: smooth;
+  transition: all 0.5s;
 }
 
 h1,

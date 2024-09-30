@@ -1,6 +1,5 @@
 <script setup>
 const route = useRoute();
-const val = ref("Koleksi " + route.params.id);
 
 const { getItemById } = useDirectusItems();
 const { getThumbnail } = useDirectusFiles();

@@ -86,13 +86,13 @@ export const displayStatusPeminjamanRuangan = (namaRuangan: string) => {
   return computed(() => {
     switch (namaRuangan) {
       case "approved":
-        return "bg-green text-white";
+        return "bg-white text-green";
       case "pending":
-        return "bg-gray text-white";
+        return "bg-white text-gray";
       case "cancel":
-        return "bg-red text-white";
+        return "bg-white text-red";
       default:
-        return "bg-orange text-white";
+        return "bg-white text-orange";
     }
   }).value;
 };
