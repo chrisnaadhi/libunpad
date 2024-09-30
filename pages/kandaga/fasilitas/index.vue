@@ -1,25 +1,8 @@
 <script setup>
 const val = ref("Fasilitas Kandaga");
-const facilities = ref([
-  "Koleksi Langka",
-  "Keanggotaan",
-  "Ruang Baca Mahasiswa",
-  "E-Learning",
-  "Pojok Statistik",
-  "Riset",
-  "Layanan Informasi",
-  "Museum",
-  "Loker",
-  "Arisp",
-  "Ruang Diskusi",
-  "Toilet",
-  "Ruang Belajar",
-  "Ruang Kelas",
-  "Musholla",
-  "Common Room",
-]);
 
 const { getItems } = useDirectusItems();
+const { getThumbnail: img } = useDirectusFiles();
 
 const getFasilitasKandaga = await getItems({
   collection: "fasilitas_kandaga",
@@ -50,7 +33,7 @@ const getFasilitasKandaga = await getItems({
         class="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-white to-transparent"
       ></div>
     </div>
-    <div class="flex flex-col gap-3 md:(grid grid-cols-3) content-section">
+    <div class="flex flex-col gap-3 lg:(grid grid-cols-3) content-section">
       <div
         v-for="facility in getFasilitasKandaga"
         class="flex flex-col items-center"
@@ -76,7 +59,7 @@ const getFasilitasKandaga = await getItems({
 
 <style scoped>
 .content-section {
-  --at-apply: max-w-7xl ma py-10 text-center;
+  --at-apply: max-w-7xl ma py-10;
 }
 
 p {
