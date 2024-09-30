@@ -2,23 +2,35 @@
 const { createItems } = useDirectusItems();
 const token = ref();
 
-const namaLengkap = ref("");
-const email = ref("");
-const pesan = ref("");
+const namaLengkap = ref(null);
+const isLoad = ref(false);
+const email = ref(null);
+const pesan = ref(null);
 
 const sendMessage = async () => {
   if (token.value) {
-    await createItems({
-      collection: "pesan_kontak_kandaga",
-      items: [
-        {
-          nama_lengkap: namaLengkap.value,
-          email: email.value,
-          pesan: pesan.value,
-        },
-      ],
-    });
-    alert("Pesan Terkirim! Token: " + token.value);
+    if (namaLengkap && email && pesan) {
+      isLoad.value = true;
+      await createItems({
+        collection: "pesan_kontak_kandaga",
+        items: [
+          {
+            nama_lengkap: namaLengkap.value,
+            email: email.value,
+            pesan: pesan.value,
+          },
+        ],
+      }).then(() => {
+        alert("Pesan Terkirim!");
+        namaLengkap.value = null;
+        email.value = null;
+        pesan.value = null;
+        isLoad.value = false;
+      });
+    } else {
+      alert("Form Harus Diisi!");
+      return;
+    }
   } else {
     alert("Token Harus Diisi!");
     return;
@@ -29,17 +41,23 @@ const sendMessage = async () => {
 <template>
   <section>
     <h2 class="text-center">Kontak Kami</h2>
-    <div class="flex justify-between mb-10">
+    <div class="flex gap-20 justify-between mb-10">
       <div class="w-full">
         <h3 class="text-center">Hubungi Kami</h3>
         <form @submit.prevent="sendMessage">
           <div class="input-block">
             <label for="nama">Nama Lengkap :</label>
-            <input type="text" name="nama" id="nama" v-model="namaLengkap" />
+            <input
+              type="text"
+              name="nama"
+              id="nama"
+              v-model="namaLengkap"
+              required
+            />
           </div>
           <div class="input-block">
             <label for="email">E-mail :</label>
-            <input type="email" name="email" id="" v-model="email" />
+            <input type="email" name="email" id="" v-model="email" required />
           </div>
           <div class="input-block">
             <label for="pesan">Pesan :</label>
@@ -48,44 +66,54 @@ const sendMessage = async () => {
               id="pesan"
               rows="10"
               v-model="pesan"
+              required
             ></textarea>
           </div>
           <div class="input-block">
-            <NuxtTurnstile v-model="token" />
+            <ClientOnly>
+              <NuxtTurnstile v-model="token" />
+            </ClientOnly>
           </div>
           <button
             type="submit"
             class="btn w-full text-white"
             :disabled="!token"
           >
-            Kirim
+            <span v-if="isLoad"> Sedang mengirim... </span>
+            <span v-else> Kirim Pesan </span>
           </button>
         </form>
       </div>
       <div class="w-full">
-        <h3 class="text-center">Media Sosial</h3>
-        <div>
-          <div>
+        <h3 class="text-center mb-5">Media Sosial</h3>
+        <div class="flex flex-col items-center justify-center gap-5">
+          <div class="flex flex-col items-center">
             <div class="i-mdi-instagram w-12 h-12 text-fuchsia" />
             <div>
-              <NuxtLink href="https://instagram.com/kandagaunpad">
-                @kandagaunpad
+              <NuxtLink
+                href="https://instagram.com/kandagaunpad"
+                target="_blank"
+              >
+                <span class="text-2xl"> @kandagaunpad </span>
               </NuxtLink>
             </div>
           </div>
-          <div>
-            <div class="i-mdi-twitter w-12 h-12 text-blue-6" />
+          <div class="flex flex-col items-center">
+            <div class="i-mdi-twitter w-12 h-12 text-sky-6" />
             <div>
-              <NuxtLink href="https://twitter.com/kandagaunpad">
-                @kandagaunpad
+              <NuxtLink href="https://twitter.com/kandagaunpad" target="_blank">
+                <span class="text-2xl"> @kandagaunpad </span>
               </NuxtLink>
             </div>
           </div>
-          <div>
+          <div class="flex flex-col items-center">
             <div class="i-mdi-email w-12 h-12 text-red" />
             <div>
-              <NuxtLink href="mailto:pusat.pengetahuan@unpad.ac.id">
-                pusat.pengetahuan@unpad.ac.id
+              <NuxtLink
+                href="mailto:pusat.pengetahuan@unpad.ac.id"
+                target="_blank"
+              >
+                <span class="text-2xl"> pusat.pengetahuan@unpad.ac.id </span>
               </NuxtLink>
             </div>
           </div>
@@ -105,7 +133,26 @@ textarea {
   --at-apply: border-1 border-orange rounded py-2 px-1;
 }
 
-p {
-  --at-apply: italic;
+/* HTML: <div class="loader"></div> */
+.loader {
+  --d: 22px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  color: #25b09b;
+  box-shadow: calc(1 * var(--d)) calc(0 * var(--d)) 0 0,
+    calc(0.707 * var(--d)) calc(0.707 * var(--d)) 0 1px,
+    calc(0 * var(--d)) calc(1 * var(--d)) 0 2px,
+    calc(-0.707 * var(--d)) calc(0.707 * var(--d)) 0 3px,
+    calc(-1 * var(--d)) calc(0 * var(--d)) 0 4px,
+    calc(-0.707 * var(--d)) calc(-0.707 * var(--d)) 0 5px,
+    calc(0 * var(--d)) calc(-1 * var(--d)) 0 6px;
+  animation: l27 1s infinite steps(8);
+}
+
+@keyframes l27 {
+  100% {
+    transform: rotate(1turn);
+  }
 }
 </style>

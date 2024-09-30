@@ -1,11 +1,20 @@
 <script setup>
-const { getItemById } = useDirectusItems();
+const { getItems, getItemById } = useDirectusItems();
 const route = useRoute();
 
 const getKoleksiHayati = await getItemById({
   collection: "koleksi_tumbuhan",
   id: route.params.id,
 });
+
+const getKolektorHayati = await getItems({
+  collection: "collector_hayati",
+});
+
+const findCollector = (id) => {
+  const collector = getKolektorHayati.find((collector) => collector.id === id);
+  return collector?.full_name;
+};
 </script>
 
 <template>
@@ -13,12 +22,9 @@ const getKoleksiHayati = await getItemById({
     <h3 class="mt-10 mb-3 text-center">
       Koleksi <br />
       <span class="text-orange font-semibold">{{
-        getKoleksiHayati.register_number
+        getKoleksiHayati.local_name
       }}</span>
     </h3>
-    <pre>
-      {{ getKoleksiHayati }}
-    </pre>
     <div class="flex items-center justify-center mb-5">
       <h5 class="bg-orange text-white px-5 py-1 rounded-md">
         Metadata Koleksi
@@ -35,16 +41,23 @@ const getKoleksiHayati = await getItemById({
       <table>
         <tbody>
           <tr>
-            <td class="font-semibold pr-5">Nama Lokal</td>
-            <td>: {{ getKoleksiHayati.local_name ?? "-" }}</td>
+            <td class="font-semibold pr-5">Register Number</td>
+            <td>: {{ getKoleksiHayati.register_number ?? "-" }}</td>
           </tr>
           <tr>
             <td class="font-semibold pr-5">Tipe</td>
             <td>: {{ getKoleksiHayati.type ?? "-" }}</td>
           </tr>
           <tr>
-            <td class="font-semibold pr-5">Ditentukan Oleh</td>
-            <td>: {{ getKoleksiHayati.determinated_by ?? "-" }}</td>
+            <td class="font-semibold pr-5">Kolektor</td>
+            <td>
+              :
+              {{
+                getKoleksiHayati.determinated_by ??
+                findCollector(getKoleksiHayati.collectior_id) ??
+                "-"
+              }}
+            </td>
           </tr>
           <tr>
             <td class="font-semibold pr-5">Lokasi</td>
@@ -178,7 +191,7 @@ const getKoleksiHayati = await getItemById({
       </div>
     </div>
     <div class="my-10 text-center">
-      <NuxtLink to="/gallery" class="btn bg-orange text-white py-1">
+      <NuxtLink to="/koleksi-hayati" class="btn bg-orange text-white py-1">
         &leftarrow; Kembali
       </NuxtLink>
     </div>
