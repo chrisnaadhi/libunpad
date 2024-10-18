@@ -134,7 +134,7 @@ export const menuContent = () => {
       nameEN: "Gallery",
       urlEN: "/en/gallery",
       deskripsi:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate eos earum debitis aspernatur repudiandae possimus eligendi? Quod culpa consectetur id enim facere quam nemo aliquam sit, qui dignissimos consequatur est alias illo rem voluptas ut voluptatem, placeat iusto. Perspiciatis nisi voluptatem laborum quos nostrum non soluta consequuntur, doloribus sed dolor numquam repellat, facere odit blanditiis atque praesentium dignissimos quas unde! Voluptate exercitationem vitae dolorem non neque reiciendis doloremque totam, incidunt hic nemo obcaecati cumque expedita sapiente quos quis nobis aperiam, est possimus? Dolorem ducimus mollitia possimus eos, adipisci reprehenderit exercitationem accusantium nobis autem, pariatur molestias alias nesciunt numquam! Provident, laborum?",
+        "Galeri ini menampilkan berbagai koleksi visual yang dimiliki oleh Kandaga Universitas Padjadjaran. Pengunjung dapat melihat berbagai foto, video, dan media lainnya yang berkaitan dengan kegiatan dan fasilitas Kandaga.",
       deskripsiEN: "",
       imgUrl: "",
     },
@@ -145,7 +145,7 @@ export const menuContent = () => {
       nameEN: "Library",
       urlEN: "/en/library",
       deskripsi:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati molestiae voluptatum in impedit a consequatur earum dignissimos, voluptates illo dolorem perspiciatis debitis ullam praesentium facere, libero, repellendus totam amet! Necessitatibus dignissimos nostrum eum doloremque ad commodi architecto odio placeat, incidunt quae distinctio officia ea, quos, perspiciatis totam. Quas aliquam nemo omnis. Soluta laudantium harum illo fugit atque. Saepe harum velit repellendus aut ratione accusamus obcaecati, iure maxime, nostrum reprehenderit unde quae placeat quisquam facilis consequuntur quod earum! Error laboriosam veniam unde eaque sapiente vel voluptate temporibus dolores iusto nihil, corrupti harum sit veritatis nostrum! Quia distinctio numquam quos autem quam?",
+        "Perpustakaan ini menyediakan berbagai koleksi buku, jurnal, dan sumber daya lainnya yang dapat diakses oleh mahasiswa, dosen, dan pengunjung lainnya. Perpustakaan ini juga menawarkan ruang baca dan layanan peminjaman buku.",
       deskripsiEN: "",
       imgUrl: "",
     },
@@ -156,7 +156,7 @@ export const menuContent = () => {
       nameEN: "Archive",
       urlEN: "/en/records",
       deskripsi:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil ab dolorum perspiciatis odio sequi, iusto iste ipsa in esse magnam, quaerat debitis repudiandae repellendus velit temporibus sapiente corrupti fugit adipisci cumque ipsum. Corporis quaerat inventore, quisquam iusto asperiores dolorem eligendi possimus sapiente vel eum necessitatibus odit adipisci iste molestiae saepe at quas voluptas, fuga veniam? Molestias magnam repellat quo et veritatis praesentium dolore natus illo possimus cupiditate fugit minima quae, quod deleniti hic, ducimus eum, a ipsa ab quia sequi tempore sed quaerat. Ex, optio. Enim quae, libero numquam ut rem nemo debitis inventore, earum, ab temporibus ratione ad asperiores.",
+        "Arsip ini menyimpan berbagai dokumen dan catatan penting yang berkaitan dengan sejarah dan kegiatan Kandaga. Pengunjung dapat mengakses arsip ini untuk keperluan penelitian dan referensi.",
       deskripsiEN: "",
       imgUrl: "",
     },
@@ -167,7 +167,7 @@ export const menuContent = () => {
       nameEN: "Museum",
       urlEN: "/en/museum",
       deskripsi:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maxime quo aliquid quisquam enim praesentium fugiat quia omnis officia, quibusdam accusantium beatae voluptate, quod facilis vitae perspiciatis est fugit odio consequatur. Id ad aliquid ut saepe nostrum ipsum dolorem, iusto quidem consectetur inventore molestias, exercitationem enim maiores repellat autem incidunt? Cum consequuntur dolor ut voluptatum quasi molestias doloremque incidunt vel culpa tenetur asperiores quidem odio voluptate facilis non, laborum tempora sequi nihil provident quisquam nisi distinctio maiores harum! Consectetur eius obcaecati inventore repellendus. Fugit, culpa soluta? Molestiae rerum, dicta ducimus hic fuga id natus reiciendis illum quis inventore ipsam, illo cumque?",
+        "Museum ini menampilkan berbagai artefak dan koleksi bersejarah yang dimiliki oleh Kandaga Universitas Padjadjaran. Pengunjung dapat belajar tentang sejarah dan budaya melalui pameran yang ada di museum ini.",
       deskripsiEN: "",
       imgUrl: "",
     },
@@ -178,7 +178,7 @@ export const menuContent = () => {
       nameEN: "Repository",
       urlEN: "/en/koleksi/repository",
       deskripsi:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut excepturi iure cumque minima necessitatibus praesentium culpa explicabo soluta, error aperiam cum voluptates repellendus neque reprehenderit esse quidem accusantium beatae? Deserunt consequatur commodi vitae recusandae quas similique provident laudantium quis modi ad in odit tenetur natus, quidem soluta! Earum incidunt voluptate nostrum libero adipisci quisquam asperiores, facilis ab laudantium qui quas perspiciatis necessitatibus veritatis exercitationem ut aspernatur. Doloremque delectus eius earum, tempore recusandae consectetur tenetur deleniti dicta culpa minus adipisci debitis quae. Culpa nisi doloribus asperiores, iste est commodi saepe vel numquam maxime facilis perspiciatis eveniet cum repudiandae? Corporis, in nesciunt?",
+        "Repositori ini menyimpan berbagai karya ilmiah, tesis, dan disertasi yang dihasilkan oleh mahasiswa dan dosen Universitas Padjadjaran. Pengunjung dapat mengakses repositori ini untuk keperluan akademik dan penelitian.",
       deskripsiEN: "",
       imgUrl: "",
     },
@@ -189,7 +189,7 @@ export const menuContent = () => {
       nameEN: "E-Theater",
       urlEN: "/en/e-teater",
       deskripsi:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem repellendus error, molestias placeat neque eum in dolorem facere, odio earum similique culpa quasi praesentium, ut nostrum vero accusantium eos perspiciatis consequatur. Inventore temporibus labore delectus sit, culpa blanditiis quasi mollitia pariatur est, ratione minima officia, iure nemo eveniet commodi libero sequi dolore laudantium? Nihil, obcaecati cupiditate. Consequuntur placeat ab possimus quibusdam! Veritatis sed quisquam minima exercitationem aut rerum commodi hic impedit temporibus velit eaque odio animi, nam, est a? Esse, officiis! Nihil, ut? Quaerat rerum fuga molestiae velit, provident impedit molestias aliquam, omnis quisquam, dolorem accusamus unde repudiandae porro enim?",
+        "E-Teater ini menyediakan berbagai konten multimedia seperti film, dokumenter, dan video edukasi yang dapat diakses secara daring. Pengunjung dapat menikmati berbagai tayangan yang disediakan oleh Kandaga.",
       deskripsiEN: "",
       imgUrl: "",
     },
@@ -200,7 +200,7 @@ export const menuContent = () => {
       nameEN: "Biological Collection",
       urlEN: "/en/koleksi-hayati",
       deskripsi:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta nihil dolorum cupiditate magnam non nisi quae repellat officia officiis quis quia incidunt ipsum rerum, amet at totam commodi dolore voluptate obcaecati, provident consectetur harum illum! Voluptatum voluptatem soluta accusamus optio, enim accusantium animi officia eveniet itaque ullam? Nihil debitis optio aliquid architecto. Culpa alias quis facilis, commodi ducimus sed aliquid suscipit laborum quisquam sapiente at illo fugit quidem nam modi? Nihil deleniti corrupti odio veritatis, neque autem exercitationem nam dignissimos velit animi ipsa aspernatur cumque est quas reiciendis laudantium modi ut accusantium pariatur porro doloribus repudiandae optio libero? Ea, quas.",
+        "Koleksi Hayati ini menampilkan berbagai spesimen dan sampel biologis yang dimiliki oleh Kandaga Universitas Padjadjaran. Pengunjung dapat mempelajari berbagai aspek biologi melalui koleksi ini.",
       deskripsiEN: "",
       imgUrl: "",
     },
@@ -214,7 +214,7 @@ export const menuContent = () => {
       nameEN: "Services & Facilities",
       urlEN: "/en/panduan",
       deskripsi:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni officia similique molestiae quibusdam impedit iste laboriosam quis, laudantium ea consequatur dignissimos vero itaque dolor enim ut quod aliquid fugiat odit. Est exercitationem iste eius placeat pariatur sint sequi dolorum aliquid rerum natus, architecto fugit, explicabo ad modi necessitatibus voluptatibus sunt. Quod aspernatur odit fuga necessitatibus deleniti hic impedit vitae voluptatum! Velit temporibus quibusdam aliquid corrupti eaque laboriosam consectetur eligendi doloremque tempora, recusandae incidunt in dolor eius voluptatem voluptatum? Libero obcaecati veritatis ratione mollitia non harum asperiores, ab magnam deserunt dicta soluta nam repellat nisi labore adipisci in odit iusto vero!",
+        "Panduan ini memberikan informasi lengkap mengenai layanan dan fasilitas yang tersedia di Kandaga Universitas Padjadjaran. Pengunjung dapat mengetahui berbagai layanan yang dapat diakses serta fasilitas yang dapat digunakan untuk mendukung kegiatan akademik dan non-akademik.",
       deskripsiEN: "",
       imgUrl: "",
     },
@@ -225,7 +225,7 @@ export const menuContent = () => {
       nameEN: "Subject Librarians",
       urlEN: "/en/panduan/pustakawan-subjek",
       deskripsi:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum dicta voluptatem porro quasi beatae, eos recusandae quaerat deleniti a, sed dignissimos, totam eligendi architecto. Repudiandae ea voluptatibus a sequi quae corporis quos delectus quis voluptates quo eveniet consectetur odio velit, placeat consequuntur repellendus distinctio rerum id. Aliquid, architecto fugiat! Blanditiis, deserunt aspernatur accusamus iste quo quam veniam perferendis optio, omnis odio voluptas fugiat rerum ipsa alias officiis? Corrupti, nam reiciendis. Ipsam, nisi. Minus repellendus quod iste soluta officiis eos ex blanditiis quaerat sapiente, a alias commodi omnis ducimus autem nobis quibusdam eligendi dolorum aut cumque ea obcaecati sed ullam doloribus.",
+        "Panduan ini memperkenalkan pustakawan subjek yang bertugas di Kandaga Universitas Padjadjaran. Pustakawan subjek adalah staf perpustakaan yang memiliki keahlian khusus dalam bidang tertentu dan siap membantu pengunjung dalam menemukan informasi yang relevan dengan bidang studi mereka.",
       deskripsiEN: "",
       imgUrl: "",
     },
@@ -236,7 +236,7 @@ export const menuContent = () => {
       nameEN: "Academic Information",
       urlEN: "/en/panduan/informasi-akademik",
       deskripsi:
-        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur voluptate corrupti quibusdam ex, illum nihil error odio non architecto ullam illo excepturi vitae, labore, possimus explicabo. Temporibus maiores id enim qui, architecto ipsa perferendis sunt. Esse possimus accusantium mollitia illo modi quis pariatur molestias cumque. Velit adipisci nobis, ipsum quos iste porro est incidunt? Veniam atque dolor aliquam nihil, rem, doloremque dolores quam sequi sunt saepe ipsam, eos sit non tempore. Temporibus nulla dolores natus ipsam tenetur ipsum aperiam tempora veniam reiciendis error quisquam cumque laboriosam esse eos, pariatur tempore illo voluptate non doloribus placeat ea aut repellat saepe cum.",
+        "Panduan ini menyediakan informasi akademik yang penting bagi mahasiswa dan dosen di Universitas Padjadjaran. Informasi ini mencakup jadwal akademik, prosedur pendaftaran, kurikulum, dan berbagai informasi lain yang berkaitan dengan kegiatan akademik di universitas.",
       deskripsiEN: "",
       imgUrl: "",
     },
@@ -247,7 +247,7 @@ export const menuContent = () => {
       nameEN: "Teaching & Learning Guide",
       urlEN: "/en/panduan/kbm",
       deskripsi:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati perferendis illum repellendus quibusdam omnis, alias iure dolor, doloribus necessitatibus corrupti possimus, excepturi optio illo rem nulla recusandae quasi. Reiciendis tempore et nemo. Aliquam adipisci dolorem molestiae nostrum unde possimus similique tempora id aspernatur earum odio natus a numquam, tempore et dolores temporibus, ut voluptates voluptatem doloribus eveniet excepturi commodi? Amet quod hic nobis tempore nesciunt nihil, possimus omnis temporibus eveniet quo, odio quisquam quasi autem officia distinctio maxime dolorum nemo placeat porro non dolor! Magnam vitae, temporibus voluptate quaerat illo similique iusto, exercitationem natus cumque dolor ipsum fugit dolorum recusandae.",
+        "Panduan ini memberikan informasi mengenai kegiatan belajar mengajar di Universitas Padjadjaran. Pengunjung dapat mengetahui metode pengajaran, fasilitas pendukung, serta berbagai program dan kegiatan yang dirancang untuk meningkatkan kualitas pembelajaran.",
       deskripsiEN: "",
       imgUrl: "",
     },
@@ -258,7 +258,7 @@ export const menuContent = () => {
       nameEN: "FAQ",
       urlEN: "/en/panduan/faq",
       deskripsi:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo alias voluptatum, possimus eveniet placeat vitae temporibus, itaque corrupti molestiae maxime doloribus praesentium qui similique iste odio quos nobis. Nesciunt neque magni veritatis sit beatae asperiores aut eos distinctio quas. Nulla quidem a deleniti facilis dolore voluptatibus similique, illum velit ducimus optio rem nemo in consequatur fugiat tempore! Minima ad quibusdam saepe est delectus, excepturi debitis sequi voluptate provident! Consequatur totam dicta dolor iste! Porro blanditiis quaerat unde quos fugiat. Quos est aperiam voluptatum sapiente totam quibusdam, possimus nostrum hic? Eligendi veritatis distinctio inventore vero possimus quos illum illo nesciunt odio?",
+        "Panduan ini berisi daftar pertanyaan yang sering diajukan (FAQ) oleh pengunjung Kandaga Universitas Padjadjaran. FAQ ini mencakup berbagai topik mulai dari layanan perpustakaan, prosedur peminjaman, hingga informasi umum tentang fasilitas yang tersedia.",
       deskripsiEN: "",
       imgUrl: "",
     },

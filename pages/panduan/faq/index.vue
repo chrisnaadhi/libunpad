@@ -14,8 +14,6 @@ const faqs = ref(
   })
 );
 
-console.log(faqs.value);
-
 const activeIndex = ref(null);
 
 const toggle = (index) => {
