@@ -5,10 +5,10 @@ defineProps({
   description: String,
   page: String,
   firstCollection: Object,
-  secondCollection: Object
+  secondCollection: Object,
 });
 
-const { getThumbnail: img } = useDirectusFiles()
+const { getThumbnail: img } = useDirectusFiles();
 </script>
 
 <template>
@@ -25,30 +25,74 @@ const { getThumbnail: img } = useDirectusFiles()
             {{ description }}
           </p>
           <div>
-            <NuxtLink :to="page" class="btn my-3 bg-orange py-0 text-white text-xs">Akses &rightarrow;</NuxtLink>
+            <NuxtLink
+              :to="page"
+              class="btn my-3 bg-orange py-0 text-white text-xs"
+              >Akses &rightarrow;</NuxtLink
+            >
           </div>
-          
         </div>
       </div>
-      <article class="sub-topic" :class="left === true ? 'order-last' : 'order-first'">
+      <article
+        class="sub-topic"
+        :class="left === true ? 'order-last' : 'order-first'"
+      >
         <div class="child-topic">
-          <NuxtImg :src="firstCollection?.thumbnail ? img(firstCollection?.thumbnail) : '/images/no-image.jpg'" class="image-cover w-full" />
+          <NuxtImg
+            :src="
+              firstCollection?.thumbnail
+                ? img(firstCollection?.thumbnail)
+                : '/images/no-image.jpg'
+            "
+            class="image-cover w-full"
+          />
           <div class="vertical-backdrop">
-            <h3 class="text-white text-xl font-600">{{ firstCollection?.judul ?? "Belum ada Koleksi" }}</h3>
+            <h3 class="text-white text-xl font-600">
+              {{ firstCollection?.judul ?? "Belum ada Koleksi" }}
+            </h3>
             <p class="sub-description">
-             <span v-html="firstCollection?.keterangan_koleksi ? trimTitle(firstCollection?.keterangan_koleksi, 50) : 'Belum ada Koleksi'"></span>
+              <span
+                v-html="
+                  firstCollection?.keterangan_koleksi
+                    ? trimTitle(firstCollection?.keterangan_koleksi, 50)
+                    : 'Belum ada Koleksi'
+                "
+              ></span>
             </p>
-            <NuxtLink v-show="firstCollection?.id" :to="page + '/' + firstCollection?.id">Lihat ></NuxtLink>
+            <NuxtLink
+              v-show="firstCollection?.id"
+              :to="page + '/' + firstCollection?.id"
+              >Lihat ></NuxtLink
+            >
           </div>
         </div>
         <div class="child-topic">
-          <NuxtImg :src="secondCollection?.thumbnail ? img(secondCollection?.thumbnail) : '/images/no-image.jpg'" class="image-cover w-full" />
+          <NuxtImg
+            :src="
+              secondCollection?.thumbnail
+                ? img(secondCollection?.thumbnail)
+                : '/images/no-image.jpg'
+            "
+            class="image-cover w-full"
+          />
           <div class="vertical-backdrop">
-            <h3 class="text-white text-xl font-600">{{ secondCollection?.judul ?? "Belum ada Koleksi" }}</h3>
+            <h3 class="text-white text-xl font-600">
+              {{ secondCollection?.judul ?? "Belum ada Koleksi" }}
+            </h3>
             <p class="sub-description">
-              <span v-html="secondCollection?.keterangan_koleksi ? trimTitle(secondCollection?.keterangan_koleksi, 50) : 'Belum ada Koleksi'"></span>
+              <span
+                v-html="
+                  secondCollection?.keterangan_koleksi
+                    ? trimTitle(secondCollection?.keterangan_koleksi, 50)
+                    : 'Belum ada Koleksi'
+                "
+              ></span>
             </p>
-            <NuxtLink v-show="secondCollection?.id" :to="page + '/' + secondCollection?.id ?? ''">Lihat ></NuxtLink>
+            <NuxtLink
+              v-show="secondCollection?.id"
+              :to="page + '/' + secondCollection?.id ?? ''"
+              >Lihat ></NuxtLink
+            >
           </div>
         </div>
       </article>

@@ -92,7 +92,7 @@ const resetFilter = async () => {
   filterKeyword.value = "";
   filterJenisKoleksi.value = "";
   collectionList.value = await getItems({
-    collection: "koleksi_archive",
+    collection: "koleksi_gallery",
     params: {
       sort: "-date_created",
       limit: 12,
