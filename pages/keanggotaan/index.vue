@@ -195,10 +195,6 @@ definePageMeta({
                           Pustaka kami:
                         </h5>
                         <p>
-                          Bu Tati Asrianti:
-                          <a href="tel:+6282120475023">+6282120475023</a>
-                        </p>
-                        <p>
                           Pak Ana Sobana:
                           <a href="tel:+6282246842403">+6282246842403</a>
                         </p>
