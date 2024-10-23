@@ -28,7 +28,9 @@ const getThumbnail = (id) => {
     <div class="hero-space">
       <div class="hero-left">
         <div class="text-2xl font-600 md:text-4xl text-gray-700">
-          <span class="text-orange text-7xl">KANDAGA</span>
+          <span class="text-orange text-4xl sm:text-4xl md:text-6xl lg:text-7xl"
+            >KANDAGA</span
+          >
         </div>
         <p class="text-sm md:text-xl font-500 text-dark-8 font-italic">
           <span class="text-orange-6 font-600">Universitas Padjadjaran</span>'s
@@ -55,7 +57,7 @@ const getThumbnail = (id) => {
         </NuxtLink>
         <NuxtLink
           :to="locale === 'en' ? '/en/koleksi' : '/koleksi'"
-          class="btn bantuan w-full"
+          class="btn koleksi w-full"
         >
           {{ $t("ourCollection") }}
         </NuxtLink>
@@ -106,7 +108,7 @@ const getThumbnail = (id) => {
   --at-apply: bg-orange text-xs px-2 py-2 text-white font-600 no-underline mr-2 md:(px-6 text-base);
 }
 
-.bantuan {
-  --at-apply: bg-white text-xs px-2 border px-6 py-2 text-dark-8 font-600 no-underline ml-2 transition-all-500 md:(px-6 text-base) hover:(bg-gray-6 text-white border-gray);
+.koleksi {
+  --at-apply: bg-white text-xs px-2 border px-6 py-2 text-dark-8 font-600 no-underline ml-2 transition-all-500 md:(px-6 text-base) hover:(bg-gray-6 text-white border-gray-6);
 }
 </style>

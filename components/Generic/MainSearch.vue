@@ -1,24 +1,51 @@
 <script setup>
-const defaultFacet = ref("main")
+const defaultFacet = ref("main");
 
 const chooseFacet = (name) => {
-  defaultFacet.value = name
-}
+  defaultFacet.value = name;
+};
 </script>
 
 <template>
   <section>
-    <div class="flex items-center justify-around text-center text-xs md:text-base z-10">
-      <button class="tab-btn" :class="defaultFacet === 'main' ? 'active-btn' : 'inactive-btn'"
-        @click="chooseFacet('main')">Pencarian</button>
-      <button class="tab-btn" :class="defaultFacet === 'gallery' ? 'active-btn' : 'inactive-btn'"
-        @click="chooseFacet('gallery')">Gallery</button>
-      <button class="tab-btn" :class="defaultFacet === 'library' ? 'active-btn' : 'inactive-btn'"
-        @click="chooseFacet('library')">Library</button>
-      <button class="tab-btn" :class="defaultFacet === 'archive' ? 'active-btn' : 'inactive-btn'"
-        @click="chooseFacet('archive')">Archive</button>
-      <button class="tab-btn" :class="defaultFacet === 'museum' ? 'active-btn' : 'inactive-btn'"
-        @click="chooseFacet('museum')">Museum</button>
+    <div
+      class="flex items-center justify-around text-center text-xs md:text-base z-10"
+    >
+      <button
+        class="tab-btn"
+        :class="defaultFacet === 'main' ? 'active-btn' : 'inactive-btn'"
+        @click="chooseFacet('main')"
+      >
+        Pencarian
+      </button>
+      <button
+        class="tab-btn"
+        :class="defaultFacet === 'gallery' ? 'active-btn' : 'inactive-btn'"
+        @click="chooseFacet('gallery')"
+      >
+        Gallery
+      </button>
+      <button
+        class="tab-btn"
+        :class="defaultFacet === 'library' ? 'active-btn' : 'inactive-btn'"
+        @click="chooseFacet('library')"
+      >
+        Library
+      </button>
+      <button
+        class="tab-btn"
+        :class="defaultFacet === 'archive' ? 'active-btn' : 'inactive-btn'"
+        @click="chooseFacet('archive')"
+      >
+        Archive
+      </button>
+      <button
+        class="tab-btn"
+        :class="defaultFacet === 'museum' ? 'active-btn' : 'inactive-btn'"
+        @click="chooseFacet('museum')"
+      >
+        Museum
+      </button>
     </div>
     <div class="bg-orange-2 px-5 py-2 h-full max-h-23 rounded-b-xl">
       <Transition name="slide-up">
@@ -26,13 +53,13 @@ const chooseFacet = (name) => {
           <GenericSearch />
         </div>
         <div v-else-if="defaultFacet === 'library'">
-          <GenericLibrarySearch  />
+          <GenericLibrarySearch />
         </div>
         <div v-else-if="defaultFacet === 'gallery'">
-          <GenericGallerySearch  />
+          <GenericGallerySearch />
         </div>
         <div v-else-if="defaultFacet === 'archive'">
-          <GenericArchiveSearch  />
+          <GenericArchiveSearch />
         </div>
         <div v-else-if="defaultFacet === 'museum'">
           <GenericMuseumSearch />
@@ -47,7 +74,7 @@ const chooseFacet = (name) => {
 
 <style scoped>
 .tab-btn {
-  --at-apply: px-4 py-2 w-full rounded-t-lg;
+  --at-apply: px-4 text-2 md:text-xs lg:text-base py-2 w-full rounded-t-lg;
 }
 
 .active-btn {
