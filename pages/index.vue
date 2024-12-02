@@ -3,7 +3,7 @@ useHead({
   meta: [
     {
       name: "description",
-      content: "Kandaga GLAM Situs Resmi Pusat Pengelolaan Pengetahuan UNPAD",
+      content: "Kandaga GLAM Situs Resmi Kantor Pengelolaan Perpustakaan UNPAD",
     },
     {
       property: "og:title",
@@ -12,11 +12,11 @@ useHead({
     {
       property: "og:description",
       content:
-        "Situs GLAM (Gallery, Library, Archive & Museums) dari Kandaga Pusat Pengelolaan Pengetahuan Universitas Padjadjaran. Situs ini menjadi pintu pencarian dan penyajian koleksi yang dimiliki oleh Universitas Padjadjaran yang dapat diakses oleh seluruh kalangan masyarakat.",
+        "Situs GLAM (Gallery, Library, Archive & Museums) dari Kandaga Kantor Pengelolaan Perpustakaan Universitas Padjadjaran. Situs ini menjadi pintu pencarian dan penyajian koleksi yang dimiliki oleh Universitas Padjadjaran yang dapat diakses oleh seluruh kalangan masyarakat.",
     },
     {
       property: "og:image",
-      content: "/images/kandaga-bg.webp",
+      content: "/images/kandaga-new.webp",
     },
   ],
   title: "GLAM Kandaga Unpad | Universitas Padjadjaran",
