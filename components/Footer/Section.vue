@@ -117,7 +117,7 @@ defineProps({
               Kandaga merupakan portal yang menyediakan banyak sumber informasi
               yang sudah dilanggan oleh Universitas Padjadjaran agar dapat
               dimanfaatkan oleh seluruh masyarakat Universitas Padjadjaran.
-              Kandaga dikelola oleh Pusat Pengelolaan Pengetahuan, Universitas
+              Kandaga dikelola oleh Kantor Pengelolaan Perpustakaan, Universitas
               Padjadjaran.
             </p>
           </div>

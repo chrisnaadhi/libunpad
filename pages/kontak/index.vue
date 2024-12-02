@@ -41,7 +41,9 @@ const sendMessage = async () => {
 <template>
   <section>
     <h2 class="text-center">Kontak Kami</h2>
-    <div class="flex gap-20 justify-between mb-10">
+    <div
+      class="flex flex-col flex-col-reverse lg:flex-row gap-20 justify-between mb-10 px-5"
+    >
       <div class="w-full">
         <h3 class="text-center">Hubungi Kami</h3>
         <form @submit.prevent="sendMessage">

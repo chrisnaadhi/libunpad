@@ -26,18 +26,37 @@ const path = useRoute();
       </div>
       <div class="p-4 flex flex-col items-center">
         <h3>Koleksi {{ libraryObj.title }} Pilihan Kami</h3>
-        <div class="my-5 flex flex-col gap-5 w-full lg:(grid grid-cols-2 gap-3)">
-          <div class="bg-white p-5 rounded flex w-full h-full gap-5" v-for="koleksi in bookCollection?.results">
+        <div
+          class="my-5 flex flex-col gap-5 w-full lg:(grid grid-cols-2 gap-3)"
+        >
+          <div
+            class="bg-white p-5 rounded flex w-full h-full gap-5"
+            v-for="koleksi in bookCollection?.results"
+          >
             <NuxtLink :to="'/library/biblio/' + koleksi?.biblioId">
               <NuxtImg
-                :src="koleksi?.image === undefined || koleksi?.image === null || koleksi?.image === '' ? '/images/default_cover.png' : `https://kandaga.unpad.ac.id:8011/lib/minigalnano/createthumb.php?filename=images/docs/${koleksi.image}&width=240`"
-                class="w-full h-40 object-cover rounded-lg lg:(w-50 h-60) transition duration-300 ease-in-out hover:scale-110" />
+                :src="
+                  koleksi?.image === undefined ||
+                  koleksi?.image === null ||
+                  koleksi?.image === ''
+                    ? '/images/default_cover.png'
+                    : `https://kandaga.unpad.ac.id:8011/lib/minigalnano/createthumb.php?filename=images/docs/${koleksi.image}&width=200`
+                "
+                class="w-full h-40 object-cover rounded-lg lg:(w-50 h-60) transition duration-300 ease-in-out hover:scale-110"
+              />
             </NuxtLink>
             <div class="flex flex-col justify-between gap-3 w-full h-full">
               <div class="flex flex-col gap-3">
-                <NuxtLink :to="'/library/biblio/' + koleksi?.biblioId" class="no-underline w-full">
-                  <h4 class="bg-orange-1 px-3 rounded text-orange" :title="koleksi?.title">{{
-                    trimTitle(koleksi?.title, 25) }}</h4>
+                <NuxtLink
+                  :to="'/library/biblio/' + koleksi?.biblioId"
+                  class="no-underline w-full"
+                >
+                  <h4
+                    class="bg-orange-1 px-3 rounded text-orange"
+                    :title="koleksi?.title"
+                  >
+                    {{ trimTitle(koleksi?.title, 25) }}
+                  </h4>
                 </NuxtLink>
                 <div class="flex w-full gap-4 pl-2">
                   <div>
@@ -47,7 +66,9 @@ const path = useRoute();
                     <p class="font-semibold text-gray-5">Lokasi</p>
                   </div>
                   <div>
-                    <p :title="koleksi?.author">: {{ trimTitle(koleksi?.author, 20) ?? "Belum ada data" }}</p>
+                    <p :title="koleksi?.author">
+                      : {{ trimTitle(koleksi?.author, 20) ?? "Belum ada data" }}
+                    </p>
                     <p>: {{ koleksi?.isbnIssn ?? "Tidak diketahui" }}</p>
                     <p>: {{ koleksi?.classification ?? "Belum ada data" }}</p>
                     <p>: {{ koleksi?.node ?? "Belum ada data" }}</p>
@@ -55,10 +76,13 @@ const path = useRoute();
                 </div>
               </div>
 
-              <NuxtLink class="btn bg-orange text-white text-center py-1"
-                :to="`https://kandaga.unpad.ac.id:8010/index.php?p=show_detail&id=${koleksi?.biblioId}`"
-                target="_blank">
-                Lihat</NuxtLink>
+              <NuxtLink
+                class="btn bg-orange text-white text-center py-1"
+                :to="`https://kandaga.unpad.ac.id:8011/index.php?p=show_detail&id=${koleksi?.biblioId}`"
+                target="_blank"
+              >
+                Lihat</NuxtLink
+              >
             </div>
           </div>
         </div>
