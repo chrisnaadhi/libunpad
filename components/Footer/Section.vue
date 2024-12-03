@@ -135,8 +135,8 @@ defineProps({
       </div>
       <div class="bg-orange-4 py-2">
         <p class="font-600 text-dark">
-          &copy; 2020-{{ currentTime.getFullYear() }} Pusat Pengelolaan
-          Pengetahuan Universitas Padjadjaran
+          &copy; 2020-{{ currentTime.getFullYear() }} Kantor Pengelolaan
+          Perpustakaan Universitas Padjadjaran
         </p>
       </div>
     </footer>
