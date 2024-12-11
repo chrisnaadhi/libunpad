@@ -46,36 +46,68 @@ const viewPanduan = () => {
     <div class="menu-wrapper">
       <div class="flex flex-col pb-2 pl-10">
         <NuxtLink to="/" class="menu-list hover-menu">Beranda</NuxtLink>
-        <p class="menu-list" :class="menu.isTentangOpen ? 'text-orange' : ''" @click="viewTentang">
+        <p
+          class="menu-list"
+          :class="menu.isTentangOpen ? 'text-orange' : ''"
+          @click="viewTentang"
+        >
           Tentang
           <span v-if="menu.isTentangOpen"> &#8628;</span>
           <span v-else> &#8594;</span>
         </p>
-        <div v-show="menu.isTentangOpen" class="pl-2 text-sm" v-for="list in tentang">
+        <div
+          v-show="menu.isTentangOpen"
+          class="pl-2 text-sm"
+          v-for="list in tentang"
+        >
           <NuxtLink :to="list.url" class="hover-menu">{{ list.name }}</NuxtLink>
         </div>
-        <p class="menu-list" :class="menu.isLayananOpen ? 'text-orange' : ''" @click="viewLayanan">
+        <p
+          class="menu-list"
+          :class="menu.isLayananOpen ? 'text-orange' : ''"
+          @click="viewLayanan"
+        >
           Layanan
           <span v-if="menu.isLayananOpen"> &#8628;</span>
           <span v-else> &#8594;</span>
         </p>
-        <div v-show="menu.isLayananOpen" class="pl-2 text-sm" v-for="list in layanan">
+        <div
+          v-show="menu.isLayananOpen"
+          class="pl-2 text-sm"
+          v-for="list in layanan"
+        >
           <NuxtLink :to="list.url" class="hover-menu">{{ list.name }}</NuxtLink>
         </div>
-        <p class="menu-list" :class="menu.isKoleksiOpen ? 'text-orange' : ''" @click="viewKoleksi">
+        <p
+          class="menu-list"
+          :class="menu.isKoleksiOpen ? 'text-orange' : ''"
+          @click="viewKoleksi"
+        >
           Koleksi
           <span v-if="menu.isKoleksiOpen"> &#8628;</span>
           <span v-else> &#8594;</span>
         </p>
-        <div v-show="menu.isKoleksiOpen" class="pl-2 text-sm" v-for="list in koleksi">
+        <div
+          v-show="menu.isKoleksiOpen"
+          class="pl-2 text-sm"
+          v-for="list in koleksi"
+        >
           <NuxtLink :to="list.url" class="hover-menu">{{ list.name }}</NuxtLink>
         </div>
-        <p class="menu-list" :class="menu.isPanduanOpen ? 'text-orange' : ''" @click="viewPanduan">
+        <p
+          class="menu-list"
+          :class="menu.isPanduanOpen ? 'text-orange' : ''"
+          @click="viewPanduan"
+        >
           Panduan
           <span v-if="menu.isPanduanOpen"> &#8628;</span>
           <span v-else> &#8594;</span>
         </p>
-        <div v-show="menu.isPanduanOpen" class="pl-2 text-sm" v-for="list in panduan">
+        <div
+          v-show="menu.isPanduanOpen"
+          class="pl-2 text-sm"
+          v-for="list in panduan"
+        >
           <NuxtLink :to="list.url" class="hover-menu">{{ list.name }}</NuxtLink>
         </div>
         <NuxtLink class="menu-list hover-menu">Kontak</NuxtLink>
@@ -85,13 +117,22 @@ const viewPanduan = () => {
           <button class="btn bg-orange w-full text-white">Login</button>
         </NuxtLink>
         <div v-else-if="status === 'authenticated'" class="flex gap-2">
-          <img :src="data.user.image" class="w-15 h-15 rounded-full" alt="Foto Profil" />
+          <img
+            :src="data.user.image"
+            class="w-15 h-15 rounded-full"
+            alt="Foto Profil"
+          />
           <div class="text-sm">
             <p>{{ data.user.name }}</p>
             <p class="text-xs">{{ data.user.email }}</p>
-            <button class="btn bg-red text-white py-0" @click="logout">
-              Logout
-            </button>
+            <div class="flex gap-1 mt-2">
+              <NuxtLink to="/profile" class="btn bg-orange text-white py-0"
+                >Keanggotaan</NuxtLink
+              >
+              <button class="btn bg-red text-white py-0" @click="logout">
+                Logout
+              </button>
+            </div>
           </div>
         </div>
       </div>
