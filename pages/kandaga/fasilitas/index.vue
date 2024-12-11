@@ -33,25 +33,27 @@ const getFasilitasKandaga = await getItems({
         class="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-white to-transparent"
       ></div>
     </div>
-    <div class="flex flex-col gap-3 lg:(grid grid-cols-3) content-section">
-      <div
-        v-for="facility in getFasilitasKandaga"
-        class="flex flex-col items-center"
-      >
-        <div class="card-block">
-          <div class="description-block overflow-hidden">
-            <div class="text-white py-6 px-8">
-              <h4>{{ facility.nama_fasilitas }}</h4>
-              <p class="text-sm">{{ facility.deskripsi }}</p>
+    <div class="content-section">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div
+          v-for="facility in getFasilitasKandaga"
+          class="flex flex-col items-center"
+        >
+          <div class="card-block">
+            <div class="description-block overflow-hidden">
+              <div class="text-white py-6 px-8">
+                <h4>{{ facility.nama_fasilitas }}</h4>
+                <p class="text-sm">{{ facility.deskripsi }}</p>
+              </div>
             </div>
+            <NuxtImg
+              :src="directusImageUrl(facility.foto_fasilitas)"
+              class="w-100 max-w-md h-60 object-cover z-0 rounded-lg"
+            />
           </div>
-          <NuxtImg
-            :src="directusImageUrl(facility.foto_fasilitas)"
-            class="w-100 max-w-md h-60 object-cover z-0 rounded-lg"
-          />
+          <h4>{{ facility.nama_fasilitas }}</h4>
+          <p>Lantai {{ facility.lantai }} Gd. Kandaga</p>
         </div>
-        <h4>{{ facility.nama_fasilitas }}</h4>
-        <p>Lantai {{ facility.lantai }} Gd. Kandaga</p>
       </div>
     </div>
   </section>
