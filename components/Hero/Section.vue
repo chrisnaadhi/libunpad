@@ -34,7 +34,7 @@ const getThumbnail = (id) => {
         </div>
         <p class="text-sm md:text-xl font-500 text-dark-8 font-italic">
           <span class="text-orange-6 font-600">Universitas Padjadjaran</span>'s
-          Gallery, Library, Archives & Museum (GLAMS)
+          Library & Academic Collection
         </p>
         <p class="py-2 text-sm xl:(mr-6 pr-8 px-20)">
           {{ $t("homeDescription") }}
@@ -79,7 +79,7 @@ const getThumbnail = (id) => {
 
 <style scoped>
 .hero-space {
-  --at-apply: bg-white opacity-70 flex flex-col-reverse max-w-7xl relative z-3 rounded-bl-xl rounded-br-xl pt-5 py-0 xl:(flex-row items-center justify-center pt-5 pb-15);
+  --at-apply: bg-white opacity-85 flex flex-col-reverse max-w-7xl relative z-3 rounded-bl-xl rounded-br-xl pt-5 py-0 xl:(flex-row items-center justify-center pt-5 pb-15);
 }
 
 .img-background {

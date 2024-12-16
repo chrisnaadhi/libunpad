@@ -92,7 +92,12 @@ definePageMeta({
       </NuxtLink>
     </div>
     <CollectionRepositoryMainSearch :is-faculty="false" />
-    <div v-show="searchTugasAkhir.searchResults !== 'loading'">
+    <div
+      v-show="
+        searchTugasAkhir.searchResults !== 'loading' &&
+        searchTugasAkhir.keywords !== ''
+      "
+    >
       <p class="text-center">
         Hasil pencarian:
         <span class="font-semibold">"{{ searchTugasAkhir.keywords }}"</span>

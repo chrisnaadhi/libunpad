@@ -3,11 +3,13 @@ useHead({
   meta: [
     {
       name: "description",
-      content: "Kandaga GLAM Situs Resmi Pusat Pengelolaan Pengetahuan UNPAD",
+      content:
+        "Kandaga Library Situs Resmi Perpustakaan Universitas Padjadjaran yang menyediakan layanan informasi dan referensi bagi seluruh sivitas akademika Universitas Padjadjaran dan juga masyarakat umum.",
     },
     {
       property: "og:title",
-      content: "GLAM Kandaga Unpad",
+      content:
+        "Kandaga Library - Perpustakaan Universitas Padjadjaran | Kandaga Unpad",
     },
     {
       property: "og:description",
@@ -19,7 +21,8 @@ useHead({
       content: "/images/kandaga-bg.webp",
     },
   ],
-  title: "Unpad Library - Perpustakaan | Kandaga",
+  title:
+    "Kandaga Library - Perpustakaan Universitas Padjadjaran | Kandaga Unpad",
 });
 
 onMounted(() => {
