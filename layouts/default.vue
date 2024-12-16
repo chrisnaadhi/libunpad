@@ -19,7 +19,7 @@ useHead({
       content: "/images/kandaga-bg.webp",
     },
   ],
-  title: "GLAM Kandaga Unpad | Universitas Padjadjaran",
+  title: "Unpad Library - Perpustakaan | Kandaga",
 });
 
 onMounted(() => {
