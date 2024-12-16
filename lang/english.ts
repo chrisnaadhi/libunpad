@@ -24,6 +24,8 @@ export default {
   exploreCollectionItem2: "Local Knowledge Collection",
   exploreCollectionItem3: "Newly added collections",
   exploreCollectionItem4: "The most popular collection",
+  facilityDescription:
+    "Kandaga provides various facilities to support academic and research activities, including comfortable reading rooms, access to digital and physical collections, book lending services, and discussion and seminar rooms.",
 
   // Pengajuan - /pengajuan
   pengajuanTitle: "Administration and Submissions",
@@ -74,6 +76,7 @@ export default {
   repositoryTitle: "Repository",
   repositoryDescription:
     "It is a place to store students' final assignments in the form of theses or dissertations. You can check the collection of theses and dissertations from various faculties at Universitas Padjadjaran.",
+  eJournalDescription: "Access a wide range of electronic journals provided by Universitas Padjadjaran to support your academic and research needs.",
 
   // Panduan
   // Akses E-Journal

@@ -70,7 +70,9 @@ const viewStateMuseum = ref(false);
         </div>
       </NuxtLink>
       <NuxtLink
-        :to="locale === 'id' ? '/records' : '/en/records'"
+        :to="
+          locale === 'id' ? '/panduan/akses-jurnal' : '/en/panduan/akses-jurnal'
+        "
         class="content"
         @mouseenter="viewStateArchive = true"
         @mouseleave="viewStateArchive = false"
@@ -81,19 +83,19 @@ const viewStateMuseum = ref(false);
         >
           <p class="use-banner">Platform</p>
           <div class="i-mdi-archive-sync w-24 h-24" />
-          <h1>Archive</h1>
+          <h1>E-Resources</h1>
         </div>
 
         <div
           v-show="viewStateArchive === true"
           class="max-w-50 flex flex-col items-center"
         >
-          <p class="use-banner-hover">Archive</p>
-          <p class="text-xs">{{ $t("archiveDescription") }}</p>
+          <p class="use-banner-hover">E-Resources</p>
+          <p class="text-xs">{{ $t("eJournalDescription") }}</p>
         </div>
       </NuxtLink>
       <NuxtLink
-        :to="locale === 'id' ? '/museum' : '/en/museum'"
+        :to="locale === 'id' ? '/kandaga' : '/en/kandaga/fasilitas'"
         class="content"
         @mouseenter="viewStateMuseum = true"
         @mouseleave="viewStateMuseum = false"
@@ -104,15 +106,15 @@ const viewStateMuseum = ref(false);
         >
           <p class="use-banner">Platform</p>
           <div class="i-mdi-bank w-24 h-24" />
-          <h1>Museum</h1>
+          <h1>Fasilitas</h1>
         </div>
 
         <div
           v-show="viewStateMuseum === true"
           class="max-w-50 flex flex-col items-center"
         >
-          <p class="use-banner-hover">Museum</p>
-          <p class="text-xs">{{ $t("museumDescription") }}</p>
+          <p class="use-banner-hover">Fasilitas</p>
+          <p class="text-xs">{{ $t("facilityDescription") }}</p>
         </div>
       </NuxtLink>
     </section>
@@ -127,15 +129,18 @@ const viewStateMuseum = ref(false);
         <h6>Gallery</h6>
       </NuxtLink>
       <NuxtLink
+        :to="locale === 'id' ? '/museum' : '/en/museum'"
+        class="extra-content"
+      >
+        <div class="i-mdi-theater w-8 h-8" />
+        <h6>Museum</h6>
+      </NuxtLink>
+      <NuxtLink
         :to="locale === 'id' ? '/koleksi-hayati' : '/en/koleksi-hayati'"
         class="extra-content"
       >
         <div class="i-mdi-leaf w-8 h-8" />
         <h6>Koleksi Hayati</h6>
-      </NuxtLink>
-      <NuxtLink class="extra-content">
-        <div class="i-mdi-map-search w-8 h-8"></div>
-        <h6>Indigenous Knowledge</h6>
       </NuxtLink>
       <NuxtLink class="extra-content" to="/e-teater">
         <div class="i-mdi-book-education w-8 h-8"></div>
