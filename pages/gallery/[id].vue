@@ -46,7 +46,7 @@ const getGalleryCollection = await getItemById({
           </tr>
           <tr>
             <td class="font-semibold pr-5">Keywords</td>
-            <td>: {{ getGalleryCollection.keywords.join(", ") ?? "-" }}</td>
+            <td>: {{ getGalleryCollection.keywords?.join(", ") ?? "-" }}</td>
           </tr>
           <tr>
             <td class="font-semibold pr-5">Lembaga Penanggungjawab</td>

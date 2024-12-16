@@ -24,6 +24,8 @@ export default {
   exploreCollectionItem2: "Local Knowledge Collection",
   exploreCollectionItem3: "Newly added collections",
   exploreCollectionItem4: "The most popular collection",
+  facilityDescription:
+    "Kandaga provides various facilities to support academic and research activities, including comfortable reading rooms, access to digital and physical collections, book lending services, and discussion and seminar rooms.",
 
   // Pengajuan - /pengajuan
   pengajuanTitle: "Administration and Submissions",
@@ -70,6 +72,20 @@ export default {
   koleksiHayatiTitle: "Biological Collection",
   koleksiHayatiDescription:
     "A biological collection is a collection of biological specimens that are collected, stored, and preserved for research, education, and conservation purposes. The biological collection can include specimens of plants, animals, and microorganisms, as well as materials related to these specimens.",
+  // Repository - /koleksi/repository
+  repositoryTitle: "Repository",
+  repositoryDescription:
+    "It is a place to store students' final assignments in the form of theses or dissertations. You can check the collection of theses and dissertations from various faculties at Universitas Padjadjaran.",
+  eJournalDescription: "Access a wide range of electronic journals provided by Universitas Padjadjaran to support your academic and research needs.",
+
+  // Panduan
+  // Akses E-Journal
+  eJournalAccess: "Accessing E-Journals",
+  eJournalAccessDescription:
+    "The following is a guide on how to access e-journals provided by Universitas Padjadjaran",
+  eJournalHeader: "Guide on how to access E-journals",
+  eJournalHeaderDescription: `To access E-Journals and E-Resources subscribed by Universitas Padjadjaran, you need to visit the page PINTU UNPAD and login using a registered account. After logging in, you can search for the journal or electronic resources you need using the available search feature. Be sure to comply with applicable usage rules and policies to avoid copyright infringement or unauthorized use. With this access, you can support your academic and research activities at Universitas Padjadjaran.`,
+  eJournalHelper: "If you are still confused about how to access it, please watch the following video:",
 
   // FOOTER
   // Tautan Cepat

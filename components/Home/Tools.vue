@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { locale, t } = useI18n();
+const { locale } = useI18n();
 const { data: tools } = await useFetch("/api/v1/tools");
 </script>
 

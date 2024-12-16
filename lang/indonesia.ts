@@ -24,6 +24,8 @@ export default {
   exploreCollectionItem2: "Koleksi Pengetahuan Lokal",
   exploreCollectionItem3: "Koleksi yang baru ditambahkan",
   exploreCollectionItem4: "Koleksi yang paling populer",
+  facilityDescription:
+    "Kandaga menyediakan berbagai fasilitas untuk mendukung kegiatan akademik dan penelitian, termasuk ruang baca yang nyaman, akses ke koleksi digital dan fisik, layanan peminjaman buku, serta ruang diskusi dan seminar",
 
   // Pengajuan - /pengajuan
   pengajuanTitle: "Administrasi dan Pengajuan",
@@ -70,6 +72,20 @@ export default {
   koleksiHayatiTitle: "Koleksi Hayati",
   koleksiHayatiDescription:
     "Koleksi hayati adalah kumpulan spesimen hayati yang dikumpulkan, disimpan, dan diawetkan untuk kepentingan penelitian, pendidikan, dan konservasi. Koleksi hayati dapat berupa spesimen tumbuhan, hewan, dan mikroorganisme, serta bahan-bahan yang terkait dengan spesimen tersebut. (KBBI)",
+  // Repositori - /koleksi/repository
+  repositoryTitle: "Repositori",
+  repositoryDescription:
+    "Merupakan tempat penyimpanan tugas akhir mahasiswa yang berupa skripsi, tesis maupun disertasi. (KBBI)",
+
+  // Panduan
+  // Akses E-Journal
+  eJournalAccess: "Panduan Akses E-Journal dan E-Resources Unpad",
+  eJournalAccessDescription:
+    "Tata cara akses E-Journal dan E-Resources yang dilanggan oleh Universitas Padjadjaran",
+  eJournalHeader: "Tata Cara Akses E-Journal & E-Resources Unpad",
+  eJournalHeaderDescription: `Untuk mengakses Jurnal Elektronik dan Sumber Elektronik yang dilanggan oleh Universitas Padjadjaran, Anda perlu mengunjungi laman PINTU UNPAD dan login menggunakan akun yang telah terdaftar. Setelah login, Anda dapat mencari jurnal atau sumber elektronik yang Anda butuhkan menggunakan fitur pencarian yang tersedia. Pastikan untuk mematuhi aturan dan kebijakan penggunaan yang berlaku untuk menghindari pelanggaran hak cipta atau penggunaan yang tidak sah. Dengan akses ini, Anda dapat mendukung kegiatan akademik dan penelitian Anda di Universitas Padjadjaran.`,
+  eJournalHelper: "Jika anda masih bingung terkait tata cara aksesnya silahkan untuk menonton video berikut :",
+  eJournalDescription: "Akses berbagai jurnal elektronik yang disediakan oleh Universitas Padjadjaran untuk mendukung kebutuhan akademis dan penelitian Anda.",
 
   // FOOTER
   // Tautan Cepat
