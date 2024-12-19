@@ -20,9 +20,6 @@ export default defineNuxtConfig({
     "/visitor/rekap": { redirect: "/error" },
     "/pengajuan/unggah-mandiri/submit/**": {
       redirect: "/pengajuan/unggah-mandiri",
-    },
-    "/pengajuan/peminjaman-ruangan": {
-      redirect: "/pengajuan"
     }
   },
 
@@ -103,6 +100,10 @@ export default defineNuxtConfig({
     dbPort: Number(process.env.DRIZZLE_PORT),
     turnstile: {
       secretKey: process.env.TURNSTILE_SECRETKEY
+    },
+    app: {
+      directusPublicUrl: process.env.DIRECTUS_BASE_URL,
+      directusAuthToken: process.env.DIRECTUS_ACCESS_TOKEN,
     },
     public: {
       meiliHost: process.env.MEILI_HOST,

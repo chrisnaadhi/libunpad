@@ -80,7 +80,7 @@ onMounted(() => {
 }
 
 .v-enter-from,
-v-leave-to {
+.v-leave-to {
   --at-apply: transition-all-500 ease-out opacity-0 translate-y-2;
 }
 

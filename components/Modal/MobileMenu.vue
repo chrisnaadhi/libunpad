@@ -40,7 +40,7 @@ const viewPanduan = () => {
 
 <template>
   <section class="layer" v-if="menu.menuState">
-    <div class="mt-14 text-right px-10 font-600 cursor-pointer">
+    <div class="mt-17 text-right px-10 font-600 cursor-pointer">
       <span @click="menu.menuState = false">&#10006;</span>
     </div>
     <div class="menu-wrapper">
@@ -142,7 +142,7 @@ const viewPanduan = () => {
 
 <style scoped>
 .layer {
-  --at-apply: fixed mt--12 h-full w-full bg-white/95 transition-all-500 z-5;
+  --at-apply: fixed mt--16 h-full w-full bg-white/95 transition-all-500 z-5;
 }
 
 .menu-wrapper {

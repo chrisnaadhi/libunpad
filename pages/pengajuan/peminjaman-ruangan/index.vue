@@ -4,7 +4,7 @@ definePageMeta({
 });
 
 const { data } = useAuth();
-
+const { $directus, $uploadFiles } = useNuxtApp();
 const { createItems, getItems } = useDirectusItems();
 
 const date = new Date();
@@ -23,6 +23,10 @@ const tanggalPeminjaman = ref("");
 const jamMulai = ref("");
 const jamSelesai = ref("");
 const tujuanPeminjaman = ref("");
+const fileSurat = ref(null);
+const uploadSurat = (event) => {
+  fileSurat.value = event.target.files[0];
+};
 const emailPattern = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
 
 const monthName = new Intl.DateTimeFormat("id-ID", { month: "long" }).format(
@@ -31,40 +35,56 @@ const monthName = new Intl.DateTimeFormat("id-ID", { month: "long" }).format(
 
 const kirimPengajuan = async () => {
   const emailValidation = emailPattern.test(email.value);
-  let items = {
-    npm: npm.value,
-    nama_lengkap: namaLengkap.value,
-    email: email.value,
-    kontak: kontak.value,
-    nama_ruangan: namaRuangan.value,
-    tanggal_peminjaman: tanggalPeminjaman.value,
-    jam_mulai_peminjaman: jamMulai.value,
-    jam_selesai_peminjaman: jamSelesai.value,
-    tujuan_peminjaman: tujuanPeminjaman.value,
-    status_peminjaman: "pending",
-  };
-  if (emailValidation) {
-    try {
-      await createItems({ collection: "peminjaman_ruangan", items });
-      textNotif.value = "text-green";
-      notification.value = "Berhasil diajukan";
+  const formData = new FormData();
+  formData.append("file", fileSurat.value);
+  formData.append("folder", "AD0865F0-F6A3-4F62-8551-FE52625C7308");
+  await $directus.request($uploadFiles(formData)).then(async (res) => {
+    let items = {
+      npm: npm.value,
+      nama_lengkap: namaLengkap.value,
+      email: email.value,
+      kontak: kontak.value,
+      nama_ruangan: namaRuangan.value,
+      tanggal_peminjaman: tanggalPeminjaman.value,
+      jam_mulai_peminjaman: jamMulai.value,
+      jam_selesai_peminjaman: jamSelesai.value,
+      keterangan: tujuanPeminjaman.value,
+      status_peminjaman: "pending",
+      file_surat: res.id,
+    };
+    if (emailValidation) {
+      try {
+        await createItems({ collection: "peminjaman_ruangan", items });
+        textNotif.value = "text-green";
+        notification.value = "Berhasil diajukan";
+        namaLengkap.value = ref("");
+        email.value = data.value.user.email;
+        kontak.value = "";
+        namaRuangan.value = "";
+        tanggalPeminjaman.value = "";
+        jamMulai.value = "";
+        jamSelesai.value = "";
+        tujuanPeminjaman.value = "";
+        fileSurat.value = null;
+        setTimeout(async () => {
+          notification.value =
+            "Silahkan isi seluruh form sesuai dengan data asli";
+          textNotif.value = "text-dark";
+          await navigateTo({ path: "/pengajuan/peminjaman-ruangan/data" });
+        }, 2000);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      textNotif.value = "text-red-7";
+      notification.value = "Email tidak valid, silahkan coba lagi";
       setTimeout(async () => {
         notification.value =
           "Silahkan isi seluruh form sesuai dengan data asli";
         textNotif.value = "text-dark";
-        await navigateTo({ path: "/pengajuan/peminjaman-ruangan/data" });
-      }, 2000);
-    } catch (error) {
-      console.log(error);
+      }, 5000);
     }
-  } else {
-    textNotif.value = "text-red-7";
-    notification.value = "Email tidak valid, silahkan coba lagi";
-    setTimeout(async () => {
-      notification.value = "Silahkan isi seluruh form sesuai dengan data asli";
-      textNotif.value = "text-dark";
-    }, 5000);
-  }
+  });
 };
 
 const dataPeminjaman = await getItems({
@@ -81,55 +101,106 @@ const dataPeminjaman = await getItems({
 
 <template>
   <main class="main-content">
-    <section class="max-w-lg ma">
+    <section class="max-w-lg">
       <h1>Form Peminjaman Ruangan</h1>
-      <form @submit.prevent="kirimPengajuan" class="container ma max-w-md px-5 text-left">
+      <form
+        @submit.prevent="kirimPengajuan"
+        class="container ma max-w-md px-5 text-left"
+      >
         <div class="input-form">
           <label for="email">Email :</label>
-          <input type="email" name="email" id="email" v-model="email" class="cursor-not-allowed" required disabled />
+          <input
+            type="email"
+            name="email"
+            id="email"
+            v-model="email"
+            class="cursor-not-allowed"
+            required
+            disabled
+          />
         </div>
         <div class="input-form">
           <label for="npm">NPM / NIP :</label>
-          <input type="text" name="npm" id="npm" v-model="npm" required />
+          <input type="number" name="npm" id="npm" v-model="npm" required />
         </div>
         <div class="input-form">
           <label for="nama">Nama Lengkap :</label>
-          <input type="text" name="nama" id="nama" v-model="namaLengkap" required />
+          <input
+            type="text"
+            name="nama"
+            id="nama"
+            v-model="namaLengkap"
+            required
+          />
         </div>
 
         <div class="input-form">
           <label for="kontak">No. HP / Whatsapp / Kontak Lain :</label>
-          <input type="text" name="kontak" id="kontak" v-model="kontak" required />
+          <input
+            type="text"
+            name="kontak"
+            id="kontak"
+            v-model="kontak"
+            required
+          />
         </div>
         <div class="input-form">
           <label for="namaruangan">Nama Ruangan</label>
-          <select name="namaruangan" id="namaruangan" v-model="namaRuangan" required>
+          <select
+            name="namaruangan"
+            id="namaruangan"
+            v-model="namaRuangan"
+            required
+          >
             <option value="ruang_the_gade">Ruang Pegadaian</option>
             <option value="ruang_kelas_2">Ruang Kelas Lt.2</option>
             <option value="ruang_teater">Ruang Teater</option>
-            <option value="ruang_telkomsel">Ruang Telkomsel</option>
-            <option value="ruang_bni_berbagi">Ruang Coaching BNI Berbagi</option>
-            <option value="r_kppu">Ruang KPPU</option>
+            <option value="ruang_telkomsel">Ruang Assistive Learning</option>
+            <option value="ruang_bni_berbagi">
+              Ruang Coaching BNI Berbagi
+            </option>
           </select>
         </div>
         <div class="input-form">
           <label for="tanggal">Tanggal Peminjaman</label>
-          <input type="date" name="tanggal" id="tanggal" v-model="tanggalPeminjaman" required />
+          <input
+            type="date"
+            name="tanggal"
+            id="tanggal"
+            v-model="tanggalPeminjaman"
+            required
+          />
         </div>
 
         <div class="input-form flex gap-2">
           <div class="w-full">
-            <label for="jamAwal">Jam Mulai {{ jamMulai }} :</label>
+            <label for="jamAwal">Jam Mulai :</label>
             <input type="time" v-model="jamMulai" required />
           </div>
           <div class="w-full">
-            <label for="jamSelesai">Jam Selesai {{ jamSelesai }} :</label>
+            <label for="jamSelesai">Jam Selesai :</label>
             <input type="time" v-model="jamSelesai" required />
           </div>
         </div>
         <div class="input-form">
           <label for="tujuanpeminjaman">Tujuan Peminjaman</label>
-          <textarea name="tujuanpeminjaman" id="tujuanpeminjaman" rows="5" v-model="tujuanPeminjaman" />
+          <textarea
+            name="tujuanpeminjaman"
+            id="tujuanpeminjaman"
+            rows="5"
+            v-model="tujuanPeminjaman"
+          />
+        </div>
+        <div class="input-form">
+          <label for="fileSurat">Surat Pengajuan</label>
+          <input
+            type="file"
+            name="fileSurat"
+            id="fileSurat"
+            @change="uploadSurat"
+            accept="application/pdf"
+            required
+          />
         </div>
 
         <div class="pb-4 text-center">
@@ -148,19 +219,27 @@ const dataPeminjaman = await getItems({
         </NuxtLink>
       </div>
     </section>
-    <section class="max-w-lg ma">
+    <section class="max-w-lg">
       <h1>Daftar Peminjaman Bulan Ini</h1>
       <p class="text-2xl font-semibold text-orange">
         {{ monthName }} {{ date.getFullYear() }}
       </p>
-      <div class="max-w-md grid grid-cols-2 gap-4 ma" v-if="dataPeminjaman.length > 0">
-        <div class="rounded bg-orange w-full p-2" v-for="(item, index) in dataPeminjaman" v-bind:key="item.id">
+      <div
+        class="max-w-md grid grid-cols-2 gap-4 ma"
+        v-if="dataPeminjaman.length > 0"
+      >
+        <div
+          class="rounded bg-orange w-full p-2"
+          v-for="(item, index) in dataPeminjaman"
+          v-bind:key="item.id"
+        >
           <p class="font-semibold text-white text-lg">
             {{ item.tanggal_peminjaman }}
           </p>
           <div class="text-xs text-white">
             <p>
-              <span class="font-semibold">Jam: </span>{{ item.jam_mulai_peminjaman }} -
+              <span class="font-semibold">Jam: </span
+              >{{ item.jam_mulai_peminjaman }} -
               {{ item.jam_selesai_peminjaman }}
             </p>
             <p>
@@ -177,13 +256,17 @@ const dataPeminjaman = await getItems({
       <div v-else>
         <p>Belum ada data.</p>
       </div>
+      <div>
+        Lihat data peminjaman
+        <NuxtLink to="/pengajuan/peminjaman-ruangan/data">disini</NuxtLink>
+      </div>
     </section>
   </main>
 </template>
 
 <style scoped>
 .main-content {
-  --at-apply: max-w-7xl ma flex flex-col-reverse items-center gap-2 text-center my-5 lg:(flex-row);
+  --at-apply: max-w-7xl ma flex justify-center gap-2 flex-col-reverse text-center my-5 lg:(flex-row gap-15);
 }
 
 h1 {
