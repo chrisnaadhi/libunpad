@@ -191,11 +191,11 @@ const viewStateMuseum = ref(false);
 }
 
 .use-banner {
-  --at-apply: text-xs bg-orange text-white px-4 rounded;
+  --at-apply: text-xs mb-1 bg-orange text-white px-4 rounded;
 }
 
 .use-banner-hover {
-  --at-apply: max-w-20 ma text-xs bg-white text-orange px-4 rounded;
+  --at-apply: max-w-30 ma text-xs mb-2 bg-white text-orange px-4 rounded;
 }
 
 .content:hover>.use-banner {
