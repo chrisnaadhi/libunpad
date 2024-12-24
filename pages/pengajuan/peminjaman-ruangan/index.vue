@@ -100,167 +100,172 @@ const dataPeminjaman = await getItems({
 </script>
 
 <template>
-  <main class="main-content">
-    <section class="max-w-lg">
-      <h1>Form Peminjaman Ruangan</h1>
-      <form
-        @submit.prevent="kirimPengajuan"
-        class="container ma max-w-md px-5 text-left"
-      >
-        <div class="input-form">
-          <label for="email">Email :</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            v-model="email"
-            class="cursor-not-allowed"
-            required
-            disabled
-          />
-        </div>
-        <div class="input-form">
-          <label for="npm">NPM / NIP :</label>
-          <input type="number" name="npm" id="npm" v-model="npm" required />
-        </div>
-        <div class="input-form">
-          <label for="nama">Nama Lengkap :</label>
-          <input
-            type="text"
-            name="nama"
-            id="nama"
-            v-model="namaLengkap"
-            required
-          />
-        </div>
+  <main>
+    <div class="main-content">
+      <section class="max-w-lg">
+        <h1>Form Peminjaman Ruangan</h1>
+        <form
+          @submit.prevent="kirimPengajuan"
+          class="container ma max-w-md px-5 text-left"
+        >
+          <div class="input-form">
+            <label for="email">Email :</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              v-model="email"
+              class="cursor-not-allowed"
+              required
+              disabled
+            />
+          </div>
+          <div class="input-form">
+            <label for="npm">NPM / NIP :</label>
+            <input type="number" name="npm" id="npm" v-model="npm" required />
+          </div>
+          <div class="input-form">
+            <label for="nama">Nama Lengkap :</label>
+            <input
+              type="text"
+              name="nama"
+              id="nama"
+              v-model="namaLengkap"
+              required
+            />
+          </div>
 
-        <div class="input-form">
-          <label for="kontak">No. HP / Whatsapp / Kontak Lain :</label>
-          <input
-            type="text"
-            name="kontak"
-            id="kontak"
-            v-model="kontak"
-            required
-          />
-        </div>
-        <div class="input-form">
-          <label for="namaruangan">Nama Ruangan</label>
-          <select
-            name="namaruangan"
-            id="namaruangan"
-            v-model="namaRuangan"
-            required
+          <div class="input-form">
+            <label for="kontak">No. HP / Whatsapp / Kontak Lain :</label>
+            <input
+              type="text"
+              name="kontak"
+              id="kontak"
+              v-model="kontak"
+              required
+            />
+          </div>
+          <div class="input-form">
+            <label for="namaruangan">Nama Ruangan</label>
+            <select
+              name="namaruangan"
+              id="namaruangan"
+              v-model="namaRuangan"
+              required
+            >
+              <option value="ruang_the_gade">Ruang Pegadaian</option>
+              <option value="ruang_kelas_2">Ruang Kelas Lt.2</option>
+              <option value="ruang_teater">Ruang Teater</option>
+              <option value="ruang_telkomsel">Ruang Assistive Learning</option>
+              <option value="ruang_bni_berbagi">
+                Ruang Coaching BNI Berbagi
+              </option>
+            </select>
+          </div>
+          <div class="input-form">
+            <label for="tanggal">Tanggal Peminjaman</label>
+            <input
+              type="date"
+              name="tanggal"
+              id="tanggal"
+              v-model="tanggalPeminjaman"
+              required
+            />
+          </div>
+
+          <div class="input-form flex gap-2">
+            <div class="w-full">
+              <label for="jamAwal">Jam Mulai :</label>
+              <input type="time" v-model="jamMulai" required />
+            </div>
+            <div class="w-full">
+              <label for="jamSelesai">Jam Selesai :</label>
+              <input type="time" v-model="jamSelesai" required />
+            </div>
+          </div>
+          <div class="input-form">
+            <label for="tujuanpeminjaman">Tujuan Peminjaman</label>
+            <textarea
+              name="tujuanpeminjaman"
+              id="tujuanpeminjaman"
+              rows="5"
+              v-model="tujuanPeminjaman"
+            />
+          </div>
+          <div class="input-form">
+            <label for="fileSurat">Surat Pengajuan</label>
+            <input
+              type="file"
+              name="fileSurat"
+              id="fileSurat"
+              @change="uploadSurat"
+              accept="application/pdf"
+              required
+            />
+          </div>
+
+          <div class="pb-4 text-center">
+            <p class="text-sm" :class="textNotif">
+              {{ notification }}
+            </p>
+          </div>
+
+          <button type="submit" class="btn bg-orange text-white w-full">
+            Ajukan
+          </button>
+        </form>
+      </section>
+      <section class="max-w-lg">
+        <h1>Daftar Peminjaman Bulan Ini</h1>
+        <p class="text-2xl font-semibold text-orange">
+          {{ monthName }} {{ date.getFullYear() }}
+        </p>
+        <div
+          class="max-w-md grid grid-cols-2 gap-4 ma py-5"
+          v-if="dataPeminjaman.length > 0"
+        >
+          <div
+            class="rounded bg-orange w-full p-2"
+            v-for="(item, index) in dataPeminjaman"
+            v-bind:key="item.id"
           >
-            <option value="ruang_the_gade">Ruang Pegadaian</option>
-            <option value="ruang_kelas_2">Ruang Kelas Lt.2</option>
-            <option value="ruang_teater">Ruang Teater</option>
-            <option value="ruang_telkomsel">Ruang Assistive Learning</option>
-            <option value="ruang_bni_berbagi">
-              Ruang Coaching BNI Berbagi
-            </option>
-          </select>
-        </div>
-        <div class="input-form">
-          <label for="tanggal">Tanggal Peminjaman</label>
-          <input
-            type="date"
-            name="tanggal"
-            id="tanggal"
-            v-model="tanggalPeminjaman"
-            required
-          />
-        </div>
-
-        <div class="input-form flex gap-2">
-          <div class="w-full">
-            <label for="jamAwal">Jam Mulai :</label>
-            <input type="time" v-model="jamMulai" required />
-          </div>
-          <div class="w-full">
-            <label for="jamSelesai">Jam Selesai :</label>
-            <input type="time" v-model="jamSelesai" required />
+            <p class="font-semibold text-white text-lg">
+              {{ item.tanggal_peminjaman }}
+            </p>
+            <div class="text-xs text-white">
+              <p>
+                <span class="font-semibold">Jam: </span
+                >{{ item.jam_mulai_peminjaman }} -
+                {{ item.jam_selesai_peminjaman }}
+              </p>
+              <p>
+                <span class="font-semibold">Peminjam:</span>
+                {{ item.nama_lengkap }}
+              </p>
+              <p>
+                <span class="font-semibold">Ruangan: </span>
+                {{ definePeminjamanRuangan(item.nama_ruangan) }}
+              </p>
+            </div>
           </div>
         </div>
-        <div class="input-form">
-          <label for="tujuanpeminjaman">Tujuan Peminjaman</label>
-          <textarea
-            name="tujuanpeminjaman"
-            id="tujuanpeminjaman"
-            rows="5"
-            v-model="tujuanPeminjaman"
-          />
+        <div v-else>
+          <p>Belum ada data.</p>
         </div>
-        <div class="input-form">
-          <label for="fileSurat">Surat Pengajuan</label>
-          <input
-            type="file"
-            name="fileSurat"
-            id="fileSurat"
-            @change="uploadSurat"
-            accept="application/pdf"
-            required
-          />
+        <div>
+          Lihat data peminjaman
+          <NuxtLink to="/pengajuan/peminjaman-ruangan/data">disini</NuxtLink>
         </div>
+      </section>
+    </div>
 
-        <div class="pb-4 text-center">
-          <p class="text-sm" :class="textNotif">
-            {{ notification }}
-          </p>
-        </div>
-
-        <button type="submit" class="btn bg-orange text-white w-full">
-          Ajukan
-        </button>
-      </form>
-      <div class="w-full my-10">
-        <NuxtLink class="btn bg-orange text-white" to="/pengajuan">
-          Kembali
+    <div class="w-full max-w-7xl ma py-10">
+      <div class="flex items-center max-w-2xl ma text-center">
+        <NuxtLink class="btn w-full bg-orange text-white" to="/pengajuan">
+          &leftarrow;Kembali
         </NuxtLink>
       </div>
-    </section>
-    <section class="max-w-lg">
-      <h1>Daftar Peminjaman Bulan Ini</h1>
-      <p class="text-2xl font-semibold text-orange">
-        {{ monthName }} {{ date.getFullYear() }}
-      </p>
-      <div
-        class="max-w-md grid grid-cols-2 gap-4 ma"
-        v-if="dataPeminjaman.length > 0"
-      >
-        <div
-          class="rounded bg-orange w-full p-2"
-          v-for="(item, index) in dataPeminjaman"
-          v-bind:key="item.id"
-        >
-          <p class="font-semibold text-white text-lg">
-            {{ item.tanggal_peminjaman }}
-          </p>
-          <div class="text-xs text-white">
-            <p>
-              <span class="font-semibold">Jam: </span
-              >{{ item.jam_mulai_peminjaman }} -
-              {{ item.jam_selesai_peminjaman }}
-            </p>
-            <p>
-              <span class="font-semibold">Peminjam:</span>
-              {{ item.nama_lengkap }}
-            </p>
-            <p>
-              <span class="font-semibold">Ruangan: </span>
-              {{ definePeminjamanRuangan(item.nama_ruangan) }}
-            </p>
-          </div>
-        </div>
-      </div>
-      <div v-else>
-        <p>Belum ada data.</p>
-      </div>
-      <div>
-        Lihat data peminjaman
-        <NuxtLink to="/pengajuan/peminjaman-ruangan/data">disini</NuxtLink>
-      </div>
-    </section>
+    </div>
   </main>
 </template>
 
