@@ -49,6 +49,8 @@ const getFasilitasKandaga = await getItems({
             <NuxtImg
               :src="directusImageUrl(facility.foto_fasilitas)"
               class="w-100 max-w-md h-60 object-cover z-0 rounded-lg"
+              format="webp"
+              quality="50"
             />
           </div>
           <h4>{{ facility.nama_fasilitas }}</h4>
