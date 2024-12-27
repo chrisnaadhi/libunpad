@@ -17,6 +17,8 @@ const prodi = ref("");
 const kontak = ref("");
 const jenisKelas = ref("");
 
+console.log(!npm.value);
+
 const jadwalKelasLiterasi = await getItems({
   collection: "jadwal_kelas_literasi",
   params: {
@@ -24,40 +26,56 @@ const jadwalKelasLiterasi = await getItems({
   },
 });
 
+const chooseKelas = (jadwal) => {
+  jenisKelas.value = jadwal;
+};
+
 const kirimPengajuan = async () => {
-  let items = {
-    npm: npm.value,
-    nama_lengkap: namaLengkap.value,
-    email: email.value,
-    kontak: kontak.value,
-    jenis_kelas: jenisKelas.value,
-    nama_fakultas: fakultas.value,
-    nama_prodi: prodi.value,
-    status_pengajuan: "pengajuan",
-  };
+  if (
+    npm.value === "" ||
+    namaLengkap.value === "" ||
+    email.value === "" ||
+    fakultas.value === "" ||
+    prodi.value === "" ||
+    jenisKelas.value === ""
+  ) {
+    alert("Silahkan isi form terlebih dahulu");
+  } else {
+    let items = {
+      npm: npm.value,
+      nama_lengkap: namaLengkap.value,
+      email: email.value,
+      kontak: kontak.value,
+      jenis_kelas: jenisKelas.value,
+      nama_fakultas: fakultas.value,
+      nama_prodi: prodi.value,
+      status_pengajuan: "pengajuan",
+    };
 
-  try {
-    await createItems({
-      collection: "pengajuan_kelas_literasi_informasi",
-      items,
-    });
-    colorNotif.value = "text-green";
-    notification.value = "Berhasil diajukan";
-    namaLengkap.value = ref("");
-    email.value = data.value.user.email;
-    kontak.value = "";
-    jenisKelas.value = "";
-    fakultas.value = "";
-    prodi.value = "";
+    try {
+      await createItems({
+        collection: "pengajuan_kelas_literasi_informasi",
+        items,
+      });
+      colorNotif.value = "text-green";
+      notification.value = "Berhasil diajukan";
+      namaLengkap.value = ref("");
+      email.value = data.value.user.email;
+      kontak.value = "";
+      jenisKelas.value = "";
+      fakultas.value = "";
+      prodi.value = "";
 
-    status_pengajuan.value = "";
-    setTimeout(async () => {
-      notification.value = "Silahkan isi seluruh form sesuai dengan data asli";
-      colorNotif.value = "text-dark";
-      await navigateTo({ path: "/keanggotaan" });
-    }, 2000);
-  } catch (error) {
-    console.log(error);
+      status_pengajuan.value = "";
+      setTimeout(async () => {
+        notification.value =
+          "Silahkan isi seluruh form sesuai dengan data asli";
+        colorNotif.value = "text-dark";
+        await navigateTo({ path: "/keanggotaan" });
+      }, 2000);
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 </script>
@@ -72,7 +90,7 @@ const kirimPengajuan = async () => {
       </div>
       <div class="input-form">
         <label for="nama-lengkap">Nama Lengkap :</label>
-        <input type="text" id="nama-lengkap" v-model="namaLengkap" equired />
+        <input type="text" id="nama-lengkap" v-model="namaLengkap" required />
       </div>
       <div class="input-form">
         <label for="email">Email :</label>
@@ -110,7 +128,11 @@ const kirimPengajuan = async () => {
         <h4 class="text-center">Silahkan pilih jadwal kelas</h4>
         <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
           <div
-            class="bg-gray-1 border border-orange rounded p-5 flex flex-col justify-between gap-6"
+            class="border border-orange rounded p-5 flex flex-col justify-between gap-6"
+            :class="{
+              'bg-orange-2': jenisKelas === jadwal.id,
+              'bg-gray-1': jenisKelas !== jadwal.id,
+            }"
             v-for="jadwal in jadwalKelasLiterasi"
           >
             <div>
@@ -125,7 +147,12 @@ const kirimPengajuan = async () => {
               <p>
                 {{ jadwal.pengajar.first_name }} {{ jadwal.pengajar.last_name }}
               </p>
-              <button class="btn bg-orange text-white py-1">Pilih Kelas</button>
+              <button
+                @click="chooseKelas(jadwal.id)"
+                class="btn bg-orange text-white py-1"
+              >
+                {{ jenisKelas === jadwal.id ? "Kelas Dipilih" : "Ambil Kelas" }}
+              </button>
             </div>
           </div>
         </div>
@@ -158,6 +185,10 @@ label {
 
 .input-form {
   --at-apply: my-2;
+}
+
+.chosen-class {
+  --at-apply: bg-orange-4;
 }
 
 input,

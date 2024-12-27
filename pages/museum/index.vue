@@ -23,6 +23,9 @@ const museumObj = {
 const getMuseumDataHighlight = await getItems({
   collection: "koleksi_museum",
   params: {
+    filter: {
+      status: "published",
+    },
     limit: 4,
   },
 });
@@ -34,6 +37,9 @@ const filterMuseumData = async () => {
     collectionList.value = await getItems({
       collection: "koleksi_museum",
       params: {
+        filter: {
+          status: "published",
+        },
         search: filterKeyword.value,
         limit: 12,
       },
@@ -45,6 +51,7 @@ const filterMuseumData = async () => {
       params: {
         filter: {
           tipe_koleksi: filterJenisKoleksi.value,
+          status: "published",
         },
         limit: 12,
       },
@@ -68,6 +75,9 @@ const resetFilter = async () => {
   collectionList.value = await getItems({
     collection: "koleksi_museum",
     params: {
+      filter: {
+        status: "published",
+      },
       limit: 12,
     },
   });

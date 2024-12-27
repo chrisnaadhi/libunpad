@@ -24,6 +24,9 @@ const uploadSurat = (event) => {
 const jadwalKelasLiterasi = await getItems({
   collection: "pemeriksaan_turnitin",
   params: {
+    filter: {
+      status: "published",
+    },
     fields: "*",
   },
 });

@@ -23,6 +23,9 @@ const galleryObj = {
 const getGalleryDataHighlight = await getItems({
   collection: "koleksi_gallery",
   params: {
+    filter: {
+      status: "published",
+    },
     limit: 4,
   },
 });
@@ -42,6 +45,9 @@ const getGalleryPaginationData = async (opts) => {
         sort: "-date_created",
         limit: 12,
         offset: currentPage.value,
+        filter: {
+          status: "published",
+        },
       },
     });
   } else if (opts === "previous" && currentPage.value !== 0) {
@@ -53,6 +59,9 @@ const getGalleryPaginationData = async (opts) => {
         sort: "-date_created",
         limit: 12,
         offset: currentPage.value,
+        filter: {
+          status: "published",
+        },
       },
     });
   } else {
@@ -69,6 +78,9 @@ const filterGalleryData = async () => {
       params: {
         search: filterKeyword.value,
         limit: 12,
+        filter: {
+          status: "published",
+        },
       },
     });
   } else if (filterJenisKoleksi.value !== "") {
@@ -80,6 +92,9 @@ const filterGalleryData = async () => {
           tipe_koleksi: filterJenisKoleksi.value,
         },
         limit: 12,
+        filter: {
+          status: "published",
+        },
       },
     });
   } else {
@@ -96,6 +111,9 @@ const resetFilter = async () => {
     params: {
       sort: "-date_created",
       limit: 12,
+      filter: {
+        status: "published",
+      },
     },
   });
 };
@@ -114,6 +132,9 @@ onMounted(async () => {
       sort: "-date_created",
       limit: 12,
       offset: 0,
+      filter: {
+        status: "published",
+      },
     },
   });
 });
