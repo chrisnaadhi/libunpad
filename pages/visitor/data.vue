@@ -2,7 +2,7 @@
 import { displayRuangan, displayKeanggotaan } from "~/composables/user";
 
 useHead({
-  title: "Data Pengunjung Kandaga | Pusat Pengelolaan Pengetahuan",
+  title: "Data Pengunjung Kandaga Universitas Padjadjaran",
 });
 
 definePageMeta({

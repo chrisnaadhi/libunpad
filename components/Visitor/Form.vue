@@ -35,6 +35,8 @@ const displayRuangan = computed(() => {
       return "Ruang Populer";
     case "r_berkala":
       return "Ruang Referensi Koleksi Berkala";
+    case "r_alh":
+      return "Ruang Assistive Learning Hub";
   }
 });
 
@@ -96,7 +98,6 @@ const getRequestLoker = async () => {
   } else {
     return false;
   }
-
 };
 
 const lokerData = async () => {
@@ -116,16 +117,17 @@ const lokerData = async () => {
             },
           },
         ],
-      }
-    }
-  })
+      },
+    },
+  });
 
   if (cekJikaSudahMeminjam.length === 0) {
     peminjamanLokerStore.konfirmasiPeminjam = true;
     const data: any = await getRequestLoker();
     if (data) {
       peminjamanLokerStore.nomorLoker = data.nomor_loker;
-      peminjamanLokerStore.namaPeminjam = identity.value.nama_anggota ?? userData.value;
+      peminjamanLokerStore.namaPeminjam =
+        identity.value.nama_anggota ?? userData.value;
       peminjamanLokerStore.showLokerData = true;
       peminjamanLokerStore.npmPeminjam = identity.value.npm ?? userData.value;
 
@@ -190,7 +192,6 @@ const lokerData = async () => {
       identitas.value.focus();
       peminjamanLokerStore.isFull = true;
       setTimeout(() => {
-
         peminjamanLokerStore.isFull = false;
         showPeminjamanLoker.value = false;
       }, 2000);
@@ -249,14 +250,14 @@ const addVisitor = async () => {
       institusi: validated.value
         ? identity.value.nama_institusi
         : isNumeric(userData.value)
-          ? "Belum mendaftar Keanggotaan"
-          : institusi.value,
+        ? "Belum mendaftar Keanggotaan"
+        : institusi.value,
       nama_ruangan: ruangan.value,
       identitas_anggota: validated.value
         ? identity.value.npm
         : isNumeric(userData.value)
-          ? 54321
-          : 12345,
+        ? 54321
+        : 12345,
     };
 
     await createItems<Item>({ collection: "data_kunjungan", items }).then(
@@ -288,7 +289,6 @@ const addVisitor = async () => {
         validated.value = false;
       }
     );
-
   } catch (e) {
     console.log(e);
   }
@@ -311,8 +311,13 @@ onMounted(async () => {
 <template>
   <main class="max-w-full ma">
     <VisitorModal @display="displayModal" v-if="showModal" />
-    <VisitorLokerPeminjamanLoker :name="peminjamanLokerStore.namaPeminjam" @peminjaman="displayPeminjamanLoker"
-      @tutupPeminjamanLoker="tutupLokerModal" @requestPeminjaman="lokerData" v-if="showPeminjamanLoker" />
+    <VisitorLokerPeminjamanLoker
+      :name="peminjamanLokerStore.namaPeminjam"
+      @peminjaman="displayPeminjamanLoker"
+      @tutupPeminjamanLoker="tutupLokerModal"
+      @requestPeminjaman="lokerData"
+      v-if="showPeminjamanLoker"
+    />
     <VisitorLokerAlertSudahMeminjam v-if="sudahMeminjamLoker" />
     <div class="absolute w-full left-0 mt--25">
       <VisitorBanner :display="displayBanner" v-if="!umum" />
@@ -321,7 +326,14 @@ onMounted(async () => {
     <form @submit.prevent="addVisitor" autocomplete="off">
       <div class="input-block">
         <label for="nomor">NPM / NIP / Nama Lengkap :</label>
-        <input type="text" id="nomor" v-model="userData" autofocus min="5" ref="identitas" />
+        <input
+          type="text"
+          id="nomor"
+          v-model="userData"
+          autofocus
+          min="5"
+          ref="identitas"
+        />
         <p class="text-sm italic text-gray-400">
           Apabila berasal dari luar Unpad, silahkan cantumkan nama dari
           institusinya juga. <br />
@@ -346,12 +358,21 @@ onMounted(async () => {
         </select>
       </div>
 
-      <button class="btn text-white w-xl py-3" :disabled="!userData" :class="!userData ? 'cursor-not-allowed bg-gray' : 'cursor-pointer bg-orange'
-        " @click.prevent="addVisitor">
+      <button
+        class="btn text-white w-xl py-3"
+        :disabled="!userData"
+        :class="
+          !userData ? 'cursor-not-allowed bg-gray' : 'cursor-pointer bg-orange'
+        "
+        @click.prevent="addVisitor"
+      >
         Masuk
       </button>
     </form>
-    <VisitorVirtualKeyboard v-on:choose="focusToIdentitas" v-on:writing="focusToIdentitas" />
+    <VisitorVirtualKeyboard
+      v-on:choose="focusToIdentitas"
+      v-on:writing="focusToIdentitas"
+    />
     <div class="fixed right-0 bottom-0">
       <button class="btn bg-orange" @click="backToIndex">Reset Ruangan</button>
     </div>

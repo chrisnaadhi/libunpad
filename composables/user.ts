@@ -20,6 +20,8 @@ export const displayRuangan = (ruangan: string) => {
         return "Ruang Populer";
       case "r_berkala":
         return "Ruang Referensi Koleksi Berkala";
+      case "r_alh":
+        return "Ruang Assistive Learning Hub"
     }
   }).value?.replace('"', "");
 };
