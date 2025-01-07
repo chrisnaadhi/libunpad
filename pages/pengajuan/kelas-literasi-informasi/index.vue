@@ -22,6 +22,7 @@ console.log(!npm.value);
 const jadwalKelasLiterasi = await getItems({
   collection: "jadwal_kelas_literasi",
   params: {
+    filter: {},
     fields: "*, pengajar.*",
   },
 });
@@ -84,6 +85,39 @@ const kirimPengajuan = async () => {
   <section>
     <h1 class="text-center">Pengajuan Kelas Literasi Informasi</h1>
     <form @submit.prevent="kirimPengajuan" class="p-7">
+      <div class="input-form py-3">
+        <h4 class="text-center mb-3">Silahkan pilih jadwal kelas</h4>
+        <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
+          <div
+            class="border border-orange rounded p-5 flex flex-col justify-between gap-6"
+            :class="{
+              'bg-orange-2': jenisKelas === jadwal.id,
+              'bg-gray-1': jenisKelas !== jadwal.id,
+            }"
+            v-for="jadwal in jadwalKelasLiterasi"
+          >
+            <div>
+              <h4>{{ jadwal.nama_kelas }}</h4>
+              <p>{{ jadwal.deskripsi_kelas }}</p>
+            </div>
+            <div class="flex gap-2">
+              <p>{{ jadwal.tanggal_kelas }}</p>
+              <p>{{ jadwal.jam_mulai }} - {{ jadwal.jam_selesai }}</p>
+            </div>
+            <div class="flex justify-between">
+              <p>
+                {{ jadwal.pengajar.first_name }} {{ jadwal.pengajar.last_name }}
+              </p>
+              <button
+                @click.prevent="chooseKelas(jadwal.id)"
+                class="btn bg-orange text-white py-1"
+              >
+                {{ jenisKelas === jadwal.id ? "Kelas Dipilih" : "Ambil Kelas" }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="input-form">
         <label for="npm">NIP / NPM :</label>
         <input type="text" id="npm" v-model="npm" required />
@@ -124,39 +158,7 @@ const kirimPengajuan = async () => {
         <label for="kontak">No. HP / Whatsapp :</label>
         <input type="text" id="kontak" v-model="kontak" />
       </div>
-      <div class="input-form py-3">
-        <h4 class="text-center">Silahkan pilih jadwal kelas</h4>
-        <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
-          <div
-            class="border border-orange rounded p-5 flex flex-col justify-between gap-6"
-            :class="{
-              'bg-orange-2': jenisKelas === jadwal.id,
-              'bg-gray-1': jenisKelas !== jadwal.id,
-            }"
-            v-for="jadwal in jadwalKelasLiterasi"
-          >
-            <div>
-              <h4>{{ jadwal.nama_kelas }}</h4>
-              <p>{{ jadwal.deskripsi_kelas }}</p>
-            </div>
-            <div class="flex gap-2">
-              <p>{{ jadwal.tanggal_kelas }}</p>
-              <p>{{ jadwal.jam_mulai }} - {{ jadwal.jam_selesai }}</p>
-            </div>
-            <div class="flex justify-between">
-              <p>
-                {{ jadwal.pengajar.first_name }} {{ jadwal.pengajar.last_name }}
-              </p>
-              <button
-                @click="chooseKelas(jadwal.id)"
-                class="btn bg-orange text-white py-1"
-              >
-                {{ jenisKelas === jadwal.id ? "Kelas Dipilih" : "Ambil Kelas" }}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+
       <div class="input-form">
         <button
           class="btn bg-orange text-white py-2 w-full"
