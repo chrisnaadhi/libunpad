@@ -6,7 +6,7 @@ export default {
   introWelcome: "Selamat Datang di",
   chosenNews: "Berita Pilihan",
   homeDescription:
-    "Kandaga merupakan platform yang menyediakan katalog koleksi dan sistem penelusuran ke sumber-sumber informasi yang dimiliki dan dilanggan oleh Universitas Padjadjaran. Kandaga dikelola oleh Kantor Pengelolaan Perpustakaan Unpad.",
+    "Kandaga merupakan platform yang menyediakan katalog koleksi dan sistem penelusuran ke sumber-sumber informasi yang dimiliki dan dilanggan oleh Universitas Padjadjaran. Kandaga merupakan Bahasa Sunda yang memiliki arti \"Tempat menyimpan barang berharga\" sehingga Kandaga Unpad merupakan fasilitas yang menyediakan sumber daya berharga untuk mendukung kegiatan akademik di Universitas Padjadjaran Kandaga dikelola oleh Kantor Pengelolaan Perpustakaan Unpad.",
   searchOurCollection: "Cari koleksi kami disini...",
   searchPage: "Halaman Pencarian",
   ourCollection: "Koleksi Kandaga",

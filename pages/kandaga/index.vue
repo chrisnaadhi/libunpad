@@ -8,7 +8,7 @@ const val = ref('Kandaga')
     <div class="flex flex-col items-center justify-center text-justify">
       <p>Kandaga Universitas Padjadjaran (Unpad) merupakan portal yang menyediakan berbagai sumber informasi dan layanan
         bagi seluruh civitas academica Unpad, termasuk mahasiswa, dosen, tenaga kependidikan, dan alumni. Kandaga
-        dikelola oleh Pusat Pengelolaan Pengetahuan Unpad dan menjadi portal resmi Perpustakaan Pusat Unpad. Kandaga Unpad merupakan portal sumber informasi bagi seluruh civitas akademika Unpad maupun masyarakat diluar Unpad. Kandaga membantu mahasiswa, dosen, dan tenaga kependidikan untuk mengakses informasi, meningkatkan kualitas penelitian dan pendidikan, meningkatkan efisiensi dan efektivitas kerja, serta meningkatkan kolaborasi dalam ranah penelitian dan pendidikan.</p>
+        dikelola oleh Kantor Pengelolaan Perpustakaan Unpad dan menjadi portal resmi Perpustakaan Pusat Unpad. Kandaga Unpad merupakan portal sumber informasi bagi seluruh civitas akademika Unpad maupun masyarakat diluar Unpad. Kandaga membantu mahasiswa, dosen, dan tenaga kependidikan untuk mengakses informasi, meningkatkan kualitas penelitian dan pendidikan, meningkatkan efisiensi dan efektivitas kerja, serta meningkatkan kolaborasi dalam ranah penelitian dan pendidikan.</p>
       <div class="my-5">
         <h3 class="text-center mb-5">Fungsi Utama Kandaga</h3>
         <div class="flex flex-col gap-4 md:(grid grid-cols-4 justify-center)">
