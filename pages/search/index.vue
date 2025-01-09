@@ -273,7 +273,7 @@ onMounted(() => {
                     {{ item?.gmd }}
                   </p>
                   <NuxtImg
-                    :src="item?.image ? `https://kandaga.unpad.ac.id:8010/lib/minigalnano/createthumb.php?filename=images/docs/${item?.image}` : '/images/default_cover.png'"
+                    :src="item?.image ? `https://kandaga.unpad.ac.id:8011/lib/minigalnano/createthumb.php?filename=images/docs/${item?.image}` : '/images/default_cover.png'"
                     class="w-full h-60 border border-orange object-scale-down px-4" format="webp">
                     <p v-show="item?.image === null" class="text-center">No Image</p>
                   </NuxtImg>
@@ -304,7 +304,7 @@ onMounted(() => {
                 </div>
               </div>
               <div class="flex mt-2 text-center">
-                <NuxtLink :href="`https://kandaga.unpad.ac.id:8010/index.php?p=show_detail&id=${item?.biblioId}`"
+                <NuxtLink :href="`https://kandaga.unpad.ac.id:8011/index.php?p=show_detail&id=${item?.biblioId}`"
                   target="_blank" class="btn bg-orange py-1 text-white w-full">
                   Lihat Koleksi
                 </NuxtLink>
