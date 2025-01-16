@@ -126,7 +126,7 @@ const viewPanduan = () => {
             <p>{{ data.user.name }}</p>
             <p class="text-xs">{{ data.user.email }}</p>
             <div class="flex gap-1 mt-2">
-              <NuxtLink to="/profile" class="btn bg-orange text-white py-0"
+              <NuxtLink to="/keanggotaan" class="btn bg-orange text-white py-0"
                 >Keanggotaan</NuxtLink
               >
               <button class="btn bg-red text-white py-0" @click="logout">
