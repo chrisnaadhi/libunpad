@@ -7,9 +7,9 @@ export default NuxtAuthHandler({
     // @ts-expect-error
     GoogleProvider.default({
       clientId:
-        process.env.GOOGLE_CLIENT_ID ?? useRuntimeConfig().authGoogleClientId,
+        process.env.AUTH_KANDAGA_GOOGLE_CLIENT_ID ?? useRuntimeConfig().authGoogleClientId,
       clientSecret:
-        process.env.GOOGLE_CLIENT_SECRET ??
+        process.env.AUTH_KANDAGA_GOOGLE_CLIEN_SECRET ??
         useRuntimeConfig().authGoogleClientSecret,
       window: {
         name: "_blank",

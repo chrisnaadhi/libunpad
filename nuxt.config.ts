@@ -80,7 +80,7 @@ export default defineNuxtConfig({
   auth: {
     isEnabled: true,
     disableServerSideAuth: false,
-    baseURL: process.env.KANDAGA_AUTH_BASEURL,
+    baseURL: process.env.AUTH_KANDAGA_BASEURL,
     provider: {
       type: "authjs",
       trustHost: false,
@@ -90,9 +90,9 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    authSecret: process.env.KANDAGA_AUTH_SECRET,
-    authGoogleClientId: process.env.KANDAGA_GOOGLE_CLIENT_ID,
-    authGoogleClientSecret: process.env.KANDAGA_GOOGLE_CLIENT_SECRET,
+    authSecret: process.env.AUTH_KANDAGA_SECRET,
+    authGoogleClientId: process.env.AUTH_KANDAGA_GOOGLE_CLIENT_ID,
+    authGoogleClientSecret: process.env.AUTH_KANDAGA_GOOGLE_CLIENT_SECRET,
     urlApiKandaga: process.env.KANDAGA_URL_API_KANDAGA,
     directusUrl: process.env.KANDAGA_DIRECTUS_BASE_URL,
     directusAuthToken: process.env.KANDAGA_DIRECTUS_ACCESS_TOKEN,
