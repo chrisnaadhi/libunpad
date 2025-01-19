@@ -5,10 +5,10 @@ export default {
   out: "server/lib/migrations",
   driver: "mysql2",
   dbCredentials: {
-    host: process.env.DRIZZLE_HOST!,
-    password: process.env.DRIZZLE_PASSWORD,
-    user: process.env.DRIZZLE_USERNAME,
-    port: Number(process.env.DRIZZLE_PORT),
-    database: process.env.DRIZZLE_DATABASE!,
+    host: process.env.KANDAGA_DRIZZLE_HOST!,
+    password: process.env.KANDAGA_DRIZZLE_PASSWORD,
+    user: process.env.KANDAGA_DRIZZLE_USERNAME,
+    port: Number(process.env.KANDAGA_DRIZZLE_PORT),
+    database: process.env.KANDAGA_DRIZZLE_DATABASE!,
   },
 } satisfies Config;
