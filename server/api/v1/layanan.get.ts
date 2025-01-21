@@ -37,7 +37,7 @@ export default defineEventHandler((event) => {
       slugName: "Ajukan",
       secondSlug: "/pengajuan/kelas-literasi-informasi/data",
       secondSlugName: "Informasi Ajuan",
-      isActive: true,
+      isActive: false,
     },
     {
       namaLayanan: "Pengajuan Pemeriksaan Turnitin",
@@ -47,7 +47,7 @@ export default defineEventHandler((event) => {
       slugName: "Ajukan",
       secondSlug: "/pengajuan/pemeriksaan-turnitin/informasi",
       secondSlugName: "Informasi Ajuan",
-      isActive: true,
+      isActive: false,
     },
     {
       namaLayanan: "Konsultasi Perpustakaan",
@@ -57,7 +57,7 @@ export default defineEventHandler((event) => {
       slugName: "Ajukan",
       secondSlug: "/pengajuan/konsultasi/informasi",
       secondSlugName: "Informasi Ajuan",
-      isActive: true,
+      isActive: false,
     },
     {
       namaLayanan: "Kunjungan dan Tur Kandaga",
@@ -67,7 +67,7 @@ export default defineEventHandler((event) => {
       slugName: "Ajukan",
       secondSlug: "/pengajuan/kunjungan/informasi",
       secondSlugName: "Informasi Ajuan",
-      isActive: true,
+      isActive: false,
     },
   ];
 });
