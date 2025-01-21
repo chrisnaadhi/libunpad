@@ -27,6 +27,9 @@ const getGalleryDataHighlight = await getItems({
       status: "published",
     },
     limit: 4,
+    filter: {
+      status: "published",
+    },
   },
 });
 
@@ -90,6 +93,7 @@ const filterGalleryData = async () => {
       params: {
         filter: {
           tipe_koleksi: filterJenisKoleksi.value,
+          status: "published",
         },
         limit: 12,
         filter: {

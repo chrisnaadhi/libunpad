@@ -42,6 +42,9 @@ const filterMuseumData = async () => {
         },
         search: filterKeyword.value,
         limit: 12,
+        filter: {
+          status: "published",
+        },
       },
     });
   } else if (filterJenisKoleksi.value !== "") {
@@ -79,6 +82,9 @@ const resetFilter = async () => {
         status: "published",
       },
       limit: 12,
+      filter: {
+        status: "published",
+      },
     },
   });
 };
@@ -98,6 +104,9 @@ const getMuseumPaginationData = async (opts) => {
         sort: "-date_created",
         limit: 12,
         offset: currentPage.value,
+        filter: {
+          status: "published",
+        },
       },
     });
   } else if (opts === "previous" && currentPage.value !== 0) {
@@ -109,6 +118,9 @@ const getMuseumPaginationData = async (opts) => {
         sort: "-date_created",
         limit: 12,
         offset: currentPage.value,
+        filter: {
+          status: "published",
+        },
       },
     });
   } else {
@@ -123,6 +135,9 @@ onMounted(async () => {
       sort: "-date_created",
       limit: 12,
       offset: 0,
+      filter: {
+        status: "published",
+      },
     },
   });
 });

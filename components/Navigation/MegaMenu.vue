@@ -1,6 +1,5 @@
 <script setup>
-const defaultDescription =
-  "Kandaga merupakan branding dari Perpustakaan Pusat di Universitas Padjadjaran. Kandaga menjadi portal dan layanan dari Perpustakaan Pusat untuk memenuhi kebutuhan kegiatan belajar dan mengajar mahasiswa serta dosen. Kandaga memberikan layanan dan fasilitas yang bisa dimanfaatkan oleh seluruh mahasiswa, dosen serta tenaga kependidikan.";
+const defaultDescription = "Kandaga merupakan branding dari Perpustakaan Pusat Universitas Padjadjaran. Kandaga merupakan Bahasa Sunda yang memiliki arti \"Tempat menyimpan barang berharga\" sehingga Kandaga Unpad merupakan fasilitas yang menyediakan sumber daya berharga untuk mendukung kegiatan akademik di Universitas Padjadjaran. Kandaga menjadi portal dan layanan dari Perpustakaan Pusat untuk memenuhi kebutuhan kegiatan belajar dan mengajar mahasiswa serta dosen. Kandaga memberikan layanan dan fasilitas yang bisa dimanfaatkan oleh seluruh mahasiswa, dosen serta tenaga kependidikan.";
 
 defineProps({
   imgFile: String,

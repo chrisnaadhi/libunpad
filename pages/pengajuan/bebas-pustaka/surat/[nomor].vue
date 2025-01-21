@@ -34,8 +34,15 @@ useHead({
 
 <template>
   <section>
-    <div class="flex flex-col items-center my-2 noPrint" v-show="getDataSurat?.persyaratan?.length > 1">
-      <button type="button" class="btn bg-blue text-white" @click="downloadSurat">
+    <div
+      class="flex flex-col items-center my-2 noPrint"
+      v-show="getDataSurat?.persyaratan?.length > 1"
+    >
+      <button
+        type="button"
+        class="btn bg-blue text-white"
+        @click="downloadSurat"
+      >
         Print / Simpan
       </button>
       <p class="italic text-center mt-4 text-sm">
@@ -43,15 +50,19 @@ useHead({
         / Laptop
       </p>
     </div>
-    <article ref="suratSection" v-if="getDataSurat?.persyaratan?.length > 1 &&
-      getDataSurat?.status_pengajuan === 'selesai'
-      ">
+    <article
+      ref="suratSection"
+      v-if="
+        getDataSurat?.persyaratan?.length > 1 &&
+        getDataSurat?.status_pengajuan === 'selesai'
+      "
+    >
       <div class="flex items-center justify-evenly">
         <NuxtImg src="images/lambang-unpad.png" class="w-24 h-24"></NuxtImg>
         <div class="text-center text-dark">
-          <h6>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI</h6>
+          <h6>KEMENTERIAN PENDIDIKAN TINGGI, SAINS, DAN TEKNOLOGI</h6>
           <h6>UNIVERSITAS PADJADJARAN</h6>
-          <h6>PUSAT PENGELOLAAN PENGETAHUAN</h6>
+          <h6>KANTOR PENGELOLAAN PERPUSTAKAAN</h6>
           <p>Jl. Raya Bandung - Sumedang Km. 21 Jatinangor 45363</p>
           <p>Telp : 022-8428806 , E-mail : perpustakaan@unpad.ac.id</p>
         </div>
@@ -102,21 +113,36 @@ useHead({
           <div>
             <p>Jatinangor, {{ bebasPustakaDate(getDataSurat.date_updated) }}</p>
             <p>a.n. Kepala Pusat Pengelolaan Pengetahuan Unpad</p>
-            <div v-if="getDataSurat.user_updated ===
-              '18C2332E-6589-4424-B613-AAB2141F9450'
-              ">
-              <NuxtImg src="images/ttd_kepala.png" v-show="getDataSurat.nama_fakultas !== 'fikom'"
-                class="w-45 mt--15 mb--8" />
+            <div
+              v-if="
+                getDataSurat.user_updated ===
+                '18C2332E-6589-4424-B613-AAB2141F9450'
+              "
+            >
+              <NuxtImg
+                src="images/ttd_kepala.png"
+                v-show="getDataSurat.nama_fakultas !== 'fikom'"
+                class="w-45 mt--15 mb--8"
+              />
             </div>
-            <div v-else-if="getDataSurat.user_updated ===
-              '95B9A96B-1BC5-44F4-BB6D-994D658CB1AF'
-              ">
-              <NuxtImg src="images/ttd_kepala2p.png" v-show="getDataSurat.nama_fakultas !== 'fikom'"
-                class="w-45 mt--5 mb--5" />
+            <div
+              v-else-if="
+                getDataSurat.user_updated ===
+                '95B9A96B-1BC5-44F4-BB6D-994D658CB1AF'
+              "
+            >
+              <NuxtImg
+                src="images/ttd_kepala2p.png"
+                v-show="getDataSurat.nama_fakultas !== 'fikom'"
+                class="w-45 mt--5 mb--5"
+              />
             </div>
             <div v-else>
-              <NuxtImg src="images/ttd_kepala2p.png" v-show="getDataSurat.nama_fakultas !== 'fikom'"
-                class="w-45 mt--5 mb--5" />
+              <NuxtImg
+                src="images/ttd_kepala2p.png"
+                v-show="getDataSurat.nama_fakultas !== 'fikom'"
+                class="w-45 mt--5 mb--5"
+              />
             </div>
             <div v-show="getDataSurat.nama_fakultas === 'fikom'">
               <div class="py-10" />

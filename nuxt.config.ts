@@ -40,8 +40,8 @@ export default defineNuxtConfig({
   },
 
   directus: {
-    url: process.env.DIRECTUS_BASE_URL,
-    token: process.env.DIRECTUS_ACCESS_TOKEN,
+    url: process.env.KANDAGA_DIRECTUS_BASE_URL,
+    token: process.env.KANDAGA_DIRECTUS_ACCESS_TOKEN,
   },
 
   i18n: {
@@ -77,7 +77,7 @@ export default defineNuxtConfig({
   auth: {
     isEnabled: true,
     disableServerSideAuth: false,
-    baseURL: process.env.AUTH_BASEURL,
+    baseURL: process.env.AUTH_KANDAGA_BASEURL,
     provider: {
       type: "authjs",
       trustHost: false,
@@ -87,32 +87,32 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    authSecret: process.env.AUTH_SECRET,
-    authGoogleClientId: process.env.GOOGLE_CLIENT_ID,
-    authGoogleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    urlApiKandaga: process.env.URL_API_KANDAGA,
-    directusUrl: process.env.DIRECTUS_BASE_URL,
-    directusAuthToken: process.env.DIRECTUS_ACCESS_TOKEN,
-    dbHost: process.env.DRIZZLE_HOST,
-    dbUsername: process.env.DRIZZLE_USERNAME,
-    dbName: process.env.DRIZZLE_DATABASE,
-    dbPassword: process.env.DRIZZLE_PASSWORD,
-    dbPort: Number(process.env.DRIZZLE_PORT),
+    authSecret: process.env.AUTH_KANDAGA_SECRET,
+    authGoogleClientId: process.env.AUTH_KANDAGA_GOOGLE_CLIENT_ID,
+    authGoogleClientSecret: process.env.AUTH_KANDAGA_GOOGLE_CLIENT_SECRET,
+    urlApiKandaga: process.env.KANDAGA_URL_API_KANDAGA,
+    directusUrl: process.env.KANDAGA_DIRECTUS_BASE_URL,
+    directusAuthToken: process.env.KANDAGA_DIRECTUS_ACCESS_TOKEN,
+    dbHost: process.env.KANDAGA_DRIZZLE_HOST,
+    dbUsername: process.env.KANDAGA_DRIZZLE_USERNAME,
+    dbName: process.env.KANDAGA_DRIZZLE_DATABASE,
+    dbPassword: process.env.KANDAGA_DRIZZLE_PASSWORD,
+    dbPort: Number(process.env.KANDAGA_DRIZZLE_PORT),
     turnstile: {
-      secretKey: process.env.TURNSTILE_SECRETKEY
+      secretKey: process.env.KANDAGA_TURNSTILE_SECRETKEY
     },
     app: {
       directusPublicUrl: process.env.DIRECTUS_BASE_URL,
       directusAuthToken: process.env.DIRECTUS_ACCESS_TOKEN,
     },
     public: {
-      meiliHost: process.env.MEILI_HOST,
-      meiliApiKey: process.env.MEILI_API_KEY,
-      directusPublicUrl: process.env.DIRECTUS_BASE_URL,
-      dSpacePublic: process.env.DSPACE_URL,
-      dSpaceFront: process.env.DSPACE_FRONTEND,
-      dSpaceAuthPublic: process.env.DSPACE_AUTH,
-      dSpaceCredentials: `user=${process.env.DSPACE_EMAIL}&password=${process.env.DSPACE_PASSWORD}`,
+      meiliHost: process.env.KANDAGA_MEILI_HOST,
+      meiliApiKey: process.env.KANDAGA_MEILI_API_KEY,
+      directusPublicUrl: process.env.KANDAGA_DIRECTUS_BASE_URL,
+      dSpacePublic: process.env.KANDAGA_SPACE_URL,
+      dSpaceFront: process.env.KANDAGA_DSPACE_FRONTEND,
+      dSpaceAuthPublic: process.env.KANDAGA_DSPACE_AUTH,
+      dSpaceCredentials: `user=${process.env.KANDAGA_DSPACE_EMAIL}&password=${process.env.KANDAGA_DSPACE_PASSWORD}`,
     },
   },
 
@@ -120,8 +120,8 @@ export default defineNuxtConfig({
     enabled: true,
     ignoredHostnames: ["localhost"],
     hashMode: false,
-    domain: process.env.NUXT_PUBLIC_PLAUSIBLE_DOMAIN,
-    apiHost: process.env.NUXT_PUBLIC_PLAUSIBLE_API_HOST,
+    domain: process.env.KANDAGA_NUXT_PUBLIC_PLAUSIBLE_DOMAIN,
+    apiHost: process.env.KANDAGA_NUXT_PUBLIC_PLAUSIBLE_API_HOST,
     autoPageviews: true,
   },
 
@@ -144,6 +144,6 @@ export default defineNuxtConfig({
     },
   },
   turnstile: {
-    siteKey: process.env.TURNSTILE_SITEKEY,
+    siteKey: process.env.KANDAGA_TURNSTILE_SITEKEY,
   }
 });

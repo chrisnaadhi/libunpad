@@ -6,7 +6,7 @@ export default {
   introWelcome: "Welcome to",
   chosenNews: "Selected News",
   homeDescription:
-    "Kandaga is a platform that provides a collection catalog and search system for information sources owned and subscribed to by Universitas Padjadjaran. Kandaga is managed by Kantor Pengelolaan Perpustakaan Unpad",
+    "Kandaga is a platform that provides a collection catalog and a search system for information sources owned and subscribed to by Padjadjaran University. Kandaga is a Sundanese language that means \"A place to store valuables things\" so Kandaga Unpad is a facility that provides valuable resources to support academic activities at Padjadjaran University. Kandaga is managed by Kantor Pengelolaan Perpustakaan Unpad",
   searchOurCollection: "Search our collections here...",
   searchPage: "Search Page",
   ourCollection: "Kandaga's Collection",

@@ -25,6 +25,9 @@ const getArchiveDataHighlight = await getItems({
   collection: "koleksi_archive",
   params: {
     limit: 4,
+    filter: {
+      status: "published",
+    },
   },
 });
 
@@ -42,6 +45,9 @@ const getArchivePaginationData = async (opts) => {
         sort: "-date_created",
         limit: 12,
         offset: currentPage.value,
+        filter: {
+          status: "published",
+        },
       },
     });
   } else if (opts === "previous" && currentPage.value !== 0) {
@@ -53,6 +59,9 @@ const getArchivePaginationData = async (opts) => {
         sort: "-date_created",
         limit: 12,
         offset: currentPage.value,
+        filter: {
+          status: "published",
+        },
       },
     });
   } else {
@@ -70,6 +79,9 @@ const filterArchiveData = async () => {
       params: {
         search: filterKeyword.value,
         limit: 12,
+        filter: {
+          status: "published",
+        },
       },
     }).finally(() => {
       isSearching.value = false;
@@ -87,6 +99,7 @@ const filterArchiveData = async () => {
       params: {
         filter: {
           tipe_koleksi: filterJenisKoleksi.value,
+          status: "published",
         },
         limit: 12,
       },
@@ -113,6 +126,9 @@ const resetFilter = async () => {
     params: {
       sort: "-date_created",
       limit: 12,
+      filter: {
+        status: "published",
+      },
     },
   });
 };
@@ -131,6 +147,9 @@ onMounted(async () => {
       sort: "-date_created",
       limit: 12,
       offset: 0,
+      filter: {
+        status: "published",
+      },
     },
   });
 });

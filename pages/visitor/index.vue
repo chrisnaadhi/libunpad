@@ -4,7 +4,7 @@ definePageMeta({
   layout: "kunjungan",
 });
 useHead({
-  title: "Daftar Kunjungan Pusat Pengelolaan Pengetahuan UNPAD",
+  title: "Daftar Kunjungan Kandaga Universitas Padjadjaran",
 });
 </script>
 
@@ -16,7 +16,7 @@ useHead({
         Daftar Kunjungan
       </h1>
       <h3 class="text-dark font-800 py-2 text-xs sm:text-sm">
-        Pusat Pengelolaan Pengetahuan Universitas Padjadjaran
+        Kandaga Universitas Padjadjaran
       </h3>
     </div>
     <div>
