@@ -38,6 +38,15 @@ export const definePeminjamanRuangan = (ruangan: string) => {
     case "ruang_kelas_2":
       return "Ruang Kelast Lt.2";
 
+    case "ruang_teater":
+      return "Ruang Teater Pengetahuan Rektorat";
+
+    case "ruang_alh":
+      return "Ruang Assistive Learning Hub Lt.4";
+
+    case "ruang_bni_berbagi":
+      return "Ruang BNI Berbagi Lt.1";
+
     default:
       return "Belum dibuat";
   }

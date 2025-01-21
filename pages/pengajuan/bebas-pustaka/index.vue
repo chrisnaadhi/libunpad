@@ -9,7 +9,7 @@ const { data } = useAuth();
 const npm = ref("");
 const notification = ref("Silahkan isi seluruh form sesuai dengan data asli");
 const textNotif = ref("text-dark");
-const namaLengkap = ref("");
+const namaLengkap = ref(data.value.user.name);
 const email = ref(data.value.user.email);
 const fakultas = ref("");
 const prodi = ref("");
@@ -82,26 +82,52 @@ const isDup = await checkDuplicateSubmission();
       </p>
       <NuxtLink to="/keanggotaan"> Keanggotaan </NuxtLink>
     </div>
-    <form v-else @submit.prevent="kirimPengajuan" class="container ma max-w-md px-5 text-left">
+    <form
+      v-else
+      @submit.prevent="kirimPengajuan"
+      class="container ma max-w-md px-5 text-left"
+    >
       <div class="input-form">
         <label for="npm">NPM :</label>
         <input type="text" name="npm" id="npm" v-model="npm" required />
       </div>
       <div class="input-form">
         <label for="nama">Nama Lengkap :</label>
-        <input type="text" name="nama" id="nama" v-model="namaLengkap" required />
+        <input
+          type="text"
+          name="nama"
+          id="nama"
+          v-model="namaLengkap"
+          required
+        />
       </div>
       <div class="input-form">
         <label for="email">Email :</label>
-        <input type="email" name="email" id="email" v-model="email" disabled required />
+        <input
+          type="email"
+          name="email"
+          id="email"
+          v-model="email"
+          disabled
+          required
+        />
       </div>
       <div class="input-form">
         <label for="fakultas">Nama Fakultas</label>
-        <select name="fakultas" id="fakultas" v-model="fakultas" required class="overflow-y-scroll">
+        <select
+          name="fakultas"
+          id="fakultas"
+          v-model="fakultas"
+          required
+          class="overflow-y-scroll"
+        >
           <option value="" selected disabled>
             Silahkan pilih Nama Fakultas
           </option>
-          <option v-for="fakultas in dataFakultas.objFakultas" :value="fakultas.singkatan">
+          <option
+            v-for="fakultas in dataFakultas.objFakultas"
+            :value="fakultas.singkatan"
+          >
             {{ fakultas.namaFakultas }}
           </option>
         </select>
@@ -112,7 +138,13 @@ const isDup = await checkDuplicateSubmission();
       </div>
       <div class="input-form">
         <label for="kontak">No. HP / Whatsapp :</label>
-        <input type="text" name="kontak" id="kontak" v-model="kontak" required />
+        <input
+          type="text"
+          name="kontak"
+          id="kontak"
+          v-model="kontak"
+          required
+        />
       </div>
       <div class="input-form">
         <label for="keperluan">Keperluan Pengajuan :</label>

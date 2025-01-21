@@ -149,6 +149,7 @@ export const displayTanggalIndonesia = (tanggal: string) => {
 
   return formattedDate;
 };
+
 export function dateToISOLikeButLocal(date: Date): string {
   const offsetMs = date.getTimezoneOffset() * 60 * 1000;
   const msLocal = date.getTime() - offsetMs;
@@ -156,4 +157,21 @@ export function dateToISOLikeButLocal(date: Date): string {
   const iso = dateLocal.toISOString();
   const isoLocal = iso.slice(0, 19);
   return isoLocal;
+}
+
+export function checkIfDateIsAlreadyTaken(dateChosen: string, dateTaken: string[]) {
+  const chosenDateTime = new Date(dateChosen);
+
+  for (const timeRange of dateTaken) {
+    const [startTime, endTime] = timeRange.split(' - ');
+    const startDateTime = new Date(startTime);
+    const endDateTime = new Date(endTime);
+
+    // Check if the chosen date falls within the existing time range
+    if (chosenDateTime >= startDateTime && chosenDateTime < endDateTime) {
+      return false; // Date is taken
+    }
+  }
+
+  return true
 }

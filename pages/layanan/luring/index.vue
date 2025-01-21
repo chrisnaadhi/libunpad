@@ -1,7 +1,7 @@
 <script setup>
 const { getItems } = useDirectusItems();
 
-const val = ref("Layanan Daring Kandaga");
+const val = ref("Layanan Luring Kandaga");
 const dataLayananLuring = await getItems({
   collection: "layanan_luring_kandaga",
 });

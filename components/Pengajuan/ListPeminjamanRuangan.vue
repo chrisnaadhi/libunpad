@@ -25,15 +25,23 @@ const displayStatusPeminjaman = (val) => {
     case "cancel":
       return "bg-red";
     default:
-      return "bg-orange-50 text-dark";
+      return "bg-orange";
   }
 };
 const displayNamaRuangan = (val) => {
   switch (val) {
     case "ruang_the_gade":
-      return "Ruang Pegadaian - The Gade";
+      return "Ruang Pegadaian Lt. 1";
+    case "plaza_kandaga":
+      return "Plaza Kandaga Lt. 1";
     case "ruang_kelas_2":
       return "Ruang Kelas Lt. 2";
+    case "ruang_hybrid":
+      return "Ruang Kelas Hybrid Lt. 4";
+    case "ruang_alh":
+      return "Ruang Assistive Learning Hub Lt. 4";
+    case "teater_pengetahuan":
+      return "Teater Pengetahuan Rektorat";
     default:
       return "Ruang Baru";
   }
@@ -49,7 +57,7 @@ const tableHeadPublic = [
 </script>
 
 <template>
-  <section class="py-5">
+  <section class="py-5 px-3 lg:px-0">
     <GenericTableData>
       <template #tablehead>
         <tr>
@@ -68,7 +76,10 @@ const tableHeadPublic = [
           <td class="table-border">
             {{ elem.jam_mulai_peminjaman }} - {{ elem.jam_selesai_peminjaman }}
           </td>
-          <td class="table-border text-white" :class="displayStatusPeminjaman(elem.status_peminjaman)">
+          <td
+            class="table-border text-white"
+            :class="displayStatusPeminjaman(elem.status_peminjaman)"
+          >
             {{ elem.status_peminjaman }}
           </td>
         </tr>
