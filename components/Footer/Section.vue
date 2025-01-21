@@ -78,8 +78,8 @@ defineProps({
           <ul class="md:text-left">
             <h4>{{ $t("footerSocialMedia") }}</h4>
             <li>
-              <NuxtLink to="mailto:pusat.pengetahuan@unpad.ac.id"
-                >pusat.pengetahuan@unpad.ac.id</NuxtLink
+              <NuxtLink to="mailto:perpustakaan@unpad.ac.id"
+                >perpustakaan@unpad.ac.id</NuxtLink
               >
             </li>
             <li>
