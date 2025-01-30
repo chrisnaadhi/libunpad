@@ -32,7 +32,7 @@ const dataMuseum = await getItems({
 })
 
 useHead({
-  title: "GLAM Kandaga Unpad | Universitas Padjadjaran",
+  title: "Kandaga Library - Perpustakaan Universitas Padjadjaran | Kandaga Unpad",
 });
 
 </script>

@@ -14,7 +14,7 @@ useHead({
     {
       property: "og:description",
       content:
-        "Situs GLAM (Gallery, Library, Archive & Museums) dari Kandaga Pusat Pengelolaan Pengetahuan Universitas Padjadjaran. Situs ini menjadi pintu pencarian dan penyajian koleksi yang dimiliki oleh Universitas Padjadjaran yang dapat diakses oleh seluruh kalangan masyarakat.",
+        "Kandaga Library Situs Resmi Perpustakaan Universitas Padjadjaran yang menyediakan layanan informasi dan referensi bagi seluruh sivitas akademika Universitas Padjadjaran dan juga masyarakat umum.",
     },
     {
       property: "og:image",
