@@ -26,9 +26,6 @@ importers:
       easyqrcodejs:
         specifier: ^4.6.1
         version: 4.6.1
-      meilisearch:
-        specifier: ^0.34.2
-        version: 0.34.2
       mysql2:
         specifier: ^3.11.3
         version: 3.11.3
@@ -38,9 +35,6 @@ importers:
       pinia:
         specifier: ^2.2.2
         version: 2.2.2(vue@3.5.8)
-      v-calendar:
-        specifier: ^3.1.2
-        version: 3.1.2(@popperjs/core@2.11.8)(vue@3.5.8)
     devDependencies:
       '@iconify-json/mdi':
         specifier: ^1.2.0
@@ -1571,17 +1565,11 @@ packages:
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
 
-  '@types/lodash@4.17.9':
-    resolution: {integrity: sha512-w9iWudx1XWOHW5lQRS9iKpK/XuRhnN+0T7HvdCCd802FYkT1AMTnxndJHGrNJwRoRHkslGr4S29tjm1cT7x/7w==}
-
   '@types/mdast@4.0.4':
     resolution: {integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==}
 
   '@types/node@22.7.2':
     resolution: {integrity: sha512-866lXSrpGpgyHBZUa2m9YNWqHDjjM0aBTJlNtYaGEw4rqY/dcD7deRVTbBBAJelfA7oaGDbNftXF/TL/A6RgoA==}
-
-  '@types/resize-observer-browser@0.1.11':
-    resolution: {integrity: sha512-cNw5iH8JkMkb3QkCoe7DaZiawbDQEUX8t7iuQaRTyLOyQCR2h+ibBD4GJt7p5yhUHrlOeL7ZtbxNHeipqNsBzQ==}
 
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
@@ -2296,9 +2284,6 @@ packages:
     resolution: {integrity: sha512-ULYhWIonJzlScCCQrPUG5uMXzXxSixty4djud9SS37DoNxDdkeRocxzHuAo4ImRBUK+mAuU5X9TSwEDccnnuPg==}
     hasBin: true
 
-  cross-fetch@3.1.8:
-    resolution: {integrity: sha512-cvA+JwZoU0Xq+h6WkMvAUqPEYy92Obet6UdKLfW60qn99ftItKjB5T+BkyWOFWe2pUyfQ+IJHmpOTznqk1M6Kg==}
-
   cross-spawn@7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
     engines: {node: '>= 8'}
@@ -2368,15 +2353,6 @@ packages:
   d@1.0.2:
     resolution: {integrity: sha512-MOqHvMWF9/9MX6nza0KgvFH4HpMU0EF5uUDXqX/BtxtU8NfB0QzRtJ8Oe/6SuS4kbhyzVJwjd97EA4PKrzJ8bw==}
     engines: {node: '>=0.12'}
-
-  date-fns-tz@2.0.1:
-    resolution: {integrity: sha512-fJCG3Pwx8HUoLhkepdsP7Z5RsucUi+ZBOxyM5d0ZZ6c4SdYustq0VMmOu6Wf7bli+yS/Jwp91TOCqn9jMcVrUA==}
-    peerDependencies:
-      date-fns: 2.x
-
-  date-fns@2.30.0:
-    resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
-    engines: {node: '>=0.11'}
 
   dayjs-nuxt@1.2.7:
     resolution: {integrity: sha512-sDiyugmpIePo1UJxqiRI/9PL6ictkSpBJXxbH/8MA64w7UL4sVwE3s/JFKnJvxkgkEjPRuJw01s6qZPHFnxy+g==}
@@ -3330,9 +3306,6 @@ packages:
 
   mdn-data@2.0.30:
     resolution: {integrity: sha512-GaqWWShW4kv/G9IEucWScBx9G1/vsFZZJUO+tD26M8J8z3Kw5RDQjaoZe03YAClgeS/SWPOcb4nkFBTEi5DUEA==}
-
-  meilisearch@0.34.2:
-    resolution: {integrity: sha512-bbiq8pr+3yyOLU+9qdnNX7CEUQCFNs13Vgrne1iNXVnnRxj9aPRpWP8Kh8o0mdQ2tVKJKGZ7MN5rCGm6qvu52A==}
 
   memoizee@0.4.17:
     resolution: {integrity: sha512-DGqD7Hjpi/1or4F/aYAspXKNm5Yili0QDAFAY4QYvpqpgiY6+1jOfqpmByzjxbWd/T9mChbCArXAbDAsTm5oXA==}
@@ -4606,12 +4579,6 @@ packages:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
     hasBin: true
 
-  v-calendar@3.1.2:
-    resolution: {integrity: sha512-QDWrnp4PWCpzUblctgo4T558PrHgHzDtQnTeUNzKxfNf29FkCeFpwGd9bKjAqktaa2aJLcyRl45T5ln1ku34kg==}
-    peerDependencies:
-      '@popperjs/core': ^2.0.0
-      vue: ^3.2.0
-
   v-lazy-show@0.2.4:
     resolution: {integrity: sha512-Lx9Str2i+HTh+zGzs9O3YyhGAZOAAfU+6MUUPcQPPiPxQO1sHBEv9sH3MO9bPc4T09gsjsS2+sbaCWQ1MdhpJQ==}
     peerDependencies:
@@ -4791,11 +4758,6 @@ packages:
 
   vue-router@4.4.5:
     resolution: {integrity: sha512-4fKZygS8cH1yCyuabAXGUAsyi1b2/o/OKgu/RUb+znIYOxPRxdkytJEx+0wGcpBE1pX6vUgh5jwWOKRGvuA/7Q==}
-    peerDependencies:
-      vue: ^3.2.0
-
-  vue-screen-utils@1.0.0-beta.13:
-    resolution: {integrity: sha512-EJ/8TANKhFj+LefDuOvZykwMr3rrLFPLNb++lNBqPOpVigT2ActRg6icH9RFQVm4nHwlHIHSGm5OY/Clar9yIg==}
     peerDependencies:
       vue: ^3.2.0
 
@@ -6460,8 +6422,6 @@ snapshots:
 
   '@types/json-schema@7.0.15': {}
 
-  '@types/lodash@4.17.9': {}
-
   '@types/mdast@4.0.4':
     dependencies:
       '@types/unist': 3.0.3
@@ -6469,8 +6429,6 @@ snapshots:
   '@types/node@22.7.2':
     dependencies:
       undici-types: 6.19.8
-
-  '@types/resize-observer-browser@0.1.11': {}
 
   '@types/resolve@1.20.2': {}
 
@@ -7382,12 +7340,6 @@ snapshots:
 
   cronstrue@2.50.0: {}
 
-  cross-fetch@3.1.8:
-    dependencies:
-      node-fetch: 2.7.0
-    transitivePeerDependencies:
-      - encoding
-
   cross-spawn@7.0.3:
     dependencies:
       path-key: 3.1.1
@@ -7479,14 +7431,6 @@ snapshots:
     dependencies:
       es5-ext: 0.10.64
       type: 2.7.3
-
-  date-fns-tz@2.0.1(date-fns@2.30.0):
-    dependencies:
-      date-fns: 2.30.0
-
-  date-fns@2.30.0:
-    dependencies:
-      '@babel/runtime': 7.25.6
 
   dayjs-nuxt@1.2.7(magicast@0.3.5)(rollup@4.22.4)(webpack-sources@3.2.3):
     dependencies:
@@ -8528,12 +8472,6 @@ snapshots:
   mdn-data@2.0.28: {}
 
   mdn-data@2.0.30: {}
-
-  meilisearch@0.34.2:
-    dependencies:
-      cross-fetch: 3.1.8
-    transitivePeerDependencies:
-      - encoding
 
   memoizee@0.4.17:
     dependencies:
@@ -10068,17 +10006,6 @@ snapshots:
 
   uuid@8.3.2: {}
 
-  v-calendar@3.1.2(@popperjs/core@2.11.8)(vue@3.5.8):
-    dependencies:
-      '@popperjs/core': 2.11.8
-      '@types/lodash': 4.17.9
-      '@types/resize-observer-browser': 0.1.11
-      date-fns: 2.30.0
-      date-fns-tz: 2.0.1(date-fns@2.30.0)
-      lodash: 4.17.21
-      vue: 3.5.8
-      vue-screen-utils: 1.0.0-beta.13(vue@3.5.8)
-
   v-lazy-show@0.2.4(@vue/compiler-core@3.5.8):
     dependencies:
       '@vue/compiler-core': 3.5.8
@@ -10232,10 +10159,6 @@ snapshots:
   vue-router@4.4.5(vue@3.5.8):
     dependencies:
       '@vue/devtools-api': 6.6.4
-      vue: 3.5.8
-
-  vue-screen-utils@1.0.0-beta.13(vue@3.5.8):
-    dependencies:
       vue: 3.5.8
 
   vue@3.5.8:

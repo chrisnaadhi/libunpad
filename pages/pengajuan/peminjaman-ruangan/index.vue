@@ -163,7 +163,7 @@ const kirimPengajuan = async () => {
         textNotif.value = "text-dark";
       }, 5000);
     }
-  } else if (fileSurat.value === !null) {
+  } else if (fileSurat.value !== null) {
     formData.append("file", fileSurat.value);
     formData.append("folder", "AD0865F0-F6A3-4F62-8551-FE52625C7308");
     await $directus.request($uploadFiles(formData)).then(async (res) => {
@@ -216,6 +216,7 @@ const kirimPengajuan = async () => {
     });
   } else {
     alert("Error! Hubungi admin.");
+    console.log(fileSurat.value);
   }
 };
 </script>

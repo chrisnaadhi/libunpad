@@ -26,11 +26,9 @@
     "@splidejs/vue-splide": "^0.6.12",
     "drizzle-orm": "^0.29.5",
     "easyqrcodejs": "^4.6.1",
-    "meilisearch": "^0.34.2",
     "mysql2": "^3.11.3",
     "nuxt-directus": "^5.6.1",
-    "pinia": "^2.2.2",
-    "v-calendar": "^3.1.2"
+    "pinia": "^2.2.2"
   },
   "overrides": {
     "vue": "latest",

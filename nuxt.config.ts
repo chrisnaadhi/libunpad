@@ -102,8 +102,8 @@ export default defineNuxtConfig({
       secretKey: process.env.KANDAGA_TURNSTILE_SECRETKEY
     },
     app: {
-      directusPublicUrl: process.env.DIRECTUS_BASE_URL,
-      directusAuthToken: process.env.DIRECTUS_ACCESS_TOKEN,
+      directusPublicUrl: process.env.KANDAGA_DIRECTUS_BASE_URL,
+      directusAuthToken: process.env.KANDAGA_DIRECTUS_ACCESS_TOKEN,
     },
     public: {
       meiliHost: process.env.KANDAGA_MEILI_HOST,
