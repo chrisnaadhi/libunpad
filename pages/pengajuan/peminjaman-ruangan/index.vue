@@ -109,8 +109,7 @@ const kirimPengajuan = async () => {
     judulKegiatan.value === "" ||
     tanggalPeminjaman.value === "" ||
     jamMulai.value === "" ||
-    jamSelesai.value === "" ||
-    tujuanPeminjaman.value === ""
+    jamSelesai.value === ""
   ) {
     alert("Mohon diisi kolom yang bertanda bintang merah!");
   } else if (isDatePast(tanggalPeminjaman.value)) {
