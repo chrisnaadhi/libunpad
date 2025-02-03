@@ -42,14 +42,23 @@ onMounted(() => {
         <h1 class="font-600 text-sm md:text-xl">{{ perpus }}</h1>
         <p class="display-hari">Hari ini</p>
         <p class="display-jam">
-          <span class="text-red-6 text-sm font-600" v-if="cekHariLibur() === 'Tutup'">
+          <span
+            class="text-red-6 text-sm font-600"
+            v-if="cekHariLibur() === 'Tutup'"
+          >
             Tutup
           </span>
           <span class="text-green-6 text-lg font-600" v-else>
-            Buka:
-            <span class="text-dark">08.00 -16.00</span>
+            Jam Layanan:
+            <span class="text-dark">08.00 - 16.00 WIB</span>
           </span>
         </p>
+        <div v-if="perpus === 'Perpustakaan Pusat, Jatinangor'">
+          <span class="text-green-6 text-sm font-600">
+            Lt. 1 Coworking Space:
+            <span class="text-dark">08.00 - 22.00 WIB</span>
+          </span>
+        </div>
       </section>
       <section class="pb-5 xl:pb-0">
         <h1 class="text-sm font-600 md:text-xl">Lihat Semua Lokasi</h1>
