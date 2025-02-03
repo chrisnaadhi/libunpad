@@ -28,6 +28,8 @@ onMounted(() => {
     disableDisplay();
   });
 });
+
+console.log(currentTime.value.getDay());
 </script>
 
 <template>
@@ -46,7 +48,7 @@ onMounted(() => {
             class="text-red-6 text-sm font-600"
             v-if="cekHariLibur() === 'Tutup'"
           >
-            Tutup
+            Layanan Tutup
           </span>
           <span class="text-green-6 text-lg font-600" v-else>
             Jam Layanan:
@@ -55,7 +57,7 @@ onMounted(() => {
         </p>
         <div v-if="perpus === 'Perpustakaan Pusat, Jatinangor'">
           <span class="text-green-6 text-sm font-600">
-            Lt. 1 Coworking Space:
+            Lt. 1 Coworking Space (Buka):
             <span class="text-dark">08.00 - 22.00 WIB</span>
           </span>
         </div>
