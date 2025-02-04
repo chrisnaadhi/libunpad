@@ -137,6 +137,30 @@ useHead({
                 class="w-45 mt--5 mb--5"
               />
             </div>
+            <div
+              v-else-if="
+                getDataSurat.user_updated ===
+                '02A58D68-B3EC-4B7F-BC72-E83A16BD5EBC'
+              "
+            >
+              <NuxtImg
+                src="images/pak_hendri_cap.png"
+                v-show="getDataSurat.nama_fakultas !== 'fikom'"
+                class="w-45 mt--5 mb--5"
+              />
+            </div>
+            <div
+              v-else-if="
+                getDataSurat.user_updated ===
+                'B1883F05-C5A3-408F-9617-417AB93DC0DF'
+              "
+            >
+              <NuxtImg
+                src="images/bu_aning_cap.png"
+                v-show="getDataSurat.nama_fakultas !== 'fikom'"
+                class="w-45 mt--5 mb--5"
+              />
+            </div>
             <div v-else>
               <NuxtImg
                 src="images/ttd_kepala2p.png"
