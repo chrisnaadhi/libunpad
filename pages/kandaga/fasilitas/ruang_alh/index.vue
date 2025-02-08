@@ -57,15 +57,29 @@ const getJumlahDataBarang = getAllDataBarangALH.reduce((acc, item) => {
           <div>
             <p>Dipinjam pada :</p>
             <h6>
-              {{ barang.tanggal_peminjaman ?? "-" }}
+              {{
+                barang.tanggal_peminjaman
+                  ? displayTanggalIndonesia(barang.tanggal_peminjaman)
+                  : "-"
+              }}
             </h6>
           </div>
           <div>
             <p>Dikembalikan pada :</p>
-            <h6>{{ barang.tanggal_pengembalian ?? "-" }}</h6>
+            <h6>
+              {{
+                barang.tanggal_pengembalian
+                  ? displayTanggalIndonesia(barang.tanggal_pengembalian)
+                  : "-"
+              }}
+            </h6>
           </div>
         </div>
         <div>
+          <h6>Keperluan Peminjaman :</h6>
+          <p>{{ barang.tujuan_penggunaan ?? "-" }}</p>
+        </div>
+        <div class="mt-10">
           <h6>Metadata Barang</h6>
           <div>
             <div class="grid grid-cols-3 gap-2 text-sm">
@@ -78,7 +92,14 @@ const getJumlahDataBarang = getAllDataBarangALH.reduce((acc, item) => {
             </div>
             <div class="grid grid-cols-3 gap-2 text-sm">
               <p>Tanggal Perolehan</p>
-              <p class="col-span-2">: {{ barang.tanggal_perolehan }}</p>
+              <p class="col-span-2">
+                :
+                {{
+                  barang.tanggal_perolehan
+                    ? displayTanggalIndonesia(barang.tanggal_perolehan)
+                    : "-"
+                }}
+              </p>
             </div>
             <div class="grid grid-cols-3 gap-2 text-sm">
               <p>Supplier</p>
