@@ -3,6 +3,7 @@ definePageMeta({
   middleware: ["authentication-check"],
 });
 
+const { status, data, signOut } = useAuth();
 const { getItems } = useDirectusItems();
 const getAllDataBarangALH = await getItems({
   collection: "data_barang_alh",
@@ -16,10 +17,27 @@ const getJumlahDataBarang = getAllDataBarangALH.reduce((acc, item) => {
 
 <template>
   <section>
-    <div class="text-center my-5">
+    <div class="text-center my-5 flex flex-col items-center">
       <h1>Daftar Barang ALH</h1>
+      <img
+        v-if="data?.user?.image"
+        :src="data?.user?.image ?? '/images/no-image.jpg'"
+        class="w-10 h-10 rounded-full cursor-pointer"
+        alt="Foto User"
+        referrerpolicy="no-referrer"
+      />
+      <h5>👋 Halo, {{ data.user.name }}</h5>
       <p>Daftar barang yang ada di ruang ALH</p>
-      <pre>{{ getJumlahDataBarang }}</pre>
+    </div>
+    <div class="bg-orange-1 rounded-xl p-5 my-5">
+      <h6>Jumlah Barang</h6>
+      <p>Laptop: {{ getJumlahDataBarang.laptop }}</p>
+      <p>Voice Recorder: {{ getJumlahDataBarang.voice_recorder }}</p>
+      <p>Meja Makan Kayu: {{ getJumlahDataBarang.meja_makan_kayu }}</p>
+      <p>Kursi Zeis: {{ getJumlahDataBarang.kursi_zeis }}</p>
+      <p>Scanner: {{ getJumlahDataBarang.scanner }}</p>
+      <p>Alat Kantor Lainnya: {{ getJumlahDataBarang.alat_kantor_lainnya }}</p>
+      <p>PC: {{ getJumlahDataBarang.pc }}</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <div

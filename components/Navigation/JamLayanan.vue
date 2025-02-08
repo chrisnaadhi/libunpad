@@ -28,8 +28,6 @@ onMounted(() => {
     disableDisplay();
   });
 });
-
-console.log(currentTime.value.getDay());
 </script>
 
 <template>
