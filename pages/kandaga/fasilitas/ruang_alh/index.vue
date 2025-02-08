@@ -12,8 +12,6 @@ const getJumlahDataBarang = getAllDataBarangALH.reduce((acc, item) => {
   acc[item.kategori_spesifik] = (acc[item.kategori_spesifik] || 0) + 1;
   return acc;
 }, {});
-
-console.log(getJumlahDataBarang);
 </script>
 
 <template>
