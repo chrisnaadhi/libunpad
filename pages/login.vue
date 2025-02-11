@@ -115,7 +115,7 @@ definePageMeta({
 
 <template>
   <main class="ma text-center my-5 mb-25">
-    <h1 class="text-5xl mb-8 text-orange">Login</h1>
+    <h1 class="text-5xl mb-8 text-unpad">Login</h1>
     <div class="flex flex-col-reverse max-w-5xl ma lg:flex-row justify-center">
       <div class="w-full">
         <form class="ma w-full max-w-sm" @submit.prevent="submitLogin">
@@ -167,7 +167,7 @@ definePageMeta({
       </div>
 
       <div class="w-full max-w-sm ma lg:hidden">
-        <div class="bg-orange h-2 my-10" />
+        <div class="bg-unpad h-2 my-10" />
       </div>
 
       <div class="w-full max-w-sm ma flex flex-col items-center">
@@ -195,7 +195,7 @@ definePageMeta({
 
 <style scoped>
 input {
-  --at-apply: border border-orange rounded;
+  --at-apply: border border-unpad rounded;
 }
 
 .input-space {
@@ -219,6 +219,6 @@ input {
 }
 
 .oauth-btn {
-  --at-apply: bg-orange-2 text-dark border border-orange border-2 cursor-pointer transition-all-500 hover:(bg-orange text-white);
+  --at-apply: bg-yellow-2 text-dark border border-unpad border-2 cursor-pointer transition-all-500 hover:(bg-unpad text-white);
 }
 </style>

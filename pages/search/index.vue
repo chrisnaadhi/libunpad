@@ -204,7 +204,7 @@ onMounted(() => {
             <div class="mt-2">
               <NuxtLink
                 :to="'/koleksi/repository/item/' + selectedPreview?.MhsNPM"
-                class="btn bg-orange text-white px-2 py-1 text-xs"
+                class="btn bg-unpad text-white px-2 py-1 text-xs"
               >
                 Detail
               </NuxtLink>
@@ -226,7 +226,7 @@ onMounted(() => {
       />
       <button
         type="submit"
-        class="btn bg-orange"
+        class="btn bg-unpad"
         @click="submitSearch(search.keywords)"
       >
         Search
@@ -245,7 +245,7 @@ onMounted(() => {
 
     <article>
       <h4 v-show="search.keywords !== '' && search.wikipediaDefinition">
-        Apa itu <span class="text-orange">{{ search.keywords }}</span> ?
+        Apa itu <span class="text-unpad">{{ search.keywords }}</span> ?
       </h4>
       <h4 v-show="search.wikipediaDefinition === false">
         Kata Kunci
@@ -265,7 +265,7 @@ onMounted(() => {
           :to="`https://id.wikipedia.org?curid=${search.wikipediaDefinition?.pageid}`"
           target="_blank"
         >
-          <h3 class="hover:text-orange-5">
+          <h3 class="hover:text-unpad">
             {{ search.wikipediaDefinition?.title }}
           </h3>
         </NuxtLink>
@@ -299,12 +299,12 @@ onMounted(() => {
         <div v-for="item in search.ulimsRes">
           <GenericBaseCard>
             <div
-              class="flex flex-col justify-between bg-white shadow shadow-orange p-5 rounded-lg w-full h-full"
+              class="flex flex-col justify-between bg-white shadow shadow-unpad p-5 rounded-lg w-full h-full"
             >
               <div class="flex gap-3">
                 <div class="py-2 w-full max-w-40">
                   <p
-                    class="bg-orange text-white text-sm rounded mb-2 text-center"
+                    class="bg-unpad text-white text-sm rounded mb-2 text-center"
                   >
                     {{ item?.gmd }}
                   </p>
@@ -314,7 +314,7 @@ onMounted(() => {
                         ? `https://kandaga.unpad.ac.id:8011/lib/minigalnano/createthumb.php?filename=images/docs/${item?.image}`
                         : '/images/default_cover.png'
                     "
-                    class="w-full h-60 border border-orange object-scale-down px-4"
+                    class="w-full h-60 border border-unpad object-scale-down px-4"
                     format="webp"
                   >
                     <p v-show="item?.image === null" class="text-center">
@@ -357,7 +357,7 @@ onMounted(() => {
                 <NuxtLink
                   :href="`https://kandaga.unpad.ac.id:8011/index.php?p=show_detail&id=${item?.biblioId}`"
                   target="_blank"
-                  class="btn bg-orange py-1 text-white w-full"
+                  class="btn bg-unpad py-1 text-white w-full"
                 >
                   Lihat Koleksi
                 </NuxtLink>
@@ -448,7 +448,7 @@ onMounted(() => {
           class="max-w-xl"
         >
           <GenericBaseCard
-            class="bg-white shadow-orange-2 shadow-lg rounded-lg p-5"
+            class="bg-white shadow-yellow-2 shadow-lg rounded-lg p-5"
           >
             <h6>{{ result["dc:title"] }}</h6>
             <p>
@@ -473,7 +473,7 @@ onMounted(() => {
               <NuxtLink
                 :to="`https://www.scopus.com/record/display.uri?eid=${result['eid']}&origin=resultslist`"
                 target="_blank"
-                class="btn bg-orange text-white py-1 px-4 no-underline"
+                class="btn bg-unpad text-white py-1 px-4 no-underline"
               >
                 Akses
               </NuxtLink>
@@ -491,7 +491,7 @@ onMounted(() => {
 
     <Transition name="fade">
       <div
-        class="sticky bottom-0 bg-orange-1 px-5 pb-15 rounded-lg h-full xl:h-20"
+        class="sticky bottom-0 bg-yellow-1 px-5 pb-15 rounded-lg h-full xl:h-20"
         v-show="portPosition >= 200 && bottomPort === false"
       >
         <section class="flex items-center gap-2">
@@ -506,7 +506,7 @@ onMounted(() => {
           />
           <button
             type="submit"
-            class="btn bg-orange"
+            class="btn bg-unpad"
             @click="submitSearch(search.keywords)"
           >
             Search
@@ -539,7 +539,7 @@ article {
 }
 
 input {
-  --at-apply: border-1 border-orange rounded p-2 my-5 w-full;
+  --at-apply: border-1 border-unpad rounded p-2 my-5 w-full;
 }
 
 .suggestion {
@@ -555,12 +555,12 @@ input {
 }
 
 .result-cards {
-  --at-apply: relative bg-white my-2 p-5 rounded-xl shadow-lg shadow-orange/20 top-0 hover:(top--2 shadow-orange/50);
+  --at-apply: relative bg-white my-2 p-5 rounded-xl shadow-lg shadow-yellow/20 top-0 hover:(top--2 shadow-yellow/50);
   transition: top ease 0.5s;
 }
 
 .box-column {
-  --at-apply: bg-orange-1 text-orange pl-3 py-0 font-semibold rounded-full;
+  --at-apply: bg-yellow-1 text-unpad pl-3 py-0 font-semibold rounded-full;
 }
 
 .box-content {
@@ -568,7 +568,7 @@ input {
 }
 
 .lengkap {
-  --at-apply: text-orange-4 hover:underline;
+  --at-apply: text-unpad hover:underline;
 }
 
 .fade-enter-active,

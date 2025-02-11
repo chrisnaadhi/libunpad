@@ -17,8 +17,8 @@ const { data: fetchService } = await useFetch("/api/v1/layanan");
             Halo,
             {{
               user
-              ? `${user.first_name}!`
-              : data
+                ? `${user.first_name}!`
+                : data
                 ? data?.user?.name
                 : "Pengunjung"
             }}
@@ -27,7 +27,10 @@ const { data: fetchService } = await useFetch("/api/v1/layanan");
             {{ $t("pengajuanDescription") }}
           </p>
           <div class="flex text-center" v-show="user || data">
-            <NuxtLink to="/keanggotaan" class="btn bg-orange text-white py-1 w-full">
+            <NuxtLink
+              to="/keanggotaan"
+              class="btn bg-unpad text-white py-1 w-full"
+            >
               {{ $t("membership") }}
             </NuxtLink>
           </div>
@@ -43,16 +46,32 @@ const { data: fetchService } = await useFetch("/api/v1/layanan");
           </div>
           <div class="flex justify-center gap-2">
             <NuxtLink :to="layanan.slug" class="w-full">
-              <button class="btn text-xs text-white w-full" :class="layanan.isActive ? 'active' : 'inactive'">
-                {{ layanan.slug.includes('unggah-mandiri') ? 'Unggah' : 'Ajukan' }}
+              <button
+                class="btn text-xs text-white w-full"
+                :class="layanan.isActive ? 'active' : 'inactive'"
+              >
+                {{
+                  layanan.slug.includes("unggah-mandiri") ? "Unggah" : "Ajukan"
+                }}
               </button>
             </NuxtLink>
-            <NuxtLink :to="layanan.slug.includes('#')
-              ? '/pengajuan/#'
-              : layanan.slug + '/data'
-              " class="w-full">
-              <button class="btn text-xs text-white w-full" :class="layanan.isActive ? 'active' : 'inactive'">
-                {{ layanan.slug.includes('unggah-mandiri') ? 'Status Unggah' : 'Data Pengajuan' }}
+            <NuxtLink
+              :to="
+                layanan.slug.includes('#')
+                  ? '/pengajuan/#'
+                  : layanan.slug + '/data'
+              "
+              class="w-full"
+            >
+              <button
+                class="btn text-xs text-white w-full"
+                :class="layanan.isActive ? 'active' : 'inactive'"
+              >
+                {{
+                  layanan.slug.includes("unggah-mandiri")
+                    ? "Status Unggah"
+                    : "Data Pengajuan"
+                }}
               </button>
             </NuxtLink>
           </div>
@@ -81,7 +100,7 @@ input {
 }
 
 .active {
-  --at-apply: bg-orange cursor-pointer;
+  --at-apply: bg-unpad cursor-pointer;
 }
 
 .inactive {
