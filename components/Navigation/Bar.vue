@@ -47,7 +47,7 @@ const { locale } = useI18n();
 }
 
 .logo {
-  --at-apply: pl-3 max-w-50 h-12 md:(pl-0 max-w-75);
+  --at-apply: pl-3 max-w-50 h-8 md:(pl-0 h-8 max-w-75);
 }
 
 .jamlayanan-enter-active,
