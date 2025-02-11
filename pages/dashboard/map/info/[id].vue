@@ -38,7 +38,7 @@ definePageMeta({
     </div>
     <p>{{ tugasPegawai }}</p>
     <div class="mt-5">
-      <NuxtLink to="/dashboard/map/info" class="btn bg-orange text-white">
+      <NuxtLink to="/dashboard/map/info" class="btn bg-unpad text-white">
         Back to List
       </NuxtLink>
     </div>

@@ -41,7 +41,7 @@ console.log(unpadBooks.value);
               class="no-underline w-full"
             >
               <h4
-                class="bg-orange-1 px-3 rounded text-orange"
+                class="bg-yellow-1 px-3 rounded text-unpad"
                 :title="koleksi?.title"
               >
                 {{ trimTitle(koleksi?.title, 25) }}
@@ -66,7 +66,7 @@ console.log(unpadBooks.value);
           </div>
 
           <NuxtLink
-            class="btn bg-orange text-white text-center py-1"
+            class="btn bg-unpad text-white text-center py-1"
             :to="`https://kandaga.unpad.ac.id:8011/index.php?p=show_detail&id=${koleksi?.biblioId}`"
             target="_blank"
           >
@@ -98,7 +98,7 @@ console.log(unpadBooks.value);
 }
 
 .splide__pagination__page.is-active {
-  --at-apply: bg-orange;
+  --at-apply: bg-unpad;
 }
 
 .splide__pagination__page {
@@ -106,6 +106,6 @@ console.log(unpadBooks.value);
 }
 
 .splide__arrow {
-  --at-apply: bg-orange-3;
+  --at-apply: bg-yellow-3;
 }
 </style>

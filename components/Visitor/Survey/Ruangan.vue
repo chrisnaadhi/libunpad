@@ -29,7 +29,7 @@ defineProps({
 <template>
   <section class="bg-white rounded-xl p-4 w-full">
     <div>
-      <h3 class="text-center mb-5 bg-orange text-white max-w-lg ma rounded">
+      <h3 class="text-center mb-5 bg-unpad text-white max-w-lg ma rounded">
         {{ namaRuangan }}
       </h3>
     </div>

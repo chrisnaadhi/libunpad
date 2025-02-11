@@ -47,13 +47,13 @@ const limitChars = (chars: any) => {
     <div class="action">
       <NuxtLink
         :to="urlBook"
-        class="action-btn text-white bg-orange xl:(my-0 mr-4)"
+        class="action-btn text-white bg-unpad xl:(my-0 mr-4)"
       >
         Detail
       </NuxtLink>
       <NuxtLink
         :to="urlBook"
-        class="action-btn border bg-gray-3 text-dark hover:(bg-orange text-white) xl:(my-0 ml-4)"
+        class="action-btn border bg-gray-3 text-dark hover:(bg-unpad text-white) xl:(my-0 ml-4)"
       >
         Pinjam
       </NuxtLink>
@@ -67,11 +67,11 @@ const limitChars = (chars: any) => {
 }
 
 .banner-mobile {
-  --at-apply: display-block xl:display-none absolute p-2 text-xs font-600 bg-orange rounded-0 right-0;
+  --at-apply: display-block xl:display-none absolute p-2 text-xs font-600 bg-unpad rounded-0 right-0;
 }
 
 .banner-desktop {
-  --at-apply: p-1 mb-2 rounded text-xs text-center font-600 bg-orange;
+  --at-apply: p-1 mb-2 rounded text-xs text-center font-600 bg-unpad;
 }
 
 h4 {

@@ -18,12 +18,15 @@ const backButton = () => {
 
 <template>
   <section>
-    <p class="text-sm font-600 text-orange">
+    <p class="text-sm font-600 text-unpad">
       {{ displayAgendaKegiatan(detailAgenda.program) }}
     </p>
     <h1 class="text-3xl">{{ detailAgenda.nama_kegiatan }}</h1>
     <div class="mt-1">
-      <span class="badge" :class="colorStatusAgenda(detailAgenda.status_kegiatan)">
+      <span
+        class="badge"
+        :class="colorStatusAgenda(detailAgenda.status_kegiatan)"
+      >
         {{ displayStatusAgenda(detailAgenda.status_kegiatan) }}
       </span>
     </div>

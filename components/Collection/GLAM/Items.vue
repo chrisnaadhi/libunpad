@@ -24,7 +24,7 @@ defineProps({
     <div class="flex flex-col w-full">
       <NuxtLink
         :to="`/${type_collection}/` + id"
-        class="no-underline w-full bg-orange-50 font-semibold transition-all-500 rounded-md hover:(bg-orange text-white)"
+        class="no-underline w-full bg-yellow-50 font-semibold transition-all-500 rounded-md hover:(bg-unpad text-white)"
         :title="judul"
       >
         <span v-if="abbr">
@@ -40,7 +40,7 @@ defineProps({
     </p>
     <div>
       <NuxtLink
-        class="bg-orange text-white px-4 py-0 text-sm rounded no-underline"
+        class="bg-unpad text-white px-4 py-0 text-sm rounded no-underline"
         :to="`/${type_collection}/` + id"
       >
         Lihat

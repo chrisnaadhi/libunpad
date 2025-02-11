@@ -86,13 +86,13 @@ definePageMeta({
   <section>
     <h1>Update Data Tugas</h1>
     <p :class="colorTeks">{{ teksUpdate }}</p>
-    <div class="text-center max-w-xl bg-orange-2 py-1 my-1 rounded-xl">
+    <div class="text-center max-w-xl bg-yellow-2 py-1 my-1 rounded-xl">
       Tipe Tugas:
       <p class="text-3xl font-600">
         {{
           getPekerjaan.kriteria_tugas
-          ? getPekerjaan.kriteria_tugas.toUpperCase()
-          : "Belum ditentukan"
+            ? getPekerjaan.kriteria_tugas.toUpperCase()
+            : "Belum ditentukan"
         }}
       </p>
       <p>Periode: {{ getPekerjaan.periode }}</p>
@@ -122,7 +122,11 @@ definePageMeta({
       <div class="form-edit">
         <label for="perkembangan-tugas">Perkembangan Tugas :</label>
         <div class="flex items-center">
-          <input type="text" class="min-w-10 max-w-xl" v-model="perkembanganTugas" />
+          <input
+            type="text"
+            class="min-w-10 max-w-xl"
+            v-model="perkembanganTugas"
+          />
           <p class="pl-1 text-xl">
             / {{ getPekerjaan.jumlah_rencana ?? "Belum ditentukan" }}
           </p>
@@ -132,9 +136,14 @@ definePageMeta({
         <label for="link-tugas">Link Berkas :</label>
         <input type="text" v-model="linkTugas" />
       </div>
-      <button type="submit" class="btn bg-orange text-white">Update</button>
-      <button type="button" class="btn text-white ml-3" :class="isWajib ? 'bg-gray cursor-not-allowed' : 'bg-red'"
-        @click="deleteTugas" :disabled="isWajib">
+      <button type="submit" class="btn bg-unpad text-white">Update</button>
+      <button
+        type="button"
+        class="btn text-white ml-3"
+        :class="isWajib ? 'bg-gray cursor-not-allowed' : 'bg-red'"
+        @click="deleteTugas"
+        :disabled="isWajib"
+      >
         Hapus
       </button>
     </form>
@@ -158,13 +167,13 @@ h1 {
 input,
 select,
 textarea {
-  --at-apply: border border-orange p-2 max-w-xl rounded bg-orange-50 my-2;
+  --at-apply: border border-unpad p-2 max-w-xl rounded bg-yellow-50 my-2;
 }
 
 input:focus,
 select:focus,
 textarea:focus {
-  --at-apply: bg-orange-50;
+  --at-apply: bg-yellow-50;
 }
 
 textarea {

@@ -27,7 +27,7 @@ const { getThumbnail: img } = useDirectusFiles();
           <div>
             <NuxtLink
               :to="page"
-              class="btn my-3 bg-orange py-0 text-white text-xs"
+              class="btn my-3 bg-unpad py-0 text-white text-xs"
               >Akses &rightarrow;</NuxtLink
             >
           </div>

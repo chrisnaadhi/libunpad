@@ -174,7 +174,7 @@ onMounted(async () => {
                   class="no-underline w-full"
                 >
                   <h4
-                    class="bg-orange-1 px-3 rounded text-orange"
+                    class="bg-yellow-1 px-3 rounded text-unpad"
                     :title="galeri.judul"
                   >
                     {{ trimTitle(galeri.judul, 25) }}
@@ -193,7 +193,7 @@ onMounted(async () => {
                 </p>
               </div>
               <NuxtLink
-                class="btn bg-orange text-white text-center py-1"
+                class="btn bg-unpad text-white text-center py-1"
                 :to="'/gallery/' + galeri.id"
                 >Lihat</NuxtLink
               >
@@ -209,7 +209,7 @@ onMounted(async () => {
       <h5 class="text-center mb-5">Total Koleksi Galeri: {{ pageTotal }}</h5>
       <div class="flex justify-center gap-5 w-full">
         <div class="w-full max-w-65">
-          <div class="bg-orange-50 h-full rounded-xl p-5">
+          <div class="bg-yellow-50 h-full rounded-xl p-5">
             <h5 class="text-center">Filter Koleksi</h5>
             <div class="input-block">
               <label for="search">Kata Kunci :</label>
@@ -241,7 +241,7 @@ onMounted(async () => {
             </div>
             <div class="input-block flex flex-col gap-2">
               <button
-                class="btn bg-orange w-full text-white"
+                class="btn bg-unpad w-full text-white"
                 @click="filterGalleryData"
               >
                 Filter Gallery
@@ -275,7 +275,7 @@ onMounted(async () => {
           </div>
           <div class="flex items-center justify-center gap-3 w-full mt-8">
             <button
-              class="btn bg-orange text-white py-0"
+              class="btn bg-unpad text-white py-0"
               @click="getGalleryPaginationData('previous')"
               :disabled="currentPage === 0"
             >
@@ -286,7 +286,7 @@ onMounted(async () => {
               {{ Math.ceil(pageTotal / 12) }}
             </p>
             <button
-              class="btn bg-orange text-white py-0"
+              class="btn bg-unpad text-white py-0"
               @click="getGalleryPaginationData('next')"
               :disabled="
                 Math.ceil(currentPage / 12 + 1) === Math.ceil(pageTotal / 12)

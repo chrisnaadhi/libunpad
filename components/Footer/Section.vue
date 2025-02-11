@@ -133,7 +133,7 @@ defineProps({
         </p>
         <p>{{ currentTime.toLocaleDateString("id-ID", options) }}</p>
       </div>
-      <div class="bg-orange-4 py-2">
+      <div class="bg-yellow-4 py-2">
         <p class="font-600 text-dark">
           &copy; 2020-{{ currentTime.getFullYear() }} Kantor Pengelolaan
           Perpustakaan Universitas Padjadjaran
@@ -150,7 +150,7 @@ ul {
 
 li,
 a {
-  --at-apply: text-white cursor-pointer no-underline ml-0 hover:(text-orange underline);
+  --at-apply: text-white cursor-pointer no-underline ml-0 hover:(text-unpad underline);
 }
 
 .footer-section {

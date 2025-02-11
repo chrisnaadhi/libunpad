@@ -5,7 +5,7 @@ const { data: tools } = await useFetch("/api/v1/tools");
 
 <template>
   <div class="wrapper">
-    <div class="bg-orange ma mt--17 max-w-200 my-1 py-3 sm:rounded-lg">
+    <div class="bg-unpad ma mt--17 max-w-200 my-1 py-3 sm:rounded-lg">
       <h1 class="text-xl text-white font-700 md:text-3xl mx-3">
         {{ $t("toolsHomeTitle") }}
       </h1>
@@ -26,7 +26,7 @@ const { data: tools } = await useFetch("/api/v1/tools");
             </p>
             <NuxtLink
               :to="tool.slug"
-              class="btn mt-3 py-0 bg-white text-sm text-orange"
+              class="btn mt-3 py-0 bg-white text-sm text-unpad"
             >
               Lihat
             </NuxtLink>
@@ -38,7 +38,7 @@ const { data: tools } = await useFetch("/api/v1/tools");
             </p>
             <NuxtLink
               :to="tool.slug"
-              class="btn mt-3 py-0 bg-white text-sm text-orange"
+              class="btn mt-3 py-0 bg-white text-sm text-unpad"
             >
               View
             </NuxtLink>
@@ -51,7 +51,7 @@ const { data: tools } = await useFetch("/api/v1/tools");
     </div>
     <NuxtLink
       to="/panduan"
-      class="text-gray-6 text-sm hover:(text-orange-5 underline)"
+      class="text-gray-6 text-sm hover:(text-unpad underline)"
     >
       Lihat selengkapnya layanan dan alat yang dapat kami tawarkan →
     </NuxtLink>
@@ -66,7 +66,7 @@ const { data: tools } = await useFetch("/api/v1/tools");
 
 <style scoped>
 .wrapper {
-  --at-apply: py-10 max-w-7xl ma text-center bg-orange-50 rounded-xl mt-15;
+  --at-apply: py-10 max-w-7xl ma text-center bg-yellow-50 rounded-xl mt-15;
 }
 
 .content-wrapper {
@@ -79,19 +79,19 @@ const { data: tools } = await useFetch("/api/v1/tools");
 }
 
 .left-content {
-  --at-apply: bg-orange-3 h-full w-12 rounded-l-lg flex items-end justify-end;
+  --at-apply: bg-yellow-3 h-full w-12 rounded-l-lg flex items-end justify-end;
 }
 
 .right-content {
-  --at-apply: bg-orange h-full w-full rounded-r-lg;
+  --at-apply: bg-unpad h-full w-full rounded-r-lg;
 }
 
 .icon-holder {
-  --at-apply: bg-orange-1 w-12 h-12 absolute mr--4 mb-2;
+  --at-apply: bg-yellow-1 w-12 h-12 absolute mr--4 mb-2;
 }
 
 .content:hover>.left-content {
-  --at-apply: transition-all-500 bg-orange-5;
+  --at-apply: transition-all-500 bg-unpad;
 }
 
 .contents-display {

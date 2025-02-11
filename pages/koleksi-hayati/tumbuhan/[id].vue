@@ -21,14 +21,12 @@ const findCollector = (id) => {
   <section>
     <h3 class="mt-10 mb-3 text-center">
       Koleksi <br />
-      <span class="text-orange font-semibold">{{
+      <span class="text-unpad font-semibold">{{
         getKoleksiHayati.local_name
       }}</span>
     </h3>
     <div class="flex items-center justify-center mb-5">
-      <h5 class="bg-orange text-white px-5 py-1 rounded-md">
-        Metadata Koleksi
-      </h5>
+      <h5 class="bg-unpad text-white px-5 py-1 rounded-md">Metadata Koleksi</h5>
     </div>
     <div class="flex justify-center gap-5 w-full max-w-4xl ma">
       <div>
@@ -72,7 +70,7 @@ const findCollector = (id) => {
     </div>
 
     <div class="flex items-center justify-center my-5">
-      <h5 class="bg-orange text-white px-5 py-1 rounded-md">
+      <h5 class="bg-unpad text-white px-5 py-1 rounded-md">
         Keterangan Koleksi
       </h5>
     </div>
@@ -191,7 +189,7 @@ const findCollector = (id) => {
       </div>
     </div>
     <div class="my-10 text-center">
-      <NuxtLink to="/koleksi-hayati" class="btn bg-orange text-white py-1">
+      <NuxtLink to="/koleksi-hayati" class="btn bg-unpad text-white py-1">
         &leftarrow; Kembali
       </NuxtLink>
     </div>

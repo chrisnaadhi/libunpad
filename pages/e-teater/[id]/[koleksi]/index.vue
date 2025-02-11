@@ -53,13 +53,13 @@ const koleksiTerseleksi = daftarKoleksiTerkait.filter(
           ></iframe>
         </div>
         <div class="flex flex-col items-start lg:items-center text-center">
-          <h6 class="bg-orange text-white rounded-full text-center px-20">
+          <h6 class="bg-unpad text-white rounded-full text-center px-20">
             {{ metaDataKoleksi.kategori }}
           </h6>
           <h2 class="font-semibold">{{ metaDataKoleksi.nama_koleksi }}</h2>
           <h5 class="italic">
             Pembuat: <br />
-            <span class="text-orange-6 font-bold">{{
+            <span class="text-unpad font-bold">{{
               metaDataKoleksi.author_koleksi
             }}</span>
           </h5>
@@ -73,7 +73,7 @@ const koleksiTerseleksi = daftarKoleksiTerkait.filter(
     <div class="my-5">
       <NuxtLink
         :to="'/e-teater/' + metaDataKoleksi.kategori"
-        class="btn bg-orange text-white py-1 w-full"
+        class="btn bg-unpad text-white py-1 w-full"
       >
         Kembali ke Koleksi
       </NuxtLink>
@@ -112,6 +112,6 @@ const koleksiTerseleksi = daftarKoleksiTerkait.filter(
 }
 
 .rekomendasi-title {
-  --at-apply: font-semibold mt-25 mb-4 underline transition-all-500 hover:(text-orange);
+  --at-apply: font-semibold mt-25 mb-4 underline transition-all-500 hover:(text-unpad);
 }
 </style>

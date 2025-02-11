@@ -104,7 +104,7 @@ const logout = async () => {
 }
 
 .login {
-  --at-apply: bg-unpad-4 text-white py-3 hidden xl:block;
+  --at-apply: bg-unpad text-white py-3 hidden xl:block;
 }
 
 .account-dropdown {

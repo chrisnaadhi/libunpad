@@ -62,14 +62,17 @@ const profilPetugas = await getUserById({
 </script>
 
 <template>
-  <section class="border-3 border-orange-3 rounded-lg">
+  <section class="border-3 border-yellow-3 rounded-lg">
     <div class="border-1 border-blue-3 rounded bg-gray-50 mx-2 mt-2">
       <p>Petugas Piket Bulan Ini</p>
       <h1>{{ monthName }} {{ date.getFullYear() }}</h1>
     </div>
 
     <div class="grid grid-cols-3 gap-2 m-2">
-      <div v-for="pegawai in dataPiketPegawai" class="border-1 border-blue-3 bg-gray-50 rounded">
+      <div
+        v-for="pegawai in dataPiketPegawai"
+        class="border-1 border-blue-3 bg-gray-50 rounded"
+      >
         <h4>{{ readableDate(pegawai.tanggal) }}</h4>
         <p>{{ searchPetugas(pegawai.petugas_pertama) }}</p>
       </div>
@@ -79,11 +82,11 @@ const profilPetugas = await getUserById({
       {{ readableDate(date) }} <br />
       {{ jamPiketPegawai(date.getDay()) }}
     </h2>
-    <h1 class="font-600 text-orange-6">
+    <h1 class="font-600 text-unpad">
       {{
         getPetugasExtendedTimeService[0] === undefined
-        ? "Tidak ada Petugas"
-        : `${profilPetugas.first_name} ${profilPetugas.last_name}`
+          ? "Tidak ada Petugas"
+          : `${profilPetugas.first_name} ${profilPetugas.last_name}`
       }}
     </h1>
   </section>
@@ -108,6 +111,7 @@ h1 {
 
 .day {
   width: calc(100% / 7);
-  --at-apply: flex relative items-center justify-center h-20 border-solid border-1 border-gray;
+  --at-apply: flex relative items-center justify-center h-20 border-solid
+    border-1 border-gray;
 }
 </style>

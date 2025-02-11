@@ -208,10 +208,10 @@ useHead({
           </div>
           <p class="text-xs italic">
             untuk dapat mengakses full silahkan login menggunakan Email
-            <span class="text-orange-6 font-semibold">Unpad</span>!
+            <span class="text-unpad font-semibold">Unpad</span>!
           </p>
         </div>
-        <button @click="signIn('google')" class="btn-auth bg-orange">
+        <button @click="signIn('google')" class="btn-auth bg-unpad">
           Klik untuk Login
         </button>
       </div>
@@ -257,7 +257,7 @@ useHead({
       <p>Hubungi kami melalui Email, Whatsapp atau Media Sosial.</p>
     </div>
     <div class="text-center mb-5">
-      <NuxtLink to="/koleksi/repository" class="btn-auth bg-orange text-lg">
+      <NuxtLink to="/koleksi/repository" class="btn-auth bg-unpad text-lg">
         Kembali ke Koleksi Repository
       </NuxtLink>
     </div>
@@ -266,7 +266,7 @@ useHead({
 
 <style scoped>
 .title {
-  --at-apply: my-3 text-center bg-orange max-w-lg py-1 ma text-white rounded;
+  --at-apply: my-3 text-center bg-unpad max-w-lg py-1 ma text-white rounded;
 }
 
 .tab-title {
@@ -278,7 +278,7 @@ useHead({
 }
 
 .active-tab {
-  --at-apply: bg-orange-1;
+  --at-apply: bg-yellow-1;
 }
 
 .inactive-tab {
@@ -286,11 +286,11 @@ useHead({
 }
 
 .citation-block {
-  --at-apply: bg-orange-1 p-2 rounded-b-lg rounded-tr-lg;
+  --at-apply: bg-yellow-1 p-2 rounded-b-lg rounded-tr-lg;
 }
 
 .citation {
-  --at-apply: hover:(text-orange-6 cursor-pointer);
+  --at-apply: hover:(text-unpad cursor-pointer);
 }
 
 .btn-auth {

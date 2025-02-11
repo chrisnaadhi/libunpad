@@ -41,10 +41,10 @@ const pemilihanRuangan = async (nama) => {
 
 <style scoped>
 div {
-  --at-apply: bg-orange-400 min-w-xs px-15 py-5 mx-2 my-4 font-600 text-xl cursor-pointer rounded-xl;
+  --at-apply: bg-unpad min-w-xs px-15 py-5 mx-2 my-4 font-600 text-xl cursor-pointer rounded-xl;
 }
 
 .data-kunjungan {
-  --at-apply: mx-2 font-600 text-gray-700 bg-gray-100 hover:(bg-orange-400 text-white border-none)
+  --at-apply: mx-2 font-600 text-gray-700 bg-gray-100 hover:(bg-unpad text-white border-none)
 }
 </style>

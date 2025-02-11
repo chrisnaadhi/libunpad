@@ -124,10 +124,10 @@ const dataObjectTA = {
           </div>
           <p class="text-xs italic">
             untuk dapat mengakses full silahkan login menggunakan Email
-            <span class="text-orange-6 font-semibold">Unpad</span>!
+            <span class="text-unpad font-semibold">Unpad</span>!
           </p>
         </div>
-        <button @click="signIn('google')" class="btn-auth bg-orange">
+        <button @click="signIn('google')" class="btn-auth bg-unpad">
           Klik untuk Login
         </button>
       </div>
@@ -141,7 +141,7 @@ const dataObjectTA = {
 
 <style scoped>
 .title {
-  --at-apply: my-3 text-center bg-orange max-w-lg py-1 ma text-white rounded;
+  --at-apply: my-3 text-center bg-unpad max-w-lg py-1 ma text-white rounded;
 }
 
 p {

@@ -5,7 +5,7 @@ const data = ref(" Vue Composition API");
 <template>
   <section class="max-w-7xl ma">
     <div class="my-3 text-center">
-      <NuxtLink href="/kegiatan/pimnas" class="btn text-white bg-orange py-1">
+      <NuxtLink href="/kegiatan/pimnas" class="btn text-white bg-unpad py-1">
         &leftarrow;Kembali
       </NuxtLink>
     </div>
@@ -15,10 +15,14 @@ const data = ref(" Vue Composition API");
         Sosialisasi Pimnas 36 Universitas Padjadjaran
       </h1>
       <div class="min-w-full">
-        <iframe class="w-full h-3xl rounded-lg" src="https://www.youtube-nocookie.com/embed/fh9JYDYzS4g"
-          title="YouTube video player" frameborder="0"
+        <iframe
+          class="w-full h-3xl rounded-lg"
+          src="https://www.youtube-nocookie.com/embed/fh9JYDYzS4g"
+          title="YouTube video player"
+          frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
+          allowfullscreen
+        ></iframe>
       </div>
     </div>
   </section>

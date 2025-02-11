@@ -129,7 +129,7 @@ const tableHeadPublic = [
       class="w-full border-collapse border text-sm border-slate-400"
       v-if="totalData.length > 0"
     >
-      <thead class="bg-orange-2">
+      <thead class="bg-yellow-2">
         <tr>
           <th
             v-if="publicData"

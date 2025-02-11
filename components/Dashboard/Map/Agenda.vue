@@ -77,7 +77,10 @@ const programList = [
       <h4>{{ list.nama }}</h4>
       <p>Total Agenda: {{ list.fungsi?.meta?.filter_count }}</p>
       <div class="my-4">
-        <NuxtLink class="btn bg-gray-50" :to="`/dashboard/map/agenda/${list.slug}`">
+        <NuxtLink
+          class="btn bg-gray-50"
+          :to="`/dashboard/map/agenda/${list.slug}`"
+        >
           Detail
         </NuxtLink>
       </div>
@@ -91,6 +94,6 @@ section {
 }
 
 .card {
-  --at-apply: bg-orange-1 px-4 py-2 rounded-xl min-h-20;
+  --at-apply: bg-yellow-1 px-4 py-2 rounded-xl min-h-20;
 }
 </style>

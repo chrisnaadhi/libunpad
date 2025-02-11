@@ -43,7 +43,10 @@ definePageMeta({
           <p class="text-nip">{{ pegawai.nomor_induk }}</p>
           <p class="text-title">{{ pegawai.title }}</p>
           <div class="mt-5">
-            <NuxtLink class="btn bg-orange text-white py-2 px-4" :to="'/dashboard/map/info/' + pegawai.id">
+            <NuxtLink
+              class="btn bg-unpad text-white py-2 px-4"
+              :to="'/dashboard/map/info/' + pegawai.id"
+            >
               Cek
             </NuxtLink>
           </div>
@@ -51,7 +54,7 @@ definePageMeta({
       </GenericBaseCard>
     </div>
     <div class="my-5">
-      <NuxtLink to="/dashboard/map" class="btn bg-orange-2 text-sm">
+      <NuxtLink to="/dashboard/map" class="btn bg-yellow-2 text-sm">
         Back to List
       </NuxtLink>
     </div>

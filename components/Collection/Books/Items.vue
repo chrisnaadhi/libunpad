@@ -33,7 +33,7 @@ h1 {
 }
 
 .recommended-list {
-  --at-apply: bg-gray-1 p-5 rounded-xl transition-all-500 hover:(bg-orange-2 text-blue-9);
+  --at-apply: bg-gray-1 p-5 rounded-xl transition-all-500 hover:(bg-yellow-2 text-blue-9);
 }
 
 h3 {

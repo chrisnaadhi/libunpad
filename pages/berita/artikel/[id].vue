@@ -23,16 +23,24 @@ const namaPenulis = `${getPenulis.first_name} ${getPenulis.last_name}`;
 
 <template>
   <section>
-    <div class="header" :style="`background-image: url(${config.public.directus.url + 'assets/' + berita[0].gambar_unggulan
-      })`">
+    <div
+      class="header"
+      :style="`background-image: url(${
+        config.public.directus.url + 'assets/' + berita[0].gambar_unggulan
+      })`"
+    >
       <div class="absolute mt--10 w-full h-full bg-dark/75"></div>
       <div class="flex flex-col items-center z-1">
         <h6>Berita</h6>
         <h1 class="text-center">{{ berita[0].judul }}</h1>
-        <NuxtImg :src="getPenulis.avatar
-            ? config.public.directus.url + 'assets/' + getPenulis.avatar
-            : '/images/no-image.jpg'
-          " class="my-3 h-24 w-24 object-cover bg-orange-50 border-3 border-orange rounded-full"></NuxtImg>
+        <NuxtImg
+          :src="
+            getPenulis.avatar
+              ? config.public.directus.url + 'assets/' + getPenulis.avatar
+              : '/images/no-image.jpg'
+          "
+          class="my-3 h-24 w-24 object-cover bg-orange-50 border-3 border-unpad rounded-full"
+        ></NuxtImg>
         <h4>Penulis: {{ namaPenulis }}</h4>
         <p class="font-semibold italic">
           Diterbitkan: {{ convertTimeZone(berita[0].date_created) }}
@@ -51,14 +59,17 @@ const namaPenulis = `${getPenulis.first_name} ${getPenulis.last_name}`;
     <div class="max-w-7xl ma">
       <article>
         <h1 class="text-center mb-5">{{ berita[0].judul }}</h1>
-        <span class="text-justify" v-html="berita[0].konten_artikel ?? berita[0].konten_berita"></span>
+        <span
+          class="text-justify"
+          v-html="berita[0].konten_artikel ?? berita[0].konten_berita"
+        ></span>
         <p class="italic text-sm mt-5">
           Diperbaharui pada:
           {{ convertTimeZone(berita[0].date_updated) }}
         </p>
       </article>
       <div class="my-5 text-center">
-        <NuxtLink class="btn bg-orange py-1 px-4 text-white" to="/berita">
+        <NuxtLink class="btn bg-unpad py-1 px-4 text-white" to="/berita">
           Kembali ke Berita
         </NuxtLink>
       </div>

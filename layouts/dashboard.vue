@@ -42,7 +42,7 @@ const logoutBtn = () => {
     <section class="vertical-menu">
       <div class="flex items-center justify-center gap-1 py-4">
         <img src="/images/lambang-unpad.png" class="w-7" alt="" />
-        <h1 class="text-center text-2xl text-orange">Kandaga</h1>
+        <h1 class="text-center text-2xl text-unpad">Kandaga</h1>
       </div>
 
       <section>
@@ -53,12 +53,14 @@ const logoutBtn = () => {
                 ? `https://repository.unpad.ac.id:8050/assets/${user?.avatar}.jpg`
                 : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'
             "
-            class="w-15 h-15 object-cover rounded-lg border border-orange"
+            class="w-15 h-15 object-cover rounded-lg border border-unpad"
             alt="Foto Anggota"
           />
         </div>
         <div class="text-center">
-          <p v-if="user?.first_name">Halo, {{ user?.first_name ?? "guest" }}!</p>
+          <p v-if="user?.first_name">
+            Halo, {{ user?.first_name ?? "guest" }}!
+          </p>
           <p v-else>Halo, Pengunjung!</p>
         </div>
       </section>
@@ -137,7 +139,7 @@ const logoutBtn = () => {
 }
 
 .icon-block {
-  --at-apply: flex items-center my-4 transition-all-500 cursor-pointer hover:(text-orange);
+  --at-apply: flex items-center my-4 transition-all-500 cursor-pointer hover:(text-unpad);
 }
 
 .icon-item {
@@ -145,7 +147,7 @@ const logoutBtn = () => {
 }
 
 .router-link-active, .rouer-link-exact-active {
-  --at-apply: text-orange;
+  --at-apply: text-unpad;
 }
 
 /* Spinner CSS */

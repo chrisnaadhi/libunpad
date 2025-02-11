@@ -86,7 +86,7 @@ definePageMeta({
       <NuxtLink
         v-for="fakultas in namaFakultas.objFakultas"
         :to="'repository/' + fakultas.singkatan"
-        class="text-white bg-orange no-underline py-3 rounded-xl"
+        class="text-white bg-unpad no-underline py-3 rounded-xl"
       >
         {{ fakultas.namaFakultas }}
       </NuxtLink>
@@ -158,7 +158,7 @@ definePageMeta({
           :class="
             !searchTugasAkhir.searchResults || searchTugasAkhir.offset === 0
               ? 'bg-gray-5 cursor-not-allowed'
-              : 'bg-orange-5'
+              : 'bg-unpad'
           "
           @click="searchTugasAkhir.previousPage()"
         >
@@ -179,7 +179,7 @@ definePageMeta({
             searchTugasAkhir.searchResults === 'loading' ||
             searchTugasAkhir.searchResults.length < 30
               ? 'bg-gray-5 cursor-not-allowed'
-              : 'bg-orange-5'
+              : 'bg-unpad'
           "
           @click="searchTugasAkhir.nextPage()"
         >
@@ -194,7 +194,7 @@ definePageMeta({
     </div>
 
     <div class="my-10 flex flex-col items-center">
-      <NuxtLink to="/koleksi" class="btn bg-orange text-white">
+      <NuxtLink to="/koleksi" class="btn bg-unpad text-white">
         Kembali ke Koleksi
       </NuxtLink>
     </div>
@@ -223,6 +223,6 @@ h1 {
 }
 
 .modal-btn {
-  --at-apply: btn bg-orange text-white px-2 py-1 text-xs;
+  --at-apply: btn bg-unpad text-white px-2 py-1 text-xs;
 }
 </style>

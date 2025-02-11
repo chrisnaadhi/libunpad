@@ -1,6 +1,6 @@
 <template>
   <table class="w-full border-collapse border text-sm border-slate-400">
-    <thead class="bg-orange-2">
+    <thead class="bg-yellow-2">
       <slot name="tablehead" />
     </thead>
     <tbody>
@@ -11,6 +11,6 @@
 
 <style scoped>
 .table-border {
-  --at-apply: border border-orange p-1;
+  --at-apply: border border-unpad p-1;
 }
 </style>

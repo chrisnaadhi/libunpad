@@ -167,7 +167,7 @@ const viewStateMuseum = ref(false);
 }
 
 .background-block {
-  --at-apply: w-full text-dark bg-white py-5 flex flex-col items-center justify-center px-5 cursor-default z-2 xl:(w-6xl mt--16 rounded-xl) hover:(bg-orange-5 text-white);
+  --at-apply: w-full text-dark bg-white py-5 flex flex-col items-center justify-center px-5 cursor-default z-2 xl:(w-6xl mt--16 rounded-xl) hover:(bg-yellow-5 text-white);
 }
 
 .background-block:hover .tanggal {
@@ -175,7 +175,7 @@ const viewStateMuseum = ref(false);
 }
 
 .tanggal {
-  --at-apply: mb-4 py-2 px-4 mt--5 min-w-32 font-600 bg-orange text-white rounded-b-lg;
+  --at-apply: mb-4 py-2 px-4 mt--5 min-w-32 font-600 bg-unpad text-white rounded-b-lg;
 }
 
 .content-wrapper {
@@ -187,27 +187,27 @@ const viewStateMuseum = ref(false);
 }
 
 .content:hover {
-  --at-apply: bg-orange text-white;
+  --at-apply: bg-unpad text-white;
 }
 
 .use-banner {
-  --at-apply: text-xs mb-1 bg-orange text-white px-4 rounded;
+  --at-apply: text-xs mb-1 bg-unpad text-white px-4 rounded;
 }
 
 .use-banner-hover {
-  --at-apply: max-w-30 ma text-xs mb-2 bg-white text-orange px-4 rounded;
+  --at-apply: max-w-30 ma text-xs mb-2 bg-white text-unpad px-4 rounded;
 }
 
 .content:hover>.use-banner {
-  --at-apply: bg-white text-orange;
+  --at-apply: bg-white text-unpad;
 }
 
 .extra-content {
-  --at-apply: bg-white p-5 flex items-center justify-center rounded w-full text-dark no-underline hover:(bg-orange text-white);
+  --at-apply: bg-white p-5 flex items-center justify-center rounded w-full text-dark no-underline hover:(bg-unpad text-white);
 }
 
 .lib-content {
-  --at-apply: flex flex-col items-center mt-5 mb-10 bg-white text-dark no-underline p-3 mx-5 rounded xl:(w-272) hover:(bg-orange text-white);
+  --at-apply: flex flex-col items-center mt-5 mb-10 bg-white text-dark no-underline p-3 mx-5 rounded xl:(w-272) hover:(bg-unpad text-white);
 }
 
 

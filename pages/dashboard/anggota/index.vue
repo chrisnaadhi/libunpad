@@ -11,7 +11,7 @@ definePageMeta({
   <section>
     <h1>Daftar Keanggotaan</h1>
     <NuxtLink to="/dashboard">
-      <button class="btn bg-orange text-white">Back to Dashboard</button>
+      <button class="btn bg-unpad text-white">Back to Dashboard</button>
     </NuxtLink>
   </section>
 </template>

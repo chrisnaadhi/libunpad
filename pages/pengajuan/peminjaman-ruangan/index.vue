@@ -103,6 +103,7 @@ const kirimPengajuan = async () => {
   );
   if (
     namaLengkap.value === "" ||
+    unitPengajuan.value === "" ||
     npm.value === "" ||
     kontak.value === "" ||
     namaRuangan.value === "" ||
@@ -120,6 +121,7 @@ const kirimPengajuan = async () => {
     let items = {
       nomor_induk: npm.value,
       nama_lengkap: namaLengkap.value,
+      unit_pengajuan: unitPengajuan.value,
       email: email.value,
       kontak: kontak.value,
       judul_kegiatan: judulKegiatan.value,
@@ -136,6 +138,7 @@ const kirimPengajuan = async () => {
         textNotif.value = "text-green";
         notification.value = "Berhasil diajukan";
         namaLengkap.value = ref("");
+        unitPengajuan.value = "";
         email.value = data.value.user.email;
         kontak.value = "";
         namaRuangan.value = "";
@@ -144,12 +147,13 @@ const kirimPengajuan = async () => {
         jamSelesai.value = "";
         tujuanPeminjaman.value = "";
         fileSurat.value = null;
+        alert("Berhasil diajukan");
         setTimeout(async () => {
           notification.value =
             "Silahkan isi seluruh form sesuai dengan data asli";
           textNotif.value = "text-dark";
           await navigateTo({ path: "/pengajuan/peminjaman-ruangan/data" });
-        }, 2000);
+        }, 1000);
       } catch (error) {
         console.log(error);
       }
@@ -169,6 +173,7 @@ const kirimPengajuan = async () => {
       let items = {
         nomor_induk: npm.value,
         nama_lengkap: namaLengkap.value,
+        unit_pengajuan: unitPengajuan.value,
         email: email.value,
         kontak: kontak.value,
         nama_ruangan: namaRuangan.value,
@@ -186,6 +191,7 @@ const kirimPengajuan = async () => {
           textNotif.value = "text-green";
           notification.value = "Berhasil diajukan";
           namaLengkap.value = ref("");
+          unitPengajuan.value = "";
           email.value = data.value.user.email;
           kontak.value = "";
           namaRuangan.value = "";
@@ -194,6 +200,7 @@ const kirimPengajuan = async () => {
           jamSelesai.value = "";
           tujuanPeminjaman.value = "";
           fileSurat.value = null;
+          alert("Berhasil diajukan");
           setTimeout(async () => {
             notification.value =
               "Silahkan isi seluruh form sesuai dengan data asli";

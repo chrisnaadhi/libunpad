@@ -42,11 +42,13 @@ const viewModal = () => {
           {{ buku.description }}
         </p>
         <section class="grid my-5 gap-2 sm:(grid-cols-2)">
-          <button class="w-full btn bg-orange text-white" @click="viewModal">
+          <button class="w-full btn bg-unpad text-white" @click="viewModal">
             Baca {{ buku.judul }}
           </button>
           <NuxtLink to="/koleksi">
-            <button class="w-full btn text-orange border border-orange transition-all-500 hover:(text-white bg-orange)">
+            <button
+              class="w-full btn text-unpad border border-unpad transition-all-500 hover:(text-white bg-unpad)"
+            >
               Kembali ke Koleksi
             </button>
           </NuxtLink>

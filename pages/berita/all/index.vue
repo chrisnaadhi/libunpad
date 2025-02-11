@@ -8,8 +8,8 @@ const getAllArticle = await getItems({
   params: {
     sort: "-date_created",
     filter: {
-      status: "published"
-    }
+      status: "published",
+    },
   },
 });
 
@@ -18,25 +18,37 @@ const getAllBeritaKunjungan = await getItems({
   params: {
     sort: "-date_created",
     filter: {
-      status: "published"
-    }
-  }
-})
+      status: "published",
+    },
+  },
+});
 
-const allBerita = [...getAllArticle, ...getAllBeritaKunjungan].sort((a, b) => new Date(b.date_created) - new Date(a.date_created))
+const allBerita = [...getAllArticle, ...getAllBeritaKunjungan].sort(
+  (a, b) => new Date(b.date_created) - new Date(a.date_created)
+);
 </script>
 
 <template>
   <main class="max-w-7xl ma px-4 py-10">
     <section>
-      <CollectionHeader :title="$t('newsTitleHeader')" :image="imageBg" :description="$t('newsDescriptionHeader')" />
+      <CollectionHeader
+        :title="$t('newsTitleHeader')"
+        :image="imageBg"
+        :description="$t('newsDescriptionHeader')"
+      />
     </section>
     <section class="article-list">
-      <GenericArticleCard v-for="item in allBerita" :featured-img="item.gambar_unggulan"
-        :description="item.konten_artikel ?? item.konten_berita" :link-slug="beritaType(item)" :title="item.judul" :date-created="item.date_created" />
+      <GenericArticleCard
+        v-for="item in allBerita"
+        :featured-img="item.gambar_unggulan"
+        :description="item.konten_artikel ?? item.konten_berita"
+        :link-slug="beritaType(item)"
+        :title="item.judul"
+        :date-created="item.date_created"
+      />
     </section>
     <section class="my-10 text-center">
-      <NuxtLink to="/berita" class="btn bg-orange text-white">
+      <NuxtLink to="/berita" class="btn bg-unpad text-white">
         Kembali ke Berita
       </NuxtLink>
     </section>

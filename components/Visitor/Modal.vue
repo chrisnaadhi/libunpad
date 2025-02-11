@@ -11,7 +11,7 @@ const emit = defineEmits(["display"]);
           Silahkan hubungi pustakawan kami atau lakukan aktivasi mandiri ke
           https://lib.unpad.ac.id
         </p>
-        <button class="btn bg-orange" @click="emit('display')">Tutup</button>
+        <button class="btn bg-unpad" @click="emit('display')">Tutup</button>
       </section>
     </Transition>
   </div>
@@ -19,6 +19,7 @@ const emit = defineEmits(["display"]);
 
 <style>
 .modal-display {
-  --at-apply: absolute z-1 inset-0 flex items-center justify-center w-full h-screen bg-gray-500/80;
+  --at-apply: absolute z-1 inset-0 flex items-center justify-center w-full
+    h-screen bg-gray-500/80;
 }
 </style>

@@ -28,9 +28,9 @@ let division = {
 <template>
   <section>
     <div class="my-5 max-w-7xl ma">
-      <GenericBaseCard class="bg-orange-1 p-5">
+      <GenericBaseCard class="bg-yellow-1 p-5">
         <div class="flex flex-col items-center">
-          <div class="i-mdi-stadium text-7xl text-orange"></div>
+          <div class="i-mdi-stadium text-7xl text-unpad"></div>
           <h1>Pusat Pengelolaan Pengetahuan</h1>
           <p class="text-xs">
             Pusat pengelolaan Pengetahuan Universitas Padjadjaran.
@@ -39,16 +39,22 @@ let division = {
           <p>Presentase Tugas Selesai : 65%</p>
         </div>
         <div class="flex items-center justify-center mt-5">
-          <NuxtLink :to="route.fullPath + '/total'" class="btn bg-white text-center">
+          <NuxtLink
+            :to="route.fullPath + '/total'"
+            class="btn bg-white text-center"
+          >
             Detail
           </NuxtLink>
         </div>
       </GenericBaseCard>
     </div>
     <div class="lower-division">
-      <GenericBaseCard class="bg-orange-1 items-center p-5" v-for="divisi in division">
+      <GenericBaseCard
+        class="bg-yellow-1 items-center p-5"
+        v-for="divisi in division"
+      >
         <div class="flex flex-col items-center">
-          <div :class="divisi.icon" class="text-7xl text-orange"></div>
+          <div :class="divisi.icon" class="text-7xl text-unpad"></div>
           <h1 class="">{{ divisi.nama }}</h1>
           <p class="text-xs">{{ divisi.deskripsi }}</p>
           <p>Total Tugas : 100</p>

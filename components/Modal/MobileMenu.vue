@@ -48,7 +48,7 @@ const viewPanduan = () => {
         <NuxtLink to="/" class="menu-list hover-menu">Beranda</NuxtLink>
         <p
           class="menu-list"
-          :class="menu.isTentangOpen ? 'text-orange' : ''"
+          :class="menu.isTentangOpen ? 'text-unpad' : ''"
           @click="viewTentang"
         >
           Tentang
@@ -64,7 +64,7 @@ const viewPanduan = () => {
         </div>
         <p
           class="menu-list"
-          :class="menu.isLayananOpen ? 'text-orange' : ''"
+          :class="menu.isLayananOpen ? 'text-unpad' : ''"
           @click="viewLayanan"
         >
           Layanan
@@ -80,7 +80,7 @@ const viewPanduan = () => {
         </div>
         <p
           class="menu-list"
-          :class="menu.isKoleksiOpen ? 'text-orange' : ''"
+          :class="menu.isKoleksiOpen ? 'text-unpad' : ''"
           @click="viewKoleksi"
         >
           Koleksi
@@ -96,7 +96,7 @@ const viewPanduan = () => {
         </div>
         <p
           class="menu-list"
-          :class="menu.isPanduanOpen ? 'text-orange' : ''"
+          :class="menu.isPanduanOpen ? 'text-unpad' : ''"
           @click="viewPanduan"
         >
           Panduan
@@ -114,7 +114,7 @@ const viewPanduan = () => {
       </div>
       <div class="flex min-w-full flex-row items-center justify-center gap-2">
         <NuxtLink to="/login" v-if="status === 'unauthenticated'">
-          <button class="btn bg-orange w-full text-white">Login</button>
+          <button class="btn bg-unpad w-full text-white">Login</button>
         </NuxtLink>
         <div v-else-if="status === 'authenticated'" class="flex gap-2">
           <img
@@ -126,7 +126,7 @@ const viewPanduan = () => {
             <p>{{ data.user.name }}</p>
             <p class="text-xs">{{ data.user.email }}</p>
             <div class="flex gap-1 mt-2">
-              <NuxtLink to="/keanggotaan" class="btn bg-orange text-white py-0"
+              <NuxtLink to="/keanggotaan" class="btn bg-unpad text-white py-0"
                 >Keanggotaan</NuxtLink
               >
               <button class="btn bg-red text-white py-0" @click="logout">
@@ -154,6 +154,6 @@ const viewPanduan = () => {
 }
 
 .hover-menu {
-  --at-apply: transition-all-500 text-dark no-underline hover:(text-orange underline);
+  --at-apply: transition-all-500 text-dark no-underline hover:(text-unpad underline);
 }
 </style>

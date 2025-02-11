@@ -54,10 +54,7 @@ const listKoleksi = await getItems({
       </div>
     </div>
     <div class="my-5 flex justify-center">
-      <NuxtLink
-        to="/e-teater"
-        class="btn bg-orange text-white py-1 text-center"
-      >
+      <NuxtLink to="/e-teater" class="btn bg-unpad text-white py-1 text-center">
         Kembali ke Koleksi E-Teater
       </NuxtLink>
     </div>

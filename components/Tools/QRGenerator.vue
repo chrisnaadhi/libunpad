@@ -50,27 +50,39 @@ function downloadQR() {
     <h1>Kandaga QRCode Generator</h1>
     <p>
       Masukkan teks atau tautan (link) lalu klik tombol
-      <span class="text-orange font-600">Generate</span>
+      <span class="text-unpad font-600">Generate</span>
     </p>
     <div class="qr-parents">
       <input type="text" name="textqr" id="" v-model="textForQR" />
-      <button class="generate-btn" :class="!textForQR ? 'bg-gray cursor-not-allowed' : 'bg-orange'" @click="generateQR"
-        :disabled="!textForQR">
+      <button
+        class="generate-btn"
+        :class="!textForQR ? 'bg-gray cursor-not-allowed' : 'bg-unpad'"
+        @click="generateQR"
+        :disabled="!textForQR"
+      >
         Generate
       </button>
     </div>
     <div class="qr-area" ref="generatedArea"></div>
     <div class="my-5 flex items-center max-w-72 ma gap-2">
-      <button :class="textForQR ? 'download-btn' : 'btn-disabled'" ref="download" @click="downloadQR"
-        :disabled="!textForQR">
+      <button
+        :class="textForQR ? 'download-btn' : 'btn-disabled'"
+        ref="download"
+        @click="downloadQR"
+        :disabled="!textForQR"
+      >
         Download
       </button>
-      <button :class="textForQR ? 'reset-btn' : 'btn-disabled'" @click="clearQR" :disabled="!textForQR">
+      <button
+        :class="textForQR ? 'reset-btn' : 'btn-disabled'"
+        @click="clearQR"
+        :disabled="!textForQR"
+      >
         Reset
       </button>
     </div>
     <div class="min-w-72 ma">
-      <NuxtLink to="/toolkit" class="btn w-full bg-orange text-white">
+      <NuxtLink to="/toolkit" class="btn w-full bg-unpad text-white">
         Kembali ke daftar Toolkit
       </NuxtLink>
     </div>
@@ -91,7 +103,7 @@ h1 {
 }
 
 input {
-  --at-apply: border border-orange p-2 rounded w-full max-w-xl;
+  --at-apply: border border-unpad p-2 rounded w-full max-w-xl;
 }
 
 .generate-btn {
@@ -103,11 +115,11 @@ input {
 }
 
 .download-btn {
-  --at-apply: btn bg-orange text-white w-full font-600;
+  --at-apply: btn bg-unpad text-white w-full font-600;
 }
 
 .reset-btn {
-  --at-apply: btn w-full bg-orange-1 text-orange font-600 hover:(bg-orange text-white);
+  --at-apply: btn w-full bg-yellow-1 text-unpad font-600 hover:(bg-unpad text-white);
 }
 
 .btn-disabled {

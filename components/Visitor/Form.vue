@@ -362,7 +362,7 @@ onMounted(async () => {
         class="btn text-white w-xl py-3"
         :disabled="!userData"
         :class="
-          !userData ? 'cursor-not-allowed bg-gray' : 'cursor-pointer bg-orange'
+          !userData ? 'cursor-not-allowed bg-gray' : 'cursor-pointer bg-unpad'
         "
         @click.prevent="addVisitor"
       >
@@ -374,7 +374,7 @@ onMounted(async () => {
       v-on:writing="focusToIdentitas"
     />
     <div class="fixed right-0 bottom-0">
-      <button class="btn bg-orange" @click="backToIndex">Reset Ruangan</button>
+      <button class="btn bg-unpad" @click="backToIndex">Reset Ruangan</button>
     </div>
   </main>
 </template>
@@ -386,7 +386,7 @@ form {
 
 input,
 select {
-  --at-apply: border border-orange rounded p-3 bg-white;
+  --at-apply: border border-unpad rounded p-3 bg-white;
 }
 
 option {

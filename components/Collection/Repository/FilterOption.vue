@@ -57,7 +57,7 @@ const years = [
             type="checkbox"
             name="ta"
             id="ta"
-            class="w-4 h-4 text-orange-600 bg-gray-100 border-gray-300 rounded focus:ring-orange-500 dark:focus:ring-orange-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+            class="w-4 h-4 text-yellow-600 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
           />
           <label for="ta" class="ms-2 text-gray-900 dark:text-gray-300">
             Tugas Akhir (Diploma)
@@ -68,7 +68,7 @@ const years = [
             type="checkbox"
             name="ta"
             id="ta"
-            class="w-4 h-4 text-orange-600 bg-gray-100 border-gray-300 rounded focus:ring-orange-500 dark:focus:ring-orange-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+            class="w-4 h-4 text-yellow-600 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
           />
           <label for="skripsi" class="ms-2 text-gray-900 dark:text-gray-300">
             Skripsi (S1)
@@ -79,7 +79,7 @@ const years = [
             type="checkbox"
             name="tesis"
             id="tesis"
-            class="w-4 h-4 text-orange-600 bg-gray-100 border-gray-300 rounded focus:ring-orange-500 dark:focus:ring-orange-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+            class="w-4 h-4 text-yellow-600 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
           />
           <label for="tesis" class="ms-2 text-gray-900 dark:text-gray-300">
             Tesis (S2)
@@ -90,7 +90,7 @@ const years = [
             type="checkbox"
             name="disertasi"
             id="disertasi"
-            class="w-4 h-4 text-orange-600 bg-gray-100 border-gray-300 rounded focus:ring-orange-500 dark:focus:ring-orange-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+            class="w-4 h-4 text-yellow-600 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
           />
           <label for="disertasi" class="ms-2 text-gray-900 dark:text-gray-300">
             Disertasi (S3)
@@ -115,7 +115,7 @@ const years = [
       </div>
       <div class="my-2">
         <button
-          class="btn text-sm text-white w-full bg-orange"
+          class="btn text-sm text-white w-full bg-unpad"
           @click="searchTugasAkhir.searchingTugasAkhir(true, false, true)"
         >
           Cari
@@ -127,11 +127,11 @@ const years = [
 
 <style scoped>
 .main-block {
-  --at-apply: bg-orange-50 border-1 border-orange rounded min-w-50 p-3 mx-2 lg:mx-0;
+  --at-apply: bg-unpad-50 border-1 border-unpad rounded min-w-50 p-3 mx-2 lg:mx-0;
 }
 
 select {
-  --at-apply: w-20 rounded border-1 border-orange;
+  --at-apply: w-20 rounded border-1 border-unpad;
 }
 
 input[type="checkbox"] {

@@ -29,7 +29,7 @@ const gabunganBerita = [...getAllArticle, ...getAllBeritaKunjungan];
 <template>
   <section>
     <div class="flex items-center justify-center mb-5 my-10">
-      <h2 class="bg-orange text-white py-2 px-10 rounded text-center">
+      <h2 class="bg-unpad text-white py-2 px-10 rounded text-center">
         {{ $t("newsTitleHeader") }}
       </h2>
     </div>
@@ -47,7 +47,7 @@ const gabunganBerita = [...getAllArticle, ...getAllBeritaKunjungan];
     </div>
     <div class="mt-5 flex flex-col items-center">
       <NuxtLink
-        class="transition-all-500 px-2 py-1 rounded hover:(bg-orange text-white no-underline)"
+        class="transition-all-500 px-2 py-1 rounded hover:(bg-unpad text-white no-underline)"
         to="/berita"
       >
         Lihat berita lainnya &rightarrow;

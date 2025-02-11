@@ -63,7 +63,7 @@ const getThumbnail = (id) => {
         </NuxtLink>
       </div>
       <div
-        class="mt-5 px-3 bg-orange-50 border-2 border-orange-2 text-dark text-center py-2 lg:(mt-20 rounded)"
+        class="mt-5 px-3 bg-yellow-50 border-2 border-yellow-2 text-dark text-center py-2 lg:(mt-20 rounded)"
       >
         <p class="font-semibold">{{ $t("chosenNews") }} :</p>
         <NuxtLink

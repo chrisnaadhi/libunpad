@@ -14,7 +14,7 @@ defineProps({
 <template>
   <div class="card">
     <div class="top-card">
-      <div class="bg-orange-6 absolute z-1 m-3 px-3 py-1 rounded-full">
+      <div class="bg-unpad absolute z-1 m-3 px-3 py-1 rounded-full">
         <p class="text-white text-sm font-semibold">{{ tipe }}</p>
       </div>
       <NuxtImg
@@ -25,7 +25,7 @@ defineProps({
 
     <div class="bot-card">
       <NuxtLink :to="`/e-teater/${parent}/${slug}`">
-        <h4 class="italic font-semibold text-orange" :title="judul">
+        <h4 class="italic font-semibold text-unpad" :title="judul">
           {{ trimTitle(judul, 70) }}
         </h4>
       </NuxtLink>
@@ -38,7 +38,7 @@ defineProps({
       <div class="mt-3 flex text-center">
         <NuxtLink
           :to="`/e-teater/${parent}/${slug}`"
-          class="btn w-full py-1 px-5 bg-orange text-white text-sm no-underline"
+          class="btn w-full py-1 px-5 bg-unpad text-white text-sm no-underline"
         >
           Lihat
         </NuxtLink>

@@ -47,7 +47,7 @@ const chooseFacet = (name) => {
         Museum
       </button>
     </div>
-    <div class="bg-orange-2 px-5 py-2 h-full max-h-23 rounded-b-xl">
+    <div class="bg-yellow-1 px-5 py-2 h-full max-h-23 rounded-b-xl">
       <Transition name="slide-up">
         <div v-if="defaultFacet === 'main'">
           <GenericSearch />
@@ -78,7 +78,7 @@ const chooseFacet = (name) => {
 }
 
 .active-btn {
-  --at-apply: bg-orange-2 text-orange-6;
+  --at-apply: bg-yellow-1 text-yellow-5;
 }
 
 .inactive-btn {

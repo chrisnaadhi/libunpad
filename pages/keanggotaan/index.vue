@@ -85,7 +85,7 @@ definePageMeta({
               : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'
           "
           :alt="user?.first_name"
-          class="w-35 h-35 object-cover border-2 border-orange rounded-xl"
+          class="w-35 h-35 object-cover border-2 border-unpad rounded-xl"
         />
       </div>
       <div class="w-full">
@@ -184,7 +184,7 @@ definePageMeta({
                             '/pengajuan/bebas-pustaka/surat/' +
                             getBebasPustaka[0].id
                           "
-                          class="btn py-1 px-2 bg-orange text-white"
+                          class="btn py-1 px-2 bg-unpad text-white"
                           target="_blank"
                           >Unduh Surat</NuxtLink
                         >
@@ -214,7 +214,7 @@ definePageMeta({
                     v-if="getPeminjamanRuangan.length > 0"
                   >
                     <GenericBaseCard v-for="ruang in getPeminjamanRuangan">
-                      <div class="p-3 rounded text-sm bg-orange-50">
+                      <div class="p-3 rounded text-sm bg-yellow-50">
                         <p>{{ displayNamaRuangan(ruang.nama_ruangan) }}</p>
                         <div class="py-1">
                           <span
@@ -256,12 +256,12 @@ definePageMeta({
     <section class="flex justify-center gap-2">
       <NuxtLink
         to="/dashboard"
-        class="btn bg-orange text-white"
+        class="btn bg-unpad text-white"
         v-show="isPegawai"
       >
         Dashboard
       </NuxtLink>
-      <NuxtLink to="/pengajuan" class="btn bg-orange text-white">
+      <NuxtLink to="/pengajuan" class="btn bg-unpad text-white">
         Pengajuan Lain
       </NuxtLink>
       <button

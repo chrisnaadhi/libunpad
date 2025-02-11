@@ -7,7 +7,7 @@ const dataArtikelLibrary = await getItems({
   params: {
     filter: {
       kategori: "library",
-      status: "published"
+      status: "published",
     },
   },
 });
@@ -17,16 +17,24 @@ const dataArtikelLibrary = await getItems({
   <section>
     <div class="text-center">
       <h1>{{ title }}</h1>
-      <p class="italic">Berita yang berkaitan seputar Perpustakaan dan pengelolaannya.</p>
+      <p class="italic">
+        Berita yang berkaitan seputar Perpustakaan dan pengelolaannya.
+      </p>
     </div>
 
     <div class="article-list">
-      <GenericArticleCard v-for="item in dataArtikelLibrary" :featured-img="item.gambar_unggulan"
-        :description="item.konten_artikel" :link-slug="item.slug" :title="item.judul" :date-created="item.date_created" />
+      <GenericArticleCard
+        v-for="item in dataArtikelLibrary"
+        :featured-img="item.gambar_unggulan"
+        :description="item.konten_artikel"
+        :link-slug="item.slug"
+        :title="item.judul"
+        :date-created="item.date_created"
+      />
     </div>
 
     <div class="my-10 text-center">
-      <NuxtLink class="btn bg-orange text-white" to="/berita">
+      <NuxtLink class="btn bg-unpad text-white" to="/berita">
         Kembali ke Berita
       </NuxtLink>
     </div>

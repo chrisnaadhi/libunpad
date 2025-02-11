@@ -29,7 +29,7 @@ const getJumlahDataBarang = getAllDataBarangALH.reduce((acc, item) => {
       <h5>👋 Halo, {{ data.user.name }}</h5>
       <p>Daftar barang yang ada di ruang ALH</p>
     </div>
-    <div class="bg-orange-1 rounded-xl p-5 my-5">
+    <div class="bg-yellow-1 rounded-xl p-5 my-5">
       <h6>Jumlah Barang</h6>
       <p>Laptop: {{ getJumlahDataBarang.laptop }}</p>
       <p>Voice Recorder: {{ getJumlahDataBarang.voice_recorder }}</p>
@@ -43,10 +43,10 @@ const getJumlahDataBarang = getAllDataBarangALH.reduce((acc, item) => {
       <div
         v-for="barang in getAllDataBarangALH"
         :key="barang.id"
-        class="bg-orange-50 rounded-xl p-5"
+        class="bg-yellow-50 rounded-xl p-5"
       >
         <p
-          class="bg-orange text-white max-w-40 ma text-center rounded-xl py-1 px-5"
+          class="bg-unpad text-white max-w-40 ma text-center rounded-xl py-1 px-5"
         >
           #{{ barang.nomor_asset }}
         </p>
