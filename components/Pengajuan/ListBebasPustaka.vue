@@ -125,13 +125,26 @@ const tableHeadPublic = [
 
 <template>
   <section class="overflow-x-auto relative">
-    <table class="w-full border-collapse border text-sm border-slate-400" v-if="totalData.length > 0">
+    <table
+      class="w-full border-collapse border text-sm border-slate-400"
+      v-if="totalData.length > 0"
+    >
       <thead class="bg-orange-2">
         <tr>
-          <th v-if="publicData" v-for="elem in tableHead" scope="col" class="table-border font-600">
+          <th
+            v-if="publicData"
+            v-for="elem in tableHead"
+            scope="col"
+            class="table-border font-600"
+          >
             {{ elem }}
           </th>
-          <th v-else v-for="elem in tableHeadPublic" scope="col" class="table-border font-600">
+          <th
+            v-else
+            v-for="elem in tableHeadPublic"
+            scope="col"
+            class="table-border font-600"
+          >
             {{ elem }}
           </th>
         </tr>
@@ -155,7 +168,10 @@ const tableHeadPublic = [
             {{ convertTimeZone(data.date_created) }}
           </td>
           <td class="table-border w-40">
-            <span :class="displayMessage(data.status_pengajuan)" class="font-600">
+            <span
+              :class="displayMessage(data.status_pengajuan)"
+              class="font-600"
+            >
               {{ displayStatusPengajuanSurat(data.status_pengajuan) }}
             </span>
           </td>
@@ -167,9 +183,14 @@ const tableHeadPublic = [
             {{ searchPetugas(data.user_updated) }}
           </td>
           <td class="table-border" v-show="publicData">
-            <NuxtLink :to="'https://repository.unpad.ac.id:8050/admin/content/pengajuan_surat_bebas_pustaka/' +
-              data.id
-              " class="btn bg-orange text-white py-0" target="_blank">
+            <NuxtLink
+              :to="
+                'https://repository.unpad.ac.id:8050/admin/content/pengajuan_surat_bebas_pustaka/' +
+                data.id
+              "
+              class="btn bg-unpad text-white py-0"
+              target="_blank"
+            >
               Cek
             </NuxtLink>
           </td>
@@ -179,16 +200,28 @@ const tableHeadPublic = [
     <div v-else>
       <p>Belum ada Data!</p>
     </div>
-    <div class="flex items-center justify-center gap-1 mt-3" v-show="totalData.length > 10">
-      <button class="btn py-0 px-5" @click="prevData" :class="pageState === 0 ? 'disable-btn' : 'enable-btn'"
-        :disabled="pageState === 0">
+    <div
+      class="flex items-center justify-center gap-1 mt-3"
+      v-show="totalData.length > 10"
+    >
+      <button
+        class="btn py-0 px-5"
+        @click="prevData"
+        :class="pageState === 0 ? 'disable-btn' : 'enable-btn'"
+        :disabled="pageState === 0"
+      >
         Prev
       </button>
       <div>
-        {{ pageState < 10 ? "1" : (pageState + 10) / 10 }} / {{ (Number(gapData) + 10) / 10 }}
+        {{ pageState < 10 ? "1" : (pageState + 10) / 10 }} /
+        {{ (Number(gapData) + 10) / 10 }}
       </div>
-      <button class="btn bg-orange py-0 px-5" @click="nextData"
-        :class="pageState < gapData ? 'enable-btn' : 'disable-btn'" :disable="pageState <= gapData">
+      <button
+        class="btn bg-unpad py-0 px-5"
+        @click="nextData"
+        :class="pageState < gapData ? 'enable-btn' : 'disable-btn'"
+        :disable="pageState <= gapData"
+      >
         Next
       </button>
     </div>
@@ -197,7 +230,7 @@ const tableHeadPublic = [
 
 <style scoped>
 .table-border {
-  --at-apply: border border-orange p-1;
+  --at-apply: border border-unpad p-1;
 }
 
 .disable-btn {
@@ -205,6 +238,6 @@ const tableHeadPublic = [
 }
 
 .enable-btn {
-  --at-apply: bg-orange text-white;
+  --at-apply: bg-unpad text-white;
 }
 </style>

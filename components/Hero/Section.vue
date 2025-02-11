@@ -28,12 +28,12 @@ const getThumbnail = (id) => {
     <div class="hero-space">
       <div class="hero-left">
         <div class="text-2xl font-600 md:text-4xl text-gray-700">
-          <span class="text-orange text-4xl sm:text-4xl md:text-6xl lg:text-7xl"
+          <span class="text-unpad text-4xl sm:text-4xl md:text-6xl lg:text-7xl"
             >KANDAGA</span
           >
         </div>
         <p class="text-sm md:text-xl font-500 text-dark-8 font-italic">
-          <span class="text-orange-6 font-600">Universitas Padjadjaran</span>'s
+          <span class="text-unpad-6 font-600">Universitas Padjadjaran</span>'s
           Library & Academic Collection
         </p>
         <p class="py-2 text-sm xl:(mr-6 pr-8 px-20)">
@@ -67,7 +67,7 @@ const getThumbnail = (id) => {
       >
         <p class="font-semibold">{{ $t("chosenNews") }} :</p>
         <NuxtLink
-          class="px-2 transition-all-500 rounded hover:(bg-orange text-white py-0)"
+          class="px-2 transition-all-500 rounded hover:(bg-unpad text-white py-0)"
           :href="beritaType(getBerita)"
         >
           {{ getBerita.judul }}
@@ -100,12 +100,12 @@ const getThumbnail = (id) => {
 }
 
 .uglam {
-  --at-apply: bg-clip-text text-transparent text-4xl sm:text-4xl md:text-6xl lg:text-7xl font-700 bg-gradient-to-br from-orange-500 to-gray-500;
+  --at-apply: bg-clip-text text-transparent text-4xl sm:text-4xl md:text-6xl lg:text-7xl font-700 bg-gradient-to-br from-unpad to-gray-500;
   font-family: "Cormorant Garamond", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .tentang {
-  --at-apply: bg-orange text-xs px-2 py-2 text-white font-600 no-underline mr-2 md:(px-6 text-base);
+  --at-apply: bg-unpad text-xs px-2 py-2 text-white font-600 no-underline mr-2 md:(px-6 text-base);
 }
 
 .koleksi {

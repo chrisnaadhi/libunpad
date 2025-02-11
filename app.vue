@@ -119,7 +119,7 @@ h6 {
 }
 
 a {
-  --at-apply: text-orange underline;
+  --at-apply: text-unpad underline;
 }
 
 ul {
@@ -141,7 +141,7 @@ label {
 input[type="search"],
 input,
 select {
-  --at-apply: w-full border-1 border-orange;
+  --at-apply: w-full border-1 border-unpad;
 }
 
 textarea:disabled,
@@ -155,11 +155,11 @@ input:disabled {
 }
 
 .input-area {
-  --at-apply: border border-orange rounded p-3 bg-white;
+  --at-apply: border border-unpad rounded p-3 bg-white;
 }
 
 button[type="submit"] {
-  --at-apply: bg-orange;
+  --at-apply: bg-unpad;
 }
 
 button:disabled {
@@ -171,7 +171,7 @@ strong {
 }
 
 .kandaga-gradient {
-  --at-apply: bg-clip-text text-transparent bg-gradient-to-br from-orange-500 to-gray-500;
+  --at-apply: bg-clip-text text-transparent bg-gradient-to-br from-unpad to-gray-500;
 }
 
 .konten-berita img {
@@ -194,7 +194,7 @@ strong {
 }
 
 .splide__pagination__page.is-active {
-  --at-apply: bg-orange;
+  --at-apply: bg-unpad;
 }
 
 .splide__pagination__page {

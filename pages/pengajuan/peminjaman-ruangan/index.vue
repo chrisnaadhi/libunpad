@@ -250,7 +250,7 @@ const kirimPengajuan = async () => {
             <label for="npm">
               NPM / NIP <span class="text-red-6">*</span> :
             </label>
-            <input type="number" name="npm" id="npm" v-model="npm" required />
+            <input type="text" name="npm" id="npm" v-model="npm" required />
           </div>
           <div class="input-form">
             <label for="nama">

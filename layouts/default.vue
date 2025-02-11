@@ -68,7 +68,7 @@ onMounted(() => {
 }
 
 .locale-display {
-  --at-apply: flex flex-col gap-2 p-2 my-2 rounded bg-orange-3 max-w-12 -translate-y-1;
+  --at-apply: flex flex-col gap-2 p-2 my-2 rounded bg-unpad max-w-12 -translate-y-1;
 }
 
 .v-enter-active {
@@ -85,7 +85,7 @@ onMounted(() => {
 }
 
 .locale-banner {
-  --at-apply: bg-orange-3 text-sm text-white rounded px-2 ml-2 hidden;
+  --at-apply: bg-unpad text-sm text-white rounded px-2 ml-2 hidden;
 }
 
 .locale-flag {

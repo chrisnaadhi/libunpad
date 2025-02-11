@@ -17,4 +17,10 @@ export default defineConfig({
     presetTypography(),
   ],
   transformers: [transformerDirectives(), transformerVariantGroup()],
+  theme: {
+    colors: {
+      unpad: "#F9B129",
+      kandaga: "#FFA100"
+    }
+  }
 });

@@ -32,7 +32,7 @@ onMounted(() => {
 
 <template>
   <main @click.stop="" class="bg-gray-1 text-center z-1">
-    <div class="bg-orange max-w-50 py-2 ma">
+    <div class="bg-unpad max-w-50 py-2 ma">
       <p class="text-md text-white font-600">
         {{ currentTime?.toLocaleDateString("id-ID", options) }}
       </p>
@@ -81,6 +81,6 @@ onMounted(() => {
 }
 
 .link-layanan {
-  --at-apply: max-w-40 text-sm text-orange-6 underline cursor-pointer;
+  --at-apply: max-w-40 text-sm text-unpad underline cursor-pointer;
 }
 </style>

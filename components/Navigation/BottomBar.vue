@@ -3,30 +3,34 @@
 <template>
   <section class="menu-bar">
     <div class="menu-element">
-      <div class="i-mdi-home bg-orange w-6 h-6" />
+      <div class="i-mdi-home bg-unpad w-6 h-6" />
       <NuxtLink to="/">
         <p>Beranda</p>
       </NuxtLink>
     </div>
     <div class="menu-element">
-      <div class="i-mdi-book-sync bg-orange w-6 h-6" />
+      <div class="i-mdi-book-sync bg-unpad w-6 h-6" />
       <NuxtLink to="/pengajuan">
         <p>Layanan</p>
       </NuxtLink>
     </div>
     <div class="middle-menu">
       <NuxtLink to="/search">
-        <img src="/images/lambang-unpad.png" class="unpad-icon" alt="Logo Unpad" />
+        <img
+          src="/images/lambang-unpad.png"
+          class="unpad-icon"
+          alt="Logo Unpad"
+        />
       </NuxtLink>
     </div>
     <div class="menu-element">
-      <div class="i-mdi-newspaper-variant-multiple bg-orange w-6 h-6" />
+      <div class="i-mdi-newspaper-variant-multiple bg-unpad w-6 h-6" />
       <NuxtLink to="/">
         <p>Berita</p>
       </NuxtLink>
     </div>
     <div class="menu-element">
-      <div class="i-mdi-help-box-multiple bg-orange w-6 h-6" />
+      <div class="i-mdi-help-box-multiple bg-unpad w-6 h-6" />
       <NuxtLink to="/">
         <p>Bantuan</p>
       </NuxtLink>

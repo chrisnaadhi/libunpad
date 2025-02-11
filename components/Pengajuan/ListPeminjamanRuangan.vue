@@ -25,7 +25,7 @@ const displayStatusPeminjaman = (val) => {
     case "cancel":
       return "bg-red";
     default:
-      return "bg-orange";
+      return "bg-unpad";
   }
 };
 const displayNamaRuangan = (val) => {
@@ -90,6 +90,6 @@ const tableHeadPublic = [
 
 <style scoped>
 .table-border {
-  --at-apply: border border-orange p-1;
+  --at-apply: border border-unpad p-1;
 }
 </style>
