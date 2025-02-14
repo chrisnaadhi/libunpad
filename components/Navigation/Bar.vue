@@ -7,12 +7,20 @@ const { locale } = useI18n();
   <GenericMiniBanner />
   <div class="wrapper">
     <nav class="navbar">
-      <NuxtLink :to="locale === 'en' ? '/en' : '/'">
+      <NuxtLink
+        :to="locale === 'en' ? '/en' : '/'"
+        class="flex items-center justify-center gap-2"
+      >
+        <NuxtImg
+          src="/images/lambang-unpad.png"
+          class="logo"
+          alt="Logo Perpustakaan"
+          format="webp"
+        />
         <NuxtImg
           src="/images/kandaga-new.png"
           class="logo"
           alt="Logo Perpustakaan"
-          height="512px"
           format="webp"
         />
       </NuxtLink>
@@ -39,7 +47,7 @@ const { locale } = useI18n();
 }
 
 .logo {
-  --at-apply: pl-3 max-w-50 md:(pl-0 max-w-75);
+  --at-apply: pl-3 max-w-50 h-8 md:(pl-0 h-8 max-w-75);
 }
 
 .jamlayanan-enter-active,

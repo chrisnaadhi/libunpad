@@ -15,14 +15,14 @@ const bahasaState = computed(() => {
 </script>
 
 <template>
-  <div class="bg-gray-7 w-full py-2 transition-all-500">
+  <div class="bg-unpad w-full py-2 transition-all-500">
     <div
-      class="max-w-7xl ma flex items-center justify-between text-white text-xs font-600"
+      class="max-w-7xl ma flex items-center justify-between text-dark text-xs font-600"
     >
       <p class="px-5 lg:px-0">
         Pengajuan Administrasi dan Bebas Pustaka dapat dilakukan dengan mengklik
         tautan berikut :
-        <NuxtLink class="text-unpad underline-unpad" to="/pengajuan"
+        <NuxtLink class="text-white underline-white" to="/pengajuan"
           >Pengajuan Administrasi</NuxtLink
         >
       </p>
@@ -54,7 +54,7 @@ const bahasaState = computed(() => {
 
 <style scoped>
 .locale {
-  --at-apply: px-2 text-white;
+  --at-apply: px-2 text-dark;
 }
 
 a {
