@@ -9,7 +9,7 @@ export const menuContent = () => {
       nameEN: "Kandaga",
       urlEN: "/en/kandaga",
       deskripsi:
-        "Kandaga merupakan branding dari Pusat Pengelolaan Pengetahuan untuk Perpustakaan Pusat di Universitas Padjadjaran. Kandaga menjadi portal dan layanan dari Perpustakaan Pusat untuk memenuhi kebutuhan kegiatan belajar dan mengajar mahasiswa serta dosen. Kandaga memberikan layanan dan fasilitas yang bisa dimanfaatkan oleh seluruh mahasiswa, dosen serta tenaga kependidikan.",
+        "Kandaga merupakan branding dari Perpustakaan Pusat di Universitas Padjadjaran yang dikelola oleh Kantor Pengelolaan Perpustakaan. Kandaga menjadi portal dan layanan dari Perpustakaan Pusat untuk memenuhi kebutuhan kegiatan belajar dan mengajar mahasiswa serta dosen. Kandaga memberikan layanan dan fasilitas yang bisa dimanfaatkan oleh seluruh mahasiswa, dosen serta tenaga kependidikan.",
       deskripsiEN: "",
       imgUrl: "",
     },
@@ -20,7 +20,7 @@ export const menuContent = () => {
       nameEN: "Profile",
       urlEN: "/en/profil",
       deskripsi:
-        "Profil Pusat Pengelolaan Pengetahuan Universitas Padjadjaran mencakup gambaran menyeluruh tentang identitas, misi, koleksi, layanan, dan kegiatan yang ditawarkan oleh sebuah perpustakaan. Ini memberikan pemahaman tentang tujuan dan fokus perpustakaan serta bagaimana perpustakaan berfungsi untuk melayani kebutuhan pengguna dan masyarakat secara umum.",
+        "Profil Perpustakaan Pusat Universitas Padjadjaran mencakup gambaran menyeluruh tentang identitas, misi, koleksi, layanan, dan kegiatan yang ditawarkan oleh sebuah perpustakaan. Ini memberikan pemahaman tentang tujuan dan fokus perpustakaan serta bagaimana perpustakaan berfungsi untuk melayani kebutuhan pengguna dan masyarakat secara umum.",
       deskripsiEN: "",
       imgUrl: "",
     },
