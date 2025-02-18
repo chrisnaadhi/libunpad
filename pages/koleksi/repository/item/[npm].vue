@@ -42,6 +42,15 @@ const dataMhs = async () => {
 const finalDataTA = await dataTugasAkhir();
 const biodataMhs = await dataMhs();
 
+const createSecurePath = (link) => {
+  if (link === null) {
+    return null;
+  } else {
+    const safeLink = link.replace("http://", "https://");
+    return safeLink;
+  }
+};
+
 // Create function for access link with auth concerned here
 const isUserAuthenticated = (linkData) => {
   if (linkData === null) {
@@ -56,6 +65,8 @@ const isUserAuthenticated = (linkData) => {
     console.log("something is missing!");
   }
 };
+
+finalDataTA.LinkPath = createSecurePath(finalDataTA.LinkPath);
 
 const dataObjectTA = {
   npm: finalDataTA.MhsNPM,
