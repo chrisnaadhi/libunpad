@@ -9,8 +9,8 @@ const date = new Date();
     <slot />
     <div class="my-5 text-center noPrint">
       <p>
-        &copy; 2020 - {{ date.getFullYear() }} | Pusat Pengelolaan Pengetahuan
-        Universitas Padjadjaran
+        &copy; 2020 - {{ date.getFullYear() }} | Grha Kandaga Universitas
+        Padjadjaran
       </p>
     </div>
   </section>

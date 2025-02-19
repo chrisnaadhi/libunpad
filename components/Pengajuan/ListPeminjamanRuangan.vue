@@ -1,5 +1,7 @@
 <script setup>
 const { getItems } = useDirectusItems();
+const pageState = ref(0);
+const listData = ref(null);
 
 defineProps({
   publicData: {
@@ -15,6 +17,46 @@ const dataPeminjam = await getItems({
     offset: 0,
   },
 });
+
+async function fetchDataPeminjam() {
+  listData.value = await getItems({
+    collection: "peminjaman_ruangan",
+    params: {
+      sort: "-date_created",
+      offset: pageState.value,
+      limit: 10,
+    },
+  });
+}
+
+const totalData = await getItems({
+  collection: "peminjaman_ruangan",
+});
+
+const gapData = Math.floor(totalData.length / 10) * 10;
+
+if (listData.value === null) {
+  listData.value = fetchDataPeminjam();
+}
+
+const nextData = () => {
+  if (pageState.value < gapData) {
+    pageState.value += 10;
+    fetchDataPeminjam();
+  }
+};
+
+const prevData = () => {
+  if (pageState !== 0) {
+    pageState.value -= 10;
+    fetchDataPeminjam();
+  }
+};
+
+const convertDate = (val) => {
+  const date = new Date(val);
+  return date.toLocaleDateString("id-ID");
+};
 
 const displayStatusPeminjaman = (val) => {
   switch (val) {
@@ -67,7 +109,7 @@ const tableHeadPublic = [
         </tr>
       </template>
       <template #tablebody>
-        <tr class="bg-white" v-for="elem in dataPeminjam">
+        <tr class="bg-white" v-for="elem in listData">
           <td class="table-border">{{ elem.nama_lengkap }}</td>
           <td class="table-border">
             {{ displayNamaRuangan(elem.nama_ruangan) }}
@@ -85,11 +127,44 @@ const tableHeadPublic = [
         </tr>
       </template>
     </GenericTableData>
+    <div
+      class="flex items-center justify-center gap-1 mt-3"
+      v-show="totalData.length > 10"
+    >
+      <button
+        class="btn py-0 px-5"
+        @click="prevData"
+        :class="pageState === 0 ? 'disable-btn' : 'enable-btn'"
+        :disabled="pageState === 0"
+      >
+        Prev
+      </button>
+      <div>
+        {{ pageState < 10 ? "1" : (pageState + 10) / 10 }} /
+        {{ (Number(gapData) + 10) / 10 }}
+      </div>
+      <button
+        class="btn bg-unpad py-0 px-5"
+        @click="nextData"
+        :class="pageState < gapData ? 'enable-btn' : 'disable-btn'"
+        :disable="pageState <= gapData"
+      >
+        Next
+      </button>
+    </div>
   </section>
 </template>
 
 <style scoped>
 .table-border {
   --at-apply: border border-unpad p-1;
+}
+
+.disable-btn {
+  --at-apply: bg-gray-3 text-dark cursor-not-allowed;
+}
+
+.enable-btn {
+  --at-apply: bg-unpad text-white;
 }
 </style>

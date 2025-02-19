@@ -39,7 +39,7 @@ export const definePeminjamanRuangan = (ruangan: string) => {
       return "Ruang Kelast Lt.2";
 
     case "ruang_teater":
-      return "Ruang Teater Pengetahuan Rektorat";
+      return "Ruang Teater Rektorat";
 
     case "ruang_alh":
       return "Ruang Assistive Learning Hub Lt.4";

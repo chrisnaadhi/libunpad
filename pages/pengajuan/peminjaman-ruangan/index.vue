@@ -231,6 +231,30 @@ const kirimPengajuan = async () => {
   <main>
     <div class="main-content">
       <section class="max-w-lg">
+        <div
+          class="bg-red-5 text-sm text-white rounded-2xl p-5 my-5 mx-5 lg:mx-0"
+        >
+          <div class="flex items-center justify-center">
+            <div class="i-mdi-warning-decagram text-white w-15 h-15" />
+          </div>
+          <p>
+            Untuk Ruang Kelas Lantai 2 selama masa aktif perkuliahan atau
+            semester aktif digunakan sebagai Ruang Perkuliahan oleh beberapa
+            Fakultas. Jika anda ingin menggunakan Ruang Kelas Lantai 2, mohon
+            untuk konfirmasi terlebih dahulu kepada Administrasi Ruangan Kandaga
+            melalui nomor berikut :
+          </p>
+          <h5 class="py-4">
+            Ana Sobana :
+            <a href="tel:081220392155" class="text-white">+62 812-2039-2155</a>
+          </h5>
+          <p>
+            Mohon untuk kontak terlebih dahulu bagian Administrasi Ruangan
+            Kandaga sebelum mengisi form apabila anda ingin menggunakan Ruang
+            Kelas Lt.2 selama masa aktif perkuliahan atau semester aktif. Terima
+            Kasih 🙏
+          </p>
+        </div>
         <h1>Form Peminjaman Ruangan</h1>
         <p class="px-3">
           Silahkan isi form dibawah ini untuk melakukan peminjaman ruangan.
@@ -400,7 +424,7 @@ const kirimPengajuan = async () => {
           v-if="dataPeminjaman.length > 0"
         >
           <div
-            class="rounded bg-gray-1 w-full p-2"
+            class="rounded bg-gray-2 w-full p-2 hidden lg:block"
             v-for="(item, index) in dataPeminjaman"
             v-bind:key="item.id"
           >
@@ -408,6 +432,32 @@ const kirimPengajuan = async () => {
               {{ item.tanggal_peminjaman }}
             </p>
             <div class="text-xs">
+              <div>
+                <p
+                  v-if="item.status_peminjaman === 'approved'"
+                  class="small-capsule bg-green-6 text-white"
+                >
+                  Disetujui
+                </p>
+                <p
+                  v-else-if="item.status_peminjaman === 'pending'"
+                  class="small-capsule bg-gray text-white"
+                >
+                  Pending
+                </p>
+                <p
+                  v-else-if="item.status_peminjaman === 'cancel'"
+                  class="small-capsule bg-red text-white"
+                >
+                  Dibatalkan
+                </p>
+                <p
+                  v-else-if="item.status_peminjaman === 'pindah'"
+                  class="small-capsule bg-yellow text-white"
+                >
+                  Dipindah Jadwal
+                </p>
+              </div>
               <p>
                 <span class="font-semibold">Jam: </span
                 >{{ item.jam_mulai_peminjaman }} -
@@ -473,5 +523,9 @@ textarea {
 
 input:disabled {
   --at-apply: bg-gray-3;
+}
+
+.small-capsule {
+  --at-apply:  w-full py-1 my-2 rounded-lg;
 }
 </style>

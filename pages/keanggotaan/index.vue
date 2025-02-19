@@ -103,12 +103,12 @@ definePageMeta({
           <h5>Halo, {{ data.user.name }}!</h5>
           <div class="max-w-6xl ma">
             <GenericBaseCard>
-              <h4 class="text-center font-semibold">Daftar Pengajuan</h4>
+              <h2 class="text-center font-semibold">Daftar Pengajuan</h2>
               <div
                 class="flex flex-col md:(grid grid-cols-2) gap-3 my-3 px-5 lg:px-0"
               >
                 <div class="flex flex-col items-center justify-center">
-                  <h5>Surat Bebas Pustaka</h5>
+                  <h3>Surat Bebas Pustaka</h3>
                   <div v-if="getBebasPustaka.length > 0">
                     <p>
                       <span
@@ -190,13 +190,17 @@ definePageMeta({
                         >
                       </div>
                       <div class="mt-5">
-                        <h5>
+                        <h6>
                           Jika ada kendala silahkan hubungi petugas Bebas
                           Pustaka kami:
-                        </h5>
+                        </h6>
                         <p>
-                          Pak Ana Sobana:
-                          <a href="tel:+6282246842403">+6282246842403</a>
+                          Pak Hendri Sarinda:
+                          <a href="tel:082216133555">+62 822-1613-3555</a>
+                        </p>
+                        <p>
+                          Bu Aning Yuningsih:
+                          <a href="tel:081394503080">+62 813-9450-3080</a>
                         </p>
                       </div>
                     </div>
@@ -208,14 +212,14 @@ definePageMeta({
                   </div>
                 </div>
                 <div>
-                  <h5 class="text-center">Peminjaman Ruangan:</h5>
+                  <h3 class="text-center">Peminjaman Ruangan:</h3>
                   <div
                     class="grid grid-cols-2 gap-3"
                     v-if="getPeminjamanRuangan.length > 0"
                   >
                     <GenericBaseCard v-for="ruang in getPeminjamanRuangan">
-                      <div class="p-3 rounded text-sm bg-yellow-50">
-                        <p>{{ displayNamaRuangan(ruang.nama_ruangan) }}</p>
+                      <div class="p-3 rounded text-sm bg-gray-2">
+                        <p>{{ definePeminjamanRuangan(ruang.nama_ruangan) }}</p>
                         <div class="py-1">
                           <span
                             class="px-2 rounded font-semibold"
