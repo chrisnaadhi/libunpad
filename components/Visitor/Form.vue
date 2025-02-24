@@ -37,6 +37,8 @@ const displayRuangan = computed(() => {
       return "Ruang Referensi Koleksi Berkala";
     case "r_alh":
       return "Ruang Assistive Learning Hub";
+    case "r_langka":
+      return "Ruang Koleksi Langka";
   }
 });
 

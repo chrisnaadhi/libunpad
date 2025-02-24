@@ -22,6 +22,8 @@ export const displayRuangan = (ruangan: string) => {
         return "Ruang Referensi Koleksi Berkala";
       case "r_alh":
         return "Ruang Assistive Learning Hub"
+      case "r_langka":
+        return "Ruang Koleksi Langka"
     }
   }).value?.replace('"', "");
 };
