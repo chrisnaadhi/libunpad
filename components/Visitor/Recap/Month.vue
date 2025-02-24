@@ -5,8 +5,8 @@ const { thisMonth } = getThisMonth();
 
 const fetchLobbyMonth = await getItems(getMonthlyVisitor("lobby", thisMonth));
 
-const fetchRBelajarMonth = await getItems(
-  getMonthlyVisitor("r_belajar", thisMonth)
+const fetchKoleksiLangkaMonth = await getItems(
+  getMonthlyVisitor("r_langka", thisMonth)
 );
 
 const fetchRReferensiMonth = await getItems(
@@ -48,10 +48,10 @@ const fetchMonth = [
     nama_ruangan: "Lobby Utama",
     nama_fungsi: fetchLobbyMonth,
   },
-  // {
-  //   nama_ruangan: "Ruang Belajar",
-  //   nama_fungsi: fetchRBelajarMonth,
-  // },
+  {
+    nama_ruangan: "Ruang Koleksi Langka",
+    nama_fungsi: fetchKoleksiLangkaMonth,
+  },
   {
     nama_ruangan: "Ruang Referensi",
     nama_fungsi: fetchRReferensiMonth,

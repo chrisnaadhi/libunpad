@@ -58,10 +58,11 @@ export const searchTugasAkhirDirectus = defineStore(
     const offset = ref(0);
     const page = ref(1);
     const facultyName = ref<NamaFakultas | null>();
-    const facultyId = ref(110);
-    const tahun = ref("2023");
+    const facultyId = ref("");
+    const tahun = ref("");
     const isNewSearch = ref(false);
     const searchResults = ref();
+    const totalData = ref();
 
     const searchingTugasAkhir = async (
       isNew: boolean,
@@ -71,7 +72,6 @@ export const searchTugasAkhirDirectus = defineStore(
       switch (isNew) {
         case false:
           isNewSearch.value = false;
-          page.value += 1;
           break;
         case true:
           isNewSearch.value = true;
@@ -83,86 +83,155 @@ export const searchTugasAkhirDirectus = defineStore(
           break;
       }
       searchResults.value = "loading";
+      totalData.value = null;
       if (
         keywords.value !== "" &&
         faculty === true &&
         facultyName.value !== null &&
         filter === false
       ) {
-        const fetchSearchResults = await getItems({
-          collection: "tbtMhsUploadThesis",
-          params: {
-            limit: 30,
-            offset: offset.value,
-            filter: {
-              _or: [
-                {
-                  Judul: {
-                    _contains: keywords.value,
+        const fetchSearchResults = ref()
+
+        if (facultyId.value) {
+          fetchSearchResults.value = await getItems({
+            collection: "tbtMhsUploadThesis",
+            params: {
+              limit: 30,
+              offset: offset.value,
+              filter: {
+                _or: [
+                  {
+                    Judul: {
+                      _contains: keywords.value,
+                    },
                   },
-                },
-                {
-                  Abstrak: {
-                    _contains: keywords.value,
+                  {
+                    Abstrak: {
+                      _contains: keywords.value,
+                    },
                   },
-                },
-                {
-                  Keywords: {
-                    _contains: keywords.value,
+                  {
+                    Keywords: {
+                      _contains: keywords.value,
+                    },
                   },
+                ],
+                MhsNPM: {
+                  _starts_with: facultyName.value,
                 },
-              ],
-              MhsNPM: {
-                _starts_with: facultyName.value?.id,
               },
             },
-          },
-        });
+          });
+        } else {
+          fetchSearchResults.value = await getItems({
+            collection: "tbtMhsUploadThesis",
+            params: {
+              limit: 30,
+              offset: offset.value,
+              filter: {
+                _or: [
+                  {
+                    Judul: {
+                      _contains: keywords.value,
+                    },
+                  },
+                  {
+                    Abstrak: {
+                      _contains: keywords.value,
+                    },
+                  },
+                  {
+                    Keywords: {
+                      _contains: keywords.value,
+                    },
+                  },
+                ],
+              },
+            },
+          });
+        }
 
-        searchResults.value = fetchSearchResults;
+        searchResults.value = fetchSearchResults.value;
       } else if (
         keywords.value !== "" &&
         faculty === false &&
         facultyName.value === null &&
         filter === true
       ) {
-        const fetchSearchResults = await getItems({
-          collection: "tbtMhsUploadThesis",
-          params: {
-            limit: 30,
-            offset: offset.value,
-            filter: {
-              _or: [
-                {
-                  Judul: {
-                    _contains: keywords.value,
+        const fetchSearchResults = ref();
+
+        if (facultyId.value !== "") {
+          fetchSearchResults.value = await getItems({
+            collection: "tbtMhsUploadThesis",
+            params: {
+              limit: 30,
+              offset: offset.value,
+              filter: {
+                _or: [
+                  {
+                    Judul: {
+                      _contains: keywords.value,
+                    },
                   },
-                },
-                {
-                  Abstrak: {
-                    _contains: keywords.value,
+                  {
+                    Abstrak: {
+                      _contains: keywords.value,
+                    },
                   },
-                },
-                {
-                  Keywords: {
-                    _contains: keywords.value,
+                  {
+                    Keywords: {
+                      _contains: keywords.value,
+                    },
                   },
-                },
-              ],
-              MhsNPM: {
-                _starts_with: facultyId.value.toString(),
-              },
-              UploadTgl: {
-                _between: [
-                  `${tahun.value}-01-01T00:00:00`,
-                  `${tahun.value}-12-30T23:59:59`,
                 ],
+                MhsNPM: {
+                  _starts_with: facultyId.value.toString(),
+                },
+                UploadTgl: {
+                  _between: [
+                    `${tahun.value === "" ? 2009 : tahun.value}-01-01T00:00:00`,
+                    `${tahun.value === "" ? new Date().getFullYear() : tahun.value}-12-30T23:59:59`,
+                  ],
+                },
               },
             },
-          },
-        });
+          });
+        } else {
+          fetchSearchResults.value = await getItems({
+            collection: "tbtMhsUploadThesis",
+            params: {
+              limit: 30,
+              offset: offset.value,
+              filter: {
+                _or: [
+                  {
+                    Judul: {
+                      _contains: keywords.value,
+                    },
+                  },
+                  {
+                    Abstrak: {
+                      _contains: keywords.value,
+                    },
+                  },
+                  {
+                    Keywords: {
+                      _contains: keywords.value,
+                    },
+                  },
+                ],
+                UploadTgl: {
+                  _between: [
+                    `${tahun.value === "" ? 2009 : tahun.value}-01-01T00:00:00`,
+                    `${tahun.value === "" ? new Date().getFullYear() : tahun.value}-12-30T23:59:59`,
+                  ],
+                },
+              },
+            },
+          });
+        }
 
-        searchResults.value = fetchSearchResults;
+        searchResults.value = fetchSearchResults.value;
       } else if (
         keywords.value !== "" &&
         faculty === false &&
@@ -197,28 +266,144 @@ export const searchTugasAkhirDirectus = defineStore(
         });
 
         searchResults.value = fetchSearchResults;
+      } else if (keywords.value !== "" && facultyId.value) {
+        searchResults.value = await getItems({
+          collection: "tbtMhsUploadThesis",
+          params: {
+            limit: 30,
+            offset: offset.value,
+            filter: {
+              _or: [
+                {
+                  Judul: {
+                    _contains: keywords.value,
+                  },
+                },
+                {
+                  Abstrak: {
+                    _contains: keywords.value,
+                  },
+                },
+                {
+                  Keywords: {
+                    _contains: keywords.value,
+                  },
+                },
+              ],
+              MhsNPM: {
+                _starts_with: facultyId.value,
+              },
+            },
+          },
+        });
+
       } else {
-        return "No Results";
+        searchResults.value = await getItems({
+          collection: "tbtMhsUploadThesis",
+          params: {
+            limit: 30,
+            offset: offset.value,
+            filter: {
+              _or: [
+                {
+                  Judul: {
+                    _contains: keywords.value,
+                  },
+                },
+                {
+                  Abstrak: {
+                    _contains: keywords.value,
+                  },
+                },
+                {
+                  Keywords: {
+                    _contains: keywords.value,
+                  },
+                },
+              ],
+            },
+          },
+        });
+      }
+
+      if (keywords.value && facultyId.value) {
+        const getData = await getItems({
+          collection: "tbtMhsUploadThesis",
+          params: {
+            filter: {
+              _or: [
+                {
+                  Judul: {
+                    _contains: keywords.value,
+                  },
+                },
+                {
+                  Abstrak: {
+                    _contains: keywords.value,
+                  },
+                },
+                {
+                  Keywords: {
+                    _contains: keywords.value,
+                  },
+                },
+              ], MhsNPM: {
+                _starts_with: facultyId.value,
+              },
+            },
+            meta: "filter_count",
+          },
+        })
+        totalData.value = getData.meta?.filter_count
+      } else {
+        const getData = await getItems({
+          collection: "tbtMhsUploadThesis",
+          params: {
+            filter: {
+              _or: [
+                {
+                  Judul: {
+                    _contains: keywords.value,
+                  },
+                },
+                {
+                  Abstrak: {
+                    _contains: keywords.value,
+                  },
+                },
+                {
+                  Keywords: {
+                    _contains: keywords.value,
+                  },
+                },
+              ]
+            },
+            meta: "filter_count",
+          },
+        })
+        totalData.value = getData.meta?.filter_count
       }
     };
 
-    const nextPage = () => {
-      if (offset.value >= 0 && facultyName === null) {
+    const nextPage = async () => {
+      if (offset.value >= 0 && !facultyId.value) {
         offset.value += 30;
-        searchingTugasAkhir(false);
-      } else if (offset.value >= 0 && facultyName !== null) {
+        page.value += 1;
+        await searchingTugasAkhir(false)
+      } else if (offset.value >= 0 && facultyId.value) {
         offset.value += 30;
-        searchingTugasAkhir(false, true);
+        page.value += 1;
+        await searchingTugasAkhir(false, true)
       }
     };
 
-    const previousPage = () => {
-      if (offset.value >= 0 && facultyName === null) {
+    const previousPage = async () => {
+      if (offset.value >= 0 && !facultyId.value) {
         offset.value -= 30;
-        searchingTugasAkhir(false);
-      } else if (offset.value >= 0 && facultyName !== null) {
+        await searchingTugasAkhir(false);
+      } else if (offset.value >= 0 && facultyId.value) {
         offset.value -= 30;
-        searchingTugasAkhir(false, true);
+        await searchingTugasAkhir(false, true);
       }
     };
 
@@ -230,6 +415,7 @@ export const searchTugasAkhirDirectus = defineStore(
       facultyName,
       facultyId,
       searchResults,
+      totalData,
       searchingTugasAkhir,
       nextPage,
       previousPage,

@@ -103,9 +103,7 @@ definePageMeta({
         <span class="font-semibold">"{{ searchTugasAkhir.keywords }}"</span>
         terdapat
         <span class="font-semibold">{{
-          !searchTugasAkhir.searchResults
-            ? dataTADirectus.length
-            : searchTugasAkhir.searchResults.length
+          searchTugasAkhir.totalData ?? "-"
         }}</span>
         data.
       </p>

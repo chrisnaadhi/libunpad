@@ -7,8 +7,8 @@ const fetchLobbyToday = await getItems(
   filterPengunjungRuanganDirectus("lobby", today)
 );
 
-const fetchRBelajarToday = await getItems(
-  filterPengunjungRuanganDirectus("r_belajar", today)
+const fetchKoleksiLangkaToday = await getItems(
+  filterPengunjungRuanganDirectus("r_langka", today)
 );
 
 const fetchRReferensiToday = await getItems(
@@ -52,10 +52,10 @@ const fetchToday = [
     nama_ruangan: "Lobby Utama",
     nama_fungsi: fetchLobbyToday,
   },
-  // {
-  //   nama_ruangan: "Ruang Belajar",
-  //   nama_fungsi: fetchRBelajarToday,
-  // },
+  {
+    nama_ruangan: "Ruang Koleksi Langka",
+    nama_fungsi: fetchKoleksiLangkaToday,
+  },
   {
     nama_ruangan: "Ruang Referensi",
     nama_fungsi: fetchRReferensiToday,

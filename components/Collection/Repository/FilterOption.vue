@@ -46,6 +46,7 @@ const years = [
           id="first"
           v-model="searchTugasAkhir.tahun"
         >
+          <option value="" selected disabled>Pilih Tahun</option>
           <option :value="year" v-for="year in years">{{ year }}</option>
         </select>
       </div>
@@ -107,6 +108,7 @@ const years = [
             class="min-w-full"
             v-model="searchTugasAkhir.facultyId"
           >
+            <option value="" selected disabled>Pilih Fakultas</option>
             <option v-for="fak in fakultas.objFakultas" :value="fak.id">
               {{ fak.namaFakultas }}
             </option>
