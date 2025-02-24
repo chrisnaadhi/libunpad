@@ -45,10 +45,14 @@ const { data: fetchService } = await useFetch("/api/v1/layanan");
             <div class="text-sm pb-2" v-html="layanan.deskripsiLayanan" />
           </div>
           <div class="flex justify-center gap-2">
-            <NuxtLink :to="layanan.slug" class="w-full">
+            <NuxtLink
+              :to="layanan.isActive ? layanan.slug : '#'"
+              class="w-full"
+            >
               <button
                 class="btn text-xs text-white w-full"
                 :class="layanan.isActive ? 'active' : 'inactive'"
+                :disabled="layanan.isActive ? true : false"
               >
                 {{
                   layanan.slug.includes("unggah-mandiri") ? "Unggah" : "Ajukan"
@@ -56,16 +60,13 @@ const { data: fetchService } = await useFetch("/api/v1/layanan");
               </button>
             </NuxtLink>
             <NuxtLink
-              :to="
-                layanan.slug.includes('#')
-                  ? '/pengajuan/#'
-                  : layanan.slug + '/data'
-              "
+              :to="layanan.isActive ? layanan.slug + '/data' : '#'"
               class="w-full"
             >
               <button
                 class="btn text-xs text-white w-full"
                 :class="layanan.isActive ? 'active' : 'inactive'"
+                :disabled="layanan.isActive ? true : false"
               >
                 {{
                   layanan.slug.includes("unggah-mandiri")
