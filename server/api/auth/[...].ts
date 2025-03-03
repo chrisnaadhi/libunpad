@@ -28,7 +28,9 @@ export default NuxtAuthHandler({
     },
     /* on redirect to another url */
     async redirect({ url, baseUrl }) {
-      console.log(url);
+      if (url.includes(':3000')) {
+        url = url.replace(':3000', '/');
+      }
       return url;
     },
     /* on session retrival */
