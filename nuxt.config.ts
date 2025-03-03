@@ -31,7 +31,7 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "dayjs-nuxt",
     "@sidebase/nuxt-auth",
-    "@nuxtjs/plausible",
+    // "@nuxtjs/plausible",
     "@nuxtjs/turnstile",
   ],
 
@@ -117,14 +117,14 @@ export default defineNuxtConfig({
     },
   },
 
-  plausible: {
-    enabled: true,
-    ignoredHostnames: ["localhost"],
-    hashMode: false,
-    domain: process.env.KANDAGA_NUXT_PUBLIC_PLAUSIBLE_DOMAIN,
-    apiHost: process.env.KANDAGA_NUXT_PUBLIC_PLAUSIBLE_API_HOST,
-    autoPageviews: true,
-  },
+  // plausible: {
+  //   enabled: true,
+  //   ignoredHostnames: ["localhost"],
+  //   hashMode: false,
+  //   domain: process.env.KANDAGA_NUXT_PUBLIC_PLAUSIBLE_DOMAIN,
+  //   apiHost: process.env.KANDAGA_NUXT_PUBLIC_PLAUSIBLE_API_HOST,
+  //   autoPageviews: true,
+  // },
 
   compatibilityDate: "2024-07-22",
 
