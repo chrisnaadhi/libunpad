@@ -118,7 +118,7 @@ export default defineNuxtConfig({
   },
 
   plausible: {
-    enabled: true,
+    enabled: false,
     ignoredHostnames: ["localhost"],
     hashMode: false,
     domain: process.env.KANDAGA_NUXT_PUBLIC_PLAUSIBLE_DOMAIN,
