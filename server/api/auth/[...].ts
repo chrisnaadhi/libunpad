@@ -2,7 +2,7 @@ import { NuxtAuthHandler } from "#auth";
 import GoogleProvider from "next-auth/providers/google";
 
 export default NuxtAuthHandler({
-  secret: process.env.AUTH_SECRET ?? useRuntimeConfig().authSecret,
+  secret: process.env.AUTH_KANDAGA_SECRET ?? useRuntimeConfig().authSecret,
   providers: [
     // @ts-expect-error
     GoogleProvider.default({
@@ -28,6 +28,7 @@ export default NuxtAuthHandler({
     },
     /* on redirect to another url */
     async redirect({ url, baseUrl }) {
+      console.log(url);
       return url;
     },
     /* on session retrival */

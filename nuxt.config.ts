@@ -77,6 +77,7 @@ export default defineNuxtConfig({
   auth: {
     isEnabled: true,
     disableServerSideAuth: false,
+    originEnvKey: "AUTH_KANDAGA_ORIGIN",
     baseURL: process.env.AUTH_KANDAGA_BASEURL,
     provider: {
       type: "authjs",

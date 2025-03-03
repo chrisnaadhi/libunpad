@@ -2,7 +2,7 @@ export default defineEventHandler((event) => {
   return [
     {
       namaLayanan: "Pengajuan Bebas Pustaka",
-      ikonLayanan: "i-mdi-notebook-check",
+      ikonLayanan: "/icon/mdi--book-check.png",
       deskripsiLayanan: `Layanan Pengajuan Bebas Pustaka dari Perpustakaan Pusat secara daring melalui sistem kami. Pastikan anda sudah membaca <a href="/pengajuan/bebas-pustaka/petunjuk" target="_blank">petunjuk</a> dari kami <a href="https://www.instagram.com/p/C2dve3qPobF" target="_blank">disini</a> atau <a href="/pengajuan/bebas-pustaka/petunjuk" target="_blank">disini</a> sebelum anda mengajukan permohonan Bebas Pustaka.`,
       slug: "/pengajuan/bebas-pustaka",
       slugName: "Ajukan",
@@ -19,7 +19,7 @@ export default defineEventHandler((event) => {
     // },
     {
       namaLayanan: "Peminjaman Ruangan",
-      ikonLayanan: "i-mdi-door-open",
+      ikonLayanan: "/icon/mdi--door-open.png",
       deskripsiLayanan:
         "Layanan ini memungkinkan peminjaman ruangan di Perpustakaan Kandaga untuk keperluan kegiatan akademik maupun non-akademik. Pastikan untuk melakukan reservasi terlebih dahulu dan mengikuti aturan yang berlaku.",
       slug: "/pengajuan/peminjaman-ruangan",
@@ -29,8 +29,18 @@ export default defineEventHandler((event) => {
       isActive: true,
     },
     {
+      namaLayanan: "Pengajuan Pemeriksaan Turnitin",
+      ikonLayanan: "/icon/mdi--file-document-check.png",
+      deskripsiLayanan: "Layanan ini menyediakan fasilitas pemeriksaan plagiarisme menggunakan Turnitin untuk mahasiswa dan dosen. Dengan layanan ini, sivitas dapat memastikan orisinalitas karya ilmiah mereka sebelum dipublikasikan atau diserahkan. Pengajuan pemeriksaan dapat dilakukan melalui sistem kami dengan mengikuti prosedur yang telah ditentukan.",
+      slug: "/pengajuan/pemeriksaan-turnitin",
+      slugName: "Ajukan",
+      secondSlug: "/pengajuan/pemeriksaan-turnitin/informasi",
+      secondSlugName: "Informasi Ajuan",
+      isActive: false,
+    },
+    {
       namaLayanan: "Kelas Literasi Informasi",
-      ikonLayanan: "i-mdi-book-information-variant",
+      ikonLayanan: "/icon/mdi--book-information-variant.png",
       deskripsiLayanan:
         "Layanan ini menyediakan kelas literasi informasi untuk mahasiswa dan dosen guna meningkatkan keterampilan dalam mencari, mengevaluasi, dan menggunakan informasi secara efektif. Pendaftaran dapat dilakukan melalui sistem kami dengan mengikuti jadwal yang telah ditentukan.",
       slug: "/pengajuan/kelas-literasi-informasi",
@@ -40,18 +50,8 @@ export default defineEventHandler((event) => {
       isActive: false,
     },
     {
-      namaLayanan: "Pengajuan Pemeriksaan Turnitin",
-      ikonLayanan: "i-mdi-file-document-check",
-      deskripsiLayanan: "Layanan ini menyediakan fasilitas pemeriksaan plagiarisme menggunakan Turnitin untuk mahasiswa dan dosen. Dengan layanan ini, sivitas dapat memastikan orisinalitas karya ilmiah mereka sebelum dipublikasikan atau diserahkan. Pengajuan pemeriksaan dapat dilakukan melalui sistem kami dengan mengikuti prosedur yang telah ditentukan.",
-      slug: "/pengajuan/pemeriksaan-turnitin",
-      slugName: "Ajukan",
-      secondSlug: "/pengajuan/pemeriksaan-turnitin/informasi",
-      secondSlugName: "Informasi Ajuan",
-      isActive: false,
-    },
-    {
       namaLayanan: "Konsultasi Perpustakaan",
-      ikonLayanan: "i-mdi-person-help",
+      ikonLayanan: "/icon/mdi--person-help.png",
       deskripsiLayanan: "Layanan ini menyediakan konsultasi dengan pustakawan untuk membantu sivitas akademika dalam mencari referensi, menggunakan basis data, dan memanfaatkan sumber informasi lainnya secara efektif. Pendaftaran konsultasi dapat dilakukan melalui sistem kami dengan memilih jadwal yang tersedia.",
       slug: "/pengajuan/konsultasi",
       slugName: "Ajukan",
@@ -61,7 +61,7 @@ export default defineEventHandler((event) => {
     },
     {
       namaLayanan: "Kunjungan dan Tur Kandaga",
-      ikonLayanan: "i-mdi-office-building-marker",
+      ikonLayanan: "/icon/mdi--office-building-marker.png",
       deskripsiLayanan: "Layanan ini menyediakan fasilitas kunjungan dan tur ke Perpustakaan Kandaga untuk kelompok mahasiswa, dosen, dan masyarakat umum. Dengan layanan ini, pengunjung dapat mengenal lebih dekat dengan koleksi, layanan, dan fasilitas yang tersedia di Perpustakaan Kandaga. Pendaftaran kunjungan dan tur dapat dilakukan melalui sistem kami dengan memilih jadwal yang tersedia.",
       slug: "/pengajuan/kunjungan",
       slugName: "Ajukan",

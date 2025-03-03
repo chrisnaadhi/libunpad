@@ -39,6 +39,10 @@ const { data: fetchService } = await useFetch("/api/v1/layanan");
       <section class="card-group">
         <GenericBaseCard v-for="layanan in fetchService" class="card-item">
           <div>
+            <div class="flex items-center justify-center">
+              <img :src="layanan.ikonLayanan" class="w-12" />
+            </div>
+
             <h1 class="text-center text-2xl">
               {{ layanan.namaLayanan }}
             </h1>

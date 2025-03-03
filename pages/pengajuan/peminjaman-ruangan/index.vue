@@ -97,6 +97,7 @@ const isDatePast = (date) => {
 const kirimPengajuan = async () => {
   const emailValidation = emailPattern.test(email.value);
   const formData = new FormData();
+  formData.append("folder", "AD0865F0-F6A3-4F62-8551-FE52625C7308");
   const roomExist = checkExistingPeminjaman(
     tanggalPeminjaman.value,
     jamMulai.value + ":00"
@@ -168,7 +169,7 @@ const kirimPengajuan = async () => {
     }
   } else if (fileSurat.value !== null) {
     formData.append("file", fileSurat.value);
-    formData.append("folder", "AD0865F0-F6A3-4F62-8551-FE52625C7308");
+    notification.value = "Sedang mengunggah berkas... Mohon tunggu sebentar";
     await $directus.request($uploadFiles(formData)).then(async (res) => {
       let items = {
         nomor_induk: npm.value,

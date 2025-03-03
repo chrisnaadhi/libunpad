@@ -20,74 +20,107 @@ const fileSurat = ref(null);
 const uploadSurat = (event) => {
   fileSurat.value = event.target.files[0];
 };
-
-const jadwalKelasLiterasi = await getItems({
-  collection: "pemeriksaan_turnitin",
-  params: {
-    filter: {
-      status: "published",
-    },
-    fields: "*",
-  },
-});
+const emailPattern = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
 
 const kirimPengajuan = async () => {
   const emailValidation = emailPattern.test(email.value);
-  const formData = new FormData();
-  formData.append("file", fileSurat.value);
-  formData.append(
-    "title",
-    `${npm.value}-${namaLengkap.value}-pengajuan-turnitin`
-  );
-  formData.append("folder", "92F6EB4F-EEDD-47ED-8947-1CC524608793");
-  await $directus.request($uploadFiles(formData)).then(async (res) => {
-    let items = {
-      npm: npm.value,
-      nama_lengkap: namaLengkap.value,
-      email: email.value,
-      kontak: kontak.value,
-      nama_fakultas: fakultas.value,
-      nama_prodi: prodi.value,
-      status_pengajuan: "pengajuan",
-      berkas_pengajuan: res.id,
-    };
-    if (emailValidation) {
-      try {
-        await createItems({ collection: "peminjaman_ruangan", items });
-        colorNotif.value = "text-green";
-        notification.value = "Berhasil diajukan";
-        npm.value = "";
-        namaLengkap.value = "";
-        email.value = data.value.user.email;
-        kontak.value = "";
-        fakultas.value = "";
-        prodi.value = "";
-        fileSurat.value = null;
+  let formData = new FormData();
+  formData.append("folder", "33D4C963-CF03-4883-A724-B93E0C1183D0");
+  if (
+    emailValidation &&
+    npm.value !== "" &&
+    namaLengkap.value !== "" &&
+    fakultas.value !== "" &&
+    prodi.value !== "" &&
+    fileSurat.value !== null
+  ) {
+    formData.append("file", fileSurat.value);
+    await $directus.request($uploadFiles(formData)).then(async (res) => {
+      let items = {
+        nomor: npm.value,
+        nama_lengkap: namaLengkap.value,
+        email: email.value,
+        kontak: kontak.value,
+        nama_fakultas: fakultas.value,
+        nama_prodi: prodi.value,
+        status_pengajuan: "pengajuan",
+        berkas_pengajuan: res.id,
+      };
+      if (emailValidation) {
+        try {
+          await createItems({
+            collection: "pengajuan_pemeriksaan_turnitin",
+            items,
+          });
+          colorNotif.value = "text-green";
+          notification.value = "Berhasil diajukan";
+          npm.value = "";
+          namaLengkap.value = "";
+          email.value = data.value.user.email;
+          kontak.value = "";
+          fakultas.value = "";
+          prodi.value = "";
+          fileSurat.value = null;
+          setTimeout(async () => {
+            notification.value =
+              "Silahkan isi seluruh form sesuai dengan data asli";
+            colorNotif.value = "text-dark";
+            await navigateTo({ path: "/keanggotaan" });
+          }, 2000);
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        colorNotif.value = "text-red-7";
+        notification.value = "Email tidak valid, silahkan coba lagi";
         setTimeout(async () => {
           notification.value =
             "Silahkan isi seluruh form sesuai dengan data asli";
           colorNotif.value = "text-dark";
-          await navigateTo({ path: "/pengajuan/peminjaman-ruangan/data" });
-        }, 2000);
-      } catch (error) {
-        console.log(error);
+        }, 5000);
       }
-    } else {
-      colorNotif.value = "text-red-7";
-      notification.value = "Email tidak valid, silahkan coba lagi";
-      setTimeout(async () => {
-        notification.value =
-          "Silahkan isi seluruh form sesuai dengan data asli";
-        colorNotif.value = "text-dark";
-      }, 5000);
-    }
-  });
+    });
+  } else {
+    alert("Kolom ( * ) wajib diisi");
+    colorNotif.value = "text-red-7";
+    notification.value = "Kolom ( * ) wajib diisi";
+    setTimeout(async () => {
+      notification.value = "Silahkan isi seluruh form sesuai dengan data asli";
+      colorNotif.value = "text-dark";
+    }, 5000);
+  }
 };
 </script>
 
 <template>
   <section>
-    <h1 class="text-center">Pengajuan Pemeriksaan Turnitin</h1>
+    <div class="max-w-3xl ma text-center">
+      <h1 class="text-center">Pengajuan Pemeriksaan Turnitin</h1>
+      <p class="text-sm">
+        Form pengajuan pemeriksaan turnitin yang bisa digunakan oleh seluruh
+        Mahasiswa, Dosen maupun Tenaga Pendidik Universitas Padjadjaran.
+        Silahkan unggah berkas yang ingin diperiksa dalam format word processor
+        (DOCX, DOC, ODT atau ODF), <br />
+        <span class="font-semibold text-red-6">
+          tidak boleh dalam bentuk PDF</span
+        >.
+      </p>
+      <p class="my-3">
+        Kolom ( <span class="text-red-6">*</span> ) wajib diisi
+      </p>
+      <p class="text-sm">
+        Ada kendala ? Silahkan hubungi penanggungjawab Turnitin Kami :
+      </p>
+      <div>
+        <p>Nama Penanggungjawab</p>
+        <p>No. HP : <a href="tel:081818188181">081818188181</a></p>
+        <p>
+          E-mail :
+          <a href="mailto:chrisna.adhi@unpad.ac.id">chrisna.adhi@unpad.ac.id</a>
+        </p>
+      </div>
+    </div>
+
     <form @submit.prevent="kirimPengajuan" class="p-7 max-w-3xl ma">
       <div class="input-form">
         <label for="npm">NIP / NPM :</label>
@@ -142,7 +175,8 @@ const kirimPengajuan = async () => {
         <p class="text-sm italic text-gray-4 text-center">
           Mohon diperhatikan untuk maksimum ukuran berkas adalah xx MB dan
           format yang dikirimkan harus dalam bentuk atau format dari standar
-          Aplikasi Word Processor (.doc, .docx, .odf, atau .odt)
+          Aplikasi Word Processor (.doc, .docx, .odf, atau .odt), tidak boleh
+          mengupload berkas dalam bentuk PDF.
         </p>
       </div>
       <div class="input-form">
