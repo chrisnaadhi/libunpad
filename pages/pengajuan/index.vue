@@ -66,7 +66,7 @@ const { data: fetchService } = await useFetch("/api/v1/layanan");
               <button
                 class="btn text-xs text-white w-full"
                 :class="layanan.isActive ? 'active' : 'inactive'"
-                :disabled="layanan.isActive ? true : false"
+                :disabled="layanan.isActive ? false : true"
               >
                 {{
                   layanan.slug.includes("unggah-mandiri")
