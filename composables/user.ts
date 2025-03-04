@@ -67,6 +67,8 @@ export const displayStatusPengajuanSurat = (status: string) => {
         return "Sedang diproses oleh petugas";
       case "selesai":
         return "Selesai diproses";
+      case "ditolak":
+        return "Ditolak oleh petugas";
       default:
         return "Silahkan hubungi Admin";
     }

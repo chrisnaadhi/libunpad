@@ -56,11 +56,13 @@ const isPegawai = computed(() => {
 const bebasPustakaBanner = (value) => {
   switch (value) {
     case "pengajuan":
-      return "bg-red text-white font-semibold";
+      return "bg-gray text-white font-semibold";
     case "proses":
-      return "bg-yellow-3 text-dark font-semibold";
+      return "bg-yellow-6 text-dark font-semibold";
     case "selesai":
-      return "bg-green-3 text-dark font-semibold";
+      return "bg-green-6 text-dark font-semibold";
+    case "ditolak":
+      return "bg-red-6 text-white font-semibold";
     default:
       return "bg-orange-3 text-dark font-semibold";
   }
@@ -292,8 +294,10 @@ definePageMeta({
                         Keterangan :
                         <p>{{ file.keterangan ?? "-" }}</p>
                       </h6>
+                      <h6>Hasil Pemeriksaan :</h6>
                       <div
                         class="my-2 flex flex-col"
+                        v-if="file.berkas_hasil_pemeriksaan.length > 0"
                         v-for="(item, index) in file.berkas_hasil_pemeriksaan"
                       >
                         <NuxtLink
@@ -307,6 +311,7 @@ definePageMeta({
                           Unduh Hasil Pemeriksaan {{ index + 1 }}
                         </NuxtLink>
                       </div>
+                      <p v-else>Belum diproses</p>
                     </div>
                   </div>
                   <div v-else>
