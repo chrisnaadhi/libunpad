@@ -22,6 +22,16 @@ const getPeminjamanRuangan = await getItems({
   },
 });
 
+const getDataTurnitin = await getItems({
+  collection: "pengajuan_pemeriksaan_turnitin",
+  params: {
+    filter: {
+      email: data?.value?.user?.email,
+    },
+    fields: ["*", "berkas_hasil_pemeriksaan.*"],
+  },
+});
+
 const isPegawai = computed(() => {
   let state = null;
   try {
@@ -72,6 +82,8 @@ useHead({
 definePageMeta({
   middleware: ["authentication-check"],
 });
+
+console.log(getDataTurnitin);
 </script>
 
 <template>
@@ -243,6 +255,59 @@ definePageMeta({
                     <p class="italic text-center text-red">
                       Belum ada pengajuan peminjaman ruangan
                     </p>
+                  </div>
+                </div>
+                <div class="flex flex-col my-10">
+                  <h3 class="text-center">Pengajuan Pemeriksaan Turnitin</h3>
+                  <p class="text-center">Daftar Pengajuan Turnitin Anda.</p>
+                  <div class="grid grid-cols-1 md:grid-cols-2">
+                    <div class="my-5 text-left" v-for="file in getDataTurnitin">
+                      <h6>
+                        Status:
+                        <p>
+                          <span
+                            :class="
+                              bebasPustakaBanner(
+                                getBebasPustaka[0].status_pengajuan
+                              )
+                            "
+                            class="px-2 text-sm rounded"
+                          >
+                            {{
+                              displayStatusPengajuanSurat(
+                                getBebasPustaka[0].status_pengajuan
+                              )
+                            }}
+                          </span>
+                        </p>
+                      </h6>
+                      <h6>
+                        Pengajuan Pada :
+                        <p>{{ file.date_created }}</p>
+                      </h6>
+                      <h6>
+                        Hasil Similarity :
+                        <p>{{ file.similarity_number }}</p>
+                      </h6>
+                      <h6>
+                        Keterangan :
+                        <p>{{ file.keterangan }}</p>
+                      </h6>
+                      <div
+                        class="my-2 flex flex-col"
+                        v-for="(item, index) in file.berkas_hasil_pemeriksaan"
+                      >
+                        <NuxtLink
+                          :href="
+                            'https://kandaga.unpad.ac.id/backoffice/assets/2478B4F2-3AA5-42E6-83C6-3C56517A6378' +
+                            item.directus_files_id
+                          "
+                          class="btn bg-unpad py-1 text-white text-center"
+                        >
+                          Unduh Hasil Pemeriksaan {{ index + 1 }}
+                        </NuxtLink>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
