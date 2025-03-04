@@ -37,11 +37,11 @@ useHead({
     lang: "id",
   },
   script: [
-    {
-      src: "https://kandaga.unpad.ac.id:8000/js/script.js",
-      "data-domain": "kandaga.unpad.ac.id",
-      defer: true,
-    },
+    // {
+    //   src: "https://kandaga.unpad.ac.id:8000/js/script.js",
+    //   "data-domain": "kandaga.unpad.ac.id",
+    //   defer: true,
+    // },
     {
       src: "https://www.instagram.com/embed.js",
       async: true,
