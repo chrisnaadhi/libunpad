@@ -302,6 +302,7 @@ definePageMeta({
                             item.directus_files_id
                           "
                           class="btn bg-unpad py-1 text-white text-center"
+                          target="_blank"
                         >
                           Unduh Hasil Pemeriksaan {{ index + 1 }}
                         </NuxtLink>
