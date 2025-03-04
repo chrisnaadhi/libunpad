@@ -117,12 +117,14 @@ const kirimPengajuan = async () => {
         Ada kendala ? Silahkan hubungi penanggungjawab Turnitin Kami :
       </p>
       <div>
-        <p>Nama Penanggungjawab</p>
-        <p>No. HP : <a href="tel:081818188181">081818188181</a></p>
+        <p>No. HP : <a href="https://wa.me/6282315798979">082315798979</a></p>
         <p>
           E-mail :
-          <a href="mailto:chrisna.adhi@unpad.ac.id">chrisna.adhi@unpad.ac.id</a>
+          <a href="mailto:perpustakaan@unpad.ac.id">perpustakaan@unpad.ac.id</a>
         </p>
+      </div>
+      <div>
+        <NuxtLink to="/pengajuan"> &leftarrow; Kembali </NuxtLink>
       </div>
     </div>
 

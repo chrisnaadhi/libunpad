@@ -60,7 +60,7 @@ const bebasPustakaBanner = (value) => {
     case "proses":
       return "bg-yellow-6 text-dark font-semibold";
     case "selesai":
-      return "bg-green-6 text-dark font-semibold";
+      return "bg-green-6 text-white font-semibold";
     case "ditolak":
       return "bg-red-6 text-white font-semibold";
     default:
@@ -297,7 +297,10 @@ definePageMeta({
                       <h6>Hasil Pemeriksaan :</h6>
                       <div
                         class="my-2 flex flex-col"
-                        v-if="file.berkas_hasil_pemeriksaan.length > 0"
+                        v-if="
+                          file.berkas_hasil_pemeriksaan.length > 0 &&
+                          file.status_pengajuan === 'selesai'
+                        "
                         v-for="(item, index) in file.berkas_hasil_pemeriksaan"
                       >
                         <NuxtLink
@@ -309,6 +312,21 @@ definePageMeta({
                           target="_blank"
                         >
                           Unduh Hasil Pemeriksaan {{ index + 1 }}
+                        </NuxtLink>
+                      </div>
+                      <div
+                        v-else-if="file.status_pengajuan === 'ditolak'"
+                        class="text-xs"
+                      >
+                        <p>Silahkan cek Keterangan Penolakan</p>
+                        <p class="mb-3">
+                          Jika ingin mengajukan ulang, klik tombol berikut :
+                        </p>
+                        <NuxtLink
+                          class="btn py-1 bg-unpad text-white"
+                          href="/pengajuan/pemeriksaan-turnitin"
+                        >
+                          Ajukan Ulang
                         </NuxtLink>
                       </div>
                       <p v-else>Belum diproses</p>
