@@ -16,6 +16,7 @@ const email = ref(data.value.user.email);
 const fakultas = ref("");
 const prodi = ref("");
 const kontak = ref("");
+const judul = ref("");
 const fileSurat = ref(null);
 const uploadSurat = (event) => {
   fileSurat.value = event.target.files[0];
@@ -33,6 +34,7 @@ const kirimPengajuan = async () => {
     kontak.value !== "" &&
     fakultas.value !== "" &&
     prodi.value !== "" &&
+    judul.value !== "" &&
     fileSurat.value !== null
   ) {
     formData.append("file", fileSurat.value);
@@ -45,6 +47,7 @@ const kirimPengajuan = async () => {
         nama_fakultas: fakultas.value,
         nama_prodi: prodi.value,
         status_pengajuan: "pengajuan",
+        judul_karya_tulis: judul.value,
         berkas_pengajuan: res.id,
       };
       if (emailValidation) {
@@ -61,13 +64,14 @@ const kirimPengajuan = async () => {
           kontak.value = "";
           fakultas.value = "";
           prodi.value = "";
+          judul.value = "";
           fileSurat.value = null;
           setTimeout(async () => {
             notification.value =
               "Silahkan isi seluruh form sesuai dengan data asli";
             colorNotif.value = "text-dark";
             await navigateTo({ path: "/keanggotaan" });
-          }, 2000);
+          }, 1000);
         } catch (error) {
           console.log(error);
         }
@@ -124,19 +128,23 @@ const kirimPengajuan = async () => {
 
     <form @submit.prevent="kirimPengajuan" class="p-7 max-w-3xl ma">
       <div class="input-form">
-        <label for="npm">NIP / NPM :</label>
+        <label for="npm">NIP / NPM <span class="text-red-6">*</span> :</label>
         <input type="text" id="npm" v-model="npm" required />
       </div>
       <div class="input-form">
-        <label for="nama-lengkap">Nama Lengkap :</label>
+        <label for="nama-lengkap"
+          >Nama Lengkap <span class="text-red-6">*</span> :</label
+        >
         <input type="text" id="nama-lengkap" v-model="namaLengkap" equired />
       </div>
       <div class="input-form">
-        <label for="email">Email :</label>
+        <label for="email">Email <span class="text-red-6">*</span> :</label>
         <input type="email" id="email" v-model="email" disabled required />
       </div>
       <div class="input-form">
-        <label for="fakultas">Nama Fakultas :</label>
+        <label for="fakultas"
+          >Nama Fakultas <span class="text-red-6">*</span> :</label
+        >
         <select
           name="fakultas"
           id="fakultas"
@@ -156,15 +164,28 @@ const kirimPengajuan = async () => {
         </select>
       </div>
       <div class="input-form">
-        <label for="prodi">Nama Program Studi :</label>
+        <label for="prodi"
+          >Nama Program Studi <span class="text-red-6">*</span> :</label
+        >
         <input type="prodi" name="prodi" id="prodi" v-model="prodi" required />
       </div>
       <div class="input-form">
-        <label for="kontak">No. HP / Whatsapp :</label>
+        <label for="kontak"
+          >No. HP / Whatsapp <span class="text-red-6">*</span> :</label
+        >
         <input type="text" id="kontak" v-model="kontak" />
       </div>
       <div class="input-form">
-        <label for="fileSurat">Berkas yang ingin diperiksa :</label>
+        <label for="judul"
+          >Judul Karya Tulis <span class="text-red-6">*</span> :</label
+        >
+        <input type="text" id="judul" v-model="judul" required />
+      </div>
+      <div class="input-form">
+        <label for="fileSurat"
+          >Berkas yang ingin diperiksa
+          <span class="text-red-6">*</span> :</label
+        >
         <input
           type="file"
           name="fileSurat"

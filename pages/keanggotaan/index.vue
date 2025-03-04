@@ -113,11 +113,11 @@ console.log(getDataTurnitin);
         >
           <NuxtImg :src="data.user.image" class="w-20 rounded-full mb-3" />
           <h5>Halo, {{ data.user.name }}!</h5>
-          <div class="max-w-6xl ma">
+          <div class="max-w-7xl ma">
             <GenericBaseCard>
               <h2 class="text-center font-semibold">Daftar Pengajuan</h2>
               <div
-                class="flex flex-col md:(grid grid-cols-2) gap-3 my-3 px-5 lg:px-0"
+                class="flex flex-col items-start md:(grid grid-cols-2) gap-10 my-3 px-5 lg:px-0"
               >
                 <div class="flex flex-col items-center justify-center">
                   <h3>Surat Bebas Pustaka</h3>
@@ -260,10 +260,17 @@ console.log(getDataTurnitin);
                 <div class="flex flex-col my-10">
                   <h3 class="text-center">Pengajuan Pemeriksaan Turnitin</h3>
                   <p class="text-center">Daftar Pengajuan Turnitin Anda.</p>
-                  <div class="grid grid-cols-1 md:grid-cols-2">
+                  <div
+                    class="grid grid-cols-1 md:grid-cols-2 gap-10"
+                    v-if="getDataTurnitin.length > 0"
+                  >
                     <div class="my-5 text-left" v-for="file in getDataTurnitin">
                       <h6>
-                        Status:
+                        Judul :
+                        <p>{{ file.judul_karya_tulis ?? "-" }}</p>
+                      </h6>
+                      <h6>
+                        Status :
                         <p>
                           <span
                             :class="bebasPustakaBanner(file.status_pengajuan)"
@@ -277,15 +284,15 @@ console.log(getDataTurnitin);
                       </h6>
                       <h6>
                         Pengajuan Pada :
-                        <p>{{ file.date_created }}</p>
+                        <p>{{ convertTimeZone(file.date_created) ?? "-" }}</p>
                       </h6>
                       <h6>
                         Hasil Similarity :
-                        <p>{{ file.similarity_number }}</p>
+                        <p>{{ file.similarity_number ?? "-" }}</p>
                       </h6>
                       <h6>
                         Keterangan :
-                        <p>{{ file.keterangan }}</p>
+                        <p>{{ file.keterangan ?? "-" }}</p>
                       </h6>
                       <div
                         class="my-2 flex flex-col"
@@ -302,6 +309,9 @@ console.log(getDataTurnitin);
                         </NuxtLink>
                       </div>
                     </div>
+                  </div>
+                  <div v-else>
+                    <p>Belum ada pengajuan</p>
                   </div>
                 </div>
               </div>
