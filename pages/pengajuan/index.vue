@@ -64,7 +64,7 @@ const { data: fetchService } = await useFetch("/api/v1/layanan");
               </button>
             </NuxtLink>
             <NuxtLink
-              :to="layanan.isActive ? layanan.slug + '/data' : '#'"
+              :to="layanan.isActive ? layanan.secondSlug : '#'"
               class="w-full"
             >
               <button

@@ -82,8 +82,6 @@ useHead({
 definePageMeta({
   middleware: ["authentication-check"],
 });
-
-console.log(getDataTurnitin);
 </script>
 
 <template>
@@ -300,7 +298,7 @@ console.log(getDataTurnitin);
                       >
                         <NuxtLink
                           :href="
-                            'https://kandaga.unpad.ac.id/backoffice/assets/2478B4F2-3AA5-42E6-83C6-3C56517A6378' +
+                            'https://kandaga.unpad.ac.id/backoffice/assets/' +
                             item.directus_files_id
                           "
                           class="btn bg-unpad py-1 text-white text-center"
