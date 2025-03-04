@@ -30,7 +30,7 @@ export default {
   // Pengajuan - /pengajuan
   pengajuanTitle: "Administration and Submissions",
   pengajuanDescription:
-    "If you need administrative files from the Unpad Central Library for academic purposes, please submit them through one of the submission fields below. Instructions regarding filling out the application form can be seen via the following link.",
+    "If you want to use the Services available at Kandaga, please select through the menu available below. Kandaga provides many services that can help your academic and research activities. To check the status of your application, please click the Membership button below:",
 
   // Koleksi - /koleksi
   collectionTitleHeader: "Explore our Collections",

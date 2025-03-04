@@ -260,6 +260,42 @@ definePageMeta({
                 <div class="flex flex-col my-10">
                   <h3 class="text-center">Pengajuan Pemeriksaan Turnitin</h3>
                   <p class="text-center">Daftar Pengajuan Turnitin Anda.</p>
+                  <div class="text-sm">
+                    <p class="text-center">
+                      Untuk cara pengutipan dapat dipelajari melalui
+                      <a
+                        href="https://penerbitdeepublish.com/wp-content/uploads/2017/01/Pedoman-Menulis-Buku-Tanpa-Plagiarisme-oleh-Penerbit-Deepublish.pdf"
+                        target="_blank"
+                        >E-Book ini</a
+                      >
+                    </p>
+                    <ol class="text-left text-xs">
+                      <li>Wajib melampirkan Cover dari karya tersebut</li>
+                      <li>
+                        Kata-kata atau kalimat yang diwarnai bersumber pada
+                        website yang ada pada daftar yang ada pada bagian akhir
+                        report (sesuai dengan warna dan nomornya)
+                      </li>
+                      <li>
+                        Kalimat-kalimat yang diwarnai sebaiknya diganti dengan
+                        kalimat lain atau parafrase tetapi memiliki arti yang
+                        sama.
+                      </li>
+                      <li>
+                        Pengutipan langsung sebaiknya menggunakan tanda "...."
+                        (penulis, tahun).
+                      </li>
+                      <li>
+                        Sebaiknya persentase (%) kurang dari 20%, bila lebih
+                        silahkan untuk memperbaikinya dan diperiksakan kembali.
+                      </li>
+                      <li>
+                        Untuk memperkecil similarity pada tugas akhir, surat
+                        pernyataan, kata pengantar, dan daftar isi sebaiknya
+                        tidak disertakan
+                      </li>
+                    </ol>
+                  </div>
                   <div
                     class="grid grid-cols-1 md:grid-cols-2 gap-10"
                     v-if="getDataTurnitin.length > 0"
@@ -329,11 +365,23 @@ definePageMeta({
                           Ajukan Ulang
                         </NuxtLink>
                       </div>
-                      <p v-else>Belum diproses</p>
+                      <div v-else>
+                        <p class="text-red-6">Belum diproses</p>
+                      </div>
                     </div>
                   </div>
                   <div v-else>
-                    <p>Belum ada pengajuan</p>
+                    <p class="text-red-6 text-center mt-5">
+                      Belum ada pengajuan
+                    </p>
+                    <div class="mt-5 flex items-center justify-center">
+                      <NuxtLink
+                        class="btn bg-unpad text-white py-1"
+                        href="/pengajuan/pemeriksaan-turnitin"
+                      >
+                        Ajukan Pemeriksaan Turnitin
+                      </NuxtLink>
+                    </div>
                   </div>
                 </div>
               </div>

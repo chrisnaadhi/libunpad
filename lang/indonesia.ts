@@ -30,7 +30,7 @@ export default {
   // Pengajuan - /pengajuan
   pengajuanTitle: "Administrasi dan Pengajuan",
   pengajuanDescription:
-    "Jika kamu membutuhkan berkas administrasi dari Perpustakaan Pusat Unpad untuk keperluan akademik silahkan ajukan melalui salah satu kolom pengajuan berikut. Petunjuk mengenai pengisian form pengajuan dapat dilihat melalui tautan berikut.",
+    "Jika kamu ingin menggunakan Layanan yang ada di Kandaga, silahkan pilih melalui menu yang tersedia dibawah. Kandaga menyediakan banyak layanan yang dapat membantu kegiatan akademik dan penelitian kamu. Untuk mengecek status pengajuan kamu, silahkan klik tombol Keanggotaan dibawah berikut :",
 
   // Koleksi - /koleksi
   collectionTitleHeader: "Jelajahi Koleksi Kami",

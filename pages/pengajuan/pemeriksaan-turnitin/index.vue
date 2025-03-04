@@ -197,7 +197,7 @@ const kirimPengajuan = async () => {
           required
         />
         <p class="text-sm italic text-gray-4 text-center">
-          Mohon diperhatikan untuk maksimum ukuran berkas adalah xx MB dan
+          Mohon diperhatikan untuk maksimum ukuran berkas adalah 100 MB dan
           format yang dikirimkan harus dalam bentuk atau format dari standar
           Aplikasi Word Processor (.doc, .docx, .odf, atau .odt), tidak boleh
           mengupload berkas dalam bentuk PDF.

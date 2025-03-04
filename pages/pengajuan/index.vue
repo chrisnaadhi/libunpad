@@ -82,6 +82,14 @@ const { data: fetchService } = await useFetch("/api/v1/layanan");
           </div>
         </GenericBaseCard>
       </section>
+      <div class="mt-10 text-center">
+        <h6>Punya pertanyaan ?</h6>
+        <p>Hubungi Kami :</p>
+        <div class="flex items-center justify-center gap-10">
+          <a href="mailto:perpustakaan@unpad.ac.id">perpustakaan@unpad.ac.id</a>
+          <a href="https://wa.me/6282315798979">+6282315798979</a>
+        </div>
+      </div>
     </section>
   </main>
 </template>
