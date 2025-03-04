@@ -34,9 +34,9 @@ export default defineEventHandler((event) => {
       deskripsiLayanan: "Layanan ini menyediakan fasilitas pemeriksaan plagiarisme menggunakan Turnitin untuk mahasiswa dan dosen. Dengan layanan ini, sivitas dapat memastikan orisinalitas karya ilmiah mereka sebelum dipublikasikan atau diserahkan. Pengajuan pemeriksaan dapat dilakukan melalui sistem kami dengan mengikuti prosedur yang telah ditentukan.",
       slug: "/pengajuan/pemeriksaan-turnitin",
       slugName: "Ajukan",
-      secondSlug: "/pengajuan/pemeriksaan-turnitin/informasi",
+      secondSlug: "/keanggotaan",
       secondSlugName: "Informasi Ajuan",
-      isActive: false,
+      isActive: true,
     },
     {
       namaLayanan: "Kelas Literasi Informasi",
