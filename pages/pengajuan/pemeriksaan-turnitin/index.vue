@@ -30,6 +30,7 @@ const kirimPengajuan = async () => {
     emailValidation &&
     npm.value !== "" &&
     namaLengkap.value !== "" &&
+    kontak.value !== "" &&
     fakultas.value !== "" &&
     prodi.value !== "" &&
     fileSurat.value !== null

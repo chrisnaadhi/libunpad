@@ -126,14 +126,14 @@ console.log(getDataTurnitin);
                       <span
                         :class="
                           bebasPustakaBanner(
-                            getBebasPustaka[0].status_pengajuan
+                            getBebasPustaka[0]?.status_pengajuan
                           )
                         "
                         class="px-2 text-sm rounded"
                       >
                         {{
                           displayStatusPengajuanSurat(
-                            getBebasPustaka[0].status_pengajuan
+                            getBebasPustaka[0]?.status_pengajuan
                           )
                         }}
                       </span>
@@ -187,7 +187,7 @@ console.log(getDataTurnitin);
                       <div
                         class="my-3"
                         v-if="
-                          getBebasPustaka[0].status_pengajuan === 'selesai' &&
+                          getBebasPustaka[0]?.status_pengajuan === 'selesai' &&
                           getBebasPustaka[0]?.persyaratan?.length > 0
                         "
                       >
@@ -234,7 +234,7 @@ console.log(getDataTurnitin);
                         <p>{{ definePeminjamanRuangan(ruang.nama_ruangan) }}</p>
                         <div class="py-1">
                           <span
-                            class="px-2 rounded font-semibold"
+                            class="px-2 rounded font-semibold w-full"
                             :class="
                               displayStatusPeminjamanRuangan(
                                 ruang.status_peminjaman
@@ -266,17 +266,11 @@ console.log(getDataTurnitin);
                         Status:
                         <p>
                           <span
-                            :class="
-                              bebasPustakaBanner(
-                                getBebasPustaka[0].status_pengajuan
-                              )
-                            "
+                            :class="bebasPustakaBanner(file.status_pengajuan)"
                             class="px-2 text-sm rounded"
                           >
                             {{
-                              displayStatusPengajuanSurat(
-                                getBebasPustaka[0].status_pengajuan
-                              )
+                              displayStatusPengajuanSurat(file.status_pengajuan)
                             }}
                           </span>
                         </p>
