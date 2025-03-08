@@ -119,7 +119,7 @@ definePageMeta({
               <div
                 class="flex flex-col items-start md:(grid grid-cols-2) gap-10 my-3 px-5 lg:px-0"
               >
-                <div class="flex flex-col items-center justify-center">
+                <div class="flex flex-col items-center justify-center w-full">
                   <h3 class="text-center">Surat Bebas Pustaka</h3>
                   <div v-if="getBebasPustaka.length > 0">
                     <p>
