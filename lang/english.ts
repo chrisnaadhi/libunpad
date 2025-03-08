@@ -30,7 +30,7 @@ export default {
   // Pengajuan - /pengajuan
   pengajuanTitle: "Administration and Submissions",
   pengajuanDescription:
-    "If you want to use the Services available at Kandaga, please select through the menu available below. This service is only processed during working hours, please submit it in an orderly manner and make sure it is not too sudden. Kandaga provides many services that can help your academic and research activities. To check the status of your application, please click the Membership button below:",
+    "If you want to use the Services available at Kandaga, please select through the menu available below. This service is only processed during working hours, please submit it accordingly and not too sudden. To check the status of your application, please click the Membership button below:",
 
   // Koleksi - /koleksi
   collectionTitleHeader: "Explore our Collections",

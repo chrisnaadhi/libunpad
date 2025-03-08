@@ -30,7 +30,7 @@ export default {
   // Pengajuan - /pengajuan
   pengajuanTitle: "Administrasi dan Pengajuan",
   pengajuanDescription:
-    "Jika kamu ingin menggunakan Layanan yang ada di Kandaga, silahkan pilih melalui menu yang tersedia dibawah. Layanan ini hanya diproses selama jam kerja, silahkan ajukan secara tertib dan pastikan tidak terlalu mendadak. Kandaga menyediakan banyak layanan yang dapat membantu kegiatan akademik dan penelitian kamu. Untuk mengecek status pengajuan kamu, silahkan klik tombol Keanggotaan dibawah berikut :",
+    "Jika kamu ingin menggunakan Layanan yang ada di Kandaga, silahkan pilih melalui menu yang tersedia dibawah. Layanan ini hanya diproses selama jam kerja, silahkan ajukan secara tertib dan pastikan tidak terlalu mendadak. Untuk mengecek status pengajuan kamu, silahkan klik tombol Keanggotaan dibawah berikut :",
 
   // Koleksi - /koleksi
   collectionTitleHeader: "Jelajahi Koleksi Kami",

@@ -26,7 +26,7 @@ const { data: fetchService } = await useFetch("/api/v1/layanan");
           <p>
             {{ $t("pengajuanDescription") }}
           </p>
-          <div class="flex text-center" v-show="user || data">
+          <div class="flex text-center mt-2">
             <NuxtLink
               to="/keanggotaan"
               class="btn bg-unpad text-white py-1 w-full"
