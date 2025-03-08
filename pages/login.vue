@@ -11,7 +11,7 @@ const passwordType = ref("password");
 const email = ref("");
 const password = ref("");
 const defaultLoginNotif = ref(
-  "Login khusus Staff Kandaga, jika anda Mahasiswa atau Dosen silahkan login dengan menggunakan PAuS E-Mail."
+  "Login khusus Staff Kandaga, jika anda Mahasiswa atau Dosen silahkan login dengan mengklik tombol PAuS E-Mail di bagian Login Mahasiswa / Dosen / Tenaga Kependidikan."
 );
 const loginNotif = ref(defaultLoginNotif.value);
 const textLogin = ref("text-dark");
