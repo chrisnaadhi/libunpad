@@ -120,7 +120,7 @@ definePageMeta({
                 class="flex flex-col items-start md:(grid grid-cols-2) gap-10 my-3 px-5 lg:px-0"
               >
                 <div class="flex flex-col items-center justify-center">
-                  <h3>Surat Bebas Pustaka</h3>
+                  <h3 class="text-center">Surat Bebas Pustaka</h3>
                   <div v-if="getBebasPustaka.length > 0">
                     <p>
                       <span
@@ -218,13 +218,13 @@ definePageMeta({
                     </div>
                   </div>
                   <div v-else>
-                    <p class="text-red italic">
+                    <p class="text-red italic text-center">
                       Tidak ada pengajuan bebas pustaka
                     </p>
                   </div>
                 </div>
-                <div>
-                  <h3 class="text-center">Peminjaman Ruangan:</h3>
+                <div class="w-full">
+                  <h3 class="text-center">Peminjaman Ruangan</h3>
                   <div
                     class="grid grid-cols-2 gap-3"
                     v-if="getPeminjamanRuangan.length > 0"
