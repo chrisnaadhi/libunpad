@@ -115,12 +115,16 @@ definePageMeta({
           <h5>Halo, {{ data.user.name }}!</h5>
           <div class="max-w-7xl ma">
             <GenericBaseCard>
-              <h2 class="text-center font-semibold">Daftar Pengajuan</h2>
+              <h2 class="text-center font-semibold">
+                Daftar Pengajuan Administratif
+              </h2>
               <div
                 class="flex flex-col items-start md:(grid grid-cols-2) gap-10 my-3 px-5 lg:px-0"
               >
-                <div class="flex flex-col items-center justify-center w-full">
-                  <h3 class="text-center">Surat Bebas Pustaka</h3>
+                <div
+                  class="flex flex-col items-center justify-center w-full bg-orange-50 p-5 rounded-xl"
+                >
+                  <h3 class="text-center mb-5">Surat Bebas Pustaka</h3>
                   <div v-if="getBebasPustaka.length > 0">
                     <p>
                       <span
@@ -223,8 +227,8 @@ definePageMeta({
                     </p>
                   </div>
                 </div>
-                <div class="w-full">
-                  <h3 class="text-center">Peminjaman Ruangan</h3>
+                <div class="w-full bg-orange-50 p-5 rounded-xl">
+                  <h3 class="text-center mb-5">Peminjaman Ruangan</h3>
                   <div
                     class="grid grid-cols-2 gap-3"
                     v-if="getPeminjamanRuangan.length > 0"
@@ -257,8 +261,10 @@ definePageMeta({
                     </p>
                   </div>
                 </div>
-                <div class="flex flex-col my-10">
-                  <h3 class="text-center">Pengajuan Pemeriksaan Turnitin</h3>
+                <div class="flex flex-col bg-orange-50 p-5 rounded-xl">
+                  <h3 class="text-center mb-5">
+                    Pengajuan Pemeriksaan Turnitin
+                  </h3>
                   <p class="text-center">Daftar Pengajuan Turnitin Anda.</p>
                   <div class="text-sm">
                     <p class="text-center">
@@ -297,10 +303,27 @@ definePageMeta({
                     </ol>
                   </div>
                   <div
+                    class="flex flex-col items-center justify-center my-5 text-center"
+                  >
+                    <p class="mb-2">
+                      Untuk mengajukan pemeriksaan lainnya silahkan klik tombol
+                      berikut
+                    </p>
+                    <NuxtLink
+                      class="btn bg-unpad text-white py-1"
+                      href="/pengajuan/pemeriksaan-turnitin"
+                    >
+                      Ajukan Pemeriksaan Turnitin
+                    </NuxtLink>
+                  </div>
+                  <div
                     class="grid grid-cols-1 md:grid-cols-2 gap-10"
                     v-if="getDataTurnitin.length > 0"
                   >
-                    <div class="my-5 text-left" v-for="file in getDataTurnitin">
+                    <div
+                      class="flex flex-col gap-3 my-5 text-left bg-white rounded p-5"
+                      v-for="file in getDataTurnitin"
+                    >
                       <h6>
                         Judul :
                         <p>{{ file.judul_karya_tulis ?? "-" }}</p>
@@ -342,7 +365,8 @@ definePageMeta({
                         <NuxtLink
                           :href="
                             'https://kandaga.unpad.ac.id/backoffice/assets/' +
-                            item.directus_files_id
+                            item.directus_files_id +
+                            '?download'
                           "
                           class="btn bg-unpad py-1 text-white text-center"
                           target="_blank"
@@ -393,6 +417,10 @@ definePageMeta({
             Akun sedang Log Out! <br />
             Memindahkan ke halaman login...
           </h1>
+          <p>Bermasalah ? silahkan klik tautan login dibawah ini</p>
+          <NuxtLink to="/login">
+            <button class="btn bg-unpad text-white">Login</button>
+          </NuxtLink>
         </div>
       </div>
     </section>

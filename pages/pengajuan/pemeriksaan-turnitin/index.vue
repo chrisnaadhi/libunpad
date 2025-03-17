@@ -110,6 +110,14 @@ const kirimPengajuan = async () => {
           tidak boleh dalam bentuk PDF</span
         >.
       </p>
+      <p class="text-sm">
+        <span class="font-semibold"
+          >Untuk meminimalisir angka similiaritas</span
+        >
+        maka tidak perlu melampirkan kata pengantar, daftar isi, daftar gambar,
+        daftar tabel, lembar pengesahan, dan pernyataan. Silahkan lampirkan saja
+        Bab Pendahuluan hingga Daftar Pustaka
+      </p>
       <p class="my-3">
         Kolom ( <span class="text-red-6">*</span> ) wajib diisi
       </p>
@@ -123,8 +131,12 @@ const kirimPengajuan = async () => {
           <a href="mailto:perpustakaan@unpad.ac.id">perpustakaan@unpad.ac.id</a>
         </p>
       </div>
-      <div>
-        <NuxtLink to="/pengajuan"> &leftarrow; Kembali </NuxtLink>
+      <div class="my-5">
+        <NuxtLink to="/pengajuan">
+          <button class="btn py-0 bg-unpad text-white">
+            &leftarrow; Kembali
+          </button>
+        </NuxtLink>
       </div>
     </div>
 

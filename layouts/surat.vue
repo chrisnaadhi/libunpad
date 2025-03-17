@@ -1,5 +1,5 @@
 <script setup>
-const data = ref("Sistem Administrasi Pusat Pengelolaan Pengetahuan");
+const data = ref("Sistem Administrasi Kandaga Universitas Padjadjaran");
 const date = new Date();
 </script>
 
