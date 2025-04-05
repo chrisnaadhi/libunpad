@@ -108,3 +108,36 @@ export const directusImageUrl = (id: string) => {
   const config = useRuntimeConfig();
   return `${config.public.directusPublicUrl}assets/${id}`;
 };
+
+export const generateStrongPassword = (
+  length: number,
+  useLowercase: boolean,
+  useUppercase: boolean,
+  useNumbers: boolean,
+  useSymbols: boolean
+) => {
+  const lowercase = "abcdefghijklmnopqrstuvwxyz";
+  const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const numbers = "0123456789";
+  const symbols = "!@#$%^&*()_+[]{}|;:,.<>?";
+
+  let charset = "";
+  if (useLowercase) charset += lowercase;
+  if (useUppercase) charset += uppercase;
+  if (useNumbers) charset += numbers;
+  if (useSymbols) charset += symbols;
+
+  if (!charset) {
+    throw new Error("At least one character type must be selected.");
+  }
+
+  let password = "";
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * charset.length);
+    password += charset[randomIndex];
+  }
+
+  console.log(password);
+
+  return password;
+};
