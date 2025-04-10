@@ -53,7 +53,7 @@ const { data: tools } = await useFetch("/api/v1/tools");
       to="/panduan"
       class="text-gray-6 text-sm hover:(text-unpad underline)"
     >
-      Lihat selengkapnya layanan dan alat yang dapat kami tawarkan →
+      Lihat selengkapnya layanan yang dapat membantu keperluan akademik anda →
     </NuxtLink>
     <div class="hidden">
       <div class="i-mdi-pencil"></div>
@@ -87,7 +87,7 @@ const { data: tools } = await useFetch("/api/v1/tools");
 }
 
 .icon-holder {
-  --at-apply: bg-yellow-1 w-12 h-12 absolute mr--4 mb-2;
+  --at-apply: bg-white w-12 h-12 absolute mr--4 mb-2;
 }
 
 .content:hover>.left-content {

@@ -28,13 +28,13 @@ export default defineEventHandler((event) => {
       slug: "/panduan",
     },
     {
-      namaTools: "Asistensi Studi",
-      namaToolsEN: "Study Assist",
-      deskripsi: "Layanan dan sumber informasi seperti pelatihan, panduan penelitian, dan alat sitasi untuk mendukung keterampilan akademik mahasiswa.",
+      namaTools: "Kursus untuk Akademik",
+      namaToolsEN: "Academic Courses",
+      deskripsi: "Kursus yang membantu akademik seperti Turnitin untuk cek plagiarisme, penelusuran informasi, manajemen referensi, dan keterampilan penulisan ilmiah.",
       deskripsiEN:
-        "Services and resources like tutorials, research guides, and citation tools to support students' academic skills.",
+        "Courses that support academics such as Turnitin for plagiarism checking, information searching, reference management, and scientific writing skills.",
       icon: "i-mdi-settings",
-      slug: "/panduan",
+      slug: "/courses",
     },
   ];
 });
