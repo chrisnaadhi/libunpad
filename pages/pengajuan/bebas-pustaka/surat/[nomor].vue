@@ -161,6 +161,18 @@ useHead({
                 class="w-45 mt--5 mb--5"
               />
             </div>
+            <div
+              v-else-if="
+                getDataSurat.user_updated ===
+                '19E39D00-ED4B-4EBB-9C04-8C0570614B7E'
+              "
+            >
+              <NuxtImg
+                src="images/ttd/pak_taufik_transparent.png"
+                v-show="getDataSurat.nama_fakultas !== 'fikom'"
+                class="w-45 mt--5 mb--5"
+              />
+            </div>
             <div v-else>
               <NuxtImg
                 src="images/ttd_kepala2p.png"
