@@ -82,7 +82,7 @@ const displayNamaRuangan = (val) => {
       return "Ruang Kelas Hybrid Lt. 4";
     case "ruang_alh":
       return "Ruang Assistive Learning Hub Lt. 4";
-    case "teater_pengetahuan":
+    case "ruang_teater":
       return "Teater Pengetahuan Rektorat";
     default:
       return "Ruang Baru";
