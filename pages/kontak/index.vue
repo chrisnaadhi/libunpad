@@ -111,11 +111,8 @@ const sendMessage = async () => {
           <div class="flex flex-col items-center">
             <div class="i-mdi-email w-12 h-12 text-red" />
             <div>
-              <NuxtLink
-                href="mailto:pusat.pengetahuan@unpad.ac.id"
-                target="_blank"
-              >
-                <span class="text-2xl"> pusat.pengetahuan@unpad.ac.id </span>
+              <NuxtLink href="mailto:perpustakaan@unpad.ac.id" target="_blank">
+                <span class="text-2xl"> perpustakaan@unpad.ac.id </span>
               </NuxtLink>
             </div>
           </div>
