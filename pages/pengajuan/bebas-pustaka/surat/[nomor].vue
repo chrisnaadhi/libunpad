@@ -168,7 +168,7 @@ useHead({
               "
             >
               <NuxtImg
-                src="images/ttd/pak_taufik_transparent.png"
+                src="images/ttd/pak_taufik_cap.png"
                 v-show="getDataSurat.nama_fakultas !== 'fikom'"
                 class="w-45 mt--5 mb--5"
               />
