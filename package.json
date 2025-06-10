@@ -8,27 +8,27 @@
     "introspectDb": "drizzle-kit introspect:mysql"
   },
   "devDependencies": {
-    "@iconify-json/mdi": "^1.2.0",
-    "@nuxt/image": "^1.8.0",
+    "@iconify-json/mdi": "^1.2.3",
+    "@nuxt/image": "^1.10.0",
     "@nuxtjs/i18n": "8.0.0",
-    "@nuxtjs/plausible": "^1.0.2",
-    "@nuxtjs/turnstile": "^0.9.10",
+    "@nuxtjs/plausible": "^1.2.0",
+    "@nuxtjs/turnstile": "^0.9.16",
     "@sidebase/nuxt-auth": "^0.8.2",
     "@unocss/nuxt": "^0.62.4",
     "dayjs-nuxt": "^1.2.7",
     "drizzle-kit": "^0.20.18",
-    "nuxt": "^3.13.2"
+    "nuxt": "^3.17.5"
   },
   "dependencies": {
-    "@directus/sdk": "^17.0.1",
+    "@directus/sdk": "^17.0.2",
     "@pinia/nuxt": "^0.4.11",
     "@popperjs/core": "^2.11.8",
     "@splidejs/vue-splide": "^0.6.12",
     "drizzle-orm": "^0.29.5",
-    "easyqrcodejs": "^4.6.1",
-    "mysql2": "^3.11.3",
-    "nuxt-directus": "^5.6.1",
-    "pinia": "^2.2.2"
+    "easyqrcodejs": "^4.6.2",
+    "mysql2": "^3.14.1",
+    "nuxt-directus": "^5.7.0",
+    "pinia": "^2.3.1"
   },
   "overrides": {
     "vue": "latest",
