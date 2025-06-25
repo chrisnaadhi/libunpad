@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-import { ref, computed } from "vue";
 
 export const trimDescription = (description: string, limit: number) => {
   if (description?.length < limit) {
@@ -40,7 +39,7 @@ export const definePeminjamanRuangan = (ruangan: string) => {
       return "Plaza Kandaga Lt.1";
 
     case "ruang_kelas_2":
-      return "Ruang Kelast Lt.2";
+      return "Ruang Kelas Lt.2";
 
     case "ruang_hybrid":
       return "Ruang Kelas Hybrid Lt.4";
