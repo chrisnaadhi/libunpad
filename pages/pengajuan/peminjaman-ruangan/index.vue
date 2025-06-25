@@ -14,6 +14,7 @@ const lastDate = `${date.getFullYear()}-${date.getMonth() + 1}-${lastDay}`;
 
 const npm = ref("");
 const notification = ref("Silahkan isi seluruh form sesuai dengan data asli");
+const isUploading = ref(false);
 const textNotif = ref("text-dark");
 const namaLengkap = ref("");
 const email = ref(data.value.user.email);
@@ -102,6 +103,8 @@ const kirimPengajuan = async () => {
     tanggalPeminjaman.value,
     jamMulai.value + ":00"
   );
+
+  isUploading.value = true;
   if (
     namaLengkap.value === "" ||
     unitPengajuan.value === "" ||
@@ -206,9 +209,11 @@ const kirimPengajuan = async () => {
             notification.value =
               "Silahkan isi seluruh form sesuai dengan data asli";
             textNotif.value = "text-dark";
+            isUploading.value = false;
             await navigateTo({ path: "/pengajuan/peminjaman-ruangan/data" });
           }, 2000);
         } catch (error) {
+          isUploading.value = false;
           console.log(error);
         }
       } else {
@@ -218,11 +223,13 @@ const kirimPengajuan = async () => {
           notification.value =
             "Silahkan isi seluruh form sesuai dengan data asli";
           textNotif.value = "text-dark";
+          isUploading.value = false;
         }, 5000);
       }
     });
   } else {
     alert("Error! Hubungi admin.");
+    isUploading.value = false;
     console.log(fileSurat.value);
   }
 };
@@ -410,7 +417,11 @@ const kirimPengajuan = async () => {
             </p>
           </div>
 
-          <button type="submit" class="btn bg-orange text-white w-full">
+          <button
+            type="submit"
+            class="btn bg-orange text-white w-full"
+            :disabled="isUploading"
+          >
             Ajukan
           </button>
         </form>

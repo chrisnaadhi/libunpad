@@ -39,11 +39,6 @@ export default defineNuxtConfig({
     preflight: true,
   },
 
-  directus: {
-    url: process.env.KANDAGA_DIRECTUS_BASE_URL,
-    token: process.env.KANDAGA_DIRECTUS_ACCESS_TOKEN,
-  },
-
   i18n: {
     locales: [
       {
@@ -87,6 +82,12 @@ export default defineNuxtConfig({
     },
   },
 
+  directus: {
+    autoFetch: true,
+    url: process.env.KANDAGA_DIRECTUS_BASE_URL,
+    token: process.env.KANDAGA_DIRECTUS_ACCESS_TOKEN,
+  },
+
   runtimeConfig: {
     authSecret: process.env.AUTH_KANDAGA_SECRET,
     authGoogleClientId: process.env.AUTH_KANDAGA_GOOGLE_CLIENT_ID,
@@ -102,13 +103,10 @@ export default defineNuxtConfig({
     turnstile: {
       secretKey: process.env.KANDAGA_TURNSTILE_SECRETKEY
     },
-    app: {
-      directusPublicUrl: process.env.KANDAGA_DIRECTUS_BASE_URL,
-      directusAuthToken: process.env.KANDAGA_DIRECTUS_ACCESS_TOKEN,
-    },
     public: {
       meiliHost: process.env.KANDAGA_MEILI_HOST,
       meiliApiKey: process.env.KANDAGA_MEILI_API_KEY,
+      directusAuthToken: process.env.KANDAGA_DIRECTUS_ACCESS_TOKEN,
       directusPublicUrl: process.env.KANDAGA_DIRECTUS_BASE_URL,
       dSpacePublic: process.env.KANDAGA_SPACE_URL,
       dSpaceFront: process.env.KANDAGA_DSPACE_FRONTEND,

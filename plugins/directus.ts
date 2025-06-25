@@ -2,7 +2,7 @@ import { createDirectus, rest, readItem, readItems, staticToken, uploadFiles } f
 
 export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig()
-  const directus = createDirectus(config.app.directusPublicUrl).with(staticToken(config.app.directusAuthToken)).with(rest())
+  const directus = createDirectus(config.public.directusPublicUrl).with(staticToken(config.public.directusAuthToken)).with(rest())
   return {
     provide: { directus, readItem, readItems, uploadFiles }
   }

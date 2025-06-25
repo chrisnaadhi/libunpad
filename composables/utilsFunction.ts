@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { ref, computed } from "vue";
 
 export const trimDescription = (description: string, limit: number) => {
   if (description?.length < limit) {
@@ -35,17 +36,20 @@ export const definePeminjamanRuangan = (ruangan: string) => {
     case "ruang_the_gade":
       return "Ruang Pegadaian Lt.1";
 
+    case "plaza_kandaga":
+      return "Plaza Kandaga Lt.1";
+
     case "ruang_kelas_2":
       return "Ruang Kelast Lt.2";
+
+    case "ruang_hybrid":
+      return "Ruang Kelas Hybrid Lt.4";
 
     case "ruang_teater":
       return "Ruang Teater Rektorat";
 
     case "ruang_alh":
       return "Ruang Assistive Learning Hub Lt.4";
-
-    case "ruang_bni_berbagi":
-      return "Ruang BNI Berbagi Lt.1";
 
     default:
       return "Belum dibuat";

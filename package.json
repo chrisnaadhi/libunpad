@@ -10,25 +10,25 @@
   "devDependencies": {
     "@iconify-json/mdi": "^1.2.3",
     "@nuxt/image": "^1.10.0",
-    "@nuxtjs/i18n": "8.0.0",
+    "@nuxtjs/i18n": "^9.0.0",
     "@nuxtjs/plausible": "^1.2.0",
-    "@nuxtjs/turnstile": "^0.9.16",
-    "@sidebase/nuxt-auth": "^0.8.2",
-    "@unocss/nuxt": "^0.62.4",
-    "dayjs-nuxt": "^1.2.7",
-    "drizzle-kit": "^0.20.18",
+    "@nuxtjs/turnstile": "^1.0.0",
+    "@sidebase/nuxt-auth": "^0.10.0",
+    "@unocss/nuxt": "^66.0.0",
+    "dayjs-nuxt": "^2.1.7",
+    "drizzle-kit": "^0.30.0",
     "nuxt": "^3.17.5"
   },
   "dependencies": {
-    "@directus/sdk": "^17.0.2",
-    "@pinia/nuxt": "^0.4.11",
+    "@directus/sdk": "^19.0.0",
+    "@pinia/nuxt": "^0.11.0",
     "@popperjs/core": "^2.11.8",
     "@splidejs/vue-splide": "^0.6.12",
-    "drizzle-orm": "^0.29.5",
+    "drizzle-orm": "^0.40.0",
     "easyqrcodejs": "^4.6.2",
     "mysql2": "^3.14.1",
     "nuxt-directus": "^5.7.0",
-    "pinia": "^2.3.1"
+    "pinia": "^3.0.0"
   },
   "overrides": {
     "vue": "latest",

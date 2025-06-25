@@ -3,7 +3,7 @@ import {
   presetAttributify,
   presetIcons,
   presetTypography,
-  presetUno,
+  presetWind3,
   transformerDirectives,
   transformerVariantGroup,
 } from "unocss";
@@ -11,7 +11,7 @@ import {
 export default defineConfig({
   shortcuts: [["btn", "px-4 py-2 rounded no-underline"]],
   presets: [
-    presetUno(),
+    presetWind3(),
     presetAttributify(),
     presetIcons(),
     presetTypography(),
