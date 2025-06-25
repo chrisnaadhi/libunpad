@@ -311,7 +311,7 @@ onMounted(() => {
                   <NuxtImg
                     :src="
                       item?.image
-                        ? `https://kandaga.unpad.ac.id:8011/lib/minigalnano/createthumb.php?filename=images/docs/${item?.image}`
+                        ? `https://kandaga.unpad.ac.id:8011/lib/minigalnano/createthumb.php?filename=../../images/docs/${item?.image}`
                         : '/images/default_cover.png'
                     "
                     class="w-full h-60 border border-unpad object-scale-down px-4"

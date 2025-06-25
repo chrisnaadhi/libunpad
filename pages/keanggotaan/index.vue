@@ -58,7 +58,7 @@ const bebasPustakaBanner = (value) => {
     case "pengajuan":
       return "bg-gray text-white font-semibold";
     case "proses":
-      return "bg-yellow-6 text-dark font-semibold";
+      return "bg-yellow-4 text-dark font-semibold";
     case "selesai":
       return "bg-green-6 text-white font-semibold";
     case "ditolak":
@@ -200,10 +200,15 @@ definePageMeta({
                             '/pengajuan/bebas-pustaka/surat/' +
                             getBebasPustaka[0].id
                           "
-                          class="btn py-1 px-2 bg-unpad text-white"
+                          class="btn py-2 px-4 bg-unpad text-white"
                           target="_blank"
                           >Unduh Surat</NuxtLink
                         >
+                      </div>
+                      <div class="my-3" v-else>
+                        <button class="btn py-2 px-4" disabled>
+                          Surat belum dapat diunduh
+                        </button>
                       </div>
                       <div class="mt-5">
                         <h6>
@@ -211,13 +216,36 @@ definePageMeta({
                           Pustaka kami:
                         </h6>
                         <p>
-                          Pak Hendri Sarinda:
-                          <a href="tel:082216133555">+62 822-1613-3555</a>
+                          Pak Taufik Hajar Wikara:
+                          <a href="tel:085721738333">+62 857-2173-8333</a>
                         </p>
                         <p>
                           Bu Aning Yuningsih:
                           <a href="tel:081394503080">+62 813-9450-3080</a>
                         </p>
+                      </div>
+                      <div
+                        class="text-xs text-center bg-white p-5 mt-5 rounded-xl"
+                      >
+                        <p class="text-gray-600">
+                          Untuk Mahasiswa jenjang Magister (S2) atau Doktoral
+                          (S3) yang ingin mengajukan Surat Bebas Pustaka namun
+                          terkendala karena akun PAuS ID nya digabung dengan
+                          jenjang sebelumnya (S1 atau S2) silahkan hubungi
+                          Sistem Administrator Kandaga :
+                        </p>
+                        <div>
+                          <a
+                            href="mailto:chrisna.adhi@unpad.ac.id"
+                            target="_blank"
+                          >
+                            chrisna.adhi@unpad.ac.id
+                          </a>
+                          <p>atau</p>
+                          <a href="https://wa.me/6281573710645" target="_blank">
+                            Whatsapp
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -344,6 +372,10 @@ definePageMeta({
                       <h6>
                         Pengajuan Pada :
                         <p>{{ convertTimeZone(file.date_created) ?? "-" }}</p>
+                      </h6>
+                      <h6>
+                        Diproses Pada :
+                        <p>{{ convertTimeZone(file.date_updated) ?? "-" }}</p>
                       </h6>
                       <h6>
                         Hasil Similarity :
