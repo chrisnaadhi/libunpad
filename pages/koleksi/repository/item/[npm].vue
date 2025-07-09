@@ -110,17 +110,21 @@ const penerbit =
 const APAFormat = () => {
   if (nama) {
     const firstName =
-      nama.length > 1 ? ", " + nama[0].split("")[0].toUpperCase() + ". " : "";
+      nama.length > 1 ? ", " + nama[0].split("")[0]?.toUpperCase() + ". " : "";
     const secondName =
-      nama.length < 3 ? "" : nama[1]?.split("")[0].toUpperCase() + ". ";
+      nama.length < 3 ? "" : nama[1]?.split("")[0]?.toUpperCase() + ". ";
     const thirdName =
-      nama.length < 4 ? "" : nama[2]?.split("")[0].toUpperCase() + ". ";
+      nama.length < 4 ? "" : nama[2]?.split("")[0]?.toUpperCase() + ". ";
     const fourthName =
-      nama.length < 5 ? "" : nama[3]?.split("")[0].toUppercase() + ". ";
+      nama.length < 5 ? "" : nama[3]?.split("")[0]?.toUpperCase() + ". ";
+    const fifthName =
+      nama.length < 6 ? "" : nama[4]?.split("")[0]?.toUpperCase() + ". ";
+    const sixthName =
+      nama.length < 7 ? "" : nama[5]?.split("")[0]?.toUpperCase() + ". ";
     const lastName =
-      nama.at(-1).charAt(0).toUpperCase() + nama.at(-1).slice(1) + " ";
+      nama.at(-1)?.charAt(0)?.toUpperCase() + nama.at(-1).slice(1) + " ";
 
-    formattedAPA.value = `${lastName}${firstName}${secondName}${thirdName}${fourthName}(${tahun}). <span class="italic">${judul}</span>. ${penerbit}`;
+    formattedAPA.value = `${lastName}${firstName}${secondName}${thirdName}${fourthName}${fifthName}${sixthName}(${tahun}). <span class="italic">${judul}</span>. ${penerbit}`;
   } else {
     formattedAPA.value = "Tidak dapat membuat sitasi";
   }
@@ -142,10 +146,20 @@ const ChicagoFormat = () => {
     const fourthName =
       nama.length < 5
         ? ""
-        : " " + nama.at(3)?.charAt(0).toUppercase() + nama.at(3)?.slice(1);
+        : " " + nama.at(3)?.charAt(0).toUpperCase() + nama.at(3)?.slice(1);
+    const fifthName =
+      nama.length < 6
+        ? ""
+        : " " + nama.at(4)?.charAt(0).toUpperCase() + nama.at(4)?.slice(1);
+
+    const sixthName =
+      nama.length < 7
+        ? ""
+        : " " + nama.at(5)?.charAt(0).toUpperCase() + nama.at(5)?.slice(1);
+
     const lastName = nama.at(-1).charAt(0).toUpperCase() + nama.at(-1).slice(1);
 
-    formattedChicago.value = `${lastName}${firstName}${secondName}${thirdName}${fourthName}. ${tahun}. "${judul}". ${penerbit}`;
+    formattedChicago.value = `${lastName}${firstName}${secondName}${thirdName}${fourthName}${fifthName}${sixthName}. ${tahun}. "${judul}". ${penerbit}`;
   } else {
     formattedChicago.value = "Tidak dapat membuat sitasi";
   }
