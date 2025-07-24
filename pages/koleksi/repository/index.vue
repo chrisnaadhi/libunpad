@@ -14,6 +14,15 @@ const dataTADirectus = await getItems({
   },
 });
 
+const totalDataTA = await getItems({
+  collection: "tbtMhsUploadThesis",
+  params: {
+    meta: "filter_count",
+  },
+});
+
+console.log(totalDataTA.meta);
+
 const previewData = (npm) => {
   if (!searchTugasAkhir.searchResults) {
     const searchData = dataTADirectus.find((elem) => elem?.MhsNPM === npm);
@@ -98,7 +107,7 @@ definePageMeta({
         searchTugasAkhir.keywords !== ''
       "
     >
-      <p class="text-center">
+      <p class="text-center" v-if="searchTugasAkhir.keywords !== ''">
         Hasil pencarian:
         <span class="font-semibold">"{{ searchTugasAkhir.keywords }}"</span>
         terdapat
@@ -107,7 +116,19 @@ definePageMeta({
         }}</span>
         data.
       </p>
+      <p v-else>
+        Total data Tugas Akhir yang tersedia:
+        <span class="font-semibold">
+          {{ totalDataTA.meta.filter_count }}
+        </span>
+      </p>
     </div>
+    <p v-if="searchTugasAkhir.keywords === ''" class="text-center">
+      Total data Tugas Akhir yang tersedia:
+      <span class="font-semibold">
+        {{ totalDataTA.meta.filter_count }}
+      </span>
+    </p>
     <div class="flex flex-col gap-4 lg:(flex-row)">
       <CollectionRepositoryFilterOption />
       <div class="repository-collection" v-if="!searchTugasAkhir.searchResults">
