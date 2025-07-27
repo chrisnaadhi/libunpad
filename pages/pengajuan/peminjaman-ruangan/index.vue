@@ -36,50 +36,50 @@ const monthName = new Intl.DateTimeFormat("id-ID", { month: "long" }).format(
   date
 );
 
-const dataPeminjaman = await getItems({
-  collection: "peminjaman_ruangan",
-  params: {
-    filter: {
-      tanggal_peminjaman: {
-        _between: [firstDate, lastDate],
-      },
-    },
-  },
-});
+// const dataPeminjaman = await getItems({
+//   collection: "peminjaman_ruangan",
+//   params: {
+//     filter: {
+//       tanggal_peminjaman: {
+//         _between: [firstDate, lastDate],
+//       },
+//     },
+//   },
+// });
 
-const checkExistingPeminjaman = (tanggal, jamMulai) => {
-  let isExist = false;
+// const checkExistingPeminjaman = (tanggal, jamMulai) => {
+//   let isExist = false;
 
-  dataPeminjaman.forEach((item) => {
-    const isTimeInRange = () => {
-      const [startHours, startMinutes, startSeconds] = item.jam_mulai_peminjaman
-        .split(":")
-        .map(Number);
-      const [endHours, endMinutes, endSeconds] = item.jam_selesai_peminjaman
-        .split(":")
-        .map(Number);
-      const [checkHours, checkMinutes, checkSeconds] = jamMulai
-        .split(":")
-        .map(Number);
+//   dataPeminjaman.forEach((item) => {
+//     const isTimeInRange = () => {
+//       const [startHours, startMinutes, startSeconds] = item.jam_mulai_peminjaman
+//         .split(":")
+//         .map(Number);
+//       const [endHours, endMinutes, endSeconds] = item.jam_selesai_peminjaman
+//         .split(":")
+//         .map(Number);
+//       const [checkHours, checkMinutes, checkSeconds] = jamMulai
+//         .split(":")
+//         .map(Number);
 
-      const startTime = new Date();
-      startTime.setHours(startHours, startMinutes, startSeconds);
+//       const startTime = new Date();
+//       startTime.setHours(startHours, startMinutes, startSeconds);
 
-      const endTime = new Date();
-      endTime.setHours(endHours, endMinutes, endSeconds);
+//       const endTime = new Date();
+//       endTime.setHours(endHours, endMinutes, endSeconds);
 
-      const checkTime = new Date();
-      checkTime.setHours(checkHours, checkMinutes, checkSeconds);
+//       const checkTime = new Date();
+//       checkTime.setHours(checkHours, checkMinutes, checkSeconds);
 
-      return checkTime >= startTime && checkTime <= endTime;
-    };
+//       return checkTime >= startTime && checkTime <= endTime;
+//     };
 
-    if (item.tanggal_peminjaman === tanggal && isTimeInRange()) {
-      isExist = true;
-    }
-  });
-  return isExist;
-};
+//     if (item.tanggal_peminjaman === tanggal && isTimeInRange()) {
+//       isExist = true;
+//     }
+//   });
+//   return isExist;
+// };
 
 const isDatePast = (date) => {
   const today = new Date();
@@ -99,10 +99,10 @@ const kirimPengajuan = async () => {
   const emailValidation = emailPattern.test(email.value);
   const formData = new FormData();
   formData.append("folder", "AD0865F0-F6A3-4F62-8551-FE52625C7308");
-  const roomExist = checkExistingPeminjaman(
-    tanggalPeminjaman.value,
-    jamMulai.value + ":00"
-  );
+  // const roomExist = checkExistingPeminjaman(
+  //   tanggalPeminjaman.value,
+  //   jamMulai.value + ":00"
+  // );
 
   isUploading.value = true;
   if (
@@ -118,10 +118,13 @@ const kirimPengajuan = async () => {
   ) {
     alert("Mohon diisi kolom yang bertanda bintang merah!");
   } else if (isDatePast(tanggalPeminjaman.value)) {
+    isUploading.value = false;
     alert("Tanggal peminjaman tidak boleh tanggal sebelum hari ini!");
-  } else if (roomExist) {
-    alert("Ruangan sudah terpakai pada jam tersebut!");
-  } else if (fileSurat.value === null) {
+  }
+  // else if (roomExist) {
+  //   alert("Ruangan sudah terpakai pada jam tersebut!");
+  // }
+  else if (fileSurat.value === null) {
     let items = {
       nomor_induk: npm.value,
       nama_lengkap: namaLengkap.value,
@@ -426,7 +429,8 @@ const kirimPengajuan = async () => {
           </button>
         </form>
       </section>
-      <section class="max-w-lg">
+
+      <!--<section class="max-w-lg">
         <h1>Daftar Peminjaman Bulan Ini</h1>
         <p class="text-2xl font-semibold text-orange">
           {{ monthName }} {{ date.getFullYear() }}
@@ -497,7 +501,7 @@ const kirimPengajuan = async () => {
           Lihat data peminjaman
           <NuxtLink to="/pengajuan/peminjaman-ruangan/data">disini</NuxtLink>
         </div>
-      </section>
+      </section> -->
     </div>
 
     <div class="w-full max-w-7xl ma py-10">
