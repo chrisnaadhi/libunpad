@@ -246,6 +246,12 @@ definePageMeta({
                             Whatsapp
                           </a>
                         </div>
+                        <div>
+                          <p class="text-red">
+                            dengan melampirkan email unpad anda agar dapat
+                            langsung diproses.
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
