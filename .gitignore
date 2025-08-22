@@ -33,3 +33,4 @@ localhost-key.pem
 
 # shell update build
 *.sh
+pnpm-workspace.yaml
