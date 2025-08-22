@@ -9,10 +9,10 @@ const tools = [
     isActive: true,
   },
   {
-    nama: "Kandaga Password Generator",
+    nama: "Password Generator",
     link: route.fullPath + "/passgenerator",
     deskripsi:
-      "Buat password yang kuat dan aman untuk akun anda dengan lebih mudah.",
+      "Buat password yang kuat dan aman untuk akun anda dengan lebih mudah dengan generator password Kandaga.",
     isActive: true,
   },
   {
@@ -34,8 +34,8 @@ const tools = [
 
 <template>
   <main>
-    <GenericBaseCard class="bg-orange min-h-45 p-5" v-for="tool in tools">
-      <h1>{{ tool.nama }}</h1>
+    <GenericBaseCard class="bg-orange p-5" v-for="tool in tools">
+      <h3>{{ tool.nama }}</h3>
       <p>{{ tool.deskripsi }}</p>
       <NuxtLink
         :to="tool.link"
@@ -58,10 +58,10 @@ const tools = [
 
 <style scoped>
 main {
-  --at-apply: max-w-7xl ma flex flex-col md:flex-row items-center justify-center gap-4 py-5;
+  --at-apply: max-w-7xl ma flex flex-col md:flex-row items-center justify-center gap-4 p-5 p;
 }
 
-h1 {
+h3 {
   --at-apply: text-2xl text-white;
 }
 

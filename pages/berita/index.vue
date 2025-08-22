@@ -137,7 +137,9 @@ platform[4]["collection"] = getMuseumArticle;
               :src="handleAssets(article?.gambar_unggulan)"
               class="w-full h-40 object-cover rounded"
             />
-            <div class="h-20 px-3 flex flex-col items-start justify-center">
+            <div
+              class="h-30 my-3 px-3 flex flex-col items-start justify-center"
+            >
               <NuxtLink :to="beritaType(article)" class="text-left">
                 <h6 :title="article?.judul">
                   {{ trimTitle(article?.judul, 27) }}
@@ -146,6 +148,14 @@ platform[4]["collection"] = getMuseumArticle;
               <p class="text-xs text-left italic">
                 {{ trimDescription(article?.konten_berita, 90) }}
               </p>
+              <div class="pt-4">
+                <NuxtLink
+                  :to="beritaType(article)"
+                  class="btn bg-unpad text-dark text-xs"
+                >
+                  Baca selengkapnya >
+                </NuxtLink>
+              </div>
             </div>
           </div>
         </div>

@@ -25,6 +25,27 @@ const emailPattern = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
 
 const kirimPengajuan = async () => {
   const emailValidation = emailPattern.test(email.value);
+  // Validate file type
+  if (fileSurat.value) {
+    const allowedTypes = [
+      "application/msword", // .doc
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // .docx
+      "application/vnd.oasis.opendocument.text", // .odt
+      "application/vnd.oasis.opendocument.formula", // .odf
+    ];
+
+    if (!allowedTypes.includes(fileSurat.value.type)) {
+      colorNotif.value = "text-red-7";
+      notification.value =
+        "Format file tidak sesuai. Hanya file DOC, DOCX, ODT, atau ODF yang diperbolehkan. Silahkan pilih file yang sesuai!";
+      setTimeout(() => {
+        notification.value =
+          "Silahkan isi seluruh form sesuai dengan data asli";
+        colorNotif.value = "text-dark";
+      }, 10000);
+      return;
+    }
+  }
   let formData = new FormData();
   formData.append("folder", "33D4C963-CF03-4883-A724-B93E0C1183D0");
   if (
@@ -205,7 +226,7 @@ const kirimPengajuan = async () => {
           name="fileSurat"
           id="fileSurat"
           @change="uploadSurat"
-          accept=".doc, .docx, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+          accept=".doc, .docx, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.oasis.opendocument.text, application/vnd.oasis.opendocument.formula"
           required
         />
         <p class="text-sm italic text-gray-4 text-center">

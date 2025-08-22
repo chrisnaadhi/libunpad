@@ -13,6 +13,6 @@ export const fetchArticleCategory = (category: string) => {
 };
 
 export const handleAssets = (id: string) => {
-  const url = "https://repository.unpad.ac.id:8050/assets/" + id;
+  const url = "https://kandaga.unpad.ac.id/backoffice/assets/" + id;
   return url;
 };

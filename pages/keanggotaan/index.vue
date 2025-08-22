@@ -119,7 +119,7 @@ definePageMeta({
                 Daftar Pengajuan Administratif
               </h2>
               <div
-                class="flex flex-col items-start md:(grid grid-cols-2) gap-10 my-3 px-5 lg:px-0"
+                class="flex flex-col items-start lg:(grid grid-cols-2) gap-10 my-3 px-5 lg:px-0"
               >
                 <div
                   class="flex flex-col items-center justify-center w-full bg-orange-50 p-5 rounded-xl"
