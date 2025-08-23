@@ -13,13 +13,12 @@ const data = ref("Profil Kandaga");
       <div class="text-justify py-4">
         <h2>Tentang Kandaga</h2>
         <p>
-          Kandaga merupakan branding lembaga dari Pusat Pengelolaan Pengetahuan,
-          Direktorat Pendidikan dan Internasionalisasi Universitas Padjadjaran.
-          Kandaga memiliki visi menjadi pusat informasi dan pengetahuan yang
-          terpercaya, inovatif, dan berdaya saing. Kandaga memiliki misi
-          memberikan layanan informasi dan pengetahuan yang berkualitas,
-          meningkatkan kualitas layanan informasi dan pengetahuan, serta
-          meningkatkan kerjasama dengan berbagai pihak. Portal kandaga
+          Kandaga merupakan branding lembaga Perpustakaan Pusat Universitas
+          Padjadjaran. Kandaga memiliki visi menjadi pusat informasi dan
+          pengetahuan yang terpercaya, inovatif, dan berdaya saing. Kandaga
+          memiliki misi memberikan layanan informasi dan pengetahuan yang
+          berkualitas, meningkatkan kualitas layanan informasi dan pengetahuan,
+          serta meningkatkan kerjasama dengan berbagai pihak. Portal kandaga
           menyediakan layanan daring dan luring serta fasilitas lainnya yang
           dapat dimanfaatkan oleh pengguna.
         </p>
