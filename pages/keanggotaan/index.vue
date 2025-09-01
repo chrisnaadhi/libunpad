@@ -93,7 +93,7 @@ definePageMeta({
         <img
           :src="
             user.avatar
-              ? `https://repository.unpad.ac.id:8050/assets/${user.avatar}.jpg`
+              ? `https://kandaga.unpad.ac.id/backoffice/assets/${user.avatar}.jpg`
               : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'
           "
           :alt="user?.first_name"
