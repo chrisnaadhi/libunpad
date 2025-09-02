@@ -8,7 +8,7 @@ const val = ref("Panduan Akses E-Journal dan E-Resources Unpad");
     <div class="w-full relative">
       <NuxtImg
         type="webp"
-        src="https://repository.unpad.ac.id:8050/assets/ACFE8D01-7E69-4905-B70A-6F043E94C7E8"
+        src="https://kandaga.unpad.ac.id/backoffice/assets/ACFE8D01-7E69-4905-B70A-6F043E94C7E8"
         class="w-full max-h-80 object-cover relative"
         alt="daring"
       />
