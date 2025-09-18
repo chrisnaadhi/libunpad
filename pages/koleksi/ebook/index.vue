@@ -186,11 +186,20 @@ onMounted(async () => {
         class="bg-white rounded-lg shadow p-4 flex flex-col"
       >
         <NuxtLink :to="`/koleksi/ebook/${item.id}`" class="no-underline">
-          <NuxtImg
-            :src="getEbookThumbnail(item.link_url)"
-            class="w-full h-100 object-cover rounded"
-            referrerpolicy="no-referrer"
-          />
+          <span v-if="item.thumbnail">
+            <NuxtImg
+              :src="directusImageUrl(item.thumbnail)"
+              class="w-full h-100 object-cover rounded"
+              referrerpolicy="no-referrer"
+            />
+          </span>
+          <span v-else>
+            <NuxtImg
+              :src="getEbookThumbnail(item.link_url)"
+              class="w-full h-100 object-cover rounded"
+              referrerpolicy="no-referrer"
+            />
+          </span>
         </NuxtLink>
         <div class="my-3 flex-1">
           <NuxtLink :to="`/koleksi/ebook/${item.id}`" class="no-underline">
