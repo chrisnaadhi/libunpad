@@ -106,4 +106,12 @@ export default {
   GLAMCollector: "Kolektor",
   GLAMCreatedAt: "Dibuat pada",
   GLAMManagedBy: "Pengelola",
+
+  // Ebook Page
+  ebookPageListTitle: "Koleksi E-Book - Kandaga",
+  ebookPageListDescription:
+    "Temukan dan baca berbagai e-book dari koleksi kami untuk mendukung kebutuhan akademik dan penelitian Anda.",
+  ebookDetailAccess:
+    "Anda perlu masuk untuk mengakses konten lengkap dari e-book ini. Silakan masuk terlebih dahulu menggunakan ID PAuS Anda.",
+  ebookDetailView: "Baca E-Book",
 };
