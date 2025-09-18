@@ -128,6 +128,17 @@ export const menuContent = () => {
 
   const koleksi = [
     {
+      id: 24,
+      name: "Ebook",
+      url: "/koleksi/ebook",
+      nameEN: "Ebook",
+      urlEN: "/en/koleksi/ebook",
+      deskripsi:
+        "Ebook adalah buku dalam format digital yang dapat diakses dan dibaca secara elektronik melalui perangkat seperti komputer, tablet, atau e-reader. Ebook menawarkan kemudahan akses, portabilitas, dan fitur interaktif yang memungkinkan pembaca untuk menyesuaikan pengalaman membaca mereka.",
+      deskripsiEN: "",
+      imgUrl: "",
+    },
+    {
       id: 12,
       name: "Galeri",
       url: "/gallery",

@@ -135,7 +135,10 @@ onMounted(async () => {
       >
         {{ t("ebookDetailAccess") }}
         <span class="ml-2 bg-green-500 text-white px-2 py-1 rounded">
-          <NuxtLink to="/login" class="text-white no-underline font-semibold">
+          <NuxtLink
+            to="/login?redir=/koleksi/ebook"
+            class="text-white no-underline font-semibold"
+          >
             Login
           </NuxtLink>
         </span>
