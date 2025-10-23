@@ -151,6 +151,21 @@ const toggleFullscreen = async () => {
         </div>
       </div>
     </div>
+    <div
+      v-if="item.url_source"
+      class="mt-6 px-4 py-8 bg-yellow-50 border-l-4 border-yellow-400 rounded-lg text-center"
+    >
+      <div class="my-4">
+        <h5>
+          Untuk bisa membaca e-book ini secara lengkap, Silahkan klik tautan
+          berikut:
+        </h5>
+      </div>
+
+      <NuxtLink :to="item.url_source" class="btn bg-blue-600 text-white">
+        Baca E-Book
+      </NuxtLink>
+    </div>
   </section>
 </template>
 
