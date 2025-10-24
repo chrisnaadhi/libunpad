@@ -21,7 +21,7 @@ useHead({
     </div>
     <div>
       <VisitorDisplay v-if="!ruang" />
-      <div class="flex gap-3 mt-25" v-else>
+      <div class="flex gap-3 mt-25 h-full" v-else>
         <VisitorForm />
         <VisitorSurveyKunjungan />
       </div>

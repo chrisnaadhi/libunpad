@@ -3,6 +3,7 @@ const { createItems, getItems } = useDirectusItems();
 const data = ref("Survey Kandaga");
 
 const selectedRating = ref("");
+const officerSelectedRating = ref("");
 const masukan = ref("");
 const ruangan = useCookie("namaRuanganVisitor");
 const viewSurvey = ref(true);
@@ -22,8 +23,32 @@ const ratingValue = computed(() => {
       return null;
   }
 });
+const officerRatingValue = computed(() => {
+  switch (officerSelectedRating.value) {
+    case "fifthStar":
+      return 5;
+    case "fourthStar":
+      return 4;
+    case "thirdStar":
+      return 3;
+    case "secondStar":
+      return 2;
+    case "firstStar":
+      return 1;
+    default:
+      return null;
+  }
+});
 
 const ratingData = ref({
+  firstStar: false,
+  secondStar: false,
+  thirdStar: false,
+  fourthStar: false,
+  fifthStar: false,
+});
+
+const officerRatingData = ref({
   firstStar: false,
   secondStar: false,
   thirdStar: false,
@@ -74,6 +99,49 @@ const changeStarValue = (starValue) => {
   }
 };
 
+const changeOfficerStarValue = (starValue) => {
+  officerSelectedRating.value = starValue;
+  switch (starValue) {
+    case "firstStar":
+      officerRatingData.value.firstStar = true;
+      officerRatingData.value.secondStar = false;
+      officerRatingData.value.thirdStar = false;
+      officerRatingData.value.fourthStar = false;
+      officerRatingData.value.fifthStar = false;
+      break;
+    case "secondStar":
+      officerRatingData.value.firstStar = true;
+      officerRatingData.value.secondStar = true;
+      officerRatingData.value.thirdStar = false;
+      officerRatingData.value.fourthStar = false;
+      officerRatingData.value.fifthStar = false;
+      break;
+    case "thirdStar":
+      officerRatingData.value.firstStar = true;
+      officerRatingData.value.secondStar = true;
+      officerRatingData.value.thirdStar = true;
+      officerRatingData.value.fourthStar = false;
+      officerRatingData.value.fifthStar = false;
+      break;
+    case "fourthStar":
+      officerRatingData.value.firstStar = true;
+      officerRatingData.value.secondStar = true;
+      officerRatingData.value.thirdStar = true;
+      officerRatingData.value.fourthStar = true;
+      officerRatingData.value.fifthStar = false;
+      break;
+    case "fifthStar":
+      officerRatingData.value.firstStar = true;
+      officerRatingData.value.secondStar = true;
+      officerRatingData.value.thirdStar = true;
+      officerRatingData.value.fourthStar = true;
+      officerRatingData.value.fifthStar = true;
+      break;
+    default:
+      break;
+  }
+};
+
 const sendSuveyData = async () => {
   try {
     await createItems({
@@ -83,6 +151,7 @@ const sendSuveyData = async () => {
         selected_star: selectedRating.value,
         masukan: masukan.value,
         number_value: ratingValue.value,
+        number_value_petugas: officerRatingValue.value,
       },
     });
   } catch (error) {
@@ -97,6 +166,11 @@ const sendSuveyData = async () => {
     ratingData.value.thirdStar = false;
     ratingData.value.fourthStar = false;
     ratingData.value.fifthStar = false;
+    officerRatingData.value.firstStar = false;
+    officerRatingData.value.secondStar = false;
+    officerRatingData.value.thirdStar = false;
+    officerRatingData.value.fourthStar = false;
+    officerRatingData.value.fifthStar = false;
     viewSurvey.value = true;
   }, 3000);
 };
@@ -121,8 +195,9 @@ const sendSuveyData = async () => {
       </div>
       <div class="msg-block" v-else-if="selectedRating === 'firstStar'">
         <img src="/emoji/1star.png" alt="Hello User!" class="w-32 h-32" />
-        <p class="text-center">
-          Apa yang membuatmu kecewa terhadap pelayanan kami di ruangan ini :
+        <p class="text-center text-sm">
+          Apa yang membuatmu kecewa dan tidak puas terhadap pelayanan kami di
+          ruangan ini :
         </p>
         <div class="bg-dark w-full text-center text-unpad rounded-xl py-1">
           <h4>{{ displayRuangan(ruangan) }}</h4>
@@ -130,7 +205,7 @@ const sendSuveyData = async () => {
       </div>
       <div class="msg-block" v-else-if="selectedRating === 'secondStar'">
         <img src="/emoji/2star.png" alt="Hello User!" class="w-32 h-32" />
-        <p class="text-center">
+        <p class="text-center text-sm">
           Menurutmu bagaimana kami bisa memperbaiki pelayanan kami untuk ruangan
           ini :
         </p>
@@ -140,7 +215,7 @@ const sendSuveyData = async () => {
       </div>
       <div class="msg-block" v-else-if="selectedRating === 'thirdStar'">
         <img src="/emoji/3star.png" alt="Hello User!" class="w-32 h-32" />
-        <p class="text-center">
+        <p class="text-center text-sm">
           Apakah ada masukan atau saran yang ingin kamu sampaikan terhadap
           ruangan ini :
         </p>
@@ -150,7 +225,7 @@ const sendSuveyData = async () => {
       </div>
       <div class="msg-block" v-else-if="selectedRating === 'fourthStar'">
         <img src="/emoji/4star.png" alt="Hello User!" class="w-32 h-32" />
-        <p class="text-center">
+        <p class="text-center text-sm">
           Menurutmu bagaimana kami bisa meningkatkan pelayanan kami untuk
           ruangan ini :
         </p>
@@ -160,7 +235,7 @@ const sendSuveyData = async () => {
       </div>
       <div class="msg-block" v-else-if="selectedRating === 'fifthStar'">
         <img src="/emoji/5star.png" alt="Hello User!" class="w-32 h-32" />
-        <p class="text-center">
+        <p class="text-center text-sm">
           Apa pesan kesan-mu terhadap pelayanan kami ? dan bagaimana pendapatmu
           mengenai ruangan ini :
         </p>
@@ -216,6 +291,63 @@ const sendSuveyData = async () => {
         <h3 v-show="selectedRating === 'fifthStar'" class="text-green-6">
           Sangat Baik
         </h3>
+      </div>
+      <div v-if="selectedRating !== ''">
+        <p class="text-center text-sm mt-4">
+          Lalu bagaimana dengan sikap petugas di ruangan ini?
+        </p>
+        <div class="my-2 flex items-center justify-center">
+          <button @click="changeOfficerStarValue('firstStar')">
+            <div
+              class="w-10 h-10 text-amber"
+              :class="
+                officerRatingData.firstStar
+                  ? 'i-mdi-star'
+                  : 'i-mdi-star-outline'
+              "
+            />
+          </button>
+          <button @click="changeOfficerStarValue('secondStar')">
+            <div
+              class="w-10 h-10 text-amber"
+              :class="
+                officerRatingData.secondStar
+                  ? 'i-mdi-star'
+                  : 'i-mdi-star-outline'
+              "
+            />
+          </button>
+          <button @click="changeOfficerStarValue('thirdStar')">
+            <div
+              class="w-10 h-10 text-amber"
+              :class="
+                officerRatingData.thirdStar
+                  ? 'i-mdi-star'
+                  : 'i-mdi-star-outline'
+              "
+            />
+          </button>
+          <button @click="changeOfficerStarValue('fourthStar')">
+            <div
+              class="w-10 h-10 text-amber"
+              :class="
+                officerRatingData.fourthStar
+                  ? 'i-mdi-star'
+                  : 'i-mdi-star-outline'
+              "
+            />
+          </button>
+          <button @click="changeOfficerStarValue('fifthStar')">
+            <div
+              class="w-10 h-10 text-amber"
+              :class="
+                officerRatingData.fifthStar
+                  ? 'i-mdi-star'
+                  : 'i-mdi-star-outline'
+              "
+            />
+          </button>
+        </div>
       </div>
       <form
         v-if="selectedRating !== ''"
