@@ -261,6 +261,11 @@ export const daftarNamaFakultasUnpad = defineStore("namaFakultas", () => {
       namaFakultas: "Fakultas Teknik Geologi",
       singkatan: "ftg",
     },
+    {
+      id: 500,
+      namaFakultas: "Unpad Press",
+      singkatan: "unpad_press"
+    }
   ];
 
   const singkatanUpper = (id: number) => {
