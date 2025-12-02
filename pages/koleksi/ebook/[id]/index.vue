@@ -1,8 +1,4 @@
 <script setup>
-definePageMeta({
-  middleware: ["authentication-check"],
-});
-
 const route = useRoute();
 const { getItemById } = useDirectusItems();
 const { cariFakultasAbbrevation } = daftarNamaFakultasUnpad();
@@ -12,6 +8,19 @@ const item = await getItemById({
   collection: "koleksi_ebook",
   id: route.params.id,
 });
+
+if (item.access_type === "login") {
+  definePageMeta({
+    middleware: ["authentication-check"],
+  });
+} else if (item.access_type === "closed") {
+  throw createError({
+    statusCode: 403,
+    statusMessage: "Akses e-book ini ditutup.",
+  });
+} else {
+  console.log("OK");
+}
 
 // helpers for drive urls
 const extractDriveId = (url) => {
