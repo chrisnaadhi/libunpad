@@ -114,4 +114,31 @@ export default {
   ebookDetailAccess:
     "Anda perlu masuk untuk mengakses konten lengkap dari e-book ini. Silakan masuk terlebih dahulu menggunakan ID PAuS Anda.",
   ebookDetailView: "Baca E-Book",
+
+  // Courses Page - /courses
+  coursesDidYouMean: "Apakah yang Anda maksud",
+  coursesPostgradAcademy: "Postgrad Academy",
+  coursesPostgradDescription:
+    "Jelajahi program pascasarjana dan keunggulan akademik kami di Postgrad Academy Universitas Padjadjaran.",
+  coursesYesTakeMeThere: "Ya, Bawa Saya Kesana",
+  coursesOr: "ATAU",
+  coursesLearningPlatform: "Platform Pembelajaran",
+  coursesDiscoverLuhung: "Temukan Lebih Banyak Kursus di",
+  coursesLuhungDescription:
+    "Luhung Universitas Padjadjaran menawarkan berbagai kursus online, program pelatihan, dan peluang pengembangan profesional. Perluas pengetahuan dan keterampilan Anda dengan platform pembelajaran komprehensif kami.",
+  coursesDiverseCatalog: "Katalog Kursus Beragam",
+  coursesDiverseCatalogDesc: "Akses ratusan kursus di berbagai disiplin ilmu",
+  coursesFlexibleLearning: "Pembelajaran Fleksibel",
+  coursesFlexibleLearningDesc: "Belajar sesuai kecepatan Anda dengan materi online",
+  coursesExpertInstructors: "Instruktur Ahli",
+  coursesExpertInstructorsDesc: "Belajar dari dosen berpengalaman dan profesional industri",
+  coursesExploreLuhung: "Jelajahi Luhung",
+  coursesLuhungUnpad: "Luhung Unpad",
+  coursesLuhungTagline: "Gerbang Anda Menuju Pembelajaran Seumur Hidup",
+  coursesOnlineCourses: "Kursus Online",
+  coursesOnlineCoursesDesc: "Akses materi pendidikan berkualitas kapan saja, di mana saja",
+  coursesCertifications: "Sertifikasi",
+  coursesCertificationsDesc: "Dapatkan sertifikat yang diakui setelah menyelesaikan kursus",
+  coursesCommunity: "Komunitas",
+  coursesCommunityDesc: "Bergabunglah dengan komunitas pembelajaran yang dinamis dari mahasiswa dan profesional",
 };

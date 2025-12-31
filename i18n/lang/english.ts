@@ -113,4 +113,31 @@ export default {
   ebookDetailAccess:
     "You need to log in to access the full content of this e-book. Please log in first using your PAuS ID.",
   ebookDetailView: "Read E-Book",
+
+  // Courses Page - /courses
+  coursesDidYouMean: "Did you mean",
+  coursesPostgradAcademy: "Postgrad Academy",
+  coursesPostgradDescription:
+    "Explore our comprehensive postgraduate programs and academic excellence at Universitas Padjadjaran's Postgraduate Academy.",
+  coursesYesTakeMeThere: "Yes, Take Me There",
+  coursesOr: "OR",
+  coursesLearningPlatform: "Learning Platform",
+  coursesDiscoverLuhung: "Discover More Courses at",
+  coursesLuhungDescription:
+    "Luhung Universitas Padjadjaran offers a wide range of online courses, training programs, and professional development opportunities. Expand your knowledge and skills with our comprehensive learning platform.",
+  coursesDiverseCatalog: "Diverse Course Catalog",
+  coursesDiverseCatalogDesc: "Access hundreds of courses across various disciplines",
+  coursesFlexibleLearning: "Flexible Learning",
+  coursesFlexibleLearningDesc: "Learn at your own pace with online materials",
+  coursesExpertInstructors: "Expert Instructors",
+  coursesExpertInstructorsDesc: "Learn from experienced faculty and industry professionals",
+  coursesExploreLuhung: "Explore Luhung",
+  coursesLuhungUnpad: "Luhung Unpad",
+  coursesLuhungTagline: "Your Gateway to Lifelong Learning",
+  coursesOnlineCourses: "Online Courses",
+  coursesOnlineCoursesDesc: "Access quality education materials anytime, anywhere",
+  coursesCertifications: "Certifications",
+  coursesCertificationsDesc: "Earn recognized certificates upon course completion",
+  coursesCommunity: "Community",
+  coursesCommunityDesc: "Join a vibrant learning community of students and professionals",
 };
