@@ -120,59 +120,9 @@ const kirimPengajuan = async () => {
   } else if (isDatePast(tanggalPeminjaman.value)) {
     isUploading.value = false;
     alert("Tanggal peminjaman tidak boleh tanggal sebelum hari ini!");
-  }
-  // else if (roomExist) {
-  //   alert("Ruangan sudah terpakai pada jam tersebut!");
-  // }
-  else if (fileSurat.value === null) {
-    let items = {
-      nomor_induk: npm.value,
-      nama_lengkap: namaLengkap.value,
-      unit_pengajuan: unitPengajuan.value,
-      email: email.value,
-      kontak: kontak.value,
-      judul_kegiatan: judulKegiatan.value,
-      nama_ruangan: namaRuangan.value,
-      tanggal_peminjaman: tanggalPeminjaman.value,
-      jam_mulai_peminjaman: jamMulai.value,
-      jam_selesai_peminjaman: jamSelesai.value,
-      keterangan: tujuanPeminjaman.value,
-      status_peminjaman: "pending",
-    };
-    if (emailValidation) {
-      try {
-        await createItems({ collection: "peminjaman_ruangan", items });
-        textNotif.value = "text-green";
-        notification.value = "Berhasil diajukan";
-        namaLengkap.value = ref("");
-        unitPengajuan.value = "";
-        email.value = data.value.user.email;
-        kontak.value = "";
-        namaRuangan.value = "";
-        tanggalPeminjaman.value = "";
-        jamMulai.value = "";
-        jamSelesai.value = "";
-        tujuanPeminjaman.value = "";
-        fileSurat.value = null;
-        alert("Berhasil diajukan");
-        setTimeout(async () => {
-          notification.value =
-            "Silahkan isi seluruh form sesuai dengan data asli";
-          textNotif.value = "text-dark";
-          await navigateTo({ path: "/pengajuan/peminjaman-ruangan/data" });
-        }, 1000);
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      textNotif.value = "text-red-7";
-      notification.value = "Email tidak valid, silahkan coba lagi";
-      setTimeout(async () => {
-        notification.value =
-          "Silahkan isi seluruh form sesuai dengan data asli";
-        textNotif.value = "text-dark";
-      }, 5000);
-    }
+  } else if (fileSurat.value === null) {
+    isUploading.value = false;
+    alert("Mohon unggah surat pengajuan!");
   } else if (fileSurat.value !== null) {
     formData.append("file", fileSurat.value);
     notification.value = "Sedang mengunggah berkas... Mohon tunggu sebentar";
@@ -404,13 +354,14 @@ const kirimPengajuan = async () => {
             />
           </div>
           <div class="input-form">
-            <label for="fileSurat">Surat Pengajuan :</label>
+            <label for="fileSurat">Surat Pengajuan <span class="text-red-6">*</span> :</label>
             <input
               type="file"
               name="fileSurat"
               id="fileSurat"
               @change="uploadSurat"
               accept="application/pdf"
+              required
             />
           </div>
 
