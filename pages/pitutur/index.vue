@@ -8,31 +8,31 @@ const router = useRouter();
 
 /* demo chat simulation state */
 const demoMessages = ref([
-  { from: "user", text: "Apa itu “Pitutur” dalam konteks perpustakaan?" },
+  { from: "user", text: "Apa saja buku tentang kecerdasan buatan yang tersedia?" },
   {
     from: "bot",
-    text: "Pitutur adalah AI berbasis kearifan Sunda, siap memandumu menemukan naskah, buku, dan ilmu dengan cara yang hangat dan bijak.",
+    text: "Saya menemukan beberapa judul terkait AI di koleksi kami. Apakah Anda ingin saya tampilkan daftarnya?",
   },
 ]);
 const demoInput = ref("");
 const demoReply = ref("Silakan ketik pertanyaanmu...");
 
 const demoResponses = [
-  "Punten, koleksi naskah Sunda di perpustakaan kami di antarana: Carita Parahyangan, Siksa Kanda Ng Kawih, jeung Fragmen Carita Pantun. Badé milari anu mana?",
-  "Pitutur tiasa ngabantosan milarian rujukan tentang upacara adat atawa kasenian wayang golek. Mangga, kéngingkeun patalékan anjeun.",
-  "Punten, aya naskah kuno “Bujangga Manik” anu nyaritakeun perjalanan suci. Itu tiasa diaksés dina form digital.",
-  "Pitutur mendeteksi minat anjeun kana budaya Sunda. Aya ogé kumpulan wawacan jeung pupuh. Hoyong terang langkung lengkep?",
+  "Tentu! Saya dapat membantu Anda menemukan buku, jurnal, atau referensi yang sesuai. Silakan beritahu topik yang ingin Anda cari.",
+  "Koleksi digital kami mencakup ribuan judul dari berbagai bidang ilmu. Apa yang ingin Anda pelajari hari ini?",
+  "Saya dapat membantu Anda dengan pencarian koleksi, perpanjangan peminjaman, atau rekomendasi bacaan. Apa yang bisa saya bantu?",
+  "Berdasarkan pertanyaan Anda, saya menemukan beberapa referensi relevan di katalog kami. Ingin saya tampilkan hasilnya?",
 ];
 
 function pickResponse(query) {
   let reply = demoResponses[Math.floor(Math.random() * demoResponses.length)];
   const low = query.toLowerCase();
-  if (low.includes("naskah") || low.includes("sunda")) {
+  if (low.includes("buku") || low.includes("koleksi")) {
     reply =
-      "Punten, koleksi naskah Sunda nu aya: Carita Parahyangan, Fragmen Carita Pantun, jeung Amanat Galunggung. Eta sadaya tos didigitalisasi. Aya anu hoyong ditingali?";
+      "Perpustakaan kami memiliki koleksi lebih dari 50.000 judul buku, jurnal, dan e-book. Silakan beritahu topik atau judul yang Anda cari!";
   } else if (low.includes("halo") || low.includes("hai")) {
     reply =
-      "Halo! Aya anu tiasa dibantos? Abdi Pitutur, siap ngabantosan anjeun.";
+      "Halo! Saya Pitutur, asisten pustakawan digital Anda. Ada yang bisa saya bantu hari ini?";
   }
   return reply;
 }
@@ -61,7 +61,7 @@ function sendDemo() {
 }
 
 function simulateAsk() {
-  const q = "Apa saja koleksi naskah Sunda?";
+  const q = "Apa saja buku yang direkomendasikan untuk pemula?";
   demoInput.value = q;
   sendDemo();
   // also scroll (optional)
@@ -105,8 +105,9 @@ onMounted(() => {
           Apa itu Pitutur?
         </h1>
         <p class="mt-4 text-xl text-gray-700 max-w-xl">
-          Pitutur adalah pustakawan digital yang menggunakan kecerdasan buatan
-          untuk membantu Anda menemukan koleksi Kandaga dengan cepat dan ramah.
+          Pitutur adalah asisten pustakawan digital berbasis AI yang siap
+          membantu Anda menemukan koleksi, menjawab pertanyaan apa saja, dan
+          mendukung kebutuhan riset Anda — kapan saja dan di mana saja.
         </p>
         <div class="mt-6">
           <NuxtLink
@@ -128,32 +129,32 @@ onMounted(() => {
 
     <!-- features grid -->
     <div class="section-header">
-      <h2>· Tri Pustaka Pitutur ·</h2>
-      <p>silih asah, silih asih, silih asuh — dalam layanan cerdas</p>
+      <h2>· Kemampuan Pitutur ·</h2>
+      <p>Asisten cerdas yang siap membantu semua kebutuhan perpustakaan Anda</p>
     </div>
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon"><i class="i-mdi-brain"></i></div>
-        <h3>Silih Asah <span>asah</span></h3>
+        <div class="feature-icon"><i class="i-mdi-book-search"></i></div>
+        <h3>Temukan Koleksi <span>cari</span></h3>
         <p>
-          Mengasah wawasan dengan rekomendasi personal, riset akademik, dan
-          referensi lintas budaya Sunda &amp; dunia.
+          Cari buku, jurnal, e-book, dan berbagai sumber daya perpustakaan
+          dengan mudah menggunakan bahasa alami.
         </p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon"><i class="i-mdi-heart"></i></div>
-        <h3>Silih Asih <span>asih</span></h3>
+        <div class="feature-icon"><i class="i-mdi-chat-question"></i></div>
+        <h3>Tanya Apa Saja <span>tanya</span></h3>
         <p>
-          Ramah, empati, dan selalu menghargai setiap pertanyaan. Dibangun
-          dengan prinsip kasih dalam melayani.
+          Ajukan pertanyaan tentang topik apapun — akademik, sains, sejarah,
+          teknologi, seni, dan banyak lagi.
         </p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon"><i class="i-mdi-handshake"></i></div>
-        <h3>Silih Asuh <span>asuh</span></h3>
+        <div class="feature-icon"><i class="i-mdi-lightbulb"></i></div>
+        <h3>Rekomendasi Cerdas <span>saran</span></h3>
         <p>
-          Membimbing pengguna dari muda hingga dewasa, menjaga kelestarian
-          naskah kuno dan nilai luhur.
+          Dapatkan rekomendasi bacaan yang dipersonalisasi sesuai minat dan
+          kebutuhan riset Anda.
         </p>
       </div>
     </div>
@@ -162,14 +163,14 @@ onMounted(() => {
     <div class="demo-section" id="demoSection">
       <div class="demo-inner">
         <div class="demo-text">
-          <h3><i class="i-mdi-feather"></i> Tanyakan pada Pitutur</h3>
+          <h3><i class="i-mdi-robot"></i> Tanyakan pada Pitutur</h3>
           <p>
-            “Naon éta naskah Siksa Kanda Ng Kawih?” — coba tanyakan sekarang,
-            rasakan bimbingan layaknya seorang sesepuh.
+            "Rekomendasikan buku tentang machine learning untuk pemula" —
+            coba sekarang dan rasakan kemudahan berinteraksi dengan pustakawan AI.
           </p>
           <p style="font-size: 0.95rem; opacity: 0.8">
-            <i class="i-mdi-map"></i> Menjawab dalam bahasa Sunda &amp;
-            Indonesia, merujuk ke koleksi digital perpustakaan.
+            <i class="i-mdi-message-text"></i> Menjawab dalam Bahasa Indonesia,
+            siap membantu kebutuhan riset dan pencarian koleksi Anda.
           </p>
         </div>
         <div class="chat-window">
@@ -202,10 +203,10 @@ onMounted(() => {
     <!-- closing cultural remark -->
     <div class="closing-remark">
       <p>
-        <i class="i-mdi-format-quote-open"></i> Pitutur: jembatan antara lontar
-        kuno dan kecerdasan masa depan.
+        <i class="i-mdi-format-quote-open"></i> Pitutur: asisten pustakawan
+        cerdas yang selalu siap membantu Anda belajar dan berkembang.
       </p>
-      <p>Hadir untuk setiap warga perpustakaan, kapanpun, dimanapun.</p>
+      <p>Hadir untuk semua pengguna perpustakaan, kapanpun, dimanapun.</p>
     </div>
   </main>
 </template>
