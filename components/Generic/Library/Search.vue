@@ -9,12 +9,15 @@ const showSearchResults = ref(false);
 const fetchLibraryItems = async () => {
   showSearchResults.value = true;
   if (searchValue.value.length > 1) {
-    const getData = await $fetch("/api/v1/koleksi/ulims", {
+    const getData = await $fetch("/api/v1/koleksi/pustaka", {
       params: {
         search: searchValue.value,
+        glam_type: "library",
+        status: "published",
+        access_level: "public",
       },
     });
-    libraryItems.value = getData.results;
+    libraryItems.value = getData.data;
   } else {
     libraryItems.value = [];
   }
@@ -76,8 +79,7 @@ watch(searchValue, async (newValue, oldValue) => {
           <div v-for="library in libraryItems" class="px-3 py-2">
             <NuxtLink
               class="no-underline"
-              :to="`https://kandaga.unpad.ac.id:8010/index.php?p=show_detail&id=${library.biblioId}`"
-              target="_blank"
+              :to="`/koleksi/pustaka/${library.id}`"
             >
               <h1
                 class="text-gray-5 text-xl transition-all-500 hover:text-unpad"
@@ -86,11 +88,10 @@ watch(searchValue, async (newValue, oldValue) => {
               </h1>
             </NuxtLink>
             <p class="text-xs text-gray">
-              {{ library.author }}
+              {{ library.collection_code ?? "" }}
               <span>
                 <NuxtLink
-                  :to="`https://kandaga.unpad.ac.id:8010/index.php?p=show_detail&id=${library.biblioId}`"
-                  target="_blank"
+                  :to="`/koleksi/pustaka/${library.id}`"
                   >Lihat Koleksi</NuxtLink
                 >
               </span>

@@ -29,31 +29,32 @@ const submitSearch = async (keyword) => {
   window.scrollTo(0, 0);
 
   try {
-    const { data: searchResults } = await useFetch(
-      search.baseURLSearch + keyword
-    );
-
-    const { data: getKeywordDefinition } = await useFetch(
-      search.baseURLSearch + keyword
-    );
-
-    const { data: ulimsData } = await useFetch("/api/v1/koleksi/ulims", {
-      query: {
-        search: keyword === "Universitas Padjadjaran" ? "" : keyword,
-      },
-    });
-
+    const wikiResults = await $fetch(search.baseURLSearch + keyword);
     search.isResult = true;
-    search.wikipediaDefinition = getKeywordDefinition?.value?.query?.search[0];
-
-    if (ulimsData.value) {
-      search.ulimsRes = ulimsData.value.results;
-    }
-    suggestion.value = searchResults.value.query.searchinfo?.suggestion;
+    search.wikipediaDefinition = wikiResults?.query?.search[0];
+    suggestion.value = wikiResults?.query?.searchinfo?.suggestion;
     loadingWiki.value = false;
-    loadingFederated.value = false;
   } catch (error) {
     search.isResult = false;
+    loadingWiki.value = false;
+    console.log(error);
+  }
+
+  try {
+    const pustakaData = await $fetch("/api/v1/koleksi/pustaka", {
+      query: {
+        search: keyword === "Universitas Padjadjaran" ? "" : keyword,
+        status: "published",
+        access_level: "public",
+      },
+    });
+    if (pustakaData) {
+      search.pustakaRes = pustakaData?.data;
+    }
+    loadingFederated.value = false;
+  } catch (error) {
+    search.pustakaRes = [];
+    loadingFederated.value = false;
     console.log(error);
   }
 
@@ -62,7 +63,7 @@ const submitSearch = async (keyword) => {
       collection: "koleksi_gallery",
       params: {
         search: keyword,
-        limit: 3,
+        limit: 12,
       },
     });
 
@@ -70,7 +71,7 @@ const submitSearch = async (keyword) => {
       collection: "koleksi_museum",
       params: {
         search: keyword,
-        limit: 3,
+        limit: 12,
       },
     });
   } catch (error) {
@@ -82,7 +83,7 @@ const submitSearch = async (keyword) => {
     repoSearch.value = await getItems({
       collection: "tbtMhsUploadThesis",
       params: {
-        limit: 8,
+        limit: 12,
         filter: {
           _or: [
             {
@@ -111,19 +112,18 @@ const submitSearch = async (keyword) => {
   }
 
   try {
-    const { data: scopusResults } = await useFetch(scopus.baseURLSearch, {
+    const scopusResults = await $fetch(scopus.baseURLSearch, {
       query: {
         query: search.keywords,
-        count: 6,
+        count: 12,
         apiKey: "bffdfae1414b050c3f0027d3c6253301",
       },
     });
-
     search.isResult = true;
-    scopus.scopusObjects = scopusResults.value;
+    scopus.scopusObjects = scopusResults;
     loadingScopus.value = false;
   } catch (err) {
-    search.isResult = false;
+    loadingScopus.value = false;
   }
 };
 
@@ -293,70 +293,58 @@ onMounted(() => {
     <article v-show="search.keywords !== ''">
       <h3>Kandaga Federated Search</h3>
       <div
-        v-if="loadingFederated === false && search.ulimsRes?.length > 0"
+        v-if="loadingFederated === false && search.pustakaRes?.length > 0"
         class="flex flex-col gap-3 mt-3 lg:(grid grid-cols-3)"
       >
-        <div v-for="item in search.ulimsRes">
+        <div v-for="item in search.pustakaRes" :key="item.id">
           <GenericBaseCard>
             <div
               class="flex flex-col justify-between bg-white shadow shadow-unpad p-5 rounded-lg w-full h-full"
             >
               <div class="flex gap-3">
                 <div class="py-2 w-full max-w-40">
-                  <p
-                    class="bg-unpad text-white text-sm rounded mb-2 text-center"
-                  >
-                    {{ item?.gmd }}
-                  </p>
                   <NuxtImg
-                    :src="
-                      item?.image
-                        ? `https://kandaga.unpad.ac.id:8011/lib/minigalnano/createthumb.php?filename=../../images/docs/${item?.image}`
-                        : '/images/default_cover.png'
-                    "
-                    class="w-full h-60 border border-unpad object-scale-down px-4"
+                    :src="item?.thumbnail ?? '/images/default_cover.png'"
+                    class="w-full h-60 border border-unpad object-cover px-1"
                     format="webp"
-                  >
-                    <p v-show="item?.image === null" class="text-center">
-                      No Image
-                    </p>
-                  </NuxtImg>
+                  />
                 </div>
                 <div class="flex flex-col gap-2 mt-2 w-full">
                   <div class="box-content">
                     <p class="box-column">Judul :</p>
                     <p class="pl-2 pt-1">
-                      {{
-                        item?.title !== null
-                          ? trimTitle(item?.title, 50)
-                          : "Belum ada data"
-                      }}
+                      {{ item?.title ? trimTitle(item.title, 50) : "Belum ada data" }}
                     </p>
                   </div>
-                  <div class="box-content">
+                  <div class="box-content" v-if="item?.creator?.creator_name">
                     <p class="box-column">Pengarang :</p>
-                    <p class="pl-2 pt-1">
-                      {{ trimTitle(item?.author, 50) ?? "Pengarang" }}
-                    </p>
+                    <p class="pl-2 pt-1">{{ item.creator.creator_name }}</p>
                   </div>
                   <div class="box-content">
+                    <p class="box-column">Kode Koleksi :</p>
+                    <p class="pl-2 pt-1">{{ item?.collection_code ?? "-" }}</p>
+                  </div>
+                  <div class="box-content" v-if="item?.items?.length">
                     <p class="box-column">Lokasi :</p>
-                    <p class="pl-2 pt-1">
-                      {{ item?.node ?? "-" }}
+                    <p class="pl-2 pt-1 text-xs">
+                      {{ [...new Set(item.items.map(i => i.location).filter(Boolean))].join(", ") || "-" }}
                     </p>
                   </div>
                   <div class="box-content">
-                    <p class="box-column">Nomor Panggil :</p>
+                    <p class="box-column">Eksemplar :</p>
+                    <p class="pl-2 pt-1">{{ item?.items?.length ?? 0 }} item</p>
+                  </div>
+                  <div class="box-content">
+                    <p class="box-column">Deskripsi :</p>
                     <p class="pl-2 pt-1">
-                      {{ item?.callNumber ?? "No. Panggil" }}
+                      {{ item?.description ? trimTitle(item.description, 100) : "-" }}
                     </p>
                   </div>
                 </div>
               </div>
               <div class="flex mt-2 text-center">
                 <NuxtLink
-                  :href="`https://kandaga.unpad.ac.id:8011/index.php?p=show_detail&id=${item?.biblioId}`"
-                  target="_blank"
+                  :to="`/koleksi/pustaka/${item?.id}`"
                   class="btn bg-unpad py-1 text-white w-full"
                 >
                   Lihat Koleksi
@@ -366,7 +354,7 @@ onMounted(() => {
           </GenericBaseCard>
         </div>
       </div>
-      <div v-else-if="search.ulimsRes?.length === 0">
+      <div v-else-if="search.pustakaRes?.length === 0">
         <h4 class="text-red text-center">Tidak ditemukan</h4>
       </div>
       <div v-else-if="loadingFederated === true">

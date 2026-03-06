@@ -4,14 +4,14 @@ const route = useRoute();
 const autoValue = ref(true);
 
 const { data: bookItems } = await useFetch("/api/v1/koleksi/buku");
-const { data: unpadBooks } = await useFetch("/api/v1/koleksi/ulims");
+const { data: unpadBooks } = await useFetch("/api/v1/koleksi/pustaka", {
+  query: { glam_type: "library", status: "published", access_level: "public" },
+});
 const options = {
   rewind: true,
   autoplay: autoValue.value,
   interval: 2500,
 };
-
-console.log(unpadBooks.value);
 </script>
 
 <template>
@@ -19,25 +19,20 @@ console.log(unpadBooks.value);
     <div class="my-5 flex flex-col gap-5 w-full lg:(grid grid-cols-3 gap-3)">
       <div
         class="bg-gray-1 p-5 rounded flex w-full h-full gap-5"
-        v-for="koleksi in unpadBooks?.results"
+        v-for="koleksi in unpadBooks?.data"
+        :key="koleksi?.id"
       >
-        <NuxtLink :to="'/library/biblio/' + koleksi?.biblioId">
+        <NuxtLink :to="'/koleksi/pustaka/' + koleksi?.id">
           <NuxtImg
-            :src="
-              koleksi?.image === undefined ||
-              koleksi?.image === null ||
-              koleksi?.image === ''
-                ? '/images/default_cover.png'
-                : `https://kandaga.unpad.ac.id:8011/lib/minigalnano/createthumb.php?filename=images/docs/${koleksi.image}&width=200`
-            "
+            :src="koleksi?.thumbnail ?? '/images/default_cover.png'"
             class="w-full h-40 object-cover rounded-lg lg:(w-50 h-60) transition duration-300 ease-in-out hover:scale-110"
-            :alt="koleksi.title"
+            :alt="koleksi?.title"
           />
         </NuxtLink>
         <div class="flex flex-col justify-between gap-3 w-full h-full">
           <div class="flex flex-col gap-3">
             <NuxtLink
-              :to="'/library/biblio/' + koleksi?.biblioId"
+              :to="'/koleksi/pustaka/' + koleksi?.id"
               class="no-underline w-full"
             >
               <h4
@@ -47,28 +42,15 @@ console.log(unpadBooks.value);
                 {{ trimTitle(koleksi?.title, 25) }}
               </h4>
             </NuxtLink>
-            <div class="flex w-full gap-4 pl-2">
-              <div>
-                <p class="font-semibold text-gray-5">Penulis</p>
-                <p class="font-semibold text-gray-5">ISBN</p>
-                <p class="font-semibold text-gray-5">Klasifikasi</p>
-                <p class="font-semibold text-gray-5">Lokasi</p>
-              </div>
-              <div>
-                <p :title="koleksi?.author">
-                  : {{ trimTitle(koleksi?.author, 20) ?? "Belum ada data" }}
-                </p>
-                <p>: {{ koleksi?.isbnIssn ?? "Tidak diketahui" }}</p>
-                <p>: {{ koleksi?.classification ?? "Belum ada data" }}</p>
-                <p>: {{ koleksi?.node ?? "Belum ada data" }}</p>
-              </div>
-            </div>
+            <p class="text-sm text-gray-5 text-justify pl-2">
+              {{ koleksi?.description ? trimTitle(koleksi.description, 80) : "-" }}
+            </p>
+            <p class="text-xs text-gray-4 pl-2">{{ koleksi?.collection_code ?? "" }}</p>
           </div>
 
           <NuxtLink
             class="btn bg-unpad text-white text-center py-1"
-            :to="`https://kandaga.unpad.ac.id:8011/index.php?p=show_detail&id=${koleksi?.biblioId}`"
-            target="_blank"
+            :to="'/koleksi/pustaka/' + koleksi?.id"
           >
             Lihat</NuxtLink
           >

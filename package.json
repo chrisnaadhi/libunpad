@@ -9,26 +9,26 @@
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.2.3",
-    "@nuxt/image": "^1.10.0",
-    "@nuxtjs/i18n": "^9.0.0",
-    "@nuxtjs/plausible": "^1.2.0",
-    "@nuxtjs/turnstile": "^1.0.0",
-    "@sidebase/nuxt-auth": "^0.10.0",
-    "@unocss/nuxt": "^66.0.0",
-    "dayjs-nuxt": "^2.1.7",
-    "drizzle-kit": "^0.30.0",
-    "nuxt": "^3.17.5"
+    "@nuxt/image": "^2.0.0",
+    "@nuxtjs/i18n": "^10.2.3",
+    "@nuxtjs/plausible": "^3.0.2",
+    "@nuxtjs/turnstile": "^1.1.1",
+    "@sidebase/nuxt-auth": "^1.2.0",
+    "@unocss/nuxt": "^66.6.5",
+    "dayjs-nuxt": "^2.1.11",
+    "drizzle-kit": "^0.31.9",
+    "nuxt": "^4.3.1"
   },
   "dependencies": {
-    "@directus/sdk": "^19.0.0",
-    "@pinia/nuxt": "^0.11.0",
+    "@directus/sdk": "^21.2.0",
+    "@pinia/nuxt": "^0.11.3",
     "@popperjs/core": "^2.11.8",
     "@splidejs/vue-splide": "^0.6.12",
-    "drizzle-orm": "^0.40.0",
+    "drizzle-orm": "^0.45.1",
     "easyqrcodejs": "^4.6.2",
-    "mysql2": "^3.14.1",
+    "mysql2": "^3.19.0",
     "nuxt-directus": "^5.7.0",
-    "pinia": "^3.0.0"
+    "pinia": "^3.0.4"
   },
   "overrides": {
     "vue": "latest",
