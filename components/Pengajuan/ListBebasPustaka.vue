@@ -35,7 +35,7 @@ const totalData = await getItems({
 const gapData = Math.floor(totalData.length / 10) * 10;
 
 if (listData.value === null) {
-  listData.value = fetchDataPengajuan();
+  await fetchDataPengajuan();
 }
 
 const nextData = () => {
@@ -52,23 +52,28 @@ const prevData = () => {
   }
 };
 
-const { data: dataPetugas } = await useFetch(
+const { data: dataPetugas, error: petugasError } = await useFetch(
   `${config.public.directus.url}users`,
   {
     headers: {
       Authorization: `Bearer ${config.public.directus.token}`,
     },
-    pick: ["data", ["id", "first_name", "last_name"]],
+    transform: (res) => res?.data ?? [],
   }
 );
 
+console.log(dataPetugas.value)
+
+if (petugasError.value) {
+  console.warn("[ListBebasPustaka] Failed to fetch petugas:", petugasError.value);
+}
+
 const searchPetugas = (idPetugas) => {
-  const petugas = dataPetugas.value.data.find((nama) => nama.id === idPetugas);
-  if (!petugas) {
-    return "Belum diproses";
-  }
-  const objPetugas = Object.assign({}, petugas);
-  return `${objPetugas.first_name} ${objPetugas.last_name}`;
+  if (!idPetugas) return "Belum diproses";
+  const normalised = idPetugas.toUpperCase();
+  const petugas = dataPetugas.value?.find((user) => user.id.toUpperCase() === normalised);
+  if (!petugas) return "Belum diproses";
+  return `${petugas.first_name} ${petugas.last_name}`;
 };
 
 const convertTimeZone = (time) => {

@@ -152,175 +152,256 @@ const kirimPengajuan = async () => {
 </script>
 
 <template>
-  <section>
-    <div class="max-w-3xl ma text-center">
-      <h1 class="text-center">Pengajuan Pemeriksaan Turnitin</h1>
-      <p class="text-sm">
-        Form pengajuan pemeriksaan turnitin yang bisa digunakan oleh seluruh
-        Mahasiswa, Dosen maupun Tenaga Pendidik Universitas Padjadjaran.
-        Silahkan unggah berkas yang ingin diperiksa dalam format word processor
-        (DOCX, DOC, ODT atau ODF), <br />
-        <span class="font-semibold text-red-6">
-          tidak boleh dalam bentuk PDF</span
-        >.
-      </p>
-      <p class="text-sm">
-        <span class="font-semibold"
-          >Untuk meminimalisir angka similiaritas</span
-        >
-        maka tidak perlu melampirkan kata pengantar, daftar isi, daftar gambar,
-        daftar tabel, lembar pengesahan, dan pernyataan. Silahkan lampirkan saja
-        Bab Pendahuluan hingga Daftar Pustaka
-      </p>
-      <p class="my-3">
-        Kolom ( <span class="text-red-6">*</span> ) wajib diisi
-      </p>
-      <p class="text-sm">
-        Ada kendala ? Silahkan hubungi penanggungjawab Turnitin Kami :
-      </p>
-      <div>
-        <p>No. HP : <a href="https://wa.me/6282315798979">082315798979</a></p>
-        <p>
-          E-mail :
-          <a href="mailto:perpustakaan@unpad.ac.id">perpustakaan@unpad.ac.id</a>
+  <main class="min-h-screen bg-gray-50">
+
+    <!-- Header Banner -->
+    <div class="bg-gradient-to-br from-unpad to-kandaga">
+      <div class="max-w-3xl ma px-4 py-8">
+        <div class="flex items-center gap-3 mb-1">
+          <div class="i-mdi-file-document-edit-outline w-7 h-7 text-white/80 shrink-0" />
+          <h1 class="text-white text-xl sm:text-2xl font-700 m-0">
+            Pengajuan Pemeriksaan Turnitin
+          </h1>
+        </div>
+        <p class="text-white/70 text-sm mt-2">
+          Tersedia untuk Mahasiswa, Dosen, dan Tenaga Pendidik Universitas Padjadjaran.
         </p>
-      </div>
-      <div class="my-5">
-        <NuxtLink to="/pengajuan">
-          <button class="btn py-0 bg-unpad text-white">
-            &leftarrow; Kembali
-          </button>
+        <NuxtLink
+          to="/pengajuan"
+          class="inline-flex items-center gap-1.5 mt-4 text-white/80 hover:text-white text-sm transition-colors-200"
+        >
+          <div class="i-mdi-arrow-left w-4 h-4" />
+          Kembali ke Pengajuan
         </NuxtLink>
       </div>
     </div>
 
-    <form @submit.prevent="kirimPengajuan" class="p-7 max-w-3xl ma">
-      <fieldset :disabled="isSubmitting" class="form-fieldset">
-      <div class="input-form">
-        <label for="npm">NIP / NPM <span class="text-red-6">*</span> :</label>
-        <input type="text" id="npm" v-model="npm" required />
+    <!-- Content -->
+    <div class="max-w-3xl ma px-4 py-6 flex flex-col gap-4">
+
+      <!-- Info panels -->
+      <div class="section-card">
+        <div class="section-card-header">
+          <div class="i-mdi-information-outline w-5 h-5 text-unpad shrink-0" />
+          <h2>Panduan & Informasi</h2>
+        </div>
+        <div class="p-5 sm:p-6 flex flex-col gap-3">
+
+          <div class="info-box bg-orange-50 border-orange-2">
+            <div class="i-mdi-file-word-outline w-4 h-4 shrink-0 text-orange-5 mt-0.5" />
+            <div class="text-sm text-gray-7 flex flex-col gap-1">
+              <p>
+                Unggah berkas dalam format word processor
+                (<span class="font-semibold">DOCX, DOC, ODT, atau ODF</span>).
+                <span class="text-red-6 font-semibold">Tidak boleh dalam bentuk PDF.</span>
+              </p>
+              <p>
+                Untuk meminimalisir angka similiaritas, tidak perlu melampirkan kata pengantar,
+                daftar isi, daftar gambar, daftar tabel, lembar pengesahan, dan pernyataan.
+              </p>
+            </div>
+          </div>
+
+          <div class="info-box bg-blue-50 border-blue-2">
+            <div class="i-mdi-book-open-variant w-4 h-4 shrink-0 text-blue-5 mt-0.5" />
+            <p class="text-xs text-gray-6">
+              Panduan pengutipan tersedia di
+              <a
+                href="https://penerbitdeepublish.com/wp-content/uploads/2017/01/Pedoman-Menulis-Buku-Tanpa-Plagiarisme-oleh-Penerbit-Deepublish.pdf"
+                target="_blank"
+                class="text-blue-6 font-semibold underline"
+              >E-Book Pedoman Menulis Tanpa Plagiarisme</a>.
+              Pastikan similarity &lt; 20%.
+            </p>
+          </div>
+
+          <div class="info-box bg-gray-50 border-gray-2 flex-col items-start gap-2">
+            <div class="flex items-center gap-2">
+              <div class="i-mdi-list-box-outline w-4 h-4 shrink-0 text-gray-5" />
+              <p class="text-xs font-semibold text-gray-7">Panduan Pemeriksaan Turnitin:</p>
+            </div>
+            <ol class="text-xs text-gray-6 list-decimal pl-5 flex flex-col gap-1">
+              <li>Wajib melampirkan Cover dari karya tersebut</li>
+              <li>Kata-kata yang diwarnai bersumber pada website yang ada pada bagian akhir report (sesuai warna dan nomornya)</li>
+              <li>Kalimat yang diwarnai sebaiknya diganti dengan parafrase yang memiliki arti sama</li>
+              <li>Pengutipan langsung sebaiknya menggunakan tanda "..." (penulis, tahun)</li>
+              <li>Persentase sebaiknya di bawah 20%; bila lebih, perbaiki dan periksakan kembali</li>
+              <li>Surat pernyataan, kata pengantar, dan daftar isi sebaiknya tidak disertakan</li>
+            </ol>
+          </div>
+
+          <div class="info-box bg-gray-50 border-gray-2">
+            <div class="i-mdi-phone-outline w-4 h-4 shrink-0 text-unpad mt-0.5" />
+            <div class="text-sm flex flex-col gap-0.5">
+              <p class="font-semibold text-gray-7">Ada kendala? Hubungi kami:</p>
+              <p class="text-gray-6">No. HP: <a href="https://wa.me/6282315798979" class="text-unpad font-medium">082315798979</a></p>
+              <p class="text-gray-6">E-mail: <a href="mailto:perpustakaan@unpad.ac.id" class="text-unpad font-medium">perpustakaan@unpad.ac.id</a></p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="input-form">
-        <label for="nama-lengkap"
-          >Nama Lengkap <span class="text-red-6">*</span> :</label
-        >
-        <input type="text" id="nama-lengkap" v-model="namaLengkap" equired />
-      </div>
-      <div class="input-form">
-        <label for="email">Email <span class="text-red-6">*</span> :</label>
-        <input type="email" id="email" v-model="email" disabled required />
-      </div>
-      <div class="input-form">
-        <label for="fakultas"
-          >Nama Fakultas <span class="text-red-6">*</span> :</label
-        >
-        <select
-          name="fakultas"
-          id="fakultas"
-          v-model="fakultas"
-          required
-          class="overflow-y-scroll"
-        >
-          <option value="" selected disabled>
-            Silahkan pilih Nama Fakultas
-          </option>
-          <option
-            v-for="fakultas in dataFakultas.daftarFakultas"
-            :value="fakultas.singkatan"
+
+      <!-- Form card -->
+      <div class="section-card">
+        <div class="section-card-header">
+          <div class="i-mdi-form-textbox w-5 h-5 text-unpad shrink-0" />
+          <h2>Data Pemohon & Berkas</h2>
+          <p class="ml-auto text-xs text-gray-4">Kolom (<span class="text-red-6">*</span>) wajib diisi</p>
+        </div>
+        <form @submit.prevent="kirimPengajuan" class="p-5 sm:p-6">
+          <fieldset :disabled="isSubmitting" class="form-fieldset">
+            <div class="flex flex-col gap-4">
+
+              <div class="input-group">
+                <label for="npm">NIP / NPM <span class="text-red-6">*</span></label>
+                <input type="text" id="npm" v-model="npm" required />
+              </div>
+
+              <div class="input-group">
+                <label for="nama-lengkap">Nama Lengkap <span class="text-red-6">*</span></label>
+                <input type="text" id="nama-lengkap" v-model="namaLengkap" required />
+              </div>
+
+              <div class="input-group">
+                <label for="email">Email <span class="text-red-6">*</span></label>
+                <input type="email" id="email" v-model="email" disabled required />
+              </div>
+
+              <div class="input-group">
+                <label for="fakultas">Nama Fakultas <span class="text-red-6">*</span></label>
+                <select id="fakultas" v-model="fakultas" required>
+                  <option value="" selected disabled>Silahkan pilih Nama Fakultas</option>
+                  <option
+                    v-for="fak in dataFakultas.daftarFakultas"
+                    :key="fak.singkatan"
+                    :value="fak.singkatan"
+                  >
+                    {{ fak.namaFakultas }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="input-group">
+                <label for="prodi">Nama Program Studi <span class="text-red-6">*</span></label>
+                <input type="text" id="prodi" v-model="prodi" required />
+              </div>
+
+              <div class="input-group">
+                <label for="kontak">No. HP / Whatsapp <span class="text-red-6">*</span></label>
+                <input type="text" id="kontak" v-model="kontak" required />
+              </div>
+
+              <div class="input-group">
+                <label for="judul">Judul Karya Tulis <span class="text-red-6">*</span></label>
+                <input type="text" id="judul" v-model="judul" required />
+              </div>
+
+              <!-- Divider -->
+              <div class="border-t border-gray-1" />
+
+              <div class="input-group">
+                <label for="fileSurat">
+                  Berkas yang Ingin Diperiksa <span class="text-red-6">*</span>
+                </label>
+                <input
+                  type="file"
+                  id="fileSurat"
+                  @change="uploadSurat"
+                  accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.oasis.opendocument.text,application/vnd.oasis.opendocument.formula"
+                  required
+                />
+                <!-- File preview -->
+                <div
+                  v-if="fileSurat"
+                  class="mt-2 flex items-center gap-2 text-sm text-gray-6 bg-gray-50 border border-gray-2 rounded-xl px-3 py-2"
+                >
+                  <div class="i-mdi-file-word-outline w-4 h-4 text-blue-5 shrink-0" />
+                  <span class="flex-1 truncate font-medium text-gray-7">{{ fileSurat.name }}</span>
+                  <span class="text-gray-4 whitespace-nowrap text-xs">{{ fileSize }}</span>
+                </div>
+                <p class="text-xs text-gray-4 italic mt-1">
+                  Format: .doc, .docx, .odf, atau .odt — Maks. 100 MB. Tidak boleh PDF.
+                </p>
+              </div>
+
+            </div>
+          </fieldset>
+
+          <!-- Notification -->
+          <div
+            class="info-box mt-4 transition-all-200"
+            :class="colorNotif === 'text-red-7' ? 'bg-red-50 border-red-2' : colorNotif === 'text-green' ? 'bg-green-50 border-green-2' : 'bg-gray-50 border-gray-2'"
           >
-            {{ fakultas.namaFakultas }}
-          </option>
-        </select>
+            <div
+              class="w-4 h-4 shrink-0 mt-0.5"
+              :class="colorNotif === 'text-red-7' ? 'i-mdi-alert-outline text-red-5' : colorNotif === 'text-green' ? 'i-mdi-check-circle-outline text-green-6' : 'i-mdi-information-outline text-gray-4'"
+            />
+            <p class="text-sm" :class="colorNotif">{{ notification }}</p>
+          </div>
+
+          <button
+            class="btn bg-orange text-white w-full py-2.5 font-600 text-base mt-4 transition-all-200"
+            type="submit"
+            :disabled="isSubmitting"
+            :class="{ 'opacity-60 cursor-not-allowed': isSubmitting }"
+          >
+            <span v-if="submitStep === 'uploading'">⏳ Mengunggah berkas...</span>
+            <span v-else-if="submitStep === 'saving'">💾 Menyimpan pengajuan...</span>
+            <span v-else-if="submitStep === 'success'">✅ Berhasil diajukan!</span>
+            <span v-else>Ajukan Pemeriksaan</span>
+          </button>
+        </form>
       </div>
-      <div class="input-form">
-        <label for="prodi"
-          >Nama Program Studi <span class="text-red-6">*</span> :</label
-        >
-        <input type="prodi" name="prodi" id="prodi" v-model="prodi" required />
-      </div>
-      <div class="input-form">
-        <label for="kontak"
-          >No. HP / Whatsapp <span class="text-red-6">*</span> :</label
-        >
-        <input type="text" id="kontak" v-model="kontak" />
-      </div>
-      <div class="input-form">
-        <label for="judul"
-          >Judul Karya Tulis <span class="text-red-6">*</span> :</label
-        >
-        <input type="text" id="judul" v-model="judul" required />
-      </div>
-      <div class="input-form">
-        <label for="fileSurat"
-          >Berkas yang ingin diperiksa
-          <span class="text-red-6">*</span> :</label
-        >
-        <input
-          type="file"
-          name="fileSurat"
-          id="fileSurat"
-          @change="uploadSurat"
-          accept=".doc, .docx, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.oasis.opendocument.text, application/vnd.oasis.opendocument.formula"
-          required
-        />
-        <div
-          v-if="fileSurat"
-          class="mt-2 flex items-center gap-2 text-sm text-gray-6 bg-gray-1 border border-gray-2 rounded px-3 py-2"
-        >
-          <span>📄</span>
-          <span class="flex-1 truncate font-medium">{{ fileSurat.name }}</span>
-          <span class="text-gray-4 whitespace-nowrap">{{ fileSize }}</span>
-        </div>
-        <p class="text-sm italic text-gray-4 text-center mt-1">
-          Mohon diperhatikan untuk maksimum ukuran berkas adalah 100 MB dan
-          format yang dikirimkan harus dalam bentuk atau format dari standar
-          Aplikasi Word Processor (.doc, .docx, .odf, atau .odt), tidak boleh
-          mengupload berkas dalam bentuk PDF.
-        </p>
-      </div>
-      </fieldset>
-      <div class="input-form">
-        <div class="pb-4 text-center">
-          <p class="text-sm" :class="colorNotif">
-            {{ notification }}
-          </p>
-        </div>
-        <button
-          class="btn bg-orange text-white py-2 w-full transition-all-200"
-          type="submit"
-          :disabled="isSubmitting"
-          :class="{ 'opacity-60 cursor-not-allowed': isSubmitting }"
-        >
-          <span v-if="submitStep === 'uploading'">⏳ Mengunggah berkas...</span>
-          <span v-else-if="submitStep === 'saving'">💾 Menyimpan pengajuan...</span>
-          <span v-else-if="submitStep === 'success'">✅ Berhasil diajukan!</span>
-          <span v-else>Ajukan Pemeriksaan</span>
-        </button>
-      </div>
-    </form>
-  </section>
+
+    </div>
+  </main>
 </template>
 
 <style scoped>
-section {
-  --at-apply: max-w-7xl ma;
+h1 {
+  --at-apply: leading-tight;
 }
 
-h1 {
-  --at-apply: text-4xl my-5;
+.section-card {
+  --at-apply: bg-white rounded-2xl shadow-sm border border-gray-2 overflow-hidden;
+}
+
+.section-card-header {
+  --at-apply: flex items-center gap-3 px-5 sm:px-6 py-4 border-b border-gray-1 bg-gray-50;
+}
+
+.section-card-header h2 {
+  --at-apply: text-base font-700 text-gray-8 m-0;
+}
+
+.info-box {
+  --at-apply: flex items-start gap-2.5 rounded-xl px-4 py-3 border;
+}
+
+.input-group {
+  --at-apply: flex flex-col gap-1;
 }
 
 label {
-  --at-apply: font-600;
-}
-
-.input-form {
-  --at-apply: my-2;
+  --at-apply: text-sm font-600 text-gray-7;
 }
 
 input,
 select {
-  --at-apply: w-full border border-orange rounded p-2;
+  --at-apply: w-full bg-white border border-gray-2 rounded-xl p-2.5 text-sm text-gray-8 transition-colors-200;
+}
+
+input:focus,
+select:focus {
+  --at-apply: border-unpad outline-none;
+}
+
+input:disabled {
+  --at-apply: bg-gray-1 text-gray-4 cursor-not-allowed;
+}
+
+input[type="file"] {
+  --at-apply: py-2 cursor-pointer;
 }
 
 .form-fieldset {
