@@ -122,13 +122,22 @@ const availabilityColor = (status) => {
             </span>
           </div>
 
-          <div class="mt-6">
+          <div class="mt-6 flex flex-wrap gap-3">
             <NuxtLink
               to="/search"
               class="btn text-unpad border border-unpad hover:(bg-unpad text-white) transition-all-300 px-5 py-2 text-sm"
             >
               ← Kembali ke Pencarian
             </NuxtLink>
+            <a
+              :href="`https://pustaka.unpad.ac.id/collections/${id}`"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn bg-unpad text-white hover:bg-unpad/80 transition-all-300 px-5 py-2 text-sm inline-flex items-center gap-1.5"
+            >
+              <span>Buka Koleksi</span>
+              <span class="i-carbon-launch text-xs" />
+            </a>
           </div>
         </div>
       </section>
@@ -188,7 +197,8 @@ const availabilityColor = (status) => {
                 <th class="px-4 py-2">Lokasi</th>
                 <th class="px-4 py-2">Ketersediaan</th>
                 <th class="px-4 py-2">Kode Inventaris</th>
-                <th class="px-4 py-2 rounded-tr-lg">Barcode</th>
+                <th class="px-4 py-2">Barcode</th>
+                <th class="px-4 py-2 rounded-tr-lg">Tautan</th>
               </tr>
             </thead>
             <tbody>
@@ -206,6 +216,19 @@ const availabilityColor = (status) => {
                 </td>
                 <td class="px-4 py-2 font-mono text-xs text-gray-6">{{ it.inventory_code ?? "-" }}</td>
                 <td class="px-4 py-2 font-mono text-xs text-gray-6">{{ it.barcode ?? "-" }}</td>
+                <td class="px-4 py-2">
+                  <a
+                    v-if="it.id"
+                    :href="`https://pustaka.unpad.ac.id/items/${it.id}`"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1 text-xs text-unpad border border-unpad rounded-full px-2.5 py-0.5 hover:(bg-unpad text-white) transition-all-300 whitespace-nowrap"
+                  >
+                    Buka Item
+                    <span class="i-carbon-launch text-xs" />
+                  </a>
+                  <span v-else class="text-gray-4 text-xs">—</span>
+                </td>
               </tr>
             </tbody>
           </table>

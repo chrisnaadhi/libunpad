@@ -143,7 +143,7 @@ const kirimPengajuan = async () => {
             Silahkan pilih Nama Fakultas
           </option>
           <option
-            v-for="fakultas in dataFakultas.objFakultas"
+            v-for="fakultas in dataFakultas.daftarFakultas"
             :value="fakultas.singkatan"
           >
             {{ fakultas.namaFakultas }}

@@ -93,7 +93,7 @@ definePageMeta({
       class="flex flex-col sm:(grid grid-cols-2) lg:(grid grid-cols-3) gap-3 text-center"
     >
       <NuxtLink
-        v-for="fakultas in namaFakultas.objFakultas"
+        v-for="fakultas in namaFakultas.daftarFakultas"
         :to="'repository/' + fakultas.singkatan"
         class="text-white bg-unpad no-underline py-3 rounded-xl"
       >

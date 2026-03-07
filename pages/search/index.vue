@@ -45,7 +45,7 @@ const submitSearch = async (keyword) => {
       query: {
         search: keyword === "Universitas Padjadjaran" ? "" : keyword,
         status: "published",
-        access_level: "public",
+        access_level: "public"
       },
     });
     if (pustakaData) {

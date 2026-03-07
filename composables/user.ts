@@ -262,11 +262,19 @@ export const daftarNamaFakultasUnpad = defineStore("namaFakultas", () => {
       singkatan: "ftg",
     },
     {
+      id: 280,
+      namaFakultas: "Sekolah Vokasi",
+      singkatan: "sv",
+    },
+    {
       id: 500,
       namaFakultas: "Unpad Press",
-      singkatan: "unpad_press"
+      singkatan: "unpad_press",
+      nonFakultas: true,
     }
   ];
+
+  const daftarFakultas = objFakultas.filter((f) => !f.nonFakultas);
 
   const singkatanUpper = (id: number) => {
     return objFakultas[id].singkatan.toUpperCase();
@@ -306,6 +314,7 @@ export const daftarNamaFakultasUnpad = defineStore("namaFakultas", () => {
 
   return {
     objFakultas,
+    daftarFakultas,
     singkatanUpper,
     cariFakultas,
     cariFakultasAbbrevation,

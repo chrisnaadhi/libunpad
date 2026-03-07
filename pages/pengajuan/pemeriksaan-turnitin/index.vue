@@ -10,6 +10,7 @@ const dataFakultas = daftarNamaFakultasUnpad();
 
 const notification = ref("Silahkan isi seluruh form sesuai dengan data asli");
 const colorNotif = ref("text-dark");
+const isSubmitting = ref(false);
 const npm = ref("");
 const namaLengkap = ref(data.value.user.name);
 const email = ref(data.value.user.email);
@@ -18,12 +19,38 @@ const prodi = ref("");
 const kontak = ref("");
 const judul = ref("");
 const fileSurat = ref(null);
+const submitStep = ref("idle"); // idle | uploading | saving | success | error
+
 const uploadSurat = (event) => {
-  fileSurat.value = event.target.files[0];
+  const file = event.target.files[0];
+  if (!file) { fileSurat.value = null; return; }
+  const maxSize = 100 * 1024 * 1024; // 100 MB
+  if (file.size > maxSize) {
+    colorNotif.value = "text-red-7";
+    notification.value = "Ukuran file melebihi 100 MB. Silahkan pilih file yang lebih kecil!";
+    event.target.value = "";
+    fileSurat.value = null;
+    setTimeout(() => {
+      notification.value = "Silahkan isi seluruh form sesuai dengan data asli";
+      colorNotif.value = "text-dark";
+    }, 8000);
+    return;
+  }
+  fileSurat.value = file;
 };
+
+const fileSize = computed(() => {
+  if (!fileSurat.value) return "";
+  const bytes = fileSurat.value.size;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+});
+
 const emailPattern = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
 
 const kirimPengajuan = async () => {
+  if (isSubmitting.value) return;
+  isSubmitting.value = true;
   const emailValidation = emailPattern.test(email.value);
   // Validate file type
   if (fileSurat.value) {
@@ -43,6 +70,7 @@ const kirimPengajuan = async () => {
           "Silahkan isi seluruh form sesuai dengan data asli";
         colorNotif.value = "text-dark";
       }, 10000);
+      isSubmitting.value = false;
       return;
     }
   }
@@ -58,9 +86,12 @@ const kirimPengajuan = async () => {
     judul.value !== "" &&
     fileSurat.value !== null
   ) {
-    formData.append("file", fileSurat.value);
-    await $directus.request($uploadFiles(formData)).then(async (res) => {
-      let items = {
+    try {
+      submitStep.value = "uploading";
+      formData.append("file", fileSurat.value);
+      const res = await $directus.request($uploadFiles(formData));
+      submitStep.value = "saving";
+      const items = {
         nomor: npm.value,
         nama_lengkap: namaLengkap.value,
         email: email.value,
@@ -71,45 +102,47 @@ const kirimPengajuan = async () => {
         judul_karya_tulis: judul.value,
         berkas_pengajuan: res.id,
       };
-      if (emailValidation) {
-        try {
-          await createItems({
-            collection: "pengajuan_pemeriksaan_turnitin",
-            items,
-          });
-          colorNotif.value = "text-green";
-          notification.value = "Berhasil diajukan";
-          npm.value = "";
-          namaLengkap.value = "";
-          email.value = data.value.user.email;
-          kontak.value = "";
-          fakultas.value = "";
-          prodi.value = "";
-          judul.value = "";
-          fileSurat.value = null;
-          setTimeout(async () => {
-            notification.value =
-              "Silahkan isi seluruh form sesuai dengan data asli";
-            colorNotif.value = "text-dark";
-            await navigateTo({ path: "/keanggotaan" });
-          }, 1000);
-        } catch (error) {
-          console.log(error);
-        }
-      } else {
-        colorNotif.value = "text-red-7";
-        notification.value = "Email tidak valid, silahkan coba lagi";
-        setTimeout(async () => {
-          notification.value =
-            "Silahkan isi seluruh form sesuai dengan data asli";
-          colorNotif.value = "text-dark";
-        }, 5000);
-      }
-    });
+      await createItems({
+        collection: "pengajuan_pemeriksaan_turnitin",
+        items,
+      });
+      submitStep.value = "success";
+      colorNotif.value = "text-green";
+      notification.value = "Berhasil diajukan! Mengalihkan halaman...";
+      npm.value = "";
+      namaLengkap.value = "";
+      email.value = data.value.user.email;
+      kontak.value = "";
+      fakultas.value = "";
+      prodi.value = "";
+      judul.value = "";
+      fileSurat.value = null;
+      setTimeout(async () => {
+        notification.value =
+          "Silahkan isi seluruh form sesuai dengan data asli";
+        colorNotif.value = "text-dark";
+        submitStep.value = "idle";
+        await navigateTo({ path: "/keanggotaan" });
+      }, 1500);
+    } catch (error) {
+      console.error(error);
+      submitStep.value = "error";
+      colorNotif.value = "text-red-7";
+      notification.value = "Terjadi kesalahan, silahkan coba lagi";
+      setTimeout(() => {
+        notification.value =
+          "Silahkan isi seluruh form sesuai dengan data asli";
+        colorNotif.value = "text-dark";
+        submitStep.value = "idle";
+      }, 5000);
+    } finally {
+      isSubmitting.value = false;
+    }
   } else {
     alert("Kolom ( * ) wajib diisi");
     colorNotif.value = "text-red-7";
     notification.value = "Kolom ( * ) wajib diisi";
+    isSubmitting.value = false;
     setTimeout(async () => {
       notification.value = "Silahkan isi seluruh form sesuai dengan data asli";
       colorNotif.value = "text-dark";
@@ -162,6 +195,7 @@ const kirimPengajuan = async () => {
     </div>
 
     <form @submit.prevent="kirimPengajuan" class="p-7 max-w-3xl ma">
+      <fieldset :disabled="isSubmitting" class="form-fieldset">
       <div class="input-form">
         <label for="npm">NIP / NPM <span class="text-red-6">*</span> :</label>
         <input type="text" id="npm" v-model="npm" required />
@@ -191,7 +225,7 @@ const kirimPengajuan = async () => {
             Silahkan pilih Nama Fakultas
           </option>
           <option
-            v-for="fakultas in dataFakultas.objFakultas"
+            v-for="fakultas in dataFakultas.daftarFakultas"
             :value="fakultas.singkatan"
           >
             {{ fakultas.namaFakultas }}
@@ -229,13 +263,22 @@ const kirimPengajuan = async () => {
           accept=".doc, .docx, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.oasis.opendocument.text, application/vnd.oasis.opendocument.formula"
           required
         />
-        <p class="text-sm italic text-gray-4 text-center">
+        <div
+          v-if="fileSurat"
+          class="mt-2 flex items-center gap-2 text-sm text-gray-6 bg-gray-1 border border-gray-2 rounded px-3 py-2"
+        >
+          <span>📄</span>
+          <span class="flex-1 truncate font-medium">{{ fileSurat.name }}</span>
+          <span class="text-gray-4 whitespace-nowrap">{{ fileSize }}</span>
+        </div>
+        <p class="text-sm italic text-gray-4 text-center mt-1">
           Mohon diperhatikan untuk maksimum ukuran berkas adalah 100 MB dan
           format yang dikirimkan harus dalam bentuk atau format dari standar
           Aplikasi Word Processor (.doc, .docx, .odf, atau .odt), tidak boleh
           mengupload berkas dalam bentuk PDF.
         </p>
       </div>
+      </fieldset>
       <div class="input-form">
         <div class="pb-4 text-center">
           <p class="text-sm" :class="colorNotif">
@@ -243,11 +286,15 @@ const kirimPengajuan = async () => {
           </p>
         </div>
         <button
-          class="btn bg-orange text-white py-2 w-full"
+          class="btn bg-orange text-white py-2 w-full transition-all-200"
           type="submit"
-          @click.prevent="kirimPengajuan"
+          :disabled="isSubmitting"
+          :class="{ 'opacity-60 cursor-not-allowed': isSubmitting }"
         >
-          Ajukan Pemeriksaan
+          <span v-if="submitStep === 'uploading'">⏳ Mengunggah berkas...</span>
+          <span v-else-if="submitStep === 'saving'">💾 Menyimpan pengajuan...</span>
+          <span v-else-if="submitStep === 'success'">✅ Berhasil diajukan!</span>
+          <span v-else>Ajukan Pemeriksaan</span>
         </button>
       </div>
     </form>
@@ -274,5 +321,18 @@ label {
 input,
 select {
   --at-apply: w-full border border-orange rounded p-2;
+}
+
+.form-fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.form-fieldset:disabled {
+  opacity: 0.55;
+  pointer-events: none;
+  user-select: none;
 }
 </style>
