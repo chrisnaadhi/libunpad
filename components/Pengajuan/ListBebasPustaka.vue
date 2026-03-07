@@ -91,11 +91,13 @@ const convertTimeZone = (time) => {
 const displayMessage = (value) => {
   switch (value) {
     case "pengajuan":
-      return "text-red-5";
+      return "bg-red-50 text-red-7 border border-red-2";
     case "proses":
-      return "text-amber-5";
+      return "bg-amber-50 text-amber-7 border border-amber-2";
     case "selesai":
-      return "text-green-5";
+      return "bg-green-50 text-green-7 border border-green-2";
+    default:
+      return "bg-gray-1 text-gray-5 border border-gray-2";
   }
 };
 
@@ -124,71 +126,36 @@ const tableHeadPublic = [
 </script>
 
 <template>
-  <section class="overflow-x-auto relative">
-    <table
-      class="w-full border-collapse border text-sm border-slate-400"
-      v-if="totalData.length > 0"
-    >
-      <thead class="bg-yellow-2">
+  <section class="overflow-x-auto">
+    <table class="w-full text-sm" v-if="totalData.length > 0">
+      <thead class="bg-gray-50 border-b border-gray-2">
         <tr>
-          <th
-            v-if="publicData"
-            v-for="elem in tableHead"
-            scope="col"
-            class="table-border font-600"
-          >
-            {{ elem }}
-          </th>
-          <th
-            v-else
-            v-for="elem in tableHeadPublic"
-            scope="col"
-            class="table-border font-600"
-          >
-            {{ elem }}
-          </th>
+          <th v-if="publicData" v-for="elem in tableHead" class="th-cell">{{ elem }}</th>
+          <th v-else v-for="elem in tableHeadPublic" class="th-cell">{{ elem }}</th>
         </tr>
       </thead>
-      <tbody v-for="data in listData">
-        <tr class="bg-white text-center">
-          <td class="table-border w-10">{{ data.npm }}</td>
-          <td class="table-border w-50">
-            {{ data.nama_lengkap }}
-          </td>
-          <td class="table-border w-30" v-show="publicData">
-            {{ data.email }}
-          </td>
-          <td class="table-border w-30">
-            {{ displayKeperluanSurat(data.keperluan) }}
-          </td>
-          <td class="table-border w-30">
-            {{ displayPersyaratan(data.persyaratan) }}
-          </td>
-          <td class="table-border w-30" v-show="publicData">
-            {{ convertTimeZone(data.date_created) }}
-          </td>
-          <td class="table-border w-40">
-            <span
-              :class="displayMessage(data.status_pengajuan)"
-              class="font-600"
-            >
+      <tbody>
+        <tr class="td-row" v-for="data in listData" :key="data.id">
+          <td class="td-cell font-medium text-gray-8">{{ data.npm }}</td>
+          <td class="td-cell">{{ data.nama_lengkap }}</td>
+          <td class="td-cell" v-show="publicData">{{ data.email }}</td>
+          <td class="td-cell">{{ displayKeperluanSurat(data.keperluan) }}</td>
+          <td class="td-cell">{{ displayPersyaratan(data.persyaratan) }}</td>
+          <td class="td-cell text-xs text-gray-5" v-show="publicData">{{ convertTimeZone(data.date_created) }}</td>
+          <td class="td-cell">
+            <span :class="displayMessage(data.status_pengajuan)" class="status-pill">
               {{ displayStatusPengajuanSurat(data.status_pengajuan) }}
             </span>
           </td>
-          <td class="table-border w-40">
-            <span v-if="!data.date_updated">Belum diproses</span>
+          <td class="td-cell text-xs text-gray-5">
+            <span v-if="!data.date_updated">—</span>
             <span v-else>{{ convertTimeZone(data.date_updated) }}</span>
           </td>
-          <td class="table-border w-30">
-            {{ searchPetugas(data.user_updated) }}
-          </td>
-          <td class="table-border" v-show="publicData">
+          <td class="td-cell">{{ searchPetugas(data.user_updated) }}</td>
+          <td class="td-cell" v-show="publicData">
             <NuxtLink
-              :to="
-                'https://repository.unpad.ac.id:8050/admin/content/pengajuan_surat_bebas_pustaka/' +
-                data.id
-              "
-              class="btn bg-unpad text-white py-0"
+              :to="'https://repository.unpad.ac.id:8050/admin/content/pengajuan_surat_bebas_pustaka/' + data.id"
+              class="btn bg-unpad text-white text-xs py-1 px-3"
               target="_blank"
             >
               Cek
@@ -197,44 +164,56 @@ const tableHeadPublic = [
         </tr>
       </tbody>
     </table>
-    <div v-else>
-      <p>Belum ada Data!</p>
+    <div v-else class="flex flex-col items-center py-10 text-center">
+      <div class="i-mdi-file-outline w-10 h-10 text-gray-3 ma mb-3" />
+      <p class="text-gray-4 italic">Belum ada data pengajuan.</p>
     </div>
     <div
-      class="flex items-center justify-center gap-1 mt-3"
+      class="flex items-center justify-center gap-2 px-4 py-4 border-t border-gray-1"
       v-show="totalData.length > 10"
     >
       <button
-        class="btn py-0 px-5"
+        class="btn py-1.5 px-5 text-sm"
         @click="prevData"
         :class="pageState === 0 ? 'disable-btn' : 'enable-btn'"
         :disabled="pageState === 0"
       >
-        Prev
+        ← Sebelumnya
       </button>
-      <div>
-        {{ pageState < 10 ? "1" : (pageState + 10) / 10 }} /
-        {{ (Number(gapData) + 10) / 10 }}
-      </div>
+      <span class="text-sm text-gray-5 font-medium">
+        {{ pageState < 10 ? "1" : (pageState + 10) / 10 }} / {{ (Number(gapData) + 10) / 10 }}
+      </span>
       <button
-        class="btn bg-unpad py-0 px-5"
+        class="btn py-1.5 px-5 text-sm"
         @click="nextData"
         :class="pageState < gapData ? 'enable-btn' : 'disable-btn'"
-        :disable="pageState <= gapData"
+        :disabled="pageState >= gapData"
       >
-        Next
+        Selanjutnya →
       </button>
     </div>
   </section>
 </template>
 
 <style scoped>
-.table-border {
-  --at-apply: border border-unpad p-1;
+.th-cell {
+  --at-apply: px-4 py-3 text-left text-xs font-700 text-gray-5 uppercase tracking-wider whitespace-nowrap;
+}
+
+.td-row {
+  --at-apply: border-b border-gray-1 hover:bg-gray-50 transition-colors-150;
+}
+
+.td-cell {
+  --at-apply: px-4 py-3 text-gray-7 whitespace-nowrap;
+}
+
+.status-pill {
+  --at-apply: inline-block text-xs font-600 px-2.5 py-0.5 rounded-full;
 }
 
 .disable-btn {
-  --at-apply: bg-gray-3 text-dark cursor-not-allowed;
+  --at-apply: bg-gray-1 text-gray-4 border border-gray-2 cursor-not-allowed;
 }
 
 .enable-btn {

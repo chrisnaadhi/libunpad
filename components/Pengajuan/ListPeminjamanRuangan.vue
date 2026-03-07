@@ -61,13 +61,13 @@ const convertDate = (val) => {
 const displayStatusPeminjaman = (val) => {
   switch (val) {
     case "pending":
-      return "bg-gray";
+      return "bg-gray-1 text-gray-6 border border-gray-3";
     case "approved":
-      return "bg-green";
+      return "bg-green-50 text-green-7 border border-green-2";
     case "cancel":
-      return "bg-red";
+      return "bg-red-50 text-red-7 border border-red-2";
     default:
-      return "bg-unpad";
+      return "bg-blue-50 text-blue-7 border border-blue-2";
   }
 };
 const displayNamaRuangan = (val) => {
@@ -99,69 +99,73 @@ const tableHeadPublic = [
 </script>
 
 <template>
-  <section class="py-5 px-3 lg:px-0">
+  <section>
     <GenericTableData>
       <template #tablehead>
         <tr>
-          <th v-for="elem in tableHeadPublic" class="table-border font-600">
-            {{ elem }}
-          </th>
+          <th v-for="elem in tableHeadPublic" class="th-cell">{{ elem }}</th>
         </tr>
       </template>
       <template #tablebody>
-        <tr class="bg-white" v-for="elem in listData">
-          <td class="table-border">{{ elem.nama_lengkap }}</td>
-          <td class="table-border">
-            {{ displayNamaRuangan(elem.nama_ruangan) }}
-          </td>
-          <td class="table-border">{{ elem.tanggal_peminjaman }}</td>
-          <td class="table-border">
-            {{ elem.jam_mulai_peminjaman }} - {{ elem.jam_selesai_peminjaman }}
-          </td>
-          <td
-            class="table-border text-white"
-            :class="displayStatusPeminjaman(elem.status_peminjaman)"
-          >
-            {{ elem.status_peminjaman }}
+        <tr class="td-row" v-for="elem in listData" :key="elem.id">
+          <td class="td-cell font-medium text-gray-8">{{ elem.nama_lengkap }}</td>
+          <td class="td-cell">{{ displayNamaRuangan(elem.nama_ruangan) }}</td>
+          <td class="td-cell">{{ elem.tanggal_peminjaman }}</td>
+          <td class="td-cell">{{ elem.jam_mulai_peminjaman }} — {{ elem.jam_selesai_peminjaman }}</td>
+          <td class="td-cell">
+            <span :class="displayStatusPeminjaman(elem.status_peminjaman)" class="status-pill">
+              {{ elem.status_peminjaman }}
+            </span>
           </td>
         </tr>
       </template>
     </GenericTableData>
     <div
-      class="flex items-center justify-center gap-1 mt-3"
+      class="flex items-center justify-center gap-2 px-4 py-4 border-t border-gray-1"
       v-show="totalData.length > 10"
     >
       <button
-        class="btn py-0 px-5"
+        class="btn py-1.5 px-5 text-sm"
         @click="prevData"
         :class="pageState === 0 ? 'disable-btn' : 'enable-btn'"
         :disabled="pageState === 0"
       >
-        Prev
+        ← Sebelumnya
       </button>
-      <div>
-        {{ pageState < 10 ? "1" : (pageState + 10) / 10 }} /
-        {{ (Number(gapData) + 10) / 10 }}
-      </div>
+      <span class="text-sm text-gray-5 font-medium">
+        {{ pageState < 10 ? "1" : (pageState + 10) / 10 }} / {{ (Number(gapData) + 10) / 10 }}
+      </span>
       <button
-        class="btn bg-unpad py-0 px-5"
+        class="btn py-1.5 px-5 text-sm"
         @click="nextData"
         :class="pageState < gapData ? 'enable-btn' : 'disable-btn'"
-        :disable="pageState <= gapData"
+        :disabled="pageState >= gapData"
       >
-        Next
+        Selanjutnya →
       </button>
     </div>
   </section>
 </template>
 
 <style scoped>
-.table-border {
-  --at-apply: border border-unpad p-1;
+.th-cell {
+  --at-apply: px-4 py-3 text-left text-xs font-700 text-gray-5 uppercase tracking-wider whitespace-nowrap;
+}
+
+.td-row {
+  --at-apply: border-b border-gray-1 hover:bg-gray-50 transition-colors-150;
+}
+
+.td-cell {
+  --at-apply: px-4 py-3 text-gray-7 whitespace-nowrap;
+}
+
+.status-pill {
+  --at-apply: inline-block text-xs font-600 px-2.5 py-0.5 rounded-full capitalize;
 }
 
 .disable-btn {
-  --at-apply: bg-gray-3 text-dark cursor-not-allowed;
+  --at-apply: bg-gray-1 text-gray-4 border border-gray-2 cursor-not-allowed;
 }
 
 .enable-btn {
