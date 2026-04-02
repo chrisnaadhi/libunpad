@@ -43,45 +43,35 @@ const finalDataTA = await dataTugasAkhir();
 const biodataMhs = await dataMhs();
 
 const createSecurePath = (link) => {
-  if (link === null) {
+  if (!link) {
     return null;
-  } else {
-    const safeLink = link.replace("http://", "https://");
-    return safeLink;
   }
+  return link.replace("http://", "https://");
 };
 
-// Create function for access link with auth concerned here
-const isUserAuthenticated = (linkData) => {
-  if (linkData === null) {
+const makeFileUrl = (filePath) => {
+  if (!filePath || filePath === "undefined") {
     return null;
-  } else if (status.value === "unauthenticated") {
-    accessText.value = "Anda tidak dapat mengakses";
-    return accessText.value;
-  } else if (status.value === "authenticated") {
-    accessText.value = "Dapat mengakses";
-    return `${finalDataTA.LinkPath}/${linkData}`;
-  } else {
-    console.log("something is missing!");
   }
+  return `${finalDataTA.LinkPath}${filePath}`;
 };
 
 finalDataTA.LinkPath = createSecurePath(finalDataTA.LinkPath);
 
 const dataObjectTA = {
   npm: finalDataTA.MhsNPM,
-  fileCover: finalDataTA.LinkPath + finalDataTA.FileCover,
-  fileAbstrak: finalDataTA.LinkPath + finalDataTA.FileAbstrak,
-  fileDaftarIsi: finalDataTA.LinkPath + finalDataTA.FileDaftarIsi,
-  fileBab1: finalDataTA.LinkPath + finalDataTA.FileBab1,
-  fileBab2: isUserAuthenticated(finalDataTA.FileBab2),
-  fileBab3: isUserAuthenticated(finalDataTA.FileBab3),
-  fileBab4: isUserAuthenticated(finalDataTA.FileBab4),
-  fileBab5: isUserAuthenticated(finalDataTA.FileBab5),
-  fileBab6: isUserAuthenticated(finalDataTA.FileBab6),
-  fileLampiran: isUserAuthenticated(finalDataTA.FileLampiran),
-  filePustaka: finalDataTA.LinkPath + finalDataTA.FilePustaka,
-  fileFullText: isUserAuthenticated(finalDataTA.FileFullText),
+  fileCover: makeFileUrl(finalDataTA.FileCover),
+  fileAbstrak: makeFileUrl(finalDataTA.FileAbstrak),
+  fileDaftarIsi: makeFileUrl(finalDataTA.FileDaftarIsi),
+  fileBab1: makeFileUrl(finalDataTA.FileBab1),
+  fileBab2: makeFileUrl(finalDataTA.FileBab2),
+  fileBab3: makeFileUrl(finalDataTA.FileBab3),
+  fileBab4: makeFileUrl(finalDataTA.FileBab4),
+  fileBab5: makeFileUrl(finalDataTA.FileBab5),
+  fileBab6: makeFileUrl(finalDataTA.FileBab6),
+  fileLampiran: makeFileUrl(finalDataTA.FileLampiran),
+  filePustaka: makeFileUrl(finalDataTA.FilePustaka),
+  fileFullText: makeFileUrl(finalDataTA.FileFullText),
   judul: finalDataTA.Judul,
   author: biodataMhs.nama_anggota,
   namaFakultas: fakultas.cariFakultas(finalDataTA.MhsNPM),
@@ -315,7 +305,7 @@ useHead({
 }
 
 .citation {
-  --at-apply: hover:(text-unpad cursor-pointer);
+  --at-apply: hover: (text-unpad cursor-pointer);
 }
 
 .btn-auth {

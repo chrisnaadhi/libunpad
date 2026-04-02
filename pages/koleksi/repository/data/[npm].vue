@@ -28,70 +28,63 @@ const fileTesis = await getFiles({
 });
 
 const fileAbstrak = fileTesis.find((file) =>
-  file.title.toLowerCase().includes("abstrak")
+  file.title.toLowerCase().includes("abstrak"),
 );
 const fileCover = fileTesis.find((file) =>
-  file.title.toLowerCase().includes("cover")
+  file.title.toLowerCase().includes("cover"),
 );
 const fileDaftarIsi = fileTesis.find((file) =>
-  file.title.toLowerCase().includes("isi")
+  file.title.toLowerCase().includes("isi"),
 );
 const fileDaftarPustaka = fileTesis.find((file) => {
   file.title.toLowerCase().includes("pustaka");
 });
 const fileBab1 = fileTesis.find((file) =>
-  file.title.toLowerCase().includes("bab1")
+  file.title.toLowerCase().includes("bab1"),
 );
 const fileBab2 = fileTesis.find((file) =>
-  file.title.toLowerCase().includes("bab2")
+  file.title.toLowerCase().includes("bab2"),
 );
 const fileBab3 = fileTesis.find((file) =>
-  file.title.toLowerCase().includes("bab3")
+  file.title.toLowerCase().includes("bab3"),
 );
 const fileBab4 = fileTesis.find((file) =>
-  file.title.toLowerCase().includes("bab4")
+  file.title.toLowerCase().includes("bab4"),
 );
 const fileBab5 = fileTesis.find((file) =>
-  file.title.toLowerCase().includes("bab5")
+  file.title.toLowerCase().includes("bab5"),
 );
 const fileBab6 = fileTesis.find((file) =>
-  file.title.toLowerCase().includes("bab6")
+  file.title.toLowerCase().includes("bab6"),
 );
 const fileFull = fileTesis.find((file) =>
-  file.title.toLowerCase().includes("fulltext")
+  file.title.toLowerCase().includes("fulltext"),
 );
 const fileLampiran = fileTesis.find((file) =>
-  file.title.toLowerCase().includes("lampiran")
+  file.title.toLowerCase().includes("lampiran"),
 );
 
-const isUserAuthenticated = (linkData) => {
-  if (linkData === null || linkData === undefined) {
+const makeFileUrl = (fileId) => {
+  if (!fileId || fileId === "undefined") {
     return null;
-  } else if (status.value === "unauthenticated") {
-    accessText.value = "Anda tidak dapat mengakses";
-    return accessText.value;
-  } else if (status.value === "authenticated") {
-    accessText.value = "Dapat mengakses";
-    return `${config.directusUrl}assets/${linkData}`;
-  } else {
-    console.log("something is missing!");
   }
+  return `${config.directusUrl}assets/${fileId}`;
 };
 
 const dataObjectTA = {
   npm: getTesisData.npm,
-  fileCover: config.directusUrl + "assets/" + fileCover?.id,
-  fileAbstrak: config.directusUrl + "assets/" + fileAbstrak?.id,
-  fileDaftarIsi: config.directusUrl + "assets/" + fileDaftarIsi?.id,
-  fileBab1: config.directusUrl + "assets/" + fileBab1?.id,
-  fileBab2: isUserAuthenticated(fileBab2?.id),
-  fileBab3: isUserAuthenticated(fileBab3?.id),
-  fileBab4: isUserAuthenticated(fileBab4?.id),
-  fileBab5: isUserAuthenticated(fileBab5?.id),
-  fileBab6: isUserAuthenticated(fileBab6?.id),
-  fileLampiran: isUserAuthenticated(fileLampiran?.id),
-  filePustaka: config.directusUrl + "assets/" + fileDaftarPustaka?.id,
-  fileFullText: isUserAuthenticated(fileFull?.id),
+  fileCover: makeFileUrl(fileCover?.id),
+  fileAbstrak: makeFileUrl(fileAbstrak?.id),
+  fileDaftarIsi: makeFileUrl(fileDaftarIsi?.id),
+  fileBab1: makeFileUrl(fileBab1?.id),
+  fileBab2: makeFileUrl(fileBab2?.id),
+  fileBab3: makeFileUrl(fileBab3?.id),
+  fileBab4: makeFileUrl(fileBab4?.id),
+  fileBab5: makeFileUrl(fileBab5?.id),
+  fileBab6: makeFileUrl(fileBab6?.id),
+  fileLampiran: makeFileUrl(fileLampiran?.id),
+  filePustaka: makeFileUrl(fileDaftarPustaka?.id),
+  fileFullText: makeFileUrl(fileFull?.id),
   judul: getTesisData.judul,
   author: getTesisData.nama,
   namaFakultas: fakultas.cariFakultas(getTesisData.npm),
@@ -132,10 +125,9 @@ const dataObjectTA = {
         </button>
       </div>
     </div>
-    <section>
+    <section class="mb-20">
       <CollectionRepositoryItem v-bind="dataObjectTA" />
     </section>
-    <div>{{ fileLampiran }}</div>
   </section>
 </template>
 

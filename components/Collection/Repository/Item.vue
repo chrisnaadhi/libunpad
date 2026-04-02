@@ -1,6 +1,6 @@
 <script setup>
 const { status } = useAuth();
-const notAllowedNpm = ref(["170310080038"]);
+const notAllowedNpm = ref([]); // unused kept as placeholder, remove if not needed
 
 defineProps({
   npm: String,
@@ -32,16 +32,13 @@ defineProps({
   verifikasi: Boolean,
 });
 
-function isAccessible(linkData) {
-  if (linkData === null) {
-    return "e-not-found";
-  } else if (status.value === "authenticated") {
-    return "auth-true";
-  } else if (status.value === "unauthenticated") {
-    return "auth-false";
-  } else {
-    return "file-not-found";
-  }
+function getFileStatusClass(url) {
+  if (!url || url === "undefined") return "file-not-found";
+  return "auth-true";
+}
+
+function hasFile(url) {
+  return Boolean(url && url !== "undefined");
 }
 
 const limitText = (text) => {
@@ -107,8 +104,8 @@ const limitText = (text) => {
             <tr class="text-left">
               <td class="font-semibold w-35">Cover</td>
               <td class="flex">
-                <div class="auth-true"></div>
-                <span v-if="fileCover">
+                <div :class="getFileStatusClass(fileCover)"></div>
+                <span v-if="hasFile(fileCover)">
                   <NuxtLink
                     :to="fileCover"
                     target="_blank"
@@ -117,19 +114,16 @@ const limitText = (text) => {
                     >Download</NuxtLink
                   >
                 </span>
-                <span v-else-if="fileCover === null">
+                <span v-else>
                   <p>File tidak tersedia</p>
-                </span>
-                <span v-else-if="status === 'unauthenticated'">
-                  <p>Anda tidak memiliki Akses</p>
                 </span>
               </td>
             </tr>
             <tr class="text-left">
               <td class="font-semibold w-35">Abstrak</td>
               <td class="flex">
-                <div class="auth-true"></div>
-                <span v-if="fileAbstrak">
+                <div :class="getFileStatusClass(fileAbstrak)"></div>
+                <span v-if="hasFile(fileAbstrak)">
                   <NuxtLink
                     :to="fileAbstrak"
                     target="_blank"
@@ -138,19 +132,16 @@ const limitText = (text) => {
                     >Download</NuxtLink
                   >
                 </span>
-                <span v-else-if="fileAbstrak === null">
+                <span v-else>
                   <p>File tidak tersedia</p>
-                </span>
-                <span v-else-if="status === 'unauthenticated'">
-                  <p>Anda tidak memiliki Akses</p>
                 </span>
               </td>
             </tr>
             <tr class="text-left">
               <td class="font-semibold w-35">Daftar Isi</td>
               <td class="flex">
-                <div class="auth-true"></div>
-                <span v-if="fileDaftarIsi">
+                <div :class="getFileStatusClass(fileDaftarIsi)"></div>
+                <span v-if="hasFile(fileDaftarIsi)">
                   <NuxtLink
                     :to="fileDaftarIsi"
                     target="_blank"
@@ -159,19 +150,16 @@ const limitText = (text) => {
                     >Download</NuxtLink
                   >
                 </span>
-                <span v-else-if="fileDaftarIsi === null">
+                <span v-else>
                   <p>File tidak tersedia</p>
-                </span>
-                <span v-else-if="status === 'unauthenticated'">
-                  <p>Anda tidak memiliki Akses</p>
                 </span>
               </td>
             </tr>
             <tr class="text-left">
               <td class="font-semibold w-35">Bab 1</td>
               <td class="flex">
-                <div class="auth-true"></div>
-                <span v-if="fileBab1">
+                <div :class="getFileStatusClass(fileBab1)"></div>
+                <span v-if="hasFile(fileBab1)">
                   <NuxtLink
                     :to="fileBab1"
                     target="_blank"
@@ -180,19 +168,16 @@ const limitText = (text) => {
                     >Download</NuxtLink
                   >
                 </span>
-                <span v-else-if="fileBab1 === null">
+                <span v-else>
                   <p>File tidak tersedia</p>
-                </span>
-                <span v-else-if="status === 'unauthenticated'">
-                  <p>Anda tidak memiliki Akses</p>
                 </span>
               </td>
             </tr>
             <tr class="text-left">
               <td class="font-semibold w-35">Bab 2</td>
               <td class="flex">
-                <div :class="isAccessible(fileBab2)"></div>
-                <span v-if="status === 'authenticated' && fileBab2">
+                <div :class="getFileStatusClass(fileBab2)"></div>
+                <span v-if="hasFile(fileBab2)">
                   <NuxtLink
                     :to="fileBab2"
                     target="_blank"
@@ -201,19 +186,16 @@ const limitText = (text) => {
                     >Download</NuxtLink
                   >
                 </span>
-                <span v-else-if="fileBab2 === null">
+                <span v-else>
                   <p>File tidak tersedia</p>
-                </span>
-                <span v-else-if="status === 'unauthenticated'">
-                  <p>Anda tidak memiliki Akses</p>
                 </span>
               </td>
             </tr>
             <tr class="text-left">
               <td class="font-semibold w-35">Bab 3</td>
               <td class="flex">
-                <div :class="isAccessible(fileBab3)"></div>
-                <span v-if="status === 'authenticated' && fileBab3">
+                <div :class="getFileStatusClass(fileBab3)"></div>
+                <span v-if="hasFile(fileBab3)">
                   <NuxtLink
                     :to="fileBab3"
                     target="_blank"
@@ -222,19 +204,16 @@ const limitText = (text) => {
                     >Download</NuxtLink
                   >
                 </span>
-                <span v-else-if="fileBab3 === null">
+                <span v-else>
                   <p>File tidak tersedia</p>
-                </span>
-                <span v-else-if="status === 'unauthenticated'">
-                  <p>Anda tidak memiliki Akses</p>
                 </span>
               </td>
             </tr>
             <tr class="text-left">
               <td class="font-semibold w-35">Bab 4</td>
               <td class="flex">
-                <div :class="isAccessible(fileBab4)"></div>
-                <span v-if="status === 'authenticated' && fileBab4">
+                <div :class="getFileStatusClass(fileBab4)"></div>
+                <span v-if="hasFile(fileBab4)">
                   <NuxtLink
                     :to="fileBab4"
                     target="_blank"
@@ -243,19 +222,16 @@ const limitText = (text) => {
                     >Download</NuxtLink
                   >
                 </span>
-                <span v-else-if="fileBab4 === null">
+                <span v-else>
                   <p>File tidak tersedia</p>
-                </span>
-                <span v-else-if="status === 'unauthenticated'">
-                  <p>Anda tidak memiliki Akses</p>
                 </span>
               </td>
             </tr>
             <tr class="text-left">
               <td class="font-semibold w-35">Bab 5</td>
               <td class="flex">
-                <div :class="isAccessible(fileBab5)"></div>
-                <span v-if="status === 'authenticated' && fileBab5">
+                <div :class="getFileStatusClass(fileBab5)"></div>
+                <span v-if="hasFile(fileBab5)">
                   <NuxtLink
                     :to="fileBab5"
                     target="_blank"
@@ -264,19 +240,16 @@ const limitText = (text) => {
                     >Download</NuxtLink
                   >
                 </span>
-                <span v-else-if="fileBab5 === null">
+                <span v-else>
                   <p>File tidak tersedia</p>
-                </span>
-                <span v-else-if="status === 'unauthenticated'">
-                  <p>Anda tidak memiliki Akses</p>
                 </span>
               </td>
             </tr>
             <tr class="text-left">
               <td class="font-semibold w-35">Bab 6</td>
               <td class="flex">
-                <div :class="isAccessible(fileBab6)"></div>
-                <span v-if="status === 'authenticated' && fileBab6">
+                <div :class="getFileStatusClass(fileBab6)"></div>
+                <span v-if="hasFile(fileBab6)">
                   <NuxtLink
                     :to="fileBab6"
                     target="_blank"
@@ -285,35 +258,16 @@ const limitText = (text) => {
                     >Download</NuxtLink
                   >
                 </span>
-                <span v-else-if="fileBab6 === null">
+                <span v-else>
                   <p>File tidak tersedia</p>
-                </span>
-                <span v-else-if="status === 'unauthenticated'">
-                  <p>Anda tidak memiliki Akses</p>
                 </span>
               </td>
             </tr>
             <tr class="text-left">
               <td class="font-semibold w-35">Lampiran</td>
               <td class="flex">
-                <div :class="isAccessible(fileLampiran)"></div>
-                <span
-                  v-if="
-                    status === 'authenticated' &&
-                    fileLampiran &&
-                    fileLampiran !== undefined &&
-                    notAllowedNpm?.includes(npm)
-                  "
-                >
-                  <p>Anda tidak memiliki Akses</p>
-                </span>
-                <span
-                  v-else-if="
-                    status === 'authenticated' &&
-                    fileLampiran &&
-                    fileLampiran !== undefined
-                  "
-                >
+                <div :class="getFileStatusClass(fileLampiran)"></div>
+                <span v-if="hasFile(fileLampiran)">
                   <NuxtLink
                     :to="fileLampiran"
                     target="_blank"
@@ -322,23 +276,16 @@ const limitText = (text) => {
                     >Download</NuxtLink
                   >
                 </span>
-                <span
-                  v-else-if="
-                    fileLampiran === null || fileLampiran === undefined
-                  "
-                >
+                <span v-else>
                   <p>File tidak tersedia</p>
-                </span>
-                <span v-else-if="status === 'unauthenticated'">
-                  <p>Anda tidak memiliki Akses</p>
                 </span>
               </td>
             </tr>
             <tr class="text-left">
               <td class="font-semibold w-35">Daftar Pustaka</td>
               <td class="flex">
-                <div class="auth-true"></div>
-                <span v-if="filePustaka">
+                <div :class="getFileStatusClass(filePustaka)"></div>
+                <span v-if="hasFile(filePustaka)">
                   <NuxtLink
                     :to="filePustaka"
                     target="_blank"
@@ -347,19 +294,16 @@ const limitText = (text) => {
                     >Download</NuxtLink
                   >
                 </span>
-                <span v-else-if="fileFullText === null">
+                <span v-else>
                   <p>File tidak tersedia</p>
-                </span>
-                <span v-else-if="status === 'unauthenticated'">
-                  <p>Anda tidak memiliki Akses</p>
                 </span>
               </td>
             </tr>
             <tr class="text-left">
               <td class="font-semibold w-35">Full Text</td>
               <td class="flex">
-                <div :class="isAccessible(fileFullText)"></div>
-                <span v-if="status === 'authenticated' && fileFullText">
+                <div :class="getFileStatusClass(fileFullText)"></div>
+                <span v-if="hasFile(fileFullText)">
                   <NuxtLink
                     :to="fileFullText"
                     target="_blank"
@@ -368,11 +312,8 @@ const limitText = (text) => {
                     >Download</NuxtLink
                   >
                 </span>
-                <span v-else-if="fileFullText === null">
+                <span v-else>
                   <p>File tidak tersedia</p>
-                </span>
-                <span v-else-if="status === 'unauthenticated'">
-                  <p>Anda tidak memiliki Akses</p>
                 </span>
               </td>
             </tr>
@@ -442,7 +383,8 @@ section {
 }
 
 .cover-section {
-  --at-apply: bg-white max-w-55 ma border-2 border-unpad min-h-75 rounded text-center flex flex-col items-center justify-around;
+  --at-apply: bg-white max-w-55 ma border-2 border-unpad min-h-75 rounded
+    text-center flex flex-col items-center justify-around;
 }
 
 table {
@@ -470,6 +412,6 @@ td {
 }
 
 .metadata-title {
-  --at-apply: w-full lg:w-25;
+  --at-apply: w-full lg: w-25;
 }
 </style>
