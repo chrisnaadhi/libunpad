@@ -12,7 +12,7 @@ export default defineNuxtConfig({
   },
 
   devtools: {
-    enabled: true
+    enabled: true,
   },
 
   routeRules: {
@@ -20,7 +20,7 @@ export default defineNuxtConfig({
     "/visitor/rekap": { redirect: "/error" },
     "/pengajuan/unggah-mandiri/submit/**": {
       redirect: "/pengajuan/unggah-mandiri",
-    }
+    },
   },
 
   modules: [
@@ -33,6 +33,7 @@ export default defineNuxtConfig({
     "@sidebase/nuxt-auth",
     "@nuxtjs/plausible",
     "@nuxtjs/turnstile",
+    "nuxt-gtag",
   ],
 
   unocss: {
@@ -104,7 +105,7 @@ export default defineNuxtConfig({
     dbPassword: process.env.KANDAGA_DRIZZLE_PASSWORD,
     dbPort: Number(process.env.KANDAGA_DRIZZLE_PORT),
     turnstile: {
-      secretKey: process.env.KANDAGA_TURNSTILE_SECRETKEY
+      secretKey: process.env.KANDAGA_TURNSTILE_SECRETKEY,
     },
     public: {
       meiliHost: process.env.KANDAGA_MEILI_HOST,
@@ -147,5 +148,8 @@ export default defineNuxtConfig({
   },
   turnstile: {
     siteKey: process.env.KANDAGA_TURNSTILE_SITEKEY,
-  }
+  },
+  gtag: {
+    id: process.env.KANDAGA_GTAG_ID,
+  },
 });

@@ -10,6 +10,7 @@
   "devDependencies": {
     "@iconify-json/mdi": "^1.2.3",
     "@nuxt/image": "^2.0.0",
+    "@nuxtjs/google-analytics": "^2.4.0",
     "@nuxtjs/i18n": "^10.2.3",
     "@nuxtjs/plausible": "^3.0.2",
     "@nuxtjs/turnstile": "^1.1.1",
@@ -17,10 +18,19 @@
     "@unocss/nuxt": "^66.6.5",
     "dayjs-nuxt": "^2.1.11",
     "drizzle-kit": "^0.31.9",
-    "nuxt": "^4.3.1"
+    "nuxt": "^4.3.1",
+    "nuxt-gtag": "4.1.0"
   },
   "dependencies": {
     "@directus/sdk": "^21.2.0",
+    "@opentelemetry/api": "^1.9.1",
+    "@opentelemetry/auto-instrumentations-node": "^0.72.0",
+    "@opentelemetry/exporter-logs-otlp-proto": "^0.214.0",
+    "@opentelemetry/exporter-trace-otlp-proto": "^0.214.0",
+    "@opentelemetry/resources": "^2.6.1",
+    "@opentelemetry/sdk-logs": "^0.214.0",
+    "@opentelemetry/sdk-node": "^0.214.0",
+    "@opentelemetry/semantic-conventions": "^1.40.0",
     "@pinia/nuxt": "^0.11.3",
     "@popperjs/core": "^2.11.8",
     "@splidejs/vue-splide": "^0.6.12",
