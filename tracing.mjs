@@ -2,10 +2,10 @@
 import { getNodeAutoInstrumentations } from "@opentelemetry/auto-instrumentations-node";
 import { OTLPLogExporter } from "@opentelemetry/exporter-logs-otlp-proto";
 import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-proto";
+import resourcesPkg from "@opentelemetry/resources";
 import { SimpleLogRecordProcessor } from "@opentelemetry/sdk-logs";
 import { NodeSDK } from "@opentelemetry/sdk-node";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Resource } from "@opentelemetry/resources";
+const { Resource } = resourcesPkg;
 
 const endpoint = process.env.KANDAGA_OTEL_ENDPOINT;
 const auth = process.env.KANDAGA_OTEL_AUTH;
