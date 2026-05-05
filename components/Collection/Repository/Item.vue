@@ -1,8 +1,6 @@
 <script setup>
-const { status } = useAuth();
-const notAllowedNpm = ref([]); // unused kept as placeholder, remove if not needed
-
-defineProps({
+import { computed, toRefs } from "vue";
+const props = defineProps({
   npm: String,
   fileCover: String,
   fileAbstrak: String,
@@ -30,15 +28,97 @@ defineProps({
   idPustaka: Number,
   stPublikasi: Boolean,
   verifikasi: Boolean,
+  isAuthenticated: {
+    type: Boolean,
+    default: false,
+  },
+  isAllowedPublicAccess: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-function getFileStatusClass(url) {
+const {
+  fileCover,
+  fileAbstrak,
+  fileDaftarIsi,
+  fileBab1,
+  fileBab2,
+  fileBab3,
+  fileBab4,
+  fileBab5,
+  fileBab6,
+  fileLampiran,
+  filePustaka,
+  fileFullText,
+  judul,
+  author,
+  namaFakultas,
+  abstrak,
+  bahasa,
+  keywords,
+  tglUpload,
+  idPustaka,
+  stPublikasi,
+  verifikasi,
+  isAuthenticated,
+  isAllowedPublicAccess,
+} = toRefs(props);
+
+const fileAccessLevel = {
+  fileCover: "public",
+  fileAbstrak: "public",
+  fileDaftarIsi: "public",
+  fileBab1: "public",
+  fileBab2: "protected",
+  fileBab3: "protected",
+  fileBab4: "protected",
+  fileBab5: "protected",
+  fileBab6: "protected",
+  fileLampiran: "protected",
+  filePustaka: "public",
+  fileFullText: "protected",
+};
+
+const fileRows = computed(() => [
+  { label: "Cover", key: "fileCover", url: fileCover.value },
+  { label: "Abstrak", key: "fileAbstrak", url: fileAbstrak.value },
+  { label: "Daftar Isi", key: "fileDaftarIsi", url: fileDaftarIsi.value },
+  { label: "Bab 1", key: "fileBab1", url: fileBab1.value },
+  { label: "Bab 2", key: "fileBab2", url: fileBab2.value },
+  { label: "Bab 3", key: "fileBab3", url: fileBab3.value },
+  { label: "Bab 4", key: "fileBab4", url: fileBab4.value },
+  { label: "Bab 5", key: "fileBab5", url: fileBab5.value },
+  { label: "Bab 6", key: "fileBab6", url: fileBab6.value },
+  { label: "Lampiran", key: "fileLampiran", url: fileLampiran.value },
+  { label: "Daftar Pustaka", key: "filePustaka", url: filePustaka.value },
+  { label: "Full Text", key: "fileFullText", url: fileFullText.value },
+]);
+
+function getFileStatusClass(url, key) {
   if (!url || url === "undefined") return "file-not-found";
-  return "auth-true";
+  return canDownload(url, key) ? "auth-true" : "auth-false";
 }
 
 function hasFile(url) {
   return Boolean(url && url !== "undefined");
+}
+
+function canDownload(url, key) {
+  if (!hasFile(url)) return false;
+  const access = fileAccessLevel[key] ?? "protected";
+  return (
+    access === "public" || isAuthenticated.value || isAllowedPublicAccess.value
+  );
+}
+
+function isRestricted(url, key) {
+  return (
+    hasFile(url) &&
+    fileAccessLevel[key] === "protected" &&
+    !isAuthenticated.value &&
+    !isAllowedPublicAccess.value
+  );
 }
 
 const limitText = (text) => {
@@ -101,216 +181,21 @@ const limitText = (text) => {
             </tr>
           </thead>
           <tbody>
-            <tr class="text-left">
-              <td class="font-semibold w-35">Cover</td>
+            <tr v-for="row in fileRows" :key="row.key" class="text-left">
+              <td class="font-semibold w-35">{{ row.label }}</td>
               <td class="flex">
-                <div :class="getFileStatusClass(fileCover)"></div>
-                <span v-if="hasFile(fileCover)">
+                <div :class="getFileStatusClass(row.url, row.key)"></div>
+                <span v-if="canDownload(row.url, row.key)">
                   <NuxtLink
-                    :to="fileCover"
+                    :to="row.url"
                     target="_blank"
                     no-rel
                     :external="true"
                     >Download</NuxtLink
                   >
                 </span>
-                <span v-else>
-                  <p>File tidak tersedia</p>
-                </span>
-              </td>
-            </tr>
-            <tr class="text-left">
-              <td class="font-semibold w-35">Abstrak</td>
-              <td class="flex">
-                <div :class="getFileStatusClass(fileAbstrak)"></div>
-                <span v-if="hasFile(fileAbstrak)">
-                  <NuxtLink
-                    :to="fileAbstrak"
-                    target="_blank"
-                    no-rel
-                    :external="true"
-                    >Download</NuxtLink
-                  >
-                </span>
-                <span v-else>
-                  <p>File tidak tersedia</p>
-                </span>
-              </td>
-            </tr>
-            <tr class="text-left">
-              <td class="font-semibold w-35">Daftar Isi</td>
-              <td class="flex">
-                <div :class="getFileStatusClass(fileDaftarIsi)"></div>
-                <span v-if="hasFile(fileDaftarIsi)">
-                  <NuxtLink
-                    :to="fileDaftarIsi"
-                    target="_blank"
-                    no-rel
-                    :external="true"
-                    >Download</NuxtLink
-                  >
-                </span>
-                <span v-else>
-                  <p>File tidak tersedia</p>
-                </span>
-              </td>
-            </tr>
-            <tr class="text-left">
-              <td class="font-semibold w-35">Bab 1</td>
-              <td class="flex">
-                <div :class="getFileStatusClass(fileBab1)"></div>
-                <span v-if="hasFile(fileBab1)">
-                  <NuxtLink
-                    :to="fileBab1"
-                    target="_blank"
-                    no-rel
-                    :external="true"
-                    >Download</NuxtLink
-                  >
-                </span>
-                <span v-else>
-                  <p>File tidak tersedia</p>
-                </span>
-              </td>
-            </tr>
-            <tr class="text-left">
-              <td class="font-semibold w-35">Bab 2</td>
-              <td class="flex">
-                <div :class="getFileStatusClass(fileBab2)"></div>
-                <span v-if="hasFile(fileBab2)">
-                  <NuxtLink
-                    :to="fileBab2"
-                    target="_blank"
-                    no-rel
-                    :external="true"
-                    >Download</NuxtLink
-                  >
-                </span>
-                <span v-else>
-                  <p>File tidak tersedia</p>
-                </span>
-              </td>
-            </tr>
-            <tr class="text-left">
-              <td class="font-semibold w-35">Bab 3</td>
-              <td class="flex">
-                <div :class="getFileStatusClass(fileBab3)"></div>
-                <span v-if="hasFile(fileBab3)">
-                  <NuxtLink
-                    :to="fileBab3"
-                    target="_blank"
-                    no-rel
-                    :external="true"
-                    >Download</NuxtLink
-                  >
-                </span>
-                <span v-else>
-                  <p>File tidak tersedia</p>
-                </span>
-              </td>
-            </tr>
-            <tr class="text-left">
-              <td class="font-semibold w-35">Bab 4</td>
-              <td class="flex">
-                <div :class="getFileStatusClass(fileBab4)"></div>
-                <span v-if="hasFile(fileBab4)">
-                  <NuxtLink
-                    :to="fileBab4"
-                    target="_blank"
-                    no-rel
-                    :external="true"
-                    >Download</NuxtLink
-                  >
-                </span>
-                <span v-else>
-                  <p>File tidak tersedia</p>
-                </span>
-              </td>
-            </tr>
-            <tr class="text-left">
-              <td class="font-semibold w-35">Bab 5</td>
-              <td class="flex">
-                <div :class="getFileStatusClass(fileBab5)"></div>
-                <span v-if="hasFile(fileBab5)">
-                  <NuxtLink
-                    :to="fileBab5"
-                    target="_blank"
-                    no-rel
-                    :external="true"
-                    >Download</NuxtLink
-                  >
-                </span>
-                <span v-else>
-                  <p>File tidak tersedia</p>
-                </span>
-              </td>
-            </tr>
-            <tr class="text-left">
-              <td class="font-semibold w-35">Bab 6</td>
-              <td class="flex">
-                <div :class="getFileStatusClass(fileBab6)"></div>
-                <span v-if="hasFile(fileBab6)">
-                  <NuxtLink
-                    :to="fileBab6"
-                    target="_blank"
-                    no-rel
-                    :external="true"
-                    >Download</NuxtLink
-                  >
-                </span>
-                <span v-else>
-                  <p>File tidak tersedia</p>
-                </span>
-              </td>
-            </tr>
-            <tr class="text-left">
-              <td class="font-semibold w-35">Lampiran</td>
-              <td class="flex">
-                <div :class="getFileStatusClass(fileLampiran)"></div>
-                <span v-if="hasFile(fileLampiran)">
-                  <NuxtLink
-                    :to="fileLampiran"
-                    target="_blank"
-                    no-rel
-                    :external="true"
-                    >Download</NuxtLink
-                  >
-                </span>
-                <span v-else>
-                  <p>File tidak tersedia</p>
-                </span>
-              </td>
-            </tr>
-            <tr class="text-left">
-              <td class="font-semibold w-35">Daftar Pustaka</td>
-              <td class="flex">
-                <div :class="getFileStatusClass(filePustaka)"></div>
-                <span v-if="hasFile(filePustaka)">
-                  <NuxtLink
-                    :to="filePustaka"
-                    target="_blank"
-                    no-rel
-                    :external="true"
-                    >Download</NuxtLink
-                  >
-                </span>
-                <span v-else>
-                  <p>File tidak tersedia</p>
-                </span>
-              </td>
-            </tr>
-            <tr class="text-left">
-              <td class="font-semibold w-35">Full Text</td>
-              <td class="flex">
-                <div :class="getFileStatusClass(fileFullText)"></div>
-                <span v-if="hasFile(fileFullText)">
-                  <NuxtLink
-                    :to="fileFullText"
-                    target="_blank"
-                    no-rel
-                    :external="true"
-                    >Download</NuxtLink
-                  >
+                <span v-else-if="isRestricted(row.url, row.key)">
+                  <p>Anda tidak dapat mengakses</p>
                 </span>
                 <span v-else>
                   <p>File tidak tersedia</p>

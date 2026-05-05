@@ -1,8 +1,18 @@
 <script setup>
+import { computed } from "vue";
 const route = useRoute();
 const { status, signIn, signOut, data } = useAuth();
 const { getItemById } = useDirectusItems();
 const fakultas = daftarNamaFakultasUnpad();
+const isAuthenticated = computed(() => status.value === "authenticated");
+
+const allowedPublicNPM = [
+  // Add NPM values here that should bypass protected-file login restrictions
+  // Example: "1901234567"
+];
+const isAllowedPublicAccess = computed(() =>
+  allowedPublicNPM.includes(String(route.params.npm)),
+);
 
 const accessText = ref("");
 
@@ -46,14 +56,25 @@ const createSecurePath = (link) => {
   if (!link) {
     return null;
   }
-  return link.replace("http://", "https://");
+
+  return link
+    .replace(/^http:\/\//i, "https://")
+    .replace("media.unpad.ac.id", "repository.unpad.ac.id");
 };
 
 const makeFileUrl = (filePath) => {
   if (!filePath || filePath === "undefined") {
     return null;
   }
-  return `${finalDataTA.LinkPath}${filePath}`;
+
+  const url =
+    filePath.startsWith("http://") || filePath.startsWith("https://")
+      ? filePath
+      : `${finalDataTA.LinkPath}${filePath}`;
+
+  return url
+    .replace(/^http:\/\//i, "https://")
+    .replace("media.unpad.ac.id", "repository.unpad.ac.id");
 };
 
 finalDataTA.LinkPath = createSecurePath(finalDataTA.LinkPath);
@@ -231,7 +252,11 @@ useHead({
         </button>
       </div>
     </div>
-    <CollectionRepositoryItem v-bind="dataObjectTA" />
+    <CollectionRepositoryItem
+      v-bind="dataObjectTA"
+      :isAuthenticated="isAuthenticated"
+      :isAllowedPublicAccess="isAllowedPublicAccess"
+    />
     <div class="max-w-6xl ma pt-5">
       <h3>Cite this paper</h3>
       <div class="tab-title">
