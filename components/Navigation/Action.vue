@@ -1,7 +1,8 @@
-<script setup>
+<script setup lang="ts">
 import { mobileMenu } from "~/composables/navMenu";
 
 const { status, data, signOut } = useAuth();
+const config = useRuntimeConfig();
 const emit = defineEmits(["toggle"]);
 const menuState = mobileMenu();
 const viewDropdown = ref(false);
@@ -18,7 +19,18 @@ const logout = async () => {
   const dSpaceAccess = useCookie("dsAccessToken");
   dSpaceAccess.value = null;
 
-  await signOut();
+  if ((data.value as Record<string, any>)?.provider === "paus") {
+    await signOut({ redirect: false });
+    const pausSignOutUrl = new URL("https://paus.unpad.ac.id/oauth/sign-out");
+    pausSignOutUrl.searchParams.set(
+      "client_id",
+      config.public.pausClientId as string,
+    );
+    pausSignOutUrl.searchParams.set("redirect_uri", window.location.origin);
+    window.location.href = pausSignOutUrl.toString();
+  } else {
+    await signOut();
+  }
 };
 </script>
 
@@ -96,7 +108,7 @@ const logout = async () => {
 
 <style scoped>
 .action-group {
-  --at-apply: flex ml-0 md:(ml-12);
+  --at-apply: flex ml-0 md: ml-12;
 }
 
 .action-group button {
@@ -104,11 +116,12 @@ const logout = async () => {
 }
 
 .login {
-  --at-apply: bg-unpad text-white py-3 hidden xl:block;
+  --at-apply: bg-unpad text-white py-3 hidden xl: block;
 }
 
 .account-dropdown {
-  --at-apply: absolute right-100% bg-white/80 border border-unpad min-w-60 mr--10 py-2 px-5 my-2 rounded text-right;
+  --at-apply: absolute right-100% bg-white/80 border border-unpad min-w-60
+    mr--10 py-2 px-5 my-2 rounded text-right;
 }
 
 .mode {
@@ -116,6 +129,6 @@ const logout = async () => {
 }
 
 .hamburger {
-  --at-apply: py-0 block xl:(hidden);
+  --at-apply: py-0 block xl: hidden;
 }
 </style>

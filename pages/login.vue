@@ -11,7 +11,7 @@ const passwordType = ref("password");
 const email = ref("");
 const password = ref("");
 const defaultLoginNotif = ref(
-  "Login khusus Staff Kandaga, jika anda bukan staff silahkan login dengan mengklik tombol PAuS E-Mail di bagian Login Mahasiswa / Dosen / Tenaga Kependidikan."
+  "Login khusus Staff Kandaga, jika anda bukan staff silahkan login dengan mengklik tombol PAuS E-Mail di bagian Login Mahasiswa / Dosen / Tenaga Kependidikan.",
 );
 const loginNotif = ref(defaultLoginNotif.value);
 const textLogin = ref("text-dark");
@@ -97,6 +97,10 @@ const googleLogin = async () => {
   console.log(route.query.redir);
 };
 
+const pausLogin = async () => {
+  await signIn("paus", { callbackUrl: route.query.redir ?? "/" });
+};
+
 const errorLogger = () => {
   console.log(error.value);
 };
@@ -177,17 +181,34 @@ definePageMeta({
           src="/illustration/undraw_secure_login.png"
           class="w-70"
         />
-        <button
-          class="form-btn"
-          :class="email || password ? 'disable-btn' : 'oauth-btn'"
-          @click="googleLogin"
-          :disable="email.length > 0"
-        >
-          <span>
-            <img src="/images/lambang-unpad.png" class="w-8 h-8" alt="" />
-          </span>
-          PAuS Email
-        </button>
+        <div class="flex flex-col gap-3 w-full">
+          <!-- PAuS SSO — primary highlighted button -->
+          <button
+            class="paus-btn-primary"
+            :class="email || password ? 'disable-btn' : ''"
+            @click="pausLogin"
+            :disabled="email.length > 0 || password.length > 0"
+          >
+            <img src="/images/lambang-unpad.png" class="w-10 h-10" alt="" />
+            <span class="flex flex-col text-left leading-tight">
+              <span class="text-base font-700">Login dengan PAuS SSO</span>
+              <span class="text-xs opacity-80 font-400"
+                >Mahasiswa / Dosen / Tendik Unpad</span
+              >
+            </span>
+          </button>
+
+          <!-- Google fallback — smaller secondary link -->
+          <button
+            class="google-btn"
+            :class="email || password ? 'disable-btn' : ''"
+            @click="googleLogin"
+            :disabled="email.length > 0"
+          >
+            <img src="/images/lambang-unpad.png" class="w-5 h-5" alt="" />
+            Atau login via PAuS Email (Google)
+          </button>
+        </div>
       </div>
     </div>
   </main>
@@ -207,7 +228,8 @@ input {
 }
 
 .form-btn {
-  --at-apply: btn flex items-center justify-center gap-2 w-full py-3 text-white font-semibold;
+  --at-apply: btn flex items-center justify-center gap-2 w-full py-3 text-white
+    font-semibold;
 }
 
 .disable-btn {
@@ -219,6 +241,24 @@ input {
 }
 
 .oauth-btn {
-  --at-apply: bg-yellow-2 text-dark border border-unpad border-2 cursor-pointer transition-all-500 hover:(bg-unpad text-white);
+  --at-apply: bg-yellow-2 text-dark border border-unpad border-2 cursor-pointer
+    transition-all-500 hover: bg-unpad hover: text-white;
+}
+
+.paus-btn {
+  --at-apply: bg-unpad text-white border border-unpad border-2 cursor-pointer
+    transition-all-500 hover: opacity-80;
+}
+
+.paus-btn-primary {
+  --at-apply: btn flex items-center gap-4 w-full px-5 py-4 bg-unpad text-white
+    border-2 border-unpad rounded-xl cursor-pointer transition-all-300
+    hover: brightness-110 shadow-md;
+}
+
+.google-btn {
+  --at-apply: btn flex items-center justify-center gap-2 w-full py-2 text-sm
+    text-gray-6 bg-gray-1 border border-gray-3 rounded-lg cursor-pointer
+    transition-all-200 hover: bg-gray-2;
 }
 </style>

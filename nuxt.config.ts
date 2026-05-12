@@ -108,6 +108,7 @@ export default defineNuxtConfig({
       secretKey: process.env.KANDAGA_TURNSTILE_SECRETKEY,
     },
     public: {
+      pausClientId: process.env.KANDAGA_PAUS_CLIENT_ID,
       meiliHost: process.env.KANDAGA_MEILI_HOST,
       meiliApiKey: process.env.KANDAGA_MEILI_API_KEY,
       directusAuthToken: process.env.KANDAGA_DIRECTUS_ACCESS_TOKEN,

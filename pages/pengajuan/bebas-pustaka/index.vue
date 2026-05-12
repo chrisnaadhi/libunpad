@@ -6,7 +6,7 @@ const { createItems, getItems } = useDirectusItems();
 const dataFakultas = daftarNamaFakultasUnpad();
 const { data } = useAuth();
 
-const npm = ref("");
+const npm = ref(data.value?.user?.identifier ?? "");
 const notification = ref("Silahkan isi seluruh form sesuai dengan data asli");
 const textNotif = ref("text-dark");
 const namaLengkap = ref(data.value.user.name);
@@ -71,12 +71,13 @@ const isDup = await checkDuplicateSubmission();
 
 <template>
   <main class="min-h-screen bg-gray-50">
-
     <!-- Header Banner -->
     <div class="bg-gradient-to-br from-unpad to-kandaga">
       <div class="max-w-3xl ma px-4 py-8">
         <div class="flex items-center gap-3 mb-1">
-          <div class="i-mdi-certificate-outline w-7 h-7 text-white/80 shrink-0" />
+          <div
+            class="i-mdi-certificate-outline w-7 h-7 text-white/80 shrink-0"
+          />
           <h1 class="text-white text-xl sm:text-2xl font-700 m-0">
             Pengajuan Surat Bebas Pustaka
           </h1>
@@ -96,7 +97,6 @@ const isDup = await checkDuplicateSubmission();
 
     <!-- Content -->
     <div class="max-w-3xl ma px-4 py-6 flex flex-col gap-4">
-
       <!-- Already submitted state -->
       <div v-if="isDup" class="section-card">
         <div class="section-card-header">
@@ -105,13 +105,16 @@ const isDup = await checkDuplicateSubmission();
         </div>
         <div class="p-5 sm:p-6 flex flex-col gap-4">
           <div class="info-box bg-red-50 border-red-2">
-            <div class="i-mdi-close-circle-outline w-4 h-4 shrink-0 text-red-5 mt-0.5" />
+            <div
+              class="i-mdi-close-circle-outline w-4 h-4 shrink-0 text-red-5 mt-0.5"
+            />
             <p class="text-sm text-red-7 font-medium">
               Anda sudah mengajukan Surat Bebas Pustaka.
             </p>
           </div>
           <p class="text-sm text-gray-6">
-            Untuk mengecek status persuratan anda, silahkan akses halaman keanggotaan.
+            Untuk mengecek status persuratan anda, silahkan akses halaman
+            keanggotaan.
           </p>
           <NuxtLink
             to="/keanggotaan"
@@ -129,15 +132,19 @@ const isDup = await checkDuplicateSubmission();
           <div class="i-mdi-form-textbox w-5 h-5 text-unpad shrink-0" />
           <h2>Data Diri Pemohon</h2>
         </div>
-        <form @submit.prevent="kirimPengajuan" class="p-5 sm:p-6 flex flex-col gap-4">
-
+        <form
+          @submit.prevent="kirimPengajuan"
+          class="p-5 sm:p-6 flex flex-col gap-4"
+        >
           <div class="input-group">
             <label for="npm">NPM <span class="text-red-6">*</span></label>
             <input type="text" id="npm" v-model="npm" required />
           </div>
 
           <div class="input-group">
-            <label for="nama">Nama Lengkap <span class="text-red-6">*</span></label>
+            <label for="nama"
+              >Nama Lengkap <span class="text-red-6">*</span></label
+            >
             <input type="text" id="nama" v-model="namaLengkap" required />
           </div>
 
@@ -147,9 +154,13 @@ const isDup = await checkDuplicateSubmission();
           </div>
 
           <div class="input-group">
-            <label for="fakultas">Nama Fakultas <span class="text-red-6">*</span></label>
+            <label for="fakultas"
+              >Nama Fakultas <span class="text-red-6">*</span></label
+            >
             <select id="fakultas" v-model="fakultas" required>
-              <option value="" selected disabled>Silahkan pilih Nama Fakultas</option>
+              <option value="" selected disabled>
+                Silahkan pilih Nama Fakultas
+              </option>
               <option
                 v-for="fak in dataFakultas.daftarFakultas"
                 :key="fak.singkatan"
@@ -161,19 +172,27 @@ const isDup = await checkDuplicateSubmission();
           </div>
 
           <div class="input-group">
-            <label for="prodi">Nama Program Studi <span class="text-red-6">*</span></label>
+            <label for="prodi"
+              >Nama Program Studi <span class="text-red-6">*</span></label
+            >
             <input type="text" id="prodi" v-model="prodi" required />
           </div>
 
           <div class="input-group">
-            <label for="kontak">No. HP / Whatsapp <span class="text-red-6">*</span></label>
+            <label for="kontak"
+              >No. HP / Whatsapp <span class="text-red-6">*</span></label
+            >
             <input type="text" id="kontak" v-model="kontak" required />
           </div>
 
           <div class="input-group">
-            <label for="keperluan">Keperluan Pengajuan <span class="text-red-6">*</span></label>
+            <label for="keperluan"
+              >Keperluan Pengajuan <span class="text-red-6">*</span></label
+            >
             <select id="keperluan" v-model="keperluan" required>
-              <option value="" selected disabled>Silahkan pilih keperluan pengajuan</option>
+              <option value="" selected disabled>
+                Silahkan pilih keperluan pengajuan
+              </option>
               <option value="sidang">Sidang</option>
               <option value="wisuda">Wisuda</option>
               <option value="ijazah">Pengambilan Ijazah</option>
@@ -184,21 +203,31 @@ const isDup = await checkDuplicateSubmission();
           <!-- Notification -->
           <div
             class="info-box transition-all-200"
-            :class="textNotif === 'text-red-7' ? 'bg-red-50 border-red-2' : 'bg-gray-50 border-gray-2'"
+            :class="
+              textNotif === 'text-red-7'
+                ? 'bg-red-50 border-red-2'
+                : 'bg-gray-50 border-gray-2'
+            "
           >
             <div
               class="w-4 h-4 shrink-0 mt-0.5"
-              :class="textNotif === 'text-red-7' ? 'i-mdi-alert-outline text-red-5' : 'i-mdi-information-outline text-gray-4'"
+              :class="
+                textNotif === 'text-red-7'
+                  ? 'i-mdi-alert-outline text-red-5'
+                  : 'i-mdi-information-outline text-gray-4'
+              "
             />
             <p class="text-sm" :class="textNotif">{{ notification }}</p>
           </div>
 
-          <button type="submit" class="btn bg-orange text-white w-full py-2.5 font-600 text-base">
+          <button
+            type="submit"
+            class="btn bg-orange text-white w-full py-2.5 font-600 text-base"
+          >
             Kirim Pengajuan
           </button>
         </form>
       </div>
-
     </div>
   </main>
 </template>
@@ -209,11 +238,13 @@ h1 {
 }
 
 .section-card {
-  --at-apply: bg-white rounded-2xl shadow-sm border border-gray-2 overflow-hidden;
+  --at-apply: bg-white rounded-2xl shadow-sm border border-gray-2
+    overflow-hidden;
 }
 
 .section-card-header {
-  --at-apply: flex items-center gap-3 px-5 sm:px-6 py-4 border-b border-gray-1 bg-gray-50;
+  --at-apply: flex items-center gap-3 px-5 sm: px-6 py-4 border-b border-gray-1
+    bg-gray-50;
 }
 
 .section-card-header h2 {
@@ -234,7 +265,8 @@ label {
 
 input,
 select {
-  --at-apply: w-full bg-white border border-gray-2 rounded-xl p-2.5 text-sm text-gray-8 transition-colors-200;
+  --at-apply: w-full bg-white border border-gray-2 rounded-xl p-2.5 text-sm
+    text-gray-8 transition-colors-200;
 }
 
 input:focus,
