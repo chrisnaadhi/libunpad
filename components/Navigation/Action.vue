@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { mobileMenu } from "~/composables/navMenu";
 
-const { status, data, signOut } = useAuth();
-const config = useRuntimeConfig();
+const { status, signOut } = useAuth();
 const emit = defineEmits(["toggle"]);
 const menuState = mobileMenu();
 const viewDropdown = ref(false);
@@ -18,19 +17,7 @@ const toggleProfile = () => {
 const logout = async () => {
   const dSpaceAccess = useCookie("dsAccessToken");
   dSpaceAccess.value = null;
-
-  if ((data.value as Record<string, any>)?.provider === "paus") {
-    await signOut({ redirect: false });
-    const pausSignOutUrl = new URL("https://paus.unpad.ac.id/oauth/sign-out");
-    pausSignOutUrl.searchParams.set(
-      "client_id",
-      config.public.pausClientId as string,
-    );
-    pausSignOutUrl.searchParams.set("redirect_uri", window.location.origin);
-    window.location.href = pausSignOutUrl.toString();
-  } else {
-    await signOut();
-  }
+  await signOut();
 };
 </script>
 

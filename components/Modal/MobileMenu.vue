@@ -1,11 +1,13 @@
 <script setup>
-import { mobileMenu, menuContent } from "~/composables/navMenu";
+import { menuContent, mobileMenu } from "~/composables/navMenu";
 
 const { status, data, signOut } = useAuth();
 const menu = mobileMenu();
 const { layanan, tentang, koleksi, panduan } = menuContent();
 
 const logout = async () => {
+  const dSpaceAccess = useCookie("dsAccessToken");
+  dSpaceAccess.value = null;
   await signOut();
 };
 
@@ -154,6 +156,7 @@ const viewPanduan = () => {
 }
 
 .hover-menu {
-  --at-apply: transition-all-500 text-dark no-underline hover:(text-unpad underline);
+  --at-apply: transition-all-500 text-dark no-underline
+    hover: (text-unpad underline);
 }
 </style>
