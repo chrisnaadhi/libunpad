@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { mobileMenu } from "~/composables/navMenu";
 
-const { status, signOut } = useAuth();
+const { status, signOut, data } = useAuth();
 const emit = defineEmits(["toggle"]);
 const menuState = mobileMenu();
 const viewDropdown = ref(false);
@@ -22,7 +22,7 @@ const logout = async () => {
 </script>
 
 <template>
-  <div class="action-group xl:mr-0">
+  <div class="flex gap-2 pl-2 ml-0 md:ml-12 xl:mr-0">
     <button
       type="button"
       class="btn mode"
@@ -34,12 +34,21 @@ const logout = async () => {
     <div v-if="status === 'authenticated'" class="relative hidden xl:block">
       <img
         v-if="data?.user?.image"
-        :src="data?.user?.image ?? '/images/no-image.jpg'"
+        :src="data?.user?.image"
         class="w-10 h-10 rounded-full cursor-pointer"
         alt="Foto User"
         referrerpolicy="no-referrer"
         @click="toggleProfile"
       />
+      <button
+        v-else
+        type="button"
+        class="btn bg-unpad text-white py-3"
+        aria-label="Profile"
+        @click="toggleProfile"
+      >
+        <div class="i-mdi-account bg-white" />
+      </button>
       <div
         class="account-dropdown"
         v-show="viewDropdown"
@@ -64,12 +73,16 @@ const logout = async () => {
       </div>
     </div>
     <NuxtLink v-else to="/login" alt="Halaman Keanggotaan">
-      <button type="button" class="btn login" aria-label="Login">
+      <button
+        type="button"
+        class="btn bg-unpad text-white py-3 hidden xl:block"
+        aria-label="Login"
+      >
         <div class="i-mdi-account-multiple bg-white" />
       </button>
     </NuxtLink>
     <button
-      class="btn hamburger"
+      class="btn py-0 mx-1 block xl:hidden"
       role="menu"
       aria-label="Menu Toggle"
       @click="menuState.changeMenuState"
@@ -94,16 +107,8 @@ const logout = async () => {
 </template>
 
 <style scoped>
-.action-group {
-  --at-apply: flex ml-0 md: ml-12;
-}
-
 .action-group button {
   --at-apply: mx-1;
-}
-
-.login {
-  --at-apply: bg-unpad text-white py-3 hidden xl: block;
 }
 
 .account-dropdown {
@@ -113,9 +118,5 @@ const logout = async () => {
 
 .mode {
   --at-apply: bg-gray-2 text-white font-600;
-}
-
-.hamburger {
-  --at-apply: py-0 block xl: hidden;
 }
 </style>

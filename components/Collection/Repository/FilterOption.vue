@@ -24,119 +24,122 @@ const years = [
 </script>
 
 <template>
-  <section class="main-block">
-    <h5 class="text-center">Filter Options</h5>
-    <div class="flex flex-col">
-      <div>
-        <h6>Pencarian</h6>
-        <input
-          type="search"
-          name="search"
-          id="search"
-          class="p-1 rounded"
-          v-model="searchTugasAkhir.keywords"
-          @keyup.enter="searchTugasAkhir.searchingTugasAkhir(true, false, true)"
-        />
-      </div>
-      <h6>Tahun</h6>
-      <div>
-        <select
-          class="min-w-full"
-          name="first"
-          id="first"
-          v-model="searchTugasAkhir.tahun"
-        >
-          <option value="" selected disabled>Pilih Tahun</option>
-          <option :value="year" v-for="year in years">{{ year }}</option>
-        </select>
+  <aside class="w-full lg:w-64 shrink-0">
+    <div
+      class="bg-white rounded-2xl border border-gray-2 shadow-sm overflow-hidden"
+    >
+      <!-- Header -->
+      <div
+        class="flex items-center gap-2 px-4 py-3 bg-gray-50 border-b border-gray-1"
+      >
+        <div class="i-mdi-filter-outline w-5 h-5 text-unpad" />
+        <h5 class="font-700 text-gray-8 m-0 text-sm">Filter Pencarian</h5>
       </div>
 
-      <div>
-        <h6>Jenis Karya</h6>
-        <div class="flex items-center">
-          <input
-            type="checkbox"
-            name="ta"
-            id="ta"
-            class="w-4 h-4 text-yellow-600 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-          />
-          <label for="ta" class="ms-2 text-gray-900 dark:text-gray-300">
-            Tugas Akhir (Diploma)
-          </label>
-        </div>
-        <div class="flex items-center">
-          <input
-            type="checkbox"
-            name="ta"
-            id="ta"
-            class="w-4 h-4 text-yellow-600 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-          />
-          <label for="skripsi" class="ms-2 text-gray-900 dark:text-gray-300">
-            Skripsi (S1)
-          </label>
-        </div>
-        <div class="flex items-center">
-          <input
-            type="checkbox"
-            name="tesis"
-            id="tesis"
-            class="w-4 h-4 text-yellow-600 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-          />
-          <label for="tesis" class="ms-2 text-gray-900 dark:text-gray-300">
-            Tesis (S2)
-          </label>
-        </div>
-        <div class="flex items-center">
-          <input
-            type="checkbox"
-            name="disertasi"
-            id="disertasi"
-            class="w-4 h-4 text-yellow-600 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-          />
-          <label for="disertasi" class="ms-2 text-gray-900 dark:text-gray-300">
-            Disertasi (S3)
-          </label>
-        </div>
-      </div>
-
-      <div>
-        <h6>Nama Fakultas</h6>
+      <div class="p-4 flex flex-col gap-4">
+        <!-- Keyword search -->
         <div>
+          <label class="filter-label">Kata Kunci</label>
+          <input
+            type="search"
+            name="search"
+            id="filter-search"
+            class="filter-input"
+            v-model="searchTugasAkhir.keywords"
+            placeholder="Judul, kata kunci..."
+            @keyup.enter="
+              searchTugasAkhir.searchingTugasAkhir(true, false, true)
+            "
+          />
+        </div>
+
+        <!-- Year -->
+        <div>
+          <label class="filter-label">Tahun</label>
+          <select
+            class="filter-input"
+            name="first"
+            id="first"
+            v-model="searchTugasAkhir.tahun"
+          >
+            <option value="" selected disabled>Pilih Tahun</option>
+            <option :value="year" v-for="year in years" :key="year">
+              {{ year }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Faculty -->
+        <div>
+          <label class="filter-label">Fakultas</label>
           <select
             name="fakultas"
             id="fakultas"
-            class="min-w-full"
+            class="filter-input"
             v-model="searchTugasAkhir.facultyId"
           >
-            <option value="" selected disabled>Pilih Fakultas</option>
-            <option v-for="fak in fakultas.objFakultas" :value="fak.id">
+            <option value="" selected disabled>Semua Fakultas</option>
+            <option
+              v-for="fak in fakultas.objFakultas"
+              :key="fak.id"
+              :value="fak.id"
+            >
               {{ fak.namaFakultas }}
             </option>
           </select>
         </div>
-      </div>
-      <div class="my-2">
+
+        <!-- Type -->
+        <div>
+          <label class="filter-label">Jenis Karya</label>
+          <div class="flex flex-col gap-2 mt-1.5">
+            <label class="filter-check-label">
+              <input type="checkbox" name="ta" class="filter-checkbox" />
+              <span>Tugas Akhir (Diploma)</span>
+            </label>
+            <label class="filter-check-label">
+              <input type="checkbox" name="skripsi" class="filter-checkbox" />
+              <span>Skripsi (S1)</span>
+            </label>
+            <label class="filter-check-label">
+              <input type="checkbox" name="tesis" class="filter-checkbox" />
+              <span>Tesis (S2)</span>
+            </label>
+            <label class="filter-check-label">
+              <input type="checkbox" name="disertasi" class="filter-checkbox" />
+              <span>Disertasi (S3)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Apply -->
         <button
-          class="btn text-sm text-white w-full bg-unpad"
+          class="btn bg-unpad text-white w-full py-2.5 font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
           @click="searchTugasAkhir.searchingTugasAkhir(true, false, true)"
         >
-          Cari
+          <div class="i-mdi-magnify w-4 h-4" />
+          Terapkan Filter
         </button>
       </div>
     </div>
-  </section>
+  </aside>
 </template>
 
 <style scoped>
-.main-block {
-  --at-apply: bg-unpad-50 border-1 border-unpad rounded min-w-50 p-3 mx-2 lg:mx-0;
+.filter-label {
+  --at-apply: block text-xs font-600 text-gray-5 uppercase tracking-wide mb-1.5;
 }
 
-select {
-  --at-apply: w-20 rounded border-1 border-unpad;
+.filter-input {
+  --at-apply: w-full px-3 py-2 rounded-lg border border-gray-2 text-sm
+    bg-gray-50 focus: bg-white focus: border-unpad outline-none transition-all;
 }
 
-input[type="checkbox"] {
-  --at-apply: mr-0;
+.filter-check-label {
+  --at-apply: flex items-center gap-2 text-sm text-gray-6 cursor-pointer;
+}
+
+.filter-checkbox {
+  --at-apply: w-4 h-4 accent-unpad cursor-pointer;
 }
 </style>

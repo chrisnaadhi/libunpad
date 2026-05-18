@@ -6,52 +6,25 @@ const searchTugasAkhir = searchTugasAkhirDirectus();
 </script>
 
 <template>
-  <section>
-    <div class="max-w-3xl ma p-3 flex gap-1">
-      <div class="w-full h-full">
-        <input
-          type="search"
-          v-model="searchTugasAkhir.keywords"
-          name=""
-          id=""
-          class="relative rounded p-2"
-          placeholder="Masukkan kata yang ingin dicari"
-          @keyup.enter="searchTugasAkhir.searchingTugasAkhir(true, isFaculty)"
-        />
-        <!-- <div class="search-wrapper" v-show="mainSearchBar !== ''">
-          <div
-            v-if="searchResults"
-            v-for="item in searchResults"
-            class="bg-yellow-50 border border-1"
-          >
-            <h6>{{ textLimiter(item.Judul) }}</h6>
-            <p>
-              {{ textLimiter(item.AbstrakBersih) ?? textLimiter(item.Abstrak) }}
-            </p>
-          </div>
-          <div v-else>
-            <p>loading...</p>
-          </div>
-        </div> -->
-      </div>
-      <button
-        type="submit"
-        @click="searchTugasAkhir.searchingTugasAkhir(true, isFaculty)"
-        class="btn bg-unpad text-white"
-      >
-        Search
-      </button>
+  <div class="flex items-center gap-2">
+    <div class="relative flex-1">
+      <div
+        class="i-mdi-magnify absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-4 pointer-events-none"
+      />
+      <input
+        type="search"
+        v-model="searchTugasAkhir.keywords"
+        class="w-full pl-11 pr-4 py-3 rounded-xl border-2 border-gray-2 hover:border-gray-3 focus:border-unpad outline-none text-sm bg-gray-50 focus:bg-white transition-all-200"
+        placeholder="Cari judul, kata kunci, atau nama penulis..."
+        @keyup.enter="searchTugasAkhir.searchingTugasAkhir(true, isFaculty)"
+      />
     </div>
-  </section>
+    <button
+      type="button"
+      @click="searchTugasAkhir.searchingTugasAkhir(true, isFaculty)"
+      class="btn bg-unpad text-white px-6 py-3 shrink-0 font-semibold hover:opacity-90 transition-opacity"
+    >
+      Cari
+    </button>
+  </div>
 </template>
-
-<style scoped>
-.search-wrapper {
-  --at-apply: bg-white border-1 border-unpad px-3 absolute w-full max-w-172
-    max-h-40 rounded overflow-auto;
-}
-
-label {
-  --at-apply: px-1;
-}
-</style>

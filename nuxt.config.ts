@@ -31,7 +31,6 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "dayjs-nuxt",
     "@sidebase/nuxt-auth",
-    "@nuxtjs/plausible",
     "@nuxtjs/turnstile",
     "nuxt-gtag",
   ],
@@ -120,15 +119,6 @@ export default defineNuxtConfig({
     },
   },
 
-  plausible: {
-    enabled: true,
-    ignoredHostnames: ["localhost"],
-    hashMode: false,
-    domain: process.env.KANDAGA_NUXT_PUBLIC_PLAUSIBLE_DOMAIN,
-    apiHost: process.env.KANDAGA_NUXT_PUBLIC_PLAUSIBLE_API_HOST,
-    autoPageviews: true,
-  },
-
   compatibilityDate: "2024-07-22",
 
   nitro: {
@@ -145,6 +135,20 @@ export default defineNuxtConfig({
           target: "esnext",
         },
       },
+    },
+    optimizeDeps: {
+      include: [
+        "@directus/sdk",
+        "@vue/devtools-core",
+        "@vue/devtools-kit",
+        "dayjs",
+        "dayjs/locale/en",
+        "dayjs/locale/id",
+        "dayjs/plugin/relativeTime",
+        "dayjs/plugin/timezone",
+        "dayjs/plugin/updateLocale",
+        "dayjs/plugin/utc",
+      ],
     },
   },
   turnstile: {

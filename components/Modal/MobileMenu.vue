@@ -144,7 +144,7 @@ const viewPanduan = () => {
 
 <style scoped>
 .layer {
-  --at-apply: fixed mt--16 h-full w-full bg-white/95 transition-all-500 z-5;
+  --at-apply: fixed mt--16 h-full w-full bg-white/95 transition-all-500 z-20;
 }
 
 .menu-wrapper {

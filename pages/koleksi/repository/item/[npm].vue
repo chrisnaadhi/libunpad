@@ -223,129 +223,226 @@ useHead({
 </script>
 
 <template>
-  <section class="content-layer">
-    <h3 class="title">Koleksi Repository Universitas Padjadjaran</h3>
-    <div class="text-center mb-3 flex items-center justify-center">
-      <!-- Sudah Login -->
-      <div class="info-auth" v-if="status === 'authenticated'">
-        <div class="flex items-center gap-1">
-          <div class="auth-true" />
-          <p class="text-xs">Selamat Datang, {{ data.user.email }}</p>
+  <div class="min-h-screen bg-gray-50">
+    <!-- Hero Banner -->
+    <div class="bg-gradient-to-br from-unpad to-kandaga">
+      <div class="max-w-6xl ma px-4 pt-10 pb-20">
+        <div class="flex items-center gap-2 mb-6">
+          <NuxtLink
+            to="/koleksi/repository"
+            class="inline-flex items-center gap-1.5 text-white/75 hover:text-white text-sm font-500 no-underline transition-colors"
+          >
+            <div class="i-mdi-arrow-left w-4 h-4" />
+            Kembali ke Repository
+          </NuxtLink>
+        </div>
+        <p
+          class="text-white/70 text-xs font-600 uppercase tracking-widest mb-2"
+        >
+          Repository Universitas Padjadjaran
+        </p>
+        <h1 class="text-white text-xl sm:text-2xl font-800 leading-snug mb-4">
+          {{ dataObjectTA.judul }}
+        </h1>
+        <div class="flex flex-wrap gap-2">
+          <span v-if="dataObjectTA.author" class="hero-chip">
+            <div class="i-mdi-account-outline w-3.5 h-3.5" />
+            {{ dataObjectTA.author }}
+          </span>
+          <span class="hero-chip font-mono">
+            <div class="i-mdi-identifier w-3.5 h-3.5" />
+            {{ dataObjectTA.npm }}
+          </span>
+          <span v-if="dataObjectTA.namaFakultas" class="hero-chip">
+            <div class="i-mdi-school-outline w-3.5 h-3.5" />
+            {{ dataObjectTA.namaFakultas }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Auth status floating card -->
+    <div class="max-w-6xl ma px-4 -mt-8 relative z-10 mb-6">
+      <div
+        :class="
+          status === 'authenticated'
+            ? 'bg-green-50 border-green-2'
+            : 'bg-white border-gray-2'
+        "
+        class="rounded-2xl shadow-lg border p-4 flex flex-col sm:flex-row items-center justify-between gap-3"
+      >
+        <!-- Authenticated -->
+        <div v-if="status === 'authenticated'" class="flex items-center gap-3">
+          <div class="i-mdi-lock-open-check w-6 h-6 text-green-6 shrink-0" />
+          <div>
+            <p class="font-600 text-green-8 text-sm">Akses Penuh Tersedia</p>
+            <p class="text-green-6 text-xs">{{ data.user.email }}</p>
+          </div>
+        </div>
+        <!-- Not authenticated -->
+        <div v-else class="flex items-center gap-3">
+          <div class="i-mdi-lock-alert w-6 h-6 text-amber-5 shrink-0" />
+          <div>
+            <p class="font-600 text-gray-8 text-sm">Belum Login</p>
+            <p class="text-gray-5 text-xs">
+              Login dengan Email
+              <span class="text-unpad font-600">Unpad</span> untuk mengakses
+              berkas lengkap
+            </p>
+          </div>
         </div>
 
-        <button @click="signOut" class="btn-auth bg-red">Logout</button>
-      </div>
-      <!-- Belum Login -->
-      <div class="info-auth" v-else>
-        <div class="flex flex-col items-center">
-          <div class="flex gap-1">
-            <div class="auth-false" />
-            <p class="text-red-6 font-semibold">Belum Login</p>
-          </div>
-          <p class="text-xs italic">
-            untuk dapat mengakses full silahkan login menggunakan Email
-            <span class="text-unpad font-semibold">Unpad</span>!
-          </p>
+        <!-- Action button -->
+        <div class="shrink-0">
+          <button
+            v-if="status === 'authenticated'"
+            @click="signOut"
+            class="btn bg-red-5 text-white text-xs py-1.5 px-4 hover:bg-red-6 transition-colors"
+          >
+            Logout
+          </button>
+          <button
+            v-else
+            @click="signIn('google')"
+            class="btn bg-unpad text-white text-sm py-2 px-5 font-semibold hover:opacity-90 transition-opacity"
+          >
+            Login dengan Google
+          </button>
         </div>
-        <button @click="signIn('google')" class="btn-auth bg-unpad">
-          Klik untuk Login
-        </button>
       </div>
     </div>
-    <CollectionRepositoryItem
-      v-bind="dataObjectTA"
-      :isAuthenticated="isAuthenticated"
-      :isAllowedPublicAccess="isAllowedPublicAccess"
-    />
-    <div class="max-w-6xl ma pt-5">
-      <h3>Cite this paper</h3>
-      <div class="tab-title">
-        <button
-          class="tab-item"
-          :class="chosenCitation === 'apa' ? 'active-tab' : 'inactive-tab'"
-          @click="chooseCitation('apa')"
+
+    <!-- Document detail component -->
+    <div class="max-w-6xl ma px-4 pb-6">
+      <CollectionRepositoryItem
+        v-bind="dataObjectTA"
+        :isAuthenticated="isAuthenticated"
+        :isAllowedPublicAccess="isAllowedPublicAccess"
+      />
+    </div>
+
+    <!-- Citation Section -->
+    <div class="max-w-6xl ma px-4 pb-8">
+      <div
+        class="bg-white rounded-2xl border border-gray-2 shadow-sm overflow-hidden"
+      >
+        <div
+          class="flex items-center gap-2 px-5 py-4 bg-gray-50 border-b border-gray-1"
         >
-          APA
-        </button>
-        <button
-          class="tab-item"
-          :class="chosenCitation === 'chicago' ? 'active-tab' : 'inactive-tab'"
-          @click="chooseCitation('chicago')"
-        >
-          Chicago
-        </button>
-      </div>
-      <div v-show="chosenCitation === 'apa'" class="citation-block">
-        <h6>APA Style</h6>
-        <p
-          v-html="formattedAPA"
-          @click="copyCitation(formattedAPA)"
-          class="citation"
-        ></p>
-      </div>
-      <div v-show="chosenCitation === 'chicago'" class="citation-block">
-        <h6>Chicago Style</h6>
-        <p
-          v-html="formattedChicago"
-          @click="copyCitation(formattedChicago)"
-          class="citation"
-        ></p>
+          <div class="i-mdi-format-quote-open w-5 h-5 text-unpad" />
+          <h3 class="font-700 text-gray-8 text-base m-0">Cite This Paper</h3>
+        </div>
+
+        <!-- Citation tabs -->
+        <div class="flex border-b border-gray-1">
+          <button
+            class="citation-tab"
+            :class="
+              chosenCitation === 'apa'
+                ? 'citation-tab-active'
+                : 'citation-tab-inactive'
+            "
+            @click="chooseCitation('apa')"
+          >
+            APA
+          </button>
+          <button
+            class="citation-tab"
+            :class="
+              chosenCitation === 'chicago'
+                ? 'citation-tab-active'
+                : 'citation-tab-inactive'
+            "
+            @click="chooseCitation('chicago')"
+          >
+            Chicago
+          </button>
+        </div>
+
+        <!-- APA -->
+        <div v-show="chosenCitation === 'apa'" class="p-5">
+          <p class="text-xs font-600 text-gray-4 uppercase tracking-wide mb-2">
+            APA Style
+          </p>
+          <div
+            class="citation-box group"
+            @click="copyCitation(formattedAPA)"
+            title="Klik untuk menyalin"
+          >
+            <p
+              class="text-sm text-gray-7 leading-relaxed"
+              v-html="formattedAPA"
+            />
+            <div
+              class="i-mdi-content-copy w-4 h-4 text-gray-4 group-hover:text-unpad shrink-0 transition-colors mt-0.5"
+            />
+          </div>
+        </div>
+
+        <!-- Chicago -->
+        <div v-show="chosenCitation === 'chicago'" class="p-5">
+          <p class="text-xs font-600 text-gray-4 uppercase tracking-wide mb-2">
+            Chicago Style
+          </p>
+          <div
+            class="citation-box group"
+            @click="copyCitation(formattedChicago)"
+            title="Klik untuk menyalin"
+          >
+            <p
+              class="text-sm text-gray-7 leading-relaxed"
+              v-html="formattedChicago"
+            />
+            <div
+              class="i-mdi-content-copy w-4 h-4 text-gray-4 group-hover:text-unpad shrink-0 transition-colors mt-0.5"
+            />
+          </div>
+        </div>
       </div>
     </div>
-    <div class="flex flex-col items-center">
-      <h4>Perlu Bantuan ?</h4>
-      <p>Hubungi kami melalui Email, Whatsapp atau Media Sosial.</p>
-    </div>
-    <div class="text-center mb-5">
-      <NuxtLink to="/koleksi/repository" class="btn-auth bg-unpad text-lg">
-        Kembali ke Koleksi Repository
+
+    <!-- Help + Back -->
+    <div
+      class="max-w-6xl ma px-4 pb-12 flex flex-col items-center gap-1 text-center"
+    >
+      <h4 class="font-700 text-gray-7">Perlu Bantuan?</h4>
+      <p class="text-gray-5 text-sm">
+        Hubungi kami melalui Email, Whatsapp atau Media Sosial.
+      </p>
+      <NuxtLink
+        to="/koleksi/repository"
+        class="btn bg-unpad text-white mt-4 px-8 py-2.5 font-semibold hover:opacity-90 transition-opacity"
+      >
+        Kembali ke Repository
       </NuxtLink>
     </div>
-  </section>
+  </div>
 </template>
 
 <style scoped>
-.title {
-  --at-apply: my-3 text-center bg-unpad max-w-lg py-1 ma text-white rounded;
+h1 {
+  --at-apply: m-0;
 }
 
-.tab-title {
-  --at-apply: flex;
+.hero-chip {
+  --at-apply: inline-flex items-center gap-1.5 text-xs bg-white/20 text-white
+    border border-white/25 px-2.5 py-1 rounded-full font-500;
 }
 
-.tab-item {
-  --at-apply: py-1 px-3 min-w-30;
+.citation-tab {
+  --at-apply: px-6 py-3 text-sm font-600 min-w-28 transition-all-200;
 }
 
-.active-tab {
-  --at-apply: bg-yellow-1;
+.citation-tab-active {
+  --at-apply: bg-white text-unpad border-b-2 border-unpad;
 }
 
-.inactive-tab {
-  --at-apply: bg-gray-1;
+.citation-tab-inactive {
+  --at-apply: text-gray-5 hover: bg-gray-50;
 }
 
-.citation-block {
-  --at-apply: bg-yellow-1 p-2 rounded-b-lg rounded-tr-lg;
-}
-
-.citation {
-  --at-apply: hover: (text-unpad cursor-pointer);
-}
-
-.btn-auth {
-  --at-apply: btn py-1 px-2 text-white text-xs;
-}
-
-.info-auth {
-  --at-apply: flex flex-col items-center gap-1 text-sm;
-}
-
-.auth-true {
-  --at-apply: i-mdi-lock-open-check bg-green-6 w-5 h-5;
-}
-
-.auth-false {
-  --at-apply: i-mdi-lock-alert bg-red-6 w-5 h-5;
+.citation-box {
+  --at-apply: flex items-start gap-3 bg-amber-50 border border-amber-2
+    rounded-xl px-4 py-3 cursor-pointer hover: bg-amber-100 transition-colors;
 }
 </style>

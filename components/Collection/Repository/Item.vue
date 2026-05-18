@@ -122,181 +122,244 @@ function isRestricted(url, key) {
 }
 
 const limitText = (text) => {
-  if (text.length > 70) {
+  if (text && text.length > 70) {
     return text.slice(0, 70) + "...";
-  } else {
-    return text;
   }
+  return text ?? "";
 };
 </script>
 
 <template>
-  <section>
-    <section class="flex flex-col lg:flex-row gap-5">
-      <div class="w-70 ma text-center">
-        <div class="cover-section">
-          <p class="text-xs italic px-2">{{ limitText(judul) }}</p>
-          <p class="text-xs font-semibold">{{ author }}</p>
+  <section class="max-w-6xl ma px-4">
+    <!-- Top: Cover card + Main info -->
+    <div class="flex flex-col lg:flex-row gap-6 mb-6">
+      <!-- Left: Cover -->
+      <div class="w-full lg:w-60 shrink-0 flex flex-col gap-4">
+        <div class="cover-card">
           <NuxtImg
             src="/images/lambang-unpad.png"
             format="webp"
-            height="75px"
-            width="75px"
+            width="80"
+            height="80"
+            class="opacity-60"
           />
-          <p class="text-xs">Perpustakaan Universitas Padjadjaran</p>
+          <p
+            class="text-xs italic text-gray-6 text-center px-3 line-clamp-3 leading-relaxed"
+          >
+            {{ limitText(judul) }}
+          </p>
+          <p class="text-xs font-600 text-center text-gray-7">{{ author }}</p>
+          <p class="text-xs text-gray-4 text-center">
+            Perpustakaan Universitas Padjadjaran
+          </p>
         </div>
-        <div class="mt-5">
-          <h5 class="bg-gray-5 text-white">Kata Kunci</h5>
-          <div class="bg-yellow-1">
-            <p class="text-sm p-2 italic">
-              {{ keywords }}
+
+        <!-- Keywords card -->
+        <div
+          class="bg-white rounded-2xl border border-gray-2 overflow-hidden shadow-sm"
+        >
+          <div
+            class="flex items-center gap-2 px-4 py-3 bg-gray-50 border-b border-gray-1"
+          >
+            <div class="i-mdi-tag-multiple-outline w-4 h-4 text-unpad" />
+            <h6 class="font-700 text-gray-8 m-0 text-sm">Kata Kunci</h6>
+          </div>
+          <div class="px-4 py-3">
+            <p class="text-xs text-gray-5 italic leading-relaxed">
+              {{ keywords ?? "—" }}
             </p>
           </div>
         </div>
       </div>
-      <div class="w-full px-5">
+
+      <!-- Right: Main info -->
+      <div
+        class="flex-1 bg-white rounded-2xl border border-gray-2 shadow-sm p-6 flex flex-col gap-4"
+      >
         <div>
-          <h3 class="italic text-gray-5">
+          <h3 class="text-gray-8 font-700 text-xl leading-snug mb-3">
             {{ judul }}
           </h3>
-          <h5 class="font-semibold">
-            {{ author ?? "Belum ada Data" }} - {{ npm }}
-          </h5>
-          <p class="italic text-gray-5">{{ namaFakultas }}</p>
-          <h6>Abstrak:</h6>
-          <p class="text-sm text-justify">
+          <div class="flex flex-wrap gap-2">
+            <span class="info-chip">
+              <div class="i-mdi-account-outline w-3.5 h-3.5 shrink-0" />
+              {{ author ?? "—" }}
+            </span>
+            <span class="info-chip font-mono text-xs">
+              <div class="i-mdi-identifier w-3.5 h-3.5 shrink-0" />
+              {{ npm }}
+            </span>
+            <span v-if="namaFakultas" class="info-chip">
+              <div class="i-mdi-school-outline w-3.5 h-3.5 shrink-0" />
+              {{ namaFakultas }}
+            </span>
+            <span v-if="bahasa" class="info-chip">
+              <div class="i-mdi-translate w-3.5 h-3.5 shrink-0" />
+              {{ bahasa }}
+            </span>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-1 pt-4">
+          <h6 class="text-xs font-600 text-gray-4 uppercase tracking-wide mb-2">
+            Abstrak
+          </h6>
+          <p class="text-sm text-gray-6 text-justify leading-relaxed">
             <span v-html="abstrak"></span>
           </p>
         </div>
       </div>
-    </section>
-    <section class="flex flex-col gap-10 lg:flex-row">
-      <div class="mt-5 mx-5">
-        <h2 class="my-5">Berkas</h2>
-        <table class="w-full lg:w-100">
-          <thead>
-            <tr>
-              <th>Nama Berkas</th>
-              <th>Akses Berkas</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="row in fileRows" :key="row.key" class="text-left">
-              <td class="font-semibold w-35">{{ row.label }}</td>
-              <td class="flex">
-                <div :class="getFileStatusClass(row.url, row.key)"></div>
-                <span v-if="canDownload(row.url, row.key)">
-                  <NuxtLink
-                    :to="row.url"
-                    target="_blank"
-                    no-rel
-                    :external="true"
-                    >Download</NuxtLink
-                  >
-                </span>
-                <span v-else-if="isRestricted(row.url, row.key)">
-                  <p>Anda tidak dapat mengakses</p>
-                </span>
-                <span v-else>
-                  <p>File tidak tersedia</p>
-                </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    </div>
+
+    <!-- File Access Section -->
+    <div
+      class="bg-white rounded-2xl border border-gray-2 shadow-sm overflow-hidden mb-6"
+    >
+      <div
+        class="flex items-center gap-2 px-5 py-4 bg-gray-50 border-b border-gray-1"
+      >
+        <div class="i-mdi-file-multiple-outline w-5 h-5 text-unpad" />
+        <h2 class="font-700 text-gray-8 text-base m-0">Akses Berkas</h2>
       </div>
-      <div class="mt-5 mx-5">
-        <h2 class="my-5">Metadata</h2>
-        <div class="grid grid-cols-none lg:grid-cols-5 my-5 gap-4 text-xs">
-          <div class="metadata-title">
-            <h6>Judul</h6>
-          </div>
-          <div class="col-span-4">
-            <p>{{ judul ?? "Belum Ada Data" }}</p>
-          </div>
-
-          <div class="metadata-title">
-            <h6>Abstrak</h6>
-          </div>
-          <div class="col-span-4">
-            <p>{{ abstrak ?? "Belum Ada Data" }}</p>
-          </div>
-
-          <div class="metadata-title">
-            <h6>Bahasa</h6>
-          </div>
-          <div class="col-span-4">
-            <p>{{ bahasa ?? "Belum Ada Data" }}</p>
+      <div class="p-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+        <template v-for="row in fileRows" :key="row.key">
+          <!-- File exists and accessible -->
+          <div
+            v-if="hasFile(row.url) && canDownload(row.url, row.key)"
+            class="file-card file-card-open"
+          >
+            <div class="i-mdi-lock-open-check w-5 h-5 text-green-6" />
+            <span class="text-xs font-600 text-center">{{ row.label }}</span>
+            <NuxtLink
+              :to="row.url"
+              target="_blank"
+              :external="true"
+              class="text-xs text-green-7 font-600 hover:underline mt-auto flex items-center gap-1"
+            >
+              <div class="i-mdi-download w-3.5 h-3.5" />
+              Download
+            </NuxtLink>
           </div>
 
-          <div class="metadata-title">
-            <h6>Keywords</h6>
-          </div>
-          <div class="col-span-4">
-            <p>{{ keywords ?? "Belum Ada Data" }}</p>
-          </div>
-
-          <div class="metadata-title">
-            <h6>Tanggal Upload</h6>
-          </div>
-          <div class="col-span-4">
-            <p>{{ tglUpload ?? "Belum Ada Data" }}</p>
+          <!-- File exists but restricted -->
+          <div
+            v-else-if="hasFile(row.url) && isRestricted(row.url, row.key)"
+            class="file-card file-card-locked"
+          >
+            <div class="i-mdi-lock-alert w-5 h-5 text-red-5" />
+            <span class="text-xs font-600 text-center">{{ row.label }}</span>
+            <span class="text-xs text-red-4 mt-auto">Login diperlukan</span>
           </div>
 
-          <div class="metadata-title">
-            <h6>Publikasi</h6>
+          <!-- File not available -->
+          <div
+            v-else-if="!hasFile(row.url)"
+            class="file-card file-card-missing"
+          >
+            <div class="i-mdi-file-remove-outline w-5 h-5 text-gray-4" />
+            <span class="text-xs font-600 text-center">{{ row.label }}</span>
+            <span class="text-xs text-gray-4 mt-auto">Tidak tersedia</span>
           </div>
-          <div class="col-span-4">
-            <p>{{ stPublikasi ?? "Belum Ada Data" }}</p>
-          </div>
+        </template>
+      </div>
+    </div>
 
-          <div class="metadata-title">
-            <h6>ID Pustaka</h6>
-          </div>
-          <div class="col-span-4">
-            <p>{{ idPustaka ?? "Belum Ada Data" }}</p>
-          </div>
+    <!-- Metadata Section -->
+    <div
+      class="bg-white rounded-2xl border border-gray-2 shadow-sm overflow-hidden"
+    >
+      <div
+        class="flex items-center gap-2 px-5 py-4 bg-gray-50 border-b border-gray-1"
+      >
+        <div class="i-mdi-information-outline w-5 h-5 text-unpad" />
+        <h2 class="font-700 text-gray-8 text-base m-0">Metadata</h2>
+      </div>
+      <div class="p-5 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
+        <div class="meta-row">
+          <dt>Bahasa</dt>
+          <dd>{{ bahasa ?? "—" }}</dd>
+        </div>
+        <div class="meta-row">
+          <dt>Tanggal Upload</dt>
+          <dd>
+            {{
+              tglUpload?.toLocaleDateString("id-ID", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              }) ?? "—"
+            }}
+          </dd>
+        </div>
+        <div class="meta-row">
+          <dt>Status Publikasi</dt>
+          <dd>
+            <span
+              :class="
+                stPublikasi
+                  ? 'bg-green-1 text-green-7 border-green-2'
+                  : 'bg-gray-1 text-gray-5 border-gray-2'
+              "
+              class="text-xs font-600 px-2 py-0.5 rounded-full border"
+            >
+              {{ stPublikasi ? "Dipublikasi" : "Tidak Dipublikasi" }}
+            </span>
+          </dd>
+        </div>
+        <div class="meta-row">
+          <dt>ID Pustaka</dt>
+          <dd>{{ idPustaka ?? "—" }}</dd>
+        </div>
+        <div class="meta-row sm:col-span-2">
+          <dt>Kata Kunci</dt>
+          <dd>{{ keywords ?? "—" }}</dd>
+        </div>
+        <div class="meta-row sm:col-span-2">
+          <dt>Abstrak</dt>
+          <dd class="text-justify leading-relaxed">{{ abstrak ?? "—" }}</dd>
         </div>
       </div>
-    </section>
+    </div>
   </section>
 </template>
 
 <style scoped>
-section {
-  --at-apply: max-w-6xl ma;
+.cover-card {
+  --at-apply: bg-white rounded-2xl border-2 border-unpad/30 min-h-60 flex
+    flex-col items-center justify-around p-5 shadow-sm;
 }
 
-.cover-section {
-  --at-apply: bg-white max-w-55 ma border-2 border-unpad min-h-75 rounded
-    text-center flex flex-col items-center justify-around;
+.info-chip {
+  --at-apply: inline-flex items-center gap-1.5 text-xs bg-gray-50 text-gray-6
+    border border-gray-2 px-2.5 py-1 rounded-full;
 }
 
-table {
-  --at-apply: text-center;
+.file-card {
+  --at-apply: rounded-xl p-3 flex flex-col items-center gap-1.5 text-center
+    min-h-24;
 }
 
-th {
-  --at-apply: font-semibold bg-yellow-3 border-1 border-unpad px-5;
+.file-card-open {
+  --at-apply: bg-green-50 border border-green-2 text-green-8;
 }
 
-td {
-  --at-apply: px-2 py-1 border-1 border-yellow;
+.file-card-locked {
+  --at-apply: bg-red-50 border border-red-2 text-red-7;
 }
 
-.auth-true {
-  --at-apply: i-mdi-lock-open-check bg-green-6 w-5 h-5;
+.file-card-missing {
+  --at-apply: bg-gray-50 border border-gray-2 text-gray-4;
 }
 
-.auth-false {
-  --at-apply: i-mdi-lock-alert bg-red-6 w-5 h-5;
+.meta-row {
+  --at-apply: flex flex-col gap-1;
 }
 
-.file-not-found {
-  --at-apply: i-mdi-note-remove bg-gray w-5 h-5;
+.meta-row dt {
+  --at-apply: text-xs font-600 text-gray-4 uppercase tracking-wide;
 }
 
-.metadata-title {
-  --at-apply: w-full lg: w-25;
+.meta-row dd {
+  --at-apply: text-sm font-500 text-gray-8 m-0;
 }
 </style>
