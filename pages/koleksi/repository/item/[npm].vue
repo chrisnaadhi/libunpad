@@ -293,21 +293,21 @@ useHead({
         </div>
 
         <!-- Action button -->
-        <div class="shrink-0">
+        <div v-if="status === 'authenticated'">
           <button
-            v-if="status === 'authenticated'"
             @click="signOut"
             class="btn bg-red-5 text-white text-xs py-1.5 px-4 hover:bg-red-6 transition-colors"
           >
             Logout
           </button>
-          <button
-            v-else
-            @click="signIn('google')"
+        </div>
+        <div v-else>
+          <NuxtLink
+            to="/login"
             class="btn bg-unpad text-white text-sm py-2 px-5 font-semibold hover:opacity-90 transition-opacity"
           >
-            Login dengan Google
-          </button>
+            Login &rightarrow;
+          </NuxtLink>
         </div>
       </div>
     </div>

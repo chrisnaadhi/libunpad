@@ -6,7 +6,15 @@ export default defineNuxtConfig({
     head: {
       link: [
         { rel: "preconnect", href: "https://fonts.googleapis.com" },
-        { rel: "preconnect", href: "https://fonts.gstatic.com" },
+        {
+          rel: "preconnect",
+          href: "https://fonts.gstatic.com",
+          crossorigin: "",
+        },
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap",
+        },
       ],
     },
   },
@@ -116,6 +124,19 @@ export default defineNuxtConfig({
       dSpaceFront: process.env.KANDAGA_DSPACE_FRONTEND,
       dSpaceAuthPublic: process.env.KANDAGA_DSPACE_AUTH,
       dSpaceCredentials: `user=${process.env.KANDAGA_DSPACE_EMAIL}&password=${process.env.KANDAGA_DSPACE_PASSWORD}`,
+    },
+  },
+
+  image: {
+    quality: 80,
+    format: ["webp"],
+    screens: {
+      xs: 320,
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+      xxl: 1536,
     },
   },
 

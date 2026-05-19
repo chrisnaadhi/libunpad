@@ -1,217 +1,312 @@
 <script setup>
-const { currentTime } = useCurrentTime();
 const { locale } = useI18n();
-const options = {
-  weekday: "long",
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-};
-
-const viewStateGallery = ref(false);
-const viewStateLibrary = ref(false);
-const viewStateArchive = ref(false);
-const viewStateMuseum = ref(false);
 </script>
 
 <template>
-  <div class="dummy">
-    <div class="background-block">
-      <div class="tanggal">
-        <p>{{ currentTime.toLocaleDateString("id-ID", options) }}</p>
+  <section class="platforms-wrap">
+    <!-- Subtle background texture -->
+    <div class="platforms-bg" />
+
+    <!-- Section header -->
+    <div class="relative z-1 text-center max-w-2xl mx-auto mb-12 px-4">
+      <div class="section-badge">
+        <div class="i-mdi-view-grid w-3.5 h-3.5" />
+        Platform Kami
       </div>
-      <h1 class="text-2xl font-600 sm:text-4xl">
-        {{ $t("usingPlatform") }}
-      </h1>
-      <p>{{ $t("usingPlatformDescription") }}</p>
+      <h2 class="section-title">{{ $t("usingPlatform") }}</h2>
+      <p class="text-gray-500 text-sm sm:text-base">
+        {{ $t("usingPlatformDescription") }}
+      </p>
     </div>
-    <section class="content-wrapper">
+
+    <!-- Main platforms grid -->
+    <div
+      class="relative z-1 max-w-6xl mx-auto px-4 mb-6 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5"
+    >
       <NuxtLink
         :to="locale === 'id' ? '/library' : '/en/library'"
-        class="content"
-        @mouseenter="viewStateLibrary = true"
-        @mouseleave="viewStateLibrary = false"
+        class="platform-card"
       >
-        <div
-          v-show="viewStateLibrary === false"
-          class="flex flex-col items-center"
-        >
-          <p class="use-banner">Platform</p>
-          <div class="i-mdi-bookshelf w-24 h-24" />
-          <h1>Library</h1>
+        <div class="platform-icon-bg">
+          <div class="i-mdi-bookshelf w-8 h-8" />
         </div>
-
-        <div v-show="viewStateLibrary === true" class="max-w-50">
-          <p class="use-banner-hover">Library</p>
-          <p class="text-xs">{{ $t("libraryDescription") }}</p>
+        <div>
+          <h3 class="platform-name">Library</h3>
+          <p class="platform-desc">{{ $t("libraryDescription") }}</p>
         </div>
+        <div class="platform-arrow i-mdi-arrow-right-circle w-5 h-5" />
       </NuxtLink>
+
       <NuxtLink
         :to="locale === 'id' ? '/koleksi/repository' : '/en/koleksi/repository'"
-        class="content"
-        @mouseenter="viewStateGallery = true"
-        @mouseleave="viewStateGallery = false"
+        class="platform-card"
       >
-        <div
-          v-show="viewStateGallery === false"
-          class="flex flex-col items-center"
-        >
-          <p class="use-banner">Platform</p>
-          <div class="i-mdi-book-education w-24 h-24" />
-          <h1>Repository</h1>
+        <div class="platform-icon-bg">
+          <div class="i-mdi-book-education w-8 h-8" />
         </div>
-
-        <div
-          v-show="viewStateGallery === true"
-          class="flex flex-col items-center max-w-50"
-        >
-          <p class="use-banner-hover">Repository</p>
-          <p class="text-xs">{{ $t("repositoryDescription") }}</p>
+        <div>
+          <h3 class="platform-name">Repository</h3>
+          <p class="platform-desc">{{ $t("repositoryDescription") }}</p>
         </div>
+        <div class="platform-arrow i-mdi-arrow-right-circle w-5 h-5" />
       </NuxtLink>
+
       <NuxtLink
         :to="
           locale === 'id' ? '/panduan/akses-jurnal' : '/en/panduan/akses-jurnal'
         "
-        class="content"
-        @mouseenter="viewStateArchive = true"
-        @mouseleave="viewStateArchive = false"
+        class="platform-card"
       >
-        <div
-          v-show="viewStateArchive === false"
-          class="flex flex-col items-center"
-        >
-          <p class="use-banner">Platform</p>
-          <div class="i-mdi-archive-sync w-24 h-24" />
-          <h1>E-Resources</h1>
+        <div class="platform-icon-bg">
+          <div class="i-mdi-archive-sync w-8 h-8" />
         </div>
-
-        <div
-          v-show="viewStateArchive === true"
-          class="max-w-50 flex flex-col items-center"
-        >
-          <p class="use-banner-hover">E-Resources</p>
-          <p class="text-xs">{{ $t("eJournalDescription") }}</p>
+        <div>
+          <h3 class="platform-name">E-Resources</h3>
+          <p class="platform-desc">{{ $t("eJournalDescription") }}</p>
         </div>
+        <div class="platform-arrow i-mdi-arrow-right-circle w-5 h-5" />
       </NuxtLink>
+
       <NuxtLink
         :to="locale === 'id' ? '/kandaga' : '/en/kandaga/fasilitas'"
-        class="content"
-        @mouseenter="viewStateMuseum = true"
-        @mouseleave="viewStateMuseum = false"
+        class="platform-card"
       >
-        <div
-          v-show="viewStateMuseum === false"
-          class="flex flex-col items-center"
-        >
-          <p class="use-banner">Platform</p>
-          <div class="i-mdi-bank w-24 h-24" />
-          <h1>Fasilitas</h1>
+        <div class="platform-icon-bg">
+          <div class="i-mdi-bank w-8 h-8" />
         </div>
-
-        <div
-          v-show="viewStateMuseum === true"
-          class="max-w-50 flex flex-col items-center"
-        >
-          <p class="use-banner-hover">Fasilitas</p>
-          <p class="text-xs">{{ $t("facilityDescription") }}</p>
+        <div>
+          <h3 class="platform-name">Fasilitas</h3>
+          <p class="platform-desc">{{ $t("facilityDescription") }}</p>
         </div>
+        <div class="platform-arrow i-mdi-arrow-right-circle w-5 h-5" />
       </NuxtLink>
-    </section>
-    <section
-      class="max-w-6xl w-full px-5 flex flex-col gap-4 mt-3 md:(grid grid-cols-2) xl:(flex flex-row justify-center px-8)"
+    </div>
+
+    <!-- Secondary services row -->
+    <div
+      class="relative z-1 max-w-6xl mx-auto px-4 mb-6 grid grid-cols-2 sm:grid-cols-4 gap-3"
     >
       <NuxtLink
         :to="locale === 'id' ? '/gallery' : '/en/gallery'"
-        class="extra-content"
+        class="extra-card"
       >
-        <div class="i-mdi-theater w-8 h-8" />
-        <h6>Gallery</h6>
+        <div class="i-mdi-image-multiple w-5 h-5" />
+        <span>Gallery</span>
       </NuxtLink>
       <NuxtLink
         :to="locale === 'id' ? '/museum' : '/en/museum'"
-        class="extra-content"
+        class="extra-card"
       >
-        <div class="i-mdi-theater w-8 h-8" />
-        <h6>Museum</h6>
+        <div class="i-mdi-bank w-5 h-5" />
+        <span>Museum</span>
       </NuxtLink>
       <NuxtLink
         :to="locale === 'id' ? '/koleksi-hayati' : '/en/koleksi-hayati'"
-        class="extra-content"
+        class="extra-card"
       >
-        <div class="i-mdi-leaf w-8 h-8" />
-        <h6>Koleksi Hayati</h6>
+        <div class="i-mdi-leaf w-5 h-5" />
+        <span>Koleksi Hayati</span>
       </NuxtLink>
-      <NuxtLink class="extra-content" to="/e-teater">
-        <div class="i-mdi-book-education w-8 h-8"></div>
-        <h6>E-Teater</h6>
+      <NuxtLink to="/e-teater" class="extra-card">
+        <div class="i-mdi-theater w-5 h-5" />
+        <span>E-Teater</span>
       </NuxtLink>
-    </section>
-    <section class="w-full flex items-center justify-center">
-      <NuxtLink to="/pengajuan" class="lib-content">
-        <div class="i-mdi-file-document-edit w-8 h-8"></div>
-        <h4>Library, Learning and Administration Services</h4>
+    </div>
+
+    <!-- Admin services banner -->
+    <div class="relative z-1 max-w-6xl mx-auto px-4">
+      <NuxtLink to="/pengajuan" class="admin-banner">
+        <div class="admin-icon-wrap">
+          <div class="i-mdi-file-document-edit w-6 h-6" />
+        </div>
+        <div class="flex-1 min-w-0">
+          <h4 class="font-700 text-base">
+            Library, Learning & Administration Services
+          </h4>
+          <p class="text-sm opacity-60 mt-1">
+            Ajukan layanan administrasi perpustakaan secara online
+          </p>
+        </div>
+        <div class="i-mdi-chevron-right w-6 h-6 opacity-60 shrink-0" />
       </NuxtLink>
-    </section>
-  </div>
+    </div>
+  </section>
 </template>
 
 <style scoped>
-.dummy {
-  text-align: center;
+.platforms-wrap {
+  position: relative;
+  padding: 5rem 0;
+  background: #fafafa;
+}
+
+.platforms-bg {
+  position: absolute;
+  inset: 0;
   background-image: url("/images/background-platform.webp");
   background-position: center;
   background-size: cover;
-  box-shadow: 0px 25px 15px rgb(255, 255, 255) inset, 0px -25px 15px rgb(255, 255, 255) inset;
-  --at-apply: bg-white w-full flex flex-col items-center mt-12 md:mt-25;
+  opacity: 0.04;
+  z-index: 0;
 }
 
-.background-block {
-  --at-apply: w-full text-dark bg-white py-5 flex flex-col items-center justify-center px-5 cursor-default z-2 xl:(w-6xl mt--16 rounded-xl) hover:(bg-yellow-5 text-white);
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #f9b129;
+  background: rgba(249, 177, 41, 0.1);
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  margin-bottom: 1rem;
 }
 
-.background-block:hover .tanggal {
-  --at-apply: bg-gray-1 text-dark;
+.section-title {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 0.75rem;
 }
 
-.tanggal {
-  --at-apply: mb-4 py-2 px-4 mt--5 min-w-32 font-600 bg-unpad text-white rounded-b-lg;
+.platform-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: white;
+  border: 2px solid #f0f0f0;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: #1a1a1a;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
-.content-wrapper {
-  --at-apply: mt-5 max-w-6xl flex flex-1 flex-wrap justify-evenly items-center md:mt-8 xl:(mt-2 flex-nowrap);
+.platform-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(249, 177, 41, 0.18);
+  border-color: #f9b129;
 }
 
-.content {
-  --at-apply: bg-white min-w-65 grow min-h-65 mx-10 my-2 rounded-md flex flex-col items-center justify-center cursor-pointer text-dark no-underline sm:(w-xs mx-5) xl:(w-1/5 mx-2);
+.platform-icon-bg {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 0.875rem;
+  background: rgba(249, 177, 41, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f9b129;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
 }
 
-.content:hover {
-  --at-apply: bg-unpad text-white;
+.platform-card:hover .platform-icon-bg {
+  background: #f9b129;
+  color: white;
 }
 
-.use-banner {
-  --at-apply: text-xs mb-1 bg-unpad text-white px-4 rounded;
+.platform-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.375rem;
 }
 
-.use-banner-hover {
-  --at-apply: max-w-30 ma text-xs mb-2 bg-white text-unpad px-4 rounded;
+.platform-desc {
+  font-size: 0.75rem;
+  color: #888;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.content:hover>.use-banner {
-  --at-apply: bg-white text-unpad;
+.platform-arrow {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  color: #ddd;
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
 }
 
-.extra-content {
-  --at-apply: bg-white p-5 flex items-center justify-center rounded w-full text-dark no-underline hover:(bg-unpad text-white);
+.platform-card:hover .platform-arrow {
+  color: #f9b129;
+  transform: translateX(3px);
 }
 
-.lib-content {
-  --at-apply: flex flex-col items-center mt-5 mb-10 bg-white text-dark no-underline p-3 mx-5 rounded xl:(w-272) hover:(bg-unpad text-white);
+.extra-card {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  background: white;
+  border: 1.5px solid #ebebeb;
+  border-radius: 0.875rem;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  color: #444;
+  font-weight: 600;
+  font-size: 0.875rem;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 
+.extra-card:hover {
+  background: #1a1a2e;
+  color: white;
+  border-color: #1a1a2e;
+  transform: translateY(-2px);
+}
 
-h1 {
-  --at-apply: text-2xl;
+.admin-banner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #1a1a2e;
+  color: white;
+  border-radius: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  text-decoration: none;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.admin-banner:hover {
+  background: #f9b129;
+  color: #1a0f00;
+  transform: translateY(-2px);
+}
+
+.admin-icon-wrap {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.625rem;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.25s ease;
+}
+
+.admin-banner:hover .admin-icon-wrap {
+  background: rgba(26, 15, 0, 0.12);
 }
 </style>

@@ -39,15 +39,16 @@ const { locale } = useI18n();
 .wrapper {
   margin: 0 auto;
   background-color: rgba(255, 255, 255, 0.95);
-  --at-apply: ma sticky top-0 z-6 w-full shadow;
+  --at-apply: ma sticky pt-2 top-0 z-99 w-full shadow;
 }
 
 .navbar {
-  --at-apply: max-w-7xl flex items-unset justify-between py-4 px-0 sm:px-3 ma xl:(items-center justify-between px-0);
+  --at-apply: max-w-7xl flex items-unset justify-between py-4 px-0 sm: px-3 ma
+    xl: (items-center justify-between px-0);
 }
 
 .logo {
-  --at-apply: pl-3 max-w-50 h-8 md:(pl-0 h-8 max-w-75);
+  --at-apply: pl-3 max-w-50 h-8 md: (pl-0 h-8 max-w-75);
 }
 
 .jamlayanan-enter-active,

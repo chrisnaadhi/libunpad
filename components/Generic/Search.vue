@@ -9,7 +9,7 @@ const removeSearchQuery = () => {
 const submitSearch = async () => {
   try {
     const { data: searchRes } = await useFetch(
-      search.baseURLSearch + search.keywords
+      search.baseURLSearch + search.keywords,
     );
     search.isResult = true;
     search.articleObj = searchRes.value.query.search;
@@ -90,7 +90,7 @@ const limitChars = (str) => {
                 class="no-underline"
                 target="_blank"
               >
-                <h1 class="text-xl text-dark no-underline hover:text-unpad">
+                <h1 class="text-xl text-gray-200 no-underline hover:text-unpad">
                   {{ elem.title }}
                 </h1>
               </NuxtLink>
@@ -127,15 +127,22 @@ const limitChars = (str) => {
 
 <style scoped>
 .input-form {
-  --at-apply: min-w-full h-14 pl-10 pr-20 py-3 md:pr-30 border-3 border-unpad rounded-lg z-2 focus:(shadow-md outline-none);
+  --at-apply: min-w-full h-14 pl-10 pr-20 py-3 md: pr-30 border-3 border-unpad
+    rounded-lg z-2 focus: (shadow-md outline-none);
 }
 
 .search-result {
-  --at-apply: absolute w-full pt-90 z-1;
+  position: absolute;
+  width: 100%;
+  top: 3.75rem;
+  left: 0;
+  z-index: 50;
+  margin-top: 0.25rem;
 }
 
 .content-result {
-  --at-apply: bg-white text-gray-6 border-1 border-yellow-3 text-left rounded-lg max-h-75 overflow-auto transition-all-500;
+  --at-apply: bg-white text-gray-6 border-1 border-yellow-3 text-left rounded-lg
+    max-h-75 overflow-auto transition-all-500;
 }
 
 .result-element {
