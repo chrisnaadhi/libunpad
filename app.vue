@@ -36,12 +36,22 @@ useHead({
   htmlAttrs: {
     lang: "id",
   },
+  link: [
+    // Load all fonts via a single non-blocking preload — fires onload to swap rel to stylesheet
+    {
+      rel: "preload",
+      as: "style",
+      href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Kanit:wght@400;600;700&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,900;1,200;1,300;1,400;1,600;1,700&display=swap",
+      onload: "this.onload=null;this.rel='stylesheet'",
+    },
+  ],
+  noscript: [
+    {
+      innerHTML:
+        '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Kanit:wght@400;600;700&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,900;1,200;1,300;1,400;1,600;1,700&display=swap">',
+    },
+  ],
   script: [
-    // {
-    //   src: "https://kandaga.unpad.ac.id:8000/js/script.js",
-    //   "data-domain": "kandaga.unpad.ac.id",
-    //   defer: true,
-    // },
     {
       src: "https://www.instagram.com/embed.js",
       async: true,
@@ -63,10 +73,6 @@ useHead({
 </template>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Kanit&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,900;1,200;1,300;1,400;1,600;1,700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
-
 @media print {
   .noPrint {
     display: none;
@@ -77,8 +83,18 @@ useHead({
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Titillium Web", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+  font-family:
+    "Titillium Web",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
     sans-serif;
   scroll-behavior: smooth;
   transition: all 0.2s;
@@ -90,8 +106,19 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Kanit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family:
+    "Kanit",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
 }
 
 h1 {
@@ -135,7 +162,7 @@ li {
 }
 
 label {
-  --at-apply: font-600 pb-2 text-base md:text-md;
+  --at-apply: font-600 pb-2 text-base md: text-md;
 }
 
 input[type="search"],
@@ -151,7 +178,7 @@ input:disabled {
 }
 
 .input-block {
-  --at-apply: flex flex-col my-5 sm:w-md md:w-full;
+  --at-apply: flex flex-col my-5 sm: w-md md: w-full;
 }
 
 .input-area {
@@ -171,7 +198,8 @@ strong {
 }
 
 .kandaga-gradient {
-  --at-apply: bg-clip-text text-transparent bg-gradient-to-br from-unpad to-gray-500;
+  --at-apply: bg-clip-text text-transparent bg-gradient-to-br from-unpad
+    to-gray-500;
 }
 
 .konten-berita img {

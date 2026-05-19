@@ -35,17 +35,16 @@ useHead(
 
 <template>
   <section class="hero-wrap">
-    <!-- Background image — real img element so the browser preload scanner can discover it (LCP) -->
-    <NuxtImg
+    <!-- Background image — plain img so src matches the preload URL exactly (no IPX proxy hop) -->
+    <img
       v-if="getBerita?.gambar_unggulan"
       :src="getThumbnail(getBerita.gambar_unggulan)"
       class="hero-bg-img"
       loading="eager"
       fetchpriority="high"
+      decoding="async"
       width="1920"
       height="1080"
-      format="webp"
-      quality="80"
       alt=""
     />
     <!-- Dark gradient overlay -->
