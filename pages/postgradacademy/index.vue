@@ -12,6 +12,11 @@ const listCourses = await getItems({
   sort: "-date_created",
 });
 
+listCourses.sort(
+  (a, b) =>
+    new Date(b.date_created).getTime() - new Date(a.date_created).getTime(),
+);
+
 const currentPage = ref(1);
 const perPage = ref(9);
 const perPageOptions = [6, 9, 12, 18];
