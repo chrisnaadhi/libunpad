@@ -6,7 +6,7 @@ export default {
   introWelcome: "Selamat Datang di",
   chosenNews: "Berita Pilihan",
   homeDescription:
-    "Kandaga merupakan platform yang menyediakan katalog koleksi dan sistem penelusuran ke sumber-sumber informasi yang dimiliki dan dilanggan oleh Universitas Padjadjaran. Kandaga merupakan Bahasa Sunda yang memiliki arti \"Tempat menyimpan barang berharga\" sehingga Kandaga Unpad merupakan fasilitas yang menyediakan sumber daya berharga untuk mendukung kegiatan akademik di Universitas Padjadjaran Kandaga dikelola oleh Kantor Pengelolaan Perpustakaan Unpad.",
+    'Kandaga merupakan platform yang menyediakan katalog koleksi dan sistem penelusuran ke sumber-sumber informasi yang dimiliki dan dilanggan oleh Universitas Padjadjaran. Kandaga merupakan Bahasa Sunda yang memiliki arti "Tempat menyimpan barang berharga" sehingga Kandaga Unpad merupakan fasilitas yang menyediakan sumber daya berharga untuk mendukung kegiatan akademik di Universitas Padjadjaran Kandaga dikelola oleh Kantor Pengelolaan Perpustakaan Unpad.',
   searchOurCollection: "Cari koleksi kami disini...",
   searchPage: "Halaman Pencarian",
   ourCollection: "Koleksi Kandaga",
@@ -84,8 +84,10 @@ export default {
     "Tata cara akses E-Journal dan E-Resources yang dilanggan oleh Universitas Padjadjaran",
   eJournalHeader: "Tata Cara Akses E-Journal & E-Resources Unpad",
   eJournalHeaderDescription: `Untuk mengakses Jurnal Elektronik dan Sumber Elektronik yang dilanggan oleh Universitas Padjadjaran, Anda perlu mengunjungi laman PINTU UNPAD dan login menggunakan akun yang telah terdaftar. Setelah login, Anda dapat mencari jurnal atau sumber elektronik yang Anda butuhkan menggunakan fitur pencarian yang tersedia. Pastikan untuk mematuhi aturan dan kebijakan penggunaan yang berlaku untuk menghindari pelanggaran hak cipta atau penggunaan yang tidak sah. Dengan akses ini, Anda dapat mendukung kegiatan akademik dan penelitian Anda di Universitas Padjadjaran.`,
-  eJournalHelper: "Jika anda masih bingung terkait tata cara aksesnya silahkan untuk menonton video berikut :",
-  eJournalDescription: "Akses berbagai jurnal elektronik yang disediakan oleh Universitas Padjadjaran untuk mendukung kebutuhan akademis dan penelitian Anda.",
+  eJournalHelper:
+    "Jika anda masih bingung terkait tata cara aksesnya silahkan untuk menonton video berikut :",
+  eJournalDescription:
+    "Akses berbagai jurnal elektronik yang disediakan oleh Universitas Padjadjaran untuk mendukung kebutuhan akademis dan penelitian Anda.",
 
   // FOOTER
   // Tautan Cepat
@@ -129,16 +131,35 @@ export default {
   coursesDiverseCatalog: "Katalog Kursus Beragam",
   coursesDiverseCatalogDesc: "Akses ratusan kursus di berbagai disiplin ilmu",
   coursesFlexibleLearning: "Pembelajaran Fleksibel",
-  coursesFlexibleLearningDesc: "Belajar sesuai kecepatan Anda dengan materi online",
+  coursesFlexibleLearningDesc:
+    "Belajar sesuai kecepatan Anda dengan materi online",
   coursesExpertInstructors: "Instruktur Ahli",
-  coursesExpertInstructorsDesc: "Belajar dari dosen berpengalaman dan profesional industri",
+  coursesExpertInstructorsDesc:
+    "Belajar dari dosen berpengalaman dan profesional industri",
   coursesExploreLuhung: "Jelajahi Luhung",
   coursesLuhungUnpad: "Luhung Unpad",
   coursesLuhungTagline: "Gerbang Anda Menuju Pembelajaran Seumur Hidup",
   coursesOnlineCourses: "Kursus Online",
-  coursesOnlineCoursesDesc: "Akses materi pendidikan berkualitas kapan saja, di mana saja",
+  coursesOnlineCoursesDesc:
+    "Akses materi pendidikan berkualitas kapan saja, di mana saja",
   coursesCertifications: "Sertifikasi",
-  coursesCertificationsDesc: "Dapatkan sertifikat yang diakui setelah menyelesaikan kursus",
+  coursesCertificationsDesc:
+    "Dapatkan sertifikat yang diakui setelah menyelesaikan kursus",
   coursesCommunity: "Komunitas",
-  coursesCommunityDesc: "Bergabunglah dengan komunitas pembelajaran yang dinamis dari mahasiswa dan profesional",
+  coursesCommunityDesc:
+    "Bergabunglah dengan komunitas pembelajaran yang dinamis dari mahasiswa dan profesional",
+
+  // Postgrad Academy Page - /postgradacademy
+  postgradHeroTitle: "Postgrad Academy",
+  postgradHeroSubtitle: "Daftar Kursus",
+  postgradHeroDescription:
+    "Jelajahi koleksi kursus yang telah dikurasi dengan cermat oleh Kandaga Universitas Padjadjaran untuk mendukung perjalanan akademik dan profesional Anda.",
+  postgradTotalCourses: "Total Kursus",
+  postgradPerPage: "Per halaman",
+  postgradShowingResults: "Menampilkan {from}-{to} dari {total} kursus",
+  postgradViewCourse: "Lihat Kursus",
+  postgradNoCourses: "Tidak ada kursus yang tersedia saat ini.",
+  postgradPrevPage: "Sebelumnya",
+  postgradNextPage: "Berikutnya",
+  postgradPageOf: "dari",
 };

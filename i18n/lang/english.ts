@@ -6,7 +6,7 @@ export default {
   introWelcome: "Welcome to",
   chosenNews: "Selected News",
   homeDescription:
-    "Kandaga is a platform that provides a collection catalog and a search system for information sources owned and subscribed to by Padjadjaran University. Kandaga is a Sundanese language that means \"A place to store valuables things\" so Kandaga Unpad is a facility that provides valuable resources to support academic activities at Padjadjaran University. Kandaga is managed by Kantor Pengelolaan Perpustakaan Unpad",
+    'Kandaga is a platform that provides a collection catalog and a search system for information sources owned and subscribed to by Padjadjaran University. Kandaga is a Sundanese language that means "A place to store valuables things" so Kandaga Unpad is a facility that provides valuable resources to support academic activities at Padjadjaran University. Kandaga is managed by Kantor Pengelolaan Perpustakaan Unpad',
   searchOurCollection: "Search our collections here...",
   searchPage: "Search Page",
   ourCollection: "Kandaga's Collection",
@@ -76,7 +76,8 @@ export default {
   repositoryTitle: "Repository",
   repositoryDescription:
     "It is a place to store students' final assignments in the form of theses or dissertations. You can check the collection of theses and dissertations from various faculties at Universitas Padjadjaran.",
-  eJournalDescription: "Access a wide range of electronic journals provided by Universitas Padjadjaran to support your academic and research needs.",
+  eJournalDescription:
+    "Access a wide range of electronic journals provided by Universitas Padjadjaran to support your academic and research needs.",
 
   // Panduan
   // Akses E-Journal
@@ -85,7 +86,8 @@ export default {
     "The following is a guide on how to access e-journals provided by Universitas Padjadjaran",
   eJournalHeader: "Guide on how to access E-journals",
   eJournalHeaderDescription: `To access E-Journals and E-Resources subscribed by Universitas Padjadjaran, you need to visit the page PINTU UNPAD and login using a registered account. After logging in, you can search for the journal or electronic resources you need using the available search feature. Be sure to comply with applicable usage rules and policies to avoid copyright infringement or unauthorized use. With this access, you can support your academic and research activities at Universitas Padjadjaran.`,
-  eJournalHelper: "If you are still confused about how to access it, please watch the following video:",
+  eJournalHelper:
+    "If you are still confused about how to access it, please watch the following video:",
 
   // FOOTER
   // Tautan Cepat
@@ -126,18 +128,37 @@ export default {
   coursesLuhungDescription:
     "Luhung Universitas Padjadjaran offers a wide range of online courses, training programs, and professional development opportunities. Expand your knowledge and skills with our comprehensive learning platform.",
   coursesDiverseCatalog: "Diverse Course Catalog",
-  coursesDiverseCatalogDesc: "Access hundreds of courses across various disciplines",
+  coursesDiverseCatalogDesc:
+    "Access hundreds of courses across various disciplines",
   coursesFlexibleLearning: "Flexible Learning",
   coursesFlexibleLearningDesc: "Learn at your own pace with online materials",
   coursesExpertInstructors: "Expert Instructors",
-  coursesExpertInstructorsDesc: "Learn from experienced faculty and industry professionals",
+  coursesExpertInstructorsDesc:
+    "Learn from experienced faculty and industry professionals",
   coursesExploreLuhung: "Explore Luhung",
   coursesLuhungUnpad: "Luhung Unpad",
   coursesLuhungTagline: "Your Gateway to Lifelong Learning",
   coursesOnlineCourses: "Online Courses",
-  coursesOnlineCoursesDesc: "Access quality education materials anytime, anywhere",
+  coursesOnlineCoursesDesc:
+    "Access quality education materials anytime, anywhere",
   coursesCertifications: "Certifications",
-  coursesCertificationsDesc: "Earn recognized certificates upon course completion",
+  coursesCertificationsDesc:
+    "Earn recognized certificates upon course completion",
   coursesCommunity: "Community",
-  coursesCommunityDesc: "Join a vibrant learning community of students and professionals",
+  coursesCommunityDesc:
+    "Join a vibrant learning community of students and professionals",
+
+  // Postgrad Academy Page - /postgradacademy
+  postgradHeroTitle: "Postgrad Academy",
+  postgradHeroSubtitle: "Curated Courses",
+  postgradHeroDescription:
+    "Explore our carefully curated collection of courses, selected by Kandaga Universitas Padjadjaran to support your academic and professional journey.",
+  postgradTotalCourses: "Total Courses",
+  postgradPerPage: "Per page",
+  postgradShowingResults: "Showing {from}-{to} of {total} courses",
+  postgradViewCourse: "View Course",
+  postgradNoCourses: "No courses available at this time.",
+  postgradPrevPage: "Previous",
+  postgradNextPage: "Next",
+  postgradPageOf: "of",
 };
