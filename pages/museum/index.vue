@@ -3,15 +3,15 @@ const { t } = useI18n();
 const { getItems } = useDirectusItems();
 
 const getTotalDataMuseum = ref(
-  await getItems(getGLAMCollectionsCount("koleksi_museum"))
+  await getItems(getGLAMCollectionsCount("koleksi_museum")),
 );
-
 const pageTotal = getTotalDataMuseum.value.meta.total_count;
 const currentPage = ref(0);
-const collectionList = ref();
+const collectionList = ref([]);
 const collectionTag = ref(null);
 const filterKeyword = ref("");
 const filterJenisKoleksi = ref("");
+const isSearching = ref(false);
 
 const museumObj = {
   title: computed(() => t("museumTitle")),
@@ -23,278 +23,290 @@ const museumObj = {
 const getMuseumDataHighlight = await getItems({
   collection: "koleksi_museum",
   params: {
-    filter: {
-      status: "published",
-    },
+    filter: { status: "published" },
     limit: 4,
+    sort: "-date_created",
   },
 });
 
+const listTipeKoleksi = await getItems({
+  collection: "koleksi_museum",
+  params: { groupBy: "tipe_koleksi" },
+});
+
+const loadMuseumPage = async (offset = 0) => {
+  collectionList.value = [];
+  collectionList.value = await getItems({
+    collection: "koleksi_museum",
+    params: {
+      sort: "-date_created",
+      limit: 12,
+      offset,
+      filter: { status: "published" },
+    },
+  });
+};
+
+const getMuseumPaginationData = async (opts) => {
+  collectionTag.value?.scrollIntoView({ behavior: "smooth" });
+  if (opts === "next" && currentPage.value + 12 < pageTotal) {
+    currentPage.value += 12;
+    await loadMuseumPage(currentPage.value);
+  } else if (opts === "previous" && currentPage.value > 0) {
+    currentPage.value -= 12;
+    await loadMuseumPage(currentPage.value);
+  }
+};
+
 const filterMuseumData = async () => {
   currentPage.value = 0;
-  if (filterKeyword.value !== "") {
+  isSearching.value = true;
+  if (filterKeyword.value.trim() !== "") {
     collectionList.value = [];
     collectionList.value = await getItems({
       collection: "koleksi_museum",
       params: {
-        filter: {
-          status: "published",
-        },
         search: filterKeyword.value,
         limit: 12,
-        filter: {
-          status: "published",
-        },
+        sort: "-date_created",
+        filter: { status: "published" },
       },
     });
   } else if (filterJenisKoleksi.value !== "") {
     collectionList.value = [];
     collectionList.value = await getItems({
-      collection: "koleksi_gallery",
+      collection: "koleksi_museum",
       params: {
         filter: {
           tipe_koleksi: filterJenisKoleksi.value,
           status: "published",
         },
         limit: 12,
+        sort: "-date_created",
       },
     });
   } else {
-    alert("Kata Kunci wajib diisi!");
+    await loadMuseumPage(0);
   }
+  isSearching.value = false;
 };
-
-const listTipeKoleksi = await getItems({
-  collection: "koleksi_museum",
-  params: {
-    groupBy: "tipe_koleksi",
-  },
-});
 
 const resetFilter = async () => {
   currentPage.value = 0;
   filterKeyword.value = "";
   filterJenisKoleksi.value = "";
-  collectionList.value = await getItems({
-    collection: "koleksi_museum",
-    params: {
-      filter: {
-        status: "published",
-      },
-      limit: 12,
-      filter: {
-        status: "published",
-      },
-    },
-  });
-};
-
-const getMuseumPaginationData = async (opts) => {
-  collectionTag.value.scrollIntoView();
-  if (
-    opts === "next" &&
-    currentPage.value >= 0 &&
-    currentPage.value < pageTotal
-  ) {
-    collectionList.value = [];
-    currentPage.value = currentPage.value + 12;
-    collectionList.value = await getItems({
-      collection: "koleksi_museum",
-      params: {
-        sort: "-date_created",
-        limit: 12,
-        offset: currentPage.value,
-        filter: {
-          status: "published",
-        },
-      },
-    });
-  } else if (opts === "previous" && currentPage.value !== 0) {
-    collectionList.value = [];
-    currentPage.value = currentPage.value - 12;
-    collectionList.value = await getItems({
-      collection: "koleksi_museum",
-      params: {
-        sort: "-date_created",
-        limit: 12,
-        offset: currentPage.value,
-        filter: {
-          status: "published",
-        },
-      },
-    });
-  } else {
-    alert("Nothing Happened!");
-  }
+  await loadMuseumPage(0);
 };
 
 onMounted(async () => {
-  collectionList.value = await getItems({
-    collection: "koleksi_museum",
-    params: {
-      sort: "-date_created",
-      limit: 12,
-      offset: 0,
-      filter: {
-        status: "published",
-      },
-    },
-  });
+  await loadMuseumPage(0);
 });
 </script>
 
 <template>
   <section>
     <GenericBaseGlamLayout v-bind="museumObj" />
-    <div class="max-w-6xl ma bg-gray-1 rounded-lg rounded-rt-lg p-4">
-      <div class="p-4">
-        <h1 class="text-4xl text-center">{{ museumObj.title }}</h1>
-      </div>
-      <div class="p-4 flex flex-col items-center">
-        <h3>Koleksi {{ museumObj.title }} Pilihan Kami</h3>
+
+    <div class="max-w-7xl ma px-6 py-12 space-y-12">
+      <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
         <div
-          class="my-5 flex flex-col gap-5 lg:(grid grid-cols-2 gap-3) w-full"
+          v-for="museum in getMuseumDataHighlight"
+          :key="museum.id"
+          class="group overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg"
         >
-          <div
-            class="bg-white p-5 rounded flex w-full h-full gap-5"
-            v-for="museum in getMuseumDataHighlight"
-          >
-            <NuxtLink :to="'/museum/' + museum.id">
+          <NuxtLink :to="`/museum/${museum.id}`" class="block h-full">
+            <div class="relative aspect-[3/4] bg-slate-100 overflow-hidden">
               <NuxtImg
                 :src="directusImageUrl(museum.thumbnail)"
+                alt="museum.judul"
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 format="webp"
-                class="w-full h-40 object-cover rounded-lg lg:(w-50 h-60) transition duration-300 ease-in-out hover:scale-110"
               />
-            </NuxtLink>
-            <div class="flex flex-col justify-around gap-3 w-full">
-              <div class="flex">
-                <NuxtLink
-                  :to="'/museum/' + museum.id"
-                  class="no-underline w-full"
-                >
-                  <h4
-                    class="bg-orange-1 px-3 rounded text-orange"
-                    :title="museum.judul"
-                  >
-                    {{ trimTitle(museum.judul, 25) }}
-                  </h4>
-                </NuxtLink>
-              </div>
-              <div class="flex flex-col w-full pl-2">
-                <p class="text-sm text-gray-5">
-                  {{ t("GLAMCollector") }}:
-                  {{ museum.pembuat_koleksi ?? "Belum ada data" }}
-                </p>
-                <p class="text-sm text-gray-5">
-                  {{ t("GLAMCreatedAt") }}:
-                  {{ museum.tanggal_dibuat ?? "Tidak diketahui" }}
-                </p>
-                <p class="text-sm text-gray-5">
-                  {{ t("GLAMManagedBy") }}: {{ museum.lembaga_penanggungjawab }}
-                </p>
-              </div>
-              <NuxtLink
-                class="btn bg-orange text-white text-center py-1"
-                :to="'/museum/' + museum.id"
-                >Lihat</NuxtLink
+              <span
+                class="absolute left-3 top-3 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-[11px] font-semibold text-slate-700"
               >
+                {{ museum.tipe_koleksi ?? "Museum" }}
+              </span>
             </div>
-          </div>
+            <div class="flex h-full flex-col gap-3 p-5">
+              <h3
+                class="text-base font-bold text-slate-900 line-clamp-2"
+                :title="museum.judul"
+              >
+                {{ museum.judul }}
+              </h3>
+              <p class="text-xs text-slate-500 line-clamp-2">
+                {{ museum.pembuat_koleksi ?? "Pembuat tidak tersedia" }}
+              </p>
+              <p class="text-xs text-slate-400">
+                {{ museum.tanggal_dibuat ?? "Tanggal tidak tersedia" }}
+              </p>
+              <div
+                class="mt-auto flex items-center justify-between text-xs font-semibold text-[#b07b00]"
+              >
+                <span>Lihat</span>
+                <div class="i-mdi-arrow-right w-4 h-4" />
+              </div>
+            </div>
+          </NuxtLink>
         </div>
       </div>
-    </div>
-    <div>
-      <div class="my-10 flex flex-col items-center justify-evenly w-full">
-        <h3 class="text-center mb-5" ref="collectionTag">
-          Daftar Koleksi Museum
-        </h3>
-        <h5 class="text-center mb-5">Total Koleksi Museum: {{ pageTotal }}</h5>
-        <div class="flex justify-center gap-5 w-full">
-          <div class="w-full max-w-65">
-            <div class="bg-orange-50 h-full rounded-xl p-5">
-              <h5 class="text-center">Filter Koleksi</h5>
-              <div class="input-block">
-                <label for="search">Kata Kunci :</label>
-                <input
-                  type="search"
-                  name="search"
-                  id="search"
-                  class="input-area"
-                  v-model="filterKeyword"
-                  @keyup.enter="filterMuseumData"
-                />
-              </div>
-              <div class="input-block">
-                <label for="jenis-koleksi">Tipe Koleksi: </label>
-                <select
-                  name="jenis-koleksi"
-                  id="jenis-koleksi"
-                  class="input-area"
-                  v-model="filterJenisKoleksi"
+
+      <div class="grid gap-8 xl:grid-cols-[0.75fr_1.25fr]">
+        <aside
+          class="rounded-[32px] border border-slate-200 bg-white p-6 shadow-sm"
+        >
+          <div class="space-y-5">
+            <p
+              class="text-xs font-semibold uppercase tracking-[0.28em] text-[#b07b00]"
+            >
+              Filter Koleksi
+            </p>
+            <div class="space-y-2">
+              <label
+                class="text-sm font-semibold text-slate-700"
+                for="museum-search"
+                >Kata Kunci</label
+              >
+              <input
+                id="museum-search"
+                v-model="filterKeyword"
+                type="search"
+                placeholder="Cari koleksi..."
+                class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-[#F9B129]"
+              />
+            </div>
+            <div class="space-y-2">
+              <label
+                class="text-sm font-semibold text-slate-700"
+                for="museum-type"
+                >Tipe Koleksi</label
+              >
+              <select
+                id="museum-type"
+                v-model="filterJenisKoleksi"
+                class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-[#F9B129]"
+              >
+                <option value="">Semua Tipe</option>
+                <option
+                  v-for="tipe in listTipeKoleksi"
+                  :key="tipe.tipe_koleksi"
+                  :value="tipe.tipe_koleksi"
                 >
-                  <option value="" selected disabled>Pilih Tipe Koleksi</option>
-                  <option
-                    v-for="tipe in listTipeKoleksi"
-                    :value="tipe.tipe_koleksi"
-                  >
-                    {{ tipe.tipe_koleksi }}
-                  </option>
-                </select>
-              </div>
-              <div class="input-block flex flex-col gap-2">
-                <button
-                  class="btn bg-orange w-full text-white"
-                  @click="filterMuseumData"
-                >
-                  Filter Gallery
-                </button>
-                <button
-                  class="btn w-full text-white"
-                  :class="
-                    filterKeyword || filterJenisKoleksi
-                      ? 'bg-red'
-                      : 'bg-gray cursor-not-allowed'
-                  "
-                  @click="resetFilter"
-                  :disabled="!filterKeyword && !filterJenisKoleksi"
-                >
-                  Reset Filter
-                </button>
-              </div>
+                  {{ tipe.tipe_koleksi }}
+                </option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-3 pt-2">
+              <button
+                class="rounded-2xl bg-[#F9B129] px-4 py-3 text-sm font-semibold text-[#1a0f00] transition hover:shadow-lg"
+                @click="filterMuseumData"
+              >
+                Terapkan Filter
+              </button>
+              <button
+                class="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition hover:border-[#F9B129]"
+                @click="resetFilter"
+              >
+                Reset Filter
+              </button>
             </div>
           </div>
-          <div class="w-full">
-            <div v-if="collectionList?.length === 0">
-              <p>Sedang memuat koleksi...</p>
-            </div>
-            <div class="museum-collection" v-else>
-              <div
-                v-for="museum in collectionList"
-                class="max-w-50 text-center flex flex-col gap-2"
-              >
-                <CollectionGLAMItems v-bind="museum" type_collection="museum" />
+        </aside>
+
+        <div class="space-y-6">
+          <div
+            class="rounded-[32px] border border-slate-200 bg-slate-50 p-6 shadow-sm"
+          >
+            <div
+              class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+            >
+              <div>
+                <p class="text-xs uppercase tracking-[0.28em] text-[#b07b00]">
+                  Daftar Koleksi
+                </p>
+                <h2 class="mt-2 text-2xl font-extrabold text-slate-950">
+                  Temukan koleksi museum terpilih
+                </h2>
               </div>
+              <p class="text-sm text-slate-500">
+                Total koleksi: {{ pageTotal }}
+              </p>
             </div>
-            <div class="flex items-center justify-center gap-3 w-full mt-8">
+          </div>
+
+          <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+            <div
+              v-for="item in collectionList"
+              :key="item.id"
+              class="group overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+            >
+              <NuxtLink :to="`/museum/${item.id}`" class="block h-full">
+                <div class="relative aspect-[3/4] bg-slate-100 overflow-hidden">
+                  <NuxtImg
+                    :src="directusImageUrl(item.thumbnail)"
+                    alt="item.judul"
+                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    format="webp"
+                  />
+                  <span
+                    class="absolute left-3 top-3 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-[11px] font-semibold text-slate-700"
+                  >
+                    {{ item.tipe_koleksi ?? "Museum" }}
+                  </span>
+                </div>
+                <div class="flex h-full flex-col gap-3 p-5">
+                  <h3
+                    class="text-base font-bold text-slate-900 line-clamp-2"
+                    :title="item.judul"
+                  >
+                    {{ item.judul }}
+                  </h3>
+                  <p class="text-xs text-slate-500 line-clamp-2">
+                    {{ item.pembuat_koleksi ?? "Pembuat tidak tersedia" }}
+                  </p>
+                  <p class="text-xs text-slate-400">
+                    {{
+                      item.lembaga_penanggungjawab ?? "Pengelola tidak tersedia"
+                    }}
+                  </p>
+                  <div
+                    class="mt-auto flex items-center justify-between text-xs font-semibold text-[#b07b00]"
+                  >
+                    <span>Lihat</span>
+                    <div class="i-mdi-arrow-right w-4 h-4" />
+                  </div>
+                </div>
+              </NuxtLink>
+            </div>
+          </div>
+
+          <div class="flex flex-col items-center gap-4 py-4">
+            <div class="flex flex-wrap items-center justify-center gap-3">
               <button
-                class="btn bg-orange text-white py-0"
+                class="pagination-btn"
                 @click="getMuseumPaginationData('previous')"
                 :disabled="currentPage === 0"
               >
+                <div class="i-mdi-chevron-left w-4 h-4" />
                 Sebelumnya
               </button>
-              <p>
-                {{ currentPage == 0 ? "1" : Math.ceil(currentPage / 12 + 1) }} /
-                {{ Math.ceil(pageTotal / 12) }}
+              <p class="text-sm text-slate-600">
+                Halaman
+                {{
+                  currentPage == 0 ? 1 : Math.ceil(currentPage / 12 + 1)
+                }}
+                dari {{ Math.ceil(pageTotal / 12) }}
               </p>
               <button
-                class="btn bg-orange text-white py-0"
+                class="pagination-btn"
                 @click="getMuseumPaginationData('next')"
                 :disabled="
                   Math.ceil(currentPage / 12 + 1) === Math.ceil(pageTotal / 12)
                 "
               >
-                Selanjutnya
+                Berikutnya
+                <div class="i-mdi-chevron-right w-4 h-4" />
               </button>
             </div>
           </div>
@@ -305,12 +317,10 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-.museum-collection {
-  --at-apply: flex flex-col gap-3 sm:(grid grid-cols-3) lg:(grid grid-cols-4 gap-10);
-}
-
-.navigation-area {
-  --at-apply: flex items-center justify-center gap-3 w-full mt-8;
+.pagination-btn {
+  --at-apply: inline-flex items-center gap-2 rounded-full border
+    border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700
+    transition-all duration-200 hover: border-[#F9B129] hover: text-[#b07b00];
 }
 
 section {

@@ -3,12 +3,11 @@ const { t } = useI18n();
 const { getItems } = useDirectusItems();
 
 const getTotalDataArchive = ref(
-  await getItems(getGLAMCollectionsCount("koleksi_archive"))
+  await getItems(getGLAMCollectionsCount("koleksi_archive")),
 );
-
 const pageTotal = getTotalDataArchive.value.meta.total_count;
 const currentPage = ref(0);
-const collectionList = ref();
+const collectionList = ref([]);
 const collectionTag = ref(null);
 const filterKeyword = ref("");
 const filterJenisKoleksi = ref("");
@@ -24,74 +23,56 @@ const archiveObj = {
 const getArchiveDataHighlight = await getItems({
   collection: "koleksi_archive",
   params: {
+    filter: { status: "published" },
     limit: 4,
-    filter: {
-      status: "published",
-    },
+    sort: "-date_created",
   },
 });
 
+const listTipeKoleksi = await getItems({
+  collection: "koleksi_archive",
+  params: { groupBy: "tipe_koleksi" },
+});
+
+const loadArchivePage = async (offset = 0) => {
+  collectionList.value = [];
+  collectionList.value = await getItems({
+    collection: "koleksi_archive",
+    params: {
+      sort: "-date_created",
+      limit: 12,
+      offset,
+      filter: { status: "published" },
+    },
+  });
+};
+
 const getArchivePaginationData = async (opts) => {
-  if (
-    opts === "next" &&
-    currentPage.value >= 0 &&
-    currentPage.value < pageTotal
-  ) {
-    collectionList.value = [];
-    currentPage.value = currentPage.value + 12;
-    collectionList.value = await getItems({
-      collection: "koleksi_archive",
-      params: {
-        sort: "-date_created",
-        limit: 12,
-        offset: currentPage.value,
-        filter: {
-          status: "published",
-        },
-      },
-    });
-  } else if (opts === "previous" && currentPage.value !== 0) {
-    collectionList.value = [];
-    currentPage.value = currentPage.value - 12;
-    collectionList.value = await getItems({
-      collection: "koleksi_archive",
-      params: {
-        sort: "-date_created",
-        limit: 12,
-        offset: currentPage.value,
-        filter: {
-          status: "published",
-        },
-      },
-    });
-  } else {
-    alert("Nothing Happened!");
+  collectionTag.value?.scrollIntoView({ behavior: "smooth" });
+  if (opts === "next" && currentPage.value + 12 < pageTotal) {
+    currentPage.value += 12;
+    await loadArchivePage(currentPage.value);
+  } else if (opts === "previous" && currentPage.value > 0) {
+    currentPage.value -= 12;
+    await loadArchivePage(currentPage.value);
   }
 };
 
 const filterArchiveData = async () => {
   currentPage.value = 0;
   isSearching.value = true;
-  if (filterKeyword.value !== "") {
+  if (filterKeyword.value.trim() !== "") {
     collectionList.value = [];
     const searchData = await getItems({
       collection: "koleksi_archive",
       params: {
         search: filterKeyword.value,
         limit: 12,
-        filter: {
-          status: "published",
-        },
+        sort: "-date_created",
+        filter: { status: "published" },
       },
-    }).finally(() => {
-      isSearching.value = false;
     });
-
-    if (searchData.length > 0) {
-      collectionList.value = searchData;
-    } else {
-      collectionList.value = null;
-    }
+    collectionList.value = searchData.length > 0 ? searchData : null;
   } else if (filterJenisKoleksi.value !== "") {
     collectionList.value = [];
     const searchData = await getItems({
@@ -102,218 +83,232 @@ const filterArchiveData = async () => {
           status: "published",
         },
         limit: 12,
+        sort: "-date_created",
       },
-    }).finally(() => {
-      isSearching.value = false;
     });
-
-    if (searchData.length > 0) {
-      collectionList.value = searchData;
-    } else {
-      collectionList.value = null;
-    }
+    collectionList.value = searchData.length > 0 ? searchData : null;
   } else {
-    alert("Kata Kunci wajib diisi!");
+    await loadArchivePage(0);
   }
+  isSearching.value = false;
 };
 
 const resetFilter = async () => {
   currentPage.value = 0;
   filterKeyword.value = "";
   filterJenisKoleksi.value = "";
-  collectionList.value = await getItems({
-    collection: "koleksi_archive",
-    params: {
-      sort: "-date_created",
-      limit: 12,
-      filter: {
-        status: "published",
-      },
-    },
-  });
+  await loadArchivePage(0);
 };
 
-const listTipeKoleksi = await getItems({
-  collection: "koleksi_archive",
-  params: {
-    groupBy: "tipe_koleksi",
-  },
-});
-
 onMounted(async () => {
-  collectionList.value = await getItems({
-    collection: "koleksi_archive",
-    params: {
-      sort: "-date_created",
-      limit: 12,
-      offset: 0,
-      filter: {
-        status: "published",
-      },
-    },
-  });
+  await loadArchivePage(0);
 });
 </script>
 
 <template>
   <section>
     <GenericBaseGlamLayout v-bind="archiveObj" />
-    <div class="max-w-6xl ma bg-gray-1 rounded-lg rounded-rt-lg p-4">
-      <div class="p-4">
-        <h1 class="text-4xl text-center">{{ archiveObj.title }}</h1>
-      </div>
-      <div class="p-4 flex flex-col items-center">
-        <h3>Koleksi {{ archiveObj.title }} Pilihan Kami</h3>
+
+    <div class="max-w-7xl ma px-6 py-12 space-y-12">
+      <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
         <div
-          class="my-5 flex flex-col gap-5 lg:(grid grid-cols-2 gap-3) w-full"
+          v-for="archive in getArchiveDataHighlight"
+          :key="archive.id"
+          class="group overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg"
         >
-          <div
-            class="bg-white p-5 rounded flex w-full h-full gap-5"
-            v-for="archive in getArchiveDataHighlight"
-          >
-            <NuxtLink :to="'/records/' + archive.id">
+          <NuxtLink :to="`/records/${archive.id}`" class="block h-full">
+            <div class="relative aspect-[3/4] bg-slate-100 overflow-hidden">
               <NuxtImg
                 :src="directusImageUrl(archive.thumbnail)"
+                alt="archive.judul"
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 format="webp"
-                class="w-full h-40 object-cover rounded-lg lg:(w-50 h-60) transition duration-300 ease-in-out hover:scale-110"
               />
-            </NuxtLink>
-            <div class="flex flex-col justify-around gap-3 w-full">
-              <div class="flex">
-                <NuxtLink
-                  :to="'/records/' + archive.id"
-                  class="no-underline w-full"
+              <span
+                class="absolute left-3 top-3 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-[11px] font-semibold text-slate-700"
+              >
+                {{ archive.tipe_koleksi ?? "Archive" }}
+              </span>
+            </div>
+            <div class="flex h-full flex-col gap-3 p-5">
+              <h3
+                class="text-base font-bold text-slate-900 line-clamp-2"
+                :title="archive.judul"
+              >
+                {{ archive.judul }}
+              </h3>
+              <p class="text-xs text-slate-500 line-clamp-2">
+                {{ archive.pembuat_koleksi ?? "Pembuat tidak tersedia" }}
+              </p>
+              <p class="text-xs text-slate-400">
+                {{ archive.tanggal_dibuat ?? "Tanggal tidak tersedia" }}
+              </p>
+              <div
+                class="mt-auto flex items-center justify-between text-xs font-semibold text-[#b07b00]"
+              >
+                <span>Lihat</span>
+                <div class="i-mdi-arrow-right w-4 h-4" />
+              </div>
+            </div>
+          </NuxtLink>
+        </div>
+      </div>
+
+      <div class="grid gap-8 xl:grid-cols-[0.75fr_1.25fr]">
+        <aside
+          class="rounded-[32px] border border-slate-200 bg-white p-6 shadow-sm"
+        >
+          <div class="space-y-5">
+            <p
+              class="text-xs font-semibold uppercase tracking-[0.28em] text-[#b07b00]"
+            >
+              Filter Koleksi
+            </p>
+            <div class="space-y-2">
+              <label
+                class="text-sm font-semibold text-slate-700"
+                for="archive-search"
+                >Kata Kunci</label
+              >
+              <input
+                id="archive-search"
+                v-model="filterKeyword"
+                type="search"
+                placeholder="Cari koleksi..."
+                class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-[#F9B129]"
+              />
+            </div>
+            <div class="space-y-2">
+              <label
+                class="text-sm font-semibold text-slate-700"
+                for="archive-type"
+                >Tipe Koleksi</label
+              >
+              <select
+                id="archive-type"
+                v-model="filterJenisKoleksi"
+                class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-[#F9B129]"
+              >
+                <option value="">Semua Tipe</option>
+                <option
+                  v-for="tipe in listTipeKoleksi"
+                  :key="tipe.tipe_koleksi"
+                  :value="tipe.tipe_koleksi"
                 >
-                  <h4
-                    class="bg-orange-1 px-3 rounded text-orange"
-                    :title="archive.judul"
+                  {{ tipe.tipe_koleksi }}
+                </option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-3 pt-2">
+              <button
+                class="rounded-2xl bg-[#F9B129] px-4 py-3 text-sm font-semibold text-[#1a0f00] transition hover:shadow-lg"
+                @click="filterArchiveData"
+              >
+                Terapkan Filter
+              </button>
+              <button
+                class="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition hover:border-[#F9B129]"
+                @click="resetFilter"
+              >
+                Reset Filter
+              </button>
+            </div>
+          </div>
+        </aside>
+
+        <div class="space-y-6">
+          <div
+            class="rounded-[32px] border border-slate-200 bg-slate-50 p-6 shadow-sm"
+          >
+            <div
+              class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+            >
+              <div>
+                <p class="text-xs uppercase tracking-[0.28em] text-[#b07b00]">
+                  Daftar Koleksi
+                </p>
+                <h2 class="mt-2 text-2xl font-extrabold text-slate-950">
+                  Temukan koleksi arsip terpilih
+                </h2>
+              </div>
+              <p class="text-sm text-slate-500">
+                Total koleksi: {{ pageTotal }}
+              </p>
+            </div>
+          </div>
+
+          <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+            <div
+              v-for="item in collectionList"
+              :key="item.id"
+              class="group overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+            >
+              <NuxtLink :to="`/records/${item.id}`" class="block h-full">
+                <div class="relative aspect-[3/4] bg-slate-100 overflow-hidden">
+                  <NuxtImg
+                    :src="directusImageUrl(item.thumbnail)"
+                    alt="item.judul"
+                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    format="webp"
+                  />
+                  <span
+                    class="absolute left-3 top-3 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-[11px] font-semibold text-slate-700"
                   >
-                    {{ trimTitle(archive.judul, 22) }}
-                  </h4>
-                </NuxtLink>
-              </div>
-              <div class="flex flex-col w-full pl-2">
-                <p class="text-sm text-gray-5">
-                  Pembuat: {{ archive.pembuat_koleksi ?? "Belum ada data" }}
-                </p>
-                <p class="text-sm text-gray-5">
-                  Dibuat pada: {{ archive.tanggal_dibuat ?? "Tidak diketahui" }}
-                </p>
-                <p class="text-sm text-gray-5">
-                  Pengelola : {{ archive.lembaga_penanggungjawab }}
-                </p>
-              </div>
-              <NuxtLink
-                class="btn bg-orange text-white text-center py-1"
-                :to="'/records/' + archive.id"
-                >Lihat
+                    {{ item.tipe_koleksi ?? "Archive" }}
+                  </span>
+                </div>
+                <div class="flex h-full flex-col gap-3 p-5">
+                  <h3
+                    class="text-base font-bold text-slate-900 line-clamp-2"
+                    :title="item.judul"
+                  >
+                    {{ item.judul }}
+                  </h3>
+                  <p class="text-xs text-slate-500 line-clamp-2">
+                    {{ item.pembuat_koleksi ?? "Pembuat tidak tersedia" }}
+                  </p>
+                  <p class="text-xs text-slate-400">
+                    {{
+                      item.lembaga_penanggungjawab ?? "Pengelola tidak tersedia"
+                    }}
+                  </p>
+                  <div
+                    class="mt-auto flex items-center justify-between text-xs font-semibold text-[#b07b00]"
+                  >
+                    <span>Lihat</span>
+                    <div class="i-mdi-arrow-right w-4 h-4" />
+                  </div>
+                </div>
               </NuxtLink>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <div>
-      <div class="my-10 flex flex-col items-center justify-evenly w-full">
-        <h3 class="text-center mb-5" ref="collectionTag">
-          Daftar Koleksi Arsip
-        </h3>
-        <h5 class="text-center mb-5">Total Koleksi Arsip: {{ pageTotal }}</h5>
-        <div class="flex justify-center gap-5 w-full">
-          <div class="w-full max-w-65">
-            <div class="bg-orange-50 h-full rounded-xl p-5">
-              <h5 class="text-center">Filter Koleksi</h5>
-              <div class="input-block">
-                <label for="search">Kata Kunci :</label>
-                <input
-                  type="search"
-                  name="search"
-                  id="search"
-                  class="input-area"
-                  v-model="filterKeyword"
-                  @keyup.enter="filterArchiveData"
-                />
-              </div>
-              <div class="input-block">
-                <label for="jenis-koleksi">Tipe Koleksi: </label>
-                <select
-                  name="jenis-koleksi"
-                  id="jenis-koleksi"
-                  class="input-area"
-                  v-model="filterJenisKoleksi"
-                >
-                  <option value="" selected disabled>Pilih Tipe Koleksi</option>
-                  <option
-                    v-for="tipe in listTipeKoleksi"
-                    :value="tipe.tipe_koleksi"
-                  >
-                    {{ tipe.tipe_koleksi }}
-                  </option>
-                </select>
-              </div>
-              <div class="input-block flex flex-col gap-2">
-                <button
-                  class="btn bg-orange w-full text-white"
-                  @click="filterArchiveData"
-                >
-                  Filter Gallery
-                </button>
-                <button
-                  class="btn w-full text-white"
-                  :class="
-                    filterKeyword || filterJenisKoleksi
-                      ? 'bg-red'
-                      : 'bg-gray cursor-not-allowed'
-                  "
-                  @click="resetFilter"
-                  :disabled="!filterKeyword && !filterJenisKoleksi"
-                >
-                  Reset Filter
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="w-full">
-            <div v-if="collectionList?.length === 0 && isSearching">
-              <p>Sedang memuat koleksi...</p>
-            </div>
-            <div v-else-if="collectionList === null && !isSearching">
-              <p class="text-red">
-                Hasil pencarian dari kata kunci "{{ filterKeyword }}" tidak
-                ditemukan!
-              </p>
-            </div>
-            <div class="archive-collection" v-else>
-              <div
-                v-for="archive in collectionList"
-                class="max-w-50 text-center flex flex-col gap-2"
-              >
-                <CollectionGLAMItems
-                  v-bind="archive"
-                  type_collection="records"
-                />
-              </div>
-            </div>
-            <div class="flex items-center justify-center gap-3 w-full mt-8">
+
+          <div class="flex flex-col items-center gap-4 py-4">
+            <div class="flex flex-wrap items-center justify-center gap-3">
               <button
-                class="btn bg-orange text-white py-0"
+                class="pagination-btn"
                 @click="getArchivePaginationData('previous')"
                 :disabled="currentPage === 0"
               >
+                <div class="i-mdi-chevron-left w-4 h-4" />
                 Sebelumnya
               </button>
-              <p>
-                {{ currentPage == 0 ? "1" : Math.ceil(currentPage / 12 + 1) }} /
-                {{ Math.ceil(pageTotal / 12) }}
+              <p class="text-sm text-slate-600">
+                Halaman
+                {{
+                  currentPage == 0 ? 1 : Math.ceil(currentPage / 12 + 1)
+                }}
+                dari {{ Math.ceil(pageTotal / 12) }}
               </p>
               <button
-                class="btn bg-orange text-white py-0"
+                class="pagination-btn"
                 @click="getArchivePaginationData('next')"
                 :disabled="
                   Math.ceil(currentPage / 12 + 1) === Math.ceil(pageTotal / 12)
                 "
               >
-                Selanjutnya
+                Berikutnya
+                <div class="i-mdi-chevron-right w-4 h-4" />
               </button>
             </div>
           </div>
@@ -324,12 +319,10 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-.archive-collection {
-  --at-apply: flex flex-col gap-3 sm:(grid grid-cols-3) lg:(grid grid-cols-4 gap-10);
-}
-
-.navigation-area {
-  --at-apply: flex items-center justify-center gap-3 w-full mt-8;
+.pagination-btn {
+  --at-apply: inline-flex items-center gap-2 rounded-full border
+    border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700
+    transition-all duration-200 hover: border-[#F9B129] hover: text-[#b07b00];
 }
 
 section {
