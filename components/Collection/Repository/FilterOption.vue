@@ -1,25 +1,29 @@
 <script setup>
 import { daftarNamaFakultasUnpad } from "~/composables/user";
 
+defineProps({
+  hideFaculty: Boolean,
+});
+
 const searchTugasAkhir = searchTugasAkhirDirectus();
 const fakultas = daftarNamaFakultasUnpad();
 
-const years = [
-  "2023",
-  "2022",
-  "2021",
-  "2020",
-  "2019",
-  "2018",
-  "2017",
-  "2016",
-  "2015",
-  "2014",
-  "2013",
-  "2012",
-  "2011",
-  "2010",
-  "2009",
+const currentYear = new Date().getFullYear();
+const years = Array.from({ length: currentYear - 2004 }, (_, i) =>
+  String(currentYear - i),
+);
+
+const bahasaOptions = [
+  { value: "Indonesia", label: "Indonesia" },
+  { value: "Inggris", label: "Inggris (English)" },
+  { value: "Sunda", label: "Sunda" },
+];
+
+const tipeOptions = [
+  { value: "tugas akhir", label: "Tugas Akhir (Diploma)" },
+  { value: "skripsi", label: "Skripsi (S1)" },
+  { value: "tesis", label: "Tesis (S2)" },
+  { value: "disertasi", label: "Disertasi (S3)" },
 ];
 </script>
 
@@ -33,7 +37,23 @@ const years = [
         class="flex items-center gap-2 px-4 py-3 bg-gray-50 border-b border-gray-1"
       >
         <div class="i-mdi-filter-outline w-5 h-5 text-unpad" />
-        <h5 class="font-700 text-gray-8 m-0 text-sm">Filter Pencarian</h5>
+        <h5 class="font-700 text-gray-8 m-0 text-sm flex-1">
+          Filter Pencarian
+        </h5>
+        <button
+          v-if="
+            searchTugasAkhir.keywords ||
+            searchTugasAkhir.tahun ||
+            searchTugasAkhir.facultyId ||
+            searchTugasAkhir.jenisKarya.length ||
+            searchTugasAkhir.bahasa
+          "
+          class="text-xs text-red-5 hover:text-red-7 font-600 transition-colors"
+          @click="searchTugasAkhir.resetFilters()"
+          title="Reset semua filter"
+        >
+          Reset
+        </button>
       </div>
 
       <div class="p-4 flex flex-col gap-4">
@@ -62,15 +82,15 @@ const years = [
             id="first"
             v-model="searchTugasAkhir.tahun"
           >
-            <option value="" selected disabled>Pilih Tahun</option>
+            <option value="">Semua Tahun</option>
             <option :value="year" v-for="year in years" :key="year">
               {{ year }}
             </option>
           </select>
         </div>
 
-        <!-- Faculty -->
-        <div>
+        <!-- Faculty (hidden on faculty page) -->
+        <div v-if="!hideFaculty">
           <label class="filter-label">Fakultas</label>
           <select
             name="fakultas"
@@ -78,7 +98,7 @@ const years = [
             class="filter-input"
             v-model="searchTugasAkhir.facultyId"
           >
-            <option value="" selected disabled>Semua Fakultas</option>
+            <option value="">Semua Fakultas</option>
             <option
               v-for="fak in fakultas.objFakultas"
               :key="fak.id"
@@ -93,23 +113,35 @@ const years = [
         <div>
           <label class="filter-label">Jenis Karya</label>
           <div class="flex flex-col gap-2 mt-1.5">
-            <label class="filter-check-label">
-              <input type="checkbox" name="ta" class="filter-checkbox" />
-              <span>Tugas Akhir (Diploma)</span>
-            </label>
-            <label class="filter-check-label">
-              <input type="checkbox" name="skripsi" class="filter-checkbox" />
-              <span>Skripsi (S1)</span>
-            </label>
-            <label class="filter-check-label">
-              <input type="checkbox" name="tesis" class="filter-checkbox" />
-              <span>Tesis (S2)</span>
-            </label>
-            <label class="filter-check-label">
-              <input type="checkbox" name="disertasi" class="filter-checkbox" />
-              <span>Disertasi (S3)</span>
+            <label
+              v-for="opt in tipeOptions"
+              :key="opt.value"
+              class="filter-check-label"
+            >
+              <input
+                type="checkbox"
+                :value="opt.value"
+                v-model="searchTugasAkhir.jenisKarya"
+                class="filter-checkbox"
+              />
+              <span>{{ opt.label }}</span>
             </label>
           </div>
+        </div>
+
+        <!-- Language -->
+        <div>
+          <label class="filter-label">Bahasa</label>
+          <select class="filter-input" v-model="searchTugasAkhir.bahasa">
+            <option value="">Semua Bahasa</option>
+            <option
+              v-for="opt in bahasaOptions"
+              :key="opt.value"
+              :value="opt.value"
+            >
+              {{ opt.label }}
+            </option>
+          </select>
         </div>
 
         <!-- Apply -->

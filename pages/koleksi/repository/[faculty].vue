@@ -8,6 +8,11 @@ const route = useRoute();
 const dataFakultas = namaFakultas.cariFakultasByParameter(route.params.faculty);
 searchTugasAkhir.facultyName = dataFakultas;
 
+// Reset default browse state for this faculty
+searchTugasAkhir.defaultResults = null;
+searchTugasAkhir.defaultPage = 1;
+searchTugasAkhir.defaultOffset = 0;
+
 const dataTADirectus = await getItems({
   collection: "tbtMhsUploadThesis",
   params: {
@@ -21,16 +26,41 @@ const dataTADirectus = await getItems({
   },
 });
 
+const totalFakultas = await getItems({
+  collection: "tbtMhsUploadThesis",
+  params: {
+    meta: "filter_count",
+    filter: {
+      MhsNPM: {
+        _starts_with: dataFakultas.id,
+      },
+    },
+  },
+});
+
+// Seed store with SSR data
+if (!searchTugasAkhir.defaultResults) {
+  searchTugasAkhir.defaultResults = dataTADirectus;
+  searchTugasAkhir.defaultTotal = totalFakultas.meta?.filter_count ?? 0;
+}
+
+const defaultStartItem = computed(
+  () => (searchTugasAkhir.defaultPage - 1) * 30 + 1,
+);
+const defaultEndItem = computed(() =>
+  Math.min(searchTugasAkhir.defaultPage * 30, searchTugasAkhir.defaultTotal),
+);
+
+const facultyIdStr = String(dataFakultas.id);
+
 const previewData = (npm) => {
-  if (!searchTugasAkhir.searchResults) {
-    const searchData = dataTADirectus.find((elem) => elem?.MhsNPM === npm);
-    return searchData;
-  } else {
-    const searchData = searchTugasAkhir.searchResults.find(
-      (elem) => elem?.MhsNPM === npm,
-    );
-    return searchData;
-  }
+  const list =
+    searchTugasAkhir.searchResults ||
+    searchTugasAkhir.defaultResults ||
+    dataTADirectus;
+  return Array.isArray(list)
+    ? list.find((elem) => elem?.MhsNPM === npm)
+    : undefined;
 };
 
 let selectedPreview = previewData(previewItem.numberSelected);
@@ -112,10 +142,14 @@ definePageMeta({
         >
           {{ dataFakultas.namaFakultas }}
         </h1>
-        <p class="text-white/80 text-base max-w-xl ma mt-2 mb-0">
-          Koleksi Karya Ilmiah dan Tugas Akhir
+        <p class="text-white/70 text-sm mt-3">
+          Total koleksi:
+          <span class="font-800 text-white text-xl mx-1">{{
+            searchTugasAkhir.defaultTotal
+          }}</span>
+          karya ilmiah
         </p>
-        <div class="mt-5">
+        <div class="mt-4">
           <NuxtLink
             to="/koleksi/repository"
             class="inline-flex items-center gap-1.5 text-white/80 hover:text-white text-sm font-500 no-underline transition-colors"
@@ -136,21 +170,23 @@ definePageMeta({
 
     <!-- Main content -->
     <div class="max-w-7xl ma px-4 pb-12">
-      <!-- Search result info -->
+      <!-- Search result info (when search is active) -->
       <div
-        v-show="searchTugasAkhir.searchResults !== 'loading'"
+        v-if="
+          searchTugasAkhir.searchResults &&
+          searchTugasAkhir.searchResults !== 'loading'
+        "
         class="text-center mb-6"
       >
-        <p class="text-gray-5 text-sm">
-          Menampilkan
-          <span class="font-700 text-gray-8">
-            {{
-              !searchTugasAkhir.searchResults
-                ? dataTADirectus.length
-                : searchTugasAkhir.searchResults.length
-            }}
+        <p class="text-gray-6">
+          Ditemukan
+          <span class="font-700 text-unpad text-lg">
+            {{ searchTugasAkhir.totalData ?? "—" }}
           </span>
-          karya
+          karya di
+          <span class="font-700 text-gray-8">{{
+            dataFakultas.namaFakultas
+          }}</span>
           <template v-if="searchTugasAkhir.keywords">
             untuk
             <span class="font-700 text-gray-8"
@@ -160,15 +196,123 @@ definePageMeta({
         </p>
       </div>
 
-      <!-- Collection -->
+      <!-- Collection with filters -->
       <div class="flex flex-col gap-6 lg:flex-row items-start">
-        <!-- <CollectionRepositoryFilterOption /> -->
+        <CollectionRepositoryFilterOption :hide-faculty="true" />
 
         <div class="flex-1 min-w-0">
-          <!-- Default list -->
-          <div v-if="!searchTugasAkhir.searchResults" class="collection-grid">
+          <!-- Default browse listing -->
+          <template v-if="!searchTugasAkhir.searchResults">
+            <!-- Page info -->
+            <p class="text-sm text-gray-5 mb-4">
+              Menampilkan
+              <span class="font-700 text-gray-7"
+                >{{ defaultStartItem }}–{{ defaultEndItem }}</span
+              >
+              dari
+              <span class="font-700 text-gray-7">{{
+                searchTugasAkhir.defaultTotal
+              }}</span>
+              karya di
+              <span class="font-600 text-gray-7">{{
+                dataFakultas.namaFakultas
+              }}</span>
+            </p>
+
+            <!-- Loading overlay -->
+            <div v-if="searchTugasAkhir.isDefaultLoading" class="state-block">
+              <div class="i-mdi-loading w-10 h-10 text-unpad animate-spin" />
+              <p class="text-gray-5 mt-3 font-500">Memuat koleksi...</p>
+            </div>
+
+            <div v-else class="collection-grid">
+              <CollectionRepositoryCard
+                v-for="koleksi in searchTugasAkhir.defaultResults ??
+                dataTADirectus"
+                :key="koleksi.MhsNPM"
+                :npm="koleksi.MhsNPM"
+                :title="trimText(koleksi.Judul)"
+                :title-hover="koleksi.Judul"
+                :tipe="koleksi.tipeKoleksi"
+                :description="koleksi.AbstrakBersih ?? koleksi.Abstrak"
+                :keywords="koleksi.Keywords"
+                :link-access="'/koleksi/repository/item/' + koleksi.MhsNPM"
+                @preview="openModal(koleksi.MhsNPM)"
+              />
+            </div>
+
+            <!-- Default pagination -->
+            <div class="mt-8 flex items-center justify-center gap-4">
+              <button
+                class="page-btn"
+                :disabled="searchTugasAkhir.defaultPage <= 1"
+                :class="
+                  searchTugasAkhir.defaultPage <= 1
+                    ? 'opacity-40 cursor-not-allowed'
+                    : 'hover:bg-unpad/10'
+                "
+                @click="searchTugasAkhir.previousDefaultPage(facultyIdStr)"
+              >
+                <div class="i-mdi-chevron-left w-5 h-5" />
+                Sebelumnya
+              </button>
+
+              <span
+                class="px-4 py-1.5 bg-unpad text-white rounded-full text-sm font-700 min-w-10 text-center"
+              >
+                {{ searchTugasAkhir.defaultPage }}
+              </span>
+
+              <button
+                class="page-btn"
+                :disabled="
+                  searchTugasAkhir.isDefaultLoading ||
+                  searchTugasAkhir.defaultOffset + 30 >=
+                    searchTugasAkhir.defaultTotal
+                "
+                :class="
+                  searchTugasAkhir.isDefaultLoading ||
+                  searchTugasAkhir.defaultOffset + 30 >=
+                    searchTugasAkhir.defaultTotal
+                    ? 'opacity-40 cursor-not-allowed'
+                    : 'hover:bg-unpad/10'
+                "
+                @click="searchTugasAkhir.nextDefaultPage(facultyIdStr)"
+              >
+                Berikutnya
+                <div class="i-mdi-chevron-right w-5 h-5" />
+              </button>
+            </div>
+          </template>
+
+          <!-- Loading (search) -->
+          <div
+            v-else-if="searchTugasAkhir.searchResults === 'loading'"
+            class="state-block"
+          >
+            <div class="i-mdi-loading w-10 h-10 text-unpad animate-spin" />
+            <p class="text-gray-5 mt-3 font-500">Sedang mencari data...</p>
+          </div>
+
+          <!-- No results -->
+          <div
+            v-else-if="
+              searchTugasAkhir.searchResults === '[]' ||
+              searchTugasAkhir.searchResults?.length === 0
+            "
+            class="state-block"
+          >
+            <div class="i-mdi-text-search w-14 h-14 text-gray-3" />
+            <p class="text-gray-5 font-600 mt-3">Tidak ada hasil ditemukan</p>
+            <p class="text-gray-4 text-sm">
+              Coba gunakan kata kunci atau filter yang berbeda
+            </p>
+          </div>
+
+          <!-- Search results -->
+          <div v-else class="collection-grid">
             <CollectionRepositoryCard
-              v-for="koleksi in dataTADirectus"
+              v-for="koleksi in searchTugasAkhir.searchResults"
               :key="koleksi.MhsNPM"
               :npm="koleksi.MhsNPM"
               :title="trimText(koleksi.Judul)"
@@ -181,87 +325,79 @@ definePageMeta({
             />
           </div>
 
-          <!-- Loading -->
+          <!-- Search results pagination -->
           <div
-            v-else-if="searchTugasAkhir.searchResults === 'loading'"
-            class="state-block"
+            v-if="
+              searchTugasAkhir.searchResults &&
+              searchTugasAkhir.searchResults !== 'loading' &&
+              searchTugasAkhir.searchResults !== '[]' &&
+              searchTugasAkhir.searchResults?.length > 0
+            "
+            class="mt-8 flex flex-col items-center gap-3"
           >
-            <div class="i-mdi-loading w-10 h-10 text-unpad animate-spin" />
-            <p class="text-gray-5 mt-3 font-500">Sedang mencari data...</p>
-          </div>
-
-          <!-- No results -->
-          <div
-            v-else-if="searchTugasAkhir.searchResults === '[]'"
-            class="state-block"
-          >
-            <div class="i-mdi-text-search w-14 h-14 text-gray-3" />
-            <p class="text-gray-5 font-600 mt-3">Tidak ada hasil ditemukan</p>
-            <p class="text-gray-4 text-sm">
-              Coba gunakan kata kunci yang berbeda
+            <p class="text-sm text-gray-5">
+              Halaman
+              <span class="font-700 text-gray-7">{{
+                searchTugasAkhir.page
+              }}</span>
+              · Menampilkan
+              <span class="font-700 text-gray-7">
+                {{ searchTugasAkhir.offset + 1 }}–{{
+                  Math.min(
+                    searchTugasAkhir.offset + 30,
+                    searchTugasAkhir.totalData ?? 9999,
+                  )
+                }}
+              </span>
+              dari
+              <span class="font-700 text-unpad">{{
+                searchTugasAkhir.totalData ?? "—"
+              }}</span>
+              hasil
             </p>
-          </div>
+            <div class="flex items-center gap-4">
+              <button
+                class="page-btn"
+                :disabled="searchTugasAkhir.offset === 0"
+                :class="
+                  searchTugasAkhir.offset === 0
+                    ? 'opacity-40 cursor-not-allowed'
+                    : 'hover:bg-unpad/10'
+                "
+                @click="searchTugasAkhir.previousPage()"
+              >
+                <div class="i-mdi-chevron-left w-5 h-5" />
+                Sebelumnya
+              </button>
 
-          <!-- Search results -->
-          <div v-else class="collection-grid">
-            <CollectionRepositoryCard
-              v-for="koleksi in searchTugasAkhir.searchResults"
-              :key="koleksi.MhsNPM"
-              :npm="koleksi.MhsNPM"
-              :title="trimText(koleksi.Judul)"
-              :tipe="koleksi.tipeKoleksi"
-              :description="koleksi.AbstrakBersih ?? koleksi.Abstrak"
-              :keywords="koleksi.Keywords"
-              :link-access="'/koleksi/repository/item/' + koleksi.MhsNPM"
-              @preview="openModal(koleksi.MhsNPM)"
-            />
+              <span
+                class="px-4 py-1.5 bg-unpad text-white rounded-full text-sm font-700 min-w-10 text-center"
+              >
+                {{ searchTugasAkhir.page }}
+              </span>
+
+              <button
+                class="page-btn"
+                :disabled="
+                  searchTugasAkhir.searchResults === 'loading' ||
+                  searchTugasAkhir.offset + 30 >=
+                    (searchTugasAkhir.totalData ?? 0)
+                "
+                :class="
+                  searchTugasAkhir.searchResults === 'loading' ||
+                  searchTugasAkhir.offset + 30 >=
+                    (searchTugasAkhir.totalData ?? 0)
+                    ? 'opacity-40 cursor-not-allowed'
+                    : 'hover:bg-unpad/10'
+                "
+                @click="searchTugasAkhir.nextPage()"
+              >
+                Berikutnya
+                <div class="i-mdi-chevron-right w-5 h-5" />
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-
-      <!-- Pagination -->
-      <div class="mt-8 flex items-center justify-center gap-4">
-        <button
-          class="page-btn"
-          :disabled="
-            !searchTugasAkhir.searchResults || searchTugasAkhir.offset === 0
-          "
-          :class="
-            !searchTugasAkhir.searchResults || searchTugasAkhir.offset === 0
-              ? 'opacity-40 cursor-not-allowed'
-              : 'hover:bg-unpad/10'
-          "
-          @click="searchTugasAkhir.previousPage()"
-        >
-          <div class="i-mdi-chevron-left w-5 h-5" />
-          Sebelumnya
-        </button>
-
-        <span
-          class="px-4 py-1.5 bg-unpad text-white rounded-full text-sm font-700 min-w-10 text-center"
-        >
-          {{ searchTugasAkhir.page }}
-        </span>
-
-        <button
-          class="page-btn"
-          :disabled="
-            !searchTugasAkhir.searchResults ||
-            searchTugasAkhir.searchResults === 'loading' ||
-            searchTugasAkhir.searchResults.length < 30
-          "
-          :class="
-            !searchTugasAkhir.searchResults ||
-            searchTugasAkhir.searchResults === 'loading' ||
-            searchTugasAkhir.searchResults.length < 30
-              ? 'opacity-40 cursor-not-allowed'
-              : 'hover:bg-unpad/10'
-          "
-          @click="searchTugasAkhir.nextPage()"
-        >
-          Berikutnya
-          <div class="i-mdi-chevron-right w-5 h-5" />
-        </button>
       </div>
 
       <!-- Help + Back -->
