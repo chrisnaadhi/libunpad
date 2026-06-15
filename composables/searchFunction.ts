@@ -60,7 +60,6 @@ export const searchTugasAkhirDirectus = defineStore(
     const facultyName = ref<NamaFakultas | null>();
     const facultyId = ref("");
     const tahun = ref("");
-    const jenisKarya = ref<string[]>([]);
     const bahasa = ref("");
     const isNewSearch = ref(false);
     const searchResults = ref();
@@ -101,14 +100,6 @@ export const searchTugasAkhirDirectus = defineStore(
               `${tahun.value}-12-31T23:59:59`,
             ],
           },
-        });
-      }
-
-      if (jenisKarya.value.length > 0) {
-        and.push({
-          _or: jenisKarya.value.map((t) => ({
-            tipeKoleksi: { _icontains: t },
-          })),
         });
       }
 
@@ -205,7 +196,6 @@ export const searchTugasAkhirDirectus = defineStore(
       keywords.value = "";
       tahun.value = "";
       facultyId.value = "";
-      jenisKarya.value = [];
       bahasa.value = "";
       offset.value = 0;
       page.value = 1;
@@ -218,7 +208,6 @@ export const searchTugasAkhirDirectus = defineStore(
       offset,
       page,
       tahun,
-      jenisKarya,
       bahasa,
       facultyName,
       facultyId,

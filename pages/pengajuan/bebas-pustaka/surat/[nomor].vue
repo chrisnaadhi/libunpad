@@ -173,6 +173,18 @@ useHead({
                 class="w-45 mt--5 mb--5"
               />
             </div>
+            <div
+              v-else-if="
+                getDataSurat.user_updated ===
+                'F089C63F-A63C-453D-9995-AB9B4803A5A7'
+              "
+            >
+              <NuxtImg
+                src="images/ttd/rita-marlina.png"
+                v-show="getDataSurat.nama_fakultas !== 'fikom'"
+                class="w-45 mt--5 mb--5"
+              />
+            </div>
             <div v-else>
               <NuxtImg
                 src="images/ttd_kepala2p.png"

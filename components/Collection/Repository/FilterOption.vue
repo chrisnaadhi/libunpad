@@ -18,13 +18,6 @@ const bahasaOptions = [
   { value: "Inggris", label: "Inggris (English)" },
   { value: "Sunda", label: "Sunda" },
 ];
-
-const tipeOptions = [
-  { value: "tugas akhir", label: "Tugas Akhir (Diploma)" },
-  { value: "skripsi", label: "Skripsi (S1)" },
-  { value: "tesis", label: "Tesis (S2)" },
-  { value: "disertasi", label: "Disertasi (S3)" },
-];
 </script>
 
 <template>
@@ -45,7 +38,6 @@ const tipeOptions = [
             searchTugasAkhir.keywords ||
             searchTugasAkhir.tahun ||
             searchTugasAkhir.facultyId ||
-            searchTugasAkhir.jenisKarya.length ||
             searchTugasAkhir.bahasa
           "
           class="text-xs text-red-5 hover:text-red-7 font-600 transition-colors"
@@ -109,27 +101,6 @@ const tipeOptions = [
           </select>
         </div>
 
-        <!-- Type -->
-        <div>
-          <label class="filter-label">Jenis Karya</label>
-          <div class="flex flex-col gap-2 mt-1.5">
-            <label
-              v-for="opt in tipeOptions"
-              :key="opt.value"
-              class="filter-check-label"
-            >
-              <input
-                type="checkbox"
-                :value="opt.value"
-                v-model="searchTugasAkhir.jenisKarya"
-                class="filter-checkbox"
-              />
-              <span>{{ opt.label }}</span>
-            </label>
-          </div>
-        </div>
-
-        <!-- Language -->
         <div>
           <label class="filter-label">Bahasa</label>
           <select class="filter-input" v-model="searchTugasAkhir.bahasa">
