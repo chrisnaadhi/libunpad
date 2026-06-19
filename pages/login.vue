@@ -10,7 +10,7 @@ const passwordType = ref("password");
 const email = ref("");
 const password = ref("");
 const defaultLoginNotif = ref(
-  "Login khusus Staff Kandaga — gunakan PAuS SSO untuk mahasiswa, dosen, dan tenaga kependidikan.",
+  "Login khusus Staff Kandaga. Gunakan PAuS SSO untuk mahasiswa, dosen, dan tenaga kependidikan.",
 );
 const loginNotif = ref(defaultLoginNotif.value);
 const textLogin = ref("text-slate-700");
@@ -94,7 +94,7 @@ definePageMeta({
       class="container ma grid gap-10 xl:grid-cols-[1.2fr_0.95fr] items-center"
     >
       <section
-        class="relative overflow-hidden rounded-[2rem] bg-slate-950 p-8 text-white shadow-[0_40px_80px_rgba(15,23,42,0.18)] sm:p-10"
+        class="relative overflow-hidden order-2 xl:order-1 rounded-[2rem] bg-slate-950 p-8 text-white shadow-[0_40px_80px_rgba(15,23,42,0.18)] sm:p-10"
       >
         <div
           class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(249,177,41,0.24),transparent_22%),radial-gradient(circle_at_bottom_right,_rgba(255,255,255,0.08),transparent_35%)] pointer-events-none"
@@ -117,16 +117,13 @@ definePageMeta({
             <div
               class="rounded-3xl bg-white/5 p-5 ring-1 ring-white/10 backdrop-blur-sm"
             >
-              <p
-                class="text-sm font-semibold uppercase tracking-[0.24em] text-[#F9B129]"
-              >
-                Keuntungan
+              <p class="text-sm font-semibold uppercase tracking-[0.24em]">
+                SSO Unpad
               </p>
-              <ul class="mt-4 space-y-3 text-sm text-slate-100">
-                <li>• Akses data staf dan operasional</li>
-                <li>• Pengelolaan koleksi internal</li>
-                <li>• Notifikasi dan pengumuman khusus</li>
-              </ul>
+              <p class="mt-3 text-sm leading-6">
+                Pilihan cepat untuk akses akademik bagi sivitas Unpad melalui
+                PAuS atau Google email.
+              </p>
             </div>
             <div
               class="rounded-3xl bg-white/5 p-5 ring-1 ring-white/10 backdrop-blur-sm"
@@ -142,32 +139,11 @@ definePageMeta({
               </p>
             </div>
           </div>
-
-          <div class="grid gap-3 sm:grid-cols-2">
-            <div class="rounded-3xl bg-[#F9B129]/10 p-5 text-slate-950">
-              <p class="text-sm font-semibold uppercase tracking-[0.24em]">
-                Staff Login
-              </p>
-              <p class="mt-3 text-sm leading-6">
-                Gunakan akun Directus staf untuk masuk ke area manajemen
-                Kandaga.
-              </p>
-            </div>
-            <div class="rounded-3xl bg-white/5 p-5 text-slate-100">
-              <p class="text-sm font-semibold uppercase tracking-[0.24em]">
-                SSO Unpad
-              </p>
-              <p class="mt-3 text-sm leading-6">
-                Pilihan cepat untuk akses akademik bagi sivitas Unpad melalui
-                PAuS atau Google email.
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 
       <section
-        class="rounded-[2rem] bg-white p-8 shadow-[0_28px_70px_rgba(15,23,42,0.08)] sm:p-10"
+        class="order-1 xl:order-2 rounded-[2rem] bg-white p-8 shadow-[0_28px_70px_rgba(15,23,42,0.08)] sm:p-10"
       >
         <div class="space-y-6">
           <div>

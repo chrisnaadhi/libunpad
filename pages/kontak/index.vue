@@ -92,14 +92,14 @@ const sendMessage = async () => {
               </ClientOnly>
             </div>
             <button type="submit" class="submit-btn" :disabled="!token">
-              <span v-if="isLoad">
+              <span v-if="isLoad" class="flex items-center gap-2">
                 <div
                   class="i-mdi-loading w-4 h-4"
                   style="animation: spin 1s linear infinite"
                 />
                 Sedang mengirim...
               </span>
-              <span v-else>
+              <span v-else class="flex items-center gap-2">
                 <div class="i-mdi-send w-4 h-4" />
                 Kirim Pesan
               </span>
