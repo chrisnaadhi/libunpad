@@ -146,8 +146,15 @@ useHead({
       </div>
     </div>
 
+    <div v-if="!profile" class="bg-gradient-to-br from-unpad to-kandaga pt-12 pb-20 animate-pulse">
+      <div class="max-w-5xl ma px-4 text-center space-y-3">
+        <div class="w-24 h-24 rounded-full bg-white/20 ma"></div>
+        <div class="h-6 bg-white/20 rounded w-48 ma"></div>
+        <div class="h-4 bg-white/20 rounded w-32 ma"></div>
+      </div>
+    </div>
     <!-- Profile hero banner -->
-    <div v-if="profile" class="bg-gradient-to-br from-unpad to-kandaga pt-12 pb-20">
+    <div v-else class="bg-gradient-to-br from-unpad to-kandaga pt-12 pb-20">
       <div class="max-w-5xl ma px-4 text-center">
         <!-- Profile photo -->
         <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden ma mb-4 ring-4 ring-white/30 shadow-lg">
@@ -311,7 +318,7 @@ useHead({
               <ClientOnly>
                 <span class="text-xs text-gray-4">{{
                   formatDate(post.date_created)
-                  }}</span>
+                }}</span>
               </ClientOnly>
             </div>
           </div>

@@ -132,11 +132,20 @@ useHead(computed(() => ({
         <div class="text-gray-3">/</div>
         <span class="text-sm text-gray-4 truncate">{{
           trimTitle(post.title, 50)
-          }}</span>
+        }}</span>
       </div>
     </div>
 
-    <div class="max-w-4xl ma px-4 py-8">
+    <div v-if="!post" class="max-w-4xl ma px-4 py-8 animate-pulse space-y-4">
+      <div class="rounded-2xl bg-gray-200 aspect-video w-full"></div>
+      <div class="bg-white rounded-2xl p-6 space-y-3">
+        <div class="h-4 bg-gray-200 rounded w-1/4"></div>
+        <div class="h-6 bg-gray-200 rounded w-3/4"></div>
+        <div class="h-4 bg-gray-200 rounded w-full"></div>
+      </div>
+    </div>
+
+    <div v-else class="max-w-4xl ma px-4 py-8">
       <div class="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-8 items-start">
         <!-- ── Main content ── -->
         <article class="space-y-6">
