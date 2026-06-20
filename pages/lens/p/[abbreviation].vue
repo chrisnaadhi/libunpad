@@ -187,9 +187,6 @@ useHead({
         </div>
       </div>
     </div>
-    <div v-else class="bg-gradient-to-br from-unpad to-kandaga pt-12 pb-20 animate-pulse">
-      <!-- skeleton loader -->
-    </div>
 
     <!-- Floating info card -->
     <div class="max-w-5xl ma px-4 -mt-8 relative z-10 mb-8">
@@ -318,7 +315,7 @@ useHead({
               <ClientOnly>
                 <span class="text-xs text-gray-4">{{
                   formatDate(post.date_created)
-                }}</span>
+                  }}</span>
               </ClientOnly>
             </div>
           </div>
