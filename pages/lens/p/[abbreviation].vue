@@ -2,12 +2,12 @@
 const { getItems } = useDirectusItems();
 const route = useRoute();
 const dayjs = useDayjs();
+import { computed, ref } from "vue";
 
 // Fetch profile and posts together in one safe block
 const { data: profileData } = await useAsyncData(
   `lens-profile-${route.params.abbreviation}`,
   async () => {
-    // 1. Fetch the profile
     const profiles = await getItems({
       collection: "kandaga_lens_profile",
       params: {
@@ -27,7 +27,6 @@ const { data: profileData } = await useAsyncData(
       });
     }
 
-    // 2. Fetch posts safely using the profile ID we just got
     const posts = await getItems({
       collection: "kandaga_lens",
       params: {
@@ -40,20 +39,66 @@ const { data: profileData } = await useAsyncData(
       },
     });
 
-    // Return them together
     return { profile, posts };
   }
 );
 
-// Extract safely using computed properties
 const profile = computed(() => profileData.value?.profile);
 const postsData = computed(() => profileData.value?.posts);
 
-// --- KEEP THE REST OF YOUR CODE BELOW THIS LINE ---
 // Filter state
 const selectedCategory = ref("all");
 
-// ... (your categories array, getCategoryBadge function, etc) ...
+const categories = [
+  { key: "all", label: "Semua", icon: "i-mdi-view-grid-outline" },
+  { key: "layanan", label: "Layanan", icon: "i-mdi-briefcase-outline" },
+  { key: "informasi", label: "Informasi", icon: "i-mdi-information-outline" },
+  { key: "edukasi_literasi", label: "Edukasi", icon: "i-mdi-school-outline" },
+  { key: "pengumuman", label: "Pengumuman", icon: "i-mdi-bullhorn-outline" },
+  { key: "acara", label: "Acara", icon: "i-mdi-calendar-star-outline" },
+];
+
+const getCategoryBadge = (cat) => {
+  const map = {
+    layanan: {
+      label: "Layanan",
+      icon: "i-mdi-briefcase-outline",
+      cls: "bg-green-50 text-green-700 border-green-200",
+    },
+    informasi: {
+      label: "Informasi",
+      icon: "i-mdi-information-outline",
+      cls: "bg-blue-50 text-blue-700 border-blue-200",
+    },
+    edukasi_literasi: {
+      label: "Edukasi",
+      icon: "i-mdi-school-outline",
+      cls: "bg-amber-50 text-amber-700 border-amber-200",
+    },
+    pengumuman: {
+      label: "Pengumuman",
+      icon: "i-mdi-bullhorn-outline",
+      cls: "bg-red-50 text-red-700 border-red-200",
+    },
+    acara: {
+      label: "Acara",
+      icon: "i-mdi-calendar-star-outline",
+      cls: "bg-purple-50 text-purple-700 border-purple-200",
+    },
+    fasilitas: {
+      label: "Fasilitas",
+      icon: "i-mdi-office-building-outline",
+      cls: "bg-cyan-50 text-cyan-700 border-cyan-200",
+    },
+  };
+  return (
+    map[cat] || {
+      label: cat,
+      icon: "i-mdi-tag-outline",
+      cls: "bg-gray-100 text-gray-600 border-gray-200",
+    }
+  );
+};
 
 const filteredPosts = computed(() => {
   if (selectedCategory.value === "all") return postsData.value || [];
@@ -62,9 +107,13 @@ const filteredPosts = computed(() => {
   );
 });
 
-const formatDate = (date) => dayjs(date).fromNow();
+const formatDate = (date) => {
+  if (import.meta.client) {
+    return dayjs(date).fromNow();
+  }
+  return dayjs(date).format("DD MMMM YYYY");
+};
 
-// Count posts per category
 const categoryCounts = computed(() => {
   const counts = {};
   (postsData.value || []).forEach((p) => {
@@ -80,7 +129,6 @@ useHead({
       name: "description",
       content: computed(() => profile.value?.deskripsi || `Konten dari ${profile.value?.name || ''}`),
     },
-    // Note: For OG images in useHead, it's safer to use a computed if the data isn't ready immediately
   ],
 });
 </script>
@@ -164,7 +212,7 @@ useHead({
           <!-- Contact -->
           <div class="flex items-center gap-3 px-6 py-4">
             <div class="w-10 h-10 rounded-xl bg-unpad/10 flex items-center justify-center flex-shrink-0">
-              <div class="i-mdi-email-outline w-5 h-5 text-unpad" />
+              <div class="i-mdi-email-outline w-4.5 h-4.5 text-unpad" />
             </div>
             <div class="min-w-0">
               <a v-if="profile.contact_email" :href="`mailto:${profile.contact_email}`"
@@ -281,7 +329,6 @@ useHead({
 </template>
 
 <style scoped>
-/* prettier-ignore */
 .profile-post-card {
   --at-apply: bg-white rounded-xl border border-gray-2 overflow-hidden flex flex-col cursor-pointer transition-all-300 hover:border-unpad hover:shadow-md hover:-translate-y-0.5;
 }
