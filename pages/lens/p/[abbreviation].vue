@@ -147,7 +147,7 @@ useHead({
     </div>
 
     <!-- Profile hero banner -->
-    <div class="bg-gradient-to-br from-unpad to-kandaga pt-12 pb-20">
+    <div v-if="profile" class="bg-gradient-to-br from-unpad to-kandaga pt-12 pb-20">
       <div class="max-w-5xl ma px-4 text-center">
         <!-- Profile photo -->
         <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden ma mb-4 ring-4 ring-white/30 shadow-lg">
@@ -179,6 +179,9 @@ useHead({
           </a>
         </div>
       </div>
+    </div>
+    <div v-else class="bg-gradient-to-br from-unpad to-kandaga pt-12 pb-20 animate-pulse">
+      <!-- skeleton loader -->
     </div>
 
     <!-- Floating info card -->
@@ -254,8 +257,8 @@ useHead({
         <button v-for="cat in categories" :key="cat.key"
           class="flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-600 whitespace-nowrap border transition-all-200 flex-shrink-0"
           :class="selectedCategory === cat.key
-              ? 'bg-unpad text-white border-unpad'
-              : 'bg-white text-gray-6 border-gray-2 hover:border-unpad hover:text-unpad'
+            ? 'bg-unpad text-white border-unpad'
+            : 'bg-white text-gray-6 border-gray-2 hover:border-unpad hover:text-unpad'
             " @click="selectedCategory = cat.key">
           {{ cat.label }}
           <span v-if="cat.key !== 'all' && categoryCounts[cat.key]" class="text-xs opacity-70">

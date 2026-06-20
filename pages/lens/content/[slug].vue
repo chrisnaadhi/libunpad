@@ -106,17 +106,17 @@ const getCategoryBadge = (cat) => {
   );
 };
 
-useHead({
-  title: `${post.title} — Kandaga Lens`,
+useHead(computed(() => ({
+  title: `${post.value?.title || ''} — Kandaga Lens`,
   meta: [
-    { name: "description", content: post.excerpt || post.title },
-    { property: "og:title", content: post.title },
-    { property: "og:description", content: post.excerpt || "" },
-    ...(post.thumbnail
-      ? [{ property: "og:image", content: handleAssets(post.thumbnail) }]
+    { name: "description", content: post.value?.excerpt || post.value?.title || '' },
+    { property: "og:title", content: post.value?.title || '' },
+    { property: "og:description", content: post.value?.excerpt || '' },
+    ...(post.value?.thumbnail
+      ? [{ property: "og:image", content: handleAssets(post.value.thumbnail) }]
       : []),
   ],
-});
+})));
 </script>
 
 <template>
@@ -132,7 +132,7 @@ useHead({
         <div class="text-gray-3">/</div>
         <span class="text-sm text-gray-4 truncate">{{
           trimTitle(post.title, 50)
-        }}</span>
+          }}</span>
       </div>
     </div>
 
