@@ -155,7 +155,6 @@ const sendSuveyData = async () => {
       },
     });
   } catch (error) {
-    console.log(error);
   }
   viewSurvey.value = false;
   setTimeout(() => {

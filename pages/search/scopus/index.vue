@@ -15,7 +15,6 @@ const submitSearchScopus = async (terms) => {
     );
     searchScopus.scopusObjects = scopusResults.value;
   } catch (err) {
-    console.log(err);
   }
 };
 

@@ -26,7 +26,6 @@ if (getKelengkapanData.length > 0 && getKelengkapanData[0]?.submitted === 'false
 } else if (getKelengkapanData[0]?.submitted === 'true') {
   await navigateTo("/keanggotaan")
 } else {
-  console.log("Nothing Else")
 }
 
 submitter.email = data.value.user.email
@@ -94,7 +93,6 @@ const nextSubmit = async () => {
         owningCollection: submitter.programStudi
       },
       async onResponse({ response }) {
-        console.log(response)
         await createItems({
           collection: "log_dspace_items",
           items: {
@@ -112,7 +110,6 @@ const nextSubmit = async () => {
     })
     await navigateTo("/pengajuan/unggah-mandiri/submit/form/kelengkapan");
   } else {
-    console.log("Failed")
     displayModal();
   }
 }

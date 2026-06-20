@@ -54,7 +54,6 @@ const fetchDataPekerjaan = async (val) => {
       },
     });
   } catch (error) {
-    console.log(error);
   }
 };
 

@@ -153,7 +153,6 @@ const lokerData = async () => {
           nama_peminjam: peminjamanLokerStore.namaPeminjam,
         },
       }).then(async () => {
-        console.log("Berhasil update data loker");
         await createItems({
           collection: "list_peminjaman_loker",
           items: {
@@ -292,7 +291,6 @@ const addVisitor = async () => {
       }
     );
   } catch (e) {
-    console.log(e);
   }
 };
 

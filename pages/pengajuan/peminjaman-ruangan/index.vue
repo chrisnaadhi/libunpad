@@ -167,7 +167,6 @@ const kirimPengajuan = async () => {
           }, 2000);
         } catch (error) {
           isUploading.value = false;
-          console.log(error);
         }
       } else {
         textNotif.value = "text-red-7";
@@ -183,7 +182,6 @@ const kirimPengajuan = async () => {
   } else {
     alert("Error! Hubungi admin.");
     isUploading.value = false;
-    console.log(fileSurat.value);
   }
 };
 </script>

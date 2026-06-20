@@ -22,7 +22,6 @@ const fetchLibraryItems = async () => {
     libraryItems.value = [];
   }
 
-  console.log(libraryItems.value);
 };
 
 const doSearch = async () => {

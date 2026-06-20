@@ -170,7 +170,6 @@ onMounted(async () => {
     },
   });
 
-  console.log(collectionList.value);
 });
 </script>
 

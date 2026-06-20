@@ -39,7 +39,6 @@ const submitSearch = async (keyword) => {
   } catch (error) {
     search.isResult = false;
     loadingWiki.value = false;
-    console.log(error);
   }
 
   try {
@@ -57,7 +56,6 @@ const submitSearch = async (keyword) => {
   } catch (error) {
     search.pustakaRes = [];
     loadingFederated.value = false;
-    console.log(error);
   }
 
   try {
@@ -78,7 +76,6 @@ const submitSearch = async (keyword) => {
     });
   } catch (error) {
     search.isResult = false;
-    console.log(error);
   }
 
   try {

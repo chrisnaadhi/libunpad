@@ -17,7 +17,6 @@ const prodi = ref("");
 const kontak = ref("");
 const jenisKelas = ref("");
 
-console.log(!npm.value);
 
 const jadwalKelasLiterasi = await getItems({
   collection: "jadwal_kelas_literasi",
@@ -75,7 +74,6 @@ const kirimPengajuan = async () => {
         await navigateTo({ path: "/keanggotaan" });
       }, 2000);
     } catch (error) {
-      console.log(error);
     }
   }
 };

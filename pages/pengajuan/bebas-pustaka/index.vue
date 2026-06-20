@@ -54,7 +54,6 @@ const kirimPengajuan = async () => {
       await createItems({ collection: "pengajuan_surat_bebas_pustaka", items });
       await navigateTo({ path: "/pengajuan/bebas-pustaka/data" });
     } catch (error) {
-      console.log(error);
     }
   } else {
     textNotif.value = "text-red-7";

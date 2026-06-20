@@ -30,7 +30,6 @@ export default defineEventHandler(async (event) => {
         });
       })
       .catch((err) => {
-        console.log(err);
       });
   } else {
     // await fetch(config.dSpaceAuth, {

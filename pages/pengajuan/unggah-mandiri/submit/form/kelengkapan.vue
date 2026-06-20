@@ -291,9 +291,7 @@ const saveMetadata = async () => {
       }, 3000)
     }
 
-    console.log("DONE!");
   } catch (error) {
-    console.log(error);
   }
 };
 
@@ -486,7 +484,6 @@ const onChangeThenUpload = async ($event, formName) => {
                   fileFullTeks.value = findFullTeks
                   break;
                 default:
-                  console.log(formName);
                   break;
               }
               inputFormState[formName] = false;
@@ -582,7 +579,6 @@ const deleteFileSubmission = async (fileName) => {
             fileFullTeks.value = null
             break;
           default:
-            console.log(fileName)
             break;
         }
         pickedFile.value = "";

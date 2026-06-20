@@ -24,7 +24,6 @@ const isKoordinator = computed(() => {
         break;
     }
   } catch (error) {
-    console.log("Logout..");
   }
 
   return state;

@@ -99,7 +99,6 @@ const confirmationDisplay = async (id) => {
     collection: 'list_kesediaan_loker',
     id: id
   }).then(async (res) => {
-    console.log(res)
     nomorLoker.value = res.nomor_loker;
     chosenLoker.value = res.id
 
@@ -116,10 +115,6 @@ const confirmationDisplay = async (id) => {
       }
     }).then(async (res) => {
       idLoker.value = res[0]?.id;
-      console.log(res)
-      console.log("Chosen ID Loker : " + chosenLoker.value)
-      console.log("ID Loker : " + idLoker.value)
-      console.log("Nomor Loker : " + nomorLoker.value)
     })
   })
 }
@@ -127,8 +122,6 @@ const confirmationDisplay = async (id) => {
 const pengembalianKunci = async () => {
   loadPengembalianState.value = true;
 
-  console.log(chosenLoker.value)
-  console.log(idLoker.value)
 
   await updateItem({
     collection: 'list_kesediaan_loker',

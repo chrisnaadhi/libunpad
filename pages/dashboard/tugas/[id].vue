@@ -51,7 +51,6 @@ const updateTugas = async () => {
       return navigateTo("/dashboard/tugas");
     }, 1000);
   } catch (error) {
-    console.log(error);
   }
 };
 
@@ -73,7 +72,6 @@ const deleteTugas = async () => {
       alert("Data tidak jadi dihapus");
     }
   } catch (err) {
-    console.log(err);
   }
 };
 

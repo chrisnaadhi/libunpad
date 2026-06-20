@@ -140,7 +140,6 @@ export const generateStrongPassword = (
     password += charset[randomIndex];
   }
 
-  console.log(password);
 
   return password;
 };

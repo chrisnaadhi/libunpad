@@ -62,7 +62,6 @@ const { data: dataPetugas, error: petugasError } = await useFetch(
   }
 );
 
-console.log(dataPetugas.value)
 
 if (petugasError.value) {
   console.warn("[ListBebasPustaka] Failed to fetch petugas:", petugasError.value);

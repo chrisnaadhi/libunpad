@@ -47,7 +47,6 @@ const isPegawai = computed(() => {
         break;
     }
   } catch (error) {
-    console.log(console.log(error));
   }
 
   return state;
