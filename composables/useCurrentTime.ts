@@ -1,14 +1,13 @@
-import { computed, onBeforeUnmount, onMounted, ref } from "vue";
+import { ref, onMounted, onBeforeUnmount, computed } from "vue";
 
 export const useCurrentTime = () => {
-  const currentTime = ref();
-  const updateTimeInterval = ref();
+  const currentTime = ref(new Date());
+  const updateTimeInterval = ref<number>();
   const updateCurrentTime = () => {
     currentTime.value = new Date();
   };
 
   onMounted(() => {
-    currentTime.value = new Date();
     updateTimeInterval.value = setInterval(updateCurrentTime, 1000);
   });
 
@@ -52,7 +51,7 @@ export const getThisMonth = () => {
 export const getAllMonthly = (
   bulan: string,
   tanggalAwal: string,
-  tanggalAkhir: string,
+  tanggalAkhir: string
 ) => {
   const date = new Date();
   const tahun = date.getFullYear();
@@ -162,14 +161,11 @@ export function dateToISOLikeButLocal(date: Date): string {
   return isoLocal;
 }
 
-export function checkIfDateIsAlreadyTaken(
-  dateChosen: string,
-  dateTaken: string[],
-) {
+export function checkIfDateIsAlreadyTaken(dateChosen: string, dateTaken: string[]) {
   const chosenDateTime = new Date(dateChosen);
 
   for (const timeRange of dateTaken) {
-    const [startTime, endTime] = timeRange.split(" - ");
+    const [startTime, endTime] = timeRange.split(' - ');
     const startDateTime = new Date(startTime);
     const endDateTime = new Date(endTime);
 
@@ -178,5 +174,5 @@ export function checkIfDateIsAlreadyTaken(
     }
   }
 
-  return true;
+  return true
 }
