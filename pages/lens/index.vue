@@ -1,6 +1,7 @@
 <script setup>
 const { getItems } = useDirectusItems();
 const dayjs = useDayjs();
+import { onMounted, onBeforeUnmount, computed } from "vue";
 
 const [{ data: lensData }, { data: profilesData }] = await Promise.all([
   useAsyncData("lens-posts", () =>
@@ -39,6 +40,15 @@ const selectedAudience = ref("all");
 const selectedProfile = ref("all");
 const searchQuery = ref("");
 const showMobileFilter = ref(false);
+const isMounted = ref(false);
+
+onMounted(() => {
+  isMounted.value = true;
+});
+
+onBeforeUnmount(() => {
+  showMobileFilter.value = false;
+});
 
 // Lock body scroll when mobile drawer is open
 watch(showMobileFilter, (val) => {
@@ -142,7 +152,12 @@ const getCategoryBadge = (cat) => {
   );
 };
 
-const formatDate = (date) => dayjs(date).fromNow();
+const formatDate = (date) => {
+  if (import.meta.client) {
+    return dayjs(date).fromNow();
+  }
+  return dayjs(date).format("DD MMMM YYYY");
+};
 
 useHead({
   title: "Kandaga Lens — Temukan Informasi Kandaga",
