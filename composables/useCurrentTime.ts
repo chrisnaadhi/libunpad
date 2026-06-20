@@ -1,15 +1,14 @@
-import { ref, onMounted, onBeforeUnmount } from "vue";
-
-const date = new Date();
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 
 export const useCurrentTime = () => {
-  const currentTime = ref(new Date());
+  const currentTime = ref();
   const updateTimeInterval = ref();
   const updateCurrentTime = () => {
     currentTime.value = new Date();
   };
 
   onMounted(() => {
+    currentTime.value = new Date();
     updateTimeInterval.value = setInterval(updateCurrentTime, 1000);
   });
 
@@ -21,6 +20,7 @@ export const useCurrentTime = () => {
 };
 
 export const getActualMonth = () => {
+  const date = new Date();
   return computed(() => {
     if (date.getMonth() + 1 >= 10) {
       return date.getMonth() + 1;
@@ -31,6 +31,7 @@ export const getActualMonth = () => {
 };
 
 export const getDateToday = () => {
+  const date = new Date();
   const tanggal = date.getDate();
   const bulan = getActualMonth();
   const tahun = date.getFullYear();
@@ -40,6 +41,7 @@ export const getDateToday = () => {
 };
 
 export const getThisMonth = () => {
+  const date = new Date();
   const bulan = getActualMonth();
   const tahun = date.getFullYear();
   const thisMonth = [`${tahun}-${bulan.value}-01T00:00:00+07:00`, `$NOW()`];
@@ -50,8 +52,9 @@ export const getThisMonth = () => {
 export const getAllMonthly = (
   bulan: string,
   tanggalAwal: string,
-  tanggalAkhir: string
+  tanggalAkhir: string,
 ) => {
+  const date = new Date();
   const tahun = date.getFullYear();
   const monthly = [
     `${tahun}-${bulan}-${tanggalAwal}T00:00:00+07:00`,
@@ -113,7 +116,8 @@ export const bebasPustakaDate = (tanggal: string) => {
   return `${tgl} ${bulan} ${tahun}`;
 };
 
-export const convertTimeZone = (time: string) => {
+export const convertTimeZone = (time?: string | null) => {
+  if (!time) return "Belum diperbarui";
   const newDate = new Date(time);
   const formatted = newDate.toLocaleDateString("id-ID", {
     weekday: "long",
@@ -126,7 +130,6 @@ export const convertTimeZone = (time: string) => {
     hour: "numeric",
     minute: "numeric",
   });
-  if (!time) return "Belum diperbarui";
   return `${formatted} ${timeFormat} WIB`;
 };
 
@@ -159,19 +162,21 @@ export function dateToISOLikeButLocal(date: Date): string {
   return isoLocal;
 }
 
-export function checkIfDateIsAlreadyTaken(dateChosen: string, dateTaken: string[]) {
+export function checkIfDateIsAlreadyTaken(
+  dateChosen: string,
+  dateTaken: string[],
+) {
   const chosenDateTime = new Date(dateChosen);
 
   for (const timeRange of dateTaken) {
-    const [startTime, endTime] = timeRange.split(' - ');
+    const [startTime, endTime] = timeRange.split(" - ");
     const startDateTime = new Date(startTime);
     const endDateTime = new Date(endTime);
 
-    // Check if the chosen date falls within the existing time range
     if (chosenDateTime >= startDateTime && chosenDateTime < endDateTime) {
-      return false; // Date is taken
+      return false;
     }
   }
 
-  return true
+  return true;
 }

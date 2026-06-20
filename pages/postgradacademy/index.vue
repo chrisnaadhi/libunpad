@@ -60,7 +60,7 @@ const visiblePages = computed(() => {
 function goToPage(page) {
   if (page >= 1 && page <= totalPages.value) {
     currentPage.value = page;
-    if (process.client) window.scrollTo({ top: 0, behavior: "smooth" });
+    if (import.meta.client) window.scrollTo({ top: 0, behavior: "smooth" });
   }
 }
 

@@ -52,7 +52,9 @@ const goToPage = async (page) => {
   if (totalItems.value > 0 && page > totalPages.value) return;
   currentPage.value = page;
   await refresh();
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  if (import.meta.client) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 };
 
 const startItem = computed(() => (currentPage.value - 1) * perPage + 1);

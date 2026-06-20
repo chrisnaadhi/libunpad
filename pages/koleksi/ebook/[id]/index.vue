@@ -58,16 +58,18 @@ const toggleFit = () => {
 };
 
 const toggleFullscreen = async () => {
-  const el = containerRef.value;
-  if (!el) return;
-  if (!document.fullscreenElement) {
-    try {
-      await el.requestFullscreen();
-    } catch (e) {
-      // ignore
+  if (import.meta.client) {
+    const el = containerRef.value;
+    if (!el) return;
+    if (!document.fullscreenElement) {
+      try {
+        await el.requestFullscreen();
+      } catch (e) {
+        // ignore
+      }
+    } else {
+      await document.exitFullscreen();
     }
-  } else {
-    await document.exitFullscreen();
   }
 };
 </script>

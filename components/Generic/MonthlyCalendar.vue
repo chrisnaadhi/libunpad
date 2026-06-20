@@ -2,12 +2,18 @@
 const config = useRuntimeConfig();
 const { getUserById } = useDirectusUsers();
 const { getItems } = useDirectusItems();
-const date = new Date();
-const lastDay = getTotalDays(date.getMonth(), date.getFullYear());
-const firstDate = `${date.getFullYear()}-${date.getMonth() + 1}-01`;
-const lastDate = `${date.getFullYear()}-${date.getMonth() + 1}-${lastDay}`;
+import { onMounted, ref, computed } from "vue";
+
+const date = ref(null);
+const isClient = ref(false);
+
+const day = new Date();
+const lastDay = getTotalDays(day.getMonth(), day.getFullYear());
+const firstDate = `${day.getFullYear()}-${day.getMonth() + 1}-01`;
+const lastDate = `${day.getFullYear()}-${day.getMonth() + 1}-${lastDay}`;
+const todayDateStr = `${day.getFullYear()}-${day.getMonth() + 1}-${day.getDate()}`;
 const monthName = new Intl.DateTimeFormat("id-ID", { month: "long" }).format(
-  date
+  day
 );
 
 // List Pegawai Piket
@@ -48,7 +54,7 @@ const getPetugasExtendedTimeService = await getItems({
   params: {
     filter: {
       tanggal: {
-        _eq: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
+        _eq: todayDateStr,
       },
     },
   },
@@ -59,13 +65,27 @@ const profilPetugas = await getUserById({
     getPetugasExtendedTimeService[0]?.petugas_pertama ??
     "6090A4D5-BD85-423D-9231-E50E705CFD22",
 });
+
+const displayYear = computed(() => date.value?.getFullYear() ?? day.getFullYear());
+const displayReadableDate = computed(() => readableDate(date.value ?? day));
+const displayJamPiket = computed(() => jamPiketPegawai((date.value ?? day).getDay()));
+
+onMounted(() => {
+  date.value = new Date();
+  isClient.value = true;
+});
 </script>
 
 <template>
   <section class="border-3 border-yellow-3 rounded-lg">
     <div class="border-1 border-blue-3 rounded bg-gray-50 mx-2 mt-2">
       <p>Petugas Piket Bulan Ini</p>
-      <h1>{{ monthName }} {{ date.getFullYear() }}</h1>
+      <ClientOnly>
+        <h1>{{ monthName }} {{ displayYear }}</h1>
+        <template #fallback>
+          <h1>{{ monthName }} {{ day.getFullYear() }}</h1>
+        </template>
+      </ClientOnly>
     </div>
 
     <div class="grid grid-cols-3 gap-2 m-2">
@@ -78,10 +98,18 @@ const profilPetugas = await getUserById({
       </div>
     </div>
     <h2>Petugas Piket Hari Ini</h2>
-    <h2>
-      {{ readableDate(date) }} <br />
-      {{ jamPiketPegawai(date.getDay()) }}
-    </h2>
+    <ClientOnly>
+      <h2>
+        {{ displayReadableDate }} <br />
+        {{ displayJamPiket }}
+      </h2>
+      <template #fallback>
+        <h2>
+          {{ readableDate(day) }} <br />
+          {{ jamPiketPegawai(day.getDay()) }}
+        </h2>
+      </template>
+    </ClientOnly>
     <h1 class="font-600 text-unpad">
       {{
         getPetugasExtendedTimeService[0] === undefined

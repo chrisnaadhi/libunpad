@@ -1,6 +1,8 @@
 <script setup>
 const { getItems } = useDirectusItems();
-const currentDate = ref(new Date());
+import { onMounted } from "vue";
+const currentDate = ref(null);
+const mounted = ref(false);
 const monthName = computed(() => {
   const monthNames = [
     "Januari",
@@ -16,10 +18,11 @@ const monthName = computed(() => {
     "November",
     "Desember",
   ];
-  return monthNames[currentDate.value.getMonth()];
+  return monthNames[currentDate.value?.getMonth() ?? 0];
 });
-const year = computed(() => currentDate.value.getFullYear());
+const year = computed(() => currentDate.value?.getFullYear() ?? 0);
 const weeks = computed(() => {
+  if (!currentDate.value) return [];
   const firstDay = new Date(2023, currentDate.value.getMonth(), 1);
   const daysInMonth = new Date(
     year.value,
@@ -54,40 +57,55 @@ const weekDays = [
 ];
 
 const prevMonth = () => {
+  if (!currentDate.value) return;
   currentDate.value = new Date(year.value, currentDate.value.getMonth() - 1, 1);
 };
 const nextMonth = () => {
+  if (!currentDate.value) return;
   currentDate.value = new Date(year.value, currentDate.value.getMonth() + 1, 1);
 };
+
+onMounted(() => {
+  currentDate.value = new Date();
+  mounted.value = true;
+});
 </script>
 
 <template>
   <section>
-    <div class="flex justify-between w-full bg-white rounded">
-      <button class="bg-green-2" @click="prevMonth">Sebelumnya</button>
-      <div class="text-center">
-        <h3 class="text-5xl font-900">{{ year }}</h3>
-        <h6 class="text-2xl">{{ monthName }}</h6>
+    <ClientOnly v-if="mounted">
+      <div class="flex justify-between w-full bg-white rounded">
+        <button class="bg-green-2" @click="prevMonth">Sebelumnya</button>
+        <div class="text-center">
+          <h3 class="text-5xl font-900">{{ year }}</h3>
+          <h6 class="text-2xl">{{ monthName }}</h6>
+        </div>
+        <button class="bg-blue-2" @click="nextMonth">Selanjutnya</button>
       </div>
-      <button class="bg-blue-2" @click="nextMonth">Selanjutnya</button>
+      <table class="w-full bg-white">
+        <thead>
+          <tr>
+            <th class="font-600" v-for="day in weekDays" :key="day">{{ day }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(week, index) in weeks" :key="index">
+            <td v-for="day in week" :key="day.date">
+              <span class="tanggal">{{ day.date }}</span>
+              <p v-show="day.date" class="text-center">
+                <span class="text-4xl">50</span> orang
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ClientOnly>
+    <div v-else class="flex justify-between w-full bg-white rounded">
+      <div class="text-center">
+        <h3 class="text-5xl font-900">...</h3>
+        <h6 class="text-2xl">...</h6>
+      </div>
     </div>
-    <table class="w-full bg-white">
-      <thead>
-        <tr>
-          <th class="font-600" v-for="day in weekDays" :key="day">{{ day }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(week, index) in weeks" :key="index">
-          <td v-for="day in week" :key="day.date">
-            <span class="tanggal">{{ day.date }}</span>
-            <p v-show="day.date" class="text-center">
-              <span class="text-4xl">50</span> orang
-            </p>
-          </td>
-        </tr>
-      </tbody>
-    </table>
   </section>
 </template>
 

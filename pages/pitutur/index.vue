@@ -69,8 +69,10 @@ function simulateAsk() {
 }
 
 function scrollDemo() {
-  const demo = document.getElementById("demoSection");
-  demo?.scrollIntoView({ behavior: "smooth", block: "center" });
+  if (import.meta.client) {
+    const demo = document.getElementById("demoSection");
+    demo?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
 }
 
 onMounted(() => {

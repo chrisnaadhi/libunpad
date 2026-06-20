@@ -4,7 +4,7 @@ export const getCSRFToken = async () => {
   const dSpaceToken = useCookie("X-XSRF-TOKEN");
   const config = useRuntimeConfig();
 
-  if (process.client) {
+  if (import.meta.client) {
     await $fetch(config.public.dSpacePublic, {
       method: "GET",
       credentials: "include",

@@ -26,7 +26,9 @@ const submitSearch = async (keyword) => {
   loadingScopus.value = true;
   loadingFederated.value = true;
 
-  window.scrollTo(0, 0);
+  if (import.meta.client) {
+    window.scrollTo(0, 0);
+  }
 
   try {
     const wikiResults = await $fetch(search.baseURLSearch + keyword);
@@ -131,10 +133,12 @@ const changeKeywords = () => {
   search.keywords = suggestion.value;
   search.initValue = 0;
   submitSearch(search.keywords);
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
+  if (import.meta.client) {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
 };
 
 const previewData = (npm) => {
