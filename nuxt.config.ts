@@ -154,18 +154,7 @@ export default defineNuxtConfig({
       },
     },
     optimizeDeps: {
-      include: [
-        "@directus/sdk",
-        "@vue/devtools-core",
-        "@vue/devtools-kit",
-        "dayjs",
-        "dayjs/locale/en",
-        "dayjs/locale/id",
-        "dayjs/plugin/relativeTime",
-        "dayjs/plugin/timezone",
-        "dayjs/plugin/updateLocale",
-        "dayjs/plugin/utc",
-      ],
+      include: ["@directus/sdk"],
     },
   },
   turnstile: {

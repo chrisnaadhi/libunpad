@@ -1,0 +1,1399 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kandaga Feed — Discovery Dashboard</title>
+    <style>
+      /* ===== RESET & BASE ===== */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --space-xs: 0.5rem;
+        --space-sm: 1rem;
+        --space-md: 1.5rem;
+        --space-lg: 2rem;
+        --space-xl: 3rem;
+        --card-radius: 12px;
+        --card-shadow:
+          0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+        --card-shadow-hover:
+          0 10px 25px rgba(0, 0, 0, 0.08), 0 5px 10px rgba(0, 0, 0, 0.04);
+        --text-xs: 0.75rem;
+        --text-sm: 0.875rem;
+        --text-base: 1rem;
+        --text-lg: 1.125rem;
+        --text-xl: 1.25rem;
+        --text-2xl: 1.5rem;
+        --unpad-blue: #003d7a;
+        --unpad-blue-light: #0066cc;
+        --unpad-gold: #f59e0b;
+        --kandaga-bg: #f1f5f9;
+        --text-primary: #0f172a;
+        --text-secondary: #64748b;
+        --border-color: #e2e8f0;
+        --cat-pengumuman: #ef4444;
+        --cat-acara: #3b82f6;
+        --cat-layanan: #10b981;
+        --cat-koleksi: #8b5cf6;
+        --cat-edukasi: #f59e0b;
+        --cat-fasilitas: #06b6d4;
+        --transition-fast: 150ms ease;
+        --transition-base: 250ms ease;
+      }
+      body {
+        font-family: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+        background: var(--kandaga-bg);
+        color: var(--text-primary);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button {
+        font-family: inherit;
+        cursor: pointer;
+        border: none;
+        background: none;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      /* ===== APP LAYOUT ===== */
+      .kandaga-app {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* ===== HEADER ===== */
+      .site-header {
+        background: white;
+        border-bottom: 1px solid var(--border-color);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      }
+      .header-inner {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0.75rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .menu-toggle {
+        display: none;
+        font-size: 1.5rem;
+        color: var(--text-primary);
+        padding: 0.5rem;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: var(--text-lg);
+        font-weight: 700;
+        color: var(--unpad-blue);
+        flex-shrink: 0;
+      }
+      .logo-mark {
+        width: 36px;
+        height: 36px;
+        background: var(--unpad-blue);
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+        color: white;
+        font-weight: 700;
+        font-size: 14px;
+      }
+      .logo-text strong {
+        color: var(--unpad-gold);
+      }
+      .search-bar {
+        flex: 1;
+        max-width: 500px;
+        position: relative;
+        margin: 0 auto;
+      }
+      .search-bar input {
+        width: 100%;
+        padding: 0.625rem 1rem 0.625rem 2.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: 24px;
+        font-size: var(--text-sm);
+        background: var(--kandaga-bg);
+        transition: all var(--transition-fast);
+      }
+      .search-bar input:focus {
+        outline: none;
+        border-color: var(--unpad-blue-light);
+        background: white;
+        box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+      }
+      .search-bar::before {
+        content: "🔍";
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: var(--text-sm);
+        opacity: 0.5;
+      }
+      .user-nav {
+        display: flex;
+        gap: 0.5rem;
+      }
+      .btn-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--kandaga-bg);
+        display: grid;
+        place-items: center;
+        font-size: 1.1rem;
+        transition: all var(--transition-fast);
+      }
+      .btn-icon:hover {
+        background: var(--border-color);
+      }
+
+      /* ===== MAIN LAYOUT ===== */
+      .kandaga-main {
+        flex: 1;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 1.5rem 1rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      /* ===== FILTER SIDEBAR (Left) ===== */
+      .filter-sidebar {
+        display: none;
+        background: white;
+        border-radius: var(--card-radius);
+        padding: 1.25rem;
+        box-shadow: var(--card-shadow);
+        position: sticky;
+        top: 80px;
+        height: fit-content;
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+      }
+      .filter-sidebar h2 {
+        font-size: var(--text-lg);
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid var(--unpad-gold);
+      }
+      .filter-group {
+        margin-bottom: 1.25rem;
+      }
+      .filter-group h3 {
+        font-size: var(--text-xs);
+        font-weight: 700;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 0.625rem;
+      }
+      .filter-option {
+        display: flex;
+        align-items: center;
+        padding: 0.375rem 0;
+        cursor: pointer;
+        transition: color var(--transition-fast);
+        font-size: var(--text-sm);
+      }
+      .filter-option:hover {
+        color: var(--unpad-blue-light);
+      }
+      .filter-option input {
+        margin-right: 0.625rem;
+        width: 16px;
+        height: 16px;
+        accent-color: var(--unpad-blue);
+      }
+      .filter-option .count {
+        margin-left: auto;
+        font-size: var(--text-xs);
+        color: var(--text-secondary);
+        background: var(--kandaga-bg);
+        padding: 0.125rem 0.375rem;
+        border-radius: 10px;
+      }
+      .filter-actions {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+      .btn-primary,
+      .btn-ghost {
+        flex: 1;
+        padding: 0.625rem;
+        border-radius: 8px;
+        font-size: var(--text-sm);
+        font-weight: 600;
+        transition: all var(--transition-fast);
+      }
+      .btn-primary {
+        background: var(--unpad-blue);
+        color: white;
+      }
+      .btn-primary:hover {
+        background: var(--unpad-blue-light);
+      }
+      .btn-ghost {
+        background: var(--kandaga-bg);
+        color: var(--text-secondary);
+      }
+      .btn-ghost:hover {
+        background: var(--border-color);
+      }
+
+      /* ===== FEED CONTAINER (Center) ===== */
+      .feed-container {
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .feed-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+      .feed-header h1 {
+        font-size: var(--text-xl);
+        font-weight: 700;
+      }
+      .feed-meta {
+        font-size: var(--text-sm);
+        color: var(--text-secondary);
+        margin-top: 0.25rem;
+      }
+      .sort-select {
+        padding: 0.5rem 0.875rem;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        background: white;
+        font-size: var(--text-sm);
+        cursor: pointer;
+      }
+      .mobile-filter-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.5rem 0.875rem;
+        background: var(--unpad-blue);
+        color: white;
+        border-radius: 8px;
+        font-size: var(--text-sm);
+        font-weight: 600;
+      }
+
+      /* ===== INTENT SELECTOR (Information Seeking Behavior) ===== */
+      .intent-bar {
+        background: white;
+        padding: 1rem;
+        border-radius: var(--card-radius);
+        box-shadow: var(--card-shadow);
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .intent-title {
+        font-size: var(--text-xs);
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 700;
+      }
+      .intent-modes {
+        display: flex;
+        gap: 0.5rem;
+        overflow-x: auto;
+        padding-bottom: 0.25rem;
+      }
+      .intent-btn {
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        background: var(--kandaga-bg);
+        color: var(--text-secondary);
+        font-weight: 600;
+        font-size: var(--text-sm);
+        white-space: nowrap;
+        transition: all var(--transition-fast);
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+        border: 1px solid transparent;
+      }
+      .intent-btn:hover {
+        background: #e2e8f0;
+      }
+      .intent-btn.active {
+        background: var(--unpad-blue);
+        color: white;
+        box-shadow: 0 4px 12px rgba(0, 61, 122, 0.2);
+      }
+
+      /* ===== FACET CHIPS (Quick Filters) ===== */
+      .facets-bar {
+        display: flex;
+        gap: 0.5rem;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+      }
+      .facet-chip {
+        padding: 0.375rem 0.875rem;
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        font-size: var(--text-sm);
+        font-weight: 500;
+        color: var(--text-secondary);
+        white-space: nowrap;
+        cursor: pointer;
+        transition: all var(--transition-fast);
+      }
+      .facet-chip:hover {
+        border-color: var(--unpad-blue-light);
+        color: var(--unpad-blue);
+      }
+      .facet-chip.active {
+        background: var(--unpad-blue);
+        color: white;
+        border-color: var(--unpad-blue);
+      }
+
+      /* ===== ACTION ZONE (Extracting Behavior) ===== */
+      .zone-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .zone-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid var(--unpad-gold);
+        padding-bottom: 0.5rem;
+      }
+      .zone-header h2 {
+        font-size: var(--text-lg);
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .zone-header p {
+        font-size: var(--text-xs);
+        color: var(--text-secondary);
+      }
+
+      .action-cards-scroll {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: 280px;
+        gap: 1rem;
+        overflow-x: auto;
+        padding-bottom: 1rem;
+        scroll-snap-type: x mandatory;
+      }
+      .action-card {
+        background: linear-gradient(135deg, var(--unpad-blue) 0%, #0056b3 100%);
+        color: white;
+        border-radius: var(--card-radius);
+        padding: 1.25rem;
+        scroll-snap-align: start;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 180px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+      }
+      .action-card::after {
+        content: "";
+        position: absolute;
+        top: -20px;
+        right: -20px;
+        width: 100px;
+        height: 100px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+      }
+      .action-tag {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: var(--text-xs);
+        font-weight: 700;
+        width: fit-content;
+        margin-bottom: 0.75rem;
+      }
+      .action-card h3 {
+        font-size: var(--text-base);
+        margin-bottom: 0.5rem;
+        position: relative;
+        z-index: 1;
+      }
+      .action-card .meta {
+        font-size: var(--text-xs);
+        opacity: 0.8;
+        margin-top: auto;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .action-card .btn-action {
+        margin-top: 1rem;
+        background: var(--unpad-gold);
+        color: var(--unpad-blue);
+        padding: 0.5rem;
+        border-radius: 6px;
+        font-weight: 700;
+        font-size: var(--text-sm);
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ===== DISCOVERY GRID (Browsing Behavior) ===== */
+      .discovery-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+      .post-card {
+        background: white;
+        border-radius: var(--card-radius);
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+        transition:
+          transform var(--transition-base),
+          box-shadow var(--transition-base);
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid transparent;
+      }
+      .post-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--card-shadow-hover);
+        border-color: var(--border-color);
+      }
+      .post-card:hover .card-cover img {
+        transform: scale(1.05);
+      }
+      .card-cover {
+        position: relative;
+        aspect-ratio: 16/9;
+        background: var(--kandaga-bg);
+        overflow: hidden;
+      }
+      .card-cover img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 300ms ease;
+      }
+      .card-badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        padding: 0.25rem 0.625rem;
+        border-radius: 6px;
+        font-size: var(--text-xs);
+        font-weight: 600;
+        color: white;
+        backdrop-filter: blur(4px);
+        text-transform: capitalize;
+      }
+      .badge-acara {
+        background: var(--cat-acara);
+      }
+      .badge-layanan {
+        background: var(--cat-layanan);
+      }
+      .badge-koleksi {
+        background: var(--cat-koleksi);
+      }
+      .badge-edukasi {
+        background: var(--cat-edukasi);
+      }
+      .badge-fasilitas {
+        background: var(--cat-fasilitas);
+      }
+      .badge-pengumuman {
+        background: var(--cat-pengumuman);
+      }
+      .card-save {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.9);
+        display: grid;
+        place-items: center;
+        font-size: 0.9rem;
+        transition: all var(--transition-fast);
+      }
+      .card-save:hover {
+        background: white;
+        transform: scale(1.1);
+      }
+      .card-save.saved {
+        background: var(--unpad-gold);
+      }
+      .card-body {
+        padding: 1rem;
+        flex: 1;
+      }
+      .card-title {
+        font-size: var(--text-base);
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .card-excerpt {
+        font-size: var(--text-sm);
+        color: var(--text-secondary);
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 1rem;
+        border-top: 1px solid var(--border-color);
+        background: #fafafa;
+      }
+      .card-unit {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: var(--text-xs);
+        font-weight: 600;
+      }
+      .unit-avatar {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: var(--unpad-blue);
+        color: white;
+        display: grid;
+        place-items: center;
+        font-size: 10px;
+      }
+      .card-meta {
+        font-size: var(--text-xs);
+        color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+      }
+
+      /* ===== WIDGETS SIDEBAR (Right) ===== */
+      .widgets-sidebar {
+        display: none;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .widget {
+        background: white;
+        border-radius: var(--card-radius);
+        padding: 1.25rem;
+        box-shadow: var(--card-shadow);
+      }
+      .widget h3 {
+        font-size: var(--text-base);
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--unpad-gold);
+      }
+      .event-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.875rem;
+      }
+      .event-list li {
+        display: flex;
+        gap: 0.75rem;
+        padding-bottom: 0.875rem;
+        border-bottom: 1px dashed var(--border-color);
+      }
+      .event-list li:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+      .event-date {
+        flex-shrink: 0;
+        width: 44px;
+        height: 44px;
+        background: var(--kandaga-bg);
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+      }
+      .event-date .day {
+        font-size: var(--text-lg);
+        font-weight: 700;
+        color: var(--unpad-blue);
+      }
+      .event-date .month {
+        font-size: var(--text-xs);
+        color: var(--text-secondary);
+        text-transform: uppercase;
+      }
+      .event-info strong {
+        display: block;
+        font-size: var(--text-sm);
+        margin-bottom: 0.25rem;
+      }
+      .event-info span {
+        font-size: var(--text-xs);
+        color: var(--text-secondary);
+      }
+      .widget-spotlight {
+        text-align: center;
+      }
+      .widget-spotlight img {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        margin: 0 auto 0.75rem;
+        background: var(--cat-acara);
+      }
+      .widget-spotlight h4 {
+        font-size: var(--text-sm);
+        margin-bottom: 0.25rem;
+      }
+      .widget-spotlight p {
+        font-size: var(--text-xs);
+        color: var(--text-secondary);
+        margin-bottom: 0.75rem;
+      }
+      .btn-outline {
+        display: inline-block;
+        padding: 0.375rem 0.875rem;
+        border: 1px solid var(--unpad-blue);
+        border-radius: 20px;
+        font-size: var(--text-xs);
+        font-weight: 600;
+        color: var(--unpad-blue);
+        transition: all var(--transition-fast);
+      }
+      .btn-outline:hover {
+        background: var(--unpad-blue);
+        color: white;
+      }
+
+      /* ===== MOBILE DRAWERS & NAV ===== */
+      .filter-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 200;
+      }
+      .filter-overlay.active {
+        display: block;
+      }
+      .filter-drawer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        border-radius: 16px 16px 0 0;
+        padding: 1.25rem;
+        max-height: 85vh;
+        overflow-y: auto;
+        z-index: 201;
+        transform: translateY(100%);
+        transition: transform var(--transition-base);
+      }
+      .filter-drawer.active {
+        transform: translateY(0);
+      }
+      .drawer-handle {
+        width: 40px;
+        height: 4px;
+        background: var(--border-color);
+        border-radius: 2px;
+        margin: 0 auto 1rem;
+      }
+      .drawer-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+      .drawer-header h2 {
+        font-size: var(--text-lg);
+      }
+      .btn-close {
+        font-size: 1.5rem;
+        color: var(--text-secondary);
+        width: 32px;
+        height: 32px;
+        display: grid;
+        place-items: center;
+      }
+
+      .bottom-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        border-top: 1px solid var(--border-color);
+        padding: 0.5rem;
+        z-index: 100;
+        justify-content: space-around;
+        margin-bottom: 0;
+      }
+      .bottom-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.375rem;
+        font-size: var(--text-xs);
+        color: var(--text-secondary);
+        transition: color var(--transition-fast);
+      }
+      .bottom-nav-item.active {
+        color: var(--unpad-blue);
+      }
+      .bottom-nav-item span {
+        font-size: 1.25rem;
+      }
+
+      /* ===== RESPONSIVE BREAKPOINTS ===== */
+      @media (min-width: 768px) {
+        .discovery-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .kandaga-main {
+          padding: 2rem 1rem;
+        }
+        .widgets-sidebar {
+          display: flex;
+        }
+        .kandaga-main {
+          grid-template-columns: 1fr 280px;
+        }
+        .mobile-filter-btn {
+          display: none;
+        }
+        .bottom-nav {
+          display: none;
+        }
+        .intent-bar {
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .intent-title {
+          margin-bottom: 0;
+        }
+      }
+      @media (min-width: 1024px) {
+        .filter-sidebar {
+          display: block;
+        }
+        .kandaga-main {
+          grid-template-columns: 240px 1fr 300px;
+          gap: 2rem;
+          padding: 2rem;
+        }
+        .menu-toggle {
+          display: none;
+        }
+        .feed-header h1 {
+          font-size: var(--text-2xl);
+        }
+      }
+      @media (min-width: 1280px) {
+        .kandaga-main {
+          grid-template-columns: 280px 1fr 320px;
+        }
+        .discovery-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (min-width: 1440px) {
+        .discovery-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="kandaga-app">
+      <!-- HEADER -->
+      <header class="site-header">
+        <div class="header-inner">
+          <button class="menu-toggle">☰</button>
+          <a href="/" class="logo">
+            <div class="logo-mark">K</div>
+            <span class="logo-text">Kandaga <strong>Feed</strong></span>
+          </a>
+          <div class="search-bar">
+            <input
+              type="search"
+              placeholder="Cari informasi, acara, layanan, atau panduan..."
+            />
+          </div>
+          <nav class="user-nav">
+            <button class="btn-icon">📌</button>
+            <button class="btn-icon">👤</button>
+          </nav>
+        </div>
+      </header>
+
+      <!-- MAIN LAYOUT -->
+      <main class="kandaga-main">
+        <!-- LEFT: FILTER SIDEBAR (Desktop) -->
+        <aside class="filter-sidebar">
+          <h2>🔍 Filter Konten</h2>
+
+          <div class="filter-group">
+            <h3>Kategori</h3>
+            <label class="filter-option"
+              ><input type="checkbox" name="cat" value="pengumuman" /><span
+                >Pengumuman</span
+              ><span class="count">8</span></label
+            >
+            <label class="filter-option"
+              ><input type="checkbox" name="cat" value="acara" checked /><span
+                >Acara</span
+              ><span class="count">12</span></label
+            >
+            <label class="filter-option"
+              ><input type="checkbox" name="cat" value="layanan" /><span
+                >Layanan</span
+              ><span class="count">15</span></label
+            >
+            <label class="filter-option"
+              ><input type="checkbox" name="cat" value="koleksi" /><span
+                >Koleksi & E-Resource</span
+              ><span class="count">7</span></label
+            >
+            <label class="filter-option"
+              ><input type="checkbox" name="cat" value="edukasi" /><span
+                >Edukasi & Literasi</span
+              ><span class="count">9</span></label
+            >
+            <label class="filter-option"
+              ><input type="checkbox" name="cat" value="fasilitas" /><span
+                >Fasilitas</span
+              ><span class="count">5</span></label
+            >
+          </div>
+
+          <div class="filter-group">
+            <h3>Unit Penyelenggara</h3>
+            <select
+              style="
+                width: 100%;
+                padding: 0.5rem;
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                font-size: var(--text-sm);
+              "
+            >
+              <option>Semua Unit</option>
+              <option>Kandaga</option>
+              <option>Fakultas Kedokteran</option>
+              <option>Fakultas Hukum</option>
+              <option>Direktorat Kemahasiswaan</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <h3>Audiens</h3>
+            <label class="filter-option"
+              ><input
+                type="checkbox"
+                name="audience"
+                value="mahasiswa"
+                checked
+              /><span>Mahasiswa</span></label
+            >
+            <label class="filter-option"
+              ><input type="checkbox" name="audience" value="dosen" /><span
+                >Dosen</span
+              ></label
+            >
+            <label class="filter-option"
+              ><input type="checkbox" name="audience" value="umum" /><span
+                >Umum</span
+              ></label
+            >
+          </div>
+
+          <div class="filter-actions">
+            <button class="btn-primary">Terapkan</button>
+            <button class="btn-ghost">Reset</button>
+          </div>
+        </aside>
+
+        <!-- CENTER: FEED CONTAINER -->
+        <section class="feed-container">
+          <!-- Feed Header -->
+          <div class="feed-header">
+            <div>
+              <h1 id="gridTitle">Jelajahi Informasi Kandaga</h1>
+              <div class="feed-meta">
+                Diurutkan berdasarkan alur kebutuhan informasi
+              </div>
+            </div>
+            <div style="display: flex; gap: 0.5rem; align-items: center">
+              <button class="mobile-filter-btn" onclick="openFilterDrawer()">
+                ⚡ Filter
+              </button>
+              <select class="sort-select">
+                <option value="relevance">Relevansi Kebutuhan</option>
+                <option value="popular">Terpopuler</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Intent Selector -->
+          <div class="intent-bar">
+            <div class="intent-title">Mode Penelusuran:</div>
+            <div class="intent-modes">
+              <button class="intent-btn active" data-intent="all">
+                🌐 Semua Alur
+              </button>
+              <button class="intent-btn" data-intent="orientation">
+                🧭 Orientasi
+              </button>
+              <button class="intent-btn" data-intent="action">
+                ⚡ Aksi & Layanan
+              </button>
+              <button class="intent-btn" data-intent="reference">
+                📚 Referensi
+              </button>
+            </div>
+          </div>
+
+          <!-- Facet Chips -->
+          <div class="facets-bar">
+            <button class="facet-chip active">Semua Topik</button>
+            <button class="facet-chip">Sirkulasi</button>
+            <button class="facet-chip">E-Journal</button>
+            <button class="facet-chip">Mahasiswa Baru</button>
+            <button class="facet-chip">Workshop</button>
+          </div>
+
+          <!-- Action Zone -->
+          <div class="zone-container" id="actionZone">
+            <div class="zone-header">
+              <h2>⚡ Butuh Tindakan Sekarang</h2>
+              <p>Deadline pendaftaran & acara berlangsung</p>
+            </div>
+            <div class="action-cards-scroll">
+              <div class="action-card">
+                <span class="action-tag">Pendaftaran Ditutup 10 Jun</span>
+                <h3>Workshop Pengelolaan Referensi dengan Mendeley</h3>
+                <div class="meta">📍 Online via Zoom</div>
+                <div class="btn-action">Daftar Sekarang</div>
+              </div>
+              <div class="action-card">
+                <span class="action-tag">Sedang Berlangsung</span>
+                <h3>Akses Statista: Platform Data & Statistik</h3>
+                <div class="meta">🔗 Aktif via UnpadWifi</div>
+                <div class="btn-action">Akses Database</div>
+              </div>
+              <div class="action-card">
+                <span class="action-tag">Deadline 25 Jun</span>
+                <h3>Lomba Essay Pekan Literasi Kandaga 2025</h3>
+                <div class="meta">🎁 Hadiah Jutaan Rupiah</div>
+                <div class="btn-action">Kumpulkan Karya</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Discovery Grid -->
+          <div class="zone-container">
+            <div class="zone-header">
+              <h2>Informasi Terkurasi</h2>
+              <p>Berdasarkan tahap pencarian informasi Anda</p>
+            </div>
+            <div class="discovery-grid" id="discoveryGrid">
+              <!-- Cards injected by JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- RIGHT: WIDGETS SIDEBAR -->
+        <aside class="widgets-sidebar">
+          <div class="widget">
+            <h3>📅 Acara Akan Datang</h3>
+            <ul class="event-list">
+              <li>
+                <div class="event-date">
+                  <span class="day">12</span><span class="month">JUN</span>
+                </div>
+                <div class="event-info">
+                  <strong>Workshop Mendeley</strong
+                  ><span>10:00 · Ruang De Gade</span>
+                </div>
+              </li>
+              <li>
+                <div class="event-date">
+                  <span class="day">15</span><span class="month">JUN</span>
+                </div>
+                <div class="event-info">
+                  <strong>Pameran Buku Sejarah</strong
+                  ><span>09:00 · Lobi Grha Kandaga</span>
+                </div>
+              </li>
+              <li>
+                <div class="event-date">
+                  <span class="day">20</span><span class="month">JUN</span>
+                </div>
+                <div class="event-info">
+                  <strong>Talkshow Literasi Digital</strong
+                  ><span>13:00 · Auditorium Lt.2</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="widget widget-spotlight">
+            <h3>🏢 Unit Kali Ini</h3>
+            <img
+              src="https://api.dicebear.com/7.x/initials/svg?seed=FK"
+              alt="FK"
+            />
+            <h4>Fakultas Kedokteran</h4>
+            <p>12 pos · 3 acara mendatang</p>
+            <a href="#" class="btn-outline">Lihat Profil</a>
+          </div>
+        </aside>
+      </main>
+
+      <!-- MOBILE FILTER DRAWER -->
+      <div
+        class="filter-overlay"
+        id="filterOverlay"
+        onclick="closeFilterDrawer()"
+      ></div>
+      <div class="filter-drawer" id="filterDrawer">
+        <div class="drawer-handle"></div>
+        <div class="drawer-header">
+          <h2>🔍 Filter Konten</h2>
+          <button class="btn-close" onclick="closeFilterDrawer()">✕</button>
+        </div>
+        <div class="filter-group">
+          <h3>Kategori</h3>
+          <label class="filter-option"
+            ><input type="checkbox" name="cat" value="pengumuman" /><span
+              >Pengumuman</span
+            ><span class="count">8</span></label
+          >
+          <label class="filter-option"
+            ><input type="checkbox" name="cat" value="acara" checked /><span
+              >Acara</span
+            ><span class="count">12</span></label
+          >
+          <label class="filter-option"
+            ><input type="checkbox" name="cat" value="layanan" /><span
+              >Layanan</span
+            ><span class="count">15</span></label
+          >
+          <label class="filter-option"
+            ><input type="checkbox" name="cat" value="koleksi" /><span
+              >Koleksi & E-Resource</span
+            ><span class="count">7</span></label
+          >
+        </div>
+        <div class="filter-group">
+          <h3>Unit Penyelenggara</h3>
+          <select
+            style="
+              width: 100%;
+              padding: 0.5rem;
+              border: 1px solid var(--border-color);
+              border-radius: 8px;
+              font-size: var(--text-sm);
+            "
+          >
+            <option>Semua Unit</option>
+            <option>Kandaga</option>
+            <option>Fakultas Kedokteran</option>
+          </select>
+        </div>
+        <div class="filter-actions">
+          <button class="btn-primary" onclick="closeFilterDrawer()">
+            Terapkan
+          </button>
+          <button class="btn-ghost">Reset</button>
+        </div>
+      </div>
+
+      <!-- BOTTOM NAV (Mobile) -->
+      <nav class="bottom-nav">
+        <button class="bottom-nav-item active"><span>🏠</span> Feed</button>
+        <button class="bottom-nav-item"><span>🔍</span> Cari</button>
+        <button class="bottom-nav-item"><span>📌</span> Tersimpan</button>
+        <button class="bottom-nav-item"><span>👤</span> Akun</button>
+      </nav>
+    </div>
+
+    <script>
+      // Mock Data
+      const allPosts = [
+        {
+          id: 1,
+          intent: "orientation",
+          cat: "fasilitas",
+          title: "Ruang Kerja Mahasiswa S3 di Grha Kandaga",
+          excerpt:
+            "Fasilitas ruang kerja khusus program doktor dengan WiFi, AC, dan colokan listrik.",
+          img: "https://picsum.photos/seed/kandaga5/400/225",
+          unit: "Kandaga",
+          date: "2 Jun",
+          read: "2m",
+        },
+        {
+          id: 2,
+          intent: "orientation",
+          cat: "fasilitas",
+          title: "Mengenal Direktorat Pendidikan Non Gelar Unpad",
+          excerpt:
+            "Profil lengkap unit pengelola perpustakaan Kandaga dan tugas pokoknya.",
+          img: "https://picsum.photos/seed/unpad1/400/225",
+          unit: "Unpad",
+          date: "1 Jun",
+          read: "4m",
+        },
+        {
+          id: 3,
+          intent: "action",
+          cat: "layanan",
+          title: "Cara Pendaftaran Keanggotaan Kandaga Online",
+          excerpt:
+            "Panduan lengkap pendaftaran keanggotaan perpustakaan secara online.",
+          img: "https://picsum.photos/seed/kandaga9/400/225",
+          unit: "Kandaga",
+          date: "25 Mei",
+          read: "4m",
+        },
+        {
+          id: 4,
+          intent: "action",
+          cat: "pengumuman",
+          title: "Penemuan KTP & KTM di Grha Kandaga",
+          excerpt:
+            "Bagi pemilik KTP/KTM yang hilang, dapat mengambilnya di Layanan Populer Lt.4.",
+          img: "https://picsum.photos/seed/kandaga4/400/225",
+          unit: "Kandaga",
+          date: "3 Jun",
+          read: "1m",
+        },
+        {
+          id: 5,
+          intent: "action",
+          cat: "acara",
+          title: "Seminar Penguatan Literasi Informasi & Media",
+          excerpt:
+            "Kegiatan penguatan literasi bagi mahasiswa dalam ekosistem digital.",
+          img: "https://picsum.photos/seed/kandaga1/400/225",
+          unit: "Kandaga",
+          date: "6 Jun",
+          read: "2m",
+        },
+        {
+          id: 6,
+          intent: "reference",
+          cat: "edukasi",
+          title: "Tutorial Menggunakan OPAC Kandaga",
+          excerpt:
+            "Cara mencari koleksi buku dan jurnal cetak melalui Online Public Access Catalog.",
+          img: "https://picsum.photos/seed/kandaga6/400/225",
+          unit: "Kandaga",
+          date: "20 Mei",
+          read: "5m",
+        },
+        {
+          id: 7,
+          intent: "reference",
+          cat: "koleksi",
+          title: "Akses E-Journal Universitas Padjadjaran",
+          excerpt:
+            "Panduan akses jurnal elektronik berlangganan melalui EZProxy.",
+          img: "https://picsum.photos/seed/kandaga3/400/225",
+          unit: "Kandaga",
+          date: "4 Jun",
+          read: "3m",
+        },
+        {
+          id: 8,
+          intent: "reference",
+          cat: "edukasi",
+          title: "Cara Menghindari Plagiarisme dalam Penulisan Ilmiah",
+          excerpt:
+            "Panduan dasar paraphrasing dan penggunaan checker similarity.",
+          img: "https://picsum.photos/seed/kandaga7/400/225",
+          unit: "Kandaga",
+          date: "15 Mei",
+          read: "6m",
+        },
+        {
+          id: 9,
+          intent: "action",
+          cat: "layanan",
+          title: "Layanan Sirkulasi Buku di Grha Kandaga",
+          excerpt:
+            "Informasi jam layanan sirkulasi, prosedur peminjaman, dan pengembalian.",
+          img: "https://picsum.photos/seed/kandaga2/400/225",
+          unit: "Kandaga",
+          date: "5 Jun",
+          read: "3m",
+        },
+      ];
+
+      const grid = document.getElementById("discoveryGrid");
+      const intentBtns = document.querySelectorAll(".intent-btn");
+      const gridTitle = document.getElementById("gridTitle");
+      const actionZone = document.getElementById("actionZone");
+
+      // Render Cards based on selected cognitive intent
+      function renderPosts(intent) {
+        let filteredPosts =
+          intent === "all"
+            ? allPosts
+            : allPosts.filter((p) => p.intent === intent);
+
+        // Update Titles based on Information Seeking Stage
+        if (intent === "orientation") {
+          gridTitle.innerText = "Orientasi & Pengenalan Kandaga";
+          actionZone.style.display = "none"; // Orientation users don't need immediate actions
+        } else if (intent === "action") {
+          gridTitle.innerText = "Layanan & Tindakan Aktif";
+          actionZone.style.display = "flex";
+        } else if (intent === "reference") {
+          gridTitle.innerText = "Referensi & Panduan Akademik";
+          actionZone.style.display = "none";
+        } else {
+          gridTitle.innerText = "Jelajahi Informasi Kandaga";
+          actionZone.style.display = "flex";
+        }
+
+        // Map data to HTML
+        grid.innerHTML = filteredPosts
+          .map(
+            (post) => `
+        <article class="post-card">
+          <div class="card-cover">
+            <img src="${post.img}" alt="${post.title}" loading="lazy">
+            <span class="card-badge badge-${post.cat}">${post.cat}</span>
+            <button class="card-save" onclick="toggleSave(this)">📌</button>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">${post.title}</h3>
+            <p class="card-excerpt">${post.excerpt}</p>
+          </div>
+          <div class="card-footer">
+            <div class="card-unit">
+              <div class="unit-avatar">${post.unit.charAt(0)}</div>
+              <span>${post.unit}</span>
+            </div>
+            <div class="card-meta">
+              <time>${post.date}</time>
+              <span>·</span>
+              <span>${post.read} baca</span>
+            </div>
+          </div>
+        </article>
+      `,
+          )
+          .join("");
+      }
+
+      // Toggle Save Button
+      function toggleSave(btn) {
+        btn.classList.toggle("saved");
+        if (btn.classList.contains("saved")) {
+          btn.innerText = "✓";
+        } else {
+          btn.innerText = "📌";
+        }
+      }
+
+      // Event Listeners for Intent Mode
+      intentBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          intentBtns.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          renderPosts(btn.dataset.intent);
+        });
+      });
+
+      // Mobile Drawer Logic
+      function openFilterDrawer() {
+        document.getElementById("filterDrawer").classList.add("active");
+        document.getElementById("filterOverlay").classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeFilterDrawer() {
+        document.getElementById("filterDrawer").classList.remove("active");
+        document.getElementById("filterOverlay").classList.remove("active");
+        document.body.style.overflow = "";
+      }
+
+      // Initial Render
+      renderPosts("all");
+
+      // Facet Chip Interaction
+      document.querySelectorAll(".facet-chip").forEach((chip) => {
+        chip.addEventListener("click", () => {
+          document
+            .querySelectorAll(".facet-chip")
+            .forEach((c) => c.classList.remove("active"));
+          chip.classList.add("active");
+        });
+      });
+    </script>
+  </body>
+</html>
