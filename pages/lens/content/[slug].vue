@@ -130,9 +130,9 @@ useHead(computed(() => ({
           Kandaga Lens
         </NuxtLink>
         <div class="text-gray-3">/</div>
-        <span class="text-sm text-gray-4 truncate">{{
-          trimTitle(post.title, 50)
-        }}</span>
+        <span class="text-sm text-gray-4 truncate" v-if="post">
+          {{ trimTitle(post.title, 50) }}
+        </span>
       </div>
     </div>
 

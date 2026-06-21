@@ -2,7 +2,6 @@
 const { getItems } = useDirectusItems();
 const route = useRoute();
 const dayjs = useDayjs();
-import { computed, ref } from "vue";
 
 // Fetch profile and posts together in one safe block
 const { data: profileData } = await useAsyncData(
@@ -107,12 +106,7 @@ const filteredPosts = computed(() => {
   );
 });
 
-const formatDate = (date) => {
-  if (import.meta.client) {
-    return dayjs(date).fromNow();
-  }
-  return dayjs(date).format("DD MMMM YYYY");
-};
+const formatDate = (date) => dayjs(date).fromNow();
 
 const categoryCounts = computed(() => {
   const counts = {};
@@ -122,15 +116,15 @@ const categoryCounts = computed(() => {
   return counts;
 });
 
-useHead({
-  title: computed(() => `${profile.value?.name || 'Loading'} — Kandaga Lens`),
+useHead(computed(() => ({
+  title: `${profile.value?.name || ''} — Kandaga Lens`,
   meta: [
     {
       name: "description",
-      content: computed(() => profile.value?.deskripsi || `Konten dari ${profile.value?.name || ''}`),
+      content: profile.value?.deskripsi || `Konten dari ${profile.value?.name || ''}`,
     },
   ],
-});
+})));
 </script>
 
 <template>
@@ -189,7 +183,7 @@ useHead({
     </div>
 
     <!-- Floating info card -->
-    <div class="max-w-5xl ma px-4 -mt-8 relative z-10 mb-8">
+    <div v-if="profile" class="max-w-5xl ma px-4 -mt-8 relative z-10 mb-8">
       <div class="bg-white rounded-2xl shadow-lg border border-gray-1">
         <div class="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-gray-1">
           <!-- Total konten -->

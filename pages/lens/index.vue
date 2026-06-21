@@ -1,7 +1,23 @@
 <script setup>
 const { getItems } = useDirectusItems();
+import { Splide, SplideSlide } from '@splidejs/vue-splide';
+import '@splidejs/vue-splide/css/core';
+
+const featuredSplideOptions = {
+  type: 'slide',
+  perPage: 3,
+  perMove: 1,
+  gap: '1rem',
+  arrows: false,
+  pagination: true,
+  drag: 'free',
+  snap: true,
+  breakpoints: {
+    640: { perPage: 1.2 },
+    1024: { perPage: 2.2 },
+  },
+}
 const dayjs = useDayjs();
-import { onMounted, onBeforeUnmount, computed } from "vue";
 
 const [{ data: lensData }, { data: profilesData }] = await Promise.all([
   useAsyncData("lens-posts", () =>
@@ -52,7 +68,7 @@ onBeforeUnmount(() => {
 
 // Lock body scroll when mobile drawer is open
 watch(showMobileFilter, (val) => {
-  if (import.meta.client) {
+  if (isMounted.value) {
     document.body.style.overflow = val ? "hidden" : "";
   }
 });
@@ -203,8 +219,8 @@ useHead({
         <button v-for="cat in categories" :key="cat.key"
           class="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-600 whitespace-nowrap border transition-all-200 flex-shrink-0"
           :class="selectedCategory === cat.key
-              ? 'bg-unpad text-white border-unpad shadow-md'
-              : 'bg-gray-50 text-gray-600 border-gray-200 hover:border-unpad hover:text-unpad'
+            ? 'bg-unpad text-white border-unpad shadow-md'
+            : 'bg-gray-50 text-gray-600 border-gray-200 hover:border-unpad hover:text-unpad'
             " @click="selectedCategory = cat.key">
           <div :class="[cat.icon, 'w-4 h-4']" />
           {{ cat.label }}
@@ -233,8 +249,8 @@ useHead({
               <button v-for="opt in audienceOptions" :key="opt.key"
                 class="flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-all-200 text-left"
                 :class="selectedAudience === opt.key
-                    ? 'bg-unpad text-white font-600 shadow-sm'
-                    : 'text-gray-600 hover:bg-gray-50'
+                  ? 'bg-unpad text-white font-600 shadow-sm'
+                  : 'text-gray-600 hover:bg-gray-50'
                   " @click="selectedAudience = opt.key">
                 {{ opt.label }}
                 <div v-if="selectedAudience === opt.key" class="i-mdi-check-circle w-4 h-4"></div>
@@ -251,8 +267,8 @@ useHead({
               <button
                 class="flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-all-200 text-left"
                 :class="selectedProfile === 'all'
-                    ? 'bg-unpad text-white font-600 shadow-sm'
-                    : 'text-gray-600 hover:bg-gray-50'
+                  ? 'bg-unpad text-white font-600 shadow-sm'
+                  : 'text-gray-600 hover:bg-gray-50'
                   " @click="selectedProfile = 'all'">
                 Semua Unit
                 <div v-if="selectedProfile === 'all'" class="i-mdi-check-circle w-4 h-4"></div>
@@ -260,8 +276,8 @@ useHead({
               <button v-for="profile in profilesData" :key="profile.id"
                 class="flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-all-200 text-left"
                 :class="selectedProfile === profile.id
-                    ? 'bg-unpad text-white font-600 shadow-sm'
-                    : 'text-gray-600 hover:bg-gray-50'
+                  ? 'bg-unpad text-white font-600 shadow-sm'
+                  : 'text-gray-600 hover:bg-gray-50'
                   " @click="selectedProfile = profile.id">
                 {{ profile.name }}
                 <div v-if="selectedProfile === profile.id" class="i-mdi-check-circle w-4 h-4"></div>
@@ -294,7 +310,7 @@ useHead({
           </button>
         </div>
 
-        <!-- Action Zone (Featured Posts Horizontal Scroll) -->
+        <!-- Action Zone (Featured Posts) -->
         <div v-if="
           featuredPosts.length &&
           selectedCategory === 'all' &&
@@ -304,34 +320,44 @@ useHead({
         " class="mb-8">
           <div class="flex items-center gap-2 mb-4">
             <div class="w-1 h-5 bg-amber-400 rounded-full"></div>
-            <h2 class="text-lg font-700 text-gray-800 m-0">
-              Konten Unggulan & Aksi
-            </h2>
+            <h2 class="text-lg font-700 text-gray-800 m-0">Konten Unggulan & Aksi</h2>
           </div>
 
-          <div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x">
-            <NuxtLink v-for="post in featuredPosts" :key="post.id" :to="`/lens/content/${post.slug}`"
-              class="flex-shrink-0 w-72 h-44 rounded-2xl overflow-hidden relative group snap-start shadow-md">
-              <NuxtImg v-if="post.thumbnail" :src="handleAssets(post.thumbnail)" :alt="post.title"
-                class="absolute inset-0 w-full h-full object-cover transition-transform-500 group-hover:scale-110"
-                loading="lazy" width="288" height="176" format="webp" />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
-              <div
-                class="absolute top-3 left-3 inline-flex items-center gap-1 text-xs font-700 px-2.5 py-1 rounded-full bg-amber-100 text-unpad">
-                <div class="i-mdi-star w-3 h-3" />
-                Unggulan
-              </div>
-              <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
-                <p class="text-sm font-700 leading-snug line-clamp-2">
-                  {{ post.title }}
-                </p>
-                <div class="flex items-center gap-2 mt-2 text-xs opacity-90">
-                  <div class="i-mdi-clock-outline w-3 h-3"></div>
-                  {{ formatDate(post.date_created) }}
+          <!-- ✅ Splide replaces the plain overflow-x-auto div -->
+          <!-- ClientOnly prevents SSR hydration mismatch with Splide's DOM manipulation -->
+          <ClientOnly>
+            <Splide :options="featuredSplideOptions" aria-label="Konten Unggulan">
+              <SplideSlide v-for="post in featuredPosts" :key="post.id">
+                <NuxtLink :to="`/lens/content/${post.slug}`"
+                  class="block w-full h-44 rounded-2xl overflow-hidden relative group shadow-md">
+                  <NuxtImg v-if="post.thumbnail" :src="handleAssets(post.thumbnail)" :alt="post.title"
+                    class="absolute inset-0 w-full h-full object-cover transition-transform-500 group-hover:scale-110"
+                    loading="lazy" width="288" height="176" format="webp" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                  <div
+                    class="absolute top-3 left-3 inline-flex items-center gap-1 text-xs font-700 px-2.5 py-1 rounded-full bg-amber-100 text-unpad">
+                    <div class="i-mdi-star w-3 h-3" />
+                    Unggulan
+                  </div>
+                  <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
+                    <p class="text-sm font-700 leading-snug line-clamp-2">{{ post.title }}</p>
+                    <div class="flex items-center gap-2 mt-2 text-xs opacity-90">
+                      <div class="i-mdi-clock-outline w-3 h-3"></div>
+                      {{ formatDate(post.date_created) }}
+                    </div>
+                  </div>
+                </NuxtLink>
+              </SplideSlide>
+            </Splide>
+
+            <!-- Skeleton while Splide loads -->
+            <template #fallback>
+              <div class="flex gap-4 overflow-x-hidden">
+                <div v-for="i in 3" :key="i" class="flex-shrink-0 w-72 h-44 rounded-2xl bg-gray-200 animate-pulse">
                 </div>
               </div>
-            </NuxtLink>
-          </div>
+            </template>
+          </ClientOnly>
         </div>
 
         <!-- Desktop Feed Count -->
@@ -381,7 +407,7 @@ useHead({
                   <div class="w-6 h-6 rounded-full bg-unpad/10 flex items-center justify-center flex-shrink-0">
                     <span class="text-xs font-700 text-unpad">{{
                       profileMap[post.profile]?.abbreviation?.charAt(0) || "K"
-                      }}</span>
+                    }}</span>
                   </div>
                   <span class="text-xs text-gray-500 font-600 truncate">
                     {{ profileMap[post.profile]?.name || "Kandaga" }}
@@ -473,8 +499,8 @@ useHead({
             <div class="grid grid-cols-2 gap-2">
               <button v-for="opt in audienceOptions" :key="opt.key"
                 class="px-4 py-2.5 rounded-xl text-sm font-600 border transition-all-200" :class="selectedAudience === opt.key
-                    ? 'bg-unpad text-white border-unpad'
-                    : 'bg-gray-50 text-gray-600 border-gray-200'
+                  ? 'bg-unpad text-white border-unpad'
+                  : 'bg-gray-50 text-gray-600 border-gray-200'
                   " @click="selectedAudience = opt.key">
                 {{ opt.label }}
               </button>
@@ -488,15 +514,15 @@ useHead({
             </p>
             <div class="grid grid-cols-2 gap-2 max-h-48 overflow-y-auto">
               <button class="px-4 py-2.5 rounded-xl text-sm font-600 border transition-all-200" :class="selectedProfile === 'all'
-                  ? 'bg-unpad text-white border-unpad'
-                  : 'bg-gray-50 text-gray-600 border-gray-200'
+                ? 'bg-unpad text-white border-unpad'
+                : 'bg-gray-50 text-gray-600 border-gray-200'
                 " @click="selectedProfile = 'all'">
                 Semua Unit
               </button>
               <button v-for="profile in profilesData" :key="profile.id"
                 class="px-4 py-2.5 rounded-xl text-sm font-600 border transition-all-200 truncate" :class="selectedProfile === profile.id
-                    ? 'bg-unpad text-white border-unpad'
-                    : 'bg-gray-50 text-gray-600 border-gray-200'
+                  ? 'bg-unpad text-white border-unpad'
+                  : 'bg-gray-50 text-gray-600 border-gray-200'
                   " @click="selectedProfile = profile.id">
                 {{ profile.abbreviation?.toUpperCase() }}
               </button>
@@ -560,5 +586,18 @@ useHead({
 .slide-up-enter-from,
 .slide-up-leave-to {
   transform: translateY(100%);
+}
+
+/* Splide pagination dots */
+:deep(.splide__pagination__page) {
+  background: #d1d5db;
+  opacity: 1;
+  width: 6px;
+  height: 6px;
+}
+
+:deep(.splide__pagination__page.is-active) {
+  background: var(--color-unpad, #003f8a);
+  transform: scale(1.3);
 }
 </style>
