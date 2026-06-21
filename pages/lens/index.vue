@@ -73,18 +73,18 @@ const audienceOptions = [
 
 const filteredPosts = computed(() => {
   let posts = lensData || []
-  if (selectedCategory !== "all")
-    posts = posts.filter((p) => p.category === selectedCategory);
-  if (selectedAudience !== "all")
+  if (selectedCategory.value !== "all")
+    posts = posts.filter((p) => p.category === selectedCategory.value);
+  if (selectedAudience.value !== "all")
     posts = posts.filter(
       (p) =>
         Array.isArray(p.audience) &&
-        p.audience.includes(selectedAudience),
+        p.audience.includes(selectedAudience.value),
     );
-  if (selectedProfile !== "all")
-    posts = posts.filter((p) => p.profile === selectedProfile);
-  if (searchQuery.trim()) {
-    const q = searchQuery.toLowerCase();
+  if (selectedProfile.value !== "all")
+    posts = posts.filter((p) => p.profile === selectedProfile.value);
+  if (searchQuery.value.trim()) {
+    const q = searchQuery.value.toLowerCase();
     posts = posts.filter(
       (p) =>
         p.title?.toLowerCase().includes(q) ||
@@ -388,7 +388,7 @@ useHead({
                   <div class="w-6 h-6 rounded-full bg-unpad/10 flex items-center justify-center flex-shrink-0">
                     <span class="text-xs font-700 text-unpad">{{
                       profileMap[post.profile]?.abbreviation?.charAt(0) || "K"
-                    }}</span>
+                      }}</span>
                   </div>
                   <span class="text-xs text-gray-500 font-600 truncate">
                     {{ profileMap[post.profile]?.name || "Kandaga" }}
