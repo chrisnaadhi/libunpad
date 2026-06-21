@@ -3,50 +3,27 @@ const { getItems } = useDirectusItems();
 const route = useRoute();
 const dayjs = useDayjs();
 
-// Fetch profile and posts together in one safe block
-const { data: profileData } = await useAsyncData(
-  `lens-profile-${route.params.abbreviation}`,
-  async () => {
-    const profiles = await getItems({
-      collection: "kandaga_lens_profile",
-      params: {
-        filter: {
-          abbreviation: { _eq: route.params.abbreviation },
-          status: { _eq: "published" },
-        },
-        limit: 1,
-      },
-    });
+const profiles = await getItems({
+  collection: "kandaga_lens_profile",
+  params: {
+    filter: { abbreviation: { _eq: route.params.abbreviation }, status: { _eq: "published" } },
+    limit: 1,
+  },
+})
 
-    const profile = profiles?.[0];
-    if (!profile) {
-      throw createError({
-        statusCode: 404,
-        statusMessage: "Profil tidak ditemukan",
-      });
-    }
+const profile = profiles?.[0]
+if (!profile) throw createError({ statusCode: 404, statusMessage: "Profil tidak ditemukan" })
 
-    const posts = await getItems({
-      collection: "kandaga_lens",
-      params: {
-        filter: {
-          profile: { _eq: profile.id },
-          status: { _eq: "published" },
-        },
-        sort: "-date_created",
-        limit: 50,
-      },
-    });
+const postsData = await getItems({
+  collection: "kandaga_lens",
+  params: {
+    filter: { profile: { _eq: profile.id }, status: { _eq: "published" } },
+    sort: "-date_created",
+    limit: 50,
+  },
+})
 
-    return { profile, posts };
-  }
-);
-
-const profile = computed(() => profileData.value?.profile);
-const postsData = computed(() => profileData.value?.posts);
-
-// Filter state
-const selectedCategory = ref("all");
+const selectedCategory = ref("all")
 
 const categories = [
   { key: "all", label: "Semua", icon: "i-mdi-view-grid-outline" },
@@ -100,31 +77,20 @@ const getCategoryBadge = (cat) => {
 };
 
 const filteredPosts = computed(() => {
-  if (selectedCategory.value === "all") return postsData.value || [];
-  return (postsData.value || []).filter(
-    (p) => p.category === selectedCategory.value,
-  );
-});
-
-const formatDate = (date) => dayjs(date).fromNow();
+  if (selectedCategory.value === "all") return postsData || []
+  return (postsData || []).filter(p => p.category === selectedCategory.value)
+})
 
 const categoryCounts = computed(() => {
-  const counts = {};
-  (postsData.value || []).forEach((p) => {
-    counts[p.category] = (counts[p.category] || 0) + 1;
-  });
-  return counts;
-});
+  const counts = {}
+    ; (postsData || []).forEach(p => { counts[p.category] = (counts[p.category] || 0) + 1 })
+  return counts
+})
 
-useHead(computed(() => ({
-  title: `${profile.value?.name || ''} — Kandaga Lens`,
-  meta: [
-    {
-      name: "description",
-      content: profile.value?.deskripsi || `Konten dari ${profile.value?.name || ''}`,
-    },
-  ],
-})));
+useHead({
+  title: `${profile.name} — Kandaga Lens`,
+  meta: [{ name: "description", content: profile.deskripsi || `Konten dari ${profile.name}` }],
+})
 </script>
 
 <template>
@@ -309,7 +275,7 @@ useHead(computed(() => ({
               <ClientOnly>
                 <span class="text-xs text-gray-4">{{
                   formatDate(post.date_created)
-                  }}</span>
+                }}</span>
               </ClientOnly>
             </div>
           </div>

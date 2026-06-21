@@ -1,68 +1,41 @@
 <script setup>
-const { getItems } = useDirectusItems();
-const route = useRoute();
-const dayjs = useDayjs();
+const { getItems } = useDirectusItems()
+const route = useRoute()
+const dayjs = useDayjs()
 
-// Fetch everything in one single, safe composable call
-const { data: postData } = await useAsyncData(
-  `lens-post-${route.params.slug}`,
-  async () => {
-    // 1. Fetch the post
-    const posts = await getItems({
-      collection: "kandaga_lens",
-      params: {
-        filter: {
-          slug: { _eq: route.params.slug },
-          status: { _eq: "published" },
-        },
-        limit: 1,
-      },
-    });
+// Plain awaits — component suspends until all resolve
+const posts = await getItems({
+  collection: "kandaga_lens",
+  params: {
+    filter: { slug: { _eq: route.params.slug }, status: { _eq: "published" } },
+    limit: 1,
+  },
+})
 
-    const post = posts?.[0];
-    if (!post) {
-      throw createError({
-        statusCode: 404,
-        statusMessage: "Konten tidak ditemukan",
-      });
-    }
+const post = posts?.[0]
+if (!post) throw createError({ statusCode: 404, statusMessage: "Konten tidak ditemukan" })
 
-    // 2. Fetch the profile (if it exists)
-    let profile = null;
-    if (post.profile) {
-      const profiles = await getItems({
-        collection: "kandaga_lens_profile",
-        params: {
-          filter: { id: { _eq: post.profile } },
-          limit: 1,
-        },
-      });
-      profile = profiles?.[0] || null;
-    }
+let profile = null
+if (post.profile) {
+  const profiles = await getItems({
+    collection: "kandaga_lens_profile",
+    params: { filter: { id: { _eq: post.profile } }, limit: 1 },
+  })
+  profile = profiles?.[0] || null
+}
 
-    // 3. Fetch related posts
-    const relatedPosts = await getItems({
-      collection: "kandaga_lens",
-      params: {
-        filter: {
-          status: { _eq: "published" },
-          category: { _eq: post.category },
-          id: { _neq: post.id },
-        },
-        sort: "-date_created",
-        limit: 3,
-      },
-    });
-
-    // Return all data together
-    return { post, profile, relatedPosts };
-  }
-);
-
-// Extract safely using computed properties
-const post = computed(() => postData.value?.post);
-const profile = computed(() => postData.value?.profile);
-const relatedPosts = computed(() => postData.value?.relatedPosts);
+const relatedPosts = await getItems({
+  collection: "kandaga_lens",
+  params: {
+    filter: {
+      status: { _eq: "published" },
+      category: { _eq: post.category },
+      id: { _neq: post.id },
+    },
+    sort: "-date_created",
+    limit: 3,
+  },
+})
 
 const getCategoryBadge = (cat) => {
   const map = {
@@ -106,17 +79,16 @@ const getCategoryBadge = (cat) => {
   );
 };
 
-useHead(computed(() => ({
-  title: `${post.value?.title || ''} — Kandaga Lens`,
+// No computed() wrapper needed — data already exists
+useHead({
+  title: `${post.title} — Kandaga Lens`,
   meta: [
-    { name: "description", content: post.value?.excerpt || post.value?.title || '' },
-    { property: "og:title", content: post.value?.title || '' },
-    { property: "og:description", content: post.value?.excerpt || '' },
-    ...(post.value?.thumbnail
-      ? [{ property: "og:image", content: handleAssets(post.value.thumbnail) }]
-      : []),
+    { name: "description", content: post.excerpt || post.title },
+    { property: "og:title", content: post.title },
+    { property: "og:description", content: post.excerpt || '' },
+    ...(post.thumbnail ? [{ property: "og:image", content: handleAssets(post.thumbnail) }] : []),
   ],
-})));
+})
 </script>
 
 <template>
@@ -130,22 +102,13 @@ useHead(computed(() => ({
           Kandaga Lens
         </NuxtLink>
         <div class="text-gray-3">/</div>
-        <span class="text-sm text-gray-4 truncate" v-if="post">
+        <span class="text-sm text-gray-4 truncate">
           {{ trimTitle(post.title, 50) }}
         </span>
       </div>
     </div>
 
-    <div v-if="!post" class="max-w-4xl ma px-4 py-8 animate-pulse space-y-4">
-      <div class="rounded-2xl bg-gray-200 aspect-video w-full"></div>
-      <div class="bg-white rounded-2xl p-6 space-y-3">
-        <div class="h-4 bg-gray-200 rounded w-1/4"></div>
-        <div class="h-6 bg-gray-200 rounded w-3/4"></div>
-        <div class="h-4 bg-gray-200 rounded w-full"></div>
-      </div>
-    </div>
-
-    <div v-else class="max-w-4xl ma px-4 py-8">
+    <div class="max-w-4xl ma px-4 py-8">
       <div class="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-8 items-start">
         <!-- ── Main content ── -->
         <article class="space-y-6">

@@ -8,47 +8,28 @@ const featuredSplideOptions = {
   perPage: 3,
   perMove: 1,
   gap: '1rem',
-  arrows: false,
+  arrows: true,
   pagination: true,
   drag: 'free',
   snap: true,
   breakpoints: {
-    640: { perPage: 1.2 },
+    640: { perPage: 1.2, arrows: false },
     1024: { perPage: 2.2 },
   },
 }
 const dayjs = useDayjs();
 
-const [{ data: lensData }, { data: profilesData }] = await Promise.all([
-  useAsyncData("lens-posts", () =>
-    getItems({
-      collection: "kandaga_lens",
-      params: {
-        filter: { status: "published" },
-        sort: "-date_created",
-        limit: 100,
-      },
-    }),
-  ),
-  useAsyncData("lens-profiles", () =>
-    getItems({
-      collection: "kandaga_lens_profile",
-      params: {
-        filter: { status: "published" },
-        sort: "name",
-      },
-    }),
-  ),
-]);
+const [lensData, profilesData] = await Promise.all([
+  getItems({ collection: "kandaga_lens", params: { filter: { status: "published" }, sort: "-date_created", limit: 100 } }),
+  getItems({ collection: "kandaga_lens_profile", params: { filter: { status: "published" }, sort: "name" } }),
+])
 
 // Build profile lookup map
 const profileMap = computed(() => {
-  const map = {};
-  profilesData.value?.forEach((p) => {
-    map[p.id] = p;
-  });
-  return map;
-});
+  const map = {}
+  profilesData?.forEach(p => { map[p.id] = p })
+  return map
+})
 
 // Filter state
 const selectedCategory = ref("all");
@@ -91,19 +72,19 @@ const audienceOptions = [
 ];
 
 const filteredPosts = computed(() => {
-  let posts = lensData.value || [];
-  if (selectedCategory.value !== "all")
-    posts = posts.filter((p) => p.category === selectedCategory.value);
-  if (selectedAudience.value !== "all")
+  let posts = lensData || []
+  if (selectedCategory !== "all")
+    posts = posts.filter((p) => p.category === selectedCategory);
+  if (selectedAudience !== "all")
     posts = posts.filter(
       (p) =>
         Array.isArray(p.audience) &&
-        p.audience.includes(selectedAudience.value),
+        p.audience.includes(selectedAudience),
     );
-  if (selectedProfile.value !== "all")
-    posts = posts.filter((p) => p.profile === selectedProfile.value);
-  if (searchQuery.value.trim()) {
-    const q = searchQuery.value.toLowerCase();
+  if (selectedProfile !== "all")
+    posts = posts.filter((p) => p.profile === selectedProfile);
+  if (searchQuery.trim()) {
+    const q = searchQuery.toLowerCase();
     posts = posts.filter(
       (p) =>
         p.title?.toLowerCase().includes(q) ||
@@ -116,7 +97,7 @@ const filteredPosts = computed(() => {
 });
 
 const featuredPosts = computed(() =>
-  (lensData.value || []).filter((p) => p.is_featured).slice(0, 4),
+  (lensData || []).filter((p) => p.is_featured).slice(0, 4),
 );
 
 const resetFilters = () => {
@@ -599,5 +580,37 @@ useHead({
 :deep(.splide__pagination__page.is-active) {
   background: var(--color-unpad, #003f8a);
   transform: scale(1.3);
+}
+
+/* Splide arrows */
+:deep(.splide__arrow) {
+  background: white;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  width: 2rem;
+  height: 2rem;
+  opacity: 1;
+}
+
+:deep(.splide__arrow:hover) {
+  background: var(--color-unpad);
+}
+
+:deep(.splide__arrow svg) {
+  fill: #374151;
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+:deep(.splide__arrow:hover svg) {
+  fill: white;
+}
+
+:deep(.splide__arrow--prev) {
+  left: -1rem;
+}
+
+:deep(.splide__arrow--next) {
+  right: -1rem;
 }
 </style>
