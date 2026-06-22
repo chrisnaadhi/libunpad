@@ -1,4 +1,4 @@
-import { ref, onMounted, onBeforeUnmount, computed } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 
 export const useCurrentTime = () => {
   const currentTime = ref(new Date());
@@ -51,7 +51,7 @@ export const getThisMonth = () => {
 export const getAllMonthly = (
   bulan: string,
   tanggalAwal: string,
-  tanggalAkhir: string
+  tanggalAkhir: string,
 ) => {
   const date = new Date();
   const tahun = date.getFullYear();
@@ -161,11 +161,14 @@ export function dateToISOLikeButLocal(date: Date): string {
   return isoLocal;
 }
 
-export function checkIfDateIsAlreadyTaken(dateChosen: string, dateTaken: string[]) {
+export function checkIfDateIsAlreadyTaken(
+  dateChosen: string,
+  dateTaken: string[],
+) {
   const chosenDateTime = new Date(dateChosen);
 
   for (const timeRange of dateTaken) {
-    const [startTime, endTime] = timeRange.split(' - ');
+    const [startTime, endTime] = timeRange.split(" - ");
     const startDateTime = new Date(startTime);
     const endDateTime = new Date(endTime);
 
@@ -174,5 +177,21 @@ export function checkIfDateIsAlreadyTaken(dateChosen: string, dateTaken: string[
     }
   }
 
-  return true
+  return true;
+}
+
+// composables/useFormatDate.js
+export function useFormatDate() {
+  const dayjs = useDayjs();
+  const mounted = ref(false);
+  onMounted(() => {
+    mounted.value = true;
+  });
+
+  const formatDate = (date: string) => {
+    const d = dayjs(date).locale("id");
+    return mounted.value ? d.fromNow() : d.format("DD MMMM YYYY");
+  };
+
+  return { formatDate, mounted };
 }

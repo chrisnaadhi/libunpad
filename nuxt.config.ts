@@ -146,6 +146,10 @@ export default defineNuxtConfig({
     },
   },
   vite: {
+    define: {
+      // Enables component/element level hydration mismatch logs in production builds
+      __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: "true",
+    },
     esbuild: {
       tsconfigRaw: {
         compilerOptions: {

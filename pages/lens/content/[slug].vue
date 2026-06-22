@@ -1,7 +1,7 @@
 <script setup>
 const { getItems } = useDirectusItems()
+const { formatDate } = useFormatDate()
 const route = useRoute()
-const dayjs = useDayjs()
 
 // Plain awaits — component suspends until all resolve
 const posts = await getItems({
@@ -152,7 +152,7 @@ useHead({
             <div class="flex flex-wrap gap-4 text-xs text-gray-4">
               <span class="flex items-center gap-1.5">
                 <div class="i-mdi-calendar-outline w-4 h-4" />
-                {{ dayjs(post.date_created).format("DD MMMM YYYY") }}
+                {{ formatDate(post.date_created) }}
               </span>
               <a v-if="post.instagram_post_url" :href="post.instagram_post_url" target="_blank"
                 rel="noopener noreferrer"

@@ -1,7 +1,7 @@
 <script setup>
 const { getItems } = useDirectusItems();
+const { formatDate } = useFormatDate()
 const route = useRoute();
-const dayjs = useDayjs();
 
 const profiles = await getItems({
   collection: "kandaga_lens_profile",
