@@ -1,10 +1,53 @@
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 // marketing/landing page for Pitutur feature
 const { status } = useAuth();
 const isLoggedIn = computed(() => status.value === "authenticated");
 const router = useRouter();
+
+const { getItems } = useDirectusItems();
+const { formatDate } = useFormatDate();
+
+const recentLensPosts = ref([]);
+
+const getCategoryBadge = (cat) => {
+  const map = {
+    layanan: {
+      label: "Layanan",
+      icon: "i-mdi-briefcase-outline",
+      cls: "bg-green-50 text-green-700 border-green-200",
+    },
+    informasi: {
+      label: "Informasi",
+      icon: "i-mdi-information-outline",
+      cls: "bg-blue-50 text-blue-700 border-blue-200",
+    },
+    edukasi_literasi: {
+      label: "Edukasi",
+      icon: "i-mdi-book-open-outline",
+      cls: "bg-amber-50 text-amber-700 border-amber-200",
+    },
+    pengumuman: {
+      label: "Pengumuman",
+      icon: "i-mdi-bullhorn-outline",
+      cls: "bg-red-50 text-red-700 border-red-200",
+    },
+    acara: {
+      label: "Acara",
+      icon: "i-mdi-calendar-star-outline",
+      cls: "bg-purple-50 text-purple-700 border-purple-200",
+    },
+  };
+  return (
+    map[cat] ||
+    {
+      label: cat,
+      icon: "i-mdi-tag-outline",
+      cls: "bg-gray-100 text-gray-600 border-gray-200",
+    }
+  );
+};
 
 /* demo chat simulation state */
 const demoMessages = ref([
@@ -75,14 +118,24 @@ function scrollDemo() {
   }
 }
 
-onMounted(() => {
-  // nothing extra for now
+onMounted(async () => {
+  try {
+    const posts = await getItems({
+      collection: "kandaga_lens",
+      params: {
+        filter: { status: "published" },
+        sort: "-date_created",
+        limit: 4,
+      },
+    });
+    recentLensPosts.value = posts || [];
+  } catch (e) {
+    console.error("Failed to fetch recent lens posts:", e);
+  }
 });
 </script>
 
 <template>
-  <div class="batik-bg fixed inset-0 pointer-events-none"></div>
-
   <main class="container">
     <!-- header -->
     <div class="header">
@@ -100,8 +153,7 @@ onMounted(() => {
 
     <!-- hero explanation -->
     <section
-      class="hero-explainer flex flex-col-reverse md:flex-row items-center gap-8 my-16 bg-kandaga/10 p-8 rounded-lg"
-    >
+      class="hero-explainer flex flex-col-reverse md:flex-row items-center gap-8 my-16 bg-kandaga/10 p-8 rounded-lg">
       <div class="flex-1 text-center md:text-left">
         <h1 class="hero-title text-5xl font-extrabold text-kandaga">
           Apa itu Pitutur?
@@ -112,20 +164,15 @@ onMounted(() => {
           mendukung kebutuhan riset Anda — kapan saja dan di mana saja.
         </p>
         <div class="mt-6">
-          <NuxtLink
-            :to="isLoggedIn ? '/pitutur/chat' : '/login?redir=/pitutur/chat'"
-            class="btn bg-kandaga text-white px-8 py-4"
-          >
+          <NuxtLink :to="isLoggedIn ? '/pitutur/chat' : '/login?redir=/pitutur/chat'"
+            class="btn bg-kandaga text-white px-8 py-4">
             {{ isLoggedIn ? "Mulai Chat" : "Login untuk Chat" }}
           </NuxtLink>
         </div>
       </div>
       <div class="flex-1">
-        <NuxtImg
-          src="/illustration/undraw_Futuristic_interface.png"
-          class="w-full max-w-md ma"
-          alt="Ilustrasi Pitutur AI"
-        />
+        <NuxtImg src="/illustration/undraw_Futuristic_interface.png" class="w-full max-w-md ma"
+          alt="Ilustrasi Pitutur AI" />
       </div>
     </section>
 
@@ -177,28 +224,55 @@ onMounted(() => {
         </div>
         <div class="chat-window">
           <div v-for="(m, idx) in demoMessages" :key="idx" class="chat-message">
-            <div
-              class="chat-avatar"
-              :class="m.from === 'bot' ? 'bg-kandaga' : ''"
-            >
-              <i
-                :class="m.from === 'bot' ? 'i-mdi-robot' : 'i-mdi-account'"
-              ></i>
+            <div class="chat-avatar" :class="m.from === 'bot' ? 'bg-kandaga' : ''">
+              <i :class="m.from === 'bot' ? 'i-mdi-robot' : 'i-mdi-account'"></i>
             </div>
             <div :class="['chat-bubble', m.from === 'user' ? 'user' : '']">
               {{ m.text }}
             </div>
           </div>
           <div class="chat-input-sim">
-            <input
-              v-model="demoInput"
-              type="text"
-              placeholder="Tanyakan sesuatu... (demo)"
-            />
+            <input v-model="demoInput" type="text" placeholder="Tanyakan sesuatu... (demo)" />
             <button @click="sendDemo">&rightarrow;</button>
           </div>
           <p class="text-xs text-right opacity-60">*simulasi interaksi</p>
         </div>
+      </div>
+    </div>
+
+    <!-- Recent Lens Recommendations -->
+    <div v-if="recentLensPosts.length" class="mt-20">
+      <div class="flex items-center gap-2 mb-5">
+        <div class="w-1 h-5 bg-kandaga rounded-full"></div>
+        <h2 class="text-lg font-700 text-gray-800 m-0">
+          Info Terbaru Kandaga
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <NuxtLink v-for="post in recentLensPosts" :key="post.id" :to="`/lens/content/${post.slug}`"
+          class="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-md hover:-translate-y-1 transition-all-300">
+          <div v-if="post.thumbnail" class="h-32 overflow-hidden bg-gray-100">
+            <NuxtImg :src="handleAssets(post.thumbnail)" :alt="post.title"
+              class="w-full h-full object-cover transition-transform-500 group-hover:scale-105" loading="lazy"
+              width="400" height="180" format="webp" />
+          </div>
+          <div v-else class="h-32 flex items-center justify-center bg-gray-50">
+            <div class="i-mdi-image-outline w-8 h-8 text-gray-300" />
+          </div>
+          <div class="p-3.5">
+            <span class="inline-flex items-center gap-1 text-[10px] font-700 px-2 py-0.5 rounded-full border mb-2"
+              :class="getCategoryBadge(post.category).cls">
+              {{ getCategoryBadge(post.category).label }}
+            </span>
+            <p
+              class="text-sm font-600 text-gray-800 leading-snug line-clamp-2 group-hover:text-kandaga transition-colors-200">
+              {{ trimTitle(post.title, 80) }}
+            </p>
+            <p class="text-xs text-gray-400 mt-2">
+              {{ formatDate(post.date_created) }}
+            </p>
+          </div>
+        </NuxtLink>
       </div>
     </div>
 
