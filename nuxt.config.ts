@@ -116,10 +116,6 @@ export default defineNuxtConfig({
       meiliApiKey: process.env.KANDAGA_MEILI_API_KEY,
       directusAuthToken: process.env.KANDAGA_DIRECTUS_ACCESS_TOKEN,
       directusPublicUrl: process.env.KANDAGA_DIRECTUS_BASE_URL,
-      dSpacePublic: process.env.KANDAGA_SPACE_URL,
-      dSpaceFront: process.env.KANDAGA_DSPACE_FRONTEND,
-      dSpaceAuthPublic: process.env.KANDAGA_DSPACE_AUTH,
-      dSpaceCredentials: `user=${process.env.KANDAGA_DSPACE_EMAIL}&password=${process.env.KANDAGA_DSPACE_PASSWORD}`,
     },
   },
 
@@ -146,10 +142,6 @@ export default defineNuxtConfig({
     },
   },
   vite: {
-    define: {
-      // Enables component/element level hydration mismatch logs in production builds
-      __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: "true",
-    },
     esbuild: {
       tsconfigRaw: {
         compilerOptions: {

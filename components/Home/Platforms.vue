@@ -20,13 +20,8 @@ const { locale } = useI18n();
     </div>
 
     <!-- Main platforms grid -->
-    <div
-      class="relative z-1 max-w-6xl mx-auto px-4 mb-6 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5"
-    >
-      <NuxtLink
-        :to="locale === 'id' ? '/library' : '/en/library'"
-        class="platform-card"
-      >
+    <div class="relative z-1 max-w-6xl mx-auto px-4 mb-6 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+      <NuxtLink :to="locale === 'id' ? '/library' : '/en/library'" class="platform-card">
         <div class="platform-icon-bg">
           <div class="i-mdi-bookshelf w-8 h-8" />
         </div>
@@ -37,10 +32,7 @@ const { locale } = useI18n();
         <div class="platform-arrow i-mdi-arrow-right-circle w-5 h-5" />
       </NuxtLink>
 
-      <NuxtLink
-        :to="locale === 'id' ? '/koleksi/repository' : '/en/koleksi/repository'"
-        class="platform-card"
-      >
+      <NuxtLink :to="locale === 'id' ? '/koleksi/repository' : '/en/koleksi/repository'" class="platform-card">
         <div class="platform-icon-bg">
           <div class="i-mdi-book-education w-8 h-8" />
         </div>
@@ -51,26 +43,19 @@ const { locale } = useI18n();
         <div class="platform-arrow i-mdi-arrow-right-circle w-5 h-5" />
       </NuxtLink>
 
-      <NuxtLink
-        :to="
-          locale === 'id' ? '/panduan/akses-jurnal' : '/en/panduan/akses-jurnal'
-        "
-        class="platform-card"
-      >
+      <NuxtLink :to="locale === 'id' ? '/lens' : '/en/lens'
+        " class="platform-card">
         <div class="platform-icon-bg">
           <div class="i-mdi-archive-sync w-8 h-8" />
         </div>
         <div>
-          <h3 class="platform-name">E-Resources</h3>
-          <p class="platform-desc">{{ $t("eJournalDescription") }}</p>
+          <h3 class="platform-name">Kandaga Lens</h3>
+          <p class="platform-desc">{{ $t("lensDescription") }}</p>
         </div>
         <div class="platform-arrow i-mdi-arrow-right-circle w-5 h-5" />
       </NuxtLink>
 
-      <NuxtLink
-        :to="locale === 'id' ? '/kandaga' : '/en/kandaga/fasilitas'"
-        class="platform-card"
-      >
+      <NuxtLink :to="locale === 'id' ? '/kandaga' : '/en/kandaga/fasilitas'" class="platform-card">
         <div class="platform-icon-bg">
           <div class="i-mdi-bank w-8 h-8" />
         </div>
@@ -83,27 +68,16 @@ const { locale } = useI18n();
     </div>
 
     <!-- Secondary services row -->
-    <div
-      class="relative z-1 max-w-6xl mx-auto px-4 mb-6 grid grid-cols-2 sm:grid-cols-4 gap-3"
-    >
-      <NuxtLink
-        :to="locale === 'id' ? '/gallery' : '/en/gallery'"
-        class="extra-card"
-      >
+    <div class="relative z-1 max-w-6xl mx-auto px-4 mb-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
+      <NuxtLink :to="locale === 'id' ? '/gallery' : '/en/gallery'" class="extra-card">
         <div class="i-mdi-image-multiple w-5 h-5" />
         <span>Gallery</span>
       </NuxtLink>
-      <NuxtLink
-        :to="locale === 'id' ? '/museum' : '/en/museum'"
-        class="extra-card"
-      >
+      <NuxtLink :to="locale === 'id' ? '/museum' : '/en/museum'" class="extra-card">
         <div class="i-mdi-bank w-5 h-5" />
         <span>Museum</span>
       </NuxtLink>
-      <NuxtLink
-        :to="locale === 'id' ? '/koleksi-hayati' : '/en/koleksi-hayati'"
-        class="extra-card"
-      >
+      <NuxtLink :to="locale === 'id' ? '/koleksi-hayati' : '/en/koleksi-hayati'" class="extra-card">
         <div class="i-mdi-leaf w-5 h-5" />
         <span>Koleksi Hayati</span>
       </NuxtLink>
@@ -228,6 +202,7 @@ const { locale } = useI18n();
   line-height: 1.6;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }

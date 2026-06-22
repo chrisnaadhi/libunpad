@@ -89,6 +89,10 @@ export default {
   eJournalDescription:
     "Akses berbagai jurnal elektronik yang disediakan oleh Universitas Padjadjaran untuk mendukung kebutuhan akademis dan penelitian Anda.",
 
+  // Lens
+  lensDescription:
+    "Kandaga Lens merupakan daftar informasi dan panduan dari berbagai layanan dan fasilitas yang tersedia di Kandaga Universitas Padjadjaran. Panduan ini memberikan informasi lengkap mengenai layanan dan fasilitas yang dapat diakses oleh pengunjung untuk mendukung kegiatan akademik dan non-akademik.",
+
   // FOOTER
   // Tautan Cepat
   footerQuickLink: "Tautan Cepat",

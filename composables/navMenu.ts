@@ -116,9 +116,9 @@ export const menuContent = () => {
     {
       id: 11,
       name: "Visitor",
-      url: "/visitor",
+      url: "https://pustaka.unpad.ac.id/visitor",
       nameEN: "Visitor",
-      urlEN: "/en/visitor",
+      urlEN: "https://pustaka.unpad.ac.id/visitor",
       deskripsi:
         "Fitur Visitor untuk pengunjung Kandaga. Rekapan data kunjungan dan survey.",
       deskripsiEN: "",
@@ -231,12 +231,12 @@ export const menuContent = () => {
     },
     {
       id: 20,
-      name: "Pustakawan Subjek",
-      url: "/panduan/pustakawan-subjek",
-      nameEN: "Subject Librarians",
-      urlEN: "/en/panduan/pustakawan-subjek",
+      name: "Kandaga Lens",
+      url: "/lens",
+      nameEN: "Kandaga Lens",
+      urlEN: "/en/lens",
       deskripsi:
-        "Panduan ini memperkenalkan pustakawan subjek yang bertugas di Kandaga Universitas Padjadjaran. Pustakawan subjek adalah staf perpustakaan yang memiliki keahlian khusus dalam bidang tertentu dan siap membantu pengunjung dalam menemukan informasi yang relevan dengan bidang studi mereka.",
+        "Kandaga Lens merupakan daftar informasi dan panduan dari berbagai layanan dan fasilitas yang tersedia di Kandaga Universitas Padjadjaran. Panduan ini memberikan informasi lengkap mengenai layanan dan fasilitas yang dapat diakses oleh pengunjung untuk mendukung kegiatan akademik dan non-akademik.",
       deskripsiEN: "",
       imgUrl: "",
     },

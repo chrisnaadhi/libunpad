@@ -27,6 +27,13 @@ const galleryImages = computed(() => {
   return post.gallery_media?.map(item => handleAssets(item.directus_files_id)).filter(Boolean) || [];
 });
 
+// FIX: Ensure Instagram URL always has a trailing slash for the embed script
+const instagramEmbedUrl = computed(() => {
+  if (!post.instagram_post_url) return null;
+  const url = post.instagram_post_url.trim();
+  return url.endsWith('/') ? url : `${url}/`;
+});
+
 const gallerySplideOptions = {
   type: 'loop',
   perPage: 1,
@@ -82,6 +89,34 @@ useHead({
     ...(post.thumbnail ? [{ property: "og:image", content: handleAssets(post.thumbnail) }] : []),
   ],
 });
+
+// Load Instagram embed script only if we have a URL
+if (instagramEmbedUrl.value) {
+  useHead({
+    script: [{ src: '//www.instagram.com/embed.js', async: true }],
+  });
+}
+
+// Trigger Instagram embed processing after component mounts
+onMounted(() => {
+  if (instagramEmbedUrl.value) {
+    nextTick(() => {
+      if (window.instgrm?.Embeds) {
+        window.instgrm.Embeds.process();
+      } else {
+        // Fallback: script hasn't loaded yet, wait for it
+        const interval = setInterval(() => {
+          if (window.instgrm?.Embeds) {
+            window.instgrm.Embeds.process();
+            clearInterval(interval);
+          }
+        }, 300);
+        // Safety net: stop checking after 5 seconds
+        setTimeout(() => clearInterval(interval), 5000);
+      }
+    });
+  }
+});
 </script>
 
 <template>
@@ -133,13 +168,12 @@ useHead({
           </div>
 
           <!-- Gallery Modal -->
-          <!-- FIX: Removed <Teleport to="#modal">. The fixed positioning handles the overlay natively without needing a phantom DOM target. -->
+          <!-- FIX: Removed <Teleport to="#modal">. The fixed positioning handles the overlay natively. -->
           <Transition name="fade">
             <div v-if="showGalleryModal" class="fixed inset-0 z-20 bg-dark/50 flex items-center justify-center p-4"
               @click.self="showGalleryModal = false">
               <div
                 class="relative w-full max-w-4xl bg-white rounded-2xl shadow-sm border border-gray-2 overflow-hidden">
-                <!-- ClientOnly is kept HERE because Splide requires window/DOM measurements to initialize -->
                 <ClientOnly>
                   <Splide :options="gallerySplideOptions">
                     <SplideSlide v-for="(img, idx) in galleryImages" :key="idx">
@@ -208,6 +242,15 @@ useHead({
           <div class="bg-white rounded-2xl shadow-sm border border-gray-2 p-6">
             <div class="lens-content prose max-w-none" v-html="post.contents" />
           </div>
+
+          <!-- Instagram Embed -->
+          <!-- Wrapped in ClientOnly because Instagram's script mutates the DOM outside of Vue's control -->
+          <ClientOnly v-if="instagramEmbedUrl">
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-2 p-6 flex justify-center">
+              <blockquote class="instagram-media" :data-instgrm-permalink="instagramEmbedUrl" data-instgrm-version="14"
+                style="max-width: 540px; width: 100%; margin: 0;" />
+            </div>
+          </ClientOnly>
 
           <!-- Tags -->
           <div v-if="post.tags?.length" class="bg-white rounded-2xl shadow-sm border border-gray-2 p-5">
