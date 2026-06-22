@@ -1,27 +1,51 @@
 <script setup>
-const { getItems } = useDirectusItems()
-const { formatDate } = useFormatDate()
-const route = useRoute()
+import { Splide, SplideSlide } from '@splidejs/vue-splide';
+import '@splidejs/vue-splide/css/core';
 
-// Plain awaits — component suspends until all resolve
+const { getItems } = useDirectusItems();
+const { formatDate } = useFormatDate();
+const route = useRoute();
+
+// FIX: Removed hidden trailing spaces in strings (e.g., "published " -> "published")
 const posts = await getItems({
   collection: "kandaga_lens",
   params: {
-    filter: { slug: { _eq: route.params.slug }, status: { _eq: "published" } },
+    filter: {
+      slug: { _eq: route.params.slug },
+      status: { _eq: "published" }
+    },
+    fields: ["*", "gallery_media.*"],
     limit: 1,
   },
-})
+});
 
-const post = posts?.[0]
-if (!post) throw createError({ statusCode: 404, statusMessage: "Konten tidak ditemukan" })
+const post = posts?.[0];
+if (!post) throw createError({ statusCode: 404, statusMessage: "Konten tidak ditemukan" });
 
-let profile = null
+const showGalleryModal = ref(false);
+const galleryImages = computed(() => {
+  return post.gallery_media?.map(item => handleAssets(item.directus_files_id)).filter(Boolean) || [];
+});
+
+const gallerySplideOptions = {
+  type: 'loop',
+  perPage: 1,
+  arrows: true,
+  pagination: true,
+};
+
+const openGallery = () => {
+  if (post.gallery_media?.length) showGalleryModal.value = true;
+};
+
+let profile = null;
 if (post.profile) {
+  const profileId = typeof post.profile === 'object' ? post.profile.id : post.profile;
   const profiles = await getItems({
     collection: "kandaga_lens_profile",
-    params: { filter: { id: { _eq: post.profile } }, limit: 1 },
-  })
-  profile = profiles?.[0] || null
+    params: { filter: { id: { _eq: profileId } }, limit: 1 },
+  });
+  profile = profiles?.[0] || null;
 }
 
 const relatedPosts = await getItems({
@@ -35,51 +59,20 @@ const relatedPosts = await getItems({
     sort: "-date_created",
     limit: 3,
   },
-})
+});
 
 const getCategoryBadge = (cat) => {
   const map = {
-    layanan: {
-      label: "Layanan",
-      icon: "i-mdi-briefcase-outline",
-      cls: "bg-green-1 text-green-7 border-green-2",
-    },
-    informasi: {
-      label: "Informasi",
-      icon: "i-mdi-information-outline",
-      cls: "bg-blue-1 text-blue-7 border-blue-2",
-    },
-    edukasi_literasi: {
-      label: "Edukasi",
-      icon: "i-mdi-book-open-outline",
-      cls: "bg-amber-1 text-amber-7 border-amber-2",
-    },
-    pengumuman: {
-      label: "Pengumuman",
-      icon: "i-mdi-bullhorn-outline",
-      cls: "bg-red-1 text-red-7 border-red-2",
-    },
-    acara: {
-      label: "Acara",
-      icon: "i-mdi-calendar-star-outline",
-      cls: "bg-purple-1 text-purple-7 border-purple-2",
-    },
-    fasilitas: {
-      label: "Fasilitas",
-      icon: "i-mdi-office-building-outline",
-      cls: "bg-cyan-1 text-cyan-7 border-cyan-2",
-    },
+    layanan: { label: "Layanan", icon: "i-mdi-briefcase-outline", cls: "bg-green-1 text-green-7 border-green-2" },
+    informasi: { label: "Informasi", icon: "i-mdi-information-outline", cls: "bg-blue-1 text-blue-7 border-blue-2" },
+    edukasi_literasi: { label: "Edukasi", icon: "i-mdi-book-open-outline", cls: "bg-amber-1 text-amber-7 border-amber-2" },
+    pengumuman: { label: "Pengumuman", icon: "i-mdi-bullhorn-outline", cls: "bg-red-1 text-red-7 border-red-2" },
+    acara: { label: "Acara", icon: "i-mdi-calendar-star-outline", cls: "bg-purple-1 text-purple-7 border-purple-2" },
+    fasilitas: { label: "Fasilitas", icon: "i-mdi-office-building-outline", cls: "bg-cyan-1 text-cyan-7 border-cyan-2" },
   };
-  return (
-    map[cat] || {
-      label: cat,
-      icon: "i-mdi-tag-outline",
-      cls: "bg-gray-1 text-gray-6 border-gray-2",
-    }
-  );
+  return map[cat] || { label: cat, icon: "i-mdi-tag-outline", cls: "bg-gray-1 text-gray-6 border-gray-2" };
 };
 
-// No computed() wrapper needed — data already exists
 useHead({
   title: `${post.title} — Kandaga Lens`,
   meta: [
@@ -88,7 +81,7 @@ useHead({
     { property: "og:description", content: post.excerpt || '' },
     ...(post.thumbnail ? [{ property: "og:image", content: handleAssets(post.thumbnail) }] : []),
   ],
-})
+});
 </script>
 
 <template>
@@ -113,10 +106,57 @@ useHead({
         <!-- ── Main content ── -->
         <article class="space-y-6">
           <!-- Thumbnail -->
-          <div v-if="post.thumbnail" class="rounded-2xl overflow-hidden aspect-video w-full bg-gray-1 shadow-sm">
-            <NuxtImg :src="handleAssets(post.thumbnail)" :alt="post.title" class="w-full h-full object-cover"
-              loading="eager" width="900" height="506" format="webp" quality="85" />
+          <div v-if="post.thumbnail"
+            class="rounded-2xl overflow-hidden w-full bg-gray-1 shadow-sm cursor-pointer relative" @click="openGallery">
+            <NuxtImg :src="handleAssets(post.thumbnail)" :alt="post.title" loading="eager" format="webp" quality="85" />
+            <div v-if="post.gallery_media?.length"
+              class="absolute top-3 right-3 bg-black/50 text-white text-xs px-2 py-1 rounded-full flex items-center gap-1">
+              <div class="i-mdi-image-multiple w-3.5 h-3.5" />
+              {{ post.gallery_media.length + 1 }}
+            </div>
           </div>
+
+          <!-- Gallery thumbnails grid (if more than one image) -->
+          <div v-if="post.gallery_media?.length && post.gallery_media.length > 1" class="space-y-3">
+            <div class="flex items-center gap-2 text-xs font-700 text-gray-5 uppercase tracking-wider">
+              <div class="i-mdi-image-multiple w-4 h-4" />
+              Galeri
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div v-for="(item, idx) in post.gallery_media" :key="item.id"
+                class="aspect-video rounded-xl overflow-hidden bg-gray-1 cursor-pointer hover:opacity-80 transition-opacity"
+                @click="openGallery">
+                <NuxtImg :src="handleAssets(item.directus_files_id)" :alt="`${post.title} - ${idx + 1}`"
+                  class="w-full h-full object-cover" loading="lazy" format="webp" quality="75" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Gallery Modal -->
+          <!-- FIX: Removed <Teleport to="#modal">. The fixed positioning handles the overlay natively without needing a phantom DOM target. -->
+          <Transition name="fade">
+            <div v-if="showGalleryModal" class="fixed inset-0 z-20 bg-dark/50 flex items-center justify-center p-4"
+              @click.self="showGalleryModal = false">
+              <div
+                class="relative w-full max-w-4xl bg-white rounded-2xl shadow-sm border border-gray-2 overflow-hidden">
+                <!-- ClientOnly is kept HERE because Splide requires window/DOM measurements to initialize -->
+                <ClientOnly>
+                  <Splide :options="gallerySplideOptions">
+                    <SplideSlide v-for="(img, idx) in galleryImages" :key="idx">
+                      <div class="flex items-center justify-center p-8 bg-gray-50">
+                        <NuxtImg :src="img" :alt="`${post.title} - gallery ${idx + 1}`"
+                          class="max-w-full max-h-[70vh] object-contain" loading="lazy" format="webp" quality="90" />
+                      </div>
+                    </SplideSlide>
+                  </Splide>
+                </ClientOnly>
+                <button @click="showGalleryModal = false"
+                  class="absolute top-3 right-3 bg-white/80 hover:bg-white text-gray-6 rounded-full w-8 h-8 flex items-center justify-center transition-colors shadow-sm">
+                  <div class="i-mdi-close w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </Transition>
 
           <!-- Post meta + title -->
           <div class="bg-white rounded-2xl shadow-sm border border-gray-2 p-6">
@@ -164,10 +204,9 @@ useHead({
           </div>
 
           <!-- Content body -->
-          <div class="bg-white rounded-2sxl shadow-sm border border-gray-2 p-6">
-            <ClientOnly>
-              <div class="lens-content prose max-w-none" v-html="post.contents" />
-            </ClientOnly>
+          <!-- FIX: Removed <ClientOnly> (v-html is perfectly safe for SSR) and fixed typo 'rounded-2sxl' to 'rounded-2xl' -->
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-2 p-6">
+            <div class="lens-content prose max-w-none" v-html="post.contents" />
           </div>
 
           <!-- Tags -->
@@ -295,6 +334,16 @@ useHead({
 </template>
 
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
 /* prettier-ignore */
 .related-card {
   --at-apply: bg-white rounded-xl border border-gray-2 overflow-hidden cursor-pointer transition-all-300 hover:border-unpad hover:shadow-sm hover:-translate-y-0.5;
@@ -327,5 +376,17 @@ useHead({
 
 .lens-content :deep(iframe) {
   --at-apply: w-full rounded-xl my-4;
+}
+
+:deep(.splide__pagination__page.is-active) {
+  --at-apply: bg-unpad;
+}
+
+:deep(.splide__arrow) {
+  --at-apply: bg-gray-1 rounded-xl;
+}
+
+:deep(.splide__arrow svg) {
+  --at-apply: w-5 h-5 text-gray-6;
 }
 </style>
